@@ -1,0 +1,25 @@
+# Dependency environments and generated files
+node_modules/
+.venv/
+dist/
+coverage/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.tsbuildinfo
+# Never commit local notes, captures, credentials, or databases.
+data/
+notes/
+uploads/
+captures/
+*.pcap
+*.pcapng
+*.db
+*.sqlite*
+.env
+.env.*
+*.pem
+*.key
+*.log
+.DS_Store
