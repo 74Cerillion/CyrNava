@@ -1,66 +1,43 @@
-# Cybersecurity workspace — M0
+# ENGAGE — M1: first persistent note
 
-A local development scaffold: React renders a two-pane shell, BlockNote owns a temporary scratchpad, and FastAPI answers one health request. **Notes exist only in browser memory and disappear on reload.** There is no saving, database, authentication, AI, collaboration, or external runtime service.
+ENGAGE is a local cybersecurity knowledge workspace. M1 saves one rich-text note in SQLite and reopens it after refresh or application restart. The two-pane M0 layout remains; the scratchpad is now a titled persistent note.
 
-## Repository map
-
-```text
-.
-├── .gitignore
-├── .nvmrc
-├── README.md
-├── VERIFICATION.md
-├── backend/
-│   ├── app/{__init__.py,main.py}
-│   ├── tests/test_health.py
-│   ├── pyproject.toml
-│   ├── requirements.in
-│   └── requirements.txt
-└── frontend/
-    ├── index.html
-    ├── package.json
-    ├── package-lock.json
-    ├── eslint.config.js
-    ├── tsconfig.json
-    ├── vite.config.ts
-    └── src/
-        ├── main.tsx
-        ├── App.tsx
-        ├── App.test.tsx
-        ├── styles.css
-        ├── test-setup.ts
-        └── components/KnowledgeEditor.tsx
-```
-
-`frontend/node_modules/` and `backend/.venv/` are separate, ignored dependency environments. Generated output and caches are also ignored.
+**Wait for `Saved` before closing.** Unsaved drafts remain in browser memory; SQLite is authoritative for saved content. No internet connection is needed while using the application. Packages must already be installed.
 
 ## Ubuntu setup
 
-Target: **Ubuntu 24.04**, Python **3.12**, Node **24.x** (tested with 24.19.0), npm **11.6.2**. Downloads during installation require internet; running the application does not.
+Target: Ubuntu 24.04, Python 3.12, Node 24.19.0, npm 11.6.2. Existing M0 installations need no new dependencies.
 
 ```bash
 sudo apt update
 sudo apt install -y git curl ca-certificates python3.12 python3.12-venv
 ```
 
-Use an existing Node version manager, or install nvm following its [official instructions](https://github.com/nvm-sh/nvm#installing-and-updating). From this repository root:
+If `nvm` is missing, install Node Version Manager for your user account:
 
 ```bash
-nvm install                 # reads .nvmrc
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash
+source ~/.bashrc
+```
+
+This follows the [official nvm installation instructions](https://github.com/nvm-sh/nvm#installing-and-updating). For zsh, reload `~/.zshrc` instead. From the repository root:
+
+```bash
+nvm install
 nvm use
 npm install --global npm@11.6.2
-
 python3.12 -m venv backend/.venv
 backend/.venv/bin/python -m pip install -r backend/requirements.txt
-
 cd frontend
 npm ci
 cd ..
 ```
 
-The Python commands call the virtual environment explicitly; activation is optional. Do not install Python packages globally. npm installs application packages inside `frontend/node_modules`; only the npm CLI is installed into the selected nvm environment.
+Python packages live in `backend/.venv`; JavaScript packages live in `frontend/node_modules`. Both are ignored by Git. npm's CLI is installed into the selected nvm environment. Installed dependency versions and lockfiles are unchanged from M0. Pydantic 2.14.1, already installed with FastAPI, is now explicitly declared because the note models import it directly.
 
-Run in two terminals, starting from the repository root:
+## Run locally
+
+**Restart an existing M0 backend first** so it loads the new notes routes. In its terminal, use Ctrl+C, then run from the repository root:
 
 ```bash
 # Terminal 1
@@ -69,31 +46,54 @@ cd backend
 ```
 
 ```bash
-# Terminal 2
+# Terminal 2, from the repository root
 cd frontend
 npm run dev
 ```
 
-Open **http://127.0.0.1:5173**. Both services bind only to loopback. Port 5173 is fixed so configuration errors do not silently move the frontend. The backend status is checked once per mount, with a three-second timeout. Reload to check again after restarting the backend. Editing remains available when it is offline. Stop each server with Ctrl+C.
+Open **http://127.0.0.1:5173**. Keep both terminals running. Stop each with Ctrl+C. Only one process can listen on each port; `Address already in use` means another server is already there. Inspect it with `ss -ltnp 'sport = :8000'` or `ss -ltnp 'sport = :5173'` before stopping a process. Do not start duplicate servers. A backend started without `--reload` must be restarted after Python source changes.
 
-## Request flow and dependencies
+Create the initial note, choose its title, and edit. Status progresses through `Unsaved Changes`, `Saving...`, and `Saved`. An error shows `Save Error` and retains the current draft. Ordinary failures have a Retry save button. Revision conflicts stop automatic saving; copy your local changes before reloading, because M1 does not merge competing edits.
+
+The health message is explicitly a sample **at page load**, not a continuous availability monitor. Save feedback reports the result of actual note requests.
+
+## Where the data lives
+
+The backend creates its database and schema on first startup:
+
+- With an absolute `XDG_DATA_HOME`: `$XDG_DATA_HOME/engage/engage.sqlite3`.
+- Otherwise: `~/.local/share/engage/engage.sqlite3`.
+
+Relative XDG values are ignored. A location inside this repository is rejected. Newly created data directories use mode 0700 and database files use mode 0600. Data is not encrypted. The existing `.gitignore` remains a secondary guard against committing databases, notes, captures, and credentials.
+
+The browser stores **only the note ID** under `engage.note-id.v1` in localStorage. It fetches the title and native document JSON from SQLite on every opening. Keep using the same browser profile and origin (`127.0.0.1:5173`): changing host/port, clearing browser storage, or using private browsing can lose this pointer. The database content still exists, but M1 has no list/recovery interface. A missing remembered note produces an error instead of silently creating a replacement. Browsers that block localStorage cannot automatically reopen the note; creation reports that limitation and its generated ID.
+
+M1 stores full BlockNote JSON with `format_version = 1`; it never uses Markdown or HTML as canonical storage. Media and remote emoji loading remain disabled. Fonts/styles are bundled locally. Backend documentation/CDN routes remain disabled. The frontend and backend bind to loopback.
+
+## API and request flow
 
 ```text
-Browser / App.tsx
-  → GET /api/health on 127.0.0.1:5173
-  → Vite's development proxy removes /api
-  → GET /health on FastAPI at 127.0.0.1:8000
-  ← 200 {"status":"ok"}
-  ← App displays "Backend: online"
+React draft → debounced PATCH /api/notes/{id} on Vite
+            → loopback FastAPI → conditional SQLite UPDATE → commit
+            ← new revision and metadata ← HTTP response ← save-state acknowledgement
 ```
 
-The browser uses one origin; the proxy handles the second port, so no CORS middleware is needed. FastAPI has exactly one route. Its generated documentation and OpenAPI routes are disabled, avoiding CDN-based documentation assets.
+Vite now preserves `/api/notes` when proxying. The existing `/api/health` browser request is still specially forwarded to `/health`.
 
-The editor setup follows the [official BlockNote Mantine setup](https://www.blocknotejs.org/docs/getting-started/mantine). `KnowledgeEditor.tsx` is the only component that imports BlockNote. `@blocknote/core` defines the text block schema; `@blocknote/react` creates the editor; `@blocknote/mantine` supplies its UI. Mantine core/hooks satisfy the UI's peer dependencies. All three BlockNote packages have the same version, **0.56.0**. No BlockNote XL package is installed. Fonts and styles are served from installed packages.
+| Endpoint | Contract |
+| --- | --- |
+| `POST /api/notes` | `{title, document_json, format_version: 1}` → 201, full note, UUID, revision 1 |
+| `GET /api/notes/{id}` | Full saved note; 404 for absent UUID, 422 for malformed UUID |
+| `PATCH /api/notes/{id}` | `{revision, title?, document_json?}` → full updated note; expected revision is required |
+| `GET /health` | Existing M0 health route |
 
-Media blocks and the emoji picker are disabled to avoid remote media/dataset loading. A content security policy restricts asset and network requests to local sources (plus in-memory images); development HMR uses a local WebSocket. These are small restrictions needed for the no-external-runtime-calls requirement. Text formatting, lists, headings, quotes, and links remain available. The app never sends editor content to FastAPI.
+Titles are trimmed and limited to 1–200 characters. A document must have at least one supported block and be at most 1 MiB when serialized, with at most 5,000 blocks and nesting depth 32. The supported M0 blocks are paragraphs, H1–H3 headings, bullets, numbered lists, checkboxes, and quotes. Validation checks the document envelope/inline structure while preserving native properties, styles, children, block IDs, links, and Unicode JSON. Unknown request fields and unsupported document versions are rejected. Invalid request bodies return 422. Stale revisions return 409 without writing. SQLite runtime failures return 503 with a generic message.
 
-## Verification commands
+The browser sends one save at a time after 700 ms without edits. Typing while a request is pending changes the queued snapshot; an older response acknowledges only its own edit number. SQLite separately prevents writes based on outdated database revisions, including from another tab.
+
+For isolated development checks, an optional numeric `ENGAGE_API_PORT` changes only the loopback proxy port. For example, `ENGAGE_API_PORT=8002 npm run dev -- --port 5175` uses a backend explicitly started on 8002. Default ports remain 8000/5173. Browser pointers differ by frontend port.
+
+## Checks and implementation guide
 
 ```bash
 cd frontend
@@ -107,18 +107,6 @@ cd ../backend
 .venv/bin/python -m pip check
 ```
 
-`build` checks TypeScript and creates `frontend/dist`; this milestone runs through the Vite development server, not a production deployment. Frontend unit tests substitute a simple editor placeholder and exercise shell rendering and health success/failure. They do not claim to test BlockNote internals. Backend tests check the health contract, method rejection, and route surface. See `VERIFICATION.md` for executed checks and limitations.
+Backend tests inject a temporary SQLite path through `create_app`; they never use the real data location. Frontend tests use the existing Vitest/Testing Library tools. Unit tests stub the rich editor; a separate adapter test checks JSON snapshots, and browser acceptance uses the actual BlockNote editor.
 
-## Pins and deliberate choices
-
-- Direct npm dependencies use exact versions; `package-lock.json` pins transitive resolution. Use `npm ci`, not an unreviewed update.
-- `backend/requirements.in` records the five direct dependencies; `requirements.txt` freezes their complete tested resolution on Python 3.12. To intentionally update, edit the direct pins, create a fresh virtual environment, install `requirements.in`, run the checks, then regenerate with `python -m pip freeze > requirements.txt`.
-- TypeScript **5.9.3** is intentional rather than the registry's TypeScript 7: the selected `typescript-eslint` supports TypeScript below 6.1. Mantine **8.3.11** is a supported BlockNote peer rather than switching to Mantine 9. Node type definitions stay on the Node 24 major.
-- Runtime FastAPI and Uvicorn are installed without optional “standard” extras. pytest, httpx, and Ruff are development tools; httpx is only used by tests.
-- One manifest/environment per language keeps dependencies understandable. No monorepo tool, container, API client abstraction, state framework, or persistence layer is introduced.
-
-## Data boundary and M0 limits
-
-Keep real notes, secrets, packet captures, exports, and databases **outside this repository** (for example in `$HOME/.local/share/cyber-workspace/` if persistence is designed later). M0 does not create or use that directory. `.gitignore` excludes common data paths, databases, captures, keys, environment files, and logs as a backup; Git ignore rules are not a general secret scanner. Repository files contain synthetic placeholder text only.
-
-Assumptions: one local user, two terminal sessions, ports 5173/8000 available, Ubuntu 24.04 tooling. Storage format/location, note navigation, authentication, and deployment remain undecided and outside M0. Review this scaffold before adding any further milestone.
+Read `M1_REPORT.md` for the complete file inventory, execution trace, concurrency example, decisions, and limitations. `VERIFICATION.md` records executed checks and the restart acceptance sequence. No dependencies, XL packages, folder features, or later milestones were added.

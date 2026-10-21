@@ -1,5 +1,7 @@
 # Direct runtime and development dependencies; full resolution is in requirements.txt.
 fastapi==0.156.3
+# Already present in the lockfile; M1 imports Pydantic directly for note validation.
+pydantic==2.14.1
 uvicorn==0.54.0
 pytest==9.1.1
 httpx==0.28.1

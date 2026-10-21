@@ -19,3 +19,8 @@ h2 { margin: 0; font-size: 26px; }
   h1 { margin: 8px 0 16px; }
   .status { margin-top: 16px; }
 }
+label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+input { font: inherit; color: inherit; padding: 10px 12px; border: 1px solid #94a3b8; border-radius: 6px; width: min(100%, 560px); }
+button { font: inherit; padding: 10px 16px; margin: 12px 8px 0 0; border: 1px solid #1e426e; border-radius: 6px; background: #1e426e; color: white; cursor: pointer; }
+button:disabled { opacity: .6; cursor: default; }
+[role="alert"] { color: #9f2424; }
