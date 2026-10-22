@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { ApiError, updateNote } from '../notes';
 import type { Note, NoteDocument } from '../notes';
 
 export const AUTOSAVE_DELAY = 700;
 export type SaveStatus = 'Unsaved Changes' | 'Saving...' | 'Saved' | 'Save Error';
 
-export function useAutosave(note: Note) {
+export function useAutosave(note: Note, onSaved?: (note: Note) => void) {
   const [draft, setDraft] = useState({
     title: note.title, document_json: note.document_json, version: 0, editedAt: 0,
   });
@@ -17,23 +17,48 @@ export function useAutosave(note: Note) {
   const inFlight = useRef(false);
   const lifetime = useRef<AbortController | null>(null);
 
+  const versions = useRef({ edited: 0, saved: 0 });
+  const failure = useRef<{ message: string; conflict: boolean } | null>(null);
+  const waiters = useRef<((saved: boolean) => void)[]>([]);
+  const [flushRequested, setFlushRequested] = useState(false);
+
+  const finishFlush = useCallback((saved: boolean) => {
+    const pending = waiters.current.splice(0);
+    for (const resolve of pending) resolve(saved);
+  }, []);
+
+  const reportError = useCallback((problem: { message: string; conflict: boolean }) => {
+    failure.current = problem;
+    setError(problem);
+    setFlushRequested(false);
+    finishFlush(false);
+  }, [finishFlush]);
+
+  // Navigation asks the same serial saver to drain, bypassing only its debounce.
+  const flush = useCallback((): Promise<boolean> => {
+    if (failure.current) return Promise.resolve(false);
+    if (versions.current.edited === versions.current.saved) return Promise.resolve(true);
+    setFlushRequested(true);
+    return new Promise((resolve) => waiters.current.push(resolve));
+  }, []);
+
   useEffect(() => {
     const controller = new AbortController();
     lifetime.current = controller;
-    return () => controller.abort();
-  }, []);
+    return () => { controller.abort(); finishFlush(false); };
+  }, [finishFlush]);
 
   const dirty = draft.version !== savedVersion;
 
   useEffect(() => {
     if (!dirty || busy || error) return;
     // Time since the latest edit, not since the previous request completed.
-    const remaining = Math.max(0, draft.editedAt + AUTOSAVE_DELAY - Date.now());
+    const remaining = flushRequested ? 0 : Math.max(0, draft.editedAt + AUTOSAVE_DELAY - Date.now());
     const timer = window.setTimeout(async () => {
       const controller = lifetime.current;
       if (!controller || controller.signal.aborted || inFlight.current) return;
       if (!draft.title.trim() || draft.title.trim().length > 200) {
-        setError({ message: 'Use a title between 1 and 200 characters.', conflict: false });
+        reportError({ message: 'Use a title between 1 and 200 characters.', conflict: false });
         return;
       }
       inFlight.current = true;
@@ -48,9 +73,15 @@ export function useAutosave(note: Note) {
         // the response: the user may have typed newer content while awaiting it.
         setRevision(saved.revision);
         setSavedVersion(draft.version);
+        versions.current.saved = draft.version;
+        if (versions.current.edited === draft.version) {
+          setFlushRequested(false);
+          finishFlush(true);
+        }
+        onSaved?.(saved);
       } catch (failure) {
         if (controller.signal.aborted) return;
-        setError({
+        reportError({
           message: failure instanceof Error ? failure.message : 'Saving failed. Your edits are still here.',
           conflict: failure instanceof ApiError && failure.status === 409,
         });
@@ -60,7 +91,7 @@ export function useAutosave(note: Note) {
       }
     }, remaining);
     return () => window.clearTimeout(timer);
-  }, [draft, dirty, busy, error, note.id, revision]);
+  }, [draft, dirty, busy, error, note.id, revision, flushRequested, reportError, finishFlush, onSaved]);
 
   useEffect(() => {
     if (!dirty) return;
@@ -73,16 +104,18 @@ export function useAutosave(note: Note) {
   }, [dirty]);
 
   function clearTransientError() {
-    setError((current) => current?.conflict ? current : null);
+    if (!failure.current?.conflict) { failure.current = null; setError(null); }
   }
 
   function changeTitle(title: string) {
-    setDraft((current) => ({ ...current, title, version: current.version + 1, editedAt: Date.now() }));
+    const version = ++versions.current.edited;
+    setDraft((current) => ({ ...current, title, version, editedAt: Date.now() }));
     clearTransientError();
   }
 
   function changeDocument(document_json: NoteDocument) {
-    setDraft((current) => ({ ...current, document_json, version: current.version + 1, editedAt: Date.now() }));
+    const version = ++versions.current.edited;
+    setDraft((current) => ({ ...current, document_json, version, editedAt: Date.now() }));
     clearTransientError();
   }
 
@@ -92,7 +125,7 @@ export function useAutosave(note: Note) {
 
   return {
     title: draft.title, status, error, revision,
-    changeTitle, changeDocument,
-    retry: () => { if (!error?.conflict) setError(null); },
+    changeTitle, changeDocument, flush,
+    retry: clearTransientError,
   };
 }

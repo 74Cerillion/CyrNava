@@ -1,26 +1,19 @@
-# ENGAGE — M1: first persistent note
+# ENGAGE — M2: hierarchical library
 
-ENGAGE is a local cybersecurity knowledge workspace. M1 saves one rich-text note in SQLite and reopens it after refresh or application restart. The two-pane M0 layout remains; the scratchpad is now a titled persistent note.
+ENGAGE is a local cybersecurity knowledge workspace. M2 adds folders, nested folders, root/folder notes, GUI management, and keyboard navigation to M1's persistent rich-text editor. SQLite remains authoritative for saved notes; BlockNote's native document JSON is retained.
 
-**Wait for `Saved` before closing.** Unsaved drafts remain in browser memory; SQLite is authoritative for saved content. No internet connection is needed while using the application. Packages must already be installed.
+**Wait for Saved before closing the application.** Switching notes and opening management dialogs drain pending saves first. A failed save keeps the current draft open and blocks the transition.
 
 ## Ubuntu setup
 
-Target: Ubuntu 24.04, Python 3.12, Node 24.19.0, npm 11.6.2. Existing M0 installations need no new dependencies.
+Target: Ubuntu 24.04, Python 3.12, Node 24.19.0, npm 11.6.2. M2 introduces no new dependencies or version changes. Existing M1 environments need no reinstall.
 
 ```bash
 sudo apt update
 sudo apt install -y git curl ca-certificates python3.12 python3.12-venv
 ```
 
-If `nvm` is missing, install Node Version Manager for your user account:
-
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash
-source ~/.bashrc
-```
-
-This follows the [official nvm installation instructions](https://github.com/nvm-sh/nvm#installing-and-updating). For zsh, reload `~/.zshrc` instead. From the repository root:
+If nvm is missing, follow its [official installation instructions](https://github.com/nvm-sh/nvm#installing-and-updating), then reload your shell. From the repository root:
 
 ```bash
 nvm install
@@ -33,11 +26,11 @@ npm ci
 cd ..
 ```
 
-Python packages live in `backend/.venv`; JavaScript packages live in `frontend/node_modules`. Both are ignored by Git. npm's CLI is installed into the selected nvm environment. Installed dependency versions and lockfiles are unchanged from M0. Pydantic 2.14.1, already installed with FastAPI, is now explicitly declared because the note models import it directly.
+Dependencies remain isolated in `backend/.venv` and `frontend/node_modules`, both excluded from Git. Installation downloads packages; application operation uses only loopback services and bundled assets.
 
-## Run locally
+## Run and upgrade
 
-**Restart an existing M0 backend first** so it loads the new notes routes. In its terminal, use Ctrl+C, then run from the repository root:
+Restart your existing M1 backend so it loads the M2 routes and migration. Start each service once in its own terminal, from the repository root:
 
 ```bash
 # Terminal 1
@@ -46,54 +39,92 @@ cd backend
 ```
 
 ```bash
-# Terminal 2, from the repository root
+# Terminal 2
 cd frontend
 npm run dev
 ```
 
-Open **http://127.0.0.1:5173**. Keep both terminals running. Stop each with Ctrl+C. Only one process can listen on each port; `Address already in use` means another server is already there. Inspect it with `ss -ltnp 'sport = :8000'` or `ss -ltnp 'sport = :5173'` before stopping a process. Do not start duplicate servers. A backend started without `--reload` must be restarted after Python source changes.
+Open **http://127.0.0.1:5173**. Stop each server with Ctrl+C. If a port is occupied, inspect its existing listener instead of starting a duplicate:
 
-Create the initial note, choose its title, and edit. Status progresses through `Unsaved Changes`, `Saving...`, and `Saved`. An error shows `Save Error` and retains the current draft. Ordinary failures have a Retry save button. Revision conflicts stop automatic saving; copy your local changes before reloading, because M1 does not merge competing edits.
-
-The health message is explicitly a sample **at page load**, not a continuous availability monitor. Save feedback reports the result of actual note requests.
-
-## Where the data lives
-
-The backend creates its database and schema on first startup:
-
-- With an absolute `XDG_DATA_HOME`: `$XDG_DATA_HOME/engage/engage.sqlite3`.
-- Otherwise: `~/.local/share/engage/engage.sqlite3`.
-
-Relative XDG values are ignored. A location inside this repository is rejected. Newly created data directories use mode 0700 and database files use mode 0600. Data is not encrypted. The existing `.gitignore` remains a secondary guard against committing databases, notes, captures, and credentials.
-
-The browser stores **only the note ID** under `engage.note-id.v1` in localStorage. It fetches the title and native document JSON from SQLite on every opening. Keep using the same browser profile and origin (`127.0.0.1:5173`): changing host/port, clearing browser storage, or using private browsing can lose this pointer. The database content still exists, but M1 has no list/recovery interface. A missing remembered note produces an error instead of silently creating a replacement. Browsers that block localStorage cannot automatically reopen the note; creation reports that limitation and its generated ID.
-
-M1 stores full BlockNote JSON with `format_version = 1`; it never uses Markdown or HTML as canonical storage. Media and remote emoji loading remain disabled. Fonts/styles are bundled locally. Backend documentation/CDN routes remain disabled. The frontend and backend bind to loopback.
-
-## API and request flow
-
-```text
-React draft → debounced PATCH /api/notes/{id} on Vite
-            → loopback FastAPI → conditional SQLite UPDATE → commit
-            ← new revision and metadata ← HTTP response ← save-state acknowledgement
+```bash
+ss -ltnp 'sport = :8000'
+ss -ltnp 'sport = :5173'
 ```
 
-Vite now preserves `/api/notes` when proxying. The existing `/api/health` browser request is still specially forwarded to `/health`.
+The startup migration upgrades SQLite `user_version` 1 to 2 in one transaction. M1's `CHECK(folder_id IS NULL)` cannot be removed using SQLite's limited ALTER TABLE; the migration copies every named note column into the new foreign-key-enabled definition, then replaces the old table. IDs, revisions, timestamps and original JSON text are copied unchanged. It creates the folders table and relationship indexes, checks foreign keys, and advances the schema version only on success. Repeated starts at version 2 do not recreate tables. A newer or invalid schema fails without resetting application data. Tests exercise a **copy** of an M1 database, repeat initialization, and rollback after a failed migration.
 
-| Endpoint | Contract |
+## Use the library
+
+- **Workspace root** clears the tree selection for creating root items.
+- Click a folder label to select it. Its arrow expands/collapses it. Selection leaves the current editor open.
+- **New folder / New note** creates inside the selected folder; when a note is selected, new items are its siblings. With no selection, creation is at root.
+- Click a note to open it. Bold text and a dot mark the open note; selection has a background, and keyboard focus has an outline.
+- **Rename / Move / Delete** acts on the selected item. Move uses a destination dialog; Workspace root is a valid destination. Invalid self/descendant folder moves are rejected by the backend.
+- Every deletion asks for permanent-deletion confirmation. A folder confirmation explicitly counts descendant folders and notes; Cancel removes nothing. A changed subtree produces a conflict. Cancel and reopen deletion to review fresh counts rather than repeatedly submitting an outdated confirmation.
+- **Refresh library** reads authoritative folder/note summaries, including changes from another tab. There is no continuous tree synchronization.
+
+Tree ordering is deterministic: folders first, then notes, within each parent. Folders sort by stored `sort_order` (currently 0), case-insensitive SQLite name order, then ID; notes by case-insensitive title, then ID. Duplicate names are allowed. Manual ordering and drag-and-drop are outside M2.
+
+| Key, while a tree item has focus | Behavior |
 | --- | --- |
-| `POST /api/notes` | `{title, document_json, format_version: 1}` → 201, full note, UUID, revision 1 |
-| `GET /api/notes/{id}` | Full saved note; 404 for absent UUID, 422 for malformed UUID |
-| `PATCH /api/notes/{id}` | `{revision, title?, document_json?}` → full updated note; expected revision is required |
-| `GET /health` | Existing M0 health route |
+| Up / Down | Previous / next visible item; focus alone does not open notes |
+| Left | Collapse an expanded folder; otherwise focus its parent |
+| Right | Expand a folder; if already expanded, focus its first visible child |
+| Enter | Open the focused note, or select/toggle the focused folder |
+| F2 | Rename the focused item |
+| Delete | Open permanent-deletion confirmation for the focused item |
+| Home / End | First / last visible item |
+| Escape, in a dialog | Cancel, unless its request is already running |
 
-Titles are trimmed and limited to 1–200 characters. A document must have at least one supported block and be at most 1 MiB when serialized, with at most 5,000 blocks and nesting depth 32. The supported M0 blocks are paragraphs, H1–H3 headings, bullets, numbered lists, checkboxes, and quotes. Validation checks the document envelope/inline structure while preserving native properties, styles, children, block IDs, links, and Unicode JSON. Unknown request fields and unsupported document versions are rejected. Invalid request bodies return 422. Stale revisions return 409 without writing. SQLite runtime failures return 503 with a generic message.
+Keyboard handlers are attached to the tree or dialog, never globally. BlockNote retains its editing/navigation keys. Native modal dialogs keep background controls inert and return focus to the tree. Expansion state is kept in memory; on reload, ancestors of the reopened note are expanded automatically.
 
-The browser sends one save at a time after 700 ms without edits. Typing while a request is pending changes the queued snapshot; an older response acknowledges only its own edit number. SQLite separately prevents writes based on outdated database revisions, including from another tab.
+The editor supports headings, paragraphs, lists, checkboxes, quotes, and now a **plain code block**, required by M2 acceptance. Use `/` commands or Markdown-style input shortcuts (`# `, `## `, and three backticks followed by a space). Code is stored/displayed as text and never executed. No remote syntax highlighter, media fetching, or AI feature is configured.
 
-For isolated development checks, an optional numeric `ENGAGE_API_PORT` changes only the loopback proxy port. For example, `ENGAGE_API_PORT=8002 npm run dev -- --port 5175` uses a backend explicitly started on 8002. Default ports remain 8000/5173. Browser pointers differ by frontend port.
+## Autosave and navigation
 
-## Checks and implementation guide
+The existing 700 ms debounce and single-request saver remain. Local edit numbers prevent an old acknowledgement from marking newer edits Saved. Database revisions reject stale writes with HTTP 409.
+
+A note transition asks `useAutosave.flush()` to drain its latest snapshot, bypassing only the debounce delay. The editor/title are briefly read-only while switching or managing items. A save error or conflict blocks the transition and retains the draft. Ordinary errors offer Retry save; conflicts require copying local changes before reloading. Metadata changes to the active note remount it only after this drain, using the response's current revision, so the next autosave does not use an obsolete revision.
+
+Saved content is in SQLite. Unsaved drafts remain in memory; the existing beforeunload warning cannot prevent forced process termination. Backend health is sampled at page load; save errors report actual note-request failures.
+
+## Data location and schema
+
+The database path is unchanged:
+
+- Absolute `XDG_DATA_HOME`: `$XDG_DATA_HOME/engage/engage.sqlite3`.
+- Otherwise: `~/.local/share/engage/engage.sqlite3`.
+
+Relative XDG values are ignored; paths inside the repository are rejected. Newly created data directories/files use 0700/0600 permissions. Data is local and unencrypted. Existing ignore rules remain a secondary guard against committing databases or user notes.
+
+Library folders are logical SQLite records; creating them does not create filesystem directories. Folders use nullable `parent_id` adjacency relationships. Notes use nullable `folder_id`; null means root. SQLite foreign keys are enabled on every connection with RESTRICT deletion. Domain operations validate parent existence/cycles in serialized write transactions. Tree traversal and child-first recursive deletion are iterative, avoiding Python call-stack and SQLite cascade-depth limits. Notes still have their original native JSON, format version, revision and timestamps.
+
+The browser's `engage.note-id.v1` key now remembers only the preferred open note. It does not determine library membership. Clearing browser storage or changing origins loses that preference, while all saved notes remain discoverable through the tree.
+
+## API
+
+Vite forwards `/api/*` unchanged, except the retained browser health request `/api/health`, which maps to `/health`.
+
+| Operation | Contract |
+| --- | --- |
+| `GET /api/tree` | `{folders: [...], notes: [...]}` flat adjacency lists. Notes are summaries without `document_json`; relationships reconstruct the hierarchy without nested JSON depth limits. |
+| `POST /api/folders` | `{name, parent_id?: UUID|null}` → 201, complete folder |
+| `PATCH /api/folders/{id}` | `{name?, parent_id?}`; explicit null moves to root |
+| `GET /api/folders/{id}/deletion-impact` | Fresh `{folder_id,name,descendant_folders,notes,token}` from one read transaction |
+| `DELETE /api/folders/{id}` | JSON body `{recursive,expected_descendant_folders,expected_notes,impact_token}` → 204 |
+| `POST /api/notes` | Existing `{title,document_json,format_version:1}` plus optional `folder_id` → 201 |
+| `GET /api/notes/{id}` | Full saved note and metadata |
+| `PATCH /api/notes/{id}` | Required expected `revision`, with `title?`, `document_json?`, `folder_id?`; explicit null moves to root; successful changes increment revision |
+| `DELETE /api/notes/{id}` | Confirmed expected `{revision}` JSON body → 204 |
+| `GET /health` | Existing health route |
+
+The read-only deletion-impact endpoint is the only addition beyond the requested operations. It supplies fresh authoritative counts and a subtree fingerprint without downloading document contents. DELETE recomputes both inside `BEGIN IMMEDIATE`; count changes, membership substitutions, or changed revisions/metadata reject with 409. Nonempty deletion also requires explicit `recursive:true`. Notes are removed, then folders child-first, in one transaction. An exception rolls back the entire operation.
+
+422 means invalid input/reference/cycle; 404 means a missing target resource; 409 means a stale note revision or deletion conflict; SQLite runtime failures map to a generic 503. Titles/names remain limited to 1–200 trimmed characters. Native document limits remain 1 MiB, 5,000 blocks, and depth 32; these document limits do **not** limit folder depth. Document format version 1 is preserved; code blocks are an additive supported native block type.
+
+For isolated checks, `ENGAGE_API_PORT` can select another numeric loopback backend port; `npm run dev -- --port 5185` can select another frontend port. Defaults remain 8000/5173. An alternate frontend port has its own browser preference key namespace.
+
+## Checks and engineering record
 
 ```bash
 cd frontend
@@ -101,12 +132,12 @@ npm run lint
 npm test
 npm run build
 cd ../backend
-.venv/bin/python -m pytest
+.venv/bin/python -m pytest -q
 .venv/bin/python -m ruff check .
 .venv/bin/python -m ruff format --check .
 .venv/bin/python -m pip check
 ```
 
-Backend tests inject a temporary SQLite path through `create_app`; they never use the real data location. Frontend tests use the existing Vitest/Testing Library tools. Unit tests stub the rich editor; a separate adapter test checks JSON snapshots, and browser acceptance uses the actual BlockNote editor.
+Tests inject temporary database paths; destructive cases never use real application data. The frontend uses the existing Vitest/Testing Library stack; native rich-editor/modal behavior is also exercised in the browser acceptance run.
 
-Read `M1_REPORT.md` for the complete file inventory, execution trace, concurrency example, decisions, and limitations. `VERIFICATION.md` records executed checks and the restart acceptance sequence. No dependencies, XL packages, folder features, or later milestones were added.
+Read `M2_REPORT.md` for the full A–H engineering report and file inventory, and `M2_VERIFICATION.md` for exact results and the reproducible A–U procedure. `M1_REPORT.md` and `VERIFICATION.md` remain the historical M1 record. No M3 functionality, new dependencies, commit, or publication is included.

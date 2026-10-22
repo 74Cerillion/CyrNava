@@ -68,7 +68,7 @@ def test_persistence_across_application_restart(database_path, document):
         row = connection.execute("SELECT document_json FROM notes").fetchone()
         assert json.loads(row[0]) == document
         assert connection.execute("PRAGMA foreign_keys").fetchone()[0] == 1
-        assert connection.execute("PRAGMA user_version").fetchone()[0] == 1
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == 2
 
 
 def test_missing_notes_and_malformed_identifier(client):
@@ -203,6 +203,6 @@ def test_initialization_idempotent_and_future_schema_rejected(database_path):
     database.initialize()
     database.initialize()
     with database.connect() as connection:
-        connection.execute("PRAGMA user_version = 2")
+        connection.execute("PRAGMA user_version = 3")
     with pytest.raises(RuntimeError, match="newer"):
         database.initialize()

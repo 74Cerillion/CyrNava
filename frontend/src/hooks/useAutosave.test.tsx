@@ -168,3 +168,49 @@ it('honors the remaining debounce delay after an earlier save completes', async 
   expect(updateNote).toHaveBeenCalledTimes(2);
   expect(result.current.status).toBe('Saved');
 });
+
+it('flushes the latest draft before navigation, including edits queued behind an active save', async () => {
+  const first = deferred();
+  const second = deferred();
+  vi.mocked(updateNote).mockReturnValueOnce(first.promise).mockReturnValueOnce(second.promise);
+  const { result } = renderHook(() => useAutosave(note));
+  act(() => result.current.changeDocument(document('A')));
+  await tick();
+  act(() => result.current.changeDocument(document('AB')));
+  let flushed!: Promise<boolean>;
+  act(() => { flushed = result.current.flush(); });
+  const finished = vi.fn();
+  void flushed.then(finished);
+  await act(async () => first.resolve({ ...note, revision: 2 }));
+  await tick(0);
+  expect(finished).not.toHaveBeenCalled();
+  expect(updateNote).toHaveBeenLastCalledWith(note.id, 2,
+    { title: note.title, document_json: document('AB') }, expect.any(AbortSignal));
+  await act(async () => second.resolve({ ...note, revision: 3 }));
+  expect(await flushed).toBe(true);
+  expect(result.current.status).toBe('Saved');
+});
+
+it('blocks navigation after save failure and retains the draft', async () => {
+  vi.mocked(updateNote).mockRejectedValue(new ApiError('offline', 0));
+  const { result } = renderHook(() => useAutosave(note));
+  act(() => result.current.changeTitle('Draft for A'));
+  let flushed!: Promise<boolean>;
+  act(() => { flushed = result.current.flush(); });
+  await tick(0);
+  expect(await flushed).toBe(false);
+  expect(result.current.title).toBe('Draft for A');
+  expect(result.current.status).toBe('Save Error');
+  expect(await result.current.flush()).toBe(false);
+});
+
+it('notices an edit synchronously when navigation is requested in the same event', async () => {
+  vi.mocked(updateNote).mockResolvedValue({ ...note, revision: 2 });
+  const { result } = renderHook(() => useAutosave(note));
+  let flushed!: Promise<boolean>;
+  act(() => { result.current.changeTitle('Immediate edit'); flushed = result.current.flush(); });
+  await tick(0);
+  expect(await flushed).toBe(true);
+  expect(updateNote).toHaveBeenCalledWith(note.id, 1,
+    expect.objectContaining({ title: 'Immediate edit' }), expect.any(AbortSignal));
+});

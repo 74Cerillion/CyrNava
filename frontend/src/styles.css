@@ -1,7 +1,7 @@
 * { box-sizing: border-box; }
 :root { font-family: Inter, system-ui, sans-serif; color: #1e293b; background: #fff; }
 body { margin: 0; }
-.workspace { display: grid; grid-template-columns: 260px minmax(0, 1fr); min-height: 100vh; }
+.workspace { display: grid; grid-template-columns: 300px minmax(0, 1fr); min-height: 100vh; }
 .sidebar { padding: 32px 24px; background: #f5f7fa; border-right: 1px solid #dce2e9; }
 .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: #475569; }
 h1 { font-size: 21px; line-height: 1.4; margin: 16px 0 32px; }
@@ -24,3 +24,22 @@ input { font: inherit; color: inherit; padding: 10px 12px; border: 1px solid #94
 button { font: inherit; padding: 10px 16px; margin: 12px 8px 0 0; border: 1px solid #1e426e; border-radius: 6px; background: #1e426e; color: white; cursor: pointer; }
 button:disabled { opacity: .6; cursor: default; }
 [role="alert"] { color: #9f2424; }
+
+.directory-tree { margin: 16px 0; overflow: auto; max-height: 55vh; border: 1px solid #dce2e9; border-radius: 6px; }
+[role="treeitem"] { display: flex; align-items: center; gap: 6px; min-width: max-content; padding-top: 8px; padding-bottom: 8px; padding-right: 8px; cursor: pointer; font-size: 14px; }
+[role="treeitem"][aria-selected="true"] { background: #e1eaf5; color: #1e426e; }
+[role="treeitem"][data-open="true"] .tree-label { font-weight: 700; }
+[role="treeitem"]:focus { outline: 2px solid #1e426e; outline-offset: -2px; }
+[role="treeitem"] button { padding: 0; margin: 0; width: 20px; background: transparent; color: inherit; border: 0; }
+.note-icon { width: 20px; text-align: center; }
+.open-marker { font-size: 8px; color: #1e426e; }
+.library-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.library-actions button, .root-button { font-size: 13px; padding: 7px 10px; margin: 6px 0; }
+button.secondary { background: white; color: #1e426e; }
+button.danger { background: #9f2424; border-color: #9f2424; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #1e426e; outline-offset: 2px; }
+dialog { width: min(560px, 90vw); max-height: 85vh; overflow: auto; border: 1px solid #94a3b8; border-radius: 8px; padding: 24px; color: #1e293b; }
+dialog::backdrop { background: rgb(15 23 42 / 40%); }
+dialog h2 { font-size: 22px; margin-bottom: 20px; overflow-wrap: anywhere; }
+dialog select { width: 100%; padding: 10px; font: inherit; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
