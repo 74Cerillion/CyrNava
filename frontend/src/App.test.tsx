@@ -286,3 +286,17 @@ it('does not steal editor focus when autosave refreshes the directory titles', a
   expect(title).toHaveFocus();
   expect(screen.getByText('Saved')).toBeInTheDocument();
 });
+
+it('autosaves native image blocks in order and reloads them from the note API', async () => {
+  const document: NoteDocument = [original.document_json[0],
+    { type: 'image', props: { url: '/api/assets/23d398da-6ac8-4e17-a6f0-1b8048714d2a', caption: 'Evidence', previewWidth: 420 } },
+    { type: 'paragraph', content: [{ type: 'text', text: 'After screenshot', styles: { bold: true } }] }];
+  seed(original);
+  const app = render(<App />);
+  fireEvent.change(await screen.findByRole('textbox', { name: 'Note editor' }), { target: { value: JSON.stringify(document) } });
+  await waitFor(() => expect(updateNote).toHaveBeenCalledWith(original.id, 1,
+    { title: original.title, document_json: document }, expect.any(AbortSignal)), { timeout: 2000 });
+  await waitFor(() => expect(screen.getByText('Saved', { exact: true })).toBeInTheDocument());
+  app.unmount(); render(<App />);
+  expect(await screen.findByRole('textbox', { name: 'Note editor' })).toHaveValue(JSON.stringify(document));
+});

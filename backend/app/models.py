@@ -1,6 +1,7 @@
 """Version 1 document contract. Preserve JSON; validate the supported editor shape."""
 
 import json
+import re
 from typing import Annotated, Self
 from uuid import UUID
 
@@ -24,6 +25,7 @@ BLOCK_TYPES = {
     "checkListItem",
     "quote",
     "codeBlock",
+    "image",
 }
 
 
@@ -86,7 +88,21 @@ def validate_document(document: list[dict[str, JsonValue]]) -> list[dict]:
                 block.get("props", {}).get("level", 1) not in (1, 2, 3)
             ):
                 raise ValueError("Invalid heading level")
-            inline(block.get("content", []))
+            if block["type"] == "image":
+                props = block.get("props", {})
+                url = props.get("url", "")
+                if not isinstance(url, str) or (
+                    url
+                    and not re.fullmatch(
+                        r"/api/assets/[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}",
+                        url,
+                    )
+                ):
+                    raise ValueError("Images require a local ENGAGE asset URL")
+                if block.get("content") not in (None, []):
+                    raise ValueError("Image blocks cannot contain inline content")
+            else:
+                inline(block.get("content", []))
             blocks(block.get("children", []), depth + 1)
 
     blocks(document)

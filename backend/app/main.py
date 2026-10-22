@@ -1,3 +1,4 @@
+import asyncio
 import sqlite3
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -5,7 +6,9 @@ from uuid import UUID
 
 from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
+from starlette.concurrency import run_in_threadpool
 
+from app.assets import MAX_BYTES, AssetStore, InvalidImage
 from app.database import (
     Database,
     DeletionConflict,
@@ -37,6 +40,9 @@ def create_app(database_path: Path | None = None) -> FastAPI:
         database = Database(database_path or default_database_path())
         database.initialize()
         application.state.database = database
+        application.state.assets = AssetStore(database)
+        application.state.assets.cleanup()
+        application.state.upload_slots = asyncio.Semaphore(2)
         yield
 
     application = FastAPI(
@@ -86,6 +92,7 @@ def create_app(database_path: Path | None = None) -> FastAPI:
     @application.delete("/api/folders/{folder_id}", status_code=204)
     def delete_folder(folder_id: UUID, body: DeleteFolder, request: Request):
         request.app.state.database.delete_folder(str(folder_id), body.model_dump())
+        request.app.state.assets.cleanup()
         return Response(status_code=204)
 
     @application.get("/health")
@@ -133,7 +140,55 @@ def create_app(database_path: Path | None = None) -> FastAPI:
             raise HTTPException(
                 status_code=409, detail="Note changed. Review before deleting."
             ) from None
+        request.app.state.assets.cleanup()
         return Response(status_code=204)
+
+    @application.post("/api/assets", status_code=201)
+    async def upload_asset(note_id: UUID, request: Request):
+        # Raw binary keeps the body bounded without a multipart parser/spool.
+        async with request.app.state.upload_slots:
+            data = bytearray()
+            try:
+                async with asyncio.timeout(30):
+                    async for chunk in request.stream():
+                        if len(data) + len(chunk) > MAX_BYTES:
+                            raise HTTPException(
+                                413, "Image exceeds 10 MiB upload limit"
+                            )
+                        data.extend(chunk)
+                return await run_in_threadpool(
+                    request.app.state.assets.upload,
+                    str(note_id),
+                    bytes(data),
+                    request.headers.get("content-type", "").split(";", 1)[0],
+                )
+            except TimeoutError:
+                raise HTTPException(408, "Image upload timed out") from None
+            except NoteNotFound:
+                raise HTTPException(404, "Note not found") from None
+            except InvalidImage as error:
+                raise HTTPException(422, str(error)) from None
+            except OSError:
+                raise HTTPException(503, "Local image storage unavailable") from None
+
+    @application.get("/api/assets/{asset_id}")
+    def get_asset(asset_id: UUID, request: Request):
+        try:
+            data, mime = request.app.state.assets.retrieve(str(asset_id))
+        except (FileNotFoundError, PermissionError):
+            raise HTTPException(404, "Image unavailable on this computer") from None
+        except OSError:
+            raise HTTPException(503, "Local image storage unavailable") from None
+        return Response(
+            data,
+            media_type=mime,
+            headers={
+                "X-Content-Type-Options": "nosniff",
+                "Content-Security-Policy": "default-src 'none'; sandbox",
+                "Cache-Control": "no-store",
+                "Content-Disposition": 'inline; filename="image"',
+            },
+        )
 
     return application
 

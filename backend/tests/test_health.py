@@ -16,6 +16,8 @@ def test_route_surface(client):
         ("/api/notes/{note_id}", {"GET"}),
         ("/api/notes/{note_id}", {"PATCH"}),
         ("/api/notes/{note_id}", {"DELETE"}),
+        ("/api/assets", {"POST"}),
+        ("/api/assets/{asset_id}", {"GET"}),
     ]
     assert client.get("/docs").status_code == 404
     assert client.post("/health").status_code == 405

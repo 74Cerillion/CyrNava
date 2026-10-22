@@ -68,7 +68,7 @@ class Database:
             # Serializes first startup/schema changes across local processes.
             connection.execute("BEGIN IMMEDIATE")
             version = connection.execute("PRAGMA user_version").fetchone()[0]
-            if version > 2:
+            if version > 3:
                 raise RuntimeError("Database schema is newer than this ENGAGE version")
             if version < 2:
                 connection.execute("""
@@ -108,6 +108,19 @@ class Database:
                 if connection.execute("PRAGMA foreign_key_check").fetchone():
                     raise RuntimeError("Database migration found invalid relationships")
                 connection.execute("PRAGMA user_version = 2")
+            if version < 3:
+                connection.execute("""
+                    CREATE TABLE assets (
+                        id TEXT PRIMARY KEY,
+                        note_id TEXT NOT NULL REFERENCES notes(id) ON DELETE CASCADE,
+                        mime_type TEXT NOT NULL,
+                        byte_size INTEGER NOT NULL CHECK (byte_size > 0),
+                        disk_path TEXT NOT NULL UNIQUE,
+                        created_at TEXT NOT NULL
+                    )
+                """)
+                connection.execute("CREATE INDEX assets_note ON assets(note_id)")
+                connection.execute("PRAGMA user_version = 3")
 
     @staticmethod
     def _note(row: sqlite3.Row) -> dict:
@@ -127,6 +140,7 @@ class Database:
         with self.connect() as connection:
             connection.execute("BEGIN IMMEDIATE")
             self._check_parent(connection, folder_id)
+            self._check_images(connection, note_id, document)
             connection.execute(
                 """INSERT INTO notes
                    (id, folder_id, title, document_json, format_version, revision,
@@ -160,6 +174,8 @@ class Database:
             connection.execute("BEGIN IMMEDIATE")
             if "folder_id" in changes:
                 self._check_parent(connection, changes["folder_id"])
+            if "document_json" in changes:
+                self._check_images(connection, note_id, changes["document_json"])
             # The revision test and write happen in ONE SQL statement/transaction.
             result = connection.execute(
                 """UPDATE notes SET
@@ -191,6 +207,20 @@ class Database:
                 "SELECT * FROM notes WHERE id = ?", (note_id,)
             ).fetchone()
         return self._note(row)
+
+    @staticmethod
+    def _check_images(connection, note_id, document):
+        pending = list(document)
+        while pending:
+            block = pending.pop()
+            pending.extend(block.get("children", []))
+            url = block.get("props", {}).get("url", "")
+            if block["type"] == "image" and url:
+                asset = connection.execute(
+                    "SELECT note_id FROM assets WHERE id = ?", (url.rsplit("/", 1)[-1],)
+                ).fetchone()
+                if asset is None or asset[0] != note_id:
+                    raise InvalidRelationship("Image must belong to this note")
 
     @staticmethod
     def _check_parent(connection, parent_id):

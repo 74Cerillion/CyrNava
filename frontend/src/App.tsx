@@ -187,7 +187,7 @@ export default function App() {
   const blocked = working || dialog !== null || loading;
   return <div className="workspace">
     <aside className="sidebar" aria-label="Workspace navigation">
-      <p className="eyebrow">LOCAL WORKSPACE · M2</p><h1>ENGAGE</h1>
+      <p className="eyebrow">LOCAL WORKSPACE · M4</p><h1>ENGAGE</h1>
       <button className="secondary root-button" disabled={blocked} onClick={() => setSelected(null)}>Workspace root</button>
       <div className="library-actions">
         <button disabled={blocked} onClick={() => newItem('new-folder')}>New folder</button>
