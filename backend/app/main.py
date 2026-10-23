@@ -30,6 +30,7 @@ from app.models import (
     UpdateFolder,
     UpdateNote,
 )
+from app.profile import profile_lock
 
 
 def create_app(database_path: Path | None = None) -> FastAPI:
@@ -38,12 +39,13 @@ def create_app(database_path: Path | None = None) -> FastAPI:
         # Resolve/create data only at startup, never at module import or in tests
         # that do not enter the application's lifespan.
         database = Database(database_path or default_database_path())
-        database.initialize()
-        application.state.database = database
-        application.state.assets = AssetStore(database)
-        application.state.assets.cleanup()
-        application.state.upload_slots = asyncio.Semaphore(2)
-        yield
+        with profile_lock(database.path.parent):
+            database.initialize()
+            application.state.database = database
+            application.state.assets = AssetStore(database)
+            application.state.assets.cleanup()
+            application.state.upload_slots = asyncio.Semaphore(2)
+            yield
 
     application = FastAPI(
         lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None

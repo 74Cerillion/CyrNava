@@ -49,6 +49,7 @@ export default function App() {
     return tree;
   }, []);
   const noteSaved = useCallback(() => {
+    setError(null);
     void refreshTree().catch((failure) => {
       if (!lifetime.current?.signal.aborted) setError(`Note saved, but the library refresh failed: ${failure instanceof Error ? failure.message : 'unknown error'}`);
     });
@@ -187,7 +188,7 @@ export default function App() {
   const blocked = working || dialog !== null || loading;
   return <div className="workspace">
     <aside className="sidebar" aria-label="Workspace navigation">
-      <p className="eyebrow">LOCAL WORKSPACE · M4</p><h1>ENGAGE</h1>
+      <p className="eyebrow">LOCAL WORKSPACE · M5</p><h1>ENGAGE</h1>
       <button className="secondary root-button" disabled={blocked} onClick={() => setSelected(null)}>Workspace root</button>
       <div className="library-actions">
         <button disabled={blocked} onClick={() => newItem('new-folder')}>New folder</button>
@@ -212,7 +213,7 @@ export default function App() {
         {!note && <button onClick={() => { setLoading(true); setError(null); setLoadAttempt((n) => n + 1); }}>Retry opening library</button>}
       </div>}
       {loading ? <p role="status">Opening library...</p> : note ?
-        <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} locked={working || dialog !== null} onSaved={noteSaved} />
+        <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} locked={working || dialog !== null} onSaved={noteSaved} onRecovered={(saved) => { setNote(saved); setEditorEpoch((n) => n + 1); setError(null); noteSaved(); }} />
         : <header><h2>Select or create a note</h2><p>Your existing notes are discoverable in the library, including notes saved before M2.</p></header>}
     </main>
     {dialog && <ManagementDialog state={dialog} data={data} busy={working} error={error}

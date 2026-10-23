@@ -1,12 +1,12 @@
-# ENGAGE — M4: persistent local images
+# ENGAGE — M5: reliability and verified recovery
 
-ENGAGE is a local cybersecurity knowledge workspace. Its hierarchical library and persistent rich-text editor now support clipboard screenshots and local PNG, JPEG and WebP images. SQLite stores note JSON and image metadata; an application-owned directory stores image bytes. Everything runs locally.
+ENGAGE is a local cybersecurity knowledge workspace. Its hierarchical library and persistent rich-text editor now support clipboard screenshots and local PNG, JPEG and WebP images. SQLite stores note JSON and image metadata; an application-owned directory stores image bytes. Everything runs locally. M5 adds deliberate conflict recovery and verified offline backup/restore, and strengthens failure feedback while preserving the existing editor and persistence paths.
 
 **Wait for image uploads to finish and for Saved before closing the application.** Switching notes and opening management dialogs drain pending saves first. A failed save keeps the current draft open and blocks the transition.
 
 ## Ubuntu setup
 
-Target: Ubuntu 24.04, Python 3.12, Node 24.19.0, npm 11.6.2. M4 adds Pillow 13.0.0 for backend image decoding and validation. Update existing backend environments with `.venv/bin/python -m pip install -r requirements.txt` from `backend/`. Frontend package versions are unchanged.
+Target: Ubuntu 24.04, Python 3.12, Node 24.19.0, npm 11.6.2. M4 adds Pillow 13.0.0 for backend image decoding and validation. Update existing backend environments with `.venv/bin/python -m pip install -r requirements.txt` from `backend/`. M5 also adds the development-only `@playwright/test==1.64.1` package; run `npm ci` in `frontend/` after updating. Runtime frontend package versions are unchanged.
 
 ```bash
 sudo apt update
@@ -30,7 +30,7 @@ Dependencies remain isolated in `backend/.venv` and `frontend/node_modules`, bot
 
 ## Run and upgrade
 
-Restart the backend after installing the updated requirements so it loads M4 routes and schema version 3. Start each service once in its own terminal, from the repository root:
+Restart the backend after installing the updated requirements so it loads M5 profile locking. The schema remains version 3; M5 adds no migration or API route. Start each service once in its own terminal, from the repository root:
 
 ```bash
 # Terminal 1
@@ -99,9 +99,23 @@ Copying an existing image block into a different note is rejected by note owners
 
 The existing 700 ms debounce and single-request saver remain. Local edit numbers prevent an old acknowledgement from marking newer edits Saved. Database revisions reject stale writes with HTTP 409.
 
-A note transition first asks the editor adapter to finish pending uploads and apply their returned URLs, then asks `useAutosave.flush()` to drain its latest snapshot, bypassing only the debounce delay. The editor/title are briefly read-only while switching or managing items. A save error or conflict blocks the transition and retains the draft. Ordinary errors offer Retry save; conflicts require copying local changes before reloading. Metadata changes to the active note remount it only after this drain, using the response's current revision, so the next autosave does not use an obsolete revision.
+A note transition first asks the editor adapter to finish pending uploads and apply their returned URLs, then asks `useAutosave.flush()` to drain its latest snapshot, bypassing only the debounce delay. The editor/title are briefly read-only while switching or managing items. A save error or conflict blocks the transition and retains the draft. Ordinary API errors retain the latest draft and stay visible until Retry save, even if typing continues. Correcting a local title-validation error resumes autosave. Identical title/document events do not schedule extra writes. Conflicts offer Review conflict and recover: inspect the saved version, download both versions as a local JSON recovery file, verify the download, then explicitly reopen the current saved note. The editor stays locked during that decision. No force-save or automatic merge is offered; keep the recovery file private and use it to compare/reapply your draft manually. Metadata changes to the active note remount it only after this drain, using the response's current revision, so the next autosave does not use an obsolete revision.
 
 Saved content is in SQLite. Unsaved drafts remain in memory; the existing beforeunload warning cannot prevent forced process termination. Backend health is sampled at page load; save errors report actual note-request failures.
+
+## Offline backup and restore
+
+See **[BACKUP_RESTORE.md](BACKUP_RESTORE.md)** for the complete procedure and exact data-path mapping. Wait for Saved and all uploads, then stop every backend before copying. The M5 CLI uses a cooperative profile lock, read-only DB/image validation and SHA-256 manifests. It refuses existing destinations and restores only into a new profile.
+
+From `backend/` (choose private absolute paths outside Git, with existing parent directories):
+
+```bash
+.venv/bin/python -m app.backup backup --destination /private/backups/new-workspace.engage-backup
+.venv/bin/python -m app.backup restore --source /private/backups/new-workspace.engage-backup --data-dir /private/restored/engage
+# For that restore, the backend uses XDG_DATA_HOME=/private/restored
+```
+
+Backups and conflict recovery downloads are **not encrypted**. Keep both private. A successful backup copy alone is insufficient: open the restored profile and verify notes and images. The M5 automated restoration drill does this without changing your personal profile.
 
 ## Data location and schema
 
@@ -157,4 +171,13 @@ cd ../backend
 
 Tests inject temporary database paths; destructive cases never use real application data. The frontend uses the existing Vitest/Testing Library stack; native rich-editor/modal behavior is also exercised in the browser acceptance run.
 
-Read `M4_REPORT.md` for the A–H engineering report, decisions and file inventory; `M4_VERIFICATION.md` contains executed checks, results, and the reproducible acceptance procedure. Earlier milestone reports remain historical records. No commit, push, tag or M5 functionality is included.
+M5 adds a reproducible Chromium suite. From `frontend/`:
+
+```bash
+npx playwright install chromium
+npm run test:e2e
+```
+
+On a minimal Ubuntu host, `npx playwright install --with-deps chromium` also installs required system libraries. Browser setup may download files; the tests themselves launch new loopback servers and isolated temporary profiles, stop/restart their own backend, verify failure recovery, and restore a backup into a separate profile. They never target an existing server or your default data directory. Fixtures are removed in cleanup. Generated evidence is under ignored `frontend/test-results/`.
+
+Read `M5_REPORT.md` for the full A–H engineering report and file inventory, `M5_VERIFICATION.md` for exact results/failure-injection coverage, and `BACKUP_RESTORE.md` before backing up real data. Earlier milestone reports remain historical records. No commit, push, tag, M6 or later functionality is included.

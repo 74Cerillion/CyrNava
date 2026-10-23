@@ -43,3 +43,5 @@ dialog::backdrop { background: rgb(15 23 42 / 40%); }
 dialog h2 { font-size: 22px; margin-bottom: 20px; overflow-wrap: anywhere; }
 dialog select { width: 100%; padding: 10px; font: inherit; }
 .dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+
+.recovery-document { max-height: 15rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }

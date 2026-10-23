@@ -13,12 +13,13 @@ export function useAutosave(note: Note, onSaved?: (note: Note) => void) {
   const [savedVersion, setSavedVersion] = useState(0);
   const [savingVersion, setSavingVersion] = useState(-1);
   const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<{ message: string; conflict: boolean } | null>(null);
+  const [error, setError] = useState<{ message: string; conflict: boolean; validation?: boolean } | null>(null);
   const inFlight = useRef(false);
   const lifetime = useRef<AbortController | null>(null);
 
+  const currentDraft = useRef({ title: note.title, json: JSON.stringify(note.document_json) });
   const versions = useRef({ edited: 0, saved: 0 });
-  const failure = useRef<{ message: string; conflict: boolean } | null>(null);
+  const failure = useRef<{ message: string; conflict: boolean; validation?: boolean } | null>(null);
   const waiters = useRef<((saved: boolean) => void)[]>([]);
   const [flushRequested, setFlushRequested] = useState(false);
 
@@ -27,7 +28,7 @@ export function useAutosave(note: Note, onSaved?: (note: Note) => void) {
     for (const resolve of pending) resolve(saved);
   }, []);
 
-  const reportError = useCallback((problem: { message: string; conflict: boolean }) => {
+  const reportError = useCallback((problem: { message: string; conflict: boolean; validation?: boolean }) => {
     failure.current = problem;
     setError(problem);
     setFlushRequested(false);
@@ -58,7 +59,7 @@ export function useAutosave(note: Note, onSaved?: (note: Note) => void) {
       const controller = lifetime.current;
       if (!controller || controller.signal.aborted || inFlight.current) return;
       if (!draft.title.trim() || draft.title.trim().length > 200) {
-        reportError({ message: 'Use a title between 1 and 200 characters.', conflict: false });
+        reportError({ message: 'Use a title between 1 and 200 characters.', conflict: false, validation: true });
         return;
       }
       inFlight.current = true;
@@ -108,15 +109,20 @@ export function useAutosave(note: Note, onSaved?: (note: Note) => void) {
   }
 
   function changeTitle(title: string) {
+    if (currentDraft.current.title === title) return;
+    currentDraft.current.title = title;
     const version = ++versions.current.edited;
     setDraft((current) => ({ ...current, title, version, editedAt: Date.now() }));
-    clearTransientError();
+    if (failure.current?.validation) clearTransientError();
   }
 
   function changeDocument(document_json: NoteDocument) {
+    const json = JSON.stringify(document_json);
+    if (currentDraft.current.json === json) return;
+    currentDraft.current.json = json;
     const version = ++versions.current.edited;
     setDraft((current) => ({ ...current, document_json, version, editedAt: Date.now() }));
-    clearTransientError();
+    if (failure.current?.validation) clearTransientError();
   }
 
   const status: SaveStatus = error ? 'Save Error'
@@ -124,7 +130,7 @@ export function useAutosave(note: Note, onSaved?: (note: Note) => void) {
       : busy && savingVersion === draft.version ? 'Saving...' : 'Unsaved Changes';
 
   return {
-    title: draft.title, status, error, revision,
+    title: draft.title, document: draft.document_json, status, error, revision,
     changeTitle, changeDocument, flush,
     retry: clearTransientError,
   };

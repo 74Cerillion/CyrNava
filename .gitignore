@@ -24,3 +24,12 @@ captures/
 *.key
 *.log
 .DS_Store
+
+# M5 sensitive backup/recovery data and generated browser reports
+backups/
+*.engage-backup/
+.engage-stage-*/
+engage-conflict-*.json
+playwright-report/
+test-results/
+.engage.lock

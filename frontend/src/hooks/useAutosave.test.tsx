@@ -214,3 +214,25 @@ it('notices an edit synchronously when navigation is requested in the same event
   expect(updateNote).toHaveBeenCalledWith(note.id, 1,
     expect.objectContaining({ title: 'Immediate edit' }), expect.any(AbortSignal));
 });
+
+it('keeps an outage visible while further edits accumulate until an explicit retry', async () => {
+  vi.mocked(updateNote).mockRejectedValueOnce(new ApiError('offline', 0)).mockResolvedValueOnce({ ...note, revision: 2 });
+  const { result } = renderHook(() => useAutosave(note));
+  act(() => result.current.changeDocument(document('Before outage')));
+  await tick();
+  act(() => result.current.changeDocument(document('Latest draft during outage')));
+  await tick(5000);
+  expect(result.current.status).toBe('Save Error');
+  expect(result.current.document).toEqual(document('Latest draft during outage'));
+  expect(updateNote).toHaveBeenCalledTimes(1);
+  act(() => result.current.retry()); await tick(0);
+  expect(updateNote).toHaveBeenLastCalledWith(note.id, 1,
+    { title: note.title, document_json: document('Latest draft during outage') }, expect.any(AbortSignal));
+  expect(result.current.status).toBe('Saved');
+});
+it('ignores identical editor events and title values without issuing writes', async () => {
+  const { result } = renderHook(() => useAutosave(note));
+  act(() => { result.current.changeTitle(note.title); result.current.changeDocument(structuredClone(note.document_json)); });
+  await tick(2000);
+  expect(updateNote).not.toHaveBeenCalled(); expect(result.current.status).toBe('Saved');
+});

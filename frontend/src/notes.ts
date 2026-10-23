@@ -44,7 +44,7 @@ export async function updateNote(id: string, revision: number, draft: Partial<No
     }, signal);
   } catch (error) {
     if (error instanceof ApiError && error.status === 409) {
-      throw new ApiError('This note changed elsewhere. Your edits remain here. Copy them before reloading.', 409);
+      throw new ApiError('This note changed elsewhere. Your edits remain here. Use Review conflict and recover to retain both versions before reopening.', 409);
     }
     throw error;
   }
