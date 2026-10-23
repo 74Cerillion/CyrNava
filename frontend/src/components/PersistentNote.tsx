@@ -30,13 +30,13 @@ export function PersistentNote({ note, locked = false, onSaved, onRecovered, ref
         <label htmlFor="note-title">Note title</label>
         <input id="note-title" value={save.title} maxLength={200} disabled={locked || recovering || preparingRecovery}
           onChange={(event) => save.changeTitle(event.target.value)} />
-        <p role="status" aria-live="polite">{save.status}</p>
+        <p className="save-state" data-state={save.status} role="status" aria-live="polite" aria-atomic="true">{save.status}</p>
         {save.error && <div role="alert">
           <p>{save.error.message}</p>
           {!save.error.conflict ? <button onClick={save.retry}>Retry save</button>
             : <button disabled={locked || preparingRecovery} onClick={() => void beginRecovery()}>Review conflict and recover</button>}
         </div>}
-        <p className="hint">Your note stays on this computer. Wait for Saved before closing.</p>
+        <p className="hint">Your note stays on this computer. Wait for uploads and Saved before closing.</p>
       </header>
       {recovering && <ConflictRecovery noteId={note.id} draft={{ title: save.title, document_json: save.document }}
         onClose={() => setRecovering(false)} onReload={(saved) => { setRecovering(false); onRecovered?.(saved); }} />}

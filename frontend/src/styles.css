@@ -21,7 +21,7 @@ h2 { margin: 0; font-size: 26px; }
 }
 label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
 input { font: inherit; color: inherit; padding: 10px 12px; border: 1px solid #94a3b8; border-radius: 6px; width: min(100%, 560px); }
-button { font: inherit; padding: 10px 16px; margin: 12px 8px 0 0; border: 1px solid #1e426e; border-radius: 6px; background: #1e426e; color: white; cursor: pointer; }
+button:not(.mantine-UnstyledButton-root) { font: inherit; padding: 10px 16px; margin: 12px 8px 0 0; border: 1px solid #1e426e; border-radius: 6px; background: #1e426e; color: white; cursor: pointer; }
 button:disabled { opacity: .6; cursor: default; }
 [role="alert"] { color: #9f2424; }
 
@@ -45,3 +45,18 @@ dialog select { width: 100%; padding: 10px; font: inherit; }
 .dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
 
 .recovery-document { max-height: 15rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* M6: retain the two-pane design and make existing controls/status clearer. */
+.skip-link { position: absolute; left: 16px; top: -100px; z-index: 1000; padding: 12px; background: white; color: #1e426e; }
+.skip-link:focus { top: 12px; }
+input[type="checkbox"] { width: auto; padding: 0; margin-right: 8px; accent-color: #1e426e; }
+button, input, select { max-width: 100%; }
+.dialog-actions { flex-wrap: wrap; }
+.save-state { display: inline-block; padding: 6px 12px; border-radius: 6px; background: #edf3f9; color: #1e426e; font-weight: 700; }
+.save-state[data-state="Save Error"] { background: #fff0f0; color: #9f2424; }
+.save-state[data-state="Unsaved Changes"] { background: #fff6db; color: #725007; }
+[role="alert"] { overflow-wrap: anywhere; }
+summary:focus-visible, main:focus-visible { outline: 2px solid #1e426e; outline-offset: 3px; }
+@media (max-width: 640px) { main { padding: 24px 16px; } dialog { padding: 18px; } }
+
+.editor { max-width: 100%; overflow-x: auto; }

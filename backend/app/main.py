@@ -8,6 +8,7 @@ from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
 from starlette.concurrency import run_in_threadpool
 
+from app import __version__
 from app.assets import MAX_BYTES, AssetStore, InvalidImage
 from app.database import (
     Database,
@@ -31,9 +32,12 @@ from app.models import (
     UpdateNote,
 )
 from app.profile import profile_lock
+from app.release import serve_frontend
 
 
-def create_app(database_path: Path | None = None) -> FastAPI:
+def create_app(
+    database_path: Path | None = None, frontend_path: Path | None = None
+) -> FastAPI:
     @asynccontextmanager
     async def lifespan(application: FastAPI):
         # Resolve/create data only at startup, never at module import or in tests
@@ -48,7 +52,12 @@ def create_app(database_path: Path | None = None) -> FastAPI:
             yield
 
     application = FastAPI(
-        lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None
+        title="ENGAGE",
+        version=__version__,
+        lifespan=lifespan,
+        docs_url=None,
+        redoc_url=None,
+        openapi_url=None,
     )
 
     @application.exception_handler(sqlite3.Error)
@@ -192,6 +201,8 @@ def create_app(database_path: Path | None = None) -> FastAPI:
             },
         )
 
+    if frontend_path is not None:
+        serve_frontend(application, frontend_path, health)
     return application
 
 

@@ -68,6 +68,7 @@ export function KnowledgeEditor({ initialDocument, onDocumentChange, noteId, edi
 
   const editor = useCreateBlockNote({
     schema,
+    domAttributes: { editor: { 'aria-label': 'Note content' } },
     initialContent: initialDocument as unknown as typeof schema.PartialBlock[],
     uploadFile: (file) => {
       const lifetime = controller.current;
@@ -114,6 +115,7 @@ export function KnowledgeEditor({ initialDocument, onDocumentChange, noteId, edi
     }} onErrorCapture={(event) => {
       if (event.target instanceof HTMLImageElement) setUploadError('A saved image is unavailable. Its reference is preserved; check local asset storage.');
     }}>
+      <p className="hint editor-help">Use / for formatting and images. Paste a screenshot with Ctrl+V, or type /image to select a local PNG, JPEG or WebP.</p>
       {uploadCount > 0 && <p role="status">Uploading image… Wait before closing.</p>}
       {uploadError && <div role="alert">{uploadError} <button onClick={() => setUploadError(null)}>Dismiss image error</button></div>}
       <BlockNoteView editor={editor} editable={editable} theme="light" emojiPicker={false} filePanel={false}

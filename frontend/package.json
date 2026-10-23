@@ -1,6 +1,6 @@
 {
   "name": "cyber-workspace-frontend",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -13,7 +13,8 @@
     "build": "tsc --noEmit && vite build",
     "lint": "eslint . --max-warnings 0",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:release": "ENGAGE_E2E_RELEASE=1 playwright test"
   },
   "dependencies": {
     "@blocknote/core": "0.56.0",
@@ -43,5 +44,6 @@
     "@types/react-dom": "19.3.0",
     "@types/node": "24.10.1",
     "@playwright/test": "1.64.1"
-  }
+  },
+  "license": "UNLICENSED"
 }

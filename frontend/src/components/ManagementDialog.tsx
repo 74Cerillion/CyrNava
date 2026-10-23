@@ -27,13 +27,13 @@ export function ManagementDialog({ state, data, busy, error, onClose, onSubmit }
     return () => { dialog.close(); if (previous?.isConnected) previous.focus(); };
   }, []);
   useEffect(() => { if (!busy) ref.current?.querySelector<HTMLElement>('input, select, button')?.focus(); }, [busy]);
-  return <dialog ref={ref} aria-labelledby="management-title"
+  return <dialog ref={ref} aria-labelledby="management-title" aria-describedby={state.kind === 'delete' ? 'deletion-description' : undefined}
     onCancel={(event) => { event.preventDefault(); if (!busy) onClose(); }}
     onKeyDown={(event) => { if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); if (!busy) onClose(); } }}>
     <h2 id="management-title">{title}</h2>
     <form onSubmit={(event) => { event.preventDefault(); if (!busy) onSubmit(value); }}>
       {state.kind === 'delete' ? <>
-        <p>This operation cannot be undone.</p>
+        <p id="deletion-description">This operation cannot be undone.</p>
         {state.impact ? <p>This will permanently delete this folder, <strong>{state.impact.descendant_folders} {state.impact.descendant_folders === 1 ? 'subfolder' : 'subfolders'}</strong>, and <strong>{state.impact.notes} {state.impact.notes === 1 ? 'note' : 'notes'}</strong>.</p>
           : <p>This will permanently delete this note.</p>}
       </> : state.kind === 'move' ? <>

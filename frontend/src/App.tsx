@@ -1,3 +1,4 @@
+import { version } from '../package.json';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { PersistentNote } from './components/PersistentNote';
 import type { NoteHandle } from './components/PersistentNote';
@@ -187,8 +188,9 @@ export default function App() {
 
   const blocked = working || dialog !== null || loading;
   return <div className="workspace">
+    <a className="skip-link" href="#note">Skip to note</a>
     <aside className="sidebar" aria-label="Workspace navigation">
-      <p className="eyebrow">LOCAL WORKSPACE · M5</p><h1>ENGAGE</h1>
+      <p className="eyebrow">LOCAL WORKSPACE · v{version}</p><h1>ENGAGE</h1>
       <button className="secondary root-button" disabled={blocked} onClick={() => setSelected(null)}>Workspace root</button>
       <div className="library-actions">
         <button disabled={blocked} onClick={() => newItem('new-folder')}>New folder</button>
@@ -206,15 +208,16 @@ export default function App() {
       </div>
       <p className="status" role="status">Backend at page load: {health}</p>
       <p className="hint">Arrow keys navigate. Enter opens notes or toggles folders. F2 renames; Delete asks for confirmation.</p>
+      <p className="hint"><a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></p>
     </aside>
-    <main id="note">
+    <main id="note" tabIndex={-1}>
       {working && <p role="status">Saving pending changes or updating the library...</p>}
       {error && !dialog && <div role="alert"><p>{error}</p>
         {!note && <button onClick={() => { setLoading(true); setError(null); setLoadAttempt((n) => n + 1); }}>Retry opening library</button>}
       </div>}
       {loading ? <p role="status">Opening library...</p> : note ?
         <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} locked={working || dialog !== null} onSaved={noteSaved} onRecovered={(saved) => { setNote(saved); setEditorEpoch((n) => n + 1); setError(null); noteSaved(); }} />
-        : <header><h2>Select or create a note</h2><p>Your existing notes are discoverable in the library, including notes saved before M2.</p></header>}
+        : <header><h2>Select or create a note</h2><p>Choose a note in the library, or use New folder and New note to start.</p></header>}
     </main>
     {dialog && <ManagementDialog state={dialog} data={data} busy={working} error={error}
       onClose={() => { if (!working) { setDialog(null); setError(null); } }} onSubmit={submit} />}

@@ -11,6 +11,7 @@ import { createServer } from 'node:net';
 const frontend = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const backend = resolve(frontend, '../backend');
 const python = join(backend, '.venv/bin/python');
+const releaseMode = process.env.ENGAGE_E2E_RELEASE === '1';
 
 async function freePort(): Promise<number> {
   const server = createServer();
@@ -38,7 +39,7 @@ async function ready(url: string, child: ChildProcess) {
 async function environment() {
   // No option to target an existing profile/server. Every test owns its children.
   const directory = await mkdtemp(join(tmpdir(), 'engage-m5-e2e-'));
-  const backendPort = await freePort(); const frontendPort = await freePort();
+  const backendPort = await freePort(); const frontendPort = releaseMode ? backendPort : await freePort();
   const api = `http://127.0.0.1:${backendPort}`; const url = `http://127.0.0.1:${frontendPort}`;
   let server: ChildProcess | undefined; let vite: ChildProcess | undefined;
   let data = join(directory, 'original-data'); let logs = '';
@@ -50,11 +51,12 @@ async function environment() {
     return child;
   }
   async function startBackend() {
-    server = launch(python, ['-m', 'uvicorn', 'app.main:app', '--host', '127.0.0.1', '--port', String(backendPort)], backend);
+    server = launch(python, releaseMode ? ['-m', 'app', '--port', String(backendPort)] : ['-m', 'uvicorn', 'app.main:app', '--host', '127.0.0.1', '--port', String(backendPort)], backend);
     await ready(`${api}/health`, server);
   }
   async function start() {
     await startBackend();
+    if (releaseMode) return;
     vite = launch(process.execPath, ['node_modules/vite/bin/vite.js', '--port', String(frontendPort)], frontend);
     await ready(url, vite);
   }
@@ -208,5 +210,114 @@ test('revision conflict retains the draft and exports both versions before expli
     await expect(page.getByRole('textbox', { name: 'Note title', exact: true })).toHaveValue('Other saved version');
     await page.getByRole('textbox', { name: 'Note title', exact: true }).fill('Editing after recovery'); await saved(page);
     expect((await getJson(`${env.api}/api/notes/${owner.id}`)).title).toBe('Editing after recovery');
+  } finally { await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+});
+
+test('Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation', async ({ page }, info) => {
+  const env = await environment();
+  const external: string[] = [];
+  await page.route('**/*', (route) => {
+    if (new URL(route.request().url()).hostname !== '127.0.0.1') { external.push(route.request().url()); return route.abort(); }
+    return route.continue();
+  });
+  const editor = () => page.getByRole('region', { name: 'Note editor' }).getByRole('textbox');
+  try {
+    await env.start(); await page.goto(env.url);
+    await create(page, 'folder', 'Networking'); await create(page, 'folder', 'Protocols');
+    await create(page, 'note', 'DNS reference');
+    await editor().click();
+    for (const [prefix, text] of [['# ', 'Network documentation'], ['## ', 'DNS resolution'], ['### ', 'Resolver behavior']]) {
+      await page.keyboard.type(prefix); await page.keyboard.type(text); await page.keyboard.press('Enter');
+    }
+    await page.keyboard.type('A resolver translates a synthetic example.test name into a local documentation example.'); await page.keyboard.press('Enter');
+    await page.keyboard.type('- '); await page.keyboard.type('Ask the configured resolver.'); await page.keyboard.press('Enter');
+    await page.keyboard.type('Review the cached response.'); await page.keyboard.press('Enter'); await page.keyboard.press('Enter');
+    await page.keyboard.press('Control+b'); await page.keyboard.type('Synthetic learning notes only.'); await page.keyboard.press('Control+b'); await page.keyboard.press('Enter');
+    await page.keyboard.type('``` '); await page.keyboard.type('dig example.test'); await page.keyboard.press('Enter'); await page.keyboard.type('# Example syntax; ENGAGE does not execute commands.');
+    await saved(page);
+    let tree = await getJson(`${env.api}/api/tree`);
+    const owner = tree.notes.find((note: Summary) => note.title === 'DNS reference');
+    const protocols = tree.folders.find((folder: { name: string }) => folder.name === 'Protocols');
+    const networking = tree.folders.find((folder: { name: string }) => folder.name === 'Networking');
+    const rich = await getJson(`${env.api}/api/notes/${owner.id}`);
+    expect(rich.document_json.filter((b: { type: string }) => b.type === 'heading').map((b: { props: { level: number } }) => b.props.level)).toEqual([1, 2, 3]);
+    expect(rich.document_json.some((b: { type: string }) => b.type === 'codeBlock')).toBe(true);
+    expect(rich.document_json.some((b: { type: string }) => b.type === 'bulletListItem')).toBe(true);
+    expect(JSON.stringify(rich.document_json)).toContain('"bold":true');
+    await create(page, 'note', 'TCP overview');
+    await editor().click(); await page.keyboard.type('TCP provides ordered, reliable byte streams between endpoints.'); await saved(page);
+    await page.getByRole('treeitem', { name: 'Note DNS reference', exact: true }).click(); await saved(page);
+    await expect(editor().getByRole('heading', { name: 'Network documentation', exact: true })).toBeVisible();
+    await page.screenshot({ path: info.outputPath('01-workspace.png'), fullPage: true });
+    await page.getByRole('complementary').screenshot({ path: info.outputPath('02-hierarchy.png') });
+    await page.getByRole('main').screenshot({ path: info.outputPath('03-rich-text.png') });
+
+    const png = join(env.directory, 'synthetic.png');
+    execFileSync(python, ['-c', "from PIL import Image,ImageDraw; import sys; im=Image.new('RGB',(600,140),'#20324a'); ImageDraw.Draw(im).text((20,45),'SYNTHETIC DNS DIAGRAM - example.test',fill='white',font_size=23); [im.save(sys.argv[1]+ext,format=fmt) for ext,fmt in [('.png','PNG'),('.jpg','JPEG'),('.webp','WEBP')]]", png]);
+    await page.context().grantPermissions(['clipboard-read', 'clipboard-write'], { origin: env.url });
+    await page.evaluate(async (data) => {
+      const bytes = Uint8Array.from(atob(data), (character) => character.charCodeAt(0));
+      await navigator.clipboard.write([new ClipboardItem({ 'image/png': new Blob([bytes], { type: 'image/png' }) })]);
+    }, (await readFile(`${png}.png`)).toString('base64'));
+    await editor().getByText('Synthetic learning notes only.', { exact: true }).click(); await page.keyboard.press('End'); await page.keyboard.press('Control+v');
+    await expect(editor().locator('img')).toHaveCount(1); await saved(page);
+    // Reuse the empty trailing paragraph for the installed native image selector.
+    for (const extension of ['jpg', 'webp']) {
+      await editor().getByText('Synthetic learning notes only.', { exact: true }).click(); await page.keyboard.press('End'); await page.keyboard.press('Enter');
+      await page.keyboard.type('/image'); await page.keyboard.press('Enter');
+      const [chooser] = await Promise.all([page.waitForEvent('filechooser', { timeout: 10_000 }), page.getByRole('button', { name: 'Upload image', exact: true }).click({ timeout: 10_000 })]);
+      await chooser.setFiles(`${png}.${extension}`); await page.keyboard.press('Escape'); await saved(page);
+    }
+    await expect(editor().locator('img')).toHaveCount(3);
+    const imageNote = await getJson(`${env.api}/api/notes/${owner.id}`);
+    expect(imageNote.document_json.filter((b: { type: string }) => b.type === 'image')).toHaveLength(3);
+    await env.stopBackend(); await env.startBackend(); await page.reload(); await saved(page);
+    expect((await getJson(`${env.api}/api/notes/${owner.id}`)).document_json).toEqual(imageNote.document_json);
+    await expect.poll(() => editor().locator('img').evaluateAll((images) => images.every((image) => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth === 600))).toBe(true);
+    await editor().locator('img').first().scrollIntoViewIfNeeded();
+    await page.screenshot({ path: info.outputPath('04-images.png'), fullPage: true });
+
+    // Move note to root and back; its native content is unchanged.
+    for (const destination of ['', protocols.id]) {
+      await page.getByRole('button', { name: 'Move', exact: true }).click();
+      await page.getByRole('dialog').getByLabel('Destination folder').selectOption(destination);
+      await page.getByRole('dialog').getByRole('button', { name: 'Apply', exact: true }).click();
+      await expect(page.getByRole('dialog')).toBeHidden();
+    }
+    expect((await getJson(`${env.api}/api/notes/${owner.id}`)).document_json).toEqual(imageNote.document_json);
+    // Folder movement is the same existing dialog, verified with descendants.
+    await page.getByRole('treeitem', { name: 'Folder Protocols', exact: true }).click();
+    for (const destination of ['', networking.id]) {
+      await page.getByRole('button', { name: 'Move', exact: true }).click();
+      await page.getByRole('dialog').getByLabel('Destination folder').selectOption(destination);
+      await page.getByRole('dialog').getByRole('button', { name: 'Apply', exact: true }).click(); await expect(page.getByRole('dialog')).toBeHidden();
+    }
+    const folder = page.getByRole('treeitem', { name: 'Folder Protocols', exact: true });
+    await folder.focus(); await page.keyboard.press('F2'); await expect(page.getByRole('dialog')).toBeVisible();
+    await page.keyboard.press('Escape'); await expect(page.getByRole('dialog')).toBeHidden(); await expect(folder).toBeFocused();
+    await page.keyboard.press('ArrowLeft'); await expect(folder).toHaveAttribute('aria-expanded', 'false');
+    await page.keyboard.press('ArrowRight'); await page.keyboard.press('ArrowRight');
+    const noteRow = page.getByRole('treeitem', { name: 'Note DNS reference', exact: true }); await expect(noteRow).toBeFocused();
+    await page.keyboard.press('Enter'); await expect(page.getByRole('textbox', { name: 'Note title', exact: true })).toHaveValue('DNS reference');
+    await noteRow.focus(); await page.keyboard.press('Delete'); await expect(page.getByRole('dialog')).toContainText('cannot be undone');
+    await page.keyboard.press('Escape'); await expect(page.getByRole('dialog')).toBeHidden(); await expect(noteRow).toBeFocused();
+    await editor().locator('p').first().click(); await page.keyboard.press('ArrowLeft'); await page.keyboard.press('ArrowRight');
+    await expect(editor()).toBeFocused(); await expect(page.getByRole('dialog')).toBeHidden();
+    for (const button of await page.getByRole('button').all()) if (await button.isVisible()) await expect(button).toHaveAccessibleName(/\S/);
+    await page.keyboard.press('Tab'); // Native focus remains keyboard operable.
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.getByRole('textbox', { name: 'Note title', exact: true }).click();
+    const layout = await page.evaluate(() => ({ width: window.innerWidth, scroll: document.documentElement.scrollWidth, overflowing: Array.from(document.querySelectorAll('*')).filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 12).map((element) => ({ tag: element.tagName, class: element.className, right: element.getBoundingClientRect().right })) }));
+    expect(layout.scroll, JSON.stringify(layout)).toBeLessThanOrEqual(layout.width + 1);
+    await page.setViewportSize({ width: 1280, height: 1000 });
+
+    await page.getByRole('button', { name: 'Workspace root', exact: true }).click();
+    await create(page, 'folder', 'Disposable fixture'); await create(page, 'note', 'Disposable note');
+    await page.getByRole('treeitem', { name: 'Folder Disposable fixture', exact: true }).click();
+    await page.getByRole('button', { name: 'Delete', exact: true }).click();
+    await expect(page.getByRole('dialog')).toContainText('1 note');
+    await page.getByRole('button', { name: 'Delete permanently', exact: true }).click(); await expect(page.getByRole('dialog')).toBeHidden();
+    tree = await getJson(`${env.api}/api/tree`); expect(tree.notes).toHaveLength(2); expect(tree.folders).toHaveLength(2);
+    expect(external).toEqual([]);
   } finally { await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
 });
