@@ -38,7 +38,7 @@ Local release mode uses `backend/app/__main__.py` (`python -m app`). It fixes Uv
 
 ## Backend and persistence
 
-`app/main.py` owns routing and maps domain errors to 404/409/422/503. `models.py` validates request shapes, bounds native JSON and limits accepted blocks. `database.py` owns connections, parameterized SQL and transactions. Every connection enables foreign keys. `BEGIN IMMEDIATE` serializes relationship validation and writes. Note updates use an atomic expected-revision predicate; stale writes affect no content.
+`app/main.py` owns routing and maps domain errors to 404/409/422/503. `models.py` validates request envelopes. `documents.py` bounds native JSON and validates known properties against `document_format_v1.json`, a snapshot checked against the editor adapter schema. Unknown blocks/content shapes remain outside the version-1 boundary; bounded extension metadata is preserved. See [document compatibility](document-format.md). `database.py` owns connections, parameterized SQL and transactions. Every connection enables foreign keys. `BEGIN IMMEDIATE` serializes relationship validation and writes. Note updates use an atomic expected-revision predicate; stale writes affect no content.
 
 Schema version is 3. Folders form nullable-parent adjacency lists; notes use nullable folder IDs, titles, native `document_json`, format version 1, revision and timestamps. Asset metadata links opaque UUIDs to owning notes and generated disk basenames. The M1-to-M2 migration copied named note fields unchanged; M4 added assets. M6 does not migrate or reformat existing data. Future schema versions fail rather than resetting a newer database.
 

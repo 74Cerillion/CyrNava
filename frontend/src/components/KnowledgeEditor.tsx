@@ -1,6 +1,6 @@
 import { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import type { Ref } from 'react';
-import { BlockNoteSchema, defaultBlockSpecs } from '@blocknote/core';
+import { schema } from './editorSchema';
 import { BlockNoteView } from '@blocknote/mantine';
 import { FilePanel, FilePanelController, UploadTab, useCreateBlockNote } from '@blocknote/react';
 import type { FilePanelProps } from '@blocknote/react';
@@ -8,19 +8,6 @@ import { uploadImage } from '../assets';
 import type { NoteDocument } from '../notes';
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/mantine/style.css';
-
-const schema = BlockNoteSchema.create({
-  blockSpecs: {
-    paragraph: defaultBlockSpecs.paragraph,
-    heading: defaultBlockSpecs.heading,
-    bulletListItem: defaultBlockSpecs.bulletListItem,
-    numberedListItem: defaultBlockSpecs.numberedListItem,
-    checkListItem: defaultBlockSpecs.checkListItem,
-    quote: defaultBlockSpecs.quote,
-    codeBlock: defaultBlockSpecs.codeBlock,
-    image: defaultBlockSpecs.image,
-  },
-});
 
 function LocalImagePanel(props: FilePanelProps) {
   const [loading, setLoading] = useState(false);
@@ -118,7 +105,7 @@ export function KnowledgeEditor({ initialDocument, onDocumentChange, noteId, edi
       <p className="hint editor-help">Use / for formatting and images. Paste a screenshot with Ctrl+V, or type /image to select a local PNG, JPEG or WebP.</p>
       {uploadCount > 0 && <p role="status">Uploading image… Wait before closing.</p>}
       {uploadError && <div role="alert">{uploadError} <button onClick={() => setUploadError(null)}>Dismiss image error</button></div>}
-      <BlockNoteView editor={editor} editable={editable} theme="light" emojiPicker={false} filePanel={false}
+      <BlockNoteView editor={editor} editable={editable} theme="light" filePanel={false}
         onChange={() => onDocumentChange(structuredClone(editor.document) as unknown as NoteDocument)}>
         <FilePanelController filePanel={LocalImagePanel} />
       </BlockNoteView>

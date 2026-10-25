@@ -52,3 +52,13 @@ it('explains an outdated backend when the create endpoint is missing', async () 
   vi.mocked(fetch).mockResolvedValue({ ok: false, status: 404 } as Response);
   await expect(createNote(note)).rejects.toThrow('Restart the local backend');
 });
+
+
+it('shows useful 422 locations/reasons without echoing submitted document content', async () => {
+  vi.mocked(fetch).mockResolvedValue({ ok: false, status: 422, json: async () => ({ detail: [
+    { loc: ['body', 'document_json'], msg: 'Value error, document[0].props.level: invalid property', input: 'private note' },
+  ] }) } as Response);
+  await expect(updateNote(note.id, 1, { document_json: note.document_json })).rejects.toMatchObject({
+    status: 422, message: 'body.document_json: Value error, document[0].props.level: invalid property',
+  });
+});

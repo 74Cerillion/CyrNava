@@ -236,3 +236,24 @@ it('ignores identical editor events and title values without issuing writes', as
   await tick(2000);
   expect(updateNote).not.toHaveBeenCalled(); expect(result.current.status).toBe('Saved');
 });
+
+
+it('keeps newer heading/toggle/code formatting while an old formatted save is in flight', async () => {
+  const first = deferred(); const second = deferred();
+  vi.mocked(updateNote).mockReturnValueOnce(first.promise).mockReturnValueOnce(second.promise);
+  const early: NoteDocument = [{ id: 'heading', type: 'heading', props: { level: 4, isToggleable: true },
+    content: [{ type: 'text', text: 'Paragraph A', styles: { bold: true } }], children: [] }];
+  const latest = structuredClone(early);
+  latest[0].props = { level: 6, isToggleable: true };
+  latest[0].children = [{ type: 'codeBlock', props: { language: 'python' }, content: [{ type: 'text', text: 'print("B 🚀")', styles: {} }], children: [] }];
+  const { result } = renderHook(() => useAutosave(note));
+  act(() => result.current.changeDocument(early)); await tick();
+  act(() => result.current.changeDocument(latest)); await tick();
+  expect(updateNote).toHaveBeenCalledTimes(1);
+  await act(async () => first.resolve({ ...note, revision: 2, document_json: early }));
+  expect(result.current.document).toEqual(latest); expect(result.current.status).not.toBe('Saved');
+  await tick(0);
+  expect(updateNote).toHaveBeenLastCalledWith(note.id, 2, { title: note.title, document_json: latest }, expect.any(AbortSignal));
+  await act(async () => second.resolve({ ...note, revision: 3, document_json: latest }));
+  expect(result.current.status).toBe('Saved'); expect(result.current.document).toEqual(latest);
+});

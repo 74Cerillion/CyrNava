@@ -18,5 +18,6 @@ export default defineConfig({
       '/api': { target },
     },
   },
-  test: { include: ['src/**/*.test.{ts,tsx}'], environment: 'jsdom', setupFiles: ['./src/test-setup.ts'] },
+  // Transform the actual emoji JSON import as Vite does in the browser.
+  test: { server: { deps: { inline: [/@blocknote\//, /@emoji-mart\/data/] } }, include: ['src/**/*.test.{ts,tsx}'], environment: 'jsdom', setupFiles: ['./src/test-setup.ts'] },
 });

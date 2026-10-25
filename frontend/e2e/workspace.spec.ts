@@ -321,3 +321,125 @@ test('Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documen
     expect(external).toEqual([]);
   } finally { await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
 });
+
+
+test('all exposed editor actions persist; mixed content reconstructs after restart and rapid edits', async ({ page }) => {
+  const env = await environment();
+  const fixture = JSON.parse(await readFile(join(backend, 'tests/fixtures/blocknote_v1.json'), 'utf8'));
+  const external: string[] = [];
+  const rejected: number[] = [];
+  let releaseHeld: (() => void) | undefined;
+  await page.route('**/*', (route) => {
+    if (new URL(route.request().url()).hostname !== '127.0.0.1') {
+      external.push(route.request().url()); return route.abort();
+    }
+    return route.continue();
+  });
+  page.on('response', (response) => {
+    if (response.request().method() === 'PATCH' && response.status() >= 400) rejected.push(response.status());
+  });
+  try {
+    await env.start();
+    const created = await fetch(env.api + '/api/notes', { method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ title: 'Compatibility', document_json: fixture.mixed }) });
+    expect(created.status).toBe(201); const note = await created.json();
+    const png = join(env.directory, 'compatibility.png');
+    execFileSync(python, ['-c', 'from PIL import Image;import sys;Image.new("RGB",(32,20),"blue").save(sys.argv[1])', png]);
+    const upload = await fetch(env.api + '/api/assets?note_id=' + note.id, { method: 'POST', headers: { 'content-type': 'image/png' }, body: await readFile(png) });
+    expect(upload.status).toBe(201); const asset = await upload.json();
+    fixture.mixed.find((block: AssetBlock) => block.type === 'image').props.url = asset.url;
+    const initial = await fetch(env.api + '/api/notes/' + note.id, { method: 'PATCH', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ revision: 1, document_json: fixture.mixed }) });
+    expect(initial.status).toBe(200);
+    await page.goto(env.url); await saved(page);
+    const editor = page.getByRole('region', { name: 'Note editor' }).getByRole('textbox');
+    for (let level = 1; level <= 6; level++) {
+      await expect(editor.getByRole('heading', { name: 'Heading ' + level, exact: true })).toBeVisible();
+    }
+    for (const button of await editor.locator('.bn-toggle-button').all()) await button.click();
+    await expect(editor.getByText('Nested toggle body 3', { exact: true })).toBeVisible();
+    await expect(editor.getByText('Nested', { exact: true })).toBeVisible();
+    await expect(editor.locator('[data-content-type="codeBlock"]')).toContainText('print("local 🚀")');
+    await expect(editor.locator('strong')).toContainText('All styles');
+    await expect(editor.locator('a[href="https://example.invalid/evidence"]')).toContainText('Reference');
+    await expect.poll(() => editor.locator('img').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0)).toBe(true);
+    const persisted = async () => (await getJson(env.api + '/api/notes/' + note.id)).document_json;
+    expect(await persisted()).toEqual(fixture.mixed);
+
+    // A block spans the editor width: clicking its center may miss its text
+    // and leave the previous caret active. Use the browser's Selection API
+    // solely for caret setup; all document edits still use real key events.
+    async function newParagraph() {
+      const anchor = editor.locator('[data-id="mixed-tail"] [data-content-type="paragraph"]');
+      await anchor.scrollIntoViewIfNeeded();
+      await anchor.evaluate((element) => {
+        element.closest<HTMLElement>('[contenteditable="true"]')!.focus();
+        const range = document.createRange();
+        range.selectNodeContents(element); range.collapse(false);
+        const selection = window.getSelection()!;
+        selection.removeAllRanges(); selection.addRange(range);
+      });
+      const caret = () => page.evaluate(() => {
+        const node = window.getSelection()?.anchorNode;
+        const element = node instanceof Element ? node : node?.parentElement;
+        const content = element?.closest('[data-content-type]');
+        return { id: element?.closest('[data-id]')?.getAttribute('data-id'),
+          type: content?.getAttribute('data-content-type'), text: content?.textContent };
+      });
+      await expect.poll(caret, { message: 'Caret is at the fixed paragraph' }).toMatchObject({ id: 'mixed-tail', type: 'paragraph', text: 'Final paragraph.' });
+      await page.keyboard.press('Enter');
+      await expect.poll(caret, { message: 'Enter creates an empty paragraph outside code' }).toMatchObject({ type: 'paragraph', text: '' });
+      expect((await caret()).id).not.toBe('mixed-tail');
+    }
+
+    // Every current slash-menu command is activated through the real UI.
+    for (const item of fixture.slash_menu as { key: string; title: string }[]) {
+      await test.step('Slash command: ' + item.title, async () => {
+        await newParagraph(); await page.keyboard.type('/' + item.title);
+        await page.locator('.bn-suggestion-menu').getByText(item.title, { exact: true }).click({ timeout: 10_000 });
+        if (item.key === 'image') {
+          const chooser = page.waitForEvent('filechooser');
+          await page.getByRole('button', { name: 'Upload image', exact: true }).click();
+          await (await chooser).setFiles(png);
+          await expect.poll(async () => (await persisted()).filter((b: AssetBlock) => b.type === 'image' && b.props?.url).length).toBe(2);
+        } else if (item.key === 'emoji') {
+          const emoji = page.locator('.bn-grid-suggestion-menu-item').first();
+          await expect(emoji).toBeVisible(); const character = await emoji.innerText(); await emoji.click();
+          await expect.poll(async () => JSON.stringify(await persisted()).includes(character.trim())).toBe(true);
+        } else {
+          const marker = 'Menu-' + item.key;
+          await page.keyboard.type(marker);
+          await expect.poll(async () => JSON.stringify(await persisted()).includes(marker)).toBe(true);
+        }
+        await saved(page);
+      });
+    }
+
+    // Hold a successful old acknowledgement while newer formatting/text changes.
+    let release!: () => void; const gate = new Promise<void>((done) => { release = done; releaseHeld = done; });
+    let received = false; let first = true;
+    await page.route('**/api/notes/*', async (route) => {
+      if (first && route.request().method() === 'PATCH') {
+        first = false; const response = await route.fetch(); received = true; await gate; await route.fulfill({ response });
+      } else await route.continue();
+    });
+    await newParagraph();
+    await page.keyboard.press('Control+Alt+4'); await page.keyboard.type('Rapid A');
+    await expect.poll(() => received, { message: 'First rapid edit reaches the API' }).toBe(true);
+    await page.keyboard.press('Control+Alt+6'); await page.keyboard.type(' + Rapid B 🚀');
+    await expect(page.getByText('Unsaved Changes', { exact: true })).toBeVisible(); release();
+    await expect.poll(async () => JSON.stringify(await persisted()).includes('Rapid A + Rapid B 🚀')).toBe(true);
+    await saved(page); await page.unroute('**/api/notes/*');
+    const final = await persisted();
+    expect(final.find((block: { id: string }) => block.id === 'case-codeBlock')).toEqual(fixture.mixed.find((block: { id: string }) => block.id === 'case-codeBlock'));
+    expect(final.find((block: { content?: unknown }) => (JSON.stringify(block.content) || '').includes('Rapid A')).props.level).toBe(6);
+    await page.reload(); await saved(page); expect(await persisted()).toEqual(final);
+    await expect(editor.getByRole('heading', { name: 'Rapid A + Rapid B 🚀', exact: true })).toBeVisible();
+    await expect(editor.getByText('Nested toggle body 3', { exact: true })).toBeVisible();
+    await env.stopBackend(); await env.startBackend(); await page.reload(); await saved(page);
+    expect(await persisted()).toEqual(final);
+    await expect(editor.locator('[data-id="case-codeBlock"] [data-content-type="codeBlock"]')).toContainText('print("local 🚀")');
+    await expect(editor.getByRole('heading', { name: 'Rapid A + Rapid B 🚀', exact: true })).toBeVisible();
+    expect(rejected).toEqual([]); expect(external).toEqual([]);
+  } finally { releaseHeld?.(); await env.shutdown(); await rm(env.directory, { recursive: true, force: true }); }
+});

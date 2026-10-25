@@ -1,0 +1,1428 @@
+{
+  "blocknote_version": "0.56.0",
+  "slash_menu_keys": [
+    "heading",
+    "heading_2",
+    "heading_3",
+    "quote",
+    "numbered_list",
+    "bullet_list",
+    "check_list",
+    "paragraph",
+    "code_block",
+    "image",
+    "toggle_heading",
+    "toggle_heading_2",
+    "toggle_heading_3",
+    "heading_4",
+    "heading_5",
+    "heading_6",
+    "emoji"
+  ],
+  "cases": {
+    "paragraph": [
+      {
+        "id": "case-paragraph",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "yellow",
+          "textColor": "blue",
+          "textAlignment": "justify"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "All styles 日本語 🚀",
+            "styles": {
+              "bold": true,
+              "italic": true,
+              "underline": true,
+              "strike": true,
+              "textColor": "#123456",
+              "backgroundColor": "yellow"
+            }
+          },
+          {
+            "type": "text",
+            "text": " inline code ",
+            "styles": {
+              "code": true
+            }
+          },
+          {
+            "type": "link",
+            "href": "https://example.invalid/evidence",
+            "content": [
+              {
+                "type": "text",
+                "text": "Reference",
+                "styles": {
+                  "italic": true
+                }
+              }
+            ]
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "tail-paragraph",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "bulletListItem": [
+      {
+        "id": "case-bulletListItem",
+        "type": "bulletListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Bullet",
+            "styles": {}
+          }
+        ],
+        "children": [
+          {
+            "id": "nested-list",
+            "type": "numberedListItem",
+            "props": {
+              "backgroundColor": "default",
+              "textColor": "default",
+              "textAlignment": "left",
+              "start": 4
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Nested",
+                "styles": {}
+              }
+            ],
+            "children": [
+              {
+                "id": "deep-check",
+                "type": "checkListItem",
+                "props": {
+                  "backgroundColor": "default",
+                  "textColor": "default",
+                  "textAlignment": "left",
+                  "checked": true
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "Check",
+                    "styles": {}
+                  }
+                ],
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "tail-bulletListItem",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "numberedListItem": [
+      {
+        "id": "case-numberedListItem",
+        "type": "numberedListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "start": 3
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Numbered",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "tail-numberedListItem",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "checkListItem": [
+      {
+        "id": "case-checkListItem",
+        "type": "checkListItem",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "checked": true
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Completed",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "tail-checkListItem",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "quote": [
+      {
+        "id": "case-quote",
+        "type": "quote",
+        "props": {
+          "backgroundColor": "gray",
+          "textColor": "red"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Quote",
+            "styles": {}
+          }
+        ],
+        "children": [
+          {
+            "id": "quote-child",
+            "type": "paragraph",
+            "props": {
+              "backgroundColor": "default",
+              "textColor": "default",
+              "textAlignment": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Nested quote paragraph",
+                "styles": {}
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "tail-quote",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "codeBlock": [
+      {
+        "id": "case-codeBlock",
+        "type": "codeBlock",
+        "props": {
+          "language": "python"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "print(\"local 🚀\")\n# second line",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "tail-codeBlock",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "image": [
+      {
+        "id": "case-image",
+        "type": "image",
+        "props": {
+          "textAlignment": "center",
+          "backgroundColor": "default",
+          "name": "evidence.png",
+          "url": "",
+          "caption": "Local image 日本語",
+          "showPreview": true,
+          "previewWidth": 420
+        },
+        "children": []
+      },
+      {
+        "id": "tail-image",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "heading_1": [
+      {
+        "id": "case-heading_1",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 1,
+          "isToggleable": false
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Heading 1",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "tail-heading_1",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "toggle_heading_1": [
+      {
+        "id": "case-toggle_heading_1",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 1,
+          "isToggleable": true
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Toggle 1",
+            "styles": {}
+          }
+        ],
+        "children": [
+          {
+            "id": "toggle-child-1",
+            "type": "paragraph",
+            "props": {
+              "backgroundColor": "default",
+              "textColor": "default",
+              "textAlignment": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Nested toggle body 1",
+                "styles": {}
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "tail-toggle_heading_1",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "heading_2": [
+      {
+        "id": "case-heading_2",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 2,
+          "isToggleable": false
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Heading 2",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "tail-heading_2",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "toggle_heading_2": [
+      {
+        "id": "case-toggle_heading_2",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 2,
+          "isToggleable": true
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Toggle 2",
+            "styles": {}
+          }
+        ],
+        "children": [
+          {
+            "id": "toggle-child-2",
+            "type": "paragraph",
+            "props": {
+              "backgroundColor": "default",
+              "textColor": "default",
+              "textAlignment": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Nested toggle body 2",
+                "styles": {}
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "tail-toggle_heading_2",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "heading_3": [
+      {
+        "id": "case-heading_3",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 3,
+          "isToggleable": false
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Heading 3",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "tail-heading_3",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "toggle_heading_3": [
+      {
+        "id": "case-toggle_heading_3",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 3,
+          "isToggleable": true
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Toggle 3",
+            "styles": {}
+          }
+        ],
+        "children": [
+          {
+            "id": "toggle-child-3",
+            "type": "paragraph",
+            "props": {
+              "backgroundColor": "default",
+              "textColor": "default",
+              "textAlignment": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Nested toggle body 3",
+                "styles": {}
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "tail-toggle_heading_3",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "heading_4": [
+      {
+        "id": "case-heading_4",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 4,
+          "isToggleable": false
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Heading 4",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "tail-heading_4",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "toggle_heading_4": [
+      {
+        "id": "case-toggle_heading_4",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 4,
+          "isToggleable": true
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Toggle 4",
+            "styles": {}
+          }
+        ],
+        "children": [
+          {
+            "id": "toggle-child-4",
+            "type": "paragraph",
+            "props": {
+              "backgroundColor": "default",
+              "textColor": "default",
+              "textAlignment": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Nested toggle body 4",
+                "styles": {}
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "tail-toggle_heading_4",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "heading_5": [
+      {
+        "id": "case-heading_5",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 5,
+          "isToggleable": false
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Heading 5",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "tail-heading_5",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "toggle_heading_5": [
+      {
+        "id": "case-toggle_heading_5",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 5,
+          "isToggleable": true
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Toggle 5",
+            "styles": {}
+          }
+        ],
+        "children": [
+          {
+            "id": "toggle-child-5",
+            "type": "paragraph",
+            "props": {
+              "backgroundColor": "default",
+              "textColor": "default",
+              "textAlignment": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Nested toggle body 5",
+                "styles": {}
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "tail-toggle_heading_5",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "heading_6": [
+      {
+        "id": "case-heading_6",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 6,
+          "isToggleable": false
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Heading 6",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "tail-heading_6",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ],
+    "toggle_heading_6": [
+      {
+        "id": "case-toggle_heading_6",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 6,
+          "isToggleable": true
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Toggle 6",
+            "styles": {}
+          }
+        ],
+        "children": [
+          {
+            "id": "toggle-child-6",
+            "type": "paragraph",
+            "props": {
+              "backgroundColor": "default",
+              "textColor": "default",
+              "textAlignment": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "Nested toggle body 6",
+                "styles": {}
+              }
+            ],
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "tail-toggle_heading_6",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [],
+        "children": []
+      }
+    ]
+  },
+  "mixed": [
+    {
+      "id": "case-paragraph",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "yellow",
+        "textColor": "blue",
+        "textAlignment": "justify"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "All styles 日本語 🚀",
+          "styles": {
+            "bold": true,
+            "italic": true,
+            "underline": true,
+            "strike": true,
+            "textColor": "#123456",
+            "backgroundColor": "yellow"
+          }
+        },
+        {
+          "type": "text",
+          "text": " inline code ",
+          "styles": {
+            "code": true
+          }
+        },
+        {
+          "type": "link",
+          "href": "https://example.invalid/evidence",
+          "content": [
+            {
+              "type": "text",
+              "text": "Reference",
+              "styles": {
+                "italic": true
+              }
+            }
+          ]
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "case-bulletListItem",
+      "type": "bulletListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Bullet",
+          "styles": {}
+        }
+      ],
+      "children": [
+        {
+          "id": "nested-list",
+          "type": "numberedListItem",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left",
+            "start": 4
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Nested",
+              "styles": {}
+            }
+          ],
+          "children": [
+            {
+              "id": "deep-check",
+              "type": "checkListItem",
+              "props": {
+                "backgroundColor": "default",
+                "textColor": "default",
+                "textAlignment": "left",
+                "checked": true
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Check",
+                  "styles": {}
+                }
+              ],
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "case-numberedListItem",
+      "type": "numberedListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "start": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Numbered",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "case-checkListItem",
+      "type": "checkListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "checked": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Completed",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "case-quote",
+      "type": "quote",
+      "props": {
+        "backgroundColor": "gray",
+        "textColor": "red"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Quote",
+          "styles": {}
+        }
+      ],
+      "children": [
+        {
+          "id": "quote-child",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Nested quote paragraph",
+              "styles": {}
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "case-codeBlock",
+      "type": "codeBlock",
+      "props": {
+        "language": "python"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "print(\"local 🚀\")\n# second line",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "case-image",
+      "type": "image",
+      "props": {
+        "textAlignment": "center",
+        "backgroundColor": "default",
+        "name": "evidence.png",
+        "url": "",
+        "caption": "Local image 日本語",
+        "showPreview": true,
+        "previewWidth": 420
+      },
+      "children": []
+    },
+    {
+      "id": "case-heading_1",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 1,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Heading 1",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "case-toggle_heading_1",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 1,
+        "isToggleable": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Toggle 1",
+          "styles": {}
+        }
+      ],
+      "children": [
+        {
+          "id": "toggle-child-1",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Nested toggle body 1",
+              "styles": {}
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "case-heading_2",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 2,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Heading 2",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "case-toggle_heading_2",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 2,
+        "isToggleable": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Toggle 2",
+          "styles": {}
+        }
+      ],
+      "children": [
+        {
+          "id": "toggle-child-2",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Nested toggle body 2",
+              "styles": {}
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "case-heading_3",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 3,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Heading 3",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "case-toggle_heading_3",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 3,
+        "isToggleable": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Toggle 3",
+          "styles": {}
+        }
+      ],
+      "children": [
+        {
+          "id": "toggle-child-3",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Nested toggle body 3",
+              "styles": {}
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "case-heading_4",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 4,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Heading 4",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "case-toggle_heading_4",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 4,
+        "isToggleable": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Toggle 4",
+          "styles": {}
+        }
+      ],
+      "children": [
+        {
+          "id": "toggle-child-4",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Nested toggle body 4",
+              "styles": {}
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "case-heading_5",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 5,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Heading 5",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "case-toggle_heading_5",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 5,
+        "isToggleable": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Toggle 5",
+          "styles": {}
+        }
+      ],
+      "children": [
+        {
+          "id": "toggle-child-5",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Nested toggle body 5",
+              "styles": {}
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "case-heading_6",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 6,
+        "isToggleable": false
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Heading 6",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "case-toggle_heading_6",
+      "type": "heading",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left",
+        "level": 6,
+        "isToggleable": true
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Toggle 6",
+          "styles": {}
+        }
+      ],
+      "children": [
+        {
+          "id": "toggle-child-6",
+          "type": "paragraph",
+          "props": {
+            "backgroundColor": "default",
+            "textColor": "default",
+            "textAlignment": "left"
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Nested toggle body 6",
+              "styles": {}
+            }
+          ],
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "mixed-tail",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Final paragraph.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    }
+  ],
+  "slash_menu": [
+    {
+      "key": "heading",
+      "title": "Heading 1"
+    },
+    {
+      "key": "heading_2",
+      "title": "Heading 2"
+    },
+    {
+      "key": "heading_3",
+      "title": "Heading 3"
+    },
+    {
+      "key": "quote",
+      "title": "Quote"
+    },
+    {
+      "key": "numbered_list",
+      "title": "Numbered List"
+    },
+    {
+      "key": "bullet_list",
+      "title": "Bullet List"
+    },
+    {
+      "key": "check_list",
+      "title": "Check List"
+    },
+    {
+      "key": "paragraph",
+      "title": "Paragraph"
+    },
+    {
+      "key": "code_block",
+      "title": "Code Block"
+    },
+    {
+      "key": "image",
+      "title": "Image"
+    },
+    {
+      "key": "toggle_heading",
+      "title": "Toggle Heading 1"
+    },
+    {
+      "key": "toggle_heading_2",
+      "title": "Toggle Heading 2"
+    },
+    {
+      "key": "toggle_heading_3",
+      "title": "Toggle Heading 3"
+    },
+    {
+      "key": "heading_4",
+      "title": "Heading 4"
+    },
+    {
+      "key": "heading_5",
+      "title": "Heading 5"
+    },
+    {
+      "key": "heading_6",
+      "title": "Heading 6"
+    },
+    {
+      "key": "emoji",
+      "title": "Emoji"
+    }
+  ]
+}

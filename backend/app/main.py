@@ -5,6 +5,7 @@ from pathlib import Path
 from uuid import UUID
 
 from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.concurrency import run_in_threadpool
 
@@ -59,6 +60,16 @@ def create_app(
         redoc_url=None,
         openapi_url=None,
     )
+
+    @application.exception_handler(RequestValidationError)
+    async def validation_error(_request: Request, error: RequestValidationError):
+        # Pydantic's default response echoes the invalid input, potentially the
+        # entire note. Keep only useful locations/reasons, never content/context.
+        details = [
+            {key: item[key] for key in ("loc", "msg", "type")}
+            for item in error.errors()
+        ]
+        return JSONResponse(status_code=422, content={"detail": details})
 
     @application.exception_handler(sqlite3.Error)
     async def database_error(_request: Request, _error: sqlite3.Error):
