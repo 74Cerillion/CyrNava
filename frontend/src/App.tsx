@@ -13,12 +13,14 @@ import { createFolder, deleteFolder, getDeletionImpact, getTree, updateFolder } 
 import type { DirectoryData } from './library';
 import { ancestorIds, itemKey } from './tree';
 import type { TreeItem } from './tree';
+import { useLifecycle } from './hooks/useLifecycle';
 
 export const NOTE_ID_KEY = 'engage.note-id.v1';
 const emptyLibrary: DirectoryData = { folders: [], notes: [] };
 type Health = 'checking' | 'online' | 'offline';
 
 export default function App() {
+  const lifecycleProblem = useLifecycle();
   const [health, setHealth] = useState<Health>('checking');
   const [data, setData] = useState<DirectoryData>(emptyLibrary);
   const [note, setNote] = useState<Note | null>(null);
@@ -102,7 +104,7 @@ export default function App() {
     if (operation.current) return;
     operation.current = true; setWorking(true); setError(null);
     try {
-      if (editor.current && !await editor.current.flush()) throw new Error('Cannot leave this note while saving has failed. Your draft remains open; resolve the save error first.');
+      if (editor.current && !await editor.current.flush()) throw new Error('Cannot leave this note until pending edits and draft recovery are resolved. Your draft remains available; resolve the save error or recovery choice first.');
       await action();
     } catch (failure) {
       if (!lifetime.current?.signal.aborted) setError(failure instanceof Error ? failure.message : 'Operation failed.');
@@ -186,7 +188,7 @@ export default function App() {
     });
   }
 
-  const blocked = working || dialog !== null || loading;
+  const blocked = working || dialog !== null || loading || lifecycleProblem !== null;
   return <div className="workspace">
     <a className="skip-link" href="#note">Skip to note</a>
     <aside className="sidebar" aria-label="Workspace navigation">
@@ -211,12 +213,13 @@ export default function App() {
       <p className="hint"><a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></p>
     </aside>
     <main id="note" tabIndex={-1}>
+      {lifecycleProblem && <p role="alert">{lifecycleProblem}</p>}
       {working && <p role="status">Saving pending changes or updating the library...</p>}
       {error && !dialog && <div role="alert"><p>{error}</p>
         {!note && <button onClick={() => { setLoading(true); setError(null); setLoadAttempt((n) => n + 1); }}>Retry opening library</button>}
       </div>}
       {loading ? <p role="status">Opening library...</p> : note ?
-        <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} locked={working || dialog !== null} onSaved={noteSaved} onRecovered={(saved) => { setNote(saved); setEditorEpoch((n) => n + 1); setError(null); noteSaved(); }} />
+        <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} locked={working || dialog !== null || lifecycleProblem !== null} onSaved={noteSaved} onRecovered={(saved) => { setNote(saved); setEditorEpoch((n) => n + 1); setError(null); noteSaved(); }} />
         : <header><h2>Select or create a note</h2><p>Choose a note in the library, or use New folder and New note to start.</p></header>}
     </main>
     {dialog && <ManagementDialog state={dialog} data={data} busy={working} error={error}

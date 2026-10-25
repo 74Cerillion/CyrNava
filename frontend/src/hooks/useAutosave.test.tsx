@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ApiError, updateNote } from '../notes';
+import { findDrafts } from '../drafts';
 import type { Note, NoteDocument } from '../notes';
 import { AUTOSAVE_DELAY, useAutosave } from './useAutosave';
 
@@ -256,4 +257,29 @@ it('keeps newer heading/toggle/code formatting while an old formatted save is in
   expect(updateNote).toHaveBeenLastCalledWith(note.id, 2, { title: note.title, document_json: latest }, expect.any(AbortSignal));
   await act(async () => second.resolve({ ...note, revision: 3, document_json: latest }));
   expect(result.current.status).toBe('Saved'); expect(result.current.document).toEqual(latest);
+});
+
+it('retains newer recovery JSON with the acknowledged base revision until its own save', async () => {
+  const first = deferred(); const second = deferred();
+  vi.mocked(updateNote).mockReturnValueOnce(first.promise).mockReturnValueOnce(second.promise);
+  const { result } = renderHook(() => useAutosave(note));
+  act(() => result.current.changeDocument(document('A')));
+  expect(findDrafts(note.id, true)[0]).toMatchObject({ base_revision: 1, document_json: document('A') });
+  await tick(); act(() => result.current.changeDocument(document('AB')));
+  await act(async () => first.resolve({ ...note, revision: 2 }));
+  expect(findDrafts(note.id, true)[0]).toMatchObject({ base_revision: 2, document_json: document('AB') });
+  await tick(); await act(async () => second.resolve({ ...note, revision: 3 }));
+  expect(findDrafts(note.id, true)).toEqual([]);
+});
+
+it('reports unavailable local storage instead of promising draft recovery', () => {
+  const storage = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new DOMException('Quota exceeded'); });
+  try {
+    const { result } = renderHook(() => useAutosave(note));
+    act(() => result.current.changeTitle('Still in memory'));
+    expect(result.current.recoveryError).toContain('unavailable');
+    expect(result.current.title).toBe('Still in memory');
+    const closing = new Event('beforeunload', { cancelable: true });
+    window.dispatchEvent(closing); expect(closing.defaultPrevented).toBe(true);
+  } finally { storage.mockRestore(); }
 });

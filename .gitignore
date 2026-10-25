@@ -30,6 +30,7 @@ backups/
 *.engage-backup/
 .engage-stage-*/
 engage-conflict-*.json
+engage-draft-*.json
 playwright-report/
 test-results/
 .engage.lock

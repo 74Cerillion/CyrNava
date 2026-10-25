@@ -20,6 +20,7 @@ from app.database import (
     RevisionConflict,
     default_database_path,
 )
+from app.lifecycle import Sessions, install_lifecycle
 from app.models import (
     CreateFolder,
     CreateNote,
@@ -37,7 +38,9 @@ from app.release import serve_frontend
 
 
 def create_app(
-    database_path: Path | None = None, frontend_path: Path | None = None
+    database_path: Path | None = None,
+    frontend_path: Path | None = None,
+    sessions: Sessions | None = None,
 ) -> FastAPI:
     @asynccontextmanager
     async def lifespan(application: FastAPI):
@@ -60,6 +63,7 @@ def create_app(
         redoc_url=None,
         openapi_url=None,
     )
+    install_lifecycle(application, sessions)
 
     @application.exception_handler(RequestValidationError)
     async def validation_error(_request: Request, error: RequestValidationError):

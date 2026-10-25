@@ -7,9 +7,12 @@ import signal
 import socket
 import subprocess
 import sys
+import time
+import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from unittest.mock import Mock
+from uuid import uuid4
 
 import pytest
 
@@ -118,7 +121,7 @@ def test_missing_runtime_and_browser_failure_are_visible(setup):
     result = cli(path, "open")
     assert result.returncode == 1
     assert "opener failed" in result.stderr
-    assert launcher.ready(config, launcher.read_state(config))
+    assert not launcher.ready(config, launcher.read_state(config))
     assert (Path(config["state_dir"]) / "backend.log").exists()
 
 
@@ -260,3 +263,166 @@ def test_installer_entries_and_failure_preserve_existing_config(tmp_path, monkey
         installer.install(args)
     assert (root / "config.json").read_text() == original
     assert list((root / "releases").iterdir()) == []
+
+
+def managed_request(config, route, body=None):
+    origin = f"http://127.0.0.1:{config['port']}"
+    request = urllib.request.Request(
+        origin + route,
+        data=json.dumps(body).encode() if body is not None else None,
+        headers={"Content-Type": "application/json", "Origin": origin},
+    )
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    with opener.open(request, timeout=2) as response:
+        return json.load(response)
+
+
+def until(predicate, timeout=8):
+    deadline = time.monotonic() + timeout
+    while not predicate():
+        assert time.monotonic() < deadline, "Lifecycle condition timed out"
+        time.sleep(0.05)
+
+
+def quick_lifecycle(config, path, startup=4):
+    config["lifecycle"] = {
+        "heartbeat": 0.1,
+        "expiration": 1,
+        "grace": 0.4,
+        "startup": startup,
+    }
+    path.write_text(json.dumps(config))
+
+
+def assert_stopped(config, state):
+    until(lambda: not launcher.process_matches(state))
+    launcher.wait_for_supervisor(config)
+    with socket.socket() as probe:
+        probe.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        probe.bind(("127.0.0.1", config["port"]))
+
+
+def test_managed_two_tabs_refresh_grace_and_restart(setup):
+    config, path = setup
+    quick_lifecycle(config, path)
+    assert cli(path).returncode == 0
+    state = launcher.read_state(config)
+    instance = managed_request(config, "/api/lifecycle")["instance"]
+    a, b = str(uuid4()), str(uuid4())
+
+    def activity(tab, n, action="heartbeat"):
+        managed_request(
+            config,
+            f"/api/lifecycle/sessions/{tab}",
+            {"instance": instance, "sequence": n, "action": action},
+        )
+
+    activity(a, 1)
+    activity(b, 1)
+    activity(a, 2, "close")
+    time.sleep(0.5)
+    activity(b, 2)
+    assert launcher.ready(config, state)
+    activity(b, 3, "close")
+    # Refresh/new page during the shutdown grace cancels drain.
+    time.sleep(0.1)
+    activity(a, 3)
+    time.sleep(0.5)
+    assert launcher.ready(config, state)
+    activity(a, 4, "close")
+    assert_stopped(config, state)
+    assert cli(path).returncode == 0
+    assert launcher.read_state(config)["nonce"] != instance
+
+
+def test_managed_crashed_browser_expires_without_close_event(setup):
+    config, path = setup
+    quick_lifecycle(config, path)
+    assert cli(path).returncode == 0
+    state = launcher.read_state(config)
+    managed_request(
+        config,
+        f"/api/lifecycle/sessions/{uuid4()}",
+        {"instance": state["nonce"], "sequence": 1},
+    )
+    assert_stopped(config, state)
+
+
+def test_missing_browser_registration_stops_backend_and_reports_failure(setup):
+    config, path = setup
+    quick_lifecycle(config, path, startup=1)
+    assert cli(path, "open").returncode == 0
+    state = launcher.read_state(config)
+    assert_stopped(config, state)
+    assert (
+        "did not register" in (Path(config["state_dir"]) / "launcher.log").read_text()
+    )
+
+
+def test_unresponsive_owned_child_is_killed_and_reaped_without_touching_other_child():
+    child = subprocess.Popen(
+        [
+            sys.executable,
+            "-c",
+            "import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);"
+            "print('ready',flush=True);time.sleep(30)",
+        ],
+        stdout=subprocess.PIPE,
+        text=True,
+    )
+    other = subprocess.Popen([sys.executable, "-c", "import time;time.sleep(30)"])
+    try:
+        assert child.stdout.readline().strip() == "ready"
+        launcher.terminate_owned(child, timeout=0.1)
+        assert child.returncode == -signal.SIGKILL
+        assert other.poll() is None
+    finally:
+        launcher.terminate_owned(child)
+        launcher.terminate_owned(other)
+
+
+def test_browser_dispatch_failure_does_not_stop_an_existing_instance(setup):
+    config, path = setup
+    assert cli(path).returncode == 0
+    state = launcher.read_state(config)
+    config["opener"] = "/bin/false"
+    path.write_text(json.dumps(config))
+    assert cli(path, "open").returncode == 1
+    assert launcher.ready(config, state)
+
+
+def test_backend_startup_failure_is_reported_and_reaped(setup):
+    config, path = setup
+    database = Path(config["data_home"]) / "engage/engage.sqlite3"
+    database.parent.mkdir(parents=True)
+    database.write_bytes(b"synthetic invalid database")
+    result = cli(path)
+    assert result.returncode == 1
+    assert "Backend exited during startup" in result.stderr
+    launcher.wait_for_supervisor(config)
+    assert not launcher.process_matches(launcher.read_state(config))
+
+
+def test_firefox_new_window_dispatch_never_waits_for_browser_lifetime(monkeypatch):
+    browser = Mock()
+    browser.poll.return_value = None
+    spawn = Mock(return_value=browser)
+    monkeypatch.setattr(launcher.subprocess, "Popen", spawn)
+    monkeypatch.setattr(launcher.time, "sleep", lambda _: None)
+    launcher.open_browser({"browser": "/usr/bin/firefox", "port": 8000})
+    assert spawn.call_args.args[0] == [
+        "/usr/bin/firefox",
+        "--new-window",
+        "http://127.0.0.1:8000",
+    ]
+    browser.wait.assert_not_called()
+
+
+def test_readiness_timeout_leaves_no_owned_worker_or_supervisor(setup):
+    config, path = setup
+    with pytest.raises(launcher.LaunchError, match="did not become ready"):
+        launcher.start(config, path, timeout=0.01)
+    launcher.wait_for_supervisor(config)
+    assert not launcher.process_matches(launcher.read_state(config))
+    with socket.socket() as probe:
+        probe.bind(("127.0.0.1", config["port"]))

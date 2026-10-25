@@ -27,6 +27,8 @@ Development uses Vite on `127.0.0.1:5173` and FastAPI on `127.0.0.1:8000`. Vite 
 
 Local release mode uses `backend/app/__main__.py` (`python -m app`). It fixes Uvicorn's host to `127.0.0.1`, builds the existing FastAPI app with a `frontend_path`, and `app/release.py` serves `frontend/dist/index.html`, hashed `/assets/*`, local third-party notices and the `/api/health` alias. Unknown paths/API routes remain 404. No Vite process, reverse proxy, cloud service or packaging daemon is needed. Its CSP permits same-origin scripts/requests/fonts and the inline styles required by the editor; there are no remote runtime assets.
 
+Desktop launches extend the existing `desktop/launcher.py` with an owning supervisor and opt-in `app/lifecycle.py` leases. Each page registers an unpredictable ID; heartbeats renew it, pagehide offers a close hint, and expiration provides the fallback. The supervisor alone holds termination authority. Direct development/release entrypoints do not opt in and have no automatic shutdown. See [desktop operation and recovery](desktop-launcher.md) and the [lifecycle report](../LIFECYCLE_REPORT.md).
+
 ## Frontend boundaries
 
 - `src/App.tsx` owns the open note, library summaries, selected tree item, expanded folders and current management dialog. `perform` drains pending uploads/saves before transitions. A failed drain keeps the current draft open. Confirmed recovery remounts the same note with the new persisted revision.
@@ -34,7 +36,7 @@ Local release mode uses `backend/app/__main__.py` (`python -m app`). It fixes Uv
 - `components/KnowledgeEditor.tsx` imports BlockNote core/react/mantine. It configures the supported schema, upload/paste hook, upload-only image panel and error feedback. Other modules use application-owned `NoteDocument` JSON and the small `flushUploads` interface. Replacing the editor would still require a document-format migration: the boundary isolates APIs, not the stored content format.
 - `PersistentNote` joins the adapter with `hooks/useAutosave.ts`. Autosave debounces 700 ms, serializes PATCH requests and distinguishes local edit numbers from the database revision. A response acknowledges only its submitted snapshot; it never installs an older document over current typing. API failures remain visible until Retry; local validation resumes on correction.
 - `ConflictRecovery` is read-only: inspect the saved document, download both versions, verify retention, then explicitly fetch/reopen the latest saved note. No stale force-save or automatic merge is offered.
-- `notes.ts`, `library.ts`, `assets.ts` and `http.ts` own HTTP contracts/timeouts/errors, not BlockNote internals. The browser remembers only a preferred note ID; SQLite remains authoritative.
+- `notes.ts`, `library.ts`, `assets.ts` and `http.ts` own HTTP contracts/timeouts/errors, not BlockNote internals. The browser remembers a preferred note ID plus unconfirmed recovery drafts through `drafts.ts`; SQLite remains authoritative. `PersistentNote` offers recovery before mounting the adapter. `useLifecycle` owns page leases independently of note selection.
 
 ## Backend and persistence
 

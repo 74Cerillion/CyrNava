@@ -85,6 +85,9 @@ def install(args):
         raise LaunchError("Port must be between 1 and 65535.")
     node, npm = shutil.which("node"), shutil.which("npm")
     opener, zenity = shutil.which("xdg-open"), shutil.which("zenity")
+    browser = shutil.which("firefox")
+    if not browser:
+        raise LaunchError("Firefox is required for normal ENGAGE desktop launches.")
     if not node or not npm:
         raise LaunchError(
             "Build tools missing: install Node 24.19.0/npm 11.6.2, then retry. "
@@ -230,6 +233,7 @@ def install(args):
                 "port": args.port,
                 "opener": opener,
                 "zenity": zenity,
+                "browser": browser,
                 "icon": str(target),
             }
             write_atomic(config_path, json.dumps(config, indent=2) + "\n")

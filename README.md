@@ -69,7 +69,7 @@ For everyday use, prepare a launcher once from the source checkout. This builds 
 
 ```bash
 sudo apt update
-sudo apt install -y git curl ca-certificates python3.12 python3.12-venv xdg-utils xdg-user-dirs zenity
+sudo apt install -y git curl ca-certificates python3.12 python3.12-venv xdg-utils xdg-user-dirs zenity firefox
 ```
 
 Install Node **24.19.0** and npm **11.6.2** for the one-time build. If using nvm, follow its official install instructions, reopen the terminal, then:
@@ -85,7 +85,7 @@ Run from the repository root of a source checkout that contains `desktop/install
 
 ENGAGE appears in the application menu and, if an existing XDG Desktop folder is detected, as a desktop icon. GNOME may show **Allow Launching** when you first click the desktop icon; review and approve the entry in the file manager if prompted. This is a desktop trust decision. No OS security setting is disabled. The shipped icon is a temporary placeholder; the owner-approved logo can be installed with `python3.12 desktop/install.py --icon /absolute/path/approved.png` (SVG is also supported).
 
-The initial install downloads pinned dependencies and builds static files. Keep network available until it reports success. If startup fails, ENGAGE shows an error; choose **Open diagnostic logs** in the app menu or inspect the two log files above. The **Stop ENGAGE** desktop action asks you to confirm after waiting for **Saved** and image uploads. Close/stop the running development server first if it already owns the configured port. A different local port can be selected during install with `--port 18000`.
+The initial install downloads pinned dependencies and builds static files. Keep network available until it reports success. If startup fails, ENGAGE shows an error; choose **Open diagnostic logs** in the app menu or inspect the two log files above. Normal desktop launches open Firefox and automatically stop the owned backend after the last ENGAGE tab's lease ends and a 5-second grace elapses. Heartbeats run every 5 seconds and expire after 20 seconds; startup registration has 60 seconds. The **Stop ENGAGE** action remains a fallback. Wait for **Saved** and image uploads before closing. Stop a running development server first if it already owns the configured port. A different local port can be selected during install with `--port 18000`.
 
 To update, wait for Saved, choose Stop ENGAGE and run `python3.12 desktop/install.py` again from the updated checkout. It builds a new version under the application directory, checks it with a temporary profile, then updates the menu entry. Old application releases remain for rollback; they contain no user data. Re-running the installer does not duplicate launchers or reset the profile. There is no automatic update. To remove the launcher, delete its `org.engage.Workspace.desktop` and `org.engage.Stop.desktop` entries from the application directory and Desktop folder, then remove `engage-application/` and `engage-launcher/` under the same XDG locations. **Do not remove `engage/`** unless you separately intend to delete your notes and images. Back up first.
 
@@ -138,7 +138,7 @@ With tree focus: Up/Down traverse visible items; Right expands/enters; Left coll
 - Absolute `$XDG_DATA_HOME`: `$XDG_DATA_HOME/engage/engage.sqlite3` and `$XDG_DATA_HOME/engage/assets/`.
 - Otherwise: `~/.local/share/engage/engage.sqlite3` and adjacent `assets/`.
 
-Relative XDG values are ignored. Runtime data inside this checkout is rejected. New directories/files use 0700/0600 permissions. Library folders are SQLite records, not disk directories. The browser remembers only a preferred note ID; changing port/origin or clearing browser storage does not delete notes. Notes and assets are **unencrypted**. Localhost does not protect against other software running as your user.
+Relative XDG values are ignored. Runtime data inside this checkout is rejected. New directories/files use 0700/0600 permissions. Library folders are SQLite records, not disk directories. The browser remembers a preferred note ID and per-tab recovery copies of unconfirmed edits. SQLite remains authoritative. Changing port/origin or clearing browser storage does not delete saved notes, but can make recovery drafts unavailable. Notes, assets and browser drafts are **unencrypted**. Localhost does not protect against other software running as your user.
 
 ## Backup and restore
 
@@ -178,7 +178,7 @@ On minimal Ubuntu, `npx playwright install --with-deps chromium` also installs b
 
 ## Known limitations
 
-Unsaved drafts are memory-only; forced shutdown can lose them. There is no automatic merge, authentication, encryption, live backup or multi-user support. Removed image blocks retain owned files until note deletion. Image normalization removes metadata and recompresses JPEG: ENGAGE is not forensic-original evidence storage. Cross-note image blocks must be re-uploaded. Chromium/Linux is the tested browser platform; screen readers and full WCAG conformance are unverified. Existing large-bundle and Starlette/HTTPX deprecation warnings remain documented.
+Unsaved title/document edits have browser-local recovery snapshots when storage is available; failures are reported. Reopening offers recovery with the original base revision, preserving conflict checks. Browser storage deletion/private browsing/storage failure can still lose drafts, and in-flight image files must be reselected if closed before upload completes. There is no automatic merge, authentication, encryption, live backup or multi-user support. Removed image blocks retain owned files until note deletion. Image normalization removes metadata and recompresses JPEG: ENGAGE is not forensic-original evidence storage. Cross-note image blocks must be re-uploaded. Screen readers and full WCAG conformance are unverified. See the [lifecycle report](LIFECYCLE_REPORT.md) for browser verification; existing large-bundle and Starlette/HTTPX deprecation warnings remain documented.
 
 ## License
 

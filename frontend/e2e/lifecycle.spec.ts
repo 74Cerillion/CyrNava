@@ -1,0 +1,127 @@
+import { test, expect } from '@playwright/test';
+import type { Page } from '@playwright/test';
+import { execFileSync } from 'node:child_process';
+import { cp, mkdtemp, mkdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
+import { createServer } from 'node:net';
+
+const root = resolve('..');
+const python = join(root, 'backend/.venv/bin/python');
+const launcher = join(root, 'desktop/launcher.py');
+
+async function installation() {
+  const directory = await mkdtemp(join(tmpdir(), 'engage-lifecycle-browser-'));
+  const release = join(directory, 'release');
+  const state = join(directory, 'state');
+  await mkdir(join(release, 'backend'), { recursive: true }); await mkdir(join(release, 'frontend'));
+  await mkdir(state, { mode: 0o700 });
+  await symlink(join(root, 'backend/app'), join(release, 'backend/app'));
+  await symlink(join(root, 'backend/.venv'), join(release, 'backend/.venv'));
+  // Snapshot the build: a concurrent source rebuild must not alter this app.
+  await cp(join(root, 'frontend/dist'), join(release, 'frontend/dist'), { recursive: true });
+  const probe = createServer(); await new Promise<void>((done) => probe.listen(0, '127.0.0.1', done));
+  const address = probe.address(); if (!address || typeof address === 'string') throw new Error('No test port');
+  const port = address.port; await new Promise<void>((done) => probe.close(() => done()));
+  const config = join(directory, 'config.json');
+  await writeFile(config, JSON.stringify({ release, state_dir: state, data_home: join(directory, 'data'), port,
+    // Graphical dispatch is stubbed. Playwright opens the real isolated browser.
+    browser: '/bin/true', opener: '/bin/true', zenity: '/bin/true',
+    lifecycle: { heartbeat: 0.1, expiration: 1.2, grace: 0.4, startup: 10 } }));
+  const url = `http://127.0.0.1:${port}`;
+  let launches = 0;
+  function run(action: 'open' | 'stop') {
+    execFileSync(python, [launcher, '--config', config, action], { timeout: 25000 });
+    if (action === 'open') launches++;
+  }
+  async function stopped() {
+    await expect.poll(async () => {
+      try { await fetch(url + '/health', { signal: AbortSignal.timeout(500) }); return false; }
+      catch { return true; }
+    }, { timeout: 10000, message: 'Final session releases backend port' }).toBe(true);
+    // The supervisor logs this only after wait() has reaped its own child.
+    await expect.poll(async () => (await readFile(join(state, 'launcher.log'), 'utf8')).split('Supervisor reaped backend and exited').length - 1).toBe(launches);
+    const check = createServer();
+    await new Promise<void>((done, reject) => { check.once('error', reject); check.listen(port, '127.0.0.1', done); });
+    await new Promise<void>((done) => check.close(() => done()));
+  }
+  async function open(page: Page) {
+    const registered = page.waitForResponse((response) => response.url().includes('/api/lifecycle/sessions/') && response.ok(), { timeout: 10000 });
+    await page.goto(url); await registered;
+  }
+  return { url, run, stopped, open, cleanup: async () => { run('stop'); await rm(directory, { recursive: true, force: true }); } };
+}
+
+test('managed tabs close, restart and recover immediately closed unconfirmed edits', async ({ context }) => {
+  const app = await installation();
+  try {
+    app.run('open'); const first = await context.newPage(); await app.open(first);
+    await first.getByRole('button', { name: 'New note', exact: true }).click();
+    await first.getByRole('dialog').getByLabel('Note title').fill('Lifecycle evidence');
+    await first.getByRole('button', { name: 'Create', exact: true }).click();
+    const content = first.getByRole('textbox', { name: 'Note content' });
+    await content.click(); await first.keyboard.type('Confirmed paragraph.');
+    await expect(first.getByText('Saved', { exact: true })).toBeVisible();
+    const second = await context.newPage(); await app.open(second);
+    await expect(second.getByRole('textbox', { name: 'Note content' })).toContainText('Confirmed paragraph.');
+    await first.close();
+    // Outlive the short test expiration while the second tab keeps renewing.
+    await expect.poll(async () => (await fetch(app.url + '/health')).ok).toBe(true);
+    await second.getByRole('textbox', { name: 'Note title' }).fill('Second tab remains active');
+    await expect(second.getByText('Saved', { exact: true })).toBeVisible();
+    await second.close(); await app.stopped();
+
+    app.run('open'); const recovery = await context.newPage(); await app.open(recovery);
+    await expect(recovery.getByRole('textbox', { name: 'Note content' })).toContainText('Confirmed paragraph.');
+    // Hold no network save: this edit must survive solely via the sync snapshot.
+    // Context routing outlives the closing page. Page-scoped routes disappear
+    // at close and may let its visibility-triggered flush reach the backend.
+    const blockSave = (route: import('@playwright/test').Route) => route.request().method() === 'PATCH' ? route.abort() : route.continue();
+    await context.route('**/api/notes/*', blockSave);
+    await recovery.getByRole('textbox', { name: 'Note title' }).fill('Immediately closed draft');
+    const paragraph = recovery.getByRole('textbox', { name: 'Note content' }).locator('p').first();
+    await paragraph.evaluate((element) => {
+      element.closest<HTMLElement>('[contenteditable="true"]')!.focus();
+      const range = document.createRange(); range.selectNodeContents(element); range.collapse(false);
+      const selection = window.getSelection()!; selection.removeAllRanges(); selection.addRange(range);
+    });
+    await expect.poll(() => paragraph.evaluate((element) => element.contains(window.getSelection()!.anchorNode))).toBe(true);
+    await recovery.keyboard.press('Control+b');
+    await recovery.keyboard.type(' Unconfirmed paragraph 🚀.'); await recovery.keyboard.press('Control+b');
+    await expect(recovery.getByRole('textbox', { name: 'Note content' }).locator('strong')).toContainText('Unconfirmed paragraph 🚀.');
+    const nativeDraft = await recovery.evaluate(() => {
+      const name = Object.keys(localStorage).find((key) => key.startsWith('engage.recovery.v1:'))!;
+      return JSON.parse(localStorage.getItem(name)!);
+    });
+    await expect(recovery.getByText('Unsaved Changes', { exact: true })).toBeVisible();
+    // page.close skips beforeunload prompting; it cannot help this recovery test.
+    await recovery.close(); await app.stopped();
+    await context.unroute('**/api/notes/*', blockSave);
+    app.run('open'); const reopened = await context.newPage(); await app.open(reopened);
+    await expect(reopened.getByRole('heading', { name: 'Recover unsaved edits' })).toBeVisible();
+    await reopened.getByRole('button', { name: 'Recover draft', exact: true }).click();
+    await expect(reopened.getByText('Saved', { exact: true })).toBeVisible();
+    await reopened.reload();
+    await expect(reopened.getByRole('textbox', { name: 'Note title' })).toHaveValue('Immediately closed draft');
+    await expect(reopened.getByRole('textbox', { name: 'Note content' })).toContainText('Unconfirmed paragraph 🚀.');
+    await expect(reopened.getByRole('textbox', { name: 'Note content' }).locator('strong')).toContainText('Unconfirmed paragraph 🚀.');
+    const response = await fetch(app.url + '/api/notes/' + nativeDraft.note_id);
+    expect((await response.json()).document_json).toEqual(nativeDraft.document_json);
+    await expect(reopened.getByRole('heading', { name: 'Recover unsaved edits' })).toHaveCount(0);
+    await reopened.close(); await app.stopped();
+  } finally { await app.cleanup(); }
+});
+
+test('killed isolated browser leaves no managed backend after lease expiry', async ({ playwright, browserName }) => {
+  const app = await installation();
+  let server: Awaited<ReturnType<typeof playwright.chromium.launchServer>> | undefined;
+  try {
+    server = await playwright[browserName].launchServer({ headless: true });
+    app.run('open');
+    const browser = await playwright[browserName].connect(server.wsEndpoint());
+    const page = await browser.newPage(); await app.open(page);
+    // Exact test-owned browser process, never the user's normal Firefox.
+    server.process().kill('SIGKILL');
+    await app.stopped();
+  } finally { await server?.close().catch(() => {}); await app.cleanup(); }
+});

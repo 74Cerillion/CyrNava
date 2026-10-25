@@ -7,6 +7,7 @@ import json
 import logging
 import logging.handlers
 import os
+import secrets
 import signal
 import socket
 import subprocess
@@ -54,7 +55,11 @@ def process_matches(state):
         # starttime guards PID reuse; the worker nonce also occurs in its argv.
         stat = Path(f"/proc/{state['pid']}/stat").read_text().rsplit(")", 1)[1].split()
         args = Path(f"/proc/{state['pid']}/cmdline").read_bytes().split(b"\0")
-        return stat[19] == state["starttime"] and state["nonce"].encode() in args
+        return (
+            stat[0] != "Z"
+            and stat[19] == state["starttime"]
+            and state["nonce"].encode() in args
+        )
     except (OSError, KeyError, TypeError):
         return False
 
@@ -74,7 +79,11 @@ def ready(config, state):
         url = f"http://127.0.0.1:{config['port']}/api/desktop-ready"
         with opener.open(url, timeout=0.4) as response:
             result = json.load(response)
-        if result != {"application": "ENGAGE", "instance": state["nonce"]}:
+        if result != {
+            "application": "ENGAGE",
+            "instance": state["nonce"],
+            "lifecycle": 1,
+        }:
             return False
         with opener.open(f"http://127.0.0.1:{config['port']}/", timeout=0.4) as page:
             return page.status == 200 and b'id="root"' in page.read(65536)
@@ -105,6 +114,7 @@ def start(config, config_path, *, timeout=20):
         logging.warning(
             "Previous managed process is no longer running; recovering stale state"
         )
+    wait_for_supervisor(config)
     runtime = preflight(config)
     # Probe only; worker bind is authoritative if another process races this check.
     with socket.socket() as probe:
@@ -134,7 +144,7 @@ def start(config, config_path, *, timeout=20):
                 str(Path(__file__).resolve()),
                 "--config",
                 str(config_path),
-                "worker",
+                "supervise",
                 "--nonce",
                 nonce,
             ],
@@ -161,20 +171,31 @@ def start(config, config_path, *, timeout=20):
         if child.poll() is not None:
             raise LaunchError("Backend exited during startup. See backend.log.")
         time.sleep(0.15)
-    # This Popen still identifies the child we started (never a PID from disk).
-    child.terminate()
-    try:
-        child.wait(timeout=5)
-    except subprocess.TimeoutExpired:
-        child.kill()
-        child.wait(timeout=5)
+    # Give the owning supervisor time to drain/reap its worker before any
+    # escalation. Killing it after only five seconds could orphan that worker.
+    terminate_owned(child, timeout=17)
     raise LaunchError("ENGAGE did not become ready within 20 seconds; startup stopped.")
+
+
+def wait_for_supervisor(config, timeout=5):
+    deadline = time.monotonic() + timeout
+    while True:
+        try:
+            with locked(Path(config["state_dir"]) / "supervisor.lock", blocking=False):
+                return
+        except BlockingIOError:
+            if time.monotonic() >= deadline:
+                raise LaunchError(
+                    "Previous ENGAGE supervisor is still stopping. Retry shortly."
+                ) from None
+            time.sleep(0.05)
 
 
 def stop(config):
     state = read_state(config)
     if not process_matches(state):
         logging.info("No live managed backend; stale state ignored")
+        wait_for_supervisor(config)
         return
     # pidfd pins the process identity while rechecking /proc before signaling.
     try:
@@ -191,8 +212,96 @@ def stop(config):
         if process_matches(state):
             raise LaunchError("Backend has not stopped. Inspect logs before retrying.")
         logging.info("Backend stopped cleanly")
+        wait_for_supervisor(config)
     finally:
         os.close(fd)
+
+
+def terminate_owned(child, *, timeout=10):
+    """Only a retained Popen child is eligible for forced termination."""
+    if child.poll() is not None:
+        return
+    child.terminate()
+    try:
+        child.wait(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        logging.error("Owned backend exceeded shutdown timeout; terminating it")
+        child.kill()
+        child.wait(timeout=5)
+
+
+def supervise(config, config_path, nonce):
+    """Detached launcher lifetime. Owns/reaps exactly one backend subprocess."""
+    with locked(Path(config["state_dir"]) / "supervisor.lock", blocking=False):
+        secret = secrets.token_urlsafe(32)
+        child = None
+        stopping = False
+
+        def interrupted(_signal, _frame):
+            nonlocal stopping
+            stopping = True
+
+        old_term = signal.signal(signal.SIGTERM, interrupted)
+        old_int = signal.signal(signal.SIGINT, interrupted)
+        last_contact = time.monotonic()
+        last_phase = None
+        try:
+            # Install handlers before spawning: SIGTERM during startup must
+            # still reach the finally block that owns and reaps this child.
+            child = subprocess.Popen(
+                [
+                    str(preflight(config)),
+                    str(Path(__file__).resolve()),
+                    "--config",
+                    str(config_path),
+                    "worker",
+                    "--nonce",
+                    nonce,
+                ],
+                cwd=Path(config["release"]) / "backend",
+                env={**os.environ, "ENGAGE_SUPERVISOR_SECRET": secret},
+                stdin=subprocess.DEVNULL,
+                close_fds=True,
+            )
+            opener = urllib.request.build_opener(
+                urllib.request.ProxyHandler({}), NoRedirect()
+            )
+            while child.poll() is None and not stopping:
+                try:
+                    request = urllib.request.Request(
+                        f"http://127.0.0.1:{config['port']}/api/lifecycle/supervisor",
+                        headers={"X-ENGAGE-Supervisor": secret},
+                    )
+                    with opener.open(request, timeout=1) as response:
+                        status = json.load(response)
+                    last_contact = time.monotonic()
+                    if status["phase"] != last_phase:
+                        logging.info("Session lifecycle: %s", status["phase"])
+                        last_phase = status["phase"]
+                    if status["draining"]:
+                        logging.info("Session drain claimed: %s", status["reason"])
+                        terminate_owned(child)
+                        if status["reason"] == "startup-timeout":
+                            report_error(
+                                config,
+                                "Firefox did not register an ENGAGE session within "
+                                "the startup grace period. Backend stopped. "
+                                "Try launching again.",
+                            )
+                        break
+                except (OSError, ValueError, KeyError, urllib.error.URLError):
+                    if time.monotonic() - last_contact >= 25:
+                        raise LaunchError(
+                            "Managed backend stopped responding; "
+                            "stopping the owned process."
+                        )
+                time.sleep(0.25)
+        finally:
+            if child is not None:
+                terminate_owned(child)
+            signal.signal(signal.SIGTERM, old_term)
+            signal.signal(signal.SIGINT, old_int)
+        logging.info("Supervisor reaped backend and exited")
 
 
 def worker(config, nonce):
@@ -200,15 +309,27 @@ def worker(config, nonce):
     with locked(state_dir / "backend.lock", blocking=False):
         sys.path.insert(0, str(Path(config["release"]) / "backend"))
         import uvicorn
+
+        from app.lifecycle import Sessions, Timing
         from app.main import create_app
 
+        sessions = Sessions(
+            nonce,
+            os.environ.pop("ENGAGE_SUPERVISOR_SECRET"),
+            Timing(**config.get("lifecycle", {})),
+        )
         application = create_app(
-            frontend_path=Path(config["release"]) / "frontend/dist"
+            frontend_path=Path(config["release"]) / "frontend/dist",
+            sessions=sessions,
         )
 
         @application.get("/api/desktop-ready", include_in_schema=False)
         def desktop_ready():
-            return {"application": "ENGAGE", "instance": nonce}
+            if sessions.draining:
+                from fastapi import HTTPException
+
+                raise HTTPException(503, "ENGAGE is stopping")
+            return {"application": "ENGAGE", "instance": nonce, "lifecycle": 1}
 
         state = {
             "pid": os.getpid(),
@@ -229,6 +350,7 @@ def worker(config, nonce):
                 port=config["port"],
                 access_log=False,
                 log_level="info",
+                timeout_graceful_shutdown=8,
             )
         finally:
             if read_state(config) == state:
@@ -250,6 +372,28 @@ def desktop_command(config, key, argument):
             )
     except (OSError, subprocess.TimeoutExpired) as error:
         raise LaunchError("Desktop opener failed; check desktop defaults.") from error
+
+
+def open_browser(config):
+    url = f"http://127.0.0.1:{config['port']}"
+    if not config.get("browser"):
+        # Existing configurations keep working until the next installation.
+        return desktop_command(config, "opener", url)
+    try:
+        browser = subprocess.Popen(
+            [config["browser"], "--new-window", url],
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            start_new_session=True,
+        )
+        time.sleep(0.2)
+        if browser.poll() not in (None, 0):
+            raise LaunchError("Firefox failed to open ENGAGE.")
+        # Firefox may reuse an existing process or keep this one alive. Neither
+        # result tells us whether an ENGAGE window remains; leases do that.
+    except OSError as error:
+        raise LaunchError("Firefox could not start; check its installation.") from error
 
 
 def report_error(config, message):
@@ -288,7 +432,9 @@ def main():
     os.umask(0o077)
     parser = argparse.ArgumentParser(description="ENGAGE desktop launcher")
     parser.add_argument("--config", type=Path, required=True)
-    parser.add_argument("action", choices=["open", "start", "stop", "logs", "worker"])
+    parser.add_argument(
+        "action", choices=["open", "start", "stop", "logs", "worker", "supervise"]
+    )
     parser.add_argument("--nonce")
     args = parser.parse_args()
     config = None
@@ -308,6 +454,9 @@ def main():
         logging.info("Launcher action: %s", args.action)
         if args.action == "worker":
             worker(config, args.nonce)
+            return 0
+        if args.action == "supervise":
+            supervise(config, args.config.resolve(), args.nonce)
             return 0
         if args.action == "logs":
             desktop_command(config, "opener", config["state_dir"])
@@ -333,11 +482,15 @@ def main():
                         "Stop confirmation could not open. Backend left running."
                     )
             else:
-                start(config, args.config.resolve())
+                previous = read_state(config)
+                owned = start(config, args.config.resolve())
                 if args.action == "open":
-                    desktop_command(
-                        config, "opener", f"http://127.0.0.1:{config['port']}"
-                    )
+                    try:
+                        open_browser(config)
+                    except LaunchError:
+                        if previous != owned:
+                            stop(config)
+                        raise
         return 0
     except (
         LaunchError,

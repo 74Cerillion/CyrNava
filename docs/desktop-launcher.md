@@ -6,7 +6,7 @@ From the ENGAGE repository root, on Ubuntu 24.04:
 
 ```bash
 sudo apt update
-sudo apt install -y git curl ca-certificates python3.12 python3.12-venv xdg-utils xdg-user-dirs zenity
+sudo apt install -y git curl ca-certificates python3.12 python3.12-venv xdg-utils xdg-user-dirs zenity firefox
 # Install Node 24.19.0 and npm 11.6.2 as described in the README.
 nvm install
 nvm use
@@ -22,13 +22,44 @@ The installer creates a menu item in `$XDG_DATA_HOME/applications/` and a copy i
 
 ## Start, reuse, stop
 
-The menu item, desktop icon and **ENGAGE** action all execute the installed launcher with an absolute Python 3.12 path. It needs no shell profile, terminal, npm, nvm or Vite. The default URL is `http://127.0.0.1:8000`; `--port 18000` can set another port during installation. Browser launching uses `xdg-open`, which dispatches to the user's configured default browser.
+The menu item, desktop icon and **ENGAGE** action all execute the installed launcher with an absolute Python 3.12 path. It needs no shell profile, terminal, npm, nvm or Vite. The default URL is `http://127.0.0.1:8000`; `--port 18000` can set another port during installation. New installations record Firefox's executable and open `firefox --new-window URL`. No dedicated profile, extension, preference change or reliance on Firefox process lifetime is needed. Existing configurations retain their previous `xdg-open` fallback until reinstalled.
 
-The launcher uses a private `flock` to serialize repeated starts. A background worker holds a second lock for its lifetime. A recorded PID is accepted only when `/proc` start time and its generated worker identifier match; when stopping, Linux `pidfd` signals that same process identity. Readiness requires the recorded process plus a local `/api/desktop-ready` response matching its identifier and the actual compiled React root page. No HTTP proxy or redirects are used for this probe. The backend binds `127.0.0.1` and disables request access logs.
+The launcher uses a private `flock` to serialize repeated starts. Its detached supervisor retains the backend's `Popen` handle, monitors session leases, and reaps that child on exit. Supervisor and worker each hold lifetime locks. A recorded PID is accepted only when `/proc` start time and its generated worker identifier match; manual stopping uses Linux `pidfd` to signal that identity. Readiness requires the recorded process plus a local `/api/desktop-ready` response matching its identifier and lifecycle protocol, and the compiled React root page. No HTTP proxy or redirects are used for probes. The backend binds `127.0.0.1` and disables request access logs.
 
 A healthy managed server is reused. A stale process record is ignored and the backend starts again. If another process owns the port, its identity is not trusted: the launcher shows an error and never stops that process. Stop the service from its own application, or choose a different port during installation. A running *unmanaged* ENGAGE development/release server does not carry the launcher's per-instance identifier and will not be adopted; stop it first to avoid two server processes sharing a data profile.
 
-Use the desktop entry's **Stop ENGAGE** action (or app-menu Stop item). A graphical confirmation reminds you to wait for **Saved** and image uploads first. If confirmed, the launcher sends SIGTERM to the verified worker and lets Uvicorn shut down. This closes the server; it does not close your browser. **Open diagnostic logs** opens the state directory. Start errors show a Zenity dialog and log at `launcher.log`/`backend.log`; notes are not intentionally logged and HTTP access logging is disabled.
+For normal closure, wait for **Saved** and uploads, then close all ENGAGE tabs/windows. Other Firefox windows may stay open. Each ENGAGE page has an unpredictable identifier and sends a heartbeat every 5 seconds. A best-effort `pagehide` close beacon accelerates closure, but leases expire after 20 seconds without heartbeats. Once no leases remain, a 5-second grace allows refresh/reconnection before shutdown is claimed. A new lease cancels that grace. After drain is claimed, new writes/leases return 503 and cannot revive the stopping process. The supervisor sends SIGTERM, allows Uvicorn up to 8 seconds for accepted requests, and waits up to 10 seconds before killing only its retained child; reaping is bounded by a further 5 seconds.
+
+Usually closure takes about 5 seconds plus shutdown. Without a delivered close beacon, allow about 25 seconds plus shutdown after the last heartbeat. Startup has a separate 60-second registration grace; a browser that never registers causes cleanup and an error. A backend that stops answering the private supervisor probe is stopped after 25 seconds without contact. Suspended/frozen tabs cannot guarantee heartbeats; see recovery below.
+
+The existing **Stop ENGAGE** action remains a manual fallback. Its confirmation reminds you to wait for Saved/uploads; it signals only a verified worker. It does not close Firefox. **Open diagnostic logs** opens the state directory. Errors show a Zenity dialog and log at `launcher.log`/`backend.log`; note content is not logged by lifecycle management.
+
+## Confirm shutdown and recover
+
+With the default port, run:
+
+```bash
+ss -ltnp 'sport = :8000'
+tail -n 30 "$HOME/.local/state/engage-launcher/launcher.log"
+```
+
+No listener means the port is free. Logs show `Session lifecycle: grace`, `draining`, then `Supervisor reaped backend and exited`. A listener could belong to another application: inspect it, never kill an unidentified PID. Substitute your saved port and XDG state path if customized.
+
+Pending title/native document edits are synchronously stored in the browser's localStorage on each change, before debounce or a network request. These are recovery copies, separate from authoritative SQLite data. Records include note ID, page writer ID, base revision and an edit token. Reopening a note with a previous-page draft offers **Recover draft**, **Download draft**, or **Continue with saved note (retain drafts)**. Recovery uses the original revision; a changed SQLite revision opens the existing conflict workflow rather than overwriting it. Choosing the saved note retains the record and defers the prompt only for the current loaded page. Draft records are removed only after a successful save acknowledgement, guarded against newer edits and other tabs.
+
+If the backend disappears, use the desktop icon to start it again. The existing page retries registration; unsaved content remains in memory/browser storage, and a failed autosave still needs **Retry save**. A revision conflict still requires review/export. Do not refresh a tab containing older unprotected edits until Saved; this source update cannot retroactively protect a page loaded from the old build.
+
+Recovery storage is per browser profile and exact origin (including port), unencrypted, and outside Git. Private browsing, clearing site data, quotas, disabled storage, OS/storage failure, or changing browser/port can make drafts unavailable. Storage failures show a warning; keep the tab open until Saved. Already uploaded image references are retained, but an in-flight original image file is not journaled: wait for uploads or reselect the original file after recovery. A local draft is not a backup.
+
+## Independent development
+
+From the repository's `backend` directory:
+
+```bash
+.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+From `frontend`, run `npm run dev` and open `http://127.0.0.1:5173`. Direct `python -m app` release serving also remains unmanaged. These paths return `managed: false` from `/api/lifecycle`; there is no watchdog, and closing the browser does not stop them. Stop with Ctrl+C. Do not run them on the managed application's port/profile simultaneously.
 
 ## Updates and removal
 
@@ -42,10 +73,12 @@ To remove only the launcher, delete `org.engage.Workspace.desktop` and `org.enga
 | --- | --- |
 | Missing Python runtime/build | Run the one-time installer again from the current source checkout. |
 | Port occupied by an unverified service | Do not kill it from ENGAGE. Stop the known development server in its own terminal or reinstall with a free local port. |
-| Browser does not open | Check `launcher.log`; test the desktop's configured default browser/`xdg-open`. A failure is displayed after server readiness. |
+| Browser does not open/register | Check `launcher.log`; verify Firefox starts normally. Immediate dispatch failure stops a newly started backend; missing registration stops it after the startup grace. Reused active instances are preserved if an additional browser dispatch fails. |
 | Startup times out/crashes | Read `launcher.log` and `backend.log` in the state directory; correct the reported dependency/profile error, then click again. Stale owned process state is recovered on the next attempt. |
 | Data cannot be accessed | Check the saved `data_home` in `engage-application/config.json` and permissions for that profile. Do not point the installer at a new path until the original XDG value is confirmed; do not move the profile. |
 | Desktop icon asks for trust | Review the installed desktop entry and choose **Allow Launching** in GNOME's file manager if desired. The application-menu item remains available. |
 | Installer reports missing Node/npm | For installation only, initialize the required Node version in that terminal. Normal desktop launches do not read `.bashrc` or nvm. |
 
 Desktop startup needs no network after dependencies/frontend assets have been installed. Install/update commands do download packages. A rebooted desktop session should still show the user-level application entry; reboot was not available for this automated review.
+
+The [lifecycle engineering report](../LIFECYCLE_REPORT.md) records tests and remaining platform verification. Firefox may route a new-window command to an existing process; see [Mozilla's command-line documentation](https://firefox-source-docs.mozilla.org/browser/CommandLineParameters.html). Closure events are unreliable; see [MDN's beacon guidance](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon). Heartbeat expiry and synchronous draft recovery address those separate concerns.

@@ -6,6 +6,7 @@ def test_health_contract(client):
 
 def test_route_surface(client):
     assert [(route.path, route.methods) for route in client.app.routes] == [
+        ("/api/lifecycle", {"GET"}),
         ("/api/tree", {"GET"}),
         ("/api/folders", {"POST"}),
         ("/api/folders/{folder_id}", {"PATCH"}),

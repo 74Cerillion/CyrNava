@@ -31,7 +31,7 @@ function makeFolder(id: string, name: string, parent_id: string | null = null): 
 beforeEach(() => {
   window.localStorage.clear(); vi.resetAllMocks();
   tree = { folders: [], notes: [] }; records = new Map(); counter = 0;
-  vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => ({ status: 'ok' }) }));
+  vi.stubGlobal('fetch', vi.fn().mockImplementation(async (path: string) => ({ ok: true, json: async () => path === '/api/lifecycle' ? { managed: false } : { status: 'ok' } })));
   vi.mocked(getTree).mockImplementation(async () => structuredClone(tree));
   vi.mocked(getNote).mockImplementation(async (id) => {
     if (!records.has(id)) throw new ApiError('Note not found', 404);
