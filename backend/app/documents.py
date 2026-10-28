@@ -145,7 +145,7 @@ def validate_document(document):
             if kind == "image":
                 url = props.get("url", "")
                 if not isinstance(url, str) or (url and not ASSET_URL.fullmatch(url)):
-                    invalid(here, "images require a local ENGAGE asset URL")
+                    invalid(here, "images require a local CyrNava asset URL")
             if spec["content"] == "none":
                 if block.get("content") not in (None, []):
                     invalid(here, "this block cannot contain inline content")

@@ -1,3 +1,3 @@
-# Application icon
+# Desktop icon
 
-`engage.svg` is a temporary engineering placeholder, not approved final artwork. Replace it with the owner's approved SVG or pass `--icon /absolute/path/approved.png` (or SVG) to the installer. Installed desktop entries use the stable `engage` icon name. No custom logo approval is implied.
+`cyrnava.svg` is the existing temporary document placeholder with updated accessible naming, not approved final artwork. Pass `--icon /absolute/path/approved.png` (or SVG) to retain owner-approved artwork. The installer copies it into each program release under the `cyrnava` basename. No logo redesign or approval is implied. Existing configured icons remain preferred on reinstall.

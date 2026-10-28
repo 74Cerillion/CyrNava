@@ -22,7 +22,7 @@ def profile_lock(directory: Path, *, offline: bool = False):
             fcntl.flock(fd, mode | fcntl.LOCK_NB)
         except BlockingIOError:
             raise ProfileBusy(
-                "Stop all ENGAGE backend processes before backup or restore."
+                "Stop all CyrNava backend processes before backup or restore."
             ) from None
         yield
     finally:

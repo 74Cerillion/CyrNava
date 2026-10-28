@@ -80,7 +80,7 @@ def ready(config, state):
         with opener.open(url, timeout=0.4) as response:
             result = json.load(response)
         if result != {
-            "application": "ENGAGE",
+            "application": "CyrNava",
             "instance": state["nonce"],
             "lifecycle": 1,
         }:
@@ -95,20 +95,20 @@ def preflight(config):
     runtime = Path(config["release"]) / "backend/.venv/bin/python"
     build = Path(config["release"]) / "frontend/dist"
     if not runtime.is_file():
-        raise LaunchError("Python runtime is missing. Re-run the ENGAGE installer.")
+        raise LaunchError("Python runtime is missing. Re-run the CyrNava installer.")
     if not (build / "index.html").is_file() or not (build / "assets").is_dir():
-        raise LaunchError("Frontend build is missing. Re-run the ENGAGE installer.")
+        raise LaunchError("Frontend build is missing. Re-run the CyrNava installer.")
     return runtime
 
 
 def start(config, config_path, *, timeout=20):
     state = read_state(config)
     if ready(config, state):
-        logging.info("Reusing healthy ENGAGE instance")
+        logging.info("Reusing healthy CyrNava instance")
         return state
     if process_matches(state):
         raise LaunchError(
-            "ENGAGE is running but not ready. Use Stop ENGAGE, then retry."
+            "CyrNava is running but not ready. Use Stop CyrNava, then retry."
         )
     if state:
         logging.warning(
@@ -174,7 +174,9 @@ def start(config, config_path, *, timeout=20):
     # Give the owning supervisor time to drain/reap its worker before any
     # escalation. Killing it after only five seconds could orphan that worker.
     terminate_owned(child, timeout=17)
-    raise LaunchError("ENGAGE did not become ready within 20 seconds; startup stopped.")
+    raise LaunchError(
+        "CyrNava did not become ready within 20 seconds; startup stopped."
+    )
 
 
 def wait_for_supervisor(config, timeout=5):
@@ -186,7 +188,7 @@ def wait_for_supervisor(config, timeout=5):
         except BlockingIOError:
             if time.monotonic() >= deadline:
                 raise LaunchError(
-                    "Previous ENGAGE supervisor is still stopping. Retry shortly."
+                    "Previous CyrNava supervisor is still stopping. Retry shortly."
                 ) from None
             time.sleep(0.05)
 
@@ -259,7 +261,7 @@ def supervise(config, config_path, nonce):
                     nonce,
                 ],
                 cwd=Path(config["release"]) / "backend",
-                env={**os.environ, "ENGAGE_SUPERVISOR_SECRET": secret},
+                env={**os.environ, "CYRNAVA_SUPERVISOR_SECRET": secret},
                 stdin=subprocess.DEVNULL,
                 close_fds=True,
             )
@@ -270,7 +272,7 @@ def supervise(config, config_path, nonce):
                 try:
                     request = urllib.request.Request(
                         f"http://127.0.0.1:{config['port']}/api/lifecycle/supervisor",
-                        headers={"X-ENGAGE-Supervisor": secret},
+                        headers={"X-CYRNAVA-Supervisor": secret},
                     )
                     with opener.open(request, timeout=1) as response:
                         status = json.load(response)
@@ -284,7 +286,7 @@ def supervise(config, config_path, nonce):
                         if status["reason"] == "startup-timeout":
                             report_error(
                                 config,
-                                "Firefox did not register an ENGAGE session within "
+                                "Firefox did not register a CyrNava session within "
                                 "the startup grace period. Backend stopped. "
                                 "Try launching again.",
                             )
@@ -315,7 +317,8 @@ def worker(config, nonce):
 
         sessions = Sessions(
             nonce,
-            os.environ.pop("ENGAGE_SUPERVISOR_SECRET"),
+            os.environ.pop("CYRNAVA_SUPERVISOR_SECRET", None)
+            or os.environ.pop("ENGAGE_SUPERVISOR_SECRET"),
             Timing(**config.get("lifecycle", {})),
         )
         application = create_app(
@@ -328,8 +331,8 @@ def worker(config, nonce):
             if sessions.draining:
                 from fastapi import HTTPException
 
-                raise HTTPException(503, "ENGAGE is stopping")
-            return {"application": "ENGAGE", "instance": nonce, "lifecycle": 1}
+                raise HTTPException(503, "CyrNava is stopping")
+            return {"application": "CyrNava", "instance": nonce, "lifecycle": 1}
 
         state = {
             "pid": os.getpid(),
@@ -389,9 +392,9 @@ def open_browser(config):
         )
         time.sleep(0.2)
         if browser.poll() not in (None, 0):
-            raise LaunchError("Firefox failed to open ENGAGE.")
+            raise LaunchError("Firefox failed to open CyrNava.")
         # Firefox may reuse an existing process or keep this one alive. Neither
-        # result tells us whether an ENGAGE window remains; leases do that.
+        # result tells us whether a CyrNava window remains; leases do that.
     except OSError as error:
         raise LaunchError("Firefox could not start; check its installation.") from error
 
@@ -406,7 +409,7 @@ def report_error(config, message):
             [
                 config["zenity"],
                 "--error",
-                "--title=ENGAGE",
+                "--title=CyrNava",
                 "--no-markup",
                 "--text=" + message,
             ],
@@ -430,7 +433,7 @@ def report_error(config, message):
 
 def main():
     os.umask(0o077)
-    parser = argparse.ArgumentParser(description="ENGAGE desktop launcher")
+    parser = argparse.ArgumentParser(description="CyrNava desktop launcher")
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument(
         "action", choices=["open", "start", "stop", "logs", "worker", "supervise"]
@@ -467,10 +470,10 @@ def main():
                     [
                         config["zenity"],
                         "--question",
-                        "--title=Stop ENGAGE",
+                        "--title=Stop CyrNava",
                         "--no-markup",
                         "--text=Wait for Saved and all image uploads before stopping. "
-                        "Stop ENGAGE now?",
+                        "Stop CyrNava now?",
                     ],
                     timeout=120,
                     check=False,

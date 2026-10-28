@@ -1,5 +1,5 @@
-ENGAGE v0.1.0 — third-party software notices
-Project license decision remains pending. These notices do not license ENGAGE original code.
+CyrNava v0.1.0 — third-party software notices
+Project license decision remains pending. These notices do not license CyrNava original code.
 Dependencies retain their own licenses. No BlockNote XL package is used.
 
 SOURCE AVAILABILITY

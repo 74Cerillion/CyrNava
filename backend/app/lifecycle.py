@@ -59,7 +59,7 @@ class Sessions:
         self.prune()
         if self.draining:
             raise HTTPException(
-                503, "ENGAGE is stopping. Launch it again, then reconnect."
+                503, "CyrNava is stopping. Launch it again, then reconnect."
             )
         previous = self.entries.get(identifier)
         # A delayed heartbeat must not undo a later close beacon.
@@ -118,7 +118,7 @@ def install_lifecycle(application: FastAPI, sessions: Sessions | None):
         if sessions is None:
             return {"managed": False}
         if sessions.draining:
-            raise HTTPException(503, "ENGAGE is stopping")
+            raise HTTPException(503, "CyrNava is stopping")
         return {
             "managed": True,
             "instance": sessions.instance,
@@ -136,7 +136,7 @@ def install_lifecycle(application: FastAPI, sessions: Sessions | None):
             from fastapi.responses import JSONResponse
 
             return JSONResponse(
-                status_code=503, content={"detail": "ENGAGE is stopping"}
+                status_code=503, content={"detail": "CyrNava is stopping"}
             )
         return await call_next(request)
 
@@ -151,18 +151,20 @@ def install_lifecycle(application: FastAPI, sessions: Sessions | None):
             or request.headers.get("sec-fetch-site", "same-origin")
             not in ("same-origin", "none")
         ):
-            raise HTTPException(403, "Same-origin ENGAGE session required")
+            raise HTTPException(403, "Same-origin CyrNava session required")
         if not secrets.compare_digest(
             body.instance.encode(), sessions.instance.encode()
         ):
-            raise HTTPException(409, "ENGAGE instance changed; reconnect")
+            raise HTTPException(409, "CyrNava instance changed; reconnect")
         sessions.touch(str(identifier), body.sequence, body.action)
         return {"registered": body.action != "close"}
 
     @application.get("/api/lifecycle/supervisor", include_in_schema=False)
     async def inspect(request: Request):
         if not secrets.compare_digest(
-            request.headers.get("x-engage-supervisor", "").encode(),
+            request.headers.get(
+                "x-cyrnava-supervisor", request.headers.get("x-engage-supervisor", "")
+            ).encode(),
             sessions.secret.encode(),
         ):
             raise HTTPException(403, "Supervisor access required")

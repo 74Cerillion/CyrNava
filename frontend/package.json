@@ -1,5 +1,5 @@
 {
-  "name": "cyber-workspace-frontend",
+  "name": "cyrnava",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -14,7 +14,7 @@
     "lint": "eslint . --max-warnings 0",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "test:release": "ENGAGE_E2E_RELEASE=1 playwright test",
+    "test:release": "CYRNAVA_E2E_RELEASE=1 playwright test",
     "document:contract": "node scripts/export-document-contract.mjs"
   },
   "dependencies": {

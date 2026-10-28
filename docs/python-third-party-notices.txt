@@ -1,4 +1,4 @@
-ENGAGE v0.1.0 — Python dependency notices
+CyrNava v0.1.0 — Python dependency notices
 Installed pinned wheel licenses, including development tools. Installer pip excluded.
 
 

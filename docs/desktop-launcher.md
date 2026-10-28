@@ -2,7 +2,7 @@
 
 ## Installation and paths
 
-From the ENGAGE repository root, on Ubuntu 24.04:
+From the CyrNava repository root, on Ubuntu 24.04:
 
 ```bash
 sudo apt update
@@ -16,23 +16,23 @@ python3.12 desktop/install.py
 
 `nvm` applies only to the one-time source build. The installer checks Ubuntu/Linux, Python 3.12, the pinned Node/npm versions and desktop utilities before modifying the per-user installation. It copies backend source, installs pinned Python requirements into an application-owned venv, runs `npm ci` and builds the React frontend. It then starts a synthetic temporary profile to verify the local app before registering launchers. It does not read or copy the user's notes, screenshots, or database.
 
-Program files and configuration: `$XDG_DATA_HOME/engage-application/`, default `~/.local/share/engage-application/`. User notes stay in the existing `$XDG_DATA_HOME/engage/`, default `~/.local/share/engage/`. Logs and runtime coordination state: `$XDG_STATE_HOME/engage-launcher/`, default `~/.local/state/engage-launcher/`. Directories are private to the user. A custom `XDG_DATA_HOME` must be present during installation; the launcher saves that path and supplies it at runtime. It refuses to change the saved path on reinstall. Preserve your environment if you have previously run ENGAGE with custom XDG settings.
+Program files and configuration: `$XDG_DATA_HOME/engage-application/`, default `~/.local/share/engage-application/`. User notes stay in the existing `$XDG_DATA_HOME/engage/`, default `~/.local/share/engage/`. Logs and runtime coordination state: `$XDG_STATE_HOME/engage-launcher/`, default `~/.local/state/engage-launcher/`. Directories are private to the user. A custom `XDG_DATA_HOME` must be present during installation; the launcher saves that path and supplies it at runtime. It refuses to change the saved path on reinstall. Preserve your environment if you have previously run CyrNava with custom XDG settings.
 
 The installer creates a menu item in `$XDG_DATA_HOME/applications/` and a copy in the XDG Desktop folder when one exists. GNOME may still ask the user to choose **Allow Launching** for the desktop file. No trust bit or OS protection is automatically changed. Each release stores its icon alongside its versioned program files, and the desktop entry references that absolute path. The provided SVG is explicitly temporary; provide approved PNG/SVG artwork with `--icon /absolute/path/logo.png` after approval.
 
 ## Start, reuse, stop
 
-The menu item, desktop icon and **ENGAGE** action all execute the installed launcher with an absolute Python 3.12 path. It needs no shell profile, terminal, npm, nvm or Vite. The default URL is `http://127.0.0.1:8000`; `--port 18000` can set another port during installation. New installations record Firefox's executable and open `firefox --new-window URL`. No dedicated profile, extension, preference change or reliance on Firefox process lifetime is needed. Existing configurations retain their previous `xdg-open` fallback until reinstalled.
+The menu item, desktop icon and **CyrNava** action all execute the installed launcher with an absolute Python 3.12 path. It needs no shell profile, terminal, npm, nvm or Vite. The default URL is `http://127.0.0.1:8000`; `--port 18000` can set another port during installation. New installations record Firefox's executable and open `firefox --new-window URL`. No dedicated profile, extension, preference change or reliance on Firefox process lifetime is needed. Existing configurations retain their previous `xdg-open` fallback until reinstalled.
 
 The launcher uses a private `flock` to serialize repeated starts. Its detached supervisor retains the backend's `Popen` handle, monitors session leases, and reaps that child on exit. Supervisor and worker each hold lifetime locks. A recorded PID is accepted only when `/proc` start time and its generated worker identifier match; manual stopping uses Linux `pidfd` to signal that identity. Readiness requires the recorded process plus a local `/api/desktop-ready` response matching its identifier and lifecycle protocol, and the compiled React root page. No HTTP proxy or redirects are used for probes. The backend binds `127.0.0.1` and disables request access logs.
 
-A healthy managed server is reused. A stale process record is ignored and the backend starts again. If another process owns the port, its identity is not trusted: the launcher shows an error and never stops that process. Stop the service from its own application, or choose a different port during installation. A running *unmanaged* ENGAGE development/release server does not carry the launcher's per-instance identifier and will not be adopted; stop it first to avoid two server processes sharing a data profile.
+A healthy managed server is reused. A stale process record is ignored and the backend starts again. If another process owns the port, its identity is not trusted: the launcher shows an error and never stops that process. Stop the service from its own application, or choose a different port during installation. A running *unmanaged* CyrNava development/release server does not carry the launcher's per-instance identifier and will not be adopted; stop it first to avoid two server processes sharing a data profile.
 
-For normal closure, wait for **Saved** and uploads, then close all ENGAGE tabs/windows. Other Firefox windows may stay open. Each ENGAGE page has an unpredictable identifier and sends a heartbeat every 5 seconds. A best-effort `pagehide` close beacon accelerates closure, but leases expire after 20 seconds without heartbeats. Once no leases remain, a 5-second grace allows refresh/reconnection before shutdown is claimed. A new lease cancels that grace. After drain is claimed, new writes/leases return 503 and cannot revive the stopping process. The supervisor sends SIGTERM, allows Uvicorn up to 8 seconds for accepted requests, and waits up to 10 seconds before killing only its retained child; reaping is bounded by a further 5 seconds.
+For normal closure, wait for **Saved** and uploads, then close all CyrNava tabs/windows. Other Firefox windows may stay open. Each CyrNava page has an unpredictable identifier and sends a heartbeat every 5 seconds. A best-effort `pagehide` close beacon accelerates closure, but leases expire after 20 seconds without heartbeats. Once no leases remain, a 5-second grace allows refresh/reconnection before shutdown is claimed. A new lease cancels that grace. After drain is claimed, new writes/leases return 503 and cannot revive the stopping process. The supervisor sends SIGTERM, allows Uvicorn up to 8 seconds for accepted requests, and waits up to 10 seconds before killing only its retained child; reaping is bounded by a further 5 seconds.
 
 Usually closure takes about 5 seconds plus shutdown. Without a delivered close beacon, allow about 25 seconds plus shutdown after the last heartbeat. Startup has a separate 60-second registration grace; a browser that never registers causes cleanup and an error. A backend that stops answering the private supervisor probe is stopped after 25 seconds without contact. Suspended/frozen tabs cannot guarantee heartbeats; see recovery below.
 
-The existing **Stop ENGAGE** action remains a manual fallback. Its confirmation reminds you to wait for Saved/uploads; it signals only a verified worker. It does not close Firefox. **Open diagnostic logs** opens the state directory. Errors show a Zenity dialog and log at `launcher.log`/`backend.log`; note content is not logged by lifecycle management.
+The existing **Stop CyrNava** action remains a manual fallback. Its confirmation reminds you to wait for Saved/uploads; it signals only a verified worker. It does not close Firefox. **Open diagnostic logs** opens the state directory. Errors show a Zenity dialog and log at `launcher.log`/`backend.log`; note content is not logged by lifecycle management.
 
 ## Confirm shutdown and recover
 
@@ -63,7 +63,7 @@ From `frontend`, run `npm run dev` and open `http://127.0.0.1:5173`. Direct `pyt
 
 ## Updates and removal
 
-Wait for Saved, stop ENGAGE, update the source checkout, then run `python3.12 desktop/install.py` again. Reinstallation uses the same configured data/state paths, verifies the new release against an isolated profile and updates the existing two application-menu entries and one desktop icon. It preserves existing data. Earlier program release directories remain available for manual rollback. There is no automatic update or release cleanup policy yet.
+Wait for Saved, stop CyrNava, update the source checkout, then run `python3.12 desktop/install.py` again. Reinstallation uses the same configured data/state paths, verifies the new release against an isolated profile and updates the existing two application-menu entries and one desktop icon. It preserves existing data. Earlier program release directories remain available for manual rollback. There is no automatic update or release cleanup policy yet.
 
 To remove only the launcher, delete `org.engage.Workspace.desktop` and `org.engage.Stop.desktop` from the user's Applications folder, and `org.engage.Workspace.desktop` from Desktop (if installed). Remove `engage-application/` (including bundled icons) and `engage-launcher/` state if logs are no longer needed. Keep `engage/` to retain your database and assets. Make and verify a backup before intentionally deleting that profile.
 
@@ -72,7 +72,7 @@ To remove only the launcher, delete `org.engage.Workspace.desktop` and `org.enga
 | Message or symptom | Safe action |
 | --- | --- |
 | Missing Python runtime/build | Run the one-time installer again from the current source checkout. |
-| Port occupied by an unverified service | Do not kill it from ENGAGE. Stop the known development server in its own terminal or reinstall with a free local port. |
+| Port occupied by an unverified service | Do not kill it from CyrNava. Stop the known development server in its own terminal or reinstall with a free local port. |
 | Browser does not open/register | Check `launcher.log`; verify Firefox starts normally. Immediate dispatch failure stops a newly started backend; missing registration stops it after the startup grace. Reused active instances are preserved if an additional browser dispatch fails. |
 | Startup times out/crashes | Read `launcher.log` and `backend.log` in the state directory; correct the reported dependency/profile error, then click again. Stale owned process state is recovered on the next attempt. |
 | Data cannot be accessed | Check the saved `data_home` in `engage-application/config.json` and permissions for that profile. Do not point the installer at a new path until the original XDG value is confirmed; do not move the profile. |

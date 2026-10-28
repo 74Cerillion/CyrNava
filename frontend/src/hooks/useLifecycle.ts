@@ -36,7 +36,7 @@ export function useLifecycle() {
         if (!disposed) setProblem(null);
       } catch {
         configuration = null;
-        if (!disposed && !controller.signal.aborted) setProblem('Connection to ENGAGE was interrupted. Your local drafts remain available. If ENGAGE has stopped, launch its desktop icon again; this tab will reconnect.');
+        if (!disposed && !controller.signal.aborted) setProblem('Connection to CyrNava was interrupted. Your local drafts remain available. If CyrNava has stopped, launch its desktop icon again; this tab will reconnect.');
       } finally {
         busy = false;
         if (!disposed && !hidden && configuration?.managed !== false) timer = window.setTimeout(() => void heartbeat(), configuration?.heartbeat_ms || 5000);

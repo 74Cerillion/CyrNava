@@ -11,7 +11,7 @@ const python = join(root, 'backend/.venv/bin/python');
 const launcher = join(root, 'desktop/launcher.py');
 
 async function installation() {
-  const directory = await mkdtemp(join(tmpdir(), 'engage-lifecycle-browser-'));
+  const directory = await mkdtemp(join(tmpdir(), 'cyrnava-lifecycle-browser-'));
   const release = join(directory, 'release');
   const state = join(directory, 'state');
   await mkdir(join(release, 'backend'), { recursive: true }); await mkdir(join(release, 'frontend'));

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One-time per-user source installation. Never opens or moves an ENGAGE profile."""
+"""One-time per-user source installation. Never opens or moves a CyrNava profile."""
 
 import argparse
 import json
@@ -59,18 +59,18 @@ def entry(root, python, icon, *, stop=False):
     command += f"--config {desktop_quote(root / 'config.json')}"
     if stop:
         return (
-            "[Desktop Entry]\nType=Application\nName=Stop ENGAGE\n"
-            "Comment=Wait for Saved, then stop the local ENGAGE server\n"
+            "[Desktop Entry]\nType=Application\nName=Stop CyrNava\n"
+            "Comment=Wait for Saved, then stop the local CyrNava server\n"
             f"Exec={command} stop\n"
             f"Icon={icon}\n"
             "Terminal=false\nCategories=Office;\n"
         )
     return (
-        "[Desktop Entry]\nVersion=1.0\nType=Application\nName=ENGAGE\n"
+        "[Desktop Entry]\nVersion=1.0\nType=Application\nName=CyrNava\n"
         "Comment=Local-first cybersecurity knowledge workspace\n"
         f"Exec={command} open\nIcon={icon}\nTerminal=false\n"
         "Categories=Office;\nActions=Stop;Logs;\n\n"
-        "[Desktop Action Stop]\nName=Stop ENGAGE (wait for Saved)\n"
+        "[Desktop Action Stop]\nName=Stop CyrNava (wait for Saved)\n"
         f"Exec={command} stop\n\n[Desktop Action Logs]\nName=Open diagnostic logs\n"
         f"Exec={command} logs\n"
     )
@@ -87,7 +87,7 @@ def install(args):
     opener, zenity = shutil.which("xdg-open"), shutil.which("zenity")
     browser = shutil.which("firefox")
     if not browser:
-        raise LaunchError("Firefox is required for normal ENGAGE desktop launches.")
+        raise LaunchError("Firefox is required for normal CyrNava desktop launches.")
     if not node or not npm:
         raise LaunchError(
             "Build tools missing: install Node 24.19.0/npm 11.6.2, then retry. "
@@ -103,6 +103,7 @@ def install(args):
     if subprocess.check_output([npm, "--version"], text=True).strip() != "11.6.2":
         raise LaunchError("Build requires pinned npm 11.6.2.")
     data_home = xdg("XDG_DATA_HOME", ".local/share").resolve()
+    # Stable installation/state/desktop IDs update existing icons in place.
     root = data_home / "engage-application"
     state = xdg("XDG_STATE_HOME", ".local/state").resolve() / "engage-launcher"
     private_directory(root)
@@ -122,7 +123,7 @@ def install(args):
                 )
             if process_matches(read_state(config)):
                 raise LaunchError(
-                    "ENGAGE is running. Wait for Saved, then use Stop ENGAGE "
+                    "CyrNava is running. Wait for Saved, then use Stop CyrNava "
                     "before updating."
                 )
         release = (
@@ -169,7 +170,7 @@ def install(args):
             import tempfile
 
             with tempfile.TemporaryDirectory(
-                prefix="engage-install-check-"
+                prefix="cyrnava-install-check-"
             ) as temporary:
                 check = Path(temporary)
                 with socket.socket() as probe:
@@ -210,13 +211,13 @@ def install(args):
                 if args.icon
                 else configured_icon
                 if configured_icon.is_file()
-                else REPOSITORY / "desktop/icons/engage.svg"
+                else REPOSITORY / "desktop/icons/cyrnava.svg"
             )
             if not icon.is_file() or icon.suffix.lower() not in (".svg", ".png"):
                 raise LaunchError("Icon must be a readable PNG or SVG file.")
             icons = release / "desktop-icons"
             icons.mkdir(mode=0o700)
-            target = icons / ("engage" + icon.suffix.lower())
+            target = icons / ("cyrnava" + icon.suffix.lower())
             if target.is_symlink():
                 raise LaunchError("Refusing symlink icon destination")
             if icon.suffix.lower() == ".svg":
@@ -269,14 +270,14 @@ def install(args):
             else:
                 print(
                     "No enabled Desktop folder found. "
-                    "ENGAGE is in the application menu. "
+                    "CyrNava is in the application menu. "
                     "rerun with --desktop-dir PATH for an existing desktop folder."
                 )
             updater = shutil.which("update-desktop-database")
             if updater:
                 subprocess.run([updater, str(applications)], check=False)
             print(
-                f"Installed ENGAGE. Open it from the desktop/application menu. "
+                f"Installed CyrNava. Open it from the desktop/application menu. "
                 f"Logs: {state}"
             )
             print(
@@ -299,7 +300,7 @@ def install(args):
 def main():
     os.umask(0o077)
     parser = argparse.ArgumentParser(
-        description="Install ENGAGE for this Ubuntu desktop user"
+        description="Install CyrNava for this Ubuntu desktop user"
     )
     parser.add_argument("--port", type=int, default=8000)
     parser.add_argument("--desktop-dir", help="Override detected XDG desktop folder")
@@ -310,7 +311,7 @@ def main():
     try:
         install(args)
     except (LaunchError, OSError, ValueError, subprocess.CalledProcessError) as error:
-        print(f"ENGAGE installation failed: {error}", file=sys.stderr)
+        print(f"CyrNava installation failed: {error}", file=sys.stderr)
         return 1
     return 0
 

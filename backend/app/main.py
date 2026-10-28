@@ -65,7 +65,7 @@ def create_app(
             yield
 
     application = FastAPI(
-        title="ENGAGE",
+        title="CyrNava",
         version=__version__,
         lifespan=lifespan,
         docs_url=None,

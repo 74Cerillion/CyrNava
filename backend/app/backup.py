@@ -41,9 +41,9 @@ def validate_profile(directory: Path) -> dict[str, str]:
     """Read-only validation; never initialize or repair a backup as a side effect."""
     database = directory / "engage.sqlite3"
     if not database.is_file() or database.is_symlink():
-        raise BackupError("Backup requires an ENGAGE database.")
+        raise BackupError("Backup requires an CyrNava database.")
     if any(directory.glob("engage.sqlite3-*")):
-        raise BackupError("Database sidecar files exist. Cleanly stop ENGAGE first.")
+        raise BackupError("Database sidecar files exist. Cleanly stop CyrNava first.")
     assets = directory / "assets"
     if not assets.is_dir() or assets.is_symlink():
         raise BackupError("Backup requires an assets directory.")
@@ -54,7 +54,7 @@ def validate_profile(directory: Path) -> dict[str, str]:
             raise BackupError("Database integrity check failed.")
         version = connection.execute("PRAGMA user_version").fetchone()[0]
         if version not in (3, 4):
-            raise BackupError("Unsupported schema. Upgrade ENGAGE before backing up.")
+            raise BackupError("Unsupported schema. Upgrade CyrNava before backing up.")
         if connection.execute("PRAGMA foreign_key_check").fetchone():
             raise BackupError("Database contains broken relationships.")
         parents = {
@@ -194,7 +194,7 @@ def restore_backup(source: Path, destination: Path):
 def main():
     parser = argparse.ArgumentParser(
         description=(
-            "Offline ENGAGE backup/restore. Stop the backend first. "
+            "Offline CyrNava backup/restore. Stop the backend first. "
             "Backups are unencrypted."
         )
     )

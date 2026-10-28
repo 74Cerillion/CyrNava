@@ -24,10 +24,11 @@ def default_database_path() -> Path:
     base = (
         Path(xdg) if xdg and Path(xdg).is_absolute() else Path.home() / ".local/share"
     )
+    # Stable profile contract: rebranding must not create a second empty workspace.
     path = (base / "engage/engage.sqlite3").resolve()
     repository = Path(__file__).resolve().parents[2]
     if path.is_relative_to(repository):
-        raise ValueError("XDG_DATA_HOME must put ENGAGE data outside the repository")
+        raise ValueError("XDG_DATA_HOME must put CyrNava data outside the repository")
     return path
 
 
@@ -69,7 +70,7 @@ class Database:
             connection.execute("BEGIN IMMEDIATE")
             version = connection.execute("PRAGMA user_version").fetchone()[0]
             if version > 4:
-                raise RuntimeError("Database schema is newer than this ENGAGE version")
+                raise RuntimeError("Database schema is newer than this CyrNava version")
             if version < 2:
                 connection.execute("""
                     CREATE TABLE folders (

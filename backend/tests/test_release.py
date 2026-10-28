@@ -14,13 +14,13 @@ def test_release_serves_only_build_and_api(tmp_path, document):
     build = tmp_path / "build"
     (build / "assets").mkdir(parents=True)
     (build / "index.html").write_text(
-        '<!doctype html><title>ENGAGE</title><div id="root"></div>'
+        '<!doctype html><title>CyrNava</title><div id="root"></div>'
     )
     (build / "assets/app-123.js").write_text('console.log("local")')
     (build / "private.txt").write_text("not served")
     with TestClient(create_app(tmp_path / "profile/engage.sqlite3", build)) as client:
         assert client.get("/").status_code == 200
-        assert "ENGAGE" in client.get("/").text
+        assert "CyrNava" in client.get("/").text
         assert client.get("/api/health").json() == {"status": "ok"}
         assert client.get("/health").status_code == 200
         assert client.get("/assets/app-123.js").status_code == 200

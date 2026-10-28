@@ -120,6 +120,14 @@ def test_managed_routes_require_origin_identity_and_supervisor_secret(tmp_path, 
             client.get("/api/lifecycle/supervisor", headers=auth).json()["sessions"]
             == 1
         )
+        # New name is canonical; the old header remains a private-protocol alias.
+        assert (
+            client.get(
+                "/api/lifecycle/supervisor",
+                headers={"X-CYRNAVA-Supervisor": "private-secret"},
+            ).status_code
+            == 200
+        )
         now[0] = 21
         client.get("/api/lifecycle/supervisor", headers=auth)
         now[0] = 26

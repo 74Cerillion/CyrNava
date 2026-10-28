@@ -1,5 +1,11 @@
 # Changelog
 
+## CyrNava rebranding — Unreleased
+
+Application, desktop/menu titles, package metadata and current documentation now use CyrNava. New configuration uses `CYRNAVA_*` with legacy aliases. Existing storage, browser keys and desktop IDs remain stable for compatibility. A dry-run-capable migration script prepares verified backups before local checkout/remote changes; it never pushes or moves application data. See `REBRANDING_REPORT.md` and `docs/migrate-to-cyrnava.md`.
+
+The M6 entry below is a historical milestone record. Current capabilities, including schema 4 templates, browser draft recovery and appearance preferences, are described in README and their later engineering reports.
+
 ## 0.1.0 — Unreleased candidate
 
 Initial Phase 1 local cybersecurity knowledge workspace: nested folders, persistent rich-text notes, core BlockNote formatting/code, local clipboard/uploaded images, keyboard navigation, serial autosave with revision conflicts, protected deletion and offline backup/restore.

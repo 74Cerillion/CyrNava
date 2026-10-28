@@ -1,14 +1,14 @@
 # Local backup and restore (M5)
 
-ENGAGE backups are **unencrypted private directories**, not archives. Keep them outside every Git checkout and on storage you control. Checksums detect accidental changes; they do not authenticate a backup from another person. Restore only trusted local backups.
+CyrNava backups are **unencrypted private directories**, not archives. Keep them outside every Git checkout and on storage you control. Checksums detect accidental changes; they do not authenticate a backup from another person. Restore only trusted local backups.
 
 ## Before backing up
 
 1. Finish editing. Wait for image uploads to finish and **Saved** to appear.
-2. Close the ENGAGE browser tab, then stop **all backend processes**, including any Uvicorn reload supervisor, with Ctrl+C in their terminals. Stop Vite too for the simplest procedure.
+2. Close the CyrNava browser tab, then stop **all backend processes**, including any Uvicorn reload supervisor, with Ctrl+C in their terminals. Stop Vite too for the simplest procedure.
 3. Run backup only after a clean shutdown. It captures confirmed SQLite/filesystem data, not unsaved browser drafts.
 
-M5 backends hold a shared Linux profile lock for their entire lifetime. The backup tool takes the exclusive lock and refuses to run while any cooperating backend remains open. This also prevents an M5 backend from starting during backup. Older ENGAGE versions and external SQLite/file tools do not participate: stop those yourself. The lock is a guard, not a live-backup feature.
+M5 backends hold a shared Linux profile lock for their entire lifetime. The backup tool takes the exclusive lock and refuses to run while any cooperating backend remains open. This also prevents an M5 backend from starting during backup. Older CyrNava versions and external SQLite/file tools do not participate: stop those yourself. The lock is a guard, not a live-backup feature.
 
 ## Data paths
 
@@ -44,7 +44,7 @@ The default source follows the same XDG rules as the backend. To choose it expli
   --destination "/absolute/private/backups/new-workspace.engage-backup"
 ```
 
-The destination must **not exist**; its parent must exist. The tool never overwrites an existing backup, even an empty directory. Do not place the destination inside the source profile or vice versa. Symlink paths and paths inside the ENGAGE checkout are rejected. Choose a location outside other checkouts too; the runtime guard knows this application's checkout, not every repository on your computer.
+The destination must **not exist**; its parent must exist. The tool never overwrites an existing backup, even an empty directory. Do not place the destination inside the source profile or vice versa. Symlink paths and paths inside the CyrNava checkout are rejected. Choose a location outside other checkouts too; the runtime guard knows this application's checkout, not every repository on your computer.
 
 On success, the tool prints `Backup completed and validated` and exits 0. Errors exit 1 with a concise message. Do not treat a failed command as a usable backup.
 

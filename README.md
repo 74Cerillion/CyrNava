@@ -1,10 +1,16 @@
-# ENGAGE — Pentest Engagement Manager
+# CyrNava
 
 **v0.1.0 release candidate · Phase 1 local knowledge workspace · Linux**
 
-ENGAGE organizes cybersecurity learning and documentation into folders and rich-text notes on your computer. SQLite stores native documents and templates; local files store note images. There are no runtime accounts, cloud services or external API calls. Engagement, host and vulnerability management are future work, not current features.
+CyrNava organizes cybersecurity learning and documentation into folders and rich-text notes on your computer. SQLite stores native documents and templates; local files store note images. There are no runtime accounts, cloud services or external API calls. Engagement, host and vulnerability management are future work, not current features.
 
 **Release approval and the original-code license are pending.** This checkout is a review candidate, not an announced public release. See [release checklist](docs/release-checklist.md).
+
+## Rebranding and existing installations
+
+The application is now **CyrNava**, formerly ENGAGE. The repository is [74Cerillion/CyrNava](https://github.com/74Cerillion/CyrNava); recommended local folder: `CyrNava`. See [the local migration guide](docs/migrate-to-cyrnava.md) and [rebranding report](REBRANDING_REPORT.md) before moving an existing checkout. `migrate_to_cyrnava.sh` supports dry run, verified backups, HTTPS/SSH remote preservation and safe re-execution. It refuses uncommitted changes and never pushes.
+
+Existing `engage/engage.sqlite3`, image files, browser keys (`engage.*`), program/state directories and `org.engage.*.desktop` filenames deliberately remain stable compatibility identifiers. This preserves notes, templates, drafts, appearance and existing icons without copying or deleting a live profile. Desktop/menu **display names** become CyrNava when reinstalled. New environment variables use `CYRNAVA_API_PORT`, `CYRNAVA_E2E_RELEASE` and `CYRNAVA_SUPERVISOR_SECRET`; their `ENGAGE_*` counterparts remain compatibility aliases. No schema or document migration is required for rebranding.
 
 ## Features
 
@@ -29,13 +35,13 @@ The release includes a small local startup script to reduce initial light flashe
 
 Use **Hide navigation** above the editor to give the note more space; **Show navigation** stays available in the same place. The button supports keyboard activation and remembers the preference for this browser origin. Collapsing does not reload the note or trigger a save. Autosave continues normally. If browser storage is unavailable, the control still works for the current page.
 
-**New note** still defaults to **Blank note**. Choose a template under **Starting content** for General Penetration Testing, Enumeration, Exploitation, Privilege Escalation, or HTB / TryHackMe Lab notes. The selected folder is used exactly as for a blank note. Templates contain headings, empty paragraphs and, where appropriate, empty code blocks; ENGAGE never executes their contents.
+**New note** still defaults to **Blank note**. Choose a template under **Starting content** for General Penetration Testing, Enumeration, Exploitation, Privilege Escalation, or HTB / TryHackMe Lab notes. The selected folder is used exactly as for a blank note. Templates contain headings, empty paragraphs and, where appropriate, empty code blocks; CyrNava never executes their contents.
 
 To reuse your own structure, open the source note, choose **Save as template**, enter a name and save. Pending uploads and edits must save successfully first. The template captures that confirmed revision, including its formatting and independent image snapshots. Creating another note gives it new block IDs and new owned image files. Later edits or deletion of the source note, template, or another generated note do not change the others.
 
 **Manage templates** lists all templates and allows custom rename/delete with deletion confirmation. Built-ins cannot be renamed or deleted. To change a custom template's content, create a new template from an edited note, then optionally delete the old one. Names need not be unique. A custom template supports up to **50 MiB total copied images**; existing per-image and document limits still apply. Failures stay visible and do not create partial notes/templates.
 
-Custom templates are private application data in the existing external SQLite database, included in offline backup/restore. The first start of this code adds schema version 4; it does not rewrite existing notes or assets. Before upgrading an everyday profile, stop ENGAGE and take a backup using [BACKUP_RESTORE.md](BACKUP_RESTORE.md). Older application code cannot open schema 4: keep a pre-upgrade backup if rollback may be needed. See the [FF-006 / FF-018 engineering report](FEATURES_FF006_FF018_REPORT.md) for implementation and verification details.
+Custom templates are private application data in the existing external SQLite database, included in offline backup/restore. The first start of this code adds schema version 4; it does not rewrite existing notes or assets. Before upgrading an everyday profile, stop CyrNava and take a backup using [BACKUP_RESTORE.md](BACKUP_RESTORE.md). Older application code cannot open schema 4: keep a pre-upgrade backup if rollback may be needed. See the [FF-006 / FF-018 engineering report](FEATURES_FF006_FF018_REPORT.md) for implementation and verification details.
 
 ## Screenshots
 
@@ -71,8 +77,8 @@ Install Node separately. If using **nvm** (a shell-based Node version manager, n
 From a fresh terminal:
 
 ```bash
-git clone https://github.com/74Cerillion/PEngage_Pentest-Engagement-Manager-.git engage
-cd engage
+git clone https://github.com/74Cerillion/CyrNava.git CyrNava
+cd CyrNava
 nvm install
 nvm use
 npm install --global npm@11.6.2
@@ -106,11 +112,11 @@ python3.12 desktop/install.py
 
 Run from the repository root of a source checkout that contains `desktop/install.py`; a clone of a branch or tag from before P2-M01 cannot install the launcher. The installer creates `$XDG_DATA_HOME/engage-application/` (normally `~/.local/share/engage-application/`) for program files, a per-user Python environment, and menu entries; logs are in `$XDG_STATE_HOME/engage-launcher/` (normally `~/.local/state/engage-launcher/`). Your existing database and screenshots stay in `$XDG_DATA_HOME/engage/` (normally `~/.local/share/engage/`). It does not copy, move, initialize or delete that profile. If you normally use a custom `XDG_DATA_HOME`, set the same value for installation; the launcher records it so graphical startup uses that profile.
 
-ENGAGE appears in the application menu and, if an existing XDG Desktop folder is detected, as a desktop icon. GNOME may show **Allow Launching** when you first click the desktop icon; review and approve the entry in the file manager if prompted. This is a desktop trust decision. No OS security setting is disabled. The shipped icon is a temporary placeholder; the owner-approved logo can be installed with `python3.12 desktop/install.py --icon /absolute/path/approved.png` (SVG is also supported).
+CyrNava appears in the application menu and, if an existing XDG Desktop folder is detected, as a desktop icon. GNOME may show **Allow Launching** when you first click the desktop icon; review and approve the entry in the file manager if prompted. This is a desktop trust decision. No OS security setting is disabled. The shipped icon is a temporary placeholder; the owner-approved logo can be installed with `python3.12 desktop/install.py --icon /absolute/path/approved.png` (SVG is also supported).
 
-The initial install downloads pinned dependencies and builds static files. Keep network available until it reports success. If startup fails, ENGAGE shows an error; choose **Open diagnostic logs** in the app menu or inspect the two log files above. Normal desktop launches open Firefox and automatically stop the owned backend after the last ENGAGE tab's lease ends and a 5-second grace elapses. Heartbeats run every 5 seconds and expire after 20 seconds; startup registration has 60 seconds. The **Stop ENGAGE** action remains a fallback. Wait for **Saved** and image uploads before closing. Stop a running development server first if it already owns the configured port. A different local port can be selected during install with `--port 18000`.
+The initial install downloads pinned dependencies and builds static files. Keep network available until it reports success. If startup fails, CyrNava shows an error; choose **Open diagnostic logs** in the app menu or inspect the two log files above. Normal desktop launches open Firefox and automatically stop the owned backend after the last CyrNava tab's lease ends and a 5-second grace elapses. Heartbeats run every 5 seconds and expire after 20 seconds; startup registration has 60 seconds. The **Stop CyrNava** action remains a fallback. Wait for **Saved** and image uploads before closing. Stop a running development server first if it already owns the configured port. A different local port can be selected during install with `--port 18000`.
 
-To update, wait for Saved, choose Stop ENGAGE and run `python3.12 desktop/install.py` again from the updated checkout. It builds a new version under the application directory, checks it with a temporary profile, then updates the menu entry. Old application releases remain for rollback; they contain no user data. Re-running the installer does not duplicate launchers or reset the profile. There is no automatic update. To remove the launcher, delete its `org.engage.Workspace.desktop` and `org.engage.Stop.desktop` entries from the application directory and Desktop folder, then remove `engage-application/` and `engage-launcher/` under the same XDG locations. **Do not remove `engage/`** unless you separately intend to delete your notes and images. Back up first.
+To update, wait for Saved, choose Stop CyrNava and run `python3.12 desktop/install.py` again from the updated checkout. It builds a new version under the application directory, checks it with a temporary profile, then updates the menu entry. Old application releases remain for rollback; they contain no user data. Re-running the installer does not duplicate launchers or reset the profile. There is no automatic update. To remove the launcher, delete its `org.engage.Workspace.desktop` and `org.engage.Stop.desktop` entries from the application directory and Desktop folder, then remove `engage-application/` and `engage-launcher/` under the same XDG locations. **Do not remove `engage/`** unless you separately intend to delete your notes and images. Back up first.
 
 See [desktop launcher details and troubleshooting](docs/desktop-launcher.md).
 
@@ -143,7 +149,7 @@ cd frontend
 npm run dev
 ```
 
-Open **http://127.0.0.1:5173**. Vite forwards `/api` to FastAPI. Start each service once. If a port is occupied, inspect `ss -ltnp 'sport = :8000'` (or `:5173`); an existing ENGAGE server may already be running. Stop the identified server in its terminal before restarting. Do not kill an unidentified process. Alternate dev ports: set `ENGAGE_API_PORT=8010 npm run dev -- --port 5185` and start Uvicorn with `--port 8010`.
+Open **http://127.0.0.1:5173**. Vite forwards `/api` to FastAPI. Start each service once. If a port is occupied, inspect `ss -ltnp 'sport = :8000'` (or `:5173`); an existing CyrNava server may already be running. Stop the identified server in its terminal before restarting. Do not kill an unidentified process. Alternate dev ports: set `CYRNAVA_API_PORT=8010 npm run dev -- --port 5185` and start Uvicorn with `--port 8010`.
 
 ## Usage
 
@@ -201,7 +207,7 @@ On minimal Ubuntu, `npx playwright install --with-deps chromium` also installs b
 
 ## Known limitations
 
-Unsaved title/document edits have browser-local recovery snapshots when storage is available; failures are reported. Reopening offers recovery with the original base revision, preserving conflict checks. Browser storage deletion/private browsing/storage failure can still lose drafts, and in-flight image files must be reselected if closed before upload completes. There is no automatic merge, authentication, encryption, live backup or multi-user support. Removed image blocks retain owned files until note deletion. Image normalization removes metadata and recompresses JPEG: ENGAGE is not forensic-original evidence storage. Cross-note image blocks must be re-uploaded. Screen readers and full WCAG conformance are unverified. See the [lifecycle report](LIFECYCLE_REPORT.md) for browser verification; existing large-bundle and Starlette/HTTPX deprecation warnings remain documented.
+Unsaved title/document edits have browser-local recovery snapshots when storage is available; failures are reported. Reopening offers recovery with the original base revision, preserving conflict checks. Browser storage deletion/private browsing/storage failure can still lose drafts, and in-flight image files must be reselected if closed before upload completes. There is no automatic merge, authentication, encryption, live backup or multi-user support. Removed image blocks retain owned files until note deletion. Image normalization removes metadata and recompresses JPEG: CyrNava is not forensic-original evidence storage. Cross-note image blocks must be re-uploaded. Screen readers and full WCAG conformance are unverified. See the [lifecycle report](LIFECYCLE_REPORT.md) for browser verification; existing large-bundle and Starlette/HTTPX deprecation warnings remain documented.
 
 ## License
 

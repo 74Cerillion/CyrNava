@@ -20,6 +20,7 @@ import { TemplateManager } from './components/TemplateManager';
 import { useComputedColorScheme } from '@mantine/core';
 import { AppearanceControl, AppearanceProvider } from './appearance';
 
+// Compatibility identifiers preserve existing preferred notes, drafts and settings.
 export const NOTE_ID_KEY = 'engage.note-id.v1';
 export const NAVIGATION_KEY = 'engage.navigation-collapsed.v1';
 const emptyLibrary: DirectoryData = { folders: [], notes: [] };
@@ -212,7 +213,7 @@ function Workspace() {
   return <div className="workspace" data-navigation-collapsed={navigationCollapsed}>
     <a className="skip-link" href="#note">Skip to note</a>
     <aside id="workspace-navigation" className="sidebar" aria-label="Workspace navigation" hidden={navigationCollapsed}>
-      <p className="eyebrow">LOCAL WORKSPACE · v{version}</p><h1>ENGAGE</h1>
+      <p className="eyebrow">LOCAL WORKSPACE · v{version}</p><h1>CyrNava</h1>
       <button className="secondary root-button" disabled={blocked} onClick={() => setSelected(null)}>Workspace root</button>
       <div className="library-actions">
         <button disabled={blocked} onClick={() => newItem('new-folder')}>New folder</button>

@@ -11,7 +11,7 @@ import { createServer } from 'node:net';
 const frontend = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const backend = resolve(frontend, '../backend');
 const python = join(backend, '.venv/bin/python');
-const releaseMode = process.env.ENGAGE_E2E_RELEASE === '1';
+const releaseMode = (process.env.CYRNAVA_E2E_RELEASE ?? process.env.ENGAGE_E2E_RELEASE) === '1';
 
 async function freePort(): Promise<number> {
   const server = createServer();
@@ -38,13 +38,13 @@ async function ready(url: string, child: ChildProcess) {
 }
 async function environment() {
   // No option to target an existing profile/server. Every test owns its children.
-  const directory = await mkdtemp(join(tmpdir(), 'engage-m5-e2e-'));
+  const directory = await mkdtemp(join(tmpdir(), 'cyrnava-workspace-e2e-'));
   const backendPort = await freePort(); const frontendPort = releaseMode ? backendPort : await freePort();
   const api = `http://127.0.0.1:${backendPort}`; const url = `http://127.0.0.1:${frontendPort}`;
   let server: ChildProcess | undefined; let vite: ChildProcess | undefined;
   let data = join(directory, 'original-data'); let logs = '';
   function launch(command: string, args: string[], cwd: string) {
-    const child = spawn(command, args, { cwd, env: { ...process.env, XDG_DATA_HOME: data, ENGAGE_API_PORT: String(backendPort) }, stdio: ['ignore', 'pipe', 'pipe'] });
+    const child = spawn(command, args, { cwd, env: { ...process.env, XDG_DATA_HOME: data, CYRNAVA_API_PORT: String(backendPort) }, stdio: ['ignore', 'pipe', 'pipe'] });
     child.stdout?.on('data', (chunk) => { logs += chunk.toString(); });
     child.stderr?.on('data', (chunk) => { logs += chunk.toString(); });
     child.on('error', (error) => { logs += error.message; });
@@ -146,6 +146,8 @@ test('appearance follows system and explicit preferences without changing notes,
     if (releaseMode) await expect.poll(() => page.locator('html').evaluate((element) => getComputedStyle(element).backgroundColor)).toBe('rgb(24, 33, 47)');
     await expect(page.locator('#root')).toBeEmpty(); release(); await page.unroute(entrypoint);
     await expect(appearance()).toHaveValue('dark');
+    await expect(page).toHaveTitle('CyrNava');
+    await expect(page.getByRole('heading', { name: 'CyrNava', exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'New note', exact: true }).click();
     const createDialog = page.getByRole('dialog');
     await createDialog.getByLabel('Note title', { exact: true }).fill('Appearance training');
@@ -399,7 +401,7 @@ test('real editing, outage recovery, safe navigation, image lifecycle and offlin
     await editor().press('Enter'); await editor().press('Control+b'); await editor().pressSequentially('Bold evidence'); await editor().press('Control+b');
     await editor().press('Enter'); await editor().pressSequentially('/image'); await editor().press('Enter');
     const png = join(env.directory, 'screenshot.png');
-    execFileSync(python, ['-c', "from PIL import Image,ImageDraw; import sys; im=Image.new('RGB',(600,140),'#20324a'); ImageDraw.Draw(im).text((25,45),'ENGAGE M5 - LOCAL RECOVERY TEST',fill='white',font_size=23); im.save(sys.argv[1])", png]);
+    execFileSync(python, ['-c', "from PIL import Image,ImageDraw; import sys; im=Image.new('RGB',(600,140),'#20324a'); ImageDraw.Draw(im).text((25,45),'CyrNava - LOCAL RECOVERY TEST',fill='white',font_size=23); im.save(sys.argv[1])", png]);
     const chooser = page.waitForEvent('filechooser');
     await page.getByRole('button', { name: 'Upload image', exact: true }).click();
     await (await chooser).setFiles(png);
@@ -530,7 +532,7 @@ test('Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documen
     await page.keyboard.type('- '); await page.keyboard.type('Ask the configured resolver.'); await page.keyboard.press('Enter');
     await page.keyboard.type('Review the cached response.'); await page.keyboard.press('Enter'); await page.keyboard.press('Enter');
     await page.keyboard.press('Control+b'); await page.keyboard.type('Synthetic learning notes only.'); await page.keyboard.press('Control+b'); await page.keyboard.press('Enter');
-    await page.keyboard.type('``` '); await page.keyboard.type('dig example.test'); await page.keyboard.press('Enter'); await page.keyboard.type('# Example syntax; ENGAGE does not execute commands.');
+    await page.keyboard.type('``` '); await page.keyboard.type('dig example.test'); await page.keyboard.press('Enter'); await page.keyboard.type('# Example syntax; CyrNava does not execute commands.');
     await saved(page);
     let tree = await getJson(`${env.api}/api/tree`);
     const owner = tree.notes.find((note: Summary) => note.title === 'DNS reference');

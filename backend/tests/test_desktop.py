@@ -20,7 +20,7 @@ DESKTOP = Path(__file__).resolve().parents[2] / "desktop"
 sys.path.insert(0, str(DESKTOP))
 import launcher  # noqa: E402
 
-spec = importlib.util.spec_from_file_location("engage_install", DESKTOP / "install.py")
+spec = importlib.util.spec_from_file_location("cyrnava_install", DESKTOP / "install.py")
 installer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(installer)
 
@@ -31,7 +31,7 @@ def setup(tmp_path):
     release = tmp_path / "installation with spaces/release"
     (release / "backend").mkdir(parents=True)
     (release / "frontend/dist/assets").mkdir(parents=True)
-    (release / "frontend/dist/index.html").write_text('<div id="root">ENGAGE</div>')
+    (release / "frontend/dist/index.html").write_text('<div id="root">CyrNava</div>')
     (release / "backend/app").symlink_to(repo / "backend/app", target_is_directory=True)
     (release / "backend/.venv").symlink_to(
         repo / "backend/.venv", target_is_directory=True
@@ -227,6 +227,12 @@ def test_data_survives_managed_restart_and_backup(setup):
 
 
 def test_installer_entries_and_failure_preserve_existing_config(tmp_path, monkeypatch):
+    assert "Name=CyrNava\n" in installer.entry(
+        tmp_path, "/usr/bin/python3", tmp_path / "cyrnava.svg"
+    )
+    assert "Name=Stop CyrNava\n" in installer.entry(
+        tmp_path, "/usr/bin/python3", tmp_path / "cyrnava.svg", stop=True
+    )
     assert "Terminal=false" in installer.entry(
         tmp_path / "space dir", "/usr/bin/python3", tmp_path / "engage logo.svg"
     )

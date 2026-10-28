@@ -10,7 +10,7 @@ from app.main import create_app
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Run ENGAGE locally with the built frontend."
+        description="Run CyrNava locally with the built frontend."
     )
     parser.add_argument("--port", type=int, default=8000)
     args = parser.parse_args()

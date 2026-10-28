@@ -1,8 +1,8 @@
-# ENGAGE v0.1.0 — release description draft
+# CyrNava v0.1.0 — release description draft
 
 **Draft only. Do not publish until the owner clears the release checklist and licensing gates.**
 
-ENGAGE's first Phase 1 release is a local cybersecurity knowledge workspace. Organize nested folders and rich-text notes, paste screenshots or upload PNG/JPEG/WebP files, and continue working offline. Notes use SQLite; validated images remain on the local filesystem outside the repository.
+CyrNava's first Phase 1 release is a local cybersecurity knowledge workspace. Organize nested folders and rich-text notes, paste screenshots or upload PNG/JPEG/WebP files, and continue working offline. Notes use SQLite; validated images remain on the local filesystem outside the repository.
 
 Includes visible autosave state, revision conflict protection, keyboard tree navigation, deliberate deletion confirmation and an offline backup/restore CLI. The built React frontend and FastAPI API run together on `127.0.0.1` without Vite. See the README for installation, usage and supported prerequisites.
 

@@ -1,7 +1,7 @@
 import { MantineProvider, localStorageColorSchemeManager, useMantineColorScheme } from '@mantine/core';
 import type { ReactNode } from 'react';
 
-// Mantine calls System "auto". This is the only persistent appearance state.
+// Mantine calls System "auto". Retain the legacy key through the CyrNava rename.
 // Keep the key/allowed values in sync with public/assets/appearance-init.js.
 export const APPEARANCE_KEY = 'engage.appearance.v1';
 const manager = localStorageColorSchemeManager({ key: APPEARANCE_KEY });

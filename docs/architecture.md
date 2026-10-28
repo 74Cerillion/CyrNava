@@ -1,6 +1,6 @@
-# Architecture of ENGAGE v0.1.0
+# Architecture of CyrNava v0.1.0
 
-ENGAGE is a local cybersecurity knowledge workspace. It does not yet implement engagement/host/vulnerability entities, integrations, search, tags or cloud services. The code is a React/TypeScript UI plus a local Python/FastAPI application, with SQLite and raster image files outside the checkout.
+CyrNava is a local cybersecurity knowledge workspace. It does not yet implement engagement/host/vulnerability entities, integrations, search, tags or cloud services. The code is a React/TypeScript UI plus a local Python/FastAPI application, with SQLite and raster image files outside the checkout.
 
 ```mermaid
 flowchart TD

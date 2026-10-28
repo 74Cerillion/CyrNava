@@ -35,6 +35,9 @@ backups/
 .engage-stage-*/
 engage-conflict-*.json
 engage-draft-*.json
+cyrnava-conflict-*.json
+cyrnava-draft-*.json
+.venv-before-cyrnava-*/
 playwright-report/
 test-results/
 .engage.lock

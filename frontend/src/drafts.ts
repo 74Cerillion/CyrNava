@@ -1,5 +1,6 @@
 import type { Note, NoteDraft } from './notes';
 
+// Keep existing unconfirmed drafts accessible after the display-name change.
 const PREFIX = 'engage.recovery.v1:';
 // A new ID per loaded page, including duplicated tabs; never shared sessionStorage.
 export const PAGE_ID = crypto.randomUUID();
@@ -58,6 +59,6 @@ export function findDrafts(noteId: string, includeAll = false): RecoveryDraft[] 
 export function downloadDraft(draft: RecoveryDraft) {
   const url = URL.createObjectURL(new Blob([JSON.stringify(draft, null, 2)], { type: 'application/json' }));
   const link = document.createElement('a'); link.href = url;
-  link.download = `engage-draft-${draft.note_id}.json`; link.click();
+  link.download = `cyrnava-draft-${draft.note_id}.json`; link.click();
   window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
