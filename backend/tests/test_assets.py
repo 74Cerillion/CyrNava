@@ -301,6 +301,8 @@ def test_m2_migration_preserves_every_existing_note_field(tmp_path):
     database.initialize()
     original = database.create("Original", [{"type": "paragraph", "content": []}], 1)
     with database.connect() as connection:
+        connection.execute("DROP TABLE template_images")
+        connection.execute("DROP TABLE templates")
         connection.execute("DROP TABLE assets")
         connection.execute("PRAGMA user_version = 2")
         before = tuple(connection.execute("SELECT * FROM notes").fetchone())
@@ -308,6 +310,6 @@ def test_m2_migration_preserves_every_existing_note_field(tmp_path):
     database.initialize()
     with database.connect() as connection:
         assert tuple(connection.execute("SELECT * FROM notes").fetchone()) == before
-        assert connection.execute("PRAGMA user_version").fetchone()[0] == 3
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == 4
         assert not connection.execute("PRAGMA foreign_key_check").fetchall()
     assert database.get(original["id"]) == original

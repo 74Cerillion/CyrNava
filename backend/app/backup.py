@@ -13,6 +13,7 @@ from app.assets import ASSET_NAME, FORMATS, MAX_BYTES, InvalidImage, validate_im
 from app.database import Database, InvalidRelationship, default_database_path
 from app.models import Note, validate_document
 from app.profile import ProfileBusy, profile_lock
+from app.templates import validate_saved_templates
 
 REPOSITORY = Path(__file__).resolve().parents[2]
 
@@ -51,7 +52,8 @@ def validate_profile(directory: Path) -> dict[str, str]:
     try:
         if connection.execute("PRAGMA integrity_check").fetchall()[0][0] != "ok":
             raise BackupError("Database integrity check failed.")
-        if connection.execute("PRAGMA user_version").fetchone()[0] != 3:
+        version = connection.execute("PRAGMA user_version").fetchone()[0]
+        if version not in (3, 4):
             raise BackupError("Unsupported schema. Upgrade ENGAGE before backing up.")
         if connection.execute("PRAGMA foreign_key_check").fetchone():
             raise BackupError("Database contains broken relationships.")
@@ -100,6 +102,11 @@ def validate_profile(directory: Path) -> dict[str, str]:
                 raise BackupError("Invalid saved note metadata.")
             validate_document(note.document_json)
             Database._check_images(connection, note.id, note.document_json)
+        if version == 4:
+            try:
+                validate_saved_templates(connection)
+            except InvalidImage:
+                raise BackupError("A template image failed validation.") from None
         return files
     finally:
         connection.close()

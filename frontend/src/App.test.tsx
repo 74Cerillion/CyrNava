@@ -1,14 +1,16 @@
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import App, { NOTE_ID_KEY } from './App';
-import { ApiError, createNote, deleteNote, getNote, updateNote } from './notes';
+import App, { NAVIGATION_KEY, NOTE_ID_KEY } from './App';
+import { ApiError, createNote, createNoteFromTemplate, deleteNote, getNote, updateNote } from './notes';
+import { captureTemplate, getTemplates } from './templates';
 import type { Note, NoteDocument } from './notes';
 import { createFolder, deleteFolder, getDeletionImpact, getTree, updateFolder } from './library';
 import type { DirectoryData, Folder } from './library';
 
 vi.mock('./notes', async (original) => ({
-  ...await original<typeof import('./notes')>(), createNote: vi.fn(), getNote: vi.fn(), updateNote: vi.fn(), deleteNote: vi.fn(),
+  ...await original<typeof import('./notes')>(), createNote: vi.fn(), createNoteFromTemplate: vi.fn(), getNote: vi.fn(), updateNote: vi.fn(), deleteNote: vi.fn(),
 }));
+vi.mock('./templates', () => ({ getTemplates: vi.fn(), captureTemplate: vi.fn(), renameTemplate: vi.fn(), deleteTemplate: vi.fn() }));
 vi.mock('./library', () => ({ getTree: vi.fn(), createFolder: vi.fn(), updateFolder: vi.fn(), deleteFolder: vi.fn(), getDeletionImpact: vi.fn() }));
 vi.mock('./components/KnowledgeEditor', () => ({
   KnowledgeEditor: ({ initialDocument, onDocumentChange, editable }: {
@@ -31,6 +33,7 @@ function makeFolder(id: string, name: string, parent_id: string | null = null): 
 beforeEach(() => {
   window.localStorage.clear(); vi.resetAllMocks();
   tree = { folders: [], notes: [] }; records = new Map(); counter = 0;
+  vi.mocked(getTemplates).mockResolvedValue([]);
   vi.stubGlobal('fetch', vi.fn().mockImplementation(async (path: string) => ({ ok: true, json: async () => path === '/api/lifecycle' ? { managed: false } : { status: 'ok' } })));
   vi.mocked(getTree).mockImplementation(async () => structuredClone(tree));
   vi.mocked(getNote).mockImplementation(async (id) => {
@@ -299,4 +302,88 @@ it('autosaves native image blocks in order and reloads them from the note API', 
   await waitFor(() => expect(screen.getByText('Saved', { exact: true })).toBeInTheDocument());
   app.unmount(); render(<App />);
   expect(await screen.findByRole('textbox', { name: 'Note editor' })).toHaveValue(JSON.stringify(document));
+});
+
+it('collapses navigation without remounting the editor, losing dirty content or making requests', async () => {
+  seed(original); render(<App />);
+  const editor = await screen.findByLabelText('Note editor');
+  const title = screen.getByLabelText('Note title');
+  fireEvent.change(title, { target: { value: 'Pending edit' } });
+  const reads = vi.mocked(getNote).mock.calls.length;
+  const trees = vi.mocked(getTree).mock.calls.length;
+  const network = vi.mocked(fetch).mock.calls.length;
+  fireEvent.click(screen.getByRole('button', { name: 'Hide navigation' }));
+  expect(screen.getByRole('button', { name: 'Show navigation' })).toHaveAttribute('aria-expanded', 'false');
+  expect(screen.queryByRole('complementary')).not.toBeInTheDocument();
+  expect(screen.getByLabelText('Note editor')).toBe(editor);
+  expect(title).toHaveValue('Pending edit');
+  expect(getNote).toHaveBeenCalledTimes(reads); expect(getTree).toHaveBeenCalledTimes(trees);
+  expect(fetch).toHaveBeenCalledTimes(network); expect(updateNote).not.toHaveBeenCalled();
+  expect(localStorage.getItem(NAVIGATION_KEY)).toBe('true');
+  fireEvent.click(screen.getByRole('button', { name: 'Show navigation' }));
+  expect(screen.getByRole('treeitem', { name: 'Note Persistent title' })).toHaveAttribute('data-open', 'true');
+  expect(screen.getByLabelText('Note editor')).toBe(editor);
+  await screen.findByText('Saved', { exact: true });
+  expect(updateNote).toHaveBeenCalledWith(original.id, 1, expect.objectContaining({ title: 'Pending edit' }), expect.any(AbortSignal));
+});
+
+it('restores the collapsed preference on reload and can immediately show navigation', async () => {
+  seed(original); localStorage.setItem(NAVIGATION_KEY, 'true'); render(<App />);
+  await screen.findByLabelText('Note editor');
+  expect(screen.queryByRole('complementary')).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: 'Show navigation' }));
+  expect(screen.getByRole('complementary')).toBeInTheDocument();
+  expect(localStorage.getItem(NAVIGATION_KEY)).toBe('false');
+});
+
+it('creates a template note in the selected folder through the note API client', async () => {
+  const template = { id: 'builtin:enumeration', name: 'Enumeration Notes', builtin: true, revision: 1 };
+  vi.mocked(getTemplates).mockResolvedValue([template]);
+  tree.folders.push(makeFolder('folder', 'Templates destination'));
+  vi.mocked(createNoteFromTemplate).mockImplementation(async (_id, _rev, title, folder_id) => {
+    const created = { ...original, id: 'from-template', title, folder_id };
+    seed(created); return created;
+  });
+  render(<App />);
+  await waitFor(() => expect(screen.queryByText('Opening library...')).not.toBeInTheDocument());
+  fireEvent.click(screen.getByRole('treeitem', { name: 'Folder Templates destination' }));
+  fireEvent.click(screen.getByRole('button', { name: 'New note' }));
+  await screen.findByRole('option', { name: 'Enumeration Notes' });
+  fireEvent.change(screen.getByLabelText('Note title'), { target: { value: 'Enumeration example' } });
+  fireEvent.change(screen.getByLabelText('Starting content'), { target: { value: template.id } });
+  fireEvent.click(screen.getByRole('button', { name: 'Create' }));
+  await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  expect(createNoteFromTemplate).toHaveBeenCalledWith(template.id, 1, 'Enumeration example', 'folder');
+  expect(createNote).not.toHaveBeenCalled();
+  expect(screen.getByLabelText('Note editor')).toHaveValue(JSON.stringify(original.document_json));
+});
+
+it('flushes dirty edits before capturing the exact acknowledged revision as a template', async () => {
+  seed(original); vi.mocked(captureTemplate).mockResolvedValue({ id: 't', name: 'My template', builtin: false, revision: 1 });
+  render(<App />);
+  const editor = await screen.findByLabelText('Note editor');
+  fireEvent.change(screen.getByLabelText('Note title'), { target: { value: 'Confirmed before capture' } });
+  fireEvent.click(screen.getByRole('button', { name: 'Save as template' }));
+  const dialog = await screen.findByRole('dialog');
+  expect(updateNote).toHaveBeenCalledOnce();
+  fireEvent.change(within(dialog).getByLabelText('Template name'), { target: { value: 'My template' } });
+  fireEvent.click(within(dialog).getByRole('button', { name: 'Save template' }));
+  await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
+  expect(captureTemplate).toHaveBeenCalledWith('My template', original.id, 2);
+  expect(screen.getByLabelText('Note editor')).toBe(editor);
+  expect(screen.getByLabelText('Note title')).toHaveValue('Confirmed before capture');
+});
+
+it('retains the template name when capture fails and preserves blank creation if listing fails', async () => {
+  seed(original); vi.mocked(captureTemplate).mockRejectedValue(new ApiError('Source revision changed', 409));
+  render(<App />); await screen.findByLabelText('Note editor');
+  fireEvent.click(screen.getByRole('button', { name: 'Save as template' }));
+  fireEvent.change(await screen.findByLabelText('Template name'), { target: { value: 'Keep this name' } });
+  fireEvent.click(screen.getByRole('button', { name: 'Save template' }));
+  expect(await screen.findByRole('alert')).toHaveTextContent('Source revision changed');
+  expect(screen.getByLabelText('Template name')).toHaveValue('Keep this name');
+  fireEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+  vi.mocked(getTemplates).mockRejectedValue(new Error('offline'));
+  await createThroughDialog('note', 'Still blank');
+  expect(createNote).toHaveBeenCalledWith(expect.objectContaining({ document_json: [{ type: 'paragraph', content: [] }] }));
 });

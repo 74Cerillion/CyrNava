@@ -7,19 +7,26 @@ import { DirectoryTree } from './components/DirectoryTree';
 import type { ManagementAction } from './components/DirectoryTree';
 import { ManagementDialog } from './components/ManagementDialog';
 import type { DialogState } from './components/ManagementDialog';
-import { createNote, deleteNote, getNote, updateNote } from './notes';
+import { createNote, createNoteFromTemplate, deleteNote, getNote, updateNote } from './notes';
 import type { Note } from './notes';
 import { createFolder, deleteFolder, getDeletionImpact, getTree, updateFolder } from './library';
 import type { DirectoryData } from './library';
 import { ancestorIds, itemKey } from './tree';
 import type { TreeItem } from './tree';
 import { useLifecycle } from './hooks/useLifecycle';
+import { captureTemplate } from './templates';
+import type { TemplateSummary } from './templates';
+import { TemplateManager } from './components/TemplateManager';
 
 export const NOTE_ID_KEY = 'engage.note-id.v1';
+export const NAVIGATION_KEY = 'engage.navigation-collapsed.v1';
 const emptyLibrary: DirectoryData = { folders: [], notes: [] };
 type Health = 'checking' | 'online' | 'offline';
 
 export default function App() {
+  const [navigationCollapsed, setNavigationCollapsed] = useState(() => {
+    try { return localStorage.getItem(NAVIGATION_KEY) === 'true'; } catch { return false; }
+  });
   const lifecycleProblem = useLifecycle();
   const [health, setHealth] = useState<Health>('checking');
   const [data, setData] = useState<DirectoryData>(emptyLibrary);
@@ -31,6 +38,8 @@ export default function App() {
   const [working, setWorking] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [dialog, setDialog] = useState<DialogState | null>(null);
+  const [templateManager, setTemplateManager] = useState(false);
+  const [templateNotice, setTemplateNotice] = useState<string | null>(null);
   const [loadAttempt, setLoadAttempt] = useState(0);
   const editor = useRef<NoteHandle>(null);
   const operation = useRef(false);
@@ -102,7 +111,7 @@ export default function App() {
 
   async function perform(action: () => Promise<void>) {
     if (operation.current) return;
-    operation.current = true; setWorking(true); setError(null);
+    operation.current = true; setWorking(true); setError(null); setTemplateNotice(null);
     try {
       if (editor.current && !await editor.current.flush()) throw new Error('Cannot leave this note until pending edits and draft recovery are resolved. Your draft remains available; resolve the save error or recovery choice first.');
       await action();
@@ -112,7 +121,7 @@ export default function App() {
   }
 
   function selectItem(item: TreeItem) {
-    if (working || dialog) return;
+    if (working || dialog || templateManager) return;
     if (item.kind === 'folder') { setSelected(itemKey(item)); return; }
     if (note?.id === item.value.id) { setSelected(itemKey(item)); return; }
     void perform(async () => {
@@ -132,7 +141,7 @@ export default function App() {
     void perform(async () => { setDialog({ kind, parent }); });
   }
   function manage(kind: ManagementAction, target: TreeItem) {
-    if (working || dialog) return;
+    if (working || dialog || templateManager) return;
     setSelected(itemKey(target));
     void perform(async () => {
       const fresh = target.kind === 'note' ? await getNote(target.value.id) : undefined;
@@ -148,7 +157,7 @@ export default function App() {
     try { return await refreshTree(); }
     catch (failure) { throw new Error(`The change completed, but the library refresh failed. Use Refresh library. ${failure instanceof Error ? failure.message : ''}`, { cause: failure }); }
   }
-  function submit(value: string) {
+  function submit(value: string, template?: TemplateSummary) {
     if (!dialog) return;
     const state = dialog;
     void perform(async () => {
@@ -157,9 +166,13 @@ export default function App() {
         setSelected(`folder:${created.id}`);
         const tree = await refreshAfterChange(); reveal(tree, created.id);
       } else if (state.kind === 'new-note') {
-        const created = await createNote({ title: value, document_json: createEmptyDocument(), folder_id: state.parent });
+        const created = template ? await createNoteFromTemplate(template.id, template.revision, value, state.parent)
+          : await createNote({ title: value, document_json: createEmptyDocument(), folder_id: state.parent });
         setNote(created); remember(created.id); setSelected(`note:${created.id}`);
         const tree = await refreshAfterChange(); reveal(tree, created.folder_id);
+      } else if (state.kind === 'save-template') {
+        await captureTemplate(value, state.note!.id, state.note!.revision);
+        setDialog(null); setTemplateNotice('Template saved. It is available in New note and Manage templates.');
       } else if (state.target) {
         if (state.target.kind === 'folder') {
           if (state.kind === 'delete') await deleteFolder(state.impact!);
@@ -188,10 +201,10 @@ export default function App() {
     });
   }
 
-  const blocked = working || dialog !== null || loading || lifecycleProblem !== null;
-  return <div className="workspace">
+  const blocked = working || dialog !== null || templateManager || loading || lifecycleProblem !== null;
+  return <div className="workspace" data-navigation-collapsed={navigationCollapsed}>
     <a className="skip-link" href="#note">Skip to note</a>
-    <aside className="sidebar" aria-label="Workspace navigation">
+    <aside id="workspace-navigation" className="sidebar" aria-label="Workspace navigation" hidden={navigationCollapsed}>
       <p className="eyebrow">LOCAL WORKSPACE · v{version}</p><h1>ENGAGE</h1>
       <button className="secondary root-button" disabled={blocked} onClick={() => setSelected(null)}>Workspace root</button>
       <div className="library-actions">
@@ -213,16 +226,30 @@ export default function App() {
       <p className="hint"><a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></p>
     </aside>
     <main id="note" tabIndex={-1}>
+      <div className="workspace-toolbar">
+        <button className="secondary" aria-controls="workspace-navigation" aria-expanded={!navigationCollapsed}
+          onClick={() => {
+            const next = !navigationCollapsed; setNavigationCollapsed(next);
+            try { localStorage.setItem(NAVIGATION_KEY, String(next)); } catch { /* Preference remains usable for this page. */ }
+          }}>{navigationCollapsed ? 'Show navigation' : 'Hide navigation'}</button>
+        <button className="secondary" disabled={blocked} onClick={() => void perform(async () => { setTemplateManager(true); })}>Manage templates</button>
+        <button className="secondary" disabled={blocked || !note} onClick={() => note && void perform(async () => {
+          const revision = editor.current!.getRevision();
+          setDialog({ kind: 'save-template', parent: null, note: { ...note, revision } });
+        })}>Save as template</button>
+      </div>
+      {templateNotice && <p role="status">{templateNotice}</p>}
       {lifecycleProblem && <p role="alert">{lifecycleProblem}</p>}
       {working && <p role="status">Saving pending changes or updating the library...</p>}
       {error && !dialog && <div role="alert"><p>{error}</p>
         {!note && <button onClick={() => { setLoading(true); setError(null); setLoadAttempt((n) => n + 1); }}>Retry opening library</button>}
       </div>}
       {loading ? <p role="status">Opening library...</p> : note ?
-        <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} locked={working || dialog !== null || lifecycleProblem !== null} onSaved={noteSaved} onRecovered={(saved) => { setNote(saved); setEditorEpoch((n) => n + 1); setError(null); noteSaved(); }} />
+        <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} locked={working || dialog !== null || templateManager || lifecycleProblem !== null} onSaved={noteSaved} onRecovered={(saved) => { setNote(saved); setEditorEpoch((n) => n + 1); setError(null); noteSaved(); }} />
         : <header><h2>Select or create a note</h2><p>Choose a note in the library, or use New folder and New note to start.</p></header>}
     </main>
     {dialog && <ManagementDialog state={dialog} data={data} busy={working} error={error}
       onClose={() => { if (!working) { setDialog(null); setError(null); } }} onSubmit={submit} />}
+    {templateManager && <TemplateManager onClose={() => setTemplateManager(false)} />}
   </div>;
 }

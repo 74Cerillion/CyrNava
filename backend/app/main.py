@@ -24,17 +24,23 @@ from app.lifecycle import Sessions, install_lifecycle
 from app.models import (
     CreateFolder,
     CreateNote,
+    CreateTemplate,
     DeleteFolder,
     DeleteNote,
+    DeleteTemplate,
     DeletionImpact,
     DirectoryTree,
     Folder,
+    InstantiateTemplate,
     Note,
+    RenameTemplate,
+    TemplateSummary,
     UpdateFolder,
     UpdateNote,
 )
 from app.profile import profile_lock
 from app.release import serve_frontend
+from app.templates import ProtectedTemplate, TemplateNotFound, TemplateStore
 
 
 def create_app(
@@ -51,6 +57,9 @@ def create_app(
             database.initialize()
             application.state.database = database
             application.state.assets = AssetStore(database)
+            application.state.templates = TemplateStore(
+                database, application.state.assets
+            )
             application.state.assets.cleanup()
             application.state.upload_slots = asyncio.Semaphore(2)
             yield
@@ -92,6 +101,74 @@ def create_app(
     @application.exception_handler(DeletionConflict)
     async def deletion_conflict(_request: Request, error: DeletionConflict):
         return JSONResponse(status_code=409, content={"detail": str(error)})
+
+    @application.exception_handler(TemplateNotFound)
+    async def template_missing(_request: Request, _error: TemplateNotFound):
+        return JSONResponse(status_code=404, content={"detail": "Template not found"})
+
+    @application.exception_handler(ProtectedTemplate)
+    async def template_protected(_request: Request, _error: ProtectedTemplate):
+        return JSONResponse(
+            status_code=403,
+            content={"detail": "Built-in templates cannot be changed or deleted"},
+        )
+
+    @application.exception_handler(RevisionConflict)
+    async def template_conflict(_request: Request, _error: RevisionConflict):
+        return JSONResponse(
+            status_code=409,
+            content={
+                "detail": "The source note or template changed. "
+                "Refresh before trying again."
+            },
+        )
+
+    @application.exception_handler(NoteNotFound)
+    async def source_missing(_request: Request, _error: NoteNotFound):
+        return JSONResponse(
+            status_code=404, content={"detail": "Source note not found"}
+        )
+
+    @application.exception_handler(InvalidImage)
+    async def template_image_invalid(_request: Request, _error: InvalidImage):
+        return JSONResponse(
+            status_code=422,
+            content={
+                "detail": "A template image is invalid; no template or note was created"
+            },
+        )
+
+    @application.get("/api/templates", response_model=list[TemplateSummary])
+    def list_templates(request: Request):
+        return request.app.state.templates.list()
+
+    @application.post("/api/templates", response_model=TemplateSummary, status_code=201)
+    def capture_template(body: CreateTemplate, request: Request):
+        return request.app.state.templates.capture(
+            body.name, str(body.source_note_id), body.source_revision
+        )
+
+    @application.patch("/api/templates/{template_id}", response_model=TemplateSummary)
+    def rename_template(template_id: str, body: RenameTemplate, request: Request):
+        return request.app.state.templates.rename(template_id, body.revision, body.name)
+
+    @application.delete("/api/templates/{template_id}", status_code=204)
+    def delete_template(template_id: str, body: DeleteTemplate, request: Request):
+        request.app.state.templates.delete(template_id, body.revision)
+        return Response(status_code=204)
+
+    @application.post(
+        "/api/templates/{template_id}/notes", response_model=Note, status_code=201
+    )
+    def instantiate_template(
+        template_id: str, body: InstantiateTemplate, request: Request
+    ):
+        return request.app.state.templates.instantiate(
+            template_id,
+            body.revision,
+            body.title,
+            str(body.folder_id) if body.folder_id else None,
+        )
 
     @application.get("/api/tree", response_model=DirectoryTree)
     def get_tree(request: Request):

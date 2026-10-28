@@ -8,7 +8,7 @@ import { KnowledgeEditor } from './KnowledgeEditor';
 import { deferDraft, downloadDraft, findDrafts } from '../drafts';
 import type { RecoveryDraft } from '../drafts';
 
-export interface NoteHandle { flush: () => Promise<boolean> }
+export interface NoteHandle { flush: () => Promise<boolean>; getRevision: () => number }
 interface Props { note: Note; locked?: boolean; onSaved?: (note: Note) => void; onRecovered?: (note: Note) => void; ref?: Ref<NoteHandle>; recovered?: RecoveryDraft }
 
 export function PersistentNote({ ref, ...props }: Props) {
@@ -19,7 +19,8 @@ export function PersistentNote({ ref, ...props }: Props) {
   const [choice, setChoice] = useState<RecoveryDraft | null | undefined>(undefined);
   const editor = useRef<NoteHandle>(null);
   const pending = recovery.drafts.length > 0 && choice === undefined;
-  useImperativeHandle(ref, () => ({ flush: () => editor.current?.flush() || Promise.resolve(false) }), []);
+  useImperativeHandle(ref, () => ({ flush: () => editor.current?.flush() || Promise.resolve(false),
+    getRevision: () => editor.current?.getRevision() ?? props.note.revision }), [props.note.revision]);
   if (pending) return <section aria-label="Draft recovery">
     <h2>Recover unsaved edits</h2>
     <p>SQLite still holds the saved note. These browser drafts may contain unconfirmed edits from this or another tab. Nothing is overwritten until you choose a draft and it saves with its original revision.</p>
@@ -49,10 +50,11 @@ function NoteEditor({ note, locked = false, onSaved, onRecovered, ref, recovered
   }
   const editor = useRef<EditorHandle>(null);
   const flushSave = save.flush;
+  const getRevision = save.getRevision;
   useImperativeHandle(ref, () => ({ flush: async () => {
     if (editor.current && !await editor.current.flushUploads()) return false;
     return flushSave();
-  } }), [flushSave]);
+  }, getRevision }), [flushSave, getRevision]);
   return (
     <>
       <header>

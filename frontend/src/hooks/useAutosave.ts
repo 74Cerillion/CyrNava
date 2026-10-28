@@ -165,10 +165,11 @@ export function useAutosave(note: Note, onSaved?: (note: Note) => void, recovere
   const status: SaveStatus = error ? 'Save Error'
     : !dirty ? 'Saved'
       : busy && savingVersion === draft.version ? 'Saving...' : 'Unsaved Changes';
+  const getRevision = useCallback(() => acknowledgedRevision.current, []);
 
   return {
     title: draft.title, document: draft.document_json, status, error, recoveryError, revision,
-    changeTitle, changeDocument, flush,
+    changeTitle, changeDocument, flush, getRevision,
     retry: clearTransientError,
   };
 }

@@ -121,3 +121,35 @@ class DeleteFolder(BaseModel):
 class DeleteNote(BaseModel):
     model_config = ConfigDict(extra="forbid")
     revision: Annotated[StrictInt, Field(ge=1)]
+
+
+class TemplateSummary(BaseModel):
+    id: str
+    name: str
+    builtin: bool
+    revision: int
+
+
+class CreateTemplate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    name: Title
+    source_note_id: UUID
+    source_revision: Annotated[StrictInt, Field(ge=1)]
+
+
+class RenameTemplate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    name: Title
+    revision: Annotated[StrictInt, Field(ge=1)]
+
+
+class InstantiateTemplate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    title: Title
+    folder_id: UUID | None = None
+    revision: Annotated[StrictInt, Field(ge=1)]
+
+
+class DeleteTemplate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    revision: Annotated[StrictInt, Field(ge=1)]

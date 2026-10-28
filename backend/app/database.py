@@ -68,7 +68,7 @@ class Database:
             # Serializes first startup/schema changes across local processes.
             connection.execute("BEGIN IMMEDIATE")
             version = connection.execute("PRAGMA user_version").fetchone()[0]
-            if version > 3:
+            if version > 4:
                 raise RuntimeError("Database schema is newer than this ENGAGE version")
             if version < 2:
                 connection.execute("""
@@ -121,6 +121,31 @@ class Database:
                 """)
                 connection.execute("CREATE INDEX assets_note ON assets(note_id)")
                 connection.execute("PRAGMA user_version = 3")
+            if version < 4:
+                # Additive only: existing notes/assets and their relationships
+                # are not rebuilt or rewritten. Image snapshots travel with DB backups.
+                connection.execute("""
+                    CREATE TABLE templates (
+                        id TEXT PRIMARY KEY,
+                        name TEXT NOT NULL CHECK (length(name) BETWEEN 1 AND 200),
+                        document_json TEXT NOT NULL CHECK (json_valid(document_json)),
+                        format_version INTEGER NOT NULL CHECK (format_version = 1),
+                        revision INTEGER NOT NULL CHECK (revision >= 1),
+                        created_at TEXT NOT NULL,
+                        updated_at TEXT NOT NULL
+                    )
+                """)
+                connection.execute("""
+                    CREATE TABLE template_images (
+                        template_id TEXT NOT NULL
+                            REFERENCES templates(id) ON DELETE CASCADE,
+                        asset_id TEXT NOT NULL,
+                        mime_type TEXT NOT NULL,
+                        data BLOB NOT NULL CHECK (length(data) BETWEEN 1 AND 10485760),
+                        PRIMARY KEY (template_id, asset_id)
+                    )
+                """)
+                connection.execute("PRAGMA user_version = 4")
 
     @staticmethod
     def _note(row: sqlite3.Row) -> dict:

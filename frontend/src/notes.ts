@@ -32,6 +32,12 @@ export function createNote(draft: NoteDraft & { folder_id?: string | null }): Pr
   });
 }
 
+export function createNoteFromTemplate(templateId: string, revision: number, title: string, folder_id: string | null): Promise<Note> {
+  return request(`/api/templates/${encodeURIComponent(templateId)}/notes`, {
+    method: 'POST', body: JSON.stringify({ title, folder_id, revision }),
+  });
+}
+
 export function getNote(id: string, signal?: AbortSignal): Promise<Note> {
   return request(`/api/notes/${encodeURIComponent(id)}`, { method: 'GET' }, signal);
 }

@@ -91,7 +91,7 @@ def test_mixed_uploaded_image_restart_and_backup(database_path, tmp_path):
             == document
         )
     with Database(database_path).connect() as connection:
-        assert connection.execute("PRAGMA user_version").fetchone()[0] == 3
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == 4
         assert (
             json.loads(
                 connection.execute("SELECT document_json FROM notes").fetchone()[0]

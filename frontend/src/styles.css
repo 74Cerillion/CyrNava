@@ -3,6 +3,12 @@
 body { margin: 0; }
 .workspace { display: grid; grid-template-columns: 300px minmax(0, 1fr); min-height: 100vh; }
 .sidebar { padding: 32px 24px; background: #f5f7fa; border-right: 1px solid #dce2e9; }
+.sidebar[hidden] { display: none; }
+.workspace[data-navigation-collapsed="true"] { grid-template-columns: minmax(0, 1fr); }
+.workspace-toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.workspace-toolbar button { margin-top: 0; }
+.template-choice { margin-top: 18px; }
+.template-choice select, #managed-template { margin-bottom: 12px; }
 .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: #475569; }
 h1 { font-size: 21px; line-height: 1.4; margin: 16px 0 32px; }
 nav a { display: block; padding: 12px; border-radius: 6px; background: #e1eaf5; color: #1e426e; text-decoration: none; font-weight: 600; }

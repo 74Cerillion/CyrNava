@@ -2,7 +2,7 @@
 
 **v0.1.0 release candidate · Phase 1 local knowledge workspace · Linux**
 
-ENGAGE organizes cybersecurity learning and documentation into folders and rich-text notes on your computer. SQLite stores native note JSON; local files store images. There are no runtime accounts, cloud services or external API calls. Engagement, host and vulnerability management are future work, not current features.
+ENGAGE organizes cybersecurity learning and documentation into folders and rich-text notes on your computer. SQLite stores native documents and templates; local files store note images. There are no runtime accounts, cloud services or external API calls. Engagement, host and vulnerability management are future work, not current features.
 
 **Release approval and the original-code license are pending.** This checkout is a review candidate, not an announced public release. See [release checklist](docs/release-checklist.md).
 
@@ -13,6 +13,20 @@ ENGAGE organizes cybersecurity learning and documentation into folders and rich-
 - Persistent clipboard screenshots and PNG/JPEG/WebP uploads.
 - Debounced autosave, visible status, stale-revision protection and deliberate conflict recovery.
 - Local SQLite/filesystem persistence and verified offline backup/restore.
+- Collapsible navigation with a browser-local preference, preserving the open editor and pending edits.
+- Five built-in pentesting note templates plus reusable custom templates with independent screenshot copies.
+
+## Navigation and templates
+
+Use **Hide navigation** above the editor to give the note more space; **Show navigation** stays available in the same place. The button supports keyboard activation and remembers the preference for this browser origin. Collapsing does not reload the note or trigger a save. Autosave continues normally. If browser storage is unavailable, the control still works for the current page.
+
+**New note** still defaults to **Blank note**. Choose a template under **Starting content** for General Penetration Testing, Enumeration, Exploitation, Privilege Escalation, or HTB / TryHackMe Lab notes. The selected folder is used exactly as for a blank note. Templates contain headings, empty paragraphs and, where appropriate, empty code blocks; ENGAGE never executes their contents.
+
+To reuse your own structure, open the source note, choose **Save as template**, enter a name and save. Pending uploads and edits must save successfully first. The template captures that confirmed revision, including its formatting and independent image snapshots. Creating another note gives it new block IDs and new owned image files. Later edits or deletion of the source note, template, or another generated note do not change the others.
+
+**Manage templates** lists all templates and allows custom rename/delete with deletion confirmation. Built-ins cannot be renamed or deleted. To change a custom template's content, create a new template from an edited note, then optionally delete the old one. Names need not be unique. A custom template supports up to **50 MiB total copied images**; existing per-image and document limits still apply. Failures stay visible and do not create partial notes/templates.
+
+Custom templates are private application data in the existing external SQLite database, included in offline backup/restore. The first start of this code adds schema version 4; it does not rewrite existing notes or assets. Before upgrading an everyday profile, stop ENGAGE and take a backup using [BACKUP_RESTORE.md](BACKUP_RESTORE.md). Older application code cannot open schema 4: keep a pre-upgrade backup if rollback may be needed. See the [FF-006 / FF-018 engineering report](FEATURES_FF006_FF018_REPORT.md) for implementation and verification details.
 
 ## Screenshots
 

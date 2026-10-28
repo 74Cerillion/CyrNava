@@ -84,6 +84,121 @@ async function getJson(url: string) {
 interface Summary { id: string; title: string }
 interface AssetBlock { type: string; props?: { url?: string } }
 
+test('navigation preference and reusable templates preserve independent rich notes and screenshots', async ({ page }, info) => {
+  const env = await environment();
+  const external: string[] = [];
+  await page.route('**/*', (route) => {
+    if (new URL(route.request().url()).hostname !== '127.0.0.1') { external.push(route.request().url()); return route.abort(); }
+    return route.continue();
+  });
+  const editor = () => page.getByRole('region', { name: 'Note editor' }).getByRole('textbox');
+  async function fromTemplate(title: string, template: string) {
+    await page.getByRole('button', { name: 'New note', exact: true }).click();
+    const dialog = page.getByRole('dialog');
+    await dialog.getByRole('textbox', { name: 'Note title', exact: true }).fill(title);
+    await dialog.getByLabel('Starting content', { exact: true }).selectOption(template);
+    await dialog.getByRole('button', { name: 'Create', exact: true }).click();
+    await expect(dialog).toBeHidden(); await saved(page);
+  }
+  async function atEnd() {
+    // Establish a real DOM caret; subsequent edits use actual keyboard input.
+    await editor().evaluate((element) => {
+      (element as HTMLElement).focus();
+      const range = document.createRange(); range.selectNodeContents(element); range.collapse(false);
+      const selection = window.getSelection()!; selection.removeAllRanges(); selection.addRange(range);
+    });
+  }
+  try {
+    await env.start(); await page.goto(env.url); await create(page, 'note', 'Blank still works');
+    await expect(editor().getByRole('heading')).toHaveCount(0);
+    const instance = await editor().elementHandle();
+    const expanded = (await page.getByRole('main').boundingBox())!.width;
+    await editor().click(); await page.keyboard.type('Unsaved navigation draft');
+    await page.getByRole('button', { name: 'Hide navigation', exact: true }).focus();
+    await page.keyboard.press('Enter');
+    await expect(page.getByRole('complementary')).toBeHidden();
+    await expect(page.getByRole('button', { name: 'Show navigation', exact: true })).toHaveAttribute('aria-expanded', 'false');
+    expect((await page.getByRole('main').boundingBox())!.width).toBeGreaterThan(expanded);
+    expect(await instance!.evaluate((node) => node.isConnected)).toBe(true);
+    await expect(editor()).toContainText('Unsaved navigation draft');
+    await saved(page); await page.reload(); await saved(page);
+    await expect(page.getByRole('complementary')).toBeHidden();
+    await expect(editor()).toContainText('Unsaved navigation draft');
+    await page.getByRole('button', { name: 'Show navigation', exact: true }).click();
+    await create(page, 'folder', 'Template training');
+    await fromTemplate('Enumeration source', 'builtin:enumeration');
+    for (const section of ['Target Information', 'Commands Executed', 'Screenshots / Evidence', 'Next Steps']) {
+      await expect(editor().getByRole('heading', { name: section, exact: true })).toBeVisible();
+    }
+    await atEnd(); await page.keyboard.type('Synthetic local technical documentation.');
+    await page.keyboard.press('Enter'); await page.keyboard.press('Control+b');
+    await page.keyboard.type('Bold evidence'); await page.keyboard.press('Control+b');
+    await page.keyboard.press('Enter'); await page.keyboard.type('/image');
+    await page.locator('.bn-suggestion-menu').getByText('Image', { exact: true }).click();
+    const png = join(env.directory, 'template-screenshot.png');
+    execFileSync(python, ['-c', "from PIL import Image; import sys; Image.new('RGB',(320,120),'#20324a').save(sys.argv[1])", png]);
+    const chooser = page.waitForEvent('filechooser');
+    await page.getByRole('button', { name: 'Upload image', exact: true }).click(); await (await chooser).setFiles(png);
+    await expect.poll(() => editor().locator('img').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth === 320)).toBe(true);
+    await saved(page);
+    const tree = await getJson(`${env.api}/api/tree`);
+    const source = tree.notes.find((row: Summary) => row.title === 'Enumeration source');
+    const before = await getJson(`${env.api}/api/notes/${source.id}`);
+    expect(JSON.stringify(before.document_json)).toContain('"bold":true');
+    await env.stopBackend(); await env.startBackend(); await page.reload(); await saved(page);
+    await expect(editor().locator('strong')).toContainText('Bold evidence');
+    await expect.poll(() => editor().locator('img').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth === 320)).toBe(true);
+    expect(await getJson(`${env.api}/api/notes/${source.id}`)).toEqual(before);
+    await page.getByRole('button', { name: 'Save as template', exact: true }).click();
+    await page.getByRole('dialog').getByLabel('Template name', { exact: true }).fill('Reusable enumeration');
+    await page.getByRole('dialog').getByRole('button', { name: 'Save template', exact: true }).click();
+    await expect(page.getByRole('dialog')).toBeHidden();
+    const template = (await getJson(`${env.api}/api/templates`)).find((row: { name: string }) => row.name === 'Reusable enumeration');
+    await fromTemplate('Independent copy', template.id);
+    await expect(editor().locator('strong')).toContainText('Bold evidence');
+    await expect.poll(() => editor().locator('img').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth === 320)).toBe(true);
+    const copied = (await getJson(`${env.api}/api/tree`)).notes.find((row: Summary) => row.title === 'Independent copy');
+    const copy = await getJson(`${env.api}/api/notes/${copied.id}`);
+    expect(copy.folder_id).toBe(before.folder_id);
+    expect(copy.document_json[0].id).not.toBe(before.document_json[0].id);
+    expect(copy.document_json.find((block: AssetBlock) => block.type === 'image').props.url)
+      .not.toBe(before.document_json.find((block: AssetBlock) => block.type === 'image').props.url);
+    await page.getByRole('textbox', { name: 'Note title', exact: true }).fill('Independently edited copy'); await saved(page);
+    expect(await getJson(`${env.api}/api/notes/${source.id}`)).toEqual(before);
+    await fromTemplate('Second independent copy', template.id);
+    await expect(editor()).not.toContainText('Unsaved navigation draft');
+    await expect(editor()).toContainText('Synthetic local technical documentation.');
+    await page.getByRole('treeitem', { name: 'Note Enumeration source', exact: true }).click(); await saved(page);
+    await page.getByRole('textbox', { name: 'Note title', exact: true }).fill('Independently edited source'); await saved(page);
+    expect((await getJson(`${env.api}/api/notes/${copied.id}`)).title).toBe('Independently edited copy');
+    await page.getByRole('button', { name: 'Manage templates', exact: true }).click();
+    const manager = page.getByRole('dialog');
+    await manager.getByLabel('Available templates', { exact: true }).selectOption('builtin:enumeration');
+    await expect(manager.getByRole('button', { name: 'Delete template', exact: true })).toHaveCount(0);
+    await manager.getByLabel('Available templates', { exact: true }).selectOption(template.id);
+    await manager.getByLabel('Template name', { exact: true }).fill('Renamed enumeration');
+    await manager.getByRole('button', { name: 'Rename template', exact: true }).click();
+    await expect(manager.getByRole('option', { name: 'Renamed enumeration', exact: true })).toHaveCount(1);
+    await manager.getByRole('button', { name: 'Delete template', exact: true }).click();
+    await manager.getByRole('button', { name: 'Delete template permanently', exact: true }).click();
+    await expect(manager.getByRole('option', { name: 'Renamed enumeration', exact: true })).toHaveCount(0);
+    await manager.getByRole('button', { name: 'Close templates', exact: true }).click();
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.getByRole('button', { name: 'Hide navigation', exact: true }).click();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await expect(editor()).toContainText('Bold evidence');
+    await page.screenshot({ path: info.outputPath('templates-mobile-collapsed.png'), fullPage: true });
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.screenshot({ path: info.outputPath('templates-desktop-collapsed.png'), fullPage: true });
+    await page.getByRole('button', { name: 'Show navigation', exact: true }).click();
+    await page.screenshot({ path: info.outputPath('templates-desktop-expanded.png'), fullPage: true });
+    expect(external).toEqual([]);
+  } finally {
+    await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs());
+    await rm(env.directory, { recursive: true, force: true });
+  }
+});
+
 test('real editing, outage recovery, safe navigation, image lifecycle and offline restoration drill', async ({ page }, info) => {
   const env = await environment();
   const external: string[] = [];
