@@ -17,6 +17,8 @@ import { useLifecycle } from './hooks/useLifecycle';
 import { captureTemplate } from './templates';
 import type { TemplateSummary } from './templates';
 import { TemplateManager } from './components/TemplateManager';
+import { useComputedColorScheme } from '@mantine/core';
+import { AppearanceControl, AppearanceProvider } from './appearance';
 
 export const NOTE_ID_KEY = 'engage.note-id.v1';
 export const NAVIGATION_KEY = 'engage.navigation-collapsed.v1';
@@ -24,6 +26,11 @@ const emptyLibrary: DirectoryData = { folders: [], notes: [] };
 type Health = 'checking' | 'online' | 'offline';
 
 export default function App() {
+  return <AppearanceProvider><Workspace /></AppearanceProvider>;
+}
+
+function Workspace() {
+  const theme = useComputedColorScheme('light', { getInitialValueInEffect: false });
   const [navigationCollapsed, setNavigationCollapsed] = useState(() => {
     try { return localStorage.getItem(NAVIGATION_KEY) === 'true'; } catch { return false; }
   });
@@ -227,6 +234,7 @@ export default function App() {
     </aside>
     <main id="note" tabIndex={-1}>
       <div className="workspace-toolbar">
+        <AppearanceControl />
         <button className="secondary" aria-controls="workspace-navigation" aria-expanded={!navigationCollapsed}
           onClick={() => {
             const next = !navigationCollapsed; setNavigationCollapsed(next);
@@ -245,7 +253,7 @@ export default function App() {
         {!note && <button onClick={() => { setLoading(true); setError(null); setLoadAttempt((n) => n + 1); }}>Retry opening library</button>}
       </div>}
       {loading ? <p role="status">Opening library...</p> : note ?
-        <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} locked={working || dialog !== null || templateManager || lifecycleProblem !== null} onSaved={noteSaved} onRecovered={(saved) => { setNote(saved); setEditorEpoch((n) => n + 1); setError(null); noteSaved(); }} />
+        <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} theme={theme} locked={working || dialog !== null || templateManager || lifecycleProblem !== null} onSaved={noteSaved} onRecovered={(saved) => { setNote(saved); setEditorEpoch((n) => n + 1); setError(null); noteSaved(); }} />
         : <header><h2>Select or create a note</h2><p>Choose a note in the library, or use New folder and New note to start.</p></header>}
     </main>
     {dialog && <ManagementDialog state={dialog} data={data} busy={working} error={error}

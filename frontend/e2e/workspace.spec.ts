@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import type { Page } from '@playwright/test';
+import type { Locator, Page } from '@playwright/test';
 import { spawn, execFileSync } from 'node:child_process';
 import type { ChildProcess } from 'node:child_process';
 import { mkdtemp, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
@@ -83,6 +83,188 @@ async function getJson(url: string) {
 // The type mirrors the API only; editor internals remain inside the product adapter.
 interface Summary { id: string; title: string }
 interface AssetBlock { type: string; props?: { url?: string } }
+
+async function readable(locator: Locator, minimum = 4.5, pseudo?: string) {
+  // Measure actual computed foreground/background, including transparent ancestors.
+  const ratio = await locator.evaluate((element, pseudo) => {
+    const rgb = (value: string) => value.match(/[\d.]+/g)!.map(Number);
+    const luminance = (values: number[]) => values.slice(0, 3).map((v) => {
+      const s = v / 255; return s <= 0.04045 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+    }).reduce((sum, v, i) => sum + v * [0.2126, 0.7152, 0.0722][i], 0);
+    let surface: Element | null = element;
+    let background = [255, 255, 255];
+    while (surface) {
+      const value = rgb(getComputedStyle(surface).backgroundColor);
+      if (value.length === 3 || value[3] === 1) { background = value; break; }
+      surface = surface.parentElement;
+    }
+    const style = getComputedStyle(element, pseudo);
+    const foreground = rgb(style.color);
+    const alpha = (foreground[3] ?? 1) * Number(style.opacity);
+    const effective = foreground.slice(0, 3).map((v, i) => v * alpha + background[i] * (1 - alpha));
+    const levels = [luminance(effective), luminance(background)].sort((a, b) => a - b);
+    return (levels[1] + 0.05) / (levels[0] + 0.05);
+  }, pseudo);
+  expect(ratio, `Text contrast for ${await locator.getAttribute('class')}`).toBeGreaterThanOrEqual(minimum);
+}
+
+test('appearance follows system and explicit preferences without changing notes, templates or autosave', async ({ page }, info) => {
+  const env = await environment();
+  const external: string[] = []; const errors: string[] = []; const writes: string[] = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  page.on('request', (request) => { if (request.method() === 'PATCH' && request.url().includes('/api/notes/')) writes.push(request.url()); });
+  await page.route('**/*', (route) => {
+    if (new URL(route.request().url()).hostname !== '127.0.0.1') { external.push(route.request().url()); return route.abort(); }
+    return route.continue();
+  });
+  // Stall the React entrypoint to verify the blocking bootstrap independently.
+  let release!: () => void;
+  const gate = new Promise<void>((done) => { release = done; });
+  const entrypoint = /\/(?:assets\/index-[^/]+\.js|src\/main\.tsx)(?:\?.*)?$/;
+  await page.route(entrypoint, async (route) => { await gate; await route.continue(); });
+  const editor = () => page.getByRole('region', { name: 'Note editor' }).getByRole('textbox');
+  const appearance = () => page.getByRole('combobox', { name: 'Appearance', exact: true });
+  async function themed(value: 'light' | 'dark') {
+    await expect(page.locator('html')).toHaveAttribute('data-mantine-color-scheme', value);
+    await expect(page.getByRole('region', { name: 'Note editor' }).locator('.bn-container')).toHaveAttribute('data-color-scheme', value);
+    await expect(page.getByRole('region', { name: 'Note editor' }).locator('.bn-mantine').first()).toHaveAttribute('data-mantine-color-scheme', value);
+  }
+  async function atEnd() {
+    await editor().evaluate((element) => {
+      (element as HTMLElement).focus(); const range = document.createRange();
+      range.selectNodeContents(element); range.collapse(false);
+      const selection = window.getSelection()!; selection.removeAllRanges(); selection.addRange(range);
+    });
+  }
+  try {
+    await env.start(); await page.emulateMedia({ colorScheme: 'light' });
+    await page.addInitScript(() => { if (!localStorage.getItem('engage.appearance.v1')) localStorage.setItem('engage.appearance.v1', 'dark'); });
+    await page.goto(env.url, { waitUntil: 'commit' });
+    await expect(page.locator('html')).toHaveAttribute('data-mantine-color-scheme', 'dark');
+    // Release CSS is a render-blocking head link. Vite injects development CSS
+    // through the module graph that this test deliberately stalls.
+    if (releaseMode) await expect.poll(() => page.locator('html').evaluate((element) => getComputedStyle(element).backgroundColor)).toBe('rgb(24, 33, 47)');
+    await expect(page.locator('#root')).toBeEmpty(); release(); await page.unroute(entrypoint);
+    await expect(appearance()).toHaveValue('dark');
+    await page.getByRole('button', { name: 'New note', exact: true }).click();
+    const createDialog = page.getByRole('dialog');
+    await createDialog.getByLabel('Note title', { exact: true }).fill('Appearance training');
+    await createDialog.getByLabel('Starting content', { exact: true }).selectOption('builtin:enumeration');
+    await createDialog.getByRole('button', { name: 'Create', exact: true }).click(); await saved(page);
+    await atEnd(); await page.keyboard.press('Control+b'); await page.keyboard.type('Theme-safe bold');
+    await page.keyboard.press('Control+b'); await page.keyboard.press('Enter'); await page.keyboard.type('Native document content.'); await saved(page);
+    const owner = (await getJson(`${env.api}/api/tree`)).notes[0];
+    const persisted = () => getJson(`${env.api}/api/notes/${owner.id}`);
+    const seeded = await persisted();
+    seeded.document_json.find((block: AssetBlock) => block.type === 'codeBlock').content = [{ type: 'text', text: 'printf "documentation only"', styles: {} }];
+    seeded.document_json.push({ type: 'paragraph', content: [{ type: 'link', href: 'https://example.invalid/reference', content: [{ type: 'text', text: 'Local reference', styles: {} }] }], children: [] });
+    seeded.document_json.push({ type: 'bulletListItem', content: [{ type: 'text', text: 'Preserved list item', styles: { italic: true } }], children: [] });
+    seeded.document_json.push({ type: 'paragraph', content: [], children: [] });
+    expect((await fetch(`${env.api}/api/notes/${owner.id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ revision: seeded.revision, document_json: seeded.document_json }) })).status).toBe(200);
+    await page.reload(); await saved(page);
+    const before = await persisted(); const changes = writes.length;
+    const instance = await editor().elementHandle();
+
+    for (const mode of ['light', 'dark'] as const) {
+      await appearance().selectOption(mode); await themed(mode);
+      await page.emulateMedia({ colorScheme: mode === 'light' ? 'dark' : 'light' }); await themed(mode);
+      expect(await instance!.evaluate((node) => node.isConnected)).toBe(true);
+      await expect(editor().locator('strong')).toContainText('Theme-safe bold');
+      await readable(page.locator('.editor-help')); await readable(page.locator('.save-state'));
+      await readable(page.getByRole('textbox', { name: 'Note title', exact: true }));
+      await readable(page.getByRole('treeitem', { name: 'Note Appearance training', exact: true }));
+      await readable(editor().getByRole('link', { name: 'Local reference', exact: true }));
+      await readable(editor().locator('[data-content-type="codeBlock"]'));
+      await page.getByRole('button', { name: 'Hide navigation', exact: true }).click();
+      await expect(appearance()).toBeVisible();
+      await page.screenshot({ path: info.outputPath(`appearance-${mode}-collapsed.png`), fullPage: true });
+      await page.getByRole('button', { name: 'Show navigation', exact: true }).click();
+    }
+    await appearance().selectOption('auto');
+    await editor().focus();
+    for (const colorScheme of ['dark', 'light'] as const) {
+      await page.emulateMedia({ colorScheme }); await themed(colorScheme);
+      await expect(editor()).toBeFocused();
+    }
+    expect(await persisted()).toEqual(before); expect(writes).toHaveLength(changes);
+    await page.emulateMedia({ colorScheme: 'dark' }); await themed('dark');
+    await page.getByRole('button', { name: 'Hide navigation', exact: true }).click();
+    await page.reload(); await saved(page); await themed('dark');
+    await expect(appearance()).toHaveValue('auto'); await expect(page.getByRole('complementary')).toBeHidden();
+    await page.getByRole('button', { name: 'Show navigation', exact: true }).focus();
+    await page.keyboard.press('Enter'); await expect(page.getByRole('complementary')).toBeVisible();
+    await appearance().focus(); await page.keyboard.press('Tab'); await page.keyboard.press('Shift+Tab');
+    await expect(appearance()).toBeFocused();
+    expect(await appearance().evaluate((element) => getComputedStyle(element).outlineStyle)).toBe('solid');
+
+    for (const mode of ['light', 'dark'] as const) {
+      await appearance().selectOption(mode); await themed(mode);
+      await editor().getByText('Theme-safe bold', { exact: true }).dblclick();
+      const toolbar = page.locator('.bn-formatting-toolbar'); await expect(toolbar).toBeVisible();
+      await readable(toolbar);
+      await toolbar.getByRole('button', { name: 'Colors', exact: true }).click();
+      await expect(page.getByText('Text', { exact: true }).last()).toBeVisible();
+      await expect(page.locator('.bn-color-picker-dropdown')).toHaveCSS('opacity', '1');
+      await readable(page.getByText('Text', { exact: true }).last());
+      await readable(page.locator('.bn-color-picker-dropdown').getByRole('menuitem').first());
+      await page.screenshot({ path: info.outputPath(`appearance-${mode}-formatting.png`), fullPage: true });
+      await page.keyboard.press('Escape'); await atEnd();
+      await page.keyboard.press('Enter'); await page.keyboard.type('/');
+      const menu = page.locator('.bn-suggestion-menu'); await expect(menu).toBeVisible();
+      await expect.poll(() => menu.evaluate((element) => {
+        let node: Element | null = element;
+        while (node) { if (getComputedStyle(node).opacity !== '1') return false; node = node.parentElement; }
+        return true;
+      })).toBe(true);
+      await readable(menu); await readable(menu.locator('.bn-suggestion-menu-label').first());
+      await readable(menu.locator('.bn-mt-suggestion-menu-item-subtitle').first());
+      await expect(menu.locator('xpath=ancestor::*[@data-mantine-color-scheme][1]')).toHaveAttribute('data-mantine-color-scheme', mode);
+      await page.screenshot({ path: info.outputPath(`appearance-${mode}-slash-menu.png`), fullPage: true });
+      await page.keyboard.press('Escape'); await page.keyboard.press('Backspace'); await saved(page);
+      const placeholder = editor().locator('[data-content-type="paragraph"]').last();
+      await expect.poll(() => placeholder.evaluate((element) => getComputedStyle(element, '::after').content)).toContain('Enter text');
+      await readable(placeholder, 4.5, '::after');
+      await page.getByRole('button', { name: 'New note', exact: true }).click();
+      const dialog = page.getByRole('dialog'); await readable(dialog); await readable(dialog.getByLabel('Starting content', { exact: true }));
+      await expect(dialog.getByRole('option', { name: 'Enumeration Notes', exact: true })).toHaveCount(1);
+      await page.screenshot({ path: info.outputPath(`appearance-${mode}-template-selection.png`), fullPage: true });
+      await dialog.getByRole('button', { name: 'Cancel', exact: true }).click();
+      await page.getByRole('button', { name: 'Manage templates', exact: true }).click();
+      await page.getByRole('dialog').getByLabel('Available templates', { exact: true }).selectOption('builtin:enumeration');
+      await page.screenshot({ path: info.outputPath(`appearance-${mode}-template-manager.png`), fullPage: true });
+      await page.getByRole('dialog').getByRole('button', { name: 'Close templates', exact: true }).click();
+    }
+    await page.getByRole('button', { name: 'Save as template', exact: true }).click();
+    await readable(page.getByRole('dialog'));
+    await page.getByRole('dialog').getByLabel('Template name', { exact: true }).fill('Appearance-neutral template');
+    await page.getByRole('dialog').getByRole('button', { name: 'Save template', exact: true }).click();
+    await expect(page.getByRole('dialog')).toBeHidden();
+    const template = (await getJson(`${env.api}/api/templates`)).find((row: { name: string }) => row.name === 'Appearance-neutral template');
+    const canonical = (await persisted()).document_json;
+    const withoutIds = (blocks: unknown) => JSON.parse(JSON.stringify(blocks, (key, value) => key === 'id' ? undefined : value));
+    for (const mode of ['light', 'dark'] as const) {
+      await appearance().selectOption(mode);
+      const response = await fetch(`${env.api}/api/templates/${template.id}/notes`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title: `Copy in ${mode}`, revision: 1 }) });
+      expect(response.status).toBe(201); expect(withoutIds((await response.json()).document_json)).toEqual(withoutIds(canonical));
+    }
+    await env.stopBackend();
+    await page.getByRole('textbox', { name: 'Note title', exact: true }).fill('Theme preserves pending edits');
+    await expect(page.getByText('Save Error', { exact: true })).toBeVisible();
+    for (const mode of ['light', 'dark'] as const) {
+      await appearance().selectOption(mode); await themed(mode);
+      await readable(page.locator('.save-state')); await readable(page.getByRole('alert').last());
+      await page.screenshot({ path: info.outputPath(`appearance-${mode}-save-error.png`), fullPage: true });
+    }
+    await env.startBackend(); await page.getByRole('button', { name: 'Retry save', exact: true }).click(); await saved(page);
+    expect((await persisted()).document_json).toEqual(canonical);
+    await page.reload(); await saved(page); await themed('dark'); await expect(appearance()).toHaveValue('dark');
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.getByRole('button', { name: 'Hide navigation', exact: true }).click(); await expect(appearance()).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.screenshot({ path: info.outputPath('appearance-dark-mobile.png'), fullPage: true });
+    expect(external).toEqual([]); expect(errors).toEqual([]);
+  } finally { release(); await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+});
 
 test('navigation preference and reusable templates preserve independent rich notes and screenshots', async ({ page }, info) => {
   const env = await environment();

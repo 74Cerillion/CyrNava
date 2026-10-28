@@ -9,7 +9,7 @@ import { deferDraft, downloadDraft, findDrafts } from '../drafts';
 import type { RecoveryDraft } from '../drafts';
 
 export interface NoteHandle { flush: () => Promise<boolean>; getRevision: () => number }
-interface Props { note: Note; locked?: boolean; onSaved?: (note: Note) => void; onRecovered?: (note: Note) => void; ref?: Ref<NoteHandle>; recovered?: RecoveryDraft }
+interface Props { note: Note; theme?: 'light' | 'dark'; locked?: boolean; onSaved?: (note: Note) => void; onRecovered?: (note: Note) => void; ref?: Ref<NoteHandle>; recovered?: RecoveryDraft }
 
 export function PersistentNote({ ref, ...props }: Props) {
   const [recovery] = useState(() => {
@@ -39,7 +39,7 @@ export function PersistentNote({ ref, ...props }: Props) {
     }} /></>;
 }
 
-function NoteEditor({ note, locked = false, onSaved, onRecovered, ref, recovered }: Props) {
+function NoteEditor({ note, theme = 'light', locked = false, onSaved, onRecovered, ref, recovered }: Props) {
   const save = useAutosave(note, onSaved, recovered);
   const [recovering, setRecovering] = useState(false);
   const [preparingRecovery, setPreparingRecovery] = useState(false);
@@ -72,7 +72,7 @@ function NoteEditor({ note, locked = false, onSaved, onRecovered, ref, recovered
       </header>
       {recovering && <ConflictRecovery noteId={note.id} draft={{ title: save.title, document_json: save.document }}
         onClose={() => setRecovering(false)} onReload={(saved) => { setRecovering(false); onRecovered?.(saved); }} />}
-      <KnowledgeEditor ref={editor} noteId={note.id} initialDocument={recovered?.document_json || note.document_json} onDocumentChange={save.changeDocument} editable={!locked && !recovering && !preparingRecovery} />
+      <KnowledgeEditor ref={editor} noteId={note.id} theme={theme} initialDocument={recovered?.document_json || note.document_json} onDocumentChange={save.changeDocument} editable={!locked && !recovering && !preparingRecovery} />
     </>
   );
 }

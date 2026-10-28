@@ -1,68 +1,136 @@
 * { box-sizing: border-box; }
-:root { font-family: Inter, system-ui, sans-serif; color: #1e293b; background: #fff; }
+:root {
+  color-scheme: light;
+  --surface: #fff;
+  --sidebar: #f5f7fa;
+  --text: #1e293b;
+  --muted: #526174;
+  --eyebrow: #475569;
+  --border: #dce2e9;
+  --divider: #e2e8f0;
+  --control-border: #7e8da2;
+  --accent: #1e426e;
+  --on-accent: #fff;
+  --selected: #e1eaf5;
+  --hover: #edf3f9;
+  --error: #9f2424;
+  --danger: #9f2424;
+  --on-danger: #fff;
+  --saved-bg: #edf3f9;
+  --saved-text: #1e426e;
+  --error-bg: #fff0f0;
+  --warning-bg: #fff6db;
+  --warning-text: #725007;
+  --selection: #c8def7;
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--text);
+  background: var(--surface);
+}
+:root[data-mantine-color-scheme="dark"] {
+  color-scheme: dark;
+  --surface: #18212f;
+  --sidebar: #202c3c;
+  --text: #e2e8f0;
+  --muted: #afbed0;
+  --eyebrow: #afbed0;
+  --border: #45566d;
+  --divider: #45566d;
+  --control-border: #7e90a7;
+  --accent: #98c4ff;
+  --on-accent: #14253d;
+  --selected: #304969;
+  --hover: #293b52;
+  --error: #fda4af;
+  --danger: #9f2424;
+  --on-danger: #fff;
+  --saved-bg: #25364c;
+  --saved-text: #c5ddff;
+  --error-bg: #45272f;
+  --warning-bg: #40351d;
+  --warning-text: #ffe189;
+  --selection: #345778;
+}
 body { margin: 0; }
+::selection { background: var(--selection); color: var(--text); }
+a { color: var(--accent); }
 .workspace { display: grid; grid-template-columns: 300px minmax(0, 1fr); min-height: 100vh; }
-.sidebar { padding: 32px 24px; background: #f5f7fa; border-right: 1px solid #dce2e9; }
+.sidebar { padding: 32px 24px; background: var(--sidebar); border-right: 1px solid var(--border); }
 .sidebar[hidden] { display: none; }
 .workspace[data-navigation-collapsed="true"] { grid-template-columns: minmax(0, 1fr); }
 .workspace-toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
 .workspace-toolbar button { margin-top: 0; }
 .template-choice { margin-top: 18px; }
 .template-choice select, #managed-template { margin-bottom: 12px; }
-.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: #475569; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .08em; color: var(--eyebrow); }
 h1 { font-size: 21px; line-height: 1.4; margin: 16px 0 32px; }
-nav a { display: block; padding: 12px; border-radius: 6px; background: #e1eaf5; color: #1e426e; text-decoration: none; font-weight: 600; }
-a:focus-visible { outline: 2px solid #1e426e; outline-offset: 3px; }
+nav a { display: block; padding: 12px; border-radius: 6px; background: var(--selected); color: var(--accent); text-decoration: none; font-weight: 600; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .status { margin-top: 32px; font-size: 14px; }
-.hint, header p { color: #526174; font-size: 14px; line-height: 1.6; }
+.hint, header p { color: var(--muted); font-size: 14px; line-height: 1.6; }
 main { min-width: 0; padding: 36px clamp(16px, 4vw, 64px); }
-header { border-bottom: 1px solid #e2e8f0; padding-bottom: 18px; margin-bottom: 32px; }
+header { border-bottom: 1px solid var(--divider); padding-bottom: 18px; margin-bottom: 32px; }
 h2 { margin: 0; font-size: 26px; }
 .editor { min-height: 300px; }
 @media (max-width: 640px) {
   .workspace { grid-template-columns: 1fr; }
-  .sidebar { border-right: 0; border-bottom: 1px solid #dce2e9; padding: 20px; }
+  .sidebar { border-right: 0; border-bottom: 1px solid var(--border); padding: 20px; }
   h1 { margin: 8px 0 16px; }
   .status { margin-top: 16px; }
 }
 label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
-input { font: inherit; color: inherit; padding: 10px 12px; border: 1px solid #94a3b8; border-radius: 6px; width: min(100%, 560px); }
-button:not(.mantine-UnstyledButton-root) { font: inherit; padding: 10px 16px; margin: 12px 8px 0 0; border: 1px solid #1e426e; border-radius: 6px; background: #1e426e; color: white; cursor: pointer; }
+input, select, textarea { color: var(--text); background-color: var(--surface); }
+input { font: inherit; padding: 10px 12px; border: 1px solid var(--control-border); border-radius: 6px; width: min(100%, 560px); }
+input::placeholder, textarea::placeholder { color: var(--muted); opacity: 1; }
+button:not(.mantine-UnstyledButton-root) { font: inherit; padding: 10px 16px; margin: 12px 8px 0 0; border: 1px solid var(--accent); border-radius: 6px; background: var(--accent); color: var(--on-accent); cursor: pointer; }
 button:disabled { opacity: .6; cursor: default; }
-[role="alert"] { color: #9f2424; }
+[role="alert"] { color: var(--error); }
+header [role="alert"] p { color: inherit; }
 
-.directory-tree { margin: 16px 0; overflow: auto; max-height: 55vh; border: 1px solid #dce2e9; border-radius: 6px; }
+.directory-tree { margin: 16px 0; overflow: auto; max-height: 55vh; border: 1px solid var(--border); border-radius: 6px; }
 [role="treeitem"] { display: flex; align-items: center; gap: 6px; min-width: max-content; padding-top: 8px; padding-bottom: 8px; padding-right: 8px; cursor: pointer; font-size: 14px; }
-[role="treeitem"][aria-selected="true"] { background: #e1eaf5; color: #1e426e; }
+[role="treeitem"]:hover { background: var(--hover); }
+[role="treeitem"][aria-selected="true"] { background: var(--selected); color: var(--accent); }
 [role="treeitem"][data-open="true"] .tree-label { font-weight: 700; }
-[role="treeitem"]:focus { outline: 2px solid #1e426e; outline-offset: -2px; }
+[role="treeitem"]:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
 [role="treeitem"] button { padding: 0; margin: 0; width: 20px; background: transparent; color: inherit; border: 0; }
 .note-icon { width: 20px; text-align: center; }
-.open-marker { font-size: 8px; color: #1e426e; }
+.open-marker { font-size: 8px; color: var(--accent); }
 .library-actions { display: flex; gap: 6px; flex-wrap: wrap; }
 .library-actions button, .root-button { font-size: 13px; padding: 7px 10px; margin: 6px 0; }
-button.secondary { background: white; color: #1e426e; }
-button.danger { background: #9f2424; border-color: #9f2424; }
-button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #1e426e; outline-offset: 2px; }
-dialog { width: min(560px, 90vw); max-height: 85vh; overflow: auto; border: 1px solid #94a3b8; border-radius: 8px; padding: 24px; color: #1e293b; }
+button.secondary { background: var(--surface); color: var(--accent); }
+button.secondary:enabled:hover { background: var(--hover); }
+button:not(.secondary):not(.mantine-UnstyledButton-root):enabled:hover { filter: brightness(1.1); }
+button.danger { background: var(--danger); border-color: var(--danger); color: var(--on-danger); }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+dialog { width: min(560px, 90vw); max-height: 85vh; overflow: auto; border: 1px solid var(--control-border); border-radius: 8px; padding: 24px; color: var(--text); background: var(--surface); }
 dialog::backdrop { background: rgb(15 23 42 / 40%); }
 dialog h2 { font-size: 22px; margin-bottom: 20px; overflow-wrap: anywhere; }
-dialog select { width: 100%; padding: 10px; font: inherit; }
+dialog select { width: 100%; padding: 10px; font: inherit; border: 1px solid var(--control-border); }
 .dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
 
 .recovery-document { max-height: 15rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
 
 /* M6: retain the two-pane design and make existing controls/status clearer. */
-.skip-link { position: absolute; left: 16px; top: -100px; z-index: 1000; padding: 12px; background: white; color: #1e426e; }
+.skip-link { position: absolute; left: 16px; top: -100px; z-index: 1000; padding: 12px; background: var(--surface); color: var(--accent); }
 .skip-link:focus { top: 12px; }
-input[type="checkbox"] { width: auto; padding: 0; margin-right: 8px; accent-color: #1e426e; }
+input[type="checkbox"] { width: auto; padding: 0; margin-right: 8px; accent-color: var(--accent); }
 button, input, select { max-width: 100%; }
 .dialog-actions { flex-wrap: wrap; }
-.save-state { display: inline-block; padding: 6px 12px; border-radius: 6px; background: #edf3f9; color: #1e426e; font-weight: 700; }
-.save-state[data-state="Save Error"] { background: #fff0f0; color: #9f2424; }
-.save-state[data-state="Unsaved Changes"] { background: #fff6db; color: #725007; }
+.save-state { display: inline-block; padding: 6px 12px; border-radius: 6px; background: var(--saved-bg); color: var(--saved-text); font-weight: 700; }
+.save-state[data-state="Save Error"] { background: var(--error-bg); color: var(--error); }
+.save-state[data-state="Unsaved Changes"] { background: var(--warning-bg); color: var(--warning-text); }
 [role="alert"] { overflow-wrap: anywhere; }
-summary:focus-visible, main:focus-visible { outline: 2px solid #1e426e; outline-offset: 3px; }
+summary:focus-visible, main:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 @media (max-width: 640px) { main { padding: 24px 16px; } dialog { padding: 18px; } }
 
 .editor { max-width: 100%; overflow-x: auto; }
+
+.workspace-toolbar { align-items: center; }
+.workspace-toolbar > button { margin: 0; }
+.appearance-control { display: flex; align-items: center; gap: 8px; margin: 0 8px 0 0; }
+.appearance-control select { font: inherit; padding: 8px; border: 1px solid var(--control-border); border-radius: 6px; }
+
+/* Native BlockNote themes own the editor/menus. Only improve muted affordances:
+   its default disabled text and translucent empty-paragraph hint are too dim. */
+.bn-root[data-color-scheme] { --bn-colors-disabled-text: var(--muted); --mantine-color-dimmed: var(--muted); }
+.bn-editor .bn-block-content:has(.ProseMirror-trailingBreak:only-child)::after { color: var(--muted); opacity: 1; }

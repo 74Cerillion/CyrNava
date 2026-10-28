@@ -15,6 +15,15 @@ ENGAGE organizes cybersecurity learning and documentation into folders and rich-
 - Local SQLite/filesystem persistence and verified offline backup/restore.
 - Collapsible navigation with a browser-local preference, preserving the open editor and pending edits.
 - Five built-in pentesting note templates plus reusable custom templates with independent screenshot copies.
+- Light, Dark and System appearance across the workspace, editor, menus and dialogs.
+
+## Appearance
+
+Use **Appearance** in the toolbar above the note to choose **Light**, **Dark**, or **System**. The control stays available with navigation collapsed. System is the default and follows live OS color-scheme changes; an explicit choice overrides the OS. Switching does not reload the note, alter document formatting, or trigger autosave.
+
+The preference is browser-local under `engage.appearance.v1` (`light`, `dark`, or Mantine's `auto` for System). It survives reload/restart at the same browser profile and origin, including port. Invalid/missing values fall back to System. If localStorage is blocked, changing appearance still works for the current page, but persistence is unavailable. It is a browser preference, so it is not part of a SQLite backup. User-applied document colors remain intentional formatting; appearance does not rewrite them.
+
+The release includes a small local startup script to reduce initial light flashes. No backend, data migration, external service or additional package is required. See the [FF-007 implementation and verification report](FF007_REPORT.md). Update an installed desktop copy using the existing installer after review; editing this checkout does not update the installed application automatically.
 
 ## Navigation and templates
 

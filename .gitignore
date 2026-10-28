@@ -13,6 +13,10 @@ data/
 notes/
 uploads/
 assets/
+# Only this application-owned startup script belongs in the local asset bundle.
+!frontend/public/assets/
+frontend/public/assets/*
+!frontend/public/assets/appearance-init.js
 captures/
 *.pcap
 *.pcapng

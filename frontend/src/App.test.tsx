@@ -13,9 +13,9 @@ vi.mock('./notes', async (original) => ({
 vi.mock('./templates', () => ({ getTemplates: vi.fn(), captureTemplate: vi.fn(), renameTemplate: vi.fn(), deleteTemplate: vi.fn() }));
 vi.mock('./library', () => ({ getTree: vi.fn(), createFolder: vi.fn(), updateFolder: vi.fn(), deleteFolder: vi.fn(), getDeletionImpact: vi.fn() }));
 vi.mock('./components/KnowledgeEditor', () => ({
-  KnowledgeEditor: ({ initialDocument, onDocumentChange, editable }: {
-    initialDocument: NoteDocument; onDocumentChange: (value: NoteDocument) => void; editable: boolean;
-  }) => <textarea aria-label="Note editor" disabled={!editable} defaultValue={JSON.stringify(initialDocument)}
+  KnowledgeEditor: ({ initialDocument, onDocumentChange, editable, theme }: {
+    initialDocument: NoteDocument; onDocumentChange: (value: NoteDocument) => void; editable: boolean; theme?: string;
+  }) => <textarea aria-label="Note editor" data-theme={theme} disabled={!editable} defaultValue={JSON.stringify(initialDocument)}
     onChange={(event) => onDocumentChange(JSON.parse(event.target.value) as NoteDocument)} />,
 }));
 const original: Note = {
@@ -325,6 +325,24 @@ it('collapses navigation without remounting the editor, losing dirty content or 
   expect(screen.getByLabelText('Note editor')).toBe(editor);
   await screen.findByText('Saved', { exact: true });
   expect(updateNote).toHaveBeenCalledWith(original.id, 1, expect.objectContaining({ title: 'Pending edit' }), expect.any(AbortSignal));
+});
+
+it('switches appearance with navigation hidden while preserving dirty content and ordinary autosave', async () => {
+  seed(original); render(<App />);
+  const editor = await screen.findByLabelText('Note editor');
+  fireEvent.click(screen.getByRole('button', { name: 'Hide navigation' }));
+  fireEvent.change(screen.getByLabelText('Note title'), { target: { value: 'Unsaved before theme switch' } });
+  const reads = vi.mocked(getNote).mock.calls.length;
+  const trees = vi.mocked(getTree).mock.calls.length;
+  fireEvent.change(screen.getByLabelText('Appearance'), { target: { value: 'dark' } });
+  expect(screen.getByLabelText('Note editor')).toBe(editor);
+  expect(editor).toHaveAttribute('data-theme', 'dark');
+  expect(screen.getByLabelText('Note title')).toHaveValue('Unsaved before theme switch');
+  expect(getNote).toHaveBeenCalledTimes(reads); expect(getTree).toHaveBeenCalledTimes(trees);
+  expect(updateNote).not.toHaveBeenCalled();
+  await screen.findByText('Saved', { exact: true });
+  expect(updateNote).toHaveBeenCalledOnce();
+  expect(records.get(original.id)?.document_json).toEqual(original.document_json);
 });
 
 it('restores the collapsed preference on reload and can immediately show navigation', async () => {

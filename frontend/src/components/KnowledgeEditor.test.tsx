@@ -12,7 +12,7 @@ const snapshot: NoteDocument = [{ type: 'heading', id: 'heading-1', props: { lev
 vi.mock('../assets', () => ({ uploadImage: vi.fn() }));
 vi.mock('@blocknote/react', () => ({ useCreateBlockNote: vi.fn(), FilePanelController: () => null, FilePanel: () => null, UploadTab: () => null }));
 vi.mock('@blocknote/mantine', () => ({
-  BlockNoteView: ({ onChange }: { onChange: () => void }) => <><button onClick={onChange}>Editor change</button><img src="/api/assets/missing" alt="Saved evidence" /></>,
+  BlockNoteView: ({ onChange, theme }: { onChange: () => void; theme: string }) => <div data-testid="blocknote-view" data-theme={theme}><button onClick={onChange}>Editor change</button><img src="/api/assets/missing" alt="Saved evidence" /></div>,
 }));
 // These mock only the editor's public boundary; real BlockNote is checked in browser.
 let options: Parameters<typeof useCreateBlockNote>[0];
@@ -41,6 +41,17 @@ it('hydrates native JSON and emits an independent document snapshot', () => {
   fireEvent.click(screen.getByRole('button', { name: 'Editor change' }));
   expect(onChange).toHaveBeenCalledWith(snapshot);
   expect(onChange.mock.calls[0][0]).not.toBe(snapshot);
+});
+it('passes live appearance to the native view without emitting a document change', () => {
+  const changed = vi.fn();
+  const view = render(<KnowledgeEditor noteId="A" initialDocument={initial} onDocumentChange={changed} theme="light" />);
+  const editorView = screen.getByTestId('blocknote-view');
+  expect(editorView).toHaveAttribute('data-theme', 'light');
+  view.rerender(<KnowledgeEditor noteId="A" initialDocument={initial} onDocumentChange={changed} theme="dark" />);
+  expect(screen.getByTestId('blocknote-view')).toBe(editorView);
+  expect(editorView).toHaveAttribute('data-theme', 'dark');
+  expect(changed).not.toHaveBeenCalled();
+  expect(current).toEqual(snapshot);
 });
 it('the file-picker upload hook returns a persistent URL owned by this note', async () => {
   render(<KnowledgeEditor noteId="A" initialDocument={initial} onDocumentChange={vi.fn()} />);

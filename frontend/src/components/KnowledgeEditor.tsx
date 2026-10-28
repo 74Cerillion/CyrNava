@@ -21,12 +21,13 @@ interface Props {
   onDocumentChange: (document: NoteDocument) => void;
   noteId: string;
   editable?: boolean;
+  theme?: 'light' | 'dark';
   ref?: Ref<EditorHandle>;
 }
 
 // Each note owns its editor, uploads and abort controller. Responses cannot reach
 // another note's editor. Initial content is applied only on mount, never on save.
-export function KnowledgeEditor({ initialDocument, onDocumentChange, noteId, editable = true, ref }: Props) {
+export function KnowledgeEditor({ initialDocument, onDocumentChange, noteId, editable = true, theme = 'light', ref }: Props) {
   const [uploadCount, setUploadCount] = useState(0);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const pending = useRef(new Set<Promise<unknown>>());
@@ -105,7 +106,7 @@ export function KnowledgeEditor({ initialDocument, onDocumentChange, noteId, edi
       <p className="hint editor-help">Use / for formatting and images. Paste a screenshot with Ctrl+V, or type /image to select a local PNG, JPEG or WebP.</p>
       {uploadCount > 0 && <p role="status">Uploading image… Wait before closing.</p>}
       {uploadError && <div role="alert">{uploadError} <button onClick={() => setUploadError(null)}>Dismiss image error</button></div>}
-      <BlockNoteView editor={editor} editable={editable} theme="light" filePanel={false}
+      <BlockNoteView editor={editor} editable={editable} theme={theme} filePanel={false}
         onChange={() => onDocumentChange(structuredClone(editor.document) as unknown as NoteDocument)}>
         <FilePanelController filePanel={LocalImagePanel} />
       </BlockNoteView>
