@@ -332,7 +332,7 @@ def test_migration_from_copy_of_m1_preserves_every_field(tmp_path, document):
         assert (
             connection.execute("SELECT document_json FROM notes").fetchone()[0] == raw
         )
-        assert connection.execute("PRAGMA user_version").fetchone()[0] == 4
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == 5
         assert not connection.execute("PRAGMA foreign_key_check").fetchall()
     with sqlite3.connect(source) as connection:
         assert connection.execute("PRAGMA user_version").fetchone()[0] == 1

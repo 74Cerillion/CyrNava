@@ -6,10 +6,14 @@ import { captureTemplate, getTemplates } from './templates';
 import type { Note, NoteDocument } from './notes';
 import { createFolder, deleteFolder, getDeletionImpact, getTree, updateFolder } from './library';
 import type { DirectoryData, Folder } from './library';
+import { searchNotes } from './search';
+import type { SearchResult } from './search';
+import { storeDraft } from './drafts';
 
 vi.mock('./notes', async (original) => ({
   ...await original<typeof import('./notes')>(), createNote: vi.fn(), createNoteFromTemplate: vi.fn(), getNote: vi.fn(), updateNote: vi.fn(), deleteNote: vi.fn(),
 }));
+vi.mock('./search', () => ({ searchNotes: vi.fn() }));
 vi.mock('./templates', () => ({ getTemplates: vi.fn(), captureTemplate: vi.fn(), renameTemplate: vi.fn(), deleteTemplate: vi.fn() }));
 vi.mock('./library', () => ({ getTree: vi.fn(), createFolder: vi.fn(), updateFolder: vi.fn(), deleteFolder: vi.fn(), getDeletionImpact: vi.fn() }));
 vi.mock('./components/KnowledgeEditor', () => ({
@@ -34,6 +38,7 @@ beforeEach(() => {
   window.localStorage.clear(); vi.resetAllMocks();
   tree = { folders: [], notes: [] }; records = new Map(); counter = 0;
   vi.mocked(getTemplates).mockResolvedValue([]);
+  vi.mocked(searchNotes).mockResolvedValue({ query: '', total: 0, results: [] });
   vi.stubGlobal('fetch', vi.fn().mockImplementation(async (path: string) => ({ ok: true, json: async () => path === '/api/lifecycle' ? { managed: false } : { status: 'ok' } })));
   vi.mocked(getTree).mockImplementation(async () => structuredClone(tree));
   vi.mocked(getNote).mockImplementation(async (id) => {
@@ -70,6 +75,121 @@ async function management(name: string) {
   fireEvent.click(screen.getByRole('button', { name }));
   return screen.findByRole('dialog');
 }
+
+async function searchResult(note: Note, query = 'matching') {
+  const result: SearchResult = { note_id: note.id, title: note.title, folder_path: ['Remote'], snippet: 'Matching snippet', score: -1 };
+  vi.mocked(searchNotes).mockResolvedValue({ query, total: 1, results: [result] });
+  fireEvent.change(screen.getByRole('combobox', { name: 'Search all notes' }), { target: { value: query } });
+  return screen.findByRole('option', { name: `Open note: ${note.title}` });
+}
+
+describe('F-09 search navigation', () => {
+  it('opens the canonical note, refreshes stale folder metadata and reveals/selects its ancestors', async () => {
+    seed(original); render(<App />); await screen.findByLabelText('Note editor');
+    const destination = { ...original, id: 'new-note', title: 'Remote result', folder_id: 'child', document_json: [{ type: 'codeBlock', content: [{ type: 'text', text: 'native code', styles: {} }] }] };
+    // Simulate another tab adding a note/folders after the initial library read.
+    tree.folders.push(makeFolder('parent', 'Root'), makeFolder('child', 'Nested', 'parent')); seed(destination);
+    const result = await searchResult(destination); fireEvent.click(result);
+    await waitFor(() => expect(screen.getByLabelText('Note title')).toHaveValue(destination.title));
+    expect(screen.getByLabelText('Note editor')).toHaveValue(JSON.stringify(destination.document_json));
+    expect(screen.getByRole('treeitem', { name: 'Folder Root' })).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('treeitem', { name: 'Folder Nested' })).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('treeitem', { name: 'Note Remote result' })).toHaveAttribute('aria-current', 'true');
+    expect(screen.getByRole('treeitem', { name: 'Note Remote result' })).toHaveAttribute('aria-selected', 'true');
+    expect(localStorage.getItem(NOTE_ID_KEY)).toBe(destination.id);
+    expect(screen.getByRole('combobox', { name: 'Search all notes' })).toHaveValue('matching');
+  });
+
+  it('waits for both an in-flight snapshot and newer queued typing before opening a result', async () => {
+    const destination = { ...original, id: 'destination', title: 'Destination' }; seed(original, destination);
+    const pending: (() => void)[] = [];
+    vi.mocked(updateNote).mockImplementation((id, revision, draft) => new Promise((resolve) => {
+      pending.push(() => { const saved = { ...records.get(id)!, ...draft, revision: revision + 1 }; records.set(id, saved); resolve(saved); });
+    }));
+    render(<App />); const editor = await screen.findByLabelText('Note editor'); const result = await searchResult(destination);
+    fireEvent.change(screen.getByLabelText('Note title'), { target: { value: 'Paragraph A' } });
+    await screen.findByText('Saving...', { exact: true });
+    fireEvent.change(screen.getByLabelText('Note title'), { target: { value: 'Paragraph A and B' } });
+    fireEvent.click(result);
+    expect(editor).toBeDisabled(); expect(getNote).toHaveBeenCalledTimes(1);
+    await act(async () => pending[0]()); await waitFor(() => expect(updateNote).toHaveBeenCalledTimes(2));
+    expect(getNote).toHaveBeenCalledTimes(1);
+    expect(updateNote).toHaveBeenLastCalledWith(original.id, 2, expect.objectContaining({ title: 'Paragraph A and B' }), expect.any(AbortSignal));
+    await act(async () => pending[1]());
+    await waitFor(() => expect(screen.getByLabelText('Note title')).toHaveValue(destination.title));
+    expect(records.get(original.id)?.title).toBe('Paragraph A and B'); expect(records.get(original.id)?.revision).toBe(3);
+  });
+
+  it.each([409, 503])('keeps the current editor/draft when its save fails with HTTP %s', async (status) => {
+    const destination = { ...original, id: 'destination', title: 'Destination' }; seed(original, destination);
+    vi.mocked(updateNote).mockRejectedValue(new ApiError('Synthetic save error', status));
+    render(<App />); const editor = await screen.findByLabelText('Note editor'); const result = await searchResult(destination);
+    fireEvent.change(screen.getByLabelText('Note title'), { target: { value: 'Keep this draft' } });
+    fireEvent.click(result);
+    await screen.findByText(/Cannot leave this note until pending edits/);
+    expect(screen.getByLabelText('Note editor')).toBe(editor);
+    expect(screen.getByLabelText('Note title')).toHaveValue('Keep this draft');
+    expect(getNote).not.toHaveBeenCalledWith(destination.id, expect.anything());
+    expect(localStorage.getItem(NOTE_ID_KEY)).toBe(original.id);
+  });
+
+  it('selects an already-open result without remounting or forcing a dirty save', async () => {
+    seed(original); render(<App />); const editor = await screen.findByLabelText('Note editor'); const result = await searchResult(original);
+    fireEvent.change(screen.getByLabelText('Note title'), { target: { value: 'Pending local title' } });
+    fireEvent.click(result);
+    expect(screen.getByLabelText('Note editor')).toBe(editor); expect(screen.getByLabelText('Note title')).toHaveValue('Pending local title');
+    expect(updateNote).not.toHaveBeenCalled(); expect(getNote).toHaveBeenCalledTimes(1);
+  });
+
+  it('preserves the active editor if a result was deleted or the fresh tree cannot load', async () => {
+    const destination = { ...original, id: 'deleted', title: 'Deleted result' }; seed(original, destination);
+    render(<App />); const editor = await screen.findByLabelText('Note editor');
+    fireEvent.click(await searchResult(destination));
+    // The first ordinary opening succeeds; return to the source before failure cases.
+    await waitFor(() => expect(screen.getByLabelText('Note title')).toHaveValue(destination.title));
+    fireEvent.click(screen.getByRole('treeitem', { name: 'Note Persistent title' }));
+    await waitFor(() => expect(screen.getByLabelText('Note title')).toHaveValue(original.title));
+    const currentEditor = screen.getByLabelText('Note editor'); expect(currentEditor).not.toBe(editor);
+    records.delete(destination.id); fireEvent.click(await screen.findByRole('option', { name: 'Open note: Deleted result' }));
+    await screen.findByText('Note not found'); expect(screen.getByLabelText('Note editor')).toBe(currentEditor);
+    records.set(destination.id, destination); vi.mocked(getTree).mockRejectedValueOnce(new Error('Cannot refresh library'));
+    fireEvent.click(screen.getByRole('option', { name: 'Open note: Deleted result' }));
+    await screen.findByText('Cannot refresh library'); expect(screen.getByLabelText('Note editor')).toBe(currentEditor);
+    expect(screen.getByLabelText('Note title')).toHaveValue(original.title);
+  });
+
+  it('refreshes the active query after saving without moving focus from the editor', async () => {
+    seed(original); render(<App />); await screen.findByLabelText('Note editor'); await searchResult(original);
+    const reads = vi.mocked(searchNotes).mock.calls.length;
+    const title = screen.getByLabelText('Note title'); title.focus();
+    fireEvent.change(title, { target: { value: 'Indexed new title' } });
+    expect(searchNotes).toHaveBeenCalledTimes(reads);
+    await screen.findByText('Saved', { exact: true });
+    await waitFor(() => expect(searchNotes).toHaveBeenCalledTimes(reads + 1));
+    expect(title).toHaveFocus();
+  });
+
+  it('cannot bypass pending draft recovery by choosing a search result', async () => {
+    const destination = { ...original, id: 'destination', title: 'Destination' }; seed(original, destination);
+    const draft = storeDraft(original, { title: 'Unconfirmed draft', document_json: original.document_json }, 1);
+    // Drafts from a prior page are eligible for the existing recovery UI.
+    const name = localStorage.key(0)!; localStorage.setItem(name, JSON.stringify({ ...draft, writer: 'prior-page' }));
+    render(<App />); const recovery = await screen.findByRole('region', { name: 'Draft recovery' });
+    fireEvent.click(await searchResult(destination)); await screen.findByText(/Cannot leave this note until pending edits/);
+    expect(screen.getByRole('region', { name: 'Draft recovery' })).toBe(recovery);
+    expect(localStorage.getItem(name)).toContain('Unconfirmed draft');
+    expect(getNote).not.toHaveBeenCalledWith(destination.id, expect.anything());
+  });
+
+  it('does not install a fetched note if it disappeared before the fresh tree response', async () => {
+    const destination = { ...original, id: 'destination', title: 'Destination' }; seed(original, destination);
+    render(<App />); const editor = await screen.findByLabelText('Note editor');
+    const result = await searchResult(destination);
+    vi.mocked(getTree).mockResolvedValueOnce({ folders: [], notes: [original] });
+    fireEvent.click(result); await screen.findByText(/This note is no longer in the library/);
+    expect(screen.getByLabelText('Note editor')).toBe(editor); expect(screen.getByLabelText('Note title')).toHaveValue(original.title);
+  });
+});
 
 describe('M1 behavior preserved through the library', () => {
   it('creates a note and stores only its identifier in localStorage', async () => {

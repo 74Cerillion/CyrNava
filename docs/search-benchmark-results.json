@@ -1,0 +1,569 @@
+{
+  "benchmark_format": 1,
+  "seed": 20261029,
+  "warmup_rounds": 5,
+  "measured_rounds": 30,
+  "cache": "warm filesystem cache; fresh connection per search",
+  "measurement": "Database.search: connection, snapshot, validation, count, rank, snippets, folder paths, close; excludes HTTP/JSON/browser/debounce and fixture setup",
+  "environment": {
+    "python": "3.12.15",
+    "sqlite": "3.46.1",
+    "os": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "logical_cpus": 8
+  },
+  "source_sha256": "9c601468e7f65f47519efdb97df48e78e66469911664d4bffa797e57e78753b5",
+  "datasets": [
+    {
+      "notes": 100,
+      "folders": 10,
+      "document_bytes": {
+        "min": 1363,
+        "mean": 3325.93,
+        "max": 5788,
+        "total": 332593
+      },
+      "corpus_sha256": "f8c8952ab186305f58eeaf88fbe3a6d46ea506f06c9469dfb960996ab22e85ec",
+      "fixture_setup_ms": 40.545,
+      "sqlite": {
+        "journal_mode": "delete",
+        "page_size": 4096
+      },
+      "database_bytes": 987136,
+      "queries": [
+        {
+          "label": "exact_title",
+          "query": "Windows identity 00042",
+          "category": "typical",
+          "matches": 1,
+          "returned": 1,
+          "samples": 30,
+          "median_ms": 0.4478,
+          "p95_ms": 0.7116,
+          "max_ms": 0.7321
+        },
+        {
+          "label": "partial_title",
+          "query": "network",
+          "category": "typical",
+          "matches": 10,
+          "returned": 10,
+          "samples": 30,
+          "median_ms": 0.4505,
+          "p95_ms": 0.7241,
+          "max_ms": 0.7685
+        },
+        {
+          "label": "heading",
+          "query": "discovery",
+          "category": "typical",
+          "matches": 34,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 0.6243,
+          "p95_ms": 1.0129,
+          "max_ms": 1.1084
+        },
+        {
+          "label": "body_rare",
+          "query": "triagesignal",
+          "category": "typical",
+          "matches": 1,
+          "returned": 1,
+          "samples": 30,
+          "median_ms": 0.38,
+          "p95_ms": 0.6213,
+          "max_ms": 0.6776
+        },
+        {
+          "label": "body_medium",
+          "query": "servicetrace",
+          "category": "typical",
+          "matches": 10,
+          "returned": 10,
+          "samples": 30,
+          "median_ms": 0.5372,
+          "p95_ms": 0.7652,
+          "max_ms": 0.8944
+        },
+        {
+          "label": "body_common",
+          "query": "commontrace",
+          "category": "typical",
+          "matches": 50,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 0.8104,
+          "p95_ms": 1.2887,
+          "max_ms": 1.6158
+        },
+        {
+          "label": "nested_prefix",
+          "query": "enum",
+          "category": "typical",
+          "matches": 100,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 0.9374,
+          "p95_ms": 1.5089,
+          "max_ms": 1.5227
+        },
+        {
+          "label": "code_and",
+          "query": "nmap -sV",
+          "category": "typical",
+          "matches": 10,
+          "returned": 10,
+          "samples": 30,
+          "median_ms": 0.5553,
+          "p95_ms": 0.8199,
+          "max_ms": 1.0413
+        },
+        {
+          "label": "technical_ip",
+          "query": "127.0.0.1",
+          "category": "typical",
+          "matches": 10,
+          "returned": 10,
+          "samples": 30,
+          "median_ms": 0.6617,
+          "p95_ms": 1.0167,
+          "max_ms": 1.1153
+        },
+        {
+          "label": "unicode",
+          "query": "cafe \u65e5\u672c\u8a9e",
+          "category": "typical",
+          "matches": 5,
+          "returned": 5,
+          "samples": 30,
+          "median_ms": 0.4938,
+          "p95_ms": 0.8002,
+          "max_ms": 0.8508
+        },
+        {
+          "label": "unique_body",
+          "query": "canary00000042",
+          "category": "typical",
+          "matches": 1,
+          "returned": 1,
+          "samples": 30,
+          "median_ms": 0.3645,
+          "p95_ms": 0.5482,
+          "max_ms": 0.6516
+        },
+        {
+          "label": "miss",
+          "query": "nomatchingtokenxyz",
+          "category": "typical",
+          "matches": 0,
+          "returned": 0,
+          "samples": 30,
+          "median_ms": 0.3459,
+          "p95_ms": 0.4748,
+          "max_ms": 0.5036
+        },
+        {
+          "label": "metadata_ignored",
+          "query": "metadataonlyneedle",
+          "category": "typical",
+          "matches": 0,
+          "returned": 0,
+          "samples": 30,
+          "median_ms": 0.333,
+          "p95_ms": 0.4593,
+          "max_ms": 0.531
+        },
+        {
+          "label": "all_notes",
+          "query": "evidence",
+          "category": "broad_stress",
+          "matches": 100,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 0.974,
+          "p95_ms": 1.4348,
+          "max_ms": 1.4535
+        },
+        {
+          "label": "one_character",
+          "query": "e",
+          "category": "broad_stress",
+          "matches": 100,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 1.4476,
+          "p95_ms": 2.2868,
+          "max_ms": 2.4558
+        }
+      ]
+    },
+    {
+      "notes": 1000,
+      "folders": 100,
+      "document_bytes": {
+        "min": 1363,
+        "mean": 3277.87,
+        "max": 5879,
+        "total": 3277872
+      },
+      "corpus_sha256": "b0ac30be31f62939efe4d7b661a183dcaee5d04108cb5ea7d15995e53aab037d",
+      "fixture_setup_ms": 398.663,
+      "sqlite": {
+        "journal_mode": "delete",
+        "page_size": 4096
+      },
+      "database_bytes": 8937472,
+      "queries": [
+        {
+          "label": "exact_title",
+          "query": "Windows identity 00042",
+          "category": "typical",
+          "matches": 1,
+          "returned": 1,
+          "samples": 30,
+          "median_ms": 0.6603,
+          "p95_ms": 0.8748,
+          "max_ms": 0.887
+        },
+        {
+          "label": "partial_title",
+          "query": "network",
+          "category": "typical",
+          "matches": 100,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 1.1648,
+          "p95_ms": 1.483,
+          "max_ms": 1.4954
+        },
+        {
+          "label": "heading",
+          "query": "discovery",
+          "category": "typical",
+          "matches": 334,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 1.9319,
+          "p95_ms": 2.513,
+          "max_ms": 2.6614
+        },
+        {
+          "label": "body_rare",
+          "query": "triagesignal",
+          "category": "typical",
+          "matches": 10,
+          "returned": 10,
+          "samples": 30,
+          "median_ms": 0.7346,
+          "p95_ms": 1.0412,
+          "max_ms": 1.2166
+        },
+        {
+          "label": "body_medium",
+          "query": "servicetrace",
+          "category": "typical",
+          "matches": 100,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 1.3158,
+          "p95_ms": 1.7188,
+          "max_ms": 1.7286
+        },
+        {
+          "label": "body_common",
+          "query": "commontrace",
+          "category": "typical",
+          "matches": 500,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 2.5571,
+          "p95_ms": 3.1902,
+          "max_ms": 3.2942
+        },
+        {
+          "label": "nested_prefix",
+          "query": "enum",
+          "category": "typical",
+          "matches": 1000,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 3.3318,
+          "p95_ms": 4.5125,
+          "max_ms": 4.814
+        },
+        {
+          "label": "code_and",
+          "query": "nmap -sV",
+          "category": "typical",
+          "matches": 100,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 1.3221,
+          "p95_ms": 1.8388,
+          "max_ms": 1.8975
+        },
+        {
+          "label": "technical_ip",
+          "query": "127.0.0.1",
+          "category": "typical",
+          "matches": 100,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 1.7396,
+          "p95_ms": 2.1524,
+          "max_ms": 2.4765
+        },
+        {
+          "label": "unicode",
+          "query": "cafe \u65e5\u672c\u8a9e",
+          "category": "typical",
+          "matches": 50,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 1.1726,
+          "p95_ms": 1.6774,
+          "max_ms": 1.9607
+        },
+        {
+          "label": "unique_body",
+          "query": "canary00000042",
+          "category": "typical",
+          "matches": 1,
+          "returned": 1,
+          "samples": 30,
+          "median_ms": 0.5017,
+          "p95_ms": 0.7859,
+          "max_ms": 0.8233
+        },
+        {
+          "label": "miss",
+          "query": "nomatchingtokenxyz",
+          "category": "typical",
+          "matches": 0,
+          "returned": 0,
+          "samples": 30,
+          "median_ms": 0.441,
+          "p95_ms": 0.7244,
+          "max_ms": 0.7419
+        },
+        {
+          "label": "metadata_ignored",
+          "query": "metadataonlyneedle",
+          "category": "typical",
+          "matches": 0,
+          "returned": 0,
+          "samples": 30,
+          "median_ms": 0.4625,
+          "p95_ms": 0.6656,
+          "max_ms": 0.8297
+        },
+        {
+          "label": "all_notes",
+          "query": "evidence",
+          "category": "broad_stress",
+          "matches": 1000,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 3.3221,
+          "p95_ms": 4.04,
+          "max_ms": 4.0906
+        },
+        {
+          "label": "one_character",
+          "query": "e",
+          "category": "broad_stress",
+          "matches": 1000,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 4.9332,
+          "p95_ms": 6.5098,
+          "max_ms": 6.5671
+        }
+      ]
+    },
+    {
+      "notes": 10000,
+      "folders": 1000,
+      "document_bytes": {
+        "min": 1363,
+        "mean": 3281.47,
+        "max": 6100,
+        "total": 32814678
+      },
+      "corpus_sha256": "fbecdf0c971aa9a0cfef43247c4f269c37fd4f0e05da9b51696652b890df680b",
+      "fixture_setup_ms": 4204.329,
+      "sqlite": {
+        "journal_mode": "delete",
+        "page_size": 4096
+      },
+      "database_bytes": 86286336,
+      "queries": [
+        {
+          "label": "exact_title",
+          "query": "Windows identity 00042",
+          "category": "typical",
+          "matches": 1,
+          "returned": 1,
+          "samples": 30,
+          "median_ms": 1.4328,
+          "p95_ms": 1.6978,
+          "max_ms": 1.7033
+        },
+        {
+          "label": "partial_title",
+          "query": "network",
+          "category": "typical",
+          "matches": 1000,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 5.0038,
+          "p95_ms": 5.9955,
+          "max_ms": 6.1491
+        },
+        {
+          "label": "heading",
+          "query": "discovery",
+          "category": "typical",
+          "matches": 3334,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 12.5564,
+          "p95_ms": 13.1003,
+          "max_ms": 13.1604
+        },
+        {
+          "label": "body_rare",
+          "query": "triagesignal",
+          "category": "typical",
+          "matches": 100,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 2.0719,
+          "p95_ms": 2.9995,
+          "max_ms": 3.3035
+        },
+        {
+          "label": "body_medium",
+          "query": "servicetrace",
+          "category": "typical",
+          "matches": 1000,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 5.0993,
+          "p95_ms": 5.8308,
+          "max_ms": 6.4143
+        },
+        {
+          "label": "body_common",
+          "query": "commontrace",
+          "category": "typical",
+          "matches": 5000,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 17.7311,
+          "p95_ms": 19.8376,
+          "max_ms": 20.0071
+        },
+        {
+          "label": "nested_prefix",
+          "query": "enum",
+          "category": "typical",
+          "matches": 10000,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 25.4444,
+          "p95_ms": 26.4955,
+          "max_ms": 28.1952
+        },
+        {
+          "label": "code_and",
+          "query": "nmap -sV",
+          "category": "typical",
+          "matches": 1000,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 5.9072,
+          "p95_ms": 6.6719,
+          "max_ms": 6.856
+        },
+        {
+          "label": "technical_ip",
+          "query": "127.0.0.1",
+          "category": "typical",
+          "matches": 1000,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 7.5448,
+          "p95_ms": 9.1157,
+          "max_ms": 9.2544
+        },
+        {
+          "label": "unicode",
+          "query": "cafe \u65e5\u672c\u8a9e",
+          "category": "typical",
+          "matches": 500,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 3.6783,
+          "p95_ms": 4.4223,
+          "max_ms": 4.7955
+        },
+        {
+          "label": "unique_body",
+          "query": "canary00000042",
+          "category": "typical",
+          "matches": 1,
+          "returned": 1,
+          "samples": 30,
+          "median_ms": 1.1594,
+          "p95_ms": 1.3215,
+          "max_ms": 1.4355
+        },
+        {
+          "label": "miss",
+          "query": "nomatchingtokenxyz",
+          "category": "typical",
+          "matches": 0,
+          "returned": 0,
+          "samples": 30,
+          "median_ms": 1.1117,
+          "p95_ms": 1.486,
+          "max_ms": 1.4869
+        },
+        {
+          "label": "metadata_ignored",
+          "query": "metadataonlyneedle",
+          "category": "typical",
+          "matches": 0,
+          "returned": 0,
+          "samples": 30,
+          "median_ms": 1.1457,
+          "p95_ms": 1.511,
+          "max_ms": 1.5182
+        },
+        {
+          "label": "all_notes",
+          "query": "evidence",
+          "category": "broad_stress",
+          "matches": 10000,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 25.3737,
+          "p95_ms": 26.5953,
+          "max_ms": 27.8825
+        },
+        {
+          "label": "one_character",
+          "query": "e",
+          "category": "broad_stress",
+          "matches": 10000,
+          "returned": 20,
+          "samples": 30,
+          "median_ms": 35.955,
+          "p95_ms": 37.4701,
+          "max_ms": 37.5189
+        }
+      ]
+    }
+  ]
+}

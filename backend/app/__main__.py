@@ -22,7 +22,7 @@ def main():
         )
     except RuntimeError as error:
         parser.error(str(error))
-    uvicorn.run(application, host="127.0.0.1", port=args.port)
+    uvicorn.run(application, host="127.0.0.1", port=args.port, access_log=False)
 
 
 if __name__ == "__main__":

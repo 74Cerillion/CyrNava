@@ -1,5 +1,27 @@
 # Changelog
 
+## Unreleased — F-09 M4 validation candidate
+
+- Add a deterministic, temporary-data-only backend benchmark for 100/1,000/10,000 native notes, with raw metrics and explicit warm-cache timing boundaries.
+- Extend real-browser checks for search retry, unchanged-query title/path/deletion refresh, rejected saves, and schema-4 migration/restart/offline rebuild preserving raw canonical JSON, templates and image bytes.
+- Record the T-SEARCH-01–16 acceptance matrix, offline/logging checks, Git hygiene and owner release gates. No production behavior, dependency, schema or license change in M4.
+
+## Unreleased — F-09 frontend search M3
+
+- Add navigation-pane global search with 300 ms debounce, loading/empty/error states, retry and clear.
+- Show ranked title/path/previews with safe text highlighting and local keyboard navigation.
+- Cancel and invalidate obsolete queries, including repeated terms; refresh after saved/library changes.
+- Route result opening through existing upload/save/recovery guards and reveal fresh tree ancestors while preserving native documents.
+- Add client/component/navigation tests and focused Chromium/Firefox search journeys. M4 benchmarks and release work remain pending. No dependency/backend/schema changes in M3.
+
+## Unreleased — F-09 backend search M2
+
+- Add local FTS5 search across saved titles, headings and native rich-text content.
+- Synchronize derived text in note/template transactions with revision protection; preserve canonical JSON.
+- Add schema-5 backfill, exclusive upgrade/rebuild protection, offline index rebuilding and schema-3/4/5 backup support.
+- Add bounded literal-prefix query validation and plain-text snippets; suppress release access logging of queries.
+- Backend milestone only: frontend search and performance/release validation remain pending M3/M4. No dependency or license changes.
+
 ## Unreleased — desktop branding and CyrNava appearance
 
 - Add the selectable CyrNava skin while retaining Light/Dark/System and existing browser preferences.

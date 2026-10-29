@@ -153,3 +153,17 @@ class InstantiateTemplate(BaseModel):
 class DeleteTemplate(BaseModel):
     model_config = ConfigDict(extra="forbid")
     revision: Annotated[StrictInt, Field(ge=1)]
+
+
+class SearchResult(BaseModel):
+    note_id: str
+    title: str
+    folder_path: list[str]
+    snippet: str
+    score: float
+
+
+class SearchResponse(BaseModel):
+    query: str
+    total: int
+    results: list[SearchResult]

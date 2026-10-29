@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from uuid import UUID
 
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import FastAPI, HTTPException, Query, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.concurrency import run_in_threadpool
@@ -34,12 +34,14 @@ from app.models import (
     InstantiateTemplate,
     Note,
     RenameTemplate,
+    SearchResponse,
     TemplateSummary,
     UpdateFolder,
     UpdateNote,
 )
 from app.profile import profile_lock
 from app.release import serve_frontend
+from app.search import InvalidSearchQuery, SearchIndexError
 from app.templates import ProtectedTemplate, TemplateNotFound, TemplateStore
 
 
@@ -53,8 +55,8 @@ def create_app(
         # Resolve/create data only at startup, never at module import or in tests
         # that do not enter the application's lifespan.
         database = Database(database_path or default_database_path())
+        database.initialize()
         with profile_lock(database.path.parent):
-            database.initialize()
             application.state.database = database
             application.state.assets = AssetStore(database)
             application.state.templates = TemplateStore(
@@ -82,7 +84,11 @@ def create_app(
             {key: item[key] for key in ("loc", "msg", "type")}
             for item in error.errors()
         ]
-        return JSONResponse(status_code=422, content={"detail": details})
+        return JSONResponse(
+            status_code=422,
+            content={"detail": details},
+            headers={"Cache-Control": "no-store"},
+        )
 
     @application.exception_handler(sqlite3.Error)
     async def database_error(_request: Request, _error: sqlite3.Error):
@@ -201,6 +207,28 @@ def create_app(
     @application.get("/health")
     def health() -> dict[str, str]:
         return {"status": "ok"}
+
+    @application.get("/api/search", response_model=SearchResponse)
+    def search_notes(
+        request: Request,
+        response: Response,
+        q: str = Query(default="", max_length=200),
+        limit: int = Query(default=20, ge=1, le=50),
+    ):
+        response.headers["Cache-Control"] = "no-store"
+        try:
+            return request.app.state.database.search(q, limit)
+        except InvalidSearchQuery as error:
+            raise HTTPException(
+                422, str(error), headers={"Cache-Control": "no-store"}
+            ) from None
+        except (sqlite3.Error, SearchIndexError):
+            raise HTTPException(
+                503,
+                "Local search is unavailable. Stop CyrNava and rebuild the search "
+                "index if the problem persists.",
+                headers={"Cache-Control": "no-store"},
+            ) from None
 
     @application.post("/api/notes", response_model=Note, status_code=201)
     def create_note(body: CreateNote, request: Request):

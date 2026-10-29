@@ -1,11 +1,13 @@
 # Architecture of CyrNava v0.1.0
 
-CyrNava is a local cybersecurity knowledge workspace. It does not yet implement engagement/host/vulnerability entities, integrations, search, tags or cloud services. The code is a React/TypeScript UI plus a local Python/FastAPI application, with SQLite and raster image files outside the checkout.
+CyrNava is a local cybersecurity knowledge workspace. It does not yet implement engagement/host/vulnerability entities, integrations, tags or cloud services. Search is implemented through backend/frontend M3, with M4 validation and [synthetic benchmarks](search-benchmark.md). Owner commit/publication remains pending. The code is a React/TypeScript UI plus a local Python/FastAPI application, with SQLite and raster image files outside the checkout.
 
 ```mermaid
 flowchart TD
   App[React App: selection and management] --> Tree[DirectoryTree + native dialogs]
   App --> Note[PersistentNote + useAutosave]
+  App --> Search[GlobalSearch + search.ts]
+  Search --> API
   Note --> Adapter[KnowledgeEditor: BlockNote boundary]
   Adapter --> Upload[assets.ts: uploadImage]
   Note --> Client[notes.ts + library.ts + http.ts]
@@ -43,11 +45,13 @@ Desktop launches extend the existing `desktop/launcher.py` with an owning superv
 - `notes.ts`, `library.ts`, `assets.ts` and `http.ts` own HTTP contracts/timeouts/errors, not BlockNote internals. The browser remembers a preferred note ID plus unconfirmed recovery drafts through `drafts.ts`; SQLite remains authoritative. `PersistentNote` offers recovery before mounting the adapter. `useLifecycle` owns page leases independently of note selection.
 - `ManagementDialog` adds optional template selection to New note, defaulting to blank. `TemplateManager` handles the small custom rename/delete dialog. `templates.ts` owns those HTTP calls; `notes.createNoteFromTemplate` validates the resulting note with the existing note response checker. The editor imports no template API. `NoteHandle.getRevision` exposes only the latest acknowledged revision so a flushed snapshot can be captured without accepting unseen edits from another tab.
 
+- `components/GlobalSearch.tsx` owns query text, 300 ms debounce, cancellation/generation guards, result status and combobox/listbox keyboard selection. Its only navigation output is a note ID. `search.ts` validates the existing M2 response, uses the shared timed HTTP client and preserves backend ranking. Search state stays in memory. `App.openSearchNote` uses `perform` for different notes, then fetches canonical JSON and a fresh tree before committing selection/ancestor expansion. The already-open note keeps its editor. `refreshTree` also invalidates active search results after committed changes, without updating the editor.
+
 ## Backend and persistence
 
 `app/main.py` owns routing and maps domain errors to 404/409/422/503. `models.py` validates request envelopes. `documents.py` bounds native JSON and validates known properties against `document_format_v1.json`, a snapshot checked against the editor adapter schema. Unknown blocks/content shapes remain outside the version-1 boundary; bounded extension metadata is preserved. See [document compatibility](document-format.md). `database.py` owns connections, parameterized SQL and transactions. Every connection enables foreign keys. `BEGIN IMMEDIATE` serializes relationship validation and writes. Note updates use an atomic expected-revision predicate; stale writes affect no content.
 
-Schema version is 4. Folders form nullable-parent adjacency lists; notes use nullable folder IDs, titles, native `document_json`, format version 1, revision and timestamps. Asset metadata links opaque UUIDs to owning notes and generated disk basenames. The M1-to-M2 migration copied named note fields unchanged; M4 added assets. FF-018 adds `templates` and `template_images` in the established initialization transaction without rebuilding or rewriting notes, folders or assets. Future schema versions fail rather than resetting a newer database.
+Schema version is 5. Folders form nullable-parent adjacency lists; notes use nullable folder IDs, titles, native `document_json`, format version 1, revision and timestamps. Asset metadata links opaque UUIDs to owning notes and generated disk basenames. The M1-to-M2 migration copied named note fields unchanged; M4 added assets. FF-018 adds `templates` and `template_images` in the established initialization transaction without rebuilding or rewriting notes, folders or assets. F-09 M2 adds the derived `note_search_documents` projection and external-content FTS5 `note_search` index, populated from native JSON. Projection triggers synchronize FTS; successful canonical note create/update and template instantiation update the projection in their existing transactions. Cascading note deletion removes search entries. Search reads a consistent snapshot and resolves current folder breadcrumbs. The offline rebuild command replaces derived objects only. See [search design and operation](search.md). Future schema versions fail rather than resetting a newer database.
 
 `app/templates.py` owns five built-in definitions and `TemplateStore` operations. Custom templates store native JSON, format version, revision, timestamps and name in `templates`. `template_images` stores independent normalized raster snapshots as SQLite BLOBs, keyed by template and original asset UUID, with a cascading foreign key to its template. These are not references to source-note files. The 50 MiB aggregate cap bounds materialized image reads per template; the existing 10 MiB per-image/decode limits remain in force. Built-ins are code-owned and are not duplicated in SQLite.
 
@@ -57,11 +61,11 @@ Capture takes a source note ID and expected confirmed revision. Under `BEGIN IMM
 
 Data is at `$XDG_DATA_HOME/engage/` for absolute XDG values, otherwise `~/.local/share/engage/`. New directories/files use 0700/0600. The checkout is rejected as a runtime data or backup location. Data is local and unencrypted; localhost is not protection from malware running as the same OS user.
 
-## Three concrete flows
+## Concrete flows
 
 ### A. Save a note
 
-Typing → `BlockNoteView.onChange` → structured native snapshot from `KnowledgeEditor` → `useAutosave.changeDocument` → debounced `notes.updateNote` → `http.request` PATCH with expected revision → `main.update_note` and Pydantic validation → `Database.update` validates image ownership and updates `WHERE id=? AND revision=?` inside a transaction → commit/revision increment → checked response → acknowledge that local version → Saved only when the current version is confirmed. New typing during a request remains unsaved and is sent next. A conflict preserves the draft.
+Typing → `BlockNoteView.onChange` → structured native snapshot from `KnowledgeEditor` → `useAutosave.changeDocument` → debounced `notes.updateNote` → `http.request` PATCH with expected revision → `main.update_note` and Pydantic validation → `Database.update` validates image ownership and updates `WHERE id=? AND revision=?` inside a transaction → `search.index_note` extracts text and updates the projection/FTS within that transaction → commit/revision increment → checked response → acknowledge that local version → Saved only when the current version is confirmed. New typing during a request remains unsaved and is sent next. A conflict preserves the draft.
 
 ### B. Retrieve an image
 
@@ -71,10 +75,14 @@ Typing → `BlockNoteView.onChange` → structured native snapshot from `Knowled
 
 Tree selection chooses the parent → `App.newItem`/`manage` uses `perform` to flush the current editor → `ManagementDialog` collects name/destination → `library.createFolder` or `updateFolder` → FastAPI `create_folder`/`update_folder` validates UUID/name → `Database.create_folder`/`update_folder` checks parent/cycles and writes in a serialized transaction → response → `refreshAfterChange` reads authoritative summaries → tree updates, reveals ancestors and restores focus. Folder deletion adds fresh descendant counts and a subtree fingerprint; the backend rechecks intent and deletes children first atomically. Assets are cleaned only after a committed deletion.
 
+### D. Search and open a result
+
+Typing in `GlobalSearch` → cancel/invalidate old query state → 300 ms timer → `search.searchNotes` → shared `http.request` GET `/api/search` → M2 `Database.search` and FTS5 → validated response → render plain text/highlights if the request is still current. Arrow keys stay on the search field with `aria-activedescendant`; Enter/click emits a note ID. `App.openSearchNote` → `perform` → `PersistentNote.flush` uploads/saves → `getNote` + `refreshTree` → check note is still present → `setNote`/`setSelected`/`reveal`/`remember`. A failed flush or read keeps the original editor mounted. Search success never writes note content.
+
 ## Recovery and dependencies
 
-`profile.py` uses cooperative shared locks during backend lifetime and exclusive locks for offline backup. `backup.py` validates read-only SQLite, ownership, images and manifest hashes, copies unchanged data through private staging, refuses existing destinations and restores to a new profile. It is an offline procedure, not live snapshotting. External/older writers must also be stopped. See [backup instructions](../BACKUP_RESTORE.md).
+`profile.py` uses cooperative shared locks during backend lifetime and exclusive locks for offline backup/rebuild. Schema upgrades also require exclusivity through commit; current-schema initialization and the serving lifetime use shared locks. The application does not serve requests between initialization and acquiring its lifetime lock. A competing offline operation can cause startup to refuse safely. `backup.py` validates read-only SQLite, ownership, images and manifest hashes, copies unchanged data through private staging, refuses existing destinations and restores to a new profile. It is an offline procedure, not live snapshotting. External/older writers must also be stopped. See [backup instructions](../BACKUP_RESTORE.md).
 
-Backup validation accepts schema 3 and 4. For schema 4 it additionally validates template JSON, image membership, MIME, size and raster decoding. Template image snapshots are already in the SQLite file, so the manifest format and filesystem asset layout stay unchanged. Restoring a schema-3 backup preserves that copy verbatim; the new backend migrates only the restored runtime copy on startup. Old application versions reject schema 4; downgrade requires the retained pre-upgrade backup.
+Backup validation accepts schema 3, 4 and 5. For schema 4 and 5 it additionally validates template JSON, image membership, MIME, size and raster decoding. Template image snapshots are already in the SQLite file, so the manifest format and filesystem asset layout stay unchanged. Restoring a schema-3 backup preserves that copy verbatim; the new backend migrates only the restored runtime copy on startup. Old application versions reject schema 5; downgrade requires the retained pre-upgrade backup.
 
 Runtime frontend dependencies are the three non-XL BlockNote packages, React/React DOM and Mantine. Runtime backend dependencies are FastAPI/Pydantic/Uvicorn/Pillow and their pinned resolution. Vitest/Testing Library and Playwright cover different testing layers; they are not production services. Versions and obligations are in [dependency review](dependencies-and-licenses.md). ADRs record observed decisions, not invented historical discussions.

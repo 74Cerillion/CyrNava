@@ -21,6 +21,7 @@ import { useComputedColorScheme } from '@mantine/core';
 import { AppearanceControl, AppearanceProvider } from './appearance';
 import { useCyrnavaTheme } from './appearanceContext';
 import { Icon } from './components/Icon';
+import { GlobalSearch } from './components/GlobalSearch';
 
 // Compatibility identifiers preserve existing preferred notes, drafts and settings.
 export const NOTE_ID_KEY = 'engage.note-id.v1';
@@ -52,6 +53,7 @@ function Workspace() {
   const [templateManager, setTemplateManager] = useState(false);
   const [templateNotice, setTemplateNotice] = useState<string | null>(null);
   const [loadAttempt, setLoadAttempt] = useState(0);
+  const [searchRefresh, setSearchRefresh] = useState(0);
   const editor = useRef<NoteHandle>(null);
   const operation = useRef(false);
   const treeRequest = useRef(0);
@@ -66,6 +68,9 @@ function Workspace() {
   }, []);
 
   const refreshTree = useCallback(async () => {
+    // Saves/mutations have committed before callers refresh the library. Search
+    // must refresh even if the subsequent tree read fails.
+    setSearchRefresh((value) => value + 1);
     const generation = ++treeRequest.current;
     const tree = await getTree(lifetime.current?.signal);
     if (!lifetime.current?.signal.aborted && generation === treeRequest.current) setData(tree);
@@ -139,6 +144,29 @@ function Workspace() {
       const saved = await getNote(item.value.id, lifetime.current?.signal);
       if (lifetime.current?.signal.aborted) return;
       setNote(saved); setSelected(itemKey(item)); reveal(data, saved.folder_id); remember(saved.id);
+    });
+  }
+
+  function openSearchNote(id: string) {
+    if (blocked) return;
+    if (note?.id === id) {
+      // App.note can predate the editor's latest acknowledged autosave revision.
+      // Keep the live editor/draft rather than remounting it from that snapshot.
+      setSelected(`note:${id}`);
+      const summary = data.notes.find((item) => item.id === id);
+      reveal(data, summary ? summary.folder_id : note.folder_id);
+      return;
+    }
+    void perform(async () => {
+      const saved = await getNote(id, lifetime.current?.signal);
+      const tree = await refreshTree();
+      if (lifetime.current?.signal.aborted) return;
+      const summary = tree.notes.find((item) => item.id === id);
+      if (!summary) throw new Error('This note is no longer in the library. Refresh search and try again.');
+      // Commit the transition only after both reads succeed. Results may refer
+      // to notes/folders absent from a stale local tree, or deleted in another tab.
+      setNote(saved); setSelected(`note:${saved.id}`);
+      reveal(tree, summary.folder_id); remember(saved.id);
     });
   }
 
@@ -218,6 +246,7 @@ function Workspace() {
     <aside id="workspace-navigation" className="sidebar" aria-label="Workspace navigation" hidden={navigationCollapsed}>
       <div className="brand"><img src="/assets/branding/cyrnava-256.png" alt="" width="128" height="128" />
         <div><h1>CyrNava</h1><p className="eyebrow">LOCAL WORKSPACE · v{version}</p></div></div>
+      <GlobalSearch disabled={blocked} refreshVersion={searchRefresh} onOpen={openSearchNote} />
       <button className="secondary root-button" disabled={blocked} onClick={() => setSelected(null)}><Icon name="home" />Workspace root</button>
       <div className="library-actions create-actions">
         <button disabled={blocked} onClick={() => newItem('new-folder')}><Icon name="folder" />New folder</button>

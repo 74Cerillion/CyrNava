@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
 
+from app.profile import profile_lock, require_exclusive
+from app.search import create_index, index_note, require_index, search_notes
+
 
 class NoteNotFound(Exception):
     pass
@@ -61,16 +64,24 @@ class Database:
             connection.close()
 
     def initialize(self) -> None:
+        # Also protect direct initialization callers. Commit the migration while
+        # holding the exclusive lock; normal current-schema startup stays shared.
+        with profile_lock(self.path.parent) as descriptor:
+            self._initialize(descriptor)
+
+    def _initialize(self, lock_descriptor) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
         # Exclusive creation avoids truncating an existing database.
         descriptor = os.open(self.path, os.O_CREAT | os.O_RDWR, 0o600)
         os.close(descriptor)
         with self.connect() as connection:
             # Serializes first startup/schema changes across local processes.
-            connection.execute("BEGIN IMMEDIATE")
             version = connection.execute("PRAGMA user_version").fetchone()[0]
-            if version > 4:
+            if version > 5:
                 raise RuntimeError("Database schema is newer than this CyrNava version")
+            if version < 5:
+                require_exclusive(lock_descriptor)
+            connection.execute("BEGIN IMMEDIATE")
             if version < 2:
                 connection.execute("""
                     CREATE TABLE folders (
@@ -147,6 +158,10 @@ class Database:
                     )
                 """)
                 connection.execute("PRAGMA user_version = 4")
+            if version < 5:
+                create_index(connection)
+                connection.execute("PRAGMA user_version = 5")
+            require_index(connection)
 
     @staticmethod
     def _note(row: sqlite3.Row) -> dict:
@@ -184,6 +199,7 @@ class Database:
             row = connection.execute(
                 "SELECT * FROM notes WHERE id = ?", (note_id,)
             ).fetchone()
+            index_note(connection, row)
         return self._note(row)
 
     def get(self, note_id: str) -> dict:
@@ -232,7 +248,14 @@ class Database:
             row = connection.execute(
                 "SELECT * FROM notes WHERE id = ?", (note_id,)
             ).fetchone()
+            index_note(connection, row)
         return self._note(row)
+
+    def search(self, query: str, limit: int = 20):
+        with self.connect() as connection:
+            # Count, ranked rows and folder breadcrumbs share one read snapshot.
+            connection.execute("BEGIN")
+            return search_notes(connection, query, limit)
 
     @staticmethod
     def _check_images(connection, note_id, document):

@@ -7,6 +7,7 @@ from uuid import UUID, uuid4
 from app.assets import ASSET_NAME, FORMATS, validate_image
 from app.database import Database, InvalidRelationship, NoteNotFound, RevisionConflict
 from app.documents import validate_document
+from app.search import index_note
 
 # Data, not commands: code sections start empty and nothing is executed.
 STARTERS = (
@@ -341,6 +342,7 @@ class TemplateStore:
                 saved = connection.execute(
                     "SELECT * FROM notes WHERE id=?", (note_id,)
                 ).fetchone()
+                index_note(connection, saved)
             return Database._note(saved)
         except BaseException:
             # SQL rollback removes partial records. Generated files are removed

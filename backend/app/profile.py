@@ -22,8 +22,22 @@ def profile_lock(directory: Path, *, offline: bool = False):
             fcntl.flock(fd, mode | fcntl.LOCK_NB)
         except BlockingIOError:
             raise ProfileBusy(
-                "Stop all CyrNava backend processes before backup or restore."
+                "Stop all CyrNava backend processes before offline maintenance."
             ) from None
-        yield
+        yield fd
     finally:
         os.close(fd)
+
+
+def require_exclusive(fd):
+    """Upgrade an initialization lock; retain exclusivity until its context exits.
+
+    flock conversion may release the shared lock on failure. The caller must
+    abort initialization, not continue using a potentially unlocked descriptor.
+    """
+    try:
+        fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        raise ProfileBusy(
+            "Stop all CyrNava backend processes before upgrading the search schema."
+        ) from None

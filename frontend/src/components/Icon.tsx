@@ -1,5 +1,6 @@
 // Small local UI glyphs; the authoritative emblem is always the supplied PNG.
 const paths = {
+  search: 'm21 21-5-5M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0',
   home: 'm3 10 9-7 9 7M5 9v12h5v-7h4v7h5V9',
   folder: 'M3 6h7l2 3h9v11H3zM3 6V4h7l2 2',
   note: 'M5 3h10l4 4v14H5zM14 3v5h5M8 12h8M8 16h8',

@@ -22,6 +22,7 @@ Existing `engage/engage.sqlite3`, image files, browser keys (`engage.*`), progra
 - Collapsible navigation with a browser-local preference, preserving the open editor and pending edits.
 - Five built-in pentesting note templates plus reusable custom templates with independent screenshot copies.
 - Light, Dark, System and CyrNava appearance across the workspace, editor, menus and dialogs.
+- Global search across saved titles, headings, code and rich text, with safe result navigation.
 
 ## Appearance
 
@@ -41,7 +42,17 @@ To reuse your own structure, open the source note, choose **Save as template**, 
 
 **Manage templates** lists all templates and allows custom rename/delete with deletion confirmation. Built-ins cannot be renamed or deleted. To change a custom template's content, create a new template from an edited note, then optionally delete the old one. Names need not be unique. A custom template supports up to **50 MiB total copied images**; existing per-image and document limits still apply. Failures stay visible and do not create partial notes/templates.
 
-Custom templates are private application data in the existing external SQLite database, included in offline backup/restore. The first start of this code adds schema version 4; it does not rewrite existing notes or assets. Before upgrading an everyday profile, stop CyrNava and take a backup using [BACKUP_RESTORE.md](BACKUP_RESTORE.md). Older application code cannot open schema 4: keep a pre-upgrade backup if rollback may be needed. See the [FF-006 / FF-018 engineering report](FEATURES_FF006_FF018_REPORT.md) for implementation and verification details.
+Custom templates are private application data in the existing external SQLite database, included in offline backup/restore. Templates were introduced in schema 4; current startup adds the schema-5 search index without rewriting existing notes or assets. Before upgrading an everyday profile, stop CyrNava and take a backup using [BACKUP_RESTORE.md](BACKUP_RESTORE.md). Older application code cannot open schema 5: keep a pre-upgrade backup if rollback may be needed. See the [FF-006 / FF-018 engineering report](FEATURES_FF006_FF018_REPORT.md) for implementation and verification details.
+
+## Full-text search — F-09 candidate
+
+Use **Search all notes...** near the top of the navigation pane. Results update after a 300 ms pause and show ranked titles, folder paths and text previews. Use ↑/↓ and Enter to open a result, or click it; Escape or **Clear search** resets the query. Search covers saved titles, headings, code and rich-text content across every folder. Results retain the backend relevance order and highlight matching text safely.
+
+Opening another result waits for pending uploads and saves. A failed save or unresolved draft recovery keeps the current note open. Selecting the already-open result preserves its live editor. Search failures have their own **Retry search** control. Successful saves and library changes refresh the active query; unconfirmed typing is not searchable yet. Queries are held only in page memory and clear on reload.
+
+The M2 local `GET /api/search` API and SQLite FTS5 remain unchanged. See the [user/API, upgrade and offline rebuild guide](docs/search.md), [M2 backend report](F09_M2_REPORT.md) and [M3 UI report](F09_M3_REPORT.md). M4 validation and reproducible scale measurements are recorded in the [M4 report](F09_M4_REPORT.md), [benchmark method/results](docs/search-benchmark.md) and [search release checklist](docs/search-release-checklist.md). Owner commit/publication and the existing license decision remain pending.
+
+Stop every backend and retain a verified pre-upgrade backup before first startup: this code upgrades the external database to **schema 5**. Previous application code refuses that schema. No new packages or remote services are required; Python’s SQLite runtime must include FTS5.
 
 ## Screenshots
 
@@ -140,7 +151,7 @@ Open **http://127.0.0.1:8000**. FastAPI serves the bundled frontend and API; Vit
 ```bash
 # Terminal 1, from the repository root
 cd backend
-.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --no-access-log
 ```
 
 ```bash
@@ -203,7 +214,7 @@ npm run test:e2e
 npm run test:release
 ```
 
-On minimal Ubuntu, `npx playwright install --with-deps chromium` also installs browser system libraries. Browser installation is development tooling, not an application runtime dependency. Tests create temporary profiles, launch their own loopback servers and clean up. They never target your personal profile. Build before `test:release`. See [M6 verification and T-01–T-12 matrix](M6_VERIFICATION.md).
+On minimal Ubuntu, `npx playwright install --with-deps chromium` also installs browser system libraries. Browser installation is development tooling, not an application runtime dependency. Tests create temporary profiles, launch their own loopback servers and clean up. They never target your personal profile. Build before browser tests. F-09 scale checks use `.venv/bin/python -m benchmarks.search` from `backend/`; see [the benchmark guide](docs/search-benchmark.md). See [M6 verification and T-01–T-12 matrix](M6_VERIFICATION.md).
 
 ## Known limitations
 
@@ -215,4 +226,4 @@ The owner has explicitly left the original-code license **pending**. No open-sou
 
 ## Development roadmap
 
-Phase 1 implements the local knowledge workspace described above. M6 prepares its release candidate. Broader engagement management, search, tags, integrations and other Phase 2 work require separate owner authorization. No future release dates are promised. See [changelog](CHANGELOG.md), [release draft](docs/release-notes-v0.1.0.md), and [M6 engineering report](M6_REPORT.md).
+Phase 1 implements the local knowledge workspace described above. M6 prepares its release candidate. F-09 search has passed M4 engineering validation; owner commit/publication and existing release/license gates remain pending. Broader engagement management, tags, integrations and other Phase 2 work require separate owner authorization. No future release dates are promised. See [changelog](CHANGELOG.md), [release draft](docs/release-notes-v0.1.0.md), and [M6 engineering report](M6_REPORT.md).

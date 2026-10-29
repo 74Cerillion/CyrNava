@@ -58,7 +58,7 @@ Recovery storage is per browser profile and exact origin (including port), unenc
 From the repository's `backend` directory:
 
 ```bash
-.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload --no-access-log
 ```
 
 From `frontend`, run `npm run dev` and open `http://127.0.0.1:5173`. Direct `python -m app` release serving also remains unmanaged. These paths return `managed: false` from `/api/lifecycle`; there is no watchdog, and closing the browser does not stop them. Stop with Ctrl+C. Do not run them on the managed application's port/profile simultaneously.

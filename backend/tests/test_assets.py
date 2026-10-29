@@ -5,6 +5,7 @@ from uuid import uuid4
 import pytest
 from fastapi.testclient import TestClient
 from PIL import Image
+from search_helpers import remove_search_schema
 
 from app.assets import MAX_BYTES, AssetStore
 from app.database import Database
@@ -301,6 +302,7 @@ def test_m2_migration_preserves_every_existing_note_field(tmp_path):
     database.initialize()
     original = database.create("Original", [{"type": "paragraph", "content": []}], 1)
     with database.connect() as connection:
+        remove_search_schema(connection)
         connection.execute("DROP TABLE template_images")
         connection.execute("DROP TABLE templates")
         connection.execute("DROP TABLE assets")
@@ -310,6 +312,6 @@ def test_m2_migration_preserves_every_existing_note_field(tmp_path):
     database.initialize()
     with database.connect() as connection:
         assert tuple(connection.execute("SELECT * FROM notes").fetchone()) == before
-        assert connection.execute("PRAGMA user_version").fetchone()[0] == 4
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == 5
         assert not connection.execute("PRAGMA foreign_key_check").fetchall()
     assert database.get(original["id"]) == original

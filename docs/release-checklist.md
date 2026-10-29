@@ -1,5 +1,7 @@
 # v0.1.0 owner release checklist
 
+This page is the historical M6 checklist. For current F-09 engineering evidence and owner gates, see the [search release checklist](search-release-checklist.md).
+
 This is a review candidate. Checked items refer to executed evidence in [M6 verification](../M6_VERIFICATION.md), not an authorization to publish.
 
 - [x] Initial repository audit recorded; existing persistence/schema preserved.
@@ -22,4 +24,4 @@ This is a review candidate. Checked items refer to executed evidence in [M6 veri
 - [ ] Owner commits/pushes approved files; repeat clean clone/install/tests against that exact public M6 commit. Do not substitute the M5 baseline evidence.
 - [ ] Owner authorizes tag/release, confirms draft wording/license and any attached artifact notices.
 
-No publication commands have been executed. Public-release classification: **NOT READY** while licensing/owner gates remain open. No Phase 2 work is included.
+No publication commands have been executed. Public-release classification: **NOT READY** while licensing/owner gates remain open. That M6 record did not include Phase 2; subsequent feature candidates are recorded separately.

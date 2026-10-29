@@ -5,6 +5,7 @@ from uuid import uuid4
 import pytest
 from fastapi.testclient import TestClient
 from PIL import Image
+from search_helpers import remove_search_schema
 
 from app.backup import BackupError, create_backup, restore_backup, validate_backup
 from app.database import Database
@@ -351,6 +352,7 @@ def test_schema3_migration_and_old_backup_restore_preserve_existing_rows(
     with TestClient(create_app(path)) as client:
         note, asset = pictured(client, document)
     with sqlite3.connect(path) as connection:
+        remove_search_schema(connection)
         connection.execute("DROP TABLE template_images")
         connection.execute("DROP TABLE templates")
         connection.execute("PRAGMA user_version = 3")
@@ -364,7 +366,7 @@ def test_schema3_migration_and_old_backup_restore_preserve_existing_rows(
     with sqlite3.connect(path) as connection:
         assert tuple(connection.execute("SELECT * FROM notes").fetchone()) == old_note
         assert connection.execute("SELECT * FROM assets").fetchall() == old_assets
-        assert connection.execute("PRAGMA user_version").fetchone()[0] == 4
+        assert connection.execute("PRAGMA user_version").fetchone()[0] == 5
     with TestClient(create_app(restored / "engage.sqlite3")) as client:
         assert client.get(f"/api/notes/{note['id']}").json() == note
         assert client.get(asset["url"]).status_code == 200
@@ -392,6 +394,7 @@ def test_schema4_failure_rolls_back_partial_migration(tmp_path, document):
     with TestClient(create_app(path)) as client:
         note = source(client, document)
     with sqlite3.connect(path) as connection:
+        remove_search_schema(connection)
         connection.execute("DROP TABLE template_images")
         connection.execute("DROP TABLE templates")
         connection.execute("PRAGMA user_version = 3")

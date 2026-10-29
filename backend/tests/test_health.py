@@ -19,6 +19,7 @@ def test_route_surface(client):
         ("/api/folders/{folder_id}/deletion-impact", {"GET"}),
         ("/api/folders/{folder_id}", {"DELETE"}),
         ("/health", {"GET"}),
+        ("/api/search", {"GET"}),
         ("/api/notes", {"POST"}),
         ("/api/notes/{note_id}", {"GET"}),
         ("/api/notes/{note_id}", {"PATCH"}),
