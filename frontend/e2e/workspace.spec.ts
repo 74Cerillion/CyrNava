@@ -268,6 +268,95 @@ test('appearance follows system and explicit preferences without changing notes,
   } finally { release(); await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
 });
 
+test('CyrNava reference appearance preserves the live editor, local images and saved content', async ({ page }, info) => {
+  const env = await environment();
+  const external: string[] = [];
+  await page.route('**/*', (route) => {
+    if (new URL(route.request().url()).hostname !== '127.0.0.1') { external.push(route.request().url()); return route.abort(); }
+    return route.continue();
+  });
+  async function post(path: string, body: unknown) {
+    const response = await fetch(env.api + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+    expect(response.status).toBe(201); return response.json();
+  }
+  try {
+    await env.start(); await page.emulateMedia({ colorScheme: 'light' });
+    await post('/api/folders', { name: 'Defensive Security' });
+    const engagement = await post('/api/folders', { name: 'Engagements' });
+    const folder = await post('/api/folders', { name: 'Brains', parent_id: engagement.id });
+    await post('/api/folders', { name: "Fool’s Mate", parent_id: engagement.id });
+    await post('/api/folders', { name: 'FlareVM' });
+    await post('/api/folders', { name: 'Offensive Security' });
+    const note = await post('/api/notes', { title: 'Brains', folder_id: folder.id, document_json: [
+      { type: 'heading', props: { level: 1 }, content: [{ type: 'text', text: 'Discovery', styles: {} }] },
+      { type: 'paragraph', content: [{ type: 'text', text: "A synthetic local lab note: discover which services are running on the host, document the observations, and keep the supporting screenshot alongside the written explanation.", styles: {} }] },
+    ] });
+    const png = join(env.directory, 'visual-fixture.png');
+    execFileSync(python, ['-c', 'from PIL import Image,ImageDraw;import sys;im=Image.new("RGB",(600,340),"#f6f7f9");d=ImageDraw.Draw(im);d.rectangle((0,0,599,32),fill="#20324a");d.text((16,9),"Synthetic local evidence — example.test",fill="white");d.text((190,150),"Local service documentation",fill="#18212f",font_size=18);im.save(sys.argv[1])', png]);
+    const uploaded = await fetch(`${env.api}/api/assets?note_id=${note.id}`, { method: 'POST', headers: { 'content-type': 'image/png' }, body: await readFile(png) });
+    expect(uploaded.status).toBe(201); const asset = await uploaded.json();
+    const content = [...note.document_json, { type: 'image', props: { url: asset.url, previewWidth: 600 }, children: [] }, { type: 'paragraph', content: [] }];
+    const update = await fetch(`${env.api}/api/notes/${note.id}`, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ revision: note.revision, document_json: content }) });
+    expect(update.ok).toBe(true);
+    const before = await getJson(`${env.api}/api/notes/${note.id}`);
+    await page.setViewportSize({ width: 1618, height: 889 });
+    await page.goto(env.url); await saved(page);
+    const editor = page.getByRole('textbox', { name: 'Note content', exact: true });
+    const instance = await editor.elementHandle();
+    const appearance = page.getByRole('combobox', { name: 'Appearance', exact: true });
+    await appearance.selectOption('cyrnava');
+    await expect(page.locator('html')).toHaveAttribute('data-cyrnava-theme', 'true');
+    await expect(page.locator('.bn-container')).toHaveAttribute('data-color-scheme', 'dark');
+    await expect.poll(() => editor.locator('img').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth === 600)).toBe(true);
+    await readable(editor.locator('p').first()); await readable(page.locator('.editor-help'));
+    await readable(page.locator('.save-state')); await readable(page.locator('#note-title'));
+    await readable(page.getByRole('treeitem', { name: 'Note Brains', exact: true }));
+    for (const button of await page.getByRole('button').all()) {
+      if (await button.isVisible() && await button.isEnabled()) await readable(button);
+    }
+    expect(await editor.locator('img').evaluate((image) => getComputedStyle(image).filter)).toBe('none');
+    await page.screenshot({ path: info.outputPath('cyrnava-reference-viewport.png'), fullPage: false, animations: 'disabled' });
+    await page.setViewportSize({ width: 1680, height: 936 });
+    await page.screenshot({ path: info.outputPath('cyrnava-1680x936.png'), fullPage: false });
+    for (const mode of ['light', 'dark', 'auto', 'cyrnava']) {
+      await appearance.selectOption(mode);
+      expect(await instance!.evaluate((node) => node.isConnected)).toBe(true);
+    }
+    expect(await getJson(`${env.api}/api/notes/${note.id}`)).toEqual(before);
+    await page.reload(); await saved(page); await expect(appearance).toHaveValue('cyrnava');
+    await expect(page.locator('.bn-container')).toHaveAttribute('data-color-scheme', 'dark');
+    await page.getByRole('button', { name: 'Manage templates', exact: true }).click();
+    await expect(page.getByRole('dialog')).toBeVisible();
+    await page.screenshot({ path: info.outputPath('cyrnava-dialog.png') });
+    await page.keyboard.press('Escape');
+    await editor.locator('[data-content-type="paragraph"]').last().evaluate((element) => {
+      element.closest<HTMLElement>('[contenteditable="true"]')!.focus(); const range = document.createRange(); range.selectNodeContents(element); range.collapse(false);
+      const selection = window.getSelection()!; selection.removeAllRanges(); selection.addRange(range);
+    });
+    await page.keyboard.type('/heading');
+    const menu = page.locator('.bn-suggestion-menu');
+    await expect(menu).toBeVisible();
+    await expect(menu).toHaveCSS('background-color', 'rgb(16, 18, 27)');
+    await readable(menu.getByText('Heading 1', { exact: true }));
+    await page.screenshot({ path: info.outputPath('cyrnava-slash-menu.png'), animations: 'disabled' });
+    await page.keyboard.press('Escape');
+    await editor.locator('[data-content-type="paragraph"]').last().evaluate((element) => {
+      const range = document.createRange(); range.selectNodeContents(element);
+      const selection = window.getSelection()!; selection.removeAllRanges(); selection.addRange(range);
+    });
+    await page.keyboard.type('Persisted under the CyrNava theme.'); await saved(page);
+    await env.stopBackend(); await env.startBackend(); await page.reload(); await saved(page);
+    await expect(editor).toContainText('Persisted under the CyrNava theme.');
+    await expect(editor.locator('img')).toBeVisible();
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.getByRole('button', { name: 'Hide navigation', exact: true }).click();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(391);
+    await expect(editor.getByRole('heading', { level: 1 })).toHaveCSS('font-size', '36px');
+    await page.screenshot({ path: info.outputPath('cyrnava-mobile.png'), fullPage: true });
+    expect(external).toEqual([]);
+  } finally { await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+});
+
 test('navigation preference and reusable templates preserve independent rich notes and screenshots', async ({ page }, info) => {
   const env = await environment();
   const external: string[] = [];
@@ -651,6 +740,7 @@ test('all exposed editor actions persist; mixed content reconstructs after resta
       body: JSON.stringify({ revision: 1, document_json: fixture.mixed }) });
     expect(initial.status).toBe(200);
     await page.goto(env.url); await saved(page);
+    await page.getByRole('combobox', { name: 'Appearance', exact: true }).selectOption('cyrnava');
     const editor = page.getByRole('region', { name: 'Note editor' }).getByRole('textbox');
     for (let level = 1; level <= 6; level++) {
       await expect(editor.getByRole('heading', { name: 'Heading ' + level, exact: true })).toBeVisible();

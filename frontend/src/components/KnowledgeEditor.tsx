@@ -2,10 +2,12 @@ import { useEffect, useImperativeHandle, useRef, useState } from 'react';
 import type { Ref } from 'react';
 import { schema } from './editorSchema';
 import { BlockNoteView } from '@blocknote/mantine';
-import { FilePanel, FilePanelController, UploadTab, useCreateBlockNote } from '@blocknote/react';
+import { BlockNoteContext, FilePanel, FilePanelController, UploadTab, useCreateBlockNote } from '@blocknote/react';
 import type { FilePanelProps } from '@blocknote/react';
 import { uploadImage } from '../assets';
 import type { NoteDocument } from '../notes';
+import type { EditorAppearance } from '../appearanceContext';
+import { cyrnavaEditorTheme } from '../cyrnavaTheme';
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/mantine/style.css';
 
@@ -21,7 +23,7 @@ interface Props {
   onDocumentChange: (document: NoteDocument) => void;
   noteId: string;
   editable?: boolean;
-  theme?: 'light' | 'dark';
+  theme?: EditorAppearance;
   ref?: Ref<EditorHandle>;
 }
 
@@ -106,10 +108,12 @@ export function KnowledgeEditor({ initialDocument, onDocumentChange, noteId, edi
       <p className="hint editor-help">Use / for formatting and images. Paste a screenshot with Ctrl+V, or type /image to select a local PNG, JPEG or WebP.</p>
       {uploadCount > 0 && <p role="status">Uploading image… Wait before closing.</p>}
       {uploadError && <div role="alert">{uploadError} <button onClick={() => setUploadError(null)}>Dismiss image error</button></div>}
-      <BlockNoteView editor={editor} editable={editable} theme={theme} filePanel={false}
+      <BlockNoteContext.Provider value={{ colorSchemePreference: theme === 'cyrnava' ? 'dark' : theme }}>
+      <BlockNoteView editor={editor} editable={editable} theme={theme === 'cyrnava' ? cyrnavaEditorTheme : theme} filePanel={false}
         onChange={() => onDocumentChange(structuredClone(editor.document) as unknown as NoteDocument)}>
         <FilePanelController filePanel={LocalImagePanel} />
       </BlockNoteView>
+      </BlockNoteContext.Provider>
     </section>
   );
 }

@@ -51,6 +51,14 @@
   --selection: #345778;
 }
 body { margin: 0; }
+.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.brand img { width: 56px; height: 56px; object-fit: contain; flex-shrink: 0; }
+.brand h1 { margin: 0; }
+.brand .eyebrow { margin: 4px 0 0; }
+.ui-icon { width: 20px; height: 20px; flex-shrink: 0; vertical-align: middle; }
+button > .ui-icon, .save-state > .ui-icon { margin-right: 8px; }
+.note-icon .ui-icon { width: 16px; height: 16px; }
+.title-row { display: contents; }
 ::selection { background: var(--selection); color: var(--text); }
 a { color: var(--accent); }
 .workspace { display: grid; grid-template-columns: 300px minmax(0, 1fr); min-height: 100vh; }

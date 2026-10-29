@@ -76,6 +76,20 @@ def entry(root, python, icon, *, stop=False):
     )
 
 
+def choose_icon(requested, configured):
+    if requested:
+        return Path(requested).resolve()
+    previous = Path(configured or "")
+    placeholder = REPOSITORY / "desktop/icons/cyrnava.svg"
+    if previous.is_file():
+        # Replace only the known shipped placeholder. Preserve owner artwork.
+        legacy = placeholder.read_bytes()
+        known = (legacy, legacy.replace(b"CyrNava", b"ENGAGE"))
+        if previous.stat().st_size > 8192 or previous.read_bytes() not in known:
+            return previous
+    return REPOSITORY / "frontend/public/assets/branding/cyrnava-512.png"
+
+
 def install(args):
     if not sys.platform.startswith("linux") or sys.version_info[:2] != (3, 12):
         raise LaunchError(
@@ -205,14 +219,7 @@ def install(args):
             )
             applications = data_home / "applications"
             applications.mkdir(parents=True, exist_ok=True)
-            configured_icon = Path(existing_config.get("icon", ""))
-            icon = (
-                Path(args.icon).resolve()
-                if args.icon
-                else configured_icon
-                if configured_icon.is_file()
-                else REPOSITORY / "desktop/icons/cyrnava.svg"
-            )
+            icon = choose_icon(args.icon, existing_config.get("icon"))
             if not icon.is_file() or icon.suffix.lower() not in (".svg", ".png"):
                 raise LaunchError("Icon must be a readable PNG or SVG file.")
             icons = release / "desktop-icons"
@@ -305,7 +312,9 @@ def main():
     parser.add_argument("--port", type=int, default=8000)
     parser.add_argument("--desktop-dir", help="Override detected XDG desktop folder")
     parser.add_argument(
-        "--icon", help="Owner-approved PNG/SVG; otherwise use placeholder"
+        "--icon",
+        help="Custom PNG/SVG override; otherwise retain custom art "
+        "or use the original CyrNava logo",
     )
     args = parser.parse_args()
     try:

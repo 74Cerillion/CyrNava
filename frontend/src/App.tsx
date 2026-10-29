@@ -19,6 +19,8 @@ import type { TemplateSummary } from './templates';
 import { TemplateManager } from './components/TemplateManager';
 import { useComputedColorScheme } from '@mantine/core';
 import { AppearanceControl, AppearanceProvider } from './appearance';
+import { useCyrnavaTheme } from './appearanceContext';
+import { Icon } from './components/Icon';
 
 // Compatibility identifiers preserve existing preferred notes, drafts and settings.
 export const NOTE_ID_KEY = 'engage.note-id.v1';
@@ -32,6 +34,7 @@ export default function App() {
 
 function Workspace() {
   const theme = useComputedColorScheme('light', { getInitialValueInEffect: false });
+  const { cyrnava } = useCyrnavaTheme();
   const [navigationCollapsed, setNavigationCollapsed] = useState(() => {
     try { return localStorage.getItem(NAVIGATION_KEY) === 'true'; } catch { return false; }
   });
@@ -213,11 +216,12 @@ function Workspace() {
   return <div className="workspace" data-navigation-collapsed={navigationCollapsed}>
     <a className="skip-link" href="#note">Skip to note</a>
     <aside id="workspace-navigation" className="sidebar" aria-label="Workspace navigation" hidden={navigationCollapsed}>
-      <p className="eyebrow">LOCAL WORKSPACE · v{version}</p><h1>CyrNava</h1>
-      <button className="secondary root-button" disabled={blocked} onClick={() => setSelected(null)}>Workspace root</button>
-      <div className="library-actions">
-        <button disabled={blocked} onClick={() => newItem('new-folder')}>New folder</button>
-        <button disabled={blocked} onClick={() => newItem('new-note')}>New note</button>
+      <div className="brand"><img src="/assets/branding/cyrnava-256.png" alt="" width="128" height="128" />
+        <div><h1>CyrNava</h1><p className="eyebrow">LOCAL WORKSPACE · v{version}</p></div></div>
+      <button className="secondary root-button" disabled={blocked} onClick={() => setSelected(null)}><Icon name="home" />Workspace root</button>
+      <div className="library-actions create-actions">
+        <button disabled={blocked} onClick={() => newItem('new-folder')}><Icon name="folder" />New folder</button>
+        <button className="secondary new-note-button" disabled={blocked} onClick={() => newItem('new-note')}><Icon name="note" />New note</button>
       </div>
       <DirectoryTree data={data} expanded={expanded} selected={selected} openedNote={note?.id || null}
         busy={blocked} onSelect={selectItem} onManage={manage}
@@ -225,11 +229,11 @@ function Workspace() {
       <div className="library-actions">
         {(['rename', 'move', 'delete'] as const).map((action) => <button key={action} className="secondary"
           disabled={blocked || !selectedItem} onClick={() => selectedItem && manage(action, selectedItem)}>
-          {action[0].toUpperCase() + action.slice(1)}
+          <Icon name={action} />{action[0].toUpperCase() + action.slice(1)}
         </button>)}
-        <button className="secondary" disabled={blocked} onClick={() => void perform(async () => { await refreshTree(); })}>Refresh library</button>
+        <button className="secondary refresh-button" disabled={blocked} onClick={() => void perform(async () => { await refreshTree(); })}><Icon name="refresh" />Refresh library</button>
       </div>
-      <p className="status" role="status">Backend at page load: {health}</p>
+      <p className="status" role="status" data-health={health}>Backend at page load: {health}</p>
       <p className="hint">Arrow keys navigate. Enter opens notes or toggles folders. F2 renames; Delete asks for confirmation.</p>
       <p className="hint"><a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></p>
     </aside>
@@ -240,12 +244,12 @@ function Workspace() {
           onClick={() => {
             const next = !navigationCollapsed; setNavigationCollapsed(next);
             try { localStorage.setItem(NAVIGATION_KEY, String(next)); } catch { /* Preference remains usable for this page. */ }
-          }}>{navigationCollapsed ? 'Show navigation' : 'Hide navigation'}</button>
-        <button className="secondary" disabled={blocked} onClick={() => void perform(async () => { setTemplateManager(true); })}>Manage templates</button>
+          }}><Icon name={navigationCollapsed ? 'show' : 'hide'} />{navigationCollapsed ? 'Show navigation' : 'Hide navigation'}</button>
+        <button className="secondary" disabled={blocked} onClick={() => void perform(async () => { setTemplateManager(true); })}><Icon name="templates" />Manage templates</button>
         <button className="secondary" disabled={blocked || !note} onClick={() => note && void perform(async () => {
           const revision = editor.current!.getRevision();
           setDialog({ kind: 'save-template', parent: null, note: { ...note, revision } });
-        })}>Save as template</button>
+        })}><Icon name="save" />Save as template</button>
       </div>
       {templateNotice && <p role="status">{templateNotice}</p>}
       {lifecycleProblem && <p role="alert">{lifecycleProblem}</p>}
@@ -254,7 +258,7 @@ function Workspace() {
         {!note && <button onClick={() => { setLoading(true); setError(null); setLoadAttempt((n) => n + 1); }}>Retry opening library</button>}
       </div>}
       {loading ? <p role="status">Opening library...</p> : note ?
-        <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} theme={theme} locked={working || dialog !== null || templateManager || lifecycleProblem !== null} onSaved={noteSaved} onRecovered={(saved) => { setNote(saved); setEditorEpoch((n) => n + 1); setError(null); noteSaved(); }} />
+        <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} theme={cyrnava ? 'cyrnava' : theme} locked={working || dialog !== null || templateManager || lifecycleProblem !== null} onSaved={noteSaved} onRecovered={(saved) => { setNote(saved); setEditorEpoch((n) => n + 1); setError(null); noteSaved(); }} />
         : <header><h2>Select or create a note</h2><p>Choose a note in the library, or use New folder and New note to start.</p></header>}
     </main>
     {dialog && <ManagementDialog state={dialog} data={data} busy={working} error={error}

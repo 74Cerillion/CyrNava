@@ -4,6 +4,7 @@ import { beforeEach, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import { AppearanceControl, AppearanceProvider, APPEARANCE_KEY } from './appearance';
+import { CYRNAVA_THEME_KEY } from './appearanceContext';
 
 let systemDark = false;
 let listeners: Set<(event: { matches: boolean }) => void>;
@@ -62,6 +63,9 @@ it('still switches appearance if localStorage is unavailable', () => {
   try {
     mount(); fireEvent.change(screen.getByLabelText('Appearance'), { target: { value: 'dark' } });
     expect(screen.getByLabelText('Resolved appearance')).toHaveTextContent('dark');
+    fireEvent.change(screen.getByLabelText('Appearance'), { target: { value: 'cyrnava' } });
+    expect(screen.getByLabelText('Appearance')).toHaveValue('cyrnava');
+    expect(document.documentElement).toHaveAttribute('data-cyrnava-theme', 'true');
     expect(warning).toHaveBeenCalled();
   } finally { read.mockRestore(); write.mockRestore(); warning.mockRestore(); }
 });
@@ -73,7 +77,7 @@ it.each([
 ])('initial startup script resolves %s with OS dark=%s before React', (stored, dark, resolved) => {
   const attribute = vi.fn();
   runInNewContext(bootstrap, {
-    localStorage: { getItem: (key: string) => { expect(key).toBe(APPEARANCE_KEY); return stored; } },
+    localStorage: { getItem: (key: string) => { expect([APPEARANCE_KEY, CYRNAVA_THEME_KEY]).toContain(key); return key === APPEARANCE_KEY ? stored : null; } },
     matchMedia: () => ({ matches: dark }), document: { documentElement: { setAttribute: attribute } },
   });
   expect(attribute).toHaveBeenCalledWith('data-mantine-color-scheme', resolved);
@@ -85,4 +89,44 @@ it('initial startup script tolerates blocked storage and absent matchMedia', () 
     document: { documentElement: { setAttribute: attribute } },
   });
   expect(attribute).toHaveBeenCalledWith('data-mantine-color-scheme', 'light');
+});
+
+it('adds CyrNava without replacing the previous preference, and restores it on remount', () => {
+  localStorage.setItem(APPEARANCE_KEY, 'light');
+  const first = mount();
+  fireEvent.change(screen.getByLabelText('Appearance'), { target: { value: 'cyrnava' } });
+  expect(screen.getByLabelText('Appearance')).toHaveValue('cyrnava');
+  expect(screen.getByLabelText('Resolved appearance')).toHaveTextContent('dark');
+  expect(localStorage.getItem(APPEARANCE_KEY)).toBe('light');
+  expect(localStorage.getItem(CYRNAVA_THEME_KEY)).toBe('cyrnava');
+  SystemChange(false);
+  expect(document.documentElement).toHaveAttribute('data-cyrnava-theme', 'true');
+  first.unmount(); mount();
+  expect(screen.getByLabelText('Appearance')).toHaveValue('cyrnava');
+  fireEvent.change(screen.getByLabelText('Appearance'), { target: { value: 'auto' } });
+  expect(localStorage.getItem(CYRNAVA_THEME_KEY)).toBeNull();
+  SystemChange(true);
+  expect(screen.getByLabelText('Resolved appearance')).toHaveTextContent('dark');
+  expect(document.documentElement).toHaveAttribute('data-cyrnava-theme', 'false');
+});
+
+it('applies the branded preference before React even when System is light', () => {
+  const attribute = vi.fn();
+  runInNewContext(bootstrap, {
+    localStorage: { getItem: (key: string) => key === CYRNAVA_THEME_KEY ? 'cyrnava' : 'light' },
+    matchMedia: () => ({ matches: false }), document: { documentElement: { setAttribute: attribute } },
+  });
+  expect(attribute).toHaveBeenCalledWith('data-cyrnava-theme', 'true');
+  expect(attribute).toHaveBeenCalledWith('data-mantine-color-scheme', 'dark');
+});
+
+it('synchronizes the branded appearance across tabs', () => {
+  mount();
+  localStorage.setItem(CYRNAVA_THEME_KEY, 'cyrnava');
+  act(() => window.dispatchEvent(new StorageEvent('storage', { key: CYRNAVA_THEME_KEY, newValue: 'cyrnava' })));
+  expect(screen.getByLabelText('Appearance')).toHaveValue('cyrnava');
+  expect(screen.getByLabelText('Resolved appearance')).toHaveTextContent('dark');
+  localStorage.clear();
+  act(() => window.dispatchEvent(new StorageEvent('storage', { key: null })));
+  expect(screen.getByLabelText('Appearance')).toHaveValue('auto');
 });

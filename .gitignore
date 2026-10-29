@@ -13,10 +13,20 @@ data/
 notes/
 uploads/
 assets/
-# Only this application-owned startup script belongs in the local asset bundle.
+# Explicit application-owned assets only; user uploads remain excluded.
 !frontend/public/assets/
 frontend/public/assets/*
 !frontend/public/assets/appearance-init.js
+!frontend/public/assets/branding/
+frontend/public/assets/branding/*
+!frontend/public/assets/branding/DesktopLogo.png
+!frontend/public/assets/branding/cyrnava-16.png
+!frontend/public/assets/branding/cyrnava-32.png
+!frontend/public/assets/branding/cyrnava-48.png
+!frontend/public/assets/branding/cyrnava-64.png
+!frontend/public/assets/branding/cyrnava-128.png
+!frontend/public/assets/branding/cyrnava-256.png
+!frontend/public/assets/branding/cyrnava-512.png
 captures/
 *.pcap
 *.pcapng

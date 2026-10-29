@@ -1,0 +1,123 @@
+/* Palette values are centralized in cyrnavaTheme.ts. The single background
+   fallback also works before React installs Mantine's local CSS variables. */
+:root[data-cyrnava-theme="true"] {
+  color-scheme: dark;
+  --surface: var(--cyrnava-bg-primary, #050507);
+  --sidebar: var(--cyrnava-bg-secondary);
+  --text: var(--cyrnava-text-primary);
+  --muted: var(--cyrnava-text-secondary);
+  --eyebrow: var(--cyrnava-accent-blue-light);
+  --border: var(--cyrnava-bg-elevated);
+  --divider: var(--cyrnava-accent-blue);
+  --control-border: var(--cyrnava-border);
+  --accent: var(--cyrnava-accent-blue-light);
+  --on-accent: var(--cyrnava-text-primary);
+  --selected: var(--cyrnava-accent-blue-deep);
+  --hover: var(--cyrnava-bg-elevated);
+  --error: var(--cyrnava-error);
+  --danger: var(--cyrnava-accent-violet-deep);
+  --saved-bg: var(--cyrnava-bg-secondary);
+  --saved-text: var(--cyrnava-text-primary);
+  --warning-text: var(--cyrnava-warning);
+  --warning-bg: var(--cyrnava-bg-elevated);
+  --error-bg: var(--cyrnava-bg-elevated);
+  --selection: var(--cyrnava-accent-blue-deep);
+  background: var(--surface);
+}
+
+:root[data-cyrnava-theme="true"] .workspace {
+  grid-template-columns: 368px minmax(0, 1fr);
+  background: radial-gradient(ellipse at 95% 3%, rgb(32 80 128 / 8%), transparent 40%), var(--surface);
+}
+:root[data-cyrnava-theme="true"] .workspace[data-navigation-collapsed="true"] { grid-template-columns: minmax(0, 1fr); }
+:root[data-cyrnava-theme="true"] .sidebar {
+  padding: 20px;
+  background: linear-gradient(120deg, var(--surface), var(--sidebar));
+  border-right: 1px solid var(--cyrnava-accent-blue);
+  box-shadow: 1px 0 9px rgb(50 136 208 / 35%), inset -1px 0 3px rgb(112 48 176 / 35%);
+}
+:root[data-cyrnava-theme="true"] .brand { height: 128px; gap: 4px; margin-bottom: 18px; }
+:root[data-cyrnava-theme="true"] .brand img { width: 128px; height: 128px; }
+:root[data-cyrnava-theme="true"] .brand h1 {
+  font-size: 32px; font-weight: 650; letter-spacing: 4px; text-transform: uppercase;
+  background: linear-gradient(180deg, var(--text) 20%, var(--cyrnava-metallic-silver) 45%, var(--cyrnava-accent-blue) 70%, var(--cyrnava-accent-blue-light));
+  background-clip: text; color: transparent; line-height: 1.25;
+}
+:root[data-cyrnava-theme="true"] .brand .eyebrow { font-size: 12px; letter-spacing: .025em; font-weight: 400; white-space: nowrap; margin-top: 7px; text-align: center; }
+:root[data-cyrnava-theme="true"] main { padding: 42px 32px; }
+:root[data-cyrnava-theme="true"] .workspace-toolbar { gap: 12px; margin-bottom: 28px; }
+:root[data-cyrnava-theme="true"] .appearance-control { font-size: 16px; gap: 12px; margin: 0; }
+:root[data-cyrnava-theme="true"] .appearance-control select { min-height: 46px; padding: 10px 12px; }
+:root[data-cyrnava-theme="true"] button:not(.mantine-UnstyledButton-root) {
+  min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 15px; padding: 10px 16px; font-weight: 400; color: var(--accent);
+  border: 1px solid transparent;
+  background: linear-gradient(var(--surface), var(--sidebar)) padding-box,
+    linear-gradient(120deg, var(--cyrnava-accent-blue), var(--cyrnava-border-violet)) border-box;
+  box-shadow: inset 0 0 7px rgb(50 136 208 / 7%);
+}
+:root[data-cyrnava-theme="true"] button:not(.mantine-UnstyledButton-root):enabled:hover { filter: none; background: var(--hover); border-color: var(--accent); box-shadow: 0 0 8px rgb(50 136 208 / 25%); }
+:root[data-cyrnava-theme="true"] .sidebar .root-button { width: 100%; justify-content: flex-start; min-height: 48px; padding-left: 20px; margin: 0; font-size: 17px; box-shadow: -2px 0 7px rgb(50 136 208 / 65%); }
+:root[data-cyrnava-theme="true"] .root-button .ui-icon { width: 24px; height: 24px; color: var(--accent); }
+:root[data-cyrnava-theme="true"] .library-actions { gap: 10px; }
+:root[data-cyrnava-theme="true"] .library-actions button { margin: 8px 0 0; padding: 10px 12px; }
+:root[data-cyrnava-theme="true"] .library-actions > button:first-child:not(.secondary) { color: var(--text); background: linear-gradient(120deg, var(--cyrnava-accent-blue-deep), var(--cyrnava-accent-violet-deep)); box-shadow: 0 0 9px rgb(50 136 208 / 30%); }
+:root[data-cyrnava-theme="true"] .library-actions > button:nth-child(3) { color: var(--cyrnava-text-secondary); }
+:root[data-cyrnava-theme="true"] .new-note-button { flex: 1; }
+:root[data-cyrnava-theme="true"] .create-actions button { flex: 1; min-height: 48px; }
+:root[data-cyrnava-theme="true"] .sidebar .create-actions button:first-child { color: var(--surface); background: var(--cyrnava-accent-blue); }
+:root[data-cyrnava-theme="true"] .directory-tree { margin: 14px 0 6px; background: rgb(0 0 0 / 20%); border-color: var(--cyrnava-bg-elevated); }
+:root[data-cyrnava-theme="true"] [role="treeitem"] { min-height: 40px; padding-top: 9px; padding-bottom: 9px; font-size: 16px; color: var(--cyrnava-text-secondary); }
+:root[data-cyrnava-theme="true"] [role="treeitem"][aria-selected="true"] {
+  color: var(--text); background: linear-gradient(100deg, var(--cyrnava-accent-blue-deep), var(--cyrnava-accent-violet-deep));
+  box-shadow: inset 3px 0 var(--cyrnava-accent-blue-light), inset 0 0 0 1px var(--cyrnava-accent-blue), 0 0 8px rgb(50 136 208 / 30%);
+}
+:root[data-cyrnava-theme="true"] [role="treeitem"] button { min-height: 20px; height: 20px; padding: 0; border: 0; box-shadow: none; background: transparent; color: inherit; }
+:root[data-cyrnava-theme="true"] .library-actions .refresh-button { flex: 0 0 auto; margin-top: 4px; }
+:root[data-cyrnava-theme="true"] .status { margin: 32px 0 18px; font-size: 14px; }
+:root[data-cyrnava-theme="true"] .status::before { content: ''; display: inline-block; width: 10px; height: 10px; margin-right: 5px; border-radius: 50%; background: var(--cyrnava-warning); }
+:root[data-cyrnava-theme="true"] .status[data-health="online"]::before { background: var(--cyrnava-success); }
+:root[data-cyrnava-theme="true"] .status[data-health="offline"]::before { background: var(--error); }
+:root[data-cyrnava-theme="true"] .hint { font-size: 15px; }
+:root[data-cyrnava-theme="true"] header { position: relative; border: 0; padding-bottom: 28px; margin-bottom: 44px; }
+:root[data-cyrnava-theme="true"] header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--cyrnava-accent-blue), var(--cyrnava-accent-violet)); box-shadow: 0 0 5px rgb(50 136 208 / 20%); }
+:root[data-cyrnava-theme="true"] header::before { content: ''; position: absolute; z-index: 1; bottom: -5px; left: calc(50% - 5px); width: 10px; height: 10px; transform: rotate(45deg); background: linear-gradient(135deg, var(--cyrnava-accent-blue), var(--cyrnava-accent-violet)); border: 2px solid var(--surface); }
+:root[data-cyrnava-theme="true"] header label { font-size: 16px; margin-bottom: 12px; }
+:root[data-cyrnava-theme="true"] .title-row { display: flex; align-items: center; gap: 12px; max-width: 888px; }
+:root[data-cyrnava-theme="true"] #note-title { flex: 1; min-width: 0; width: 100%; max-width: none; height: 54px; font-size: 20px; padding: 12px 14px; }
+:root[data-cyrnava-theme="true"] header > .hint { font-size: 16px; margin: 26px 0 12px; }
+:root[data-cyrnava-theme="true"] .save-state { display: inline-flex; align-items: center; white-space: nowrap; padding: 10px 12px; font-size: 14px; font-weight: 400; margin: 0; min-height: 42px; border: 1px solid var(--cyrnava-accent-blue); background: linear-gradient(120deg, var(--sidebar), var(--cyrnava-accent-violet-deep)); }
+:root[data-cyrnava-theme="true"] .save-state[data-state="Saved"] .ui-icon { border-radius: 50%; color: var(--surface); background: var(--accent); padding: 2px; }
+:root[data-cyrnava-theme="true"] .save-state[data-state="Save Error"] { border-color: var(--error); color: var(--error); background: var(--error-bg); }
+:root[data-cyrnava-theme="true"] .save-state[data-state="Unsaved Changes"] { color: var(--warning-text); background: var(--warning-bg); }
+:root[data-cyrnava-theme="true"] .editor-help { margin: 0 0 16px; font-size: 16px; line-height: 24px; }
+:root[data-cyrnava-theme="true"] .editor > .bn-container {
+  min-height: 65vh; border: 1px solid var(--cyrnava-accent-blue); border-radius: 8px; overflow: hidden;
+  background: radial-gradient(ellipse at 100% 0, rgb(50 136 208 / 12%), transparent 35%), var(--surface);
+  box-shadow: 0 0 7px rgb(50 136 208 / 12%), inset -1px 0 2px rgb(112 48 176 / 35%);
+}
+:root[data-cyrnava-theme="true"] .bn-editor { background: transparent; color: var(--text); font-size: 18px; line-height: 1.55; padding: 4px 60px 60px; min-height: 65vh; }
+:root[data-cyrnava-theme="true"] .bn-editor h1 { font-size: 52px; line-height: 1.2; }
+:root[data-cyrnava-theme="true"] .bn-editor [data-content-type="codeBlock"] { background: var(--cyrnava-bg-secondary); color: var(--text); }
+:root[data-cyrnava-theme="true"] .bn-editor a { color: var(--cyrnava-accent-blue-light); }
+:root[data-cyrnava-theme="true"] dialog { background: var(--cyrnava-bg-secondary); box-shadow: 0 0 18px rgb(50 136 208 / 15%); }
+:root[data-cyrnava-theme="true"] :is(button, input, select, summary, a):focus-visible { outline: 2px solid var(--cyrnava-accent-blue-light); outline-offset: 3px; box-shadow: 0 0 8px rgb(50 136 208 / 35%); }
+
+@media (max-width: 1050px) and (min-width: 641px) {
+  :root[data-cyrnava-theme="true"] .workspace { grid-template-columns: 300px minmax(0, 1fr); }
+  :root[data-cyrnava-theme="true"] .brand img { width: 92px; height: 92px; }
+  :root[data-cyrnava-theme="true"] .brand h1 { font-size: 23px; letter-spacing: 1px; }
+  :root[data-cyrnava-theme="true"] main { padding: 28px 24px; }
+}
+@media (max-width: 640px) {
+  :root[data-cyrnava-theme="true"] .workspace { grid-template-columns: minmax(0, 1fr); }
+  :root[data-cyrnava-theme="true"] .sidebar { border-right: 0; border-bottom: 1px solid var(--cyrnava-accent-blue); }
+  :root[data-cyrnava-theme="true"] main { padding: 24px 16px; }
+  :root[data-cyrnava-theme="true"] .brand { height: 104px; }
+  :root[data-cyrnava-theme="true"] .brand img { width: 104px; height: 104px; }
+  :root[data-cyrnava-theme="true"] .brand h1 { font-size: 25px; letter-spacing: 2px; }
+  :root[data-cyrnava-theme="true"] .title-row { flex-wrap: wrap; }
+  :root[data-cyrnava-theme="true"] #note-title { flex-basis: 100%; }
+  :root[data-cyrnava-theme="true"] .bn-editor { padding: 24px; }
+  :root[data-cyrnava-theme="true"] .bn-editor h1 { font-size: 36px; }
+}

@@ -10,7 +10,7 @@ import type { NoteDocument } from '../notes';
 const snapshot: NoteDocument = [{ type: 'heading', id: 'heading-1', props: { level: 1 },
   content: [{ type: 'text', text: 'Formatted', styles: { bold: true } }], children: [] }];
 vi.mock('../assets', () => ({ uploadImage: vi.fn() }));
-vi.mock('@blocknote/react', () => ({ useCreateBlockNote: vi.fn(), FilePanelController: () => null, FilePanel: () => null, UploadTab: () => null }));
+vi.mock('@blocknote/react', async () => ({ BlockNoteContext: (await import('react')).createContext(undefined), useCreateBlockNote: vi.fn(), FilePanelController: () => null, FilePanel: () => null, UploadTab: () => null }));
 vi.mock('@blocknote/mantine', () => ({
   BlockNoteView: ({ onChange, theme }: { onChange: () => void; theme: string }) => <div data-testid="blocknote-view" data-theme={theme}><button onClick={onChange}>Editor change</button><img src="/api/assets/missing" alt="Saved evidence" /></div>,
 }));

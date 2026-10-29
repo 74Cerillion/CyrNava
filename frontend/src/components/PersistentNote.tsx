@@ -7,9 +7,11 @@ import { ConflictRecovery } from './ConflictRecovery';
 import { KnowledgeEditor } from './KnowledgeEditor';
 import { deferDraft, downloadDraft, findDrafts } from '../drafts';
 import type { RecoveryDraft } from '../drafts';
+import type { EditorAppearance } from '../appearanceContext';
+import { Icon } from './Icon';
 
 export interface NoteHandle { flush: () => Promise<boolean>; getRevision: () => number }
-interface Props { note: Note; theme?: 'light' | 'dark'; locked?: boolean; onSaved?: (note: Note) => void; onRecovered?: (note: Note) => void; ref?: Ref<NoteHandle>; recovered?: RecoveryDraft }
+interface Props { note: Note; theme?: EditorAppearance; locked?: boolean; onSaved?: (note: Note) => void; onRecovered?: (note: Note) => void; ref?: Ref<NoteHandle>; recovered?: RecoveryDraft }
 
 export function PersistentNote({ ref, ...props }: Props) {
   const [recovery] = useState(() => {
@@ -59,9 +61,9 @@ function NoteEditor({ note, theme = 'light', locked = false, onSaved, onRecovere
     <>
       <header>
         <label htmlFor="note-title">Note title</label>
-        <input id="note-title" value={save.title} maxLength={200} disabled={locked || recovering || preparingRecovery}
+        <div className="title-row"><input id="note-title" value={save.title} maxLength={200} disabled={locked || recovering || preparingRecovery}
           onChange={(event) => save.changeTitle(event.target.value)} />
-        <p className="save-state" data-state={save.status} role="status" aria-live="polite" aria-atomic="true">{save.status}</p>
+        <p className="save-state" data-state={save.status} role="status" aria-live="polite" aria-atomic="true"><Icon name={save.status === 'Saved' ? 'check' : save.status === 'Save Error' ? 'warning' : save.status === 'Saving...' ? 'save' : 'note'} />{save.status}</p></div>
         {save.recoveryError && <p role="alert">{save.recoveryError}</p>}
         {save.error && <div role="alert">
           <p>{save.error.message}</p>

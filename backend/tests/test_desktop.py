@@ -283,6 +283,37 @@ def managed_request(config, route, body=None):
         return json.load(response)
 
 
+def test_original_logo_assets_and_installer_selection(tmp_path):
+    import hashlib
+
+    from PIL import Image
+
+    assets = DESKTOP.parent / "frontend/public/assets/branding"
+    original = assets / "DesktopLogo.png"
+    assert hashlib.sha256(original.read_bytes()).hexdigest() == (
+        "0d5be626f349f83cde2dc0738242e7cccf13ed7b08c08ab85b6d6853fa69db24"
+    )
+    with Image.open(original) as source:
+        for size in (16, 32, 48, 64, 128, 256, 512):
+            with Image.open(assets / f"cyrnava-{size}.png") as icon:
+                assert icon.size == (size, size)
+                assert (
+                    icon.tobytes()
+                    == source.resize((size, size), Image.Resampling.LANCZOS).tobytes()
+                )
+    bundled = assets / "cyrnava-512.png"
+    assert installer.choose_icon(None, None) == bundled
+    placeholder = DESKTOP / "icons/cyrnava.svg"
+    assert installer.choose_icon(None, str(placeholder)) == bundled
+    older = tmp_path / "old-placeholder.svg"
+    older.write_bytes(placeholder.read_bytes().replace(b"CyrNava", b"ENGAGE"))
+    assert installer.choose_icon(None, str(older)) == bundled
+    custom = tmp_path / "custom.svg"
+    custom.write_text('<svg xmlns="http://www.w3.org/2000/svg"/>')
+    assert installer.choose_icon(None, str(custom)) == custom
+    assert installer.choose_icon(str(bundled), str(custom)) == bundled
+
+
 def until(predicate, timeout=8):
     deadline = time.monotonic() + timeout
     while not predicate():

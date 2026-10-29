@@ -3,6 +3,7 @@ import type { KeyboardEvent } from 'react';
 import type { DirectoryData } from '../library';
 import { itemKey, itemLabel, visibleRows } from '../tree';
 import type { TreeItem } from '../tree';
+import { Icon } from './Icon';
 
 export type ManagementAction = 'rename' | 'move' | 'delete';
 interface Props {
@@ -79,7 +80,7 @@ export function DirectoryTree({ data, expanded, selected, openedNote, busy, onTo
         {isFolder ? <button type="button" tabIndex={-1} disabled={busy}
           aria-label={`${expanded.has(row.item.value.id) ? 'Collapse' : 'Expand'} ${itemLabel(row.item)}`}
           onClick={(event) => { event.stopPropagation(); focus(key); onToggle(row.item.value.id); }}>
-          {expanded.has(row.item.value.id) ? '▾' : '▸'}</button> : <span aria-hidden="true" className="note-icon">▤</span>}
+          {expanded.has(row.item.value.id) ? '▾' : '▸'}</button> : <span aria-hidden="true" className="note-icon"><Icon name="note" /></span>}
         <span className="tree-label">{itemLabel(row.item)}</span>
         {!isFolder && openedNote === row.item.value.id && <span className="open-marker" aria-hidden="true">●</span>}
       </div>;

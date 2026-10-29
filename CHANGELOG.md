@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — desktop branding and CyrNava appearance
+
+- Add the selectable CyrNava skin while retaining Light/Dark/System and existing browser preferences.
+- Integrate the owner's original logo, local favicon/sidebar assets and seven Lanczos icon sizes.
+- Upgrade known desktop placeholders during installation while retaining custom artwork and the existing launcher lifecycle.
+- Add reference-view browser verification for layout, menus, contrast, persistence and mobile behavior. No database, dependency or storage-path changes.
+
 ## CyrNava rebranding — Unreleased
 
 Application, desktop/menu titles, package metadata and current documentation now use CyrNava. New configuration uses `CYRNAVA_*` with legacy aliases. Existing storage, browser keys and desktop IDs remain stable for compatibility. A dry-run-capable migration script prepares verified backups before local checkout/remote changes; it never pushes or moves application data. See `REBRANDING_REPORT.md` and `docs/migrate-to-cyrnava.md`.
