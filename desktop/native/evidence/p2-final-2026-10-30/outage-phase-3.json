@@ -1,0 +1,610 @@
+{
+  "phase": 3,
+  "real_save_portal": true,
+  "status": "PASS",
+  "checks": {
+    "test_owned_backend_stopped": "PASS",
+    "live_offline_title_verified": "PASS",
+    "keep_open_choice": "PASS",
+    "native_download_save_request": "PASS",
+    "native_blob_export_while_backend_stopped": "PASS",
+    "real_save_chooser_and_granted_json_readback": "PASS",
+    "explicit_recovery_close": "PASS",
+    "owned_backend_reaped": "PASS"
+  },
+  "driver_revision": "p2-portal-window-filter-3",
+  "complete": true,
+  "marker": "P2 unsaved 9fbbe27097d2",
+  "trace": [
+    {
+      "sequence": 1,
+      "ms": 0.042,
+      "event": "driver-initialized",
+      "phase": 3,
+      "stage": "load",
+      "generation": 0
+    },
+    {
+      "sequence": 2,
+      "ms": 1034.136,
+      "event": "main-window-created",
+      "phase": 3,
+      "stage": "load",
+      "generation": 0
+    },
+    {
+      "sequence": 3,
+      "ms": 1054.668,
+      "event": "event-loop-enter",
+      "phase": 3,
+      "stage": "load",
+      "generation": 0
+    },
+    {
+      "sequence": 4,
+      "ms": 1276.196,
+      "event": "js-query",
+      "phase": 3,
+      "stage": "load",
+      "generation": 0,
+      "query": 1
+    },
+    {
+      "sequence": 5,
+      "ms": 1283.251,
+      "event": "js-reply-queued",
+      "phase": 3,
+      "stage": "load",
+      "generation": 0,
+      "query": 1,
+      "ready": false,
+      "valid": true
+    },
+    {
+      "sequence": 6,
+      "ms": 1377.908,
+      "event": "js-query",
+      "phase": 3,
+      "stage": "load",
+      "generation": 0,
+      "query": 2
+    },
+    {
+      "sequence": 7,
+      "ms": 1381.785,
+      "event": "js-reply-queued",
+      "phase": 3,
+      "stage": "load",
+      "generation": 0,
+      "query": 2,
+      "ready": true,
+      "valid": true
+    },
+    {
+      "sequence": 8,
+      "ms": 1476.578,
+      "event": "transition",
+      "phase": 3,
+      "stage": "typing",
+      "generation": 1
+    },
+    {
+      "sequence": 9,
+      "ms": 1479.289,
+      "event": "native-action-queued",
+      "phase": 3,
+      "stage": "typing",
+      "generation": 1
+    },
+    {
+      "sequence": 10,
+      "ms": 1481.23,
+      "event": "native-typing-begin",
+      "phase": 3,
+      "stage": "typing",
+      "generation": 1
+    },
+    {
+      "sequence": 11,
+      "ms": 1697.512,
+      "event": "test-backend-stopped",
+      "phase": 3,
+      "stage": "typing",
+      "generation": 1
+    },
+    {
+      "sequence": 12,
+      "ms": 1712.041,
+      "event": "native-typing-return",
+      "phase": 3,
+      "stage": "typing",
+      "generation": 1
+    },
+    {
+      "sequence": 13,
+      "ms": 1713.846,
+      "event": "transition",
+      "phase": 3,
+      "stage": "typed",
+      "generation": 2
+    },
+    {
+      "sequence": 14,
+      "ms": 1716.976,
+      "event": "js-query",
+      "phase": 3,
+      "stage": "typed",
+      "generation": 2,
+      "query": 3
+    },
+    {
+      "sequence": 15,
+      "ms": 1747.371,
+      "event": "js-reply-queued",
+      "phase": 3,
+      "stage": "typed",
+      "generation": 2,
+      "query": 3,
+      "ready": true,
+      "valid": true
+    },
+    {
+      "sequence": 16,
+      "ms": 1811.026,
+      "event": "transition",
+      "phase": 3,
+      "stage": "first-close-ready",
+      "generation": 3
+    },
+    {
+      "sequence": 17,
+      "ms": 1812.911,
+      "event": "transition",
+      "phase": 3,
+      "stage": "first-close",
+      "generation": 4
+    },
+    {
+      "sequence": 18,
+      "ms": 1814.627,
+      "event": "native-action-queued",
+      "phase": 3,
+      "stage": "first-close",
+      "generation": 4
+    },
+    {
+      "sequence": 19,
+      "ms": 1817.023,
+      "event": "driver-close-request",
+      "phase": 3,
+      "stage": "first-close",
+      "generation": 4,
+      "reason": "verify-keep-open"
+    },
+    {
+      "sequence": 20,
+      "ms": 1818.567,
+      "event": "python-close-enter",
+      "phase": 3,
+      "stage": "first-close",
+      "generation": 4,
+      "origin": "driver-queued-close"
+    },
+    {
+      "sequence": 21,
+      "ms": 1819.958,
+      "event": "qt-close-event",
+      "phase": 3,
+      "stage": "first-close",
+      "generation": 4,
+      "spontaneous": false,
+      "python_close_context": "driver-queued-close",
+      "intent": "verify-keep-open",
+      "request_pending": false,
+      "allow_close": false,
+      "action_busy": true,
+      "action_pending": false
+    },
+    {
+      "sequence": 22,
+      "ms": 1906.085,
+      "event": "native-confirmation-observed",
+      "phase": 3,
+      "stage": "first-close",
+      "generation": 4,
+      "expected": true
+    },
+    {
+      "sequence": 23,
+      "ms": 1908.657,
+      "event": "transition",
+      "phase": 3,
+      "stage": "keep-open-settling",
+      "generation": 5
+    },
+    {
+      "sequence": 24,
+      "ms": 1911.038,
+      "event": "python-close-return",
+      "phase": 3,
+      "stage": "keep-open-settling",
+      "generation": 5,
+      "origin": "driver-queued-close"
+    },
+    {
+      "sequence": 25,
+      "ms": 1912.5,
+      "event": "driver-close-return",
+      "phase": 3,
+      "stage": "keep-open-settling",
+      "generation": 5,
+      "reason": "verify-keep-open"
+    },
+    {
+      "sequence": 26,
+      "ms": 1914.825,
+      "event": "transition",
+      "phase": 3,
+      "stage": "export",
+      "generation": 6
+    },
+    {
+      "sequence": 27,
+      "ms": 2001.964,
+      "event": "transition",
+      "phase": 3,
+      "stage": "download",
+      "generation": 7
+    },
+    {
+      "sequence": 28,
+      "ms": 2004.669,
+      "event": "js-query",
+      "phase": 3,
+      "stage": "download",
+      "generation": 7,
+      "query": 4
+    },
+    {
+      "sequence": 29,
+      "ms": 2007.382,
+      "event": "js-reply-queued",
+      "phase": 3,
+      "stage": "download",
+      "generation": 7,
+      "query": 4,
+      "ready": false,
+      "valid": true
+    },
+    {
+      "sequence": 30,
+      "ms": 2096.338,
+      "event": "transition",
+      "phase": 3,
+      "stage": "export",
+      "generation": 8
+    },
+    {
+      "sequence": 31,
+      "ms": 2099.141,
+      "event": "transition",
+      "phase": 3,
+      "stage": "download",
+      "generation": 9
+    },
+    {
+      "sequence": 32,
+      "ms": 2101.423,
+      "event": "js-query",
+      "phase": 3,
+      "stage": "download",
+      "generation": 9,
+      "query": 5
+    },
+    {
+      "sequence": 33,
+      "ms": 2104.021,
+      "event": "js-reply-queued",
+      "phase": 3,
+      "stage": "download",
+      "generation": 9,
+      "query": 5,
+      "ready": false,
+      "valid": true
+    },
+    {
+      "sequence": 34,
+      "ms": 2191.992,
+      "event": "transition",
+      "phase": 3,
+      "stage": "export",
+      "generation": 10
+    },
+    {
+      "sequence": 35,
+      "ms": 2195.11,
+      "event": "transition",
+      "phase": 3,
+      "stage": "download",
+      "generation": 11
+    },
+    {
+      "sequence": 36,
+      "ms": 2196.718,
+      "event": "js-query",
+      "phase": 3,
+      "stage": "download",
+      "generation": 11,
+      "query": 6
+    },
+    {
+      "sequence": 37,
+      "ms": 2199.652,
+      "event": "js-reply-queued",
+      "phase": 3,
+      "stage": "download",
+      "generation": 11,
+      "query": 6,
+      "ready": false,
+      "valid": true
+    },
+    {
+      "sequence": 38,
+      "ms": 2286.149,
+      "event": "transition",
+      "phase": 3,
+      "stage": "export",
+      "generation": 12
+    },
+    {
+      "sequence": 39,
+      "ms": 2289.221,
+      "event": "transition",
+      "phase": 3,
+      "stage": "download",
+      "generation": 13
+    },
+    {
+      "sequence": 40,
+      "ms": 2291.235,
+      "event": "js-query",
+      "phase": 3,
+      "stage": "download",
+      "generation": 13,
+      "query": 7
+    },
+    {
+      "sequence": 41,
+      "ms": 2294.005,
+      "event": "js-reply-queued",
+      "phase": 3,
+      "stage": "download",
+      "generation": 13,
+      "query": 7,
+      "ready": false,
+      "valid": true
+    },
+    {
+      "sequence": 42,
+      "ms": 2382.027,
+      "event": "transition",
+      "phase": 3,
+      "stage": "export",
+      "generation": 14
+    },
+    {
+      "sequence": 43,
+      "ms": 2384.529,
+      "event": "transition",
+      "phase": 3,
+      "stage": "download",
+      "generation": 15
+    },
+    {
+      "sequence": 44,
+      "ms": 2386.84,
+      "event": "js-query",
+      "phase": 3,
+      "stage": "download",
+      "generation": 15,
+      "query": 8
+    },
+    {
+      "sequence": 45,
+      "ms": 2389.421,
+      "event": "js-reply-queued",
+      "phase": 3,
+      "stage": "download",
+      "generation": 15,
+      "query": 8,
+      "ready": false,
+      "valid": true
+    },
+    {
+      "sequence": 46,
+      "ms": 2476.953,
+      "event": "transition",
+      "phase": 3,
+      "stage": "export",
+      "generation": 16
+    },
+    {
+      "sequence": 47,
+      "ms": 2479.433,
+      "event": "transition",
+      "phase": 3,
+      "stage": "download",
+      "generation": 17
+    },
+    {
+      "sequence": 48,
+      "ms": 2481.425,
+      "event": "js-query",
+      "phase": 3,
+      "stage": "download",
+      "generation": 17,
+      "query": 9
+    },
+    {
+      "sequence": 49,
+      "ms": 2485.168,
+      "event": "js-reply-queued",
+      "phase": 3,
+      "stage": "download",
+      "generation": 17,
+      "query": 9,
+      "ready": true,
+      "valid": true
+    },
+    {
+      "sequence": 50,
+      "ms": 8378.604,
+      "event": "granted-json-verified",
+      "phase": 3,
+      "stage": "download",
+      "generation": 17
+    },
+    {
+      "sequence": 51,
+      "ms": 8381.272,
+      "event": "transition",
+      "phase": 3,
+      "stage": "second-close",
+      "generation": 18
+    },
+    {
+      "sequence": 52,
+      "ms": 8383.26,
+      "event": "native-action-queued",
+      "phase": 3,
+      "stage": "second-close",
+      "generation": 18
+    },
+    {
+      "sequence": 53,
+      "ms": 8385.234,
+      "event": "driver-close-request",
+      "phase": 3,
+      "stage": "second-close",
+      "generation": 18,
+      "reason": "verify-recovery-close"
+    },
+    {
+      "sequence": 54,
+      "ms": 8387.052,
+      "event": "python-close-enter",
+      "phase": 3,
+      "stage": "second-close",
+      "generation": 18,
+      "origin": "driver-queued-close"
+    },
+    {
+      "sequence": 55,
+      "ms": 8388.957,
+      "event": "qt-close-event",
+      "phase": 3,
+      "stage": "second-close",
+      "generation": 18,
+      "spontaneous": false,
+      "python_close_context": "driver-queued-close",
+      "intent": "verify-recovery-close",
+      "request_pending": false,
+      "allow_close": false,
+      "action_busy": true,
+      "action_pending": false
+    },
+    {
+      "sequence": 56,
+      "ms": 8477.067,
+      "event": "native-confirmation-observed",
+      "phase": 3,
+      "stage": "second-close",
+      "generation": 18,
+      "expected": true
+    },
+    {
+      "sequence": 57,
+      "ms": 8479.686,
+      "event": "transition",
+      "phase": 3,
+      "stage": "finished",
+      "generation": 19
+    },
+    {
+      "sequence": 58,
+      "ms": 8482.439,
+      "event": "python-close-enter",
+      "phase": 3,
+      "stage": "finished",
+      "generation": 19,
+      "origin": "close_problem"
+    },
+    {
+      "sequence": 59,
+      "ms": 8484.881,
+      "event": "python-close-return",
+      "phase": 3,
+      "stage": "finished",
+      "generation": 19,
+      "origin": "close_problem"
+    },
+    {
+      "sequence": 60,
+      "ms": 8487.253,
+      "event": "python-close-return",
+      "phase": 3,
+      "stage": "finished",
+      "generation": 19,
+      "origin": "driver-queued-close"
+    },
+    {
+      "sequence": 61,
+      "ms": 8489.344,
+      "event": "driver-close-return",
+      "phase": 3,
+      "stage": "finished",
+      "generation": 19,
+      "reason": "verify-recovery-close"
+    },
+    {
+      "sequence": 62,
+      "ms": 19725.589,
+      "event": "qt-close-event",
+      "phase": 3,
+      "stage": "finished",
+      "generation": 19,
+      "spontaneous": true,
+      "python_close_context": "none",
+      "intent": "none",
+      "request_pending": false,
+      "allow_close": true,
+      "action_busy": false,
+      "action_pending": false
+    },
+    {
+      "sequence": 63,
+      "ms": 19729.136,
+      "event": "qt-last-window-closed",
+      "phase": 3,
+      "stage": "finished",
+      "generation": 19
+    },
+    {
+      "sequence": 64,
+      "ms": 19731.459,
+      "event": "qt-about-to-quit",
+      "phase": 3,
+      "stage": "finished",
+      "generation": 19
+    },
+    {
+      "sequence": 65,
+      "ms": 19737.316,
+      "event": "event-loop-return",
+      "phase": 3,
+      "stage": "finished",
+      "generation": 20
+    }
+  ],
+  "event_loop_exit_code": 0
+}

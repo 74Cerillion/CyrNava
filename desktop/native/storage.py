@@ -1,12 +1,15 @@
-"""One stable, private desktop profile; no legacy-profile discovery/migration."""
+"""Private desktop profile and explicit, verified workspace-generation selection."""
 
 import fcntl
 import json
 import os
+import re
 import stat
 from pathlib import Path
 
-APP_ID = "org.cyrnava.CyrNava.Devel"
+from .identity import DEVELOPMENT_ID
+
+APP_ID = DEVELOPMENT_ID
 
 
 def private_directory(path: Path):
@@ -37,7 +40,7 @@ def open_private(path: Path):
 
 
 class Profile:
-    def __init__(self, root: Path):
+    def __init__(self, root: Path, *, recovery=False):
         self.root = private_directory(root)
         self.lock = open_private(self.root / ".instance.lock")
         try:
@@ -56,10 +59,28 @@ class Profile:
                         os.close(fd)
                     else:
                         raise ValueError("Unexpected special file in desktop profile")
-            self.data = private_directory(self.root / "workspace")
-            self.qt = private_directory(self.root / "web-profile")
-            self.cache = private_directory(self.root / "web-cache")
-            self.database = self.data / "engage.sqlite3"
+            self.selection = "workspace"
+            pointer = self.root / "active-workspace.json"
+            self.pointer_error = False
+            if pointer.exists():
+                try:
+                    fd = open_private(pointer)
+                    with os.fdopen(fd, "r") as stream:
+                        value = json.loads(stream.read(1025))
+                    if not isinstance(value, dict) or value.get("version") != 1:
+                        raise ValueError("Unsupported workspace pointer")
+                    self.selection = value.get("workspace")
+                    self.validate_selection(self.selection)
+                    if not (self.root / self.selection / "engage.sqlite3").is_file():
+                        raise ValueError("Selected workspace is missing")
+                except (ValueError, TypeError, AttributeError):
+                    if not recovery:
+                        raise ValueError(
+                            "Workspace pointer invalid; use backup and recovery"
+                        ) from None
+                    self.selection = "workspace"
+                    self.pointer_error = True
+            self.select_paths(self.selection)
             self.config = self.root / "desktop.json"
             fd = open_private(self.config)
             with os.fdopen(fd, "r") as stream:
@@ -70,6 +91,42 @@ class Profile:
         except BaseException:
             os.close(self.lock)
             raise
+
+    @staticmethod
+    def validate_selection(selection):
+        if not isinstance(selection, str) or not re.fullmatch(
+            r"workspace|workspaces/[0-9a-f]{32}", selection
+        ):
+            raise ValueError("Invalid workspace selection")
+
+    def select_paths(self, selection):
+        self.validate_selection(selection)
+        self.selection = selection
+        self.data = private_directory(self.root / selection)
+        suffix = "" if selection == "workspace" else "-" + selection.split("/")[1]
+        self.qt = private_directory(self.root / ("web-profile" + suffix))
+        self.cache = private_directory(self.root / ("web-cache" + suffix))
+        self.database = self.data / "engage.sqlite3"
+
+    def activate_workspace(self, selection):
+        """Caller retains instance lock. Validate before one atomic pointer change."""
+        self.validate_selection(selection)
+        from app.migration import durable_json, inspect
+
+        summary = inspect(self.root / selection)
+        if summary["schema"] != 5:
+            raise ValueError("Recovery workspace requires schema 5")
+        suffix = "" if selection == "workspace" else "-" + selection.split("/")[1]
+        private_directory(self.root / ("web-profile" + suffix))
+        private_directory(self.root / ("web-cache" + suffix))
+        durable_json(
+            self.root / "active-workspace.json",
+            {
+                "version": 1,
+                "workspace": selection,
+            },
+        )
+        self.select_paths(selection)
 
     def remember_port(self, port):
         temporary = self.root / ".desktop.json.new"

@@ -79,10 +79,12 @@ def manifest():
     }
 
 
-def snapshot(source, destination):
+def snapshot(source, destination, *, excluded=frozenset()):
     if source.is_symlink() or not source.is_dir():
         raise ValueError("Snapshot roots must be real source directories")
     for path in source.rglob("*"):
+        if path.relative_to(source).parts[0] in excluded:
+            continue
         if path.is_symlink():
             raise ValueError("Source symlinks cannot enter the review snapshot")
         if "__pycache__" in path.parts or path.suffix == ".pyc":
@@ -133,7 +135,11 @@ def stage(source=SOURCE):
     directory = Path(tempfile.mkdtemp(prefix="review-", dir=root))
     app = directory / "application"
     for relative in ("backend/app", "frontend/dist", "desktop/native", "desktop/icons"):
-        snapshot(source / relative, app / relative)
+        snapshot(
+            source / relative,
+            app / relative,
+            excluded={"evidence"} if relative == "desktop/native" else frozenset(),
+        )
     (app / "backend/requirements.txt").write_bytes(
         (source / "backend/requirements.txt").read_bytes()
     )

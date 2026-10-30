@@ -1,0 +1,13 @@
+{
+  "prepare": "PASS",
+  "import": "FAIL",
+  "video": "/home/cerillion/Videos/Screencasts/Screencast From 2026-10-30 15-39-29.webm",
+  "observations": [
+    "Native synthetic backup export and readback passed.",
+    "Recording shows Create verified backup selected in fresh import manager.",
+    "Save verified backup chooser opens, followed by Operation failed at 0%; this is failure, not a running export.",
+    "Disposable destination has no database or activated workspace; import was not performed."
+  ],
+  "next_action": "Select Import backup into a new workspace and choose the synthetic archive saved in PREPARE.",
+  "p3_status": "CONDITIONAL"
+}

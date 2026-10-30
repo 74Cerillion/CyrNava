@@ -1,0 +1,8 @@
+{
+  "phase": "restart",
+  "status": "PASS",
+  "complete": true,
+  "checks": {
+    "native_application_closed": "PASS"
+  }
+}

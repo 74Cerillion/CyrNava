@@ -6,6 +6,7 @@ import json
 import shutil
 import sqlite3
 import sys
+import time
 from pathlib import Path
 from uuid import UUID, uuid4
 
@@ -37,7 +38,7 @@ def digest(path):
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
-def validate_profile(directory: Path) -> dict[str, str]:
+def validate_profile(directory: Path, *, bounded=False) -> dict[str, str]:
     """Read-only validation; never initialize or repair a backup as a side effect."""
     database = directory / "engage.sqlite3"
     if not database.is_file() or database.is_symlink():
@@ -47,8 +48,13 @@ def validate_profile(directory: Path) -> dict[str, str]:
     assets = directory / "assets"
     if not assets.is_dir() or assets.is_symlink():
         raise BackupError("Backup requires an assets directory.")
-    connection = sqlite3.connect(f"{database.as_uri()}?mode=ro", uri=True)
+    uri = f"{database.as_uri()}?mode=ro" + ("&immutable=1" if bounded else "")
+    connection = sqlite3.connect(uri, uri=True)
     connection.row_factory = sqlite3.Row
+    if bounded:
+        deadline = time.monotonic() + 60
+        connection.setlimit(sqlite3.SQLITE_LIMIT_LENGTH, 12 * 1024**2)
+        connection.set_progress_handler(lambda: int(time.monotonic() > deadline), 1000)
     try:
         if connection.execute("PRAGMA integrity_check").fetchall()[0][0] != "ok":
             raise BackupError("Database integrity check failed.")
@@ -112,7 +118,7 @@ def validate_profile(directory: Path) -> dict[str, str]:
         connection.close()
 
 
-def validate_backup(directory):
+def validate_backup(directory, *, bounded=False):
     manifest_path = directory / "manifest.json"
     if (
         manifest_path.is_symlink()
@@ -121,7 +127,7 @@ def validate_backup(directory):
     ):
         raise BackupError("Missing or invalid backup manifest.")
     manifest = json.loads(manifest_path.read_text())
-    actual = validate_profile(directory)
+    actual = validate_profile(directory, bounded=bounded)
     if (
         not isinstance(manifest, dict)
         or manifest.get("backup_format") != 1

@@ -1,0 +1,9 @@
+{
+  "phase": "prepare",
+  "status": "PASS",
+  "complete": true,
+  "checks": {
+    "real_backup_export_and_readback": "PASS"
+  },
+  "stage": "export_and_readback"
+}

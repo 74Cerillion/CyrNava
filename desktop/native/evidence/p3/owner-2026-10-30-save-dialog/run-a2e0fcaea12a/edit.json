@@ -1,0 +1,8 @@
+{
+  "phase": "edit",
+  "status": "PASS",
+  "complete": true,
+  "checks": {
+    "native_application_closed": "PASS"
+  }
+}

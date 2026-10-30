@@ -1,0 +1,13 @@
+{
+  "status": "FAIL",
+  "phase": "prepare",
+  "observation": "Owner video shows native Save dialog with empty Name and disabled Save. No migration-manager window yet. Existing generic failure records do not establish the exact cancellation or exception cause.",
+  "video": "/home/cerillion/Videos/Screencasts/Screencast From 2026-10-30 15-35-59.webm",
+  "correction": "Verification helper supplies unique filename and explicit Save-dialog instructions, checkpoints stage, and records cancellation reason. No production behavior or sandbox permission changes.",
+  "tests": {
+    "supervisor_and_snapshot_contracts": "6 PASS",
+    "ruff": "PASS",
+    "diff_check": "PASS"
+  },
+  "native_rerun": "NOT TESTED"
+}

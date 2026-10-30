@@ -1,5 +1,26 @@
 # Final four P2 native checks
 
+**P2 STATUS: ACCEPTED — FINAL NATIVE PORTAL VERIFICATION PASSED**
+
+Accepted 30 October 2026 (Asia/Seoul). Owner-executed run `run-64a7b56d5fc0`
+was independently verified from both final JSON records. Corrected driver
+`p2-portal-window-filter-3`, source SHA-256
+`d4e5025c567074f7dc653b265e3429c2979e6bc5c70f0c9c6775fab251d8089b`,
+matches current source. Supervisor and driver report complete PASS, child exit 0,
+stage finished, and no remaining child. All eight checks passed, including the
+real native Save chooser, granted-file JSON readback, offline recovery-draft
+export, explicit recovery close, and owned-backend reaping. The driver record
+sets `real_save_portal: true`; this was not a mocked export destination.
+
+Original evidence:
+`/home/cerillion/.var/app/org.cyrnava.CyrNava.Devel/data/p2-portal-verification/run-64a7b56d5fc0/`.
+Repository copies: `desktop/native/evidence/p2-final-2026-10-30/`.
+Prior failure/investigation sections below are retained as historical evidence;
+their pending/conditional statuses are superseded by this acceptance record.
+This passing run supports the instrumentation correction, without claiming a
+native C++ stack established the exact earlier segmentation-fault mechanism.
+
+
 Run on the owner's ordinary Ubuntu/Wayland desktop against the already installed
 `org.cyrnava.CyrNava.Devel`, branch `p2`. Shell redirection streams test-only
 helpers to the installed Flatpak Python. The helpers are not production launch

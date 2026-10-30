@@ -72,7 +72,7 @@ def open_notice_request(request, origin, make_page):
     return True
 
 
-def run():
+def run(*, offer_import=False):
     os.umask(0o077)
     root = configuration()
     from PySide6.QtCore import Qt, QTimer, QUrl
@@ -100,6 +100,20 @@ def run():
     except (OSError, ValueError) as error:
         QMessageBox.critical(None, "CyrNava storage unavailable", str(error))
         return 1
+    if offer_import and not profile.database.exists():
+        answer = QMessageBox.question(
+            None,
+            "Welcome to CyrNava",
+            "Import an existing verified CyrNava backup? Choose No to start empty.",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        if answer == QMessageBox.StandardButton.Yes:
+            profile.close()
+            from .maintenance import manage
+
+            manage(app, root)
+            profile = Profile(root)
     backend = Backend(profile)
     try:
         backend.start()
@@ -167,6 +181,7 @@ def run():
     class Window(QMainWindow):
         def __init__(self):
             super().__init__()
+            self.maintenance_requested = False
             self.request_id = None
             self.deadline = 0
             self.allow_close = False
@@ -190,7 +205,13 @@ def run():
             self.timer.setInterval(100)
             self.timer.timeout.connect(self.poll_close)
             self.timer.start()
+            action = self.menuBar().addAction("Backup and recovery…")
+            action.triggered.connect(self.open_maintenance)
             self.view.setUrl(QUrl(backend.origin + "/"))
+
+        def open_maintenance(self):
+            self.maintenance_requested = True
+            self.close()
 
         def load_finished(self, success):
             self.loaded = success
@@ -263,6 +284,7 @@ def run():
                 self.allow_close = True
                 self.close()
             else:
+                self.maintenance_requested = False
                 self.page.runJavaScript(
                     f"window.__cyrnavaDesktop?.cancel({json.dumps(identifier)})"
                 )
@@ -305,17 +327,29 @@ def run():
     web_profile.downloadRequested.connect(download)
     # Termination signals use the same normal-close protocol; a second SIGKILL
     # cannot be made safe. Pipe EOF still stops the owned backend after GUI death.
+    old_signals = {
+        number: signal.getsignal(number) for number in (signal.SIGTERM, signal.SIGINT)
+    }
     signal.signal(signal.SIGTERM, lambda *_: window.close())
     signal.signal(signal.SIGINT, lambda *_: window.close())
     window.show()
     try:
-        return app.exec()
+        result = app.exec()
     finally:
+        for number, handler in old_signals.items():
+            signal.signal(number, handler)
         backend.stop()
         # Destroy pages before the profile and retain the lock through Qt teardown.
         from shiboken6 import delete
 
+        window_maintenance_requested = window.maintenance_requested
         delete(window)
         delete(web_profile)
         app.processEvents()
         profile.close()
+
+    if window_maintenance_requested:
+        from .maintenance import manage
+
+        return manage(app, root)
+    return result

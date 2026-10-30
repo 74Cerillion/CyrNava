@@ -1,0 +1,28 @@
+{
+  "branch": "desktop/p2-production-integration",
+  "base_commit": "808e906dbe977edd4a20ec23f134ad565c54a675",
+  "description": "P3 uncommitted change groups; no owner data or production package. Evidence files excluded from source hash map.",
+  "source_sha256": {
+    "backend/app/backup.py": "794f8170865e8896546e512376fc008dabcaf8523c8501a59c3a052cf78da93b",
+    "backend/app/migration.py": "f84dbca8829880a777e53e8195b762596950a17411340c8d93c2cfe14707952e",
+    "backend/app/migration_benchmark.py": "adce5605ab51056b0d6b8df85e3d32d1ad70546e783bed50046fc1caf15ed052",
+    "backend/app/migration_cli.py": "f8b8d3e6f7f6baf23f84ef8c8f584c8fad6e210dc0a21f6e7c7d3a279d759d98",
+    "backend/tests/test_migration.py": "a54e3fe222227684290b926cd2473409c51643b975868fcf151cbc924d0dd7ce",
+    "desktop/native/P2_REPORT.md": "daa8ac9305df7103f84c593724059d59300d87b555fb429c5bc96686620b459d",
+    "desktop/native/P3_NATIVE_CHECKS.md": "69aab5e699bc388a8d8473c9c94bb1d0fb13e8c491cf57128b9cdd9fefc9c93c",
+    "desktop/native/P3_REPORT.md": "e21fd273ecd424f71b75d7a2d89310325c5bbed87ca3b4a8b6d341d7c9df4b89",
+    "desktop/native/__main__.py": "7e6d5c72c20e4f8155a33642c1738a6afc539634fabd282827563dd243f0d240",
+    "desktop/native/application.py": "630485b0532272d73cae66a29356a7016ec1e41ca3ebf66f2a32ade1692da311",
+    "desktop/native/identity.py": "0e12bfcc837b8c1132f7eb99ec99e33deabb4b9be6589e74c89b2a88acc222f6",
+    "desktop/native/maintenance.py": "10b96250ba516b66b725314320c4af3df3e732e446ee3af95fe336d3d6eff2f9",
+    "desktop/native/maintenance_io.py": "a161405d57e7abe71b4ca5a0bf32f862a1bbf5cdd93d3b79a2102a481ea1c36c",
+    "desktop/native/storage.py": "bf2d2b10d40b154fd2e47c8eb7c09fa9d1d3fa6d653d5f94440195248085ad96",
+    "packaging/flatpak/P2_NATIVE_CHECKS.md": "d5a4c7417472d5eeedd933932c1518f63e449d6a63411d7cb3d6ff18d7e70e0f",
+    "packaging/flatpak/prepare.py": "4d4e3b11048bd70b355a220f4c56650a670180469c52ac7df98d6e9e9b13c7be",
+    "packaging/flatpak/qt_migration_check.py": "29ba2f6883909e341eead78af513e317e6f63c5b8c9481080316dddf08902390",
+    "packaging/flatpak/qt_migration_portal_check.py": "a70bdb1b62d9f3a08643e5ff29f552253a238151ee71f63a42eafbfa75ecf6f0",
+    "packaging/flatpak/run_migration_verification.py": "01a1bbdae9dc57e44cd48254bc9b47b12971b874e00a050b8225b288a5ceddd3",
+    "packaging/flatpak/test_run_migration_verification.py": "f794271a8354353be69ee4ce33345ed21e9af06821322443fe6d9eaaa63648f8",
+    "packaging/flatpak/verify_migration.py": "2695e2495ea5f056475bce86483b5ea76cd1bcc074b1c79cb672cec4852dc56b"
+  }
+}

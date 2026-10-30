@@ -1,0 +1,10 @@
+{
+  "run_id": "run-debbbe523b30",
+  "status": "FAIL",
+  "complete": true,
+  "phases": {
+    "prepare": "FAIL"
+  },
+  "helper_sha256": "f3bf52006af838415ef6ed917e1670a653ea5aba9ba577d1d4d0c590c31fbae6",
+  "child_still_running": false
+}

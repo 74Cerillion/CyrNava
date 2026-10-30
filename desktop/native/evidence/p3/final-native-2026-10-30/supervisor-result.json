@@ -1,0 +1,14 @@
+{
+  "run_id": "run-a2e0fcaea12a",
+  "status": "PASS",
+  "complete": true,
+  "phases": {
+    "prepare": "PASS",
+    "import": "PASS",
+    "edit": "PASS",
+    "restart": "PASS",
+    "verify": "PASS"
+  },
+  "helper_sha256": "2695e2495ea5f056475bce86483b5ea76cd1bcc074b1c79cb672cec4852dc56b",
+  "resumed_from": "/home/cerillion/.var/app/org.cyrnava.CyrNava.Devel/data/p3-verification/run-a2e0fcaea12a/before-resume-1e9ccff6c497"
+}

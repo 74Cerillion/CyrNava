@@ -1,0 +1,26 @@
+{
+  "supervisor_revision": "p2-portal-window-filter-3",
+  "status": "PASS",
+  "complete": true,
+  "reason": "real Save portal, JSON readback and recovery close verified",
+  "checks": {
+    "test_owned_backend_stopped": "PASS",
+    "live_offline_title_verified": "PASS",
+    "keep_open_choice": "PASS",
+    "native_download_save_request": "PASS",
+    "native_blob_export_while_backend_stopped": "PASS",
+    "real_save_chooser_and_granted_json_readback": "PASS",
+    "explicit_recovery_close": "PASS",
+    "owned_backend_reaped": "PASS"
+  },
+  "driver_sha256": "d4e5025c567074f7dc653b265e3429c2979e6bc5c70f0c9c6775fab251d8089b",
+  "child_exit_code": 0,
+  "driver_revision": "p2-portal-window-filter-3",
+  "driver_status": "PASS",
+  "driver_complete": true,
+  "driver_record": "outage-phase-3.json",
+  "child_still_running": false,
+  "stdin_complete": true,
+  "elapsed_ms": 20229.611,
+  "last_driver_stage": "finished"
+}
