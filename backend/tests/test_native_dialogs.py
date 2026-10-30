@@ -57,3 +57,38 @@ def test_export_uses_absolute_home_destination_and_honors_cancel(tmp_path, monke
     )
     dialog.getSaveFileName.return_value = ("", "")
     assert choose_draft_destination(dialog, "parent") == ""
+
+
+def test_backup_save_suggests_extension_without_changing_portal_grant(
+    tmp_path, monkeypatch
+):
+    from desktop.native.dialogs import choose_backup_destination
+
+    monkeypatch.setattr(Path, "home", lambda: tmp_path)
+    dialog = Mock()
+    # User can replace the suggested name with one lacking an extension.
+    selected = "/run/user/1000/doc/backup-grant/test"
+    dialog.getSaveFileName.return_value = (selected, "CyrNava backup")
+    assert choose_backup_destination(dialog, None) == selected
+    assert dialog.getSaveFileName.call_args.args[2] == str(
+        tmp_path / "cyrnava-backup.cyrnava"
+    )
+    dialog.getSaveFileName.return_value = ("", "")
+    assert choose_backup_destination(dialog, None) == ""
+
+
+def test_backup_open_includes_extensionless_files_and_preserves_grant(
+    tmp_path, monkeypatch
+):
+    from desktop.native.dialogs import choose_backup_source
+
+    monkeypatch.setattr(Path, "home", lambda: tmp_path)
+    dialog = Mock()
+    selected = "/run/user/1000/doc/backup-grant/test"
+    dialog.getOpenFileName.return_value = (selected, "All files (*)")
+    assert choose_backup_source(dialog, None) == selected
+    args = dialog.getOpenFileName.call_args.args
+    assert args[2] == str(tmp_path)
+    assert "*.cyrnava" in args[3] and "*.zip" in args[3] and "All files (*)" in args[3]
+    dialog.getOpenFileName.return_value = ("", "")
+    assert choose_backup_source(dialog, None) == ""

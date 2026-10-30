@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "bundle_sha256_independently_checked": true,
+  "bundle_size_independently_checked": true,
+  "ostree_ref_independently_checked": true,
+  "production_install_and_native_checks": "NOT TESTED",
+  "result": {
+    "status": "PASS",
+    "directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/.p4-cache/cyrnava-builds/p4/local-A-6m4ne70o",
+    "app_id": "io.github._74Cerillion.CyrNava",
+    "bundle": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/.p4-cache/cyrnava-builds/p4/local-A-6m4ne70o/io.github._74Cerillion.CyrNava.flatpak",
+    "sha256": "856cc0ccd82bca263320e2d692a5b3d316543ae320cd76d9cd42bf42e54a3170",
+    "bytes": 209183720,
+    "logical_installed_bytes": 980983648,
+    "ostree_commit": "e0529b136effc347a5f7a32b52d95ddd5fead5230410e752ce8eb8f9a4c35e19"
+  }
+}

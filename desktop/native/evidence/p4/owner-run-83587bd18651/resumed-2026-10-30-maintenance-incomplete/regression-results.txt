@@ -1,0 +1,6 @@
+2026-10-30
+backend/.venv/bin/python -m pytest -q packaging/flatpak/production/test_packaging.py
+36 passed in 0.35s
+backend/.venv/bin/ruff check packaging/flatpak/production
+All checks passed!
+compileall and git diff --check: exit 0

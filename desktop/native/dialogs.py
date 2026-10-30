@@ -26,3 +26,27 @@ def choose_draft_destination(dialog, parent):
         "JSON (*.json)",
     )
     return selected
+
+
+def choose_backup_destination(dialog, parent, title="Save verified backup"):
+    # Suggest an extension before the portal grants access. Never append one to
+    # the returned path: that could name an ungranted sibling document.
+    selected, _ = dialog.getSaveFileName(
+        parent,
+        title,
+        str(Path.home() / "cyrnava-backup.cyrnava"),
+        "CyrNava backup (*.cyrnava)",
+    )
+    return selected
+
+
+def choose_backup_source(dialog, parent):
+    # Older exports may be ZIPs with arbitrary or absent extensions. The archive
+    # validator, not the filename filter, decides whether an input is valid.
+    selected, _ = dialog.getOpenFileName(
+        parent,
+        "Choose verified backup (do not extract)",
+        str(Path.home()),
+        "CyrNava backups (*.cyrnava *.zip);;All files (*)",
+    )
+    return selected

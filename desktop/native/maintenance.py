@@ -7,6 +7,7 @@ from pathlib import Path
 from uuid import uuid4
 
 from .backend import SOURCE
+from .dialogs import choose_backup_destination, choose_backup_source
 from .storage import Profile
 
 
@@ -110,9 +111,7 @@ def manage(app, root):
                 callback(success, result)
 
         def backup(self):
-            chosen, _ = QFileDialog.getSaveFileName(
-                self, "Save verified backup", "", "CyrNava backup (*.cyrnava)"
-            )
+            chosen = choose_backup_destination(QFileDialog, self)
             if not chosen:
                 return
 
@@ -130,9 +129,7 @@ def manage(app, root):
             self.start(operation)
 
         def restore(self):
-            chosen, _ = QFileDialog.getOpenFileName(
-                self, "Choose verified backup", "", "CyrNava backup (*.cyrnava)"
-            )
+            chosen = choose_backup_source(QFileDialog, self)
             if not chosen:
                 return
             # Validation and summary are explicit before activation. Background work
@@ -196,8 +193,8 @@ def manage(app, root):
             )
             if not source:
                 return
-            chosen, _ = QFileDialog.getSaveFileName(
-                self, "Save portable backup", "", "CyrNava backup (*.cyrnava)"
+            chosen = choose_backup_destination(
+                QFileDialog, self, "Save portable backup"
             )
             if not chosen:
                 return

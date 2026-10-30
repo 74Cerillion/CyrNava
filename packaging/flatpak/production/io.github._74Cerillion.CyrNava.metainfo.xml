@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github._74Cerillion.CyrNava</id>
+  <name>CyrNava</name>
+  <summary>Organize cybersecurity notes and screenshots offline</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <description>
+    <p>CyrNava is a local cybersecurity knowledge workspace with rich-text notes,
+    nested folders, screenshot paste, image uploads, and full-text search.</p>
+    <p>Notes and images stay in application-private storage. Verified backups,
+    explicit imports, and preserved workspace generations support recovery.
+    Core editing and search work offline without an account.</p>
+  </description>
+  <launchable type="desktop-id">io.github._74Cerillion.CyrNava.desktop</launchable>
+  <url type="homepage">https://github.com/74Cerillion/CyrNava</url>
+  <provides><binary>cyrnava</binary></provides>
+  <categories><category>Office</category></categories>
+  <supports><control>pointing</control><control>keyboard</control></supports>
+</component>

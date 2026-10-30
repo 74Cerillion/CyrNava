@@ -1,0 +1,7 @@
+{
+  "status": "FAIL",
+  "directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/.p4-cache/cyrnava-builds/p4/local-A-zg3vjcxr",
+  "app_id": "io.github._74Cerillion.CyrNava",
+  "error_type": "ValueError",
+  "error": "Unexpected frontend output: assets/inter-v12-latin-700-B5TOIllR.woff"
+}

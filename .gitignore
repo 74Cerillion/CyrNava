@@ -51,3 +51,6 @@ cyrnava-draft-*.json
 playwright-report/
 test-results/
 .engage.lock
+
+# Local P4 build outputs; never packaged or committed.
+.p4-cache/

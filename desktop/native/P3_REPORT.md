@@ -322,7 +322,7 @@ acceptance; P4 and real-data migration require separate authorization.**
 
 Follow `P3_NATIVE_CHECKS.md`. Stop after P3.
 
-## Owner verification follow-up — 30 October 2026
+## Historical owner verification follow-up — 30 October 2026
 
 The build succeeded. Runs `run-f467a263b4d0` and `run-debbbe523b30`
 failed in PREPARE with no passed checks. The recording shows the native Save
@@ -337,7 +337,7 @@ No application behavior or permissions changed. Six supervisor/snapshot tests,
 Ruff and diff checks passed. Native verification remains pending; no rebuild is
 needed for these host-streamed helper changes.
 
-### Follow-up: run-7b69a3f8e674
+### Historical follow-up: run-7b69a3f8e674
 
 PREPARE passed real native backup export and readback. IMPORT failed. The
 recording shows Create verified backup selected before importing into the empty
@@ -347,7 +347,7 @@ worker hang. The host instructions now identify the second button, Import backup
 into a new workspace. Raw results and review are preserved alongside earlier
 owner evidence. No production code or permissions changed. P3 remains conditional.
 
-### Portal initialization correction: run-d6ad0ae96bd0
+### Historical portal initialization correction: run-d6ad0ae96bd0
 
 The recording shows a sandbox-local initial Save chooser and a later host-native
 Import chooser. PREPARE recorded file write/readback PASS, but that did not prove
@@ -374,7 +374,7 @@ ephemeral/traversal destination rejection. The existing Qt migration workflow
 probe and all six supervisor/snapshot tests pass. Real corrected host Save/import
 remains NOT TESTED pending owner execution. No rebuild is required.
 
-### Owner edit prerequisite: run-a2e0fcaea12a
+### Historical owner edit prerequisite: run-a2e0fcaea12a
 
 PREPARE now passes the required document-portal destination and archive readback.
 IMPORT passes schema upgrade, source preservation and exact data preservation.
@@ -391,3 +391,13 @@ supervisor supports `--resume run-a2e0fcaea12a`, validates prior successful port
 and import records, archives previous results and reruns only EDIT onward. No
 production application changes. Twelve supervisor/snapshot/resume tests and the
 Qt probe's unedited/edited fixture checks pass. Owner native continuation pending.
+
+## P4 prerequisite reconciliation — 30 October 2026
+
+Final P3 acceptance was independently rechecked before P4 implementation. All
+recorded per-phase results are complete PASS; final helper hash and evidence file
+hashes match. Saved title/screenshot, real document-portal delivery/readback,
+source preservation, restore/rollback and owned backend reaping all passed. The
+failed edit and pending continuation above are historical attempts superseded by
+`final-native-2026-10-30/`. The owner subsequently authorized bounded P4; earlier
+statements that P4 was unauthorized describe the P3 report checkpoint.

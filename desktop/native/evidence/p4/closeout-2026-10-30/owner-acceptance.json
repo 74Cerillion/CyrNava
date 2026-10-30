@@ -1,0 +1,84 @@
+{
+  "phase": "P4",
+  "status": "PASS",
+  "lifecycle": "CLOSED",
+  "date": "2026-10-30",
+  "timezone": "Asia/Seoul",
+  "acceptance_basis": "Explicit owner confirmation and instruction to record PASS and close P4; not an all-gates independently verified assertion",
+  "owner_statements": [
+    "Test passed!! What state does that put P4 in now?",
+    "mark the PASS down in the official logs and do what you need to do to wrap up and close P4."
+  ],
+  "confirmed_test": {
+    "test": "Direct .cyrnava backup export/import using explicit filename extension",
+    "status": "PASS",
+    "evidence_type": "OWNER_ATTESTATION",
+    "machine_success_record_available": false
+  },
+  "recorded_machine_checks": {
+    "local_update": "PASS",
+    "edit": "PASS",
+    "updated": "PASS",
+    "compatible_binary_rollback": "PASS",
+    "rollback": "PASS",
+    "restart": "PASS",
+    "fresh_install_permissions": "PASS"
+  },
+  "historical_machine_result": {
+    "status": "FAIL",
+    "phase": "maintenance",
+    "missing_checks": [
+      "import_activated_new_workspace"
+    ],
+    "preserved": "last-machine-host-result.json",
+    "superseded_for_owner_acceptance_only": true
+  },
+  "limitations": [
+    {
+      "item": "Final native supervisor recovery/uninstall/reinstall/development-isolation results",
+      "status": "NOT INDEPENDENTLY VERIFIED",
+      "reason": "No final successful supervisor JSON or recovery record available"
+    },
+    {
+      "item": "Desktop launcher/icon/first-run persistence manual checks",
+      "status": "NOT TESTED IN AVAILABLE EVIDENCE"
+    },
+    {
+      "item": "Backup chooser filename/filter correction in final installed artifact",
+      "status": "NOT TESTED",
+      "reason": "Source fix and automated regressions pass; A/B artifacts predate it. Existing build requires full .cyrnava filename."
+    },
+    {
+      "item": "Byte reproducibility, clean-checkout replay, controlled cold/warm and idle benchmarks",
+      "status": "NOT TESTED"
+    }
+  ],
+  "branch": "desktop/p2-production-integration",
+  "base_commit": "eb65fc152181f77b3fa131f79aa417a03d84a1ac",
+  "application_version": "0.1.0",
+  "schema_version": 5,
+  "scope": {
+    "real_data_migration": false,
+    "publication": false,
+    "committed": false,
+    "pushed": false,
+    "P5_started": false,
+    "P6_started": false
+  },
+  "release_readiness": "Not a public release authorization; documented limitations require resolution before release claims",
+  "final_regressions": {
+    "status": "PASS",
+    "passed": 527,
+    "warnings": 2,
+    "seconds": 31.71,
+    "command": "cd backend && .venv/bin/python -m pytest -q tests ../packaging/flatpak/test_verify_outage.py ../packaging/flatpak/test_run_portal_verification.py ../packaging/flatpak/test_run_migration_verification.py ../packaging/flatpak/production/test_packaging.py",
+    "warning_notes": [
+      "Existing Starlette/httpx deprecation",
+      "Intentional duplicate-manifest archive fixture"
+    ],
+    "ruff": "PASS",
+    "compileall": "PASS",
+    "git_diff_check": "PASS",
+    "frontend": "Previously recorded 273 unit and 16 browser PASS; frontend source unchanged, no unnecessary rerun"
+  }
+}

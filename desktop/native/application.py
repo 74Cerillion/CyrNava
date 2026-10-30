@@ -9,6 +9,7 @@ from pathlib import Path
 from uuid import uuid4
 
 from .backend import SOURCE, Backend
+from .build_identity import ICON_PATH, WINDOW_TITLE
 from .dialogs import choose_draft_destination, choose_images
 from .policy import (
     download_allowed,
@@ -88,6 +89,10 @@ def run(*, offer_import=False):
     app = QApplication(["CyrNava"])
     app.setApplicationName("CyrNava")
     app.setOrganizationName("CyrNava")
+    app.setDesktopFileName(APP_ID)
+    from PySide6.QtGui import QIcon
+
+    app.setWindowIcon(QIcon(ICON_PATH))
     try:
         profile = Profile(root)
     except BlockingIOError:
@@ -187,7 +192,7 @@ def run(*, offer_import=False):
             self.allow_close = False
             self.checking = False
             self.loaded = False
-            self.setWindowTitle("CyrNava — Desktop review build")
+            self.setWindowTitle(WINDOW_TITLE)
             self.resize(1280, 900)
             self.view = QWebEngineView(self)
             self.page = Page(web_profile, self.view)

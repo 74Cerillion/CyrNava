@@ -1,0 +1,10 @@
+{
+  "cause": "flatpak build-export requires ISO 8601; numeric Unix seconds were incorrectly supplied",
+  "old_argument": "--timestamp=1793314800",
+  "corrected_argument": "--timestamp=2026-10-29T23:00:00Z",
+  "tests": "22 PASS, including actual Flatpak export and OSTree commit-date verification using a synthetic icon-free fixture",
+  "production_export": "NOT TESTED after correction; Codex icon-validator namespace restriction remains",
+  "payload_rebuilt": false,
+  "security_settings_changed": false,
+  "build_helper_sha256": "6c81256762e82be61bba092d038731675d1b8c8b811e06b96099887707e6486d"
+}

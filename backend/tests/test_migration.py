@@ -396,3 +396,21 @@ def test_migrated_api_autosave_upload_and_restart(profile, tmp_path):
         assert client.get(f"/api/notes/{identifier}").json()["document_json"] == doc
         assert client.get(asset["url"]).content == data
     m.inspect(destination)
+
+
+@pytest.mark.parametrize("filename", ["test", "test.zip", "test.cyrnava"])
+def test_backup_import_is_independent_of_filename_extension(
+    profile, tmp_path, filename
+):
+    source, db, note, asset = profile
+    backup = tmp_path / filename
+    m.pack(source, backup)
+    before = hashlib.sha256(backup.read_bytes()).hexdigest()
+    destination = tmp_path / "restored"
+    assert m.migrate(backup, destination)["status"] == "activated"
+    restored = Database(destination / "engage.sqlite3")
+    assert restored.get(note) == db.get(note)
+    assert (destination / "assets" / asset["id"]).read_bytes() == (
+        source / "assets" / asset["id"]
+    ).read_bytes()
+    assert hashlib.sha256(backup.read_bytes()).hexdigest() == before

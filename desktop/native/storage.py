@@ -7,9 +7,7 @@ import re
 import stat
 from pathlib import Path
 
-from .identity import DEVELOPMENT_ID
-
-APP_ID = DEVELOPMENT_ID
+from .build_identity import APP_ID as APP_ID  # noqa: PLC0414 - explicit public re-export
 
 
 def private_directory(path: Path):

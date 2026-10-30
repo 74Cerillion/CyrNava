@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-30",
+  "sha256": {
+    "desktop/native/evidence/p4/source-manifest.json": "af3ddfdd7b19a52e96a66c8fb6c3cc97f3dc8fb90dc54e867cca07d3c113dd6b",
+    "desktop/native/evidence/p4/validation.json": "fb956ecd450a3f1e42054c571fab3f58ef4b4f16e93f3289715e9c39638f275d",
+    "desktop/native/P4_REPORT.md": "1ff86c4350a53f67c3b0a5447315a203e0b1516c7285ce3fef525d7369abd289",
+    "packaging/flatpak/production/P4_NATIVE_CHECKS.md": "d3319701468df33d7670b9a0bb72ae3a990031529e59015adb718b27f14b3546",
+    "packaging/flatpak/production/README.md": "3dd46c10060be44c73d1bdcfba0e24541ba27173d621bed3bcd68cd86aad46c1",
+    "desktop/native/evidence/p4/closeout-2026-10-30/before-closeout-validation.json": "d15c6576cc50c67ec9dd9d1bf883091aad8f8686670b9615ba5a58978924a34b",
+    "desktop/native/evidence/p4/closeout-2026-10-30/final-regressions.json": "d6375e2061fb45f08e84d5db8b5e7e2cfe59c6761d9b885a45599863f3838737",
+    "desktop/native/evidence/p4/closeout-2026-10-30/before-closeout-source-manifest.json": "b1cf15a9fb7cea6847e746e05a5b58a7a595a231c9f9e9eec9c7883479d2298d",
+    "desktop/native/evidence/p4/closeout-2026-10-30/owner-acceptance.json": "e970fcfaac20516e0fe679cde6fb52206d83aeef079aeee1606ab7fc8f45bc04",
+    "desktop/native/evidence/p4/closeout-2026-10-30/before-closeout-P4_NATIVE_CHECKS.md": "8ae58525962327c344ca80ce3b5b221b422579c353f701355aea94c49523e0e8",
+    "desktop/native/evidence/p4/closeout-2026-10-30/last-machine-host-result.json": "06be5c525c93e38e0c00e5b1016540488827d106d5214608d4c060ea36214ab7",
+    "desktop/native/evidence/p4/closeout-2026-10-30/before-closeout-P4_REPORT.md": "7aaf528bb44a23d26a8b771a93fba4d1d025865799a6a5232fa04857a385d170"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "phase": "edit",
+  "status": "FAIL",
+  "complete": true,
+  "checks": {
+    "production_identity_private_network_and_filesystem": "PASS",
+    "single_instance_lock": "PASS",
+    "backend_authentication_and_origin": "PASS",
+    "production_window_title": "PASS",
+    "renderer_sandbox": "PASS",
+    "owned_backend_reaped": "PASS"
+  },
+  "timings_ms": {
+    "backend_ready": 840.0,
+    "frontend_loaded": 2372.0,
+    "backend_shutdown": 163.9
+  },
+  "backend_pid": 10,
+  "backend_origin": "http://127.0.0.1:38615",
+  "sandbox_diagnostic": "Sandbox Status\nLayer 1 Sandbox\tFlatpak\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tYes\nPtrace Protection with Yama LSM (Non-broker)\tYes\n\nYou are adequately sandboxed.",
+  "processes": [
+    {
+      "pid": 2,
+      "renderer": false,
+      "status": {
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "1",
+        "VmRSS": "342516 kB"
+      },
+      "namespaces": {
+        "user": "user:[4026533656]",
+        "pid": "pid:[4026533380]",
+        "net": "net:[4026533381]",
+        "mnt": "mnt:[4026533377]"
+      }
+    },
+    {
+      "pid": 29,
+      "renderer": false,
+      "status": {
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "1",
+        "VmRSS": "57044 kB"
+      },
+      "namespaces": {
+        "user": "user:[4026533656]",
+        "pid": "pid:[4026533380]",
+        "net": "net:[4026533381]",
+        "mnt": "mnt:[4026533377]"
+      }
+    },
+    {
+      "pid": 33,
+      "renderer": false,
+      "status": {
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "1",
+        "VmRSS": "57396 kB"
+      },
+      "namespaces": {
+        "user": "user:[4026533656]",
+        "pid": "pid:[4026533781]",
+        "net": "net:[4026533660]",
+        "mnt": "mnt:[4026533658]"
+      }
+    },
+    {
+      "pid": 69,
+      "renderer": true,
+      "status": {
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "2",
+        "VmRSS": "134248 kB"
+      },
+      "namespaces": {
+        "user": "user:[4026533656]",
+        "pid": "pid:[4026533781]",
+        "net": "net:[4026533660]",
+        "mnt": "mnt:[4026533658]"
+      }
+    },
+    {
+      "pid": 94,
+      "renderer": true,
+      "status": {
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "2",
+        "VmRSS": "93128 kB"
+      },
+      "namespaces": {
+        "user": "user:[4026533656]",
+        "pid": "pid:[4026533781]",
+        "net": "net:[4026533660]",
+        "mnt": "mnt:[4026533658]"
+      }
+    }
+  ],
+  "error_type": "AssertionError",
+  "error": "P4 synthetic check failed; preserve the run and phase for diagnosis."
+}

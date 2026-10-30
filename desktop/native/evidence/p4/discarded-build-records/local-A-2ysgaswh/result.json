@@ -1,0 +1,7 @@
+{
+  "status": "FAIL",
+  "directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/.p4-cache/cyrnava-builds/p4/local-A-2ysgaswh",
+  "app_id": "io.github._74Cerillion.CyrNava",
+  "error_type": "CalledProcessError",
+  "error": "Command '['/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/backend/.venv/bin/python', '/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/packaging/flatpak/production/install_payload.py', '/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/.p4-cache/cyrnava-builds/p4/local-A-2ysgaswh/build/files', '/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/.p4-cache/cyrnava-builds/p4/local-A-2ysgaswh']' returned non-zero exit status 1."
+}

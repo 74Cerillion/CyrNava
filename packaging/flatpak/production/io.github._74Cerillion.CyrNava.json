@@ -1,0 +1,82 @@
+{
+  "app-id": "io.github._74Cerillion.CyrNava",
+  "branch": "stable",
+  "runtime": "org.kde.Platform",
+  "runtime-version": "6.11",
+  "sdk": "org.kde.Sdk",
+  "base": "io.qt.PySide.BaseApp",
+  "base-version": "6.11",
+  "command": "cyrnava",
+  "finish-args": [
+    "--socket=wayland",
+    "--device=dri",
+    "--unshare=network",
+    "--nofilesystem=host",
+    "--nofilesystem=home",
+    "--env=QT_QPA_PLATFORM=wayland",
+    "--env=QT_QPA_PLATFORMTHEME=xdgdesktopportal",
+    "--env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess",
+    "--env=QTWEBENGINE_DICTIONARIES_PATH=/app/qtwebengine_dictionaries"
+  ],
+  "build-options": {
+    "env": {
+      "PYTHONPATH": "/app/lib/python3.13/site-packages"
+    }
+  },
+  "modules": [
+    {
+      "name": "cyrnava",
+      "buildsystem": "simple",
+      "build-commands": [
+        "python3 -c \"import sys; assert sys.version_info[:2] == (3,13)\"",
+        "python3 -m pip install --no-index --no-deps --no-compile --require-hashes --find-links=wheels --prefix=/app -r requirements.lock",
+        "python3 install_payload.py /app ."
+      ],
+      "sources": [
+        {
+          "type": "dir",
+          "path": "application",
+          "dest": "application"
+        },
+        {
+          "type": "dir",
+          "path": "wheels",
+          "dest": "wheels"
+        },
+        {
+          "type": "dir",
+          "path": "icons",
+          "dest": "icons"
+        },
+        {
+          "type": "file",
+          "path": "requirements.lock"
+        },
+        {
+          "type": "file",
+          "path": "build_identity.py"
+        },
+        {
+          "type": "file",
+          "path": "cyrnava"
+        },
+        {
+          "type": "file",
+          "path": "install_payload.py"
+        },
+        {
+          "type": "file",
+          "path": "build-inputs.json"
+        },
+        {
+          "type": "file",
+          "path": "io.github._74Cerillion.CyrNava.desktop"
+        },
+        {
+          "type": "file",
+          "path": "io.github._74Cerillion.CyrNava.metainfo.xml"
+        }
+      ]
+    }
+  ]
+}

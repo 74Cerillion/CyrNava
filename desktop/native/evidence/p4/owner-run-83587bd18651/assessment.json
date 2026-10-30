@@ -1,0 +1,25 @@
+{
+  "status": "PARTIAL",
+  "host_fresh_install_permissions": "PASS",
+  "native_checks_passed": [
+    "production_identity_private_network_and_filesystem",
+    "single_instance_lock",
+    "backend_authentication_and_origin",
+    "production_window_title",
+    "renderer_sandbox",
+    "owned_backend_reaped"
+  ],
+  "saved_workspace_observation": {
+    "required_title_present": false,
+    "saved_asset_count": 1,
+    "saved_folder_count": 1
+  },
+  "owner_window_close": "Owner confirmed manual closure",
+  "missing_preference_evidence": "Old driver returned a JS object; new driver uses JSON.stringify and retains last valid sample during teardown",
+  "correction": "Visible test-only instructions, individual saved-data checks, explicit preference serialization, guarded synthetic resume with historical record copies, no duplicate seed note on resume",
+  "tests": "27 PASS; Ruff, Python compile and diff check PASS",
+  "production_bundle_changed": false,
+  "corrected_native_run": "NOT TESTED",
+  "old_helper_sha256": "cf02b6441103fec072a1ed8a548bf91d644479fa285d0ae9a955d7ca7e00986e",
+  "new_helper_sha256": "02b85571ac7da81dc168df54e4efc7ca2ca0172e2c538d3f6e5aeae7b628c005"
+}

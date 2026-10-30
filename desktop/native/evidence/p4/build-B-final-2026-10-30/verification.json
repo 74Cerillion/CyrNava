@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "bundle_sha256_independently_checked": true,
+  "bundle_length_independently_checked": true,
+  "ostree_ref_independently_checked": true,
+  "distinct_from_build_A": true,
+  "installation_and_native_verification": "NOT TESTED",
+  "result": {
+    "status": "PASS",
+    "directory": "/home/cerillion/.cache/cyrnava-builds/p4/local-B-f26wev2b",
+    "app_id": "io.github._74Cerillion.CyrNava",
+    "bundle": "/home/cerillion/.cache/cyrnava-builds/p4/local-B-f26wev2b/io.github._74Cerillion.CyrNava.flatpak",
+    "sha256": "96f17ff6a7e46763c846a223d27029f96071b421e167f27263672b6f45e25d8e",
+    "bytes": 209186816,
+    "logical_installed_bytes": 980983648,
+    "ostree_commit": "b49969699b4e52df078193713a1aca9a1e8def70f608ba46d700e48d0be5d5c5"
+  }
+}
