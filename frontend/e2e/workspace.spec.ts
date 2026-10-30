@@ -832,3 +832,93 @@ test('all exposed editor actions persist; mixed content reconstructs after resta
     expect(rejected).toEqual([]); expect(external).toEqual([]);
   } finally { releaseHeld?.(); await env.shutdown(); await rm(env.directory, { recursive: true, force: true }); }
 });
+
+test('desktop close protocol drains real autosave and retains an interrupted draft', async ({ page, context }) => {
+  const env = await environment();
+  try {
+    await env.start(); await page.goto(env.url);
+    await create(page, 'note', 'P2 close protocol');
+    const content = page.getByRole('textbox', { name: 'Note content' });
+    await content.click(); await page.keyboard.type('Paragraph saved by close handshake.');
+    const request = 'a'.repeat(32);
+    await page.evaluate((id) => window.__cyrnavaDesktop!.request(id), request);
+    await expect.poll(() => page.evaluate((id) => window.__cyrnavaDesktop!.state(id), request)).toBe('saved');
+    const tree = await getJson(env.api + '/api/tree');
+    const note = await getJson(env.api + '/api/notes/' + tree.notes[0].id);
+    expect(JSON.stringify(note.document_json)).toContain('Paragraph saved by close handshake.');
+    await page.evaluate((id) => window.__cyrnavaDesktop!.cancel(id), request);
+    await env.stopBackend();
+    await page.getByRole('textbox', { name: 'Note title' }).fill('P2 unconfirmed recovery draft');
+    const blocked = 'b'.repeat(32);
+    await page.evaluate((id) => window.__cyrnavaDesktop!.request(id), blocked);
+    await expect.poll(() => page.evaluate((id) => window.__cyrnavaDesktop!.state(id), blocked)).toBe('error');
+    await page.evaluate((id) => window.__cyrnavaDesktop!.cancel(id), blocked);
+    const exported = page.waitForEvent('download');
+    await page.getByRole('button', { name: 'Download pending draft', exact: true }).click();
+    const exportPath = await (await exported).path();
+    expect(exportPath).not.toBeNull();
+    expect(JSON.parse(await readFile(exportPath!, 'utf8')).title).toBe('P2 unconfirmed recovery draft');
+    // Closing without an acknowledgement is explicitly the recovery path.
+    // Context-level abort outlives the page and prevents a late close save.
+    await context.route('**/api/notes/*', (route) => route.request().method() === 'PATCH' ? route.abort() : route.continue());
+    await env.startBackend(); await page.reload();
+    await expect(page.getByRole('heading', { name: 'Recover unsaved edits' })).toBeVisible();
+    await context.unrouteAll({ behavior: 'wait' });
+    await page.getByRole('button', { name: 'Recover draft', exact: true }).click();
+    await saved(page); await page.reload();
+    await expect(page.getByRole('textbox', { name: 'Note title' })).toHaveValue('P2 unconfirmed recovery draft');
+  } finally { await env.shutdown(); await rm(env.directory, { recursive: true, force: true }); }
+});
+
+test('desktop close waits for an image upload and its subsequent document save', async ({ page, context }) => {
+  const env = await environment();
+  let release: (() => void) | undefined;
+  try {
+    await env.start(); await page.goto(env.url); await create(page, 'note', 'P2 pending image');
+    const png = join(env.directory, 'synthetic-close.png');
+    execFileSync(python, ['-c', 'from PIL import Image;import sys;Image.new("RGB",(8,8),"blue").save(sys.argv[1])', png]);
+    let started = false;
+    const held = new Promise<void>((done) => { release = done; });
+    await page.route('**/api/assets?*', async (route) => { started = true; await held; await route.continue(); });
+    await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: env.url });
+    await page.evaluate(async (data) => {
+      const bytes = Uint8Array.from(atob(data), (value) => value.charCodeAt(0));
+      await navigator.clipboard.write([new ClipboardItem({ 'image/png': new Blob([bytes], { type: 'image/png' }) })]);
+    }, (await readFile(png)).toString('base64'));
+    await page.getByRole('textbox', { name: 'Note content' }).click(); await page.keyboard.press('Control+v');
+    await expect.poll(() => started).toBe(true);
+    await expect(page.getByText('Saved', { exact: true })).toBeHidden();
+    const id = 'c'.repeat(32);
+    await page.evaluate((id) => window.__cyrnavaDesktop!.request(id), id);
+    await expect.poll(() => page.evaluate((id) => window.__cyrnavaDesktop!.state(id), id)).toBe('waiting');
+    // Closing must preserve the two-pane layout while the upload is held.
+    await expect.poll(() => page.evaluate(() => {
+      const sidebar = document.querySelector('.sidebar')!.getBoundingClientRect();
+      const main = document.querySelector('main')!.getBoundingClientRect();
+      return { sameRow: Math.abs(sidebar.y - main.y) < 1,
+        adjacent: Math.abs(sidebar.right - main.x) < 1 };
+    })).toEqual({ sameRow: true, adjacent: true });
+    release!();
+    await expect.poll(() => page.evaluate((id) => window.__cyrnavaDesktop!.state(id), id)).toBe('saved');
+    const tree = await getJson(env.api + '/api/tree');
+    const note = await getJson(env.api + '/api/notes/' + tree.notes[0].id);
+    expect(note.document_json.find((block: AssetBlock) => block.type === 'image')?.props?.url).toMatch(/^\/api\/assets\/[0-9a-f-]{36}$/);
+    await page.evaluate((id) => window.__cyrnavaDesktop!.cancel(id), id);
+    await page.reload(); await expect(page.locator('.editor img')).toBeVisible();
+    await expect.poll(() => page.locator('.editor img').evaluate((image) => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  } finally { release?.(); await env.shutdown(); await rm(env.directory, { recursive: true, force: true }); }
+});
+
+test('desktop close does not silently discard an unsubmitted management form', async ({ page }) => {
+  const env = await environment();
+  try {
+    await env.start(); await page.goto(env.url);
+    await page.getByRole('button', { name: 'New note', exact: true }).click();
+    await page.getByRole('dialog').getByLabel('Note title').fill('Unsubmitted title');
+    const id = 'd'.repeat(32);
+    await page.evaluate((id) => window.__cyrnavaDesktop!.request(id), id);
+    await expect.poll(() => page.evaluate((id) => window.__cyrnavaDesktop!.state(id), id)).toBe('error');
+    await page.evaluate((id) => window.__cyrnavaDesktop!.cancel(id), id);
+    await expect(page.getByRole('dialog').getByLabel('Note title')).toHaveValue('Unsubmitted title');
+  } finally { await env.shutdown(); await rm(env.directory, { recursive: true, force: true }); }
+});

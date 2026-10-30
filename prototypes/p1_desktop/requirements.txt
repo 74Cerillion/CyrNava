@@ -1,0 +1,7 @@
+# P1 only. Production dependencies and installer are unchanged.
+-r ../../backend/requirements.txt
+# Match the documented Qt 6.11 Flatpak BaseApp line, not latest Qt 6.12.
+PySide6==6.11.3
+PySide6_Addons==6.11.3
+PySide6_Essentials==6.11.3
+shiboken6==6.11.3

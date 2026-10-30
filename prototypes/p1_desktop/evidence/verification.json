@@ -1,0 +1,110 @@
+{
+  "journeys": [
+    "duplicate disposable-workspace launch refused before a second backend",
+    "different-origin fetch blocked before reaching an owned loopback canary",
+    "native BlockNote heading, paragraph, bold and code editing",
+    "native Qt clipboard screenshot paste, API upload and image decode",
+    "image-selector upload and canonical native JSON persistence",
+    "tree/search navigation and clean desktop-owned backend shutdown",
+    "full Qt/backend restart preserves SQLite JSON, images, preferred note and appearance/navigation preferences",
+    "failed-save close dialog defaults to Keep open and explicitly closes without deleting the disposable profile",
+    "backend outage and persistent Qt localStorage draft recovery after desktop restart",
+    "native page rejects different-origin main-frame navigation"
+  ],
+  "launches": [
+    {
+      "workspace": "/tmp/cyrnava-p1/workspace-50lkwkjz",
+      "interactive_ms": 997.58,
+      "backend_ready_ms": 462.62,
+      "frontend_loaded_ms": 661.81,
+      "shutdown_ms": 214.03,
+      "backend_exit_code": -15,
+      "console_errors": [
+        "Refused to connect to 'http://127.0.0.1:46653/canary' because it violates the following Content Security Policy directive: \"connect-src 'self'\".\n",
+        "Refused to connect to 'http://127.0.0.1:46653/canary' because it violates the following Content Security Policy directive: \"connect-src 'self' ws://127.0.0.1:*\".\n",
+        "Fetch API cannot load http://127.0.0.1:46653/canary. Refused to connect because it violates the document's Content Security Policy."
+      ],
+      "blocked_requests": []
+    },
+    {
+      "workspace": "/tmp/cyrnava-p1/workspace-50lkwkjz",
+      "interactive_ms": 924.42,
+      "backend_ready_ms": 359.06,
+      "frontend_loaded_ms": 573.46,
+      "shutdown_ms": 0.02,
+      "backend_exit_code": -15,
+      "console_errors": [],
+      "blocked_requests": []
+    },
+    {
+      "workspace": "/tmp/cyrnava-p1/workspace-50lkwkjz",
+      "interactive_ms": 847.59,
+      "backend_ready_ms": 343.1,
+      "frontend_loaded_ms": 558.21,
+      "shutdown_ms": 163.85,
+      "backend_exit_code": -15,
+      "console_errors": [],
+      "blocked_requests": []
+    }
+  ],
+  "note": "synthetic only; unauthenticated test CDP; no production profiles",
+  "platform": "wayland",
+  "memory": {
+    "process_count": 6,
+    "rss_sum_kib": 1061116,
+    "pss_sum_kib": 601335,
+    "samples": [
+      {
+        "pid": 110,
+        "role": "webengine-helper",
+        "rss_kib": 54780,
+        "pss_kib": 14802,
+        "seccomp": 2,
+        "no_new_privs": 1
+      },
+      {
+        "pid": 111,
+        "role": "webengine-helper",
+        "rss_kib": 54932,
+        "pss_kib": 9562,
+        "seccomp": 2,
+        "no_new_privs": 1
+      },
+      {
+        "pid": 147,
+        "role": "renderer",
+        "rss_kib": 100124,
+        "pss_kib": 27078,
+        "seccomp": 2,
+        "no_new_privs": 1
+      },
+      {
+        "pid": 158,
+        "role": "renderer",
+        "rss_kib": 210064,
+        "pss_kib": 113532,
+        "seccomp": 2,
+        "no_new_privs": 1
+      },
+      {
+        "pid": 64,
+        "role": "desktop",
+        "rss_kib": 582908,
+        "pss_kib": 389438,
+        "seccomp": 2,
+        "no_new_privs": 1
+      },
+      {
+        "pid": 72,
+        "role": "backend",
+        "rss_kib": 58308,
+        "pss_kib": 46923,
+        "seccomp": 2,
+        "no_new_privs": 1
+      }
+    ]
+  },
+  "sandbox": "Sandbox Status\nLayer 1 Sandbox\tNone\nPID namespaces\tNo\nNetwork namespaces\tNo\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tYes\nPtrace Protection with Yama LSM (Non-broker)\tYes\n\nYou are NOT adequately sandboxed.",
+  "sandboxComplete": false,
+  "compatibilityPassed": true
+}

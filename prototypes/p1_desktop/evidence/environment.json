@@ -1,0 +1,45 @@
+{
+  "os": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "python": "3.12.15",
+  "machine": "x86_64",
+  "logical_cpus": 8,
+  "flatpak": null,
+  "flatpak_builder": null,
+  "dependencies": {
+    "PySide6": {
+      "version": "6.11.3",
+      "installed_bytes": 4898822,
+      "download_bytes": 572119
+    },
+    "PySide6_Addons": {
+      "version": "6.11.3",
+      "installed_bytes": 438589184,
+      "download_bytes": 175307424
+    },
+    "PySide6_Essentials": {
+      "version": "6.11.3",
+      "installed_bytes": 237042919,
+      "download_bytes": 80292754
+    },
+    "shiboken6": {
+      "version": "6.11.3",
+      "installed_bytes": 661329,
+      "download_bytes": 272494
+    }
+  },
+  "environment_bytes": 759532954,
+  "frontend_dist_bytes": 4214785,
+  "namespace_probe": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "bwrap: No permissions to create a new namespace, likely because the kernel does not allow non-privileged user namespaces. See <https://deb.li/bubblewrap> or <file:///usr/share/doc/bubblewrap/README.Debian.gz>.\n",
+    "note": "Bubblewrap probe only; not an actual Flatpak package test"
+  },
+  "firefox_probe": {
+    "exit_code": 46,
+    "elapsed_ms": 118.74,
+    "stderr": "internal error, please report: running \"firefox\" failed: cannot create transient scope: DBus error \"org.freedesktop.DBus.Error.InvalidArgs\": [Process 40 is a kernel thread, refusing.]\n",
+    "stdout": "",
+    "note": "Blank isolated Firefox launch only; not a full-app performance measurement"
+  }
+}

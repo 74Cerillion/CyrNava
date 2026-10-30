@@ -13,6 +13,7 @@ import { createFolder, deleteFolder, getDeletionImpact, getTree, updateFolder } 
 import type { DirectoryData } from './library';
 import { ancestorIds, itemKey } from './tree';
 import type { TreeItem } from './tree';
+import { useDesktopClose } from './hooks/useDesktopClose';
 import { useLifecycle } from './hooks/useLifecycle';
 import { captureTemplate } from './templates';
 import type { TemplateSummary } from './templates';
@@ -56,6 +57,18 @@ function Workspace() {
   const [searchRefresh, setSearchRefresh] = useState(0);
   const editor = useRef<NoteHandle>(null);
   const operation = useRef(false);
+  const desktopClosing = useDesktopClose(async (deadline) => {
+    while (operation.current) {
+      if (Date.now() >= deadline) return false;
+      await new Promise((resolve) => window.setTimeout(resolve, 20));
+    }
+    // An open management form may contain unsubmitted text. Normal closure
+    // must not silently discard it; cancel close and finish/dismiss the form.
+    if (dialog || templateManager) return false;
+    // A preceding navigation may have mounted a different note this turn.
+    await new Promise((resolve) => window.setTimeout(resolve, 0));
+    return editor.current ? editor.current.flush() : !loading;
+  });
   const treeRequest = useRef(0);
   const lifetime = useRef<AbortController | null>(null);
 
@@ -126,7 +139,7 @@ function Workspace() {
   }, [loadAttempt, reveal, remember]);
 
   async function perform(action: () => Promise<void>) {
-    if (operation.current) return;
+    if (operation.current || desktopClosing) return;
     operation.current = true; setWorking(true); setError(null); setTemplateNotice(null);
     try {
       if (editor.current && !await editor.current.flush()) throw new Error('Cannot leave this note until pending edits and draft recovery are resolved. Your draft remains available; resolve the save error or recovery choice first.');
@@ -240,8 +253,8 @@ function Workspace() {
     });
   }
 
-  const blocked = working || dialog !== null || templateManager || loading || lifecycleProblem !== null;
-  return <div className="workspace" data-navigation-collapsed={navigationCollapsed}>
+  const blocked = desktopClosing || working || dialog !== null || templateManager || loading || lifecycleProblem !== null;
+  return <div className="workspace" inert={desktopClosing} data-navigation-collapsed={navigationCollapsed}>
     <a className="skip-link" href="#note">Skip to note</a>
     <aside id="workspace-navigation" className="sidebar" aria-label="Workspace navigation" hidden={navigationCollapsed}>
       <div className="brand"><img src="/assets/branding/cyrnava-256.png" alt="" width="128" height="128" />
@@ -267,6 +280,7 @@ function Workspace() {
       <p className="hint"><a href="/third-party-notices.txt" target="_blank" rel="noopener noreferrer">Third-party notices</a></p>
     </aside>
     <main id="note" tabIndex={-1}>
+      {desktopClosing && <p role="status">Finishing uploads and saving before closing...</p>}
       <div className="workspace-toolbar">
         <AppearanceControl />
         <button className="secondary" aria-controls="workspace-navigation" aria-expanded={!navigationCollapsed}
@@ -287,7 +301,7 @@ function Workspace() {
         {!note && <button onClick={() => { setLoading(true); setError(null); setLoadAttempt((n) => n + 1); }}>Retry opening library</button>}
       </div>}
       {loading ? <p role="status">Opening library...</p> : note ?
-        <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} theme={cyrnava ? 'cyrnava' : theme} locked={working || dialog !== null || templateManager || lifecycleProblem !== null} onSaved={noteSaved} onRecovered={(saved) => { setNote(saved); setEditorEpoch((n) => n + 1); setError(null); noteSaved(); }} />
+        <PersistentNote key={`${note.id}:${editorEpoch}`} note={note} ref={editor} theme={cyrnava ? 'cyrnava' : theme} locked={desktopClosing || working || dialog !== null || templateManager || lifecycleProblem !== null} onSaved={noteSaved} onRecovered={(saved) => { setNote(saved); setEditorEpoch((n) => n + 1); setError(null); noteSaved(); }} />
         : <header><h2>Select or create a note</h2><p>Choose a note in the library, or use New folder and New note to start.</p></header>}
     </main>
     {dialog && <ManagementDialog state={dialog} data={data} busy={working} error={error}

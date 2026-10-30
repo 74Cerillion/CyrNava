@@ -1,0 +1,117 @@
+{
+  "workspace": "/home/cerillion/.var/app/org.cyrnava.P1B/data/p1b-profiles/workspace-p1b",
+  "origin": "http://127.0.0.1:36131",
+  "parent_pid": 2,
+  "pyside": "6.11.2",
+  "qt": "6.11.2",
+  "webengine": "6.11.1",
+  "chromium": "140.0.7339.225",
+  "flatpak_id": "org.cyrnava.P1B",
+  "platform": "wayland",
+  "test_cdp": null,
+  "blocked_requests": [],
+  "console_errors": [],
+  "backend_pid": 10,
+  "backend_ready_ms": 853.82,
+  "process_evidence": [
+    {
+      "pid": 2,
+      "status": {
+        "Name": "python3",
+        "PPid": "1",
+        "NSpid": "2",
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "1"
+      },
+      "namespaces": {
+        "user": "user:[4026532687]",
+        "pid": "pid:[4026532708]",
+        "net": "net:[4026532710]",
+        "mnt": "mnt:[4026532703]"
+      }
+    },
+    {
+      "pid": 10,
+      "unavailable": "[Errno 2] No such file or directory: '/proc/10/status'"
+    },
+    {
+      "pid": 25,
+      "status": {
+        "Name": "QtWebEngineProc",
+        "PPid": "2",
+        "NSpid": "25",
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "1"
+      },
+      "namespaces": {
+        "user": "user:[4026532687]",
+        "pid": "pid:[4026532708]",
+        "net": "net:[4026532710]",
+        "mnt": "mnt:[4026532703]"
+      }
+    },
+    {
+      "pid": 29,
+      "status": {
+        "Name": "QtWebEngineProc",
+        "PPid": "28",
+        "NSpid": "29\t2",
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "1"
+      },
+      "namespaces": {
+        "user": "user:[4026532687]",
+        "pid": "pid:[4026533555]",
+        "net": "net:[4026533327]",
+        "mnt": "mnt:[4026533252]"
+      }
+    },
+    {
+      "pid": 63,
+      "status": {
+        "Name": "QtWebEngineProc",
+        "PPid": "29",
+        "NSpid": "63\t3",
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "2"
+      },
+      "namespaces": {
+        "user": "user:[4026532687]",
+        "pid": "pid:[4026533555]",
+        "net": "net:[4026533327]",
+        "mnt": "mnt:[4026533252]"
+      }
+    },
+    {
+      "pid": 77,
+      "status": {
+        "Name": "QtWebEngineProc",
+        "PPid": "29",
+        "NSpid": "77\t11",
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "2"
+      },
+      "namespaces": {
+        "user": "user:[4026532687]",
+        "pid": "pid:[4026533555]",
+        "net": "net:[4026533327]",
+        "mnt": "mnt:[4026533252]"
+      }
+    }
+  ],
+  "backend_running": false,
+  "flatpak_info": "[Application]\nname=org.cyrnava.P1B\nruntime=runtime/org.kde.Platform/x86_64/6.11\n\n[Instance]\ninstance-id=891127750\ninstance-path=/home/cerillion/.var/app/org.cyrnava.P1B\napp-path=/home/cerillion/.local/share/flatpak/app/org.cyrnava.P1B/x86_64/p1b/de98d04b66fe89d4865afdaabbfc6ef1d9706cf92f526270ba45279404a975c9/files\napp-commit=de98d04b66fe89d4865afdaabbfc6ef1d9706cf92f526270ba45279404a975c9\napp-extensions=org.cyrnava.P1B.Locale=43b45dd319061d7b9f0ad696cd5fc3343602b2c3cad5f7eb3f1ac677e9e29dc7;org.cyrnava.P1B.Debug=162e58faff8aca65c75d90dd262f38eeac13ddd99dc31e052b836537bb6884ab\nruntime-path=/home/cerillion/.local/share/flatpak/runtime/org.kde.Platform/x86_64/6.11/76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473/files\nruntime-commit=76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473\nruntime-extensions=org.kde.Platform.Locale=6ba2b53b9e1c09dfa8f53333cc66c4ccc5de1e8cb6bbee9e503cf529a30bcf9f;org.freedesktop.Platform.GL.default=c8dc1156588776045866acd53f9090c90fa84fdff0e74ee4e859ebfc80fb671d;org.freedesktop.Platform.VAAPI.Intel=8983ce4b3afd9da43c9ad7486eb732bb1b2ff64ec6f7171b2aade5a6fe899832;org.freedesktop.Platform.codecs-extra=4ac6fc6727e278ddff768b8996a9240ef3f40becead3b70289faa43314934c5b;org.freedesktop.Platform.GL.default=4a2f702604835090c94ae8806aa9d91ab03cd294aedb3e0e24fc49d492d781eb\nbranch=p1b\narch=x86_64\nflatpak-version=1.16.6\nsession-bus-proxy=true\nsystem-bus-proxy=true\nextra-args=--usb-list=;--usb-list=;\n\n[Context]\nsockets=wayland;\ndevices=dri;\nfilesystems=xdg-config/kdeglobals:ro;\n\n[Session Bus Policy]\ncom.canonical.AppMenu.Registrar=talk\norg.kde.kconfig.notify=talk\norg.kde.KGlobalSettings=talk\n\n[Environment]\nQTWEBENGINE_DICTIONARIES_PATH=/app/qtwebengine_dictionaries\nQTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess\nALSA_CONFIG_PATH=/usr/share/alsa/alsa-flatpak.conf\nQT_QPA_PLATFORM=wayland\nGI_TYPELIB_PATH=/app/lib/girepository-1.0\nQT_PLUGIN_PATH=/app/lib/plugins:/usr/share/runtime/lib/plugins\nPYTHONUSERBASE=/var/data/python\n__EGL_EXTERNAL_PLATFORM_CONFIG_DIRS=/etc/egl/egl_external_platform.d:/usr/lib/x86_64-linux-gnu/GL/egl/egl_external_platform.d:/usr/share/egl/egl_external_platform.d\nQML2_IMPORT_PATH=/app/lib/qml\nGST_PLUGIN_SYSTEM_PATH=/app/lib/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/codecs-extra/lib/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0\nXDG_DATA_DIRS=/app/share:/usr/share:/usr/share/runtime/share:/run/host/user-share:/run/host/share\nKDE_FORK_SLAVES=1\nALSA_CONFIG_DIR=/usr/share/alsa\nQT_QPA_PLATFORMTHEME=xdgdesktopportal\n",
+  "network_interfaces": [
+    "lo"
+  ],
+  "tcp_listeners": [],
+  "sandbox_diagnostic": "Sandbox Status\nLayer 1 Sandbox\tFlatpak\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tYes\nPtrace Protection with Yama LSM (Non-broker)\tYes\n\nYou are adequately sandboxed.",
+  "frontend_loaded_ms": 944.17,
+  "shutdown_ms": 213.9,
+  "backend_exit_code": -15
+}

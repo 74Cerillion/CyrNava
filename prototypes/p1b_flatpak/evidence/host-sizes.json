@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-29",
+  "method": "flatpak info --user --show-size REF",
+  "scope": "Installed logical ref sizes, not incremental disk usage or compressed download size; shared runtime and SDK excluded",
+  "installed_bytes": {
+    "org.cyrnava.P1B//p1b": 737895424,
+    "org.cyrnava.P1B.Locale//p1b": 309432320,
+    "org.cyrnava.P1B.Debug//p1b": 1213952
+  },
+  "logical_sum_bytes": 1048541696
+}
