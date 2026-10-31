@@ -115,3 +115,26 @@ prove provisioning and all existing application gates, production build, exporte
 package audit, unsigned upload, independently checked SHA/provenance and required gate.
 Do not call P5A PASS before that evidence exists. No further commit/push/rerun/dispatch,
 release/signing/distribution, main merge, P5B or P5C is authorized by this local task.
+
+
+## Hosted outcome — sixth run verified PASS
+
+Owner completed the authorized push of `1ee2077b283b8e5dfc2162119dd439ed3baeb109`.
+Run 41181510439/attempt 1 verifies the corrected dependency/pin sequence: all three
+final actual SHAs explicitly equal the unchanged locks. Workflow contracts (31),
+backend/security (567 +31 subtests), units (273), browsers (20), production build,
+exported package audit, unsigned upload and required gate all PASS. Independently
+verified four ZIP digests, bundle SHA/checksum and source/run/lock provenance.
+See current P5A_REPORT and hosted-provisioning evidence. Additional local payload
+re-extraction is BLOCKED by read-only O_TMPFILE; no local payload audit PASS claimed.
+P5A recommendation is now PASS for owner acceptance; no further commit/push or rerun.
+The earlier FAIL statements above describe the preserved pre-hosted checkpoint.
+
+
+## Formal owner acceptance
+
+The owner explicitly accepted P5A on 31 October 2026, citing hosted run 41181510439
+and implementation commit 1ee2077. The acceptance record retains the successful
+hosted gates and the blocked additional local re-audit without changing either.
+Documentation-only closeout is authorized. Prepare `p5a-accepted` only after the
+closeout commit is synchronized with origin. No main merge, P5B or P5C is authorized.

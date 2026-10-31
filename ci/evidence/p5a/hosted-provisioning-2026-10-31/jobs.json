@@ -1,0 +1,521 @@
+{
+  "total_count": 5,
+  "jobs": [
+    {
+      "id": 124479698016,
+      "run_id": 41181510439,
+      "workflow_name": "CyrNava CI",
+      "head_branch": "desktop/p2-production-integration",
+      "run_url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/runs/41181510439",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOVRhg7M8AAAAc-5F0YA",
+      "head_sha": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+      "url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/jobs/124479698016",
+      "html_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41181510439/job/124479698016",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-31T07:40:12Z",
+      "started_at": "2026-10-31T07:40:13Z",
+      "completed_at": "2026-10-31T07:40:22Z",
+      "name": "Workflow validation",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-31T07:40:14Z",
+          "completed_at": "2026-10-31T07:40:15Z"
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-31T07:40:15Z",
+          "completed_at": "2026-10-31T07:40:17Z"
+        },
+        {
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-31T07:40:17Z",
+          "completed_at": "2026-10-31T07:40:17Z"
+        },
+        {
+          "name": "Install locked workflow parser",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-31T07:40:17Z",
+          "completed_at": "2026-10-31T07:40:18Z"
+        },
+        {
+          "name": "Validate workflow and negative contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-31T07:40:18Z",
+          "completed_at": "2026-10-31T07:40:20Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-31T07:40:20Z",
+          "completed_at": "2026-10-31T07:40:20Z"
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-31T07:40:20Z",
+          "completed_at": "2026-10-31T07:40:20Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-31T07:40:20Z",
+          "completed_at": "2026-10-31T07:40:20Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/74Cerillion/CyrNava/check-runs/124479698016",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "runner_id": 1000000021,
+      "runner_name": "GitHub Actions 1000000021",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 124479732143,
+      "run_id": 41181510439,
+      "workflow_name": "CyrNava CI",
+      "head_branch": "desktop/p2-production-integration",
+      "run_url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/runs/41181510439",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOVRhg7M8AAAAc-5H5rw",
+      "head_sha": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+      "url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/jobs/124479732143",
+      "html_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41181510439/job/124479732143",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-31T07:40:22Z",
+      "started_at": "2026-10-31T07:40:24Z",
+      "completed_at": "2026-10-31T07:41:57Z",
+      "name": "Backend and security",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-31T07:40:24Z",
+          "completed_at": "2026-10-31T07:40:25Z"
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-31T07:40:25Z",
+          "completed_at": "2026-10-31T07:40:27Z"
+        },
+        {
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-31T07:40:27Z",
+          "completed_at": "2026-10-31T07:40:27Z"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-31T07:40:27Z",
+          "completed_at": "2026-10-31T07:40:33Z"
+        },
+        {
+          "name": "Install verification dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-31T07:40:33Z",
+          "completed_at": "2026-10-31T07:40:57Z"
+        },
+        {
+          "name": "Backend, security, lifecycle and migration regressions",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-31T07:40:57Z",
+          "completed_at": "2026-10-31T07:41:54Z"
+        },
+        {
+          "name": "Preserve synthetic test diagnostics",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-31T07:41:54Z",
+          "completed_at": "2026-10-31T07:41:55Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-31T07:41:55Z",
+          "completed_at": "2026-10-31T07:41:55Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-31T07:41:55Z",
+          "completed_at": "2026-10-31T07:41:55Z"
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-31T07:41:55Z",
+          "completed_at": "2026-10-31T07:41:56Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-31T07:41:56Z",
+          "completed_at": "2026-10-31T07:41:56Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/74Cerillion/CyrNava/check-runs/124479732143",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "runner_id": 1000000022,
+      "runner_name": "GitHub Actions 1000000022",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 124479732217,
+      "run_id": 41181510439,
+      "workflow_name": "CyrNava CI",
+      "head_branch": "desktop/p2-production-integration",
+      "run_url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/runs/41181510439",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOVRhg7M8AAAAc-5H5-Q",
+      "head_sha": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+      "url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/jobs/124479732217",
+      "html_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41181510439/job/124479732217",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-31T07:40:22Z",
+      "started_at": "2026-10-31T07:40:24Z",
+      "completed_at": "2026-10-31T07:44:22Z",
+      "name": "Frontend and browser",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-31T07:40:25Z",
+          "completed_at": "2026-10-31T07:40:26Z"
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-31T07:40:26Z",
+          "completed_at": "2026-10-31T07:40:28Z"
+        },
+        {
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-31T07:40:28Z",
+          "completed_at": "2026-10-31T07:40:29Z"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-31T07:40:29Z",
+          "completed_at": "2026-10-31T07:40:36Z"
+        },
+        {
+          "name": "Install locked frontend and browser dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-31T07:40:36Z",
+          "completed_at": "2026-10-31T07:41:12Z"
+        },
+        {
+          "name": "Lint, unit tests, TypeScript, production build and Chromium tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-31T07:41:12Z",
+          "completed_at": "2026-10-31T07:44:16Z"
+        },
+        {
+          "name": "Preserve synthetic browser diagnostics",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-31T07:44:16Z",
+          "completed_at": "2026-10-31T07:44:19Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-31T07:44:19Z",
+          "completed_at": "2026-10-31T07:44:19Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-31T07:44:19Z",
+          "completed_at": "2026-10-31T07:44:19Z"
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-10-31T07:44:19Z",
+          "completed_at": "2026-10-31T07:44:19Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-10-31T07:44:19Z",
+          "completed_at": "2026-10-31T07:44:19Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/74Cerillion/CyrNava/check-runs/124479732217",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "runner_id": 1000000023,
+      "runner_name": "GitHub Actions 1000000023",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 124480491065,
+      "run_id": 41181510439,
+      "workflow_name": "CyrNava CI",
+      "head_branch": "desktop/p2-production-integration",
+      "run_url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/runs/41181510439",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOVRhg7M8AAAAc-52OOQ",
+      "head_sha": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+      "url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/jobs/124480491065",
+      "html_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41181510439/job/124480491065",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-31T07:44:22Z",
+      "started_at": "2026-10-31T07:44:24Z",
+      "completed_at": "2026-10-31T07:53:36Z",
+      "name": "Production Flatpak and bundle audit",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-31T07:44:25Z",
+          "completed_at": "2026-10-31T07:44:26Z"
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-31T07:44:26Z",
+          "completed_at": "2026-10-31T07:44:28Z"
+        },
+        {
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-31T07:44:28Z",
+          "completed_at": "2026-10-31T07:44:28Z"
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-31T07:44:28Z",
+          "completed_at": "2026-10-31T07:44:35Z"
+        },
+        {
+          "name": "Install build tools",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-31T07:44:35Z",
+          "completed_at": "2026-10-31T07:44:47Z"
+        },
+        {
+          "name": "Provision and verify P4 locked runtime commits",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-31T07:44:47Z",
+          "completed_at": "2026-10-31T07:46:34Z"
+        },
+        {
+          "name": "Build through the P4 production builder",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-31T07:46:34Z",
+          "completed_at": "2026-10-31T07:52:31Z"
+        },
+        {
+          "name": "Audit exported bundle and generate checksum/provenance",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-31T07:52:31Z",
+          "completed_at": "2026-10-31T07:53:28Z"
+        },
+        {
+          "name": "Upload validated unsigned local-installation artifact",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-31T07:53:28Z",
+          "completed_at": "2026-10-31T07:53:31Z"
+        },
+        {
+          "name": "Preserve build diagnostics without uploading an unvalidated package",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-31T07:53:31Z",
+          "completed_at": "2026-10-31T07:53:32Z"
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18,
+          "started_at": "2026-10-31T07:53:32Z",
+          "completed_at": "2026-10-31T07:53:32Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19,
+          "started_at": "2026-10-31T07:53:32Z",
+          "completed_at": "2026-10-31T07:53:33Z"
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20,
+          "started_at": "2026-10-31T07:53:33Z",
+          "completed_at": "2026-10-31T07:53:33Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21,
+          "started_at": "2026-10-31T07:53:33Z",
+          "completed_at": "2026-10-31T07:53:33Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/74Cerillion/CyrNava/check-runs/124480491065",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "runner_id": 1000000024,
+      "runner_name": "GitHub Actions 1000000024",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 124482240371,
+      "run_id": 41181510439,
+      "workflow_name": "CyrNava CI",
+      "head_branch": "desktop/p2-production-integration",
+      "run_url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/runs/41181510439",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOVRhg7M8AAAAc-7g_cw",
+      "head_sha": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+      "url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/jobs/124482240371",
+      "html_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41181510439/job/124482240371",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-31T07:53:36Z",
+      "started_at": "2026-10-31T07:53:47Z",
+      "completed_at": "2026-10-31T07:53:50Z",
+      "name": "CI required",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-31T07:53:48Z",
+          "completed_at": "2026-10-31T07:53:48Z"
+        },
+        {
+          "name": "Require every verification and artifact job to succeed",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-31T07:53:48Z",
+          "completed_at": "2026-10-31T07:53:48Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-31T07:53:48Z",
+          "completed_at": "2026-10-31T07:53:48Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/74Cerillion/CyrNava/check-runs/124482240371",
+      "labels": [
+        "ubuntu-24.04"
+      ],
+      "runner_id": 1000000025,
+      "runner_name": "GitHub Actions 1000000025",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

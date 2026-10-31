@@ -1,0 +1,30 @@
+[
+  {
+    "kind": "backend",
+    "artifact_id": 13035461320,
+    "sha256": "139af47b0712073dc0fdab1097dc63068a1342a9de7ad01cadc040292a633de7",
+    "bytes": 10813,
+    "matches_GitHub_digest": true
+  },
+  {
+    "kind": "frontend",
+    "artifact_id": 13035237190,
+    "sha256": "05186518ecbdbcae3d5a61cf073eadcbb5a6ba59c17321fe644611dde5ff092e",
+    "bytes": 4889335,
+    "matches_GitHub_digest": true
+  },
+  {
+    "kind": "flatpak",
+    "artifact_id": 13034998599,
+    "sha256": "528ce9ebc8d5b5a046860bf0d26cf12f29d7501564f302d894184fe388c63c43",
+    "bytes": 2041,
+    "matches_GitHub_digest": true
+  },
+  {
+    "kind": "package",
+    "artifact_id": 13035607417,
+    "sha256": "73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b",
+    "bytes": 210238004,
+    "matches_GitHub_digest": true
+  }
+]

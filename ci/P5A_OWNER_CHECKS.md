@@ -1,3 +1,39 @@
+# P5A owner checks — formally ACCEPTED
+
+Run [41181510439](https://github.com/74Cerillion/CyrNava/actions/runs/41181510439),
+commit `1ee2077b283b8e5dfc2162119dd439ed3baeb109`, attempt 1; automatic push event.
+
+- [x] Remote branch, source SHA and automatic workflow verified.
+- [x] Workflow validation: 31 contracts PASS.
+- [x] Backend/security: 567 tests + 31 subtests PASS.
+- [x] Frontend lint, 273 units, TypeScript and production build PASS.
+- [x] All 20 browsers PASS, including five lifecycle and both image cases.
+- [x] Provisioning PASS: final actual/expected SHA equality for all three P4 refs.
+- [x] Production Flatpak builder PASS.
+- [x] Hosted exported bundle import/content/permissions/provenance audit PASS.
+- [x] Validated unsigned artifact upload PASS, ID 13035607417.
+- [x] Independent downloads: package and all three diagnostic ZIP hashes match GitHub.
+- [x] Bundle SHA matches SHA256SUMS, result and source/run/lock provenance.
+- [x] Independent inventory exclusions/link review and 28 application-source hashes match.
+- [x] Final required CI gate PASS.
+- [x] Historical failures/uncertainty and additional local re-audit BLOCKED status preserved.
+- [x] No extra commit/push/rerun/dispatch, release, signing, deployment, merge or P5B/P5C.
+- [x] Owner formally accepts P5A, explicitly citing run 41181510439 and commit 1ee2077.
+- [ ] Synchronize the documentation-only acceptance commit after push authorization.
+- [ ] Prepare local `p5a-accepted` tag only after synchronization; no tag push performed.
+
+Additional local payload re-extraction was blocked by O_TMPFILE read-only restrictions;
+it is not a claimed local PASS. Hosted exported-payload audit is verified PASS.
+Native renderer/portal behavior is not tested by this package audit.
+
+Evidence: `ci/evidence/p5a/hosted-provisioning-2026-10-31/`.
+Report: `ci/P5A_REPORT.md`. Formal acceptance: hosted-provisioning evidence/owner-acceptance.json.
+Documentation-only closeout commit is authorized; push authorization remains pending.
+
+---
+
+The following preserves the prior fifth-run checklist and local correction checkpoint.
+
 # P5A owner checks — fifth hosted verification
 
 **P5A remains FAIL / NOT ACCEPTED.** Run 41179709348 / commit 6743d1d / attempt 1.

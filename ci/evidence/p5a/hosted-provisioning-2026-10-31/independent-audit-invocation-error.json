@@ -1,0 +1,12 @@
+{
+  "status": "FAIL",
+  "context": "Independent audit of downloaded hosted bundle; not an application launch or install",
+  "sha256": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db",
+  "bundle_bytes": 209189544,
+  "source_and_run_provenance": "PASS",
+  "checksums": "PASS",
+  "runtime_lock": "PASS",
+  "error_type": "CalledProcessError",
+  "error": "Command '['ostree', 'init', '--mode=archive', '--repo=/tmp/cyrnava-p5a-hosted-41181510439/independent-audit/imported-repo']' returned non-zero exit status 1.",
+  "seconds": 0.444
+}

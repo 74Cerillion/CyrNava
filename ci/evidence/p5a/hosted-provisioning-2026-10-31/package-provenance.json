@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "app_id": "io.github._74Cerillion.CyrNava",
+  "version": "0.1.0",
+  "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+  "sha256": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db",
+  "artifact_bytes": 209189544,
+  "ostree_commit": "da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac",
+  "runtime": {
+    "architecture": "x86_64",
+    "python": "3.13",
+    "qt_series": "6.11",
+    "application_version": "0.1.0",
+    "schema": 5,
+    "refs": {
+      "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+      "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+      "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e"
+    }
+  },
+  "built_at_utc": "2026-10-31T07:53:28.151250+00:00",
+  "ostree_timestamp": "2026-10-29T23:00:00Z",
+  "workflow_run_id": "41181510439",
+  "workflow_run_attempt": "1",
+  "runner_os": "Linux",
+  "runner_image": "ubuntu24",
+  "runner_image_version": "20261026.354.1",
+  "audit_seconds": 56.872,
+  "native_renderer_portals": "NOT TESTED by package audit"
+}

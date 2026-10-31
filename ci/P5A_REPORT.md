@@ -2,9 +2,84 @@
 
 Date: 31 October 2026, Asia/Seoul.
 
-**P5A STATUS: FAIL — FLATPAK RUNTIME PROVISIONING; APPLICATION TESTS PASS**
+**P5A STATUS: ACCEPTED — FORMAL OWNER ACCEPTANCE RECORDED**
 
-## Local provisioning correction — ready for authorization
+## Formal acceptance and milestone
+
+The owner explicitly declared **P5A IS FORMALLY ACCEPTED**, citing run 41181510439
+against implementation commit `1ee2077b283b8e5dfc2162119dd439ed3baeb109`.
+Acceptance is recorded in `evidence/p5a/hosted-provisioning-2026-10-31/owner-acceptance.json`.
+Required hosted results, independently checked artifact checksums/provenance,
+historical failures and the blocked additional local re-audit are preserved.
+This documentation-only closeout changes no application, tests, locks or workflow.
+
+The owner authorized one documentation-only acceptance commit. Its push requires
+separate authorization. Prepare the local `p5a-accepted` milestone tag only after
+that documentation commit is verified synchronized with origin; target that
+synchronized documentation commit, retaining the tested implementation SHA above.
+No tag, release, main merge, P5B or P5C is part of this unsynchronized checkpoint.
+Earlier recommendations and pending-acceptance statements below are historical.
+
+## Current result — sixth hosted run: PASS
+
+[Run 41181510439](https://github.com/74Cerillion/CyrNava/actions/runs/41181510439),
+attempt 1, was automatically push-triggered for
+`1ee2077b283b8e5dfc2162119dd439ed3baeb109` on the authorized branch. Remote ref and
+run source SHA match. Run started 2026-10-31 07:40:11 UTC; all five jobs completed
+successfully. **PASS; formally accepted by the owner on 31 October 2026.** Older sections
+below preserve historical checkpoints and their then-current recommendations.
+
+| Required gate | Actual hosted result |
+| --- | --- |
+| Workflow validation and negative/security contracts | PASS — 31 contracts |
+| Backend/security/lifecycle/migration/packaging | PASS — 567 tests + 31 subtests; two existing warnings |
+| Frontend lint, unit, TypeScript, production build | PASS — 273 unit tests |
+| Browser integration | PASS — all 20, zero failures/skips; all five lifecycle cases and both image cases |
+| P4 runtime provisioning and final exact commits | PASS — all three expected/actual SHAs explicitly equal; 107.064 s |
+| Production P4 builder | PASS — unsigned bundle produced |
+| Exported package-content audit | PASS — imported exported bundle; permissions, file hashes/inventory and packaged provenance checked |
+| Validated unsigned artifact upload | PASS — artifact 13035607417 |
+| Independent artifact SHA/provenance verification | PASS — four ZIP digests match GitHub; bundle checksum/source/run/locks agree |
+| Final CI required gate | PASS — all four dependency results success |
+
+Package SHA-256:
+`93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db`.
+Bundle 209,189,544 bytes; audited payload 5,320 entries, 980,984,007 logical bytes.
+OSTree commit `da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac`.
+The 210,238,004-byte artifact ZIP has a distinct SHA-256:
+`73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b`.
+Provenance identifies this source commit, run 41181510439/attempt 1, schema 5,
+application 0.1.0, fixed OSTree timestamp and unchanged P4 runtime locks.
+
+Independently downloaded package and all three diagnostic archives; matched each
+against GitHub's artifact digest. The bundle matches SHA256SUMS, result and
+provenance. Independently reviewed the downloaded inventory for unsafe/duplicate
+paths, prohibited content and links; all 28 packaged application-source files with
+local source counterparts match their hashes. Hosted audit imported and checked
+out the actual exported bundle, compared full file hashes against build inventory,
+validated permissions/identity/runtime metadata and compared packaged provenance.
+This is verified hosted audit evidence, not merely a successful build step.
+
+**Additional local re-audit limitation:** after correcting an invocation's missing
+output directory, the local OSTree import failed with `open(O_TMPFILE): Read-only
+file system`. That optional local repetition is BLOCKED, not PASS; its original
+failure records are retained. Local inventory review is not represented as hashing
+locally re-extracted files. This does not change the successful hosted export audit.
+No native application launch/portal validation was performed by this package audit.
+
+Evidence: `evidence/p5a/hosted-provisioning-2026-10-31/` (run/jobs, prepare/build/audit,
+package metadata/inventory, JUnit, ZIP digest checks, local limitation and manifest).
+The successful corrected sequence establishes the hosted repair. The historical
+fifth-run exact failing SHA remains unproven and is not reconstructed from this run.
+
+Production code, accepted lifecycle guard, locks, GPG and sandbox/workflow permissions
+remain unchanged. One authorized commit was created; owner completed its push after
+local HTTPS authentication failed. No additional commit, push, workflow rerun/dispatch,
+GitHub Release, signing, deployment, main merge or P5B/P5C occurred during that hosted review. These hosted-result
+updates are included in the authorized documentation-only closeout. The artifact is a verification-only unsigned CI upload, not a
+published release. **All required hosted P5A gates PASS; P5A formally accepted.**
+
+## Historical local provisioning correction — pre-hosted checkpoint
 
 The authorized 31 October correction is locally verified, uncommitted and unpushed.
 It does not change the hosted FAIL above. See `P5A_PROVISIONING_CORRECTION.md` and
@@ -40,7 +115,7 @@ but omitted its final SHA and exact exception. That uncertainty remains preserve
 **Recommendation: authorize one P5A-only commit/push for hosted verification.**
 No commit, push, dispatch, rerun, release, signing, deployment or P5B/P5C occurred.
 
-## A. Current hosted result — application tests pass; Flatpak provisioning fails
+## A. Historical fifth hosted result — application tests passed; provisioning failed
 
 **P5A remains FAIL / NOT ACCEPTED.** Actual run **41179709348**, attempt 1,
 was push-triggered for `6743d1d5c76f2db87c2debb6f687a6e57a6826b6`. The owner push
@@ -660,3 +735,13 @@ record safe expected/actual ref/commit mismatch details. Retain lock values, GPG
 verification and all fail-closed gates. No code change, weakening, commit, push,
 rerun, dispatch, production release/signing/deployment, main merge or P5B/P5C occurred
 in this hosted review. **P5A recommendation: FAIL / NOT ACCEPTED.**
+
+
+## Historical provisioning push attempt — authentication blocked
+
+Created one reviewed P5A-only commit `1ee2077b283b8e5dfc2162119dd439ed3baeb109`. The single authorized
+push exited 128: Git HTTPS credentials are unavailable in this terminal. No remote
+update or new hosted verification resulted from this attempt. Owner must complete
+the same authorized push from an authenticated Ubuntu terminal. No retry, second
+commit, workflow dispatch/rerun or P5B/P5C occurred. P5A remains FAIL / NOT ACCEPTED.
+Evidence: `evidence/p5a/provisioning-commit-review-2026-10-31/push-status.json`.
