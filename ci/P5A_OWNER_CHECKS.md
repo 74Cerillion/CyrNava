@@ -1,61 +1,40 @@
-# P5A owner checks — GitHub-hosted verification
+# P5A owner checks — correction ready for review
 
-Status: **CONDITIONAL — GITHUB-HOSTED VERIFICATION REQUIRED**.
+**P5A STATUS: CONDITIONAL — LOCAL CORRECTION PASSED; HOSTED VERIFICATION PENDING**
 
-The local candidate is on `desktop/p2-production-integration` and has not been
-committed or pushed by the agent. A push is an external action requiring explicit
-owner authorization under the P5A instructions. Publishing an Actions artifact is
-included in the proposed verification; creating a public release is not.
+The first hosted [run 41157614256](https://github.com/74Cerillion/CyrNava/actions/runs/41157614256)
+remains FAIL at commit `329020b5286ce0d5474e04a781ed61a6079f8edc`.
+Its evidence and previous reports are preserved. The backend job lacked generated
+production frontend assets; a separate runner's frontend build cannot supply them.
 
-## One owner decision
+The local correction gives the backend job its own pinned Node/npm setup and
+locked dependency install/production build. No cross-job artifact or test skip
+was introduced. Existing read-only permissions and fail-closed gates are preserved.
 
-Review `.github/workflows/ci.yml`, the helpers in `ci/`, the two bounded P4 build/
-audit changes and import-order-only test cleanup. Then either:
+- [x] Clean baseline clone; explicit four-file candidate overlay; no preexisting dist,
+  node_modules or backend venv. Fresh isolated dependencies and synthetic data.
+- [x] 550 backend tests, 31 subtests; all three prior failures now pass.
+- [x] 273 frontend units, 16 browser tests; lint, TypeScript/build pass.
+- [x] 23 CI contract methods including four new prerequisite regressions.
+- [x] Ruff, actionlint syntax/expression checks, compile and diff checks pass.
+- [x] Reports, exact patch, source hashes, logs and JUnit preserved in
+  `evidence/p5a/frontend-prerequisite-correction-2026-10-31/`.
+- [ ] Owner authorizes one additional P5A-only commit and push to
+  `desktop/p2-production-integration`.
+- [ ] Monitor the resulting hosted run; record source SHA/run ID and all job results.
+- [ ] Require production build/exported-payload audit/upload and verify package hash.
+- [ ] Owner accepts P5A only after required hosted checks succeed.
 
-- Authorize a P5A commit and push to the existing integration branch. Its push
-  trigger starts CI automatically; no manual dispatch is necessary.
-- Commit/push the reviewed changes yourself, then provide the Actions run URL.
+Local backend setup adds 10.142 s for npm install/build; the full backend wrapper
+was 41.472 s. Frontend wrapper was 122.877 s. Hosted timing remains unmeasured for
+the correction. ShellCheck is not installed locally; no local ShellCheck PASS is
+claimed. Existing P4 native evidence limitations remain unchanged.
 
-No merge to main, tag, signing, release or repository setting change is required.
-Do not enable a paid plan or new production secret. This is a public repository,
-so workflow logs/artifacts must contain only source/build data and synthetic tests.
+No new commit, push, manual Actions trigger, signing, release, main merge or
+P5B/P5C work occurred. Do not rerun the old revision. Stop for the explicitly
+required commit/push authorization; no owner terminal test is requested now.
 
-If Actions is disabled, enable GitHub Actions only for this repository and allow
-its referenced official `actions/*` actions. Keep default workflow token
-permissions read-only; no write permission or signing credential is needed.
-If fork PR execution awaits approval, review the PR and approve that run instead
-of switching to a privileged PR trigger. These are contingency instructions,
-not a claim that either condition currently applies.
-
-## Hosted acceptance evidence
-
-Record each item from the actual run:
-
-- Run URL/ID and attempt, source SHA and runner image.
-- Workflow validation, backend/security and frontend/browser jobs PASS.
-- Production Flatpak build and exported-bundle audit PASS.
-- `CI required` PASS; no required job skipped or cancelled.
-- Artifact upload successful; the production bundle/provenance/checksum are present.
-- Download and independently verify the `.flatpak` against `SHA256SUMS` and
-  provenance; source SHA and app ID match the run.
-- Record durations, artifact bytes, npm cache hit/miss and overall conclusion.
-- Preserve relevant failure logs before correcting/retrying a failed job.
-
-For a downloaded artifact directory:
-
-```bash
-sha256sum --check SHA256SUMS
-```
-
-Downloading/inspecting the artifact does not require running or installing it.
-Real native launcher/portal coverage remains distinct and P4's recorded limits
-remain in force. Do not migrate personal data or declare a production release.
-
-The deliberate local failure regression runs a subprocess exiting 17, verifies
-nonzero orchestration, prevents its later marker/upload step, and tests the exact
-final gate shell with failure/skipped/cancelled statuses. It never commits a
-broken integration test. Hosted negative execution remains unclaimed until an
-approved run provides evidence.
-
-After hosted evidence is reconciled, review `P5A_REPORT.md` and explicitly accept
-P5A. P5B/P5C remain unauthorized.
+An exploratory lint expansion to unchanged desktop/packaging sources found 98
+existing style violations outside the established CI lint scope. They were not
+changed or represented as passing; canonical CI Ruff passed. See correction
+evidence `exploratory-lint.json`.

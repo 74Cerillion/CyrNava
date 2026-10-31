@@ -1,0 +1,19 @@
+{
+  "status": "FAIL",
+  "complete": true,
+  "steps": [
+    {
+      "name": "python-lint",
+      "status": "PASS",
+      "seconds": 0.028
+    },
+    {
+      "name": "backend-security-lifecycle-migration-packaging",
+      "status": "FAIL",
+      "seconds": 36.577
+    }
+  ],
+  "error_type": "CalledProcessError",
+  "exit_code": 1,
+  "seconds": 36.604
+}

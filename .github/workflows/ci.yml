@@ -56,6 +56,15 @@ jobs:
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.12'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+          cache: npm
+          cache-dependency-path: |
+            frontend/package-lock.json
+            frontend/package.json
+            .nvmrc
       - name: Install verification dependencies
         run: |
           sudo apt-get update -qq
@@ -64,8 +73,9 @@ jobs:
           backend/.venv/bin/python -m pip install --only-binary=:all: -r backend/requirements.txt
           backend/.venv/bin/python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock
           backend/.venv/bin/python -m pip check
+          npm install --global npm@11.6.2 --ignore-scripts --no-audit --no-fund
       - name: Backend, security, lifecycle and migration regressions
-        run: python ci/verify.py backend
+        run: python ci/verify.py backend --require-clean-frontend
       - name: Preserve synthetic test diagnostics
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

@@ -1,0 +1,231 @@
+{
+  "run_id": 41157614256,
+  "source_commit": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+  "url": "https://github.com/74Cerillion/CyrNava/actions/runs/41157614256",
+  "attempt": 1,
+  "status": "in_progress",
+  "observed_jobs": [
+    {
+      "id": 124407772670,
+      "name": "Workflow validation",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 41157614256,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install locked workflow parser",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Validate workflow and negative contracts",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        }
+      ]
+    },
+    {
+      "id": 124407811238,
+      "name": "Frontend and browser",
+      "status": "in_progress",
+      "conclusion": null,
+      "run_id": 41157614256,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Install locked frontend and browser dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Lint, unit tests, TypeScript, production build and Chromium tests",
+          "status": "in_progress",
+          "conclusion": null,
+          "number": 6
+        },
+        {
+          "name": "Preserve synthetic browser diagnostics",
+          "status": "pending",
+          "conclusion": null,
+          "number": 7
+        },
+        {
+          "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+          "status": "pending",
+          "conclusion": null,
+          "number": 12
+        },
+        {
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "pending",
+          "conclusion": null,
+          "number": 13
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "pending",
+          "conclusion": null,
+          "number": 14
+        }
+      ]
+    },
+    {
+      "id": 124407811240,
+      "name": "Backend and security",
+      "status": "completed",
+      "conclusion": "failure",
+      "run_id": 41157614256,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install verification dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Backend, security, lifecycle and migration regressions",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5
+        },
+        {
+          "name": "Preserve synthetic test diagnostics",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 11
+        },
+        {
+          "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ]
+    }
+  ],
+  "backend": {
+    "passed": 543,
+    "failed": 3,
+    "subtests_passed": 28,
+    "pytest_seconds": 35.39,
+    "failure_cause": "Backend job lacks production frontend/dist; real worker and staging tests require it",
+    "reproduction": "missing-frontend-reproduction.json"
+  },
+  "runner": {
+    "os": "Ubuntu 24.04.5",
+    "image": "ubuntu-24.04",
+    "image_version": "20261025.353.1",
+    "runner_version": "2.338.2",
+    "python": "3.12.15",
+    "token_permissions": {
+      "contents": "read",
+      "metadata": "read"
+    }
+  },
+  "production_artifact": {
+    "status": "NOT BUILT",
+    "checksum": null
+  },
+  "diagnostic_artifact": {
+    "id": 13026131792,
+    "bytes": 12225,
+    "sha256": "30adeec94e96176f536790a7ddfc654f6d5002fb9bdd428eb9e1c2f90407f283",
+    "not_a_production_package": true
+  },
+  "additional_push": false
+}

@@ -2,25 +2,34 @@
 
 Date: 31 October 2026, Asia/Seoul.
 
-**P5A STATUS: CONDITIONAL — GITHUB-HOSTED VERIFICATION REQUIRED**
+**P5A STATUS: CONDITIONAL — LOCAL CORRECTION PASSED; HOSTED VERIFICATION PENDING**
 
 ## A. Executive summary
 
-Implemented one verification-only GitHub Actions workflow, local/CI test runners,
-workflow security contracts, hash-verified workflow tooling, production build
-orchestration, exported-bundle auditing, artifact checksums/provenance and owner
-instructions. No releases, signing, hosting, settings changes or P5B/P5C work.
-The candidate remains uncommitted/unpushed pending explicit owner authorization.
+The backend CI preparation defect is corrected locally. Its job independently installs
+locked frontend dependencies and builds real production assets before running the
+unchanged full backend/security/lifecycle/migration/packaging test selection. It
+uses the same pinned Node setup as the frontend job, without cross-job artifacts.
+Permissions, failure propagation, package audit and upload gates are unchanged.
 
-Local automated checks pass. A real exported P4 bundle passed structural/security
-and inventory checks but was correctly rejected as evidence for a different
-source commit. An intentionally failing local verification subprocess also
-stopped downstream execution and failed the orchestration. Neither result is
-presented as a successful new CI build or GitHub-hosted execution.
+A disposable clone of `329020b5286ce0d5474e04a781ed61a6079f8edc` began with a
+clean tracked baseline and no `frontend/dist`, `node_modules` or backend venv.
+Only the four corrected source files were overlaid, explicitly uncommitted. Fresh
+isolated dependencies were installed. Backend: **550 passed, 31 subtests passed**,
+two existing warnings; frontend: **273 unit and 16 browser tests passed**. All
+three previously failing tests passed. Four new CI contract tests bring the
+standalone contract suite from 19 to 23 methods. This is local verification,
+not a new GitHub-hosted PASS.
 
-Remaining acceptance blocker: an actual approved GitHub-hosted run must build the
-current source, pass all jobs, upload its artifact and provide run/checksum evidence.
-No hosted run ID, uploaded artifact or workflow conclusion exists for this candidate.
+The first and only hosted [run 41157614256](https://github.com/74Cerillion/CyrNava/actions/runs/41157614256)
+remains FAIL. Its original records and pre-correction reports are preserved.
+No new commit, push, manual trigger, release, signing or P5B/P5C work occurred.
+The correction is ready for owner review and authorization of one additional
+commit/push. A successful hosted build, actual bundle audit, upload and checksum
+verification are still required before P5A acceptance.
+
+Correction evidence: `evidence/p5a/frontend-prerequisite-correction-2026-10-31/`.
+See its `validation.json`, `setup.json`, JUnit, logs, patch and `manifest.json`.
 
 ## B. Repository baseline
 
@@ -46,7 +55,8 @@ used as an undocumented CI dependency.
 `.github/workflows/ci.yml` has five jobs on Ubuntu 24.04 x86_64:
 
 1. `validate`: parse/security policy, negative contracts, pinned actionlint.
-2. `backend`: requires validate; backend/security/lifecycle/migration/packaging tests.
+2. `backend`: requires validate; its own locked npm install and production build,
+   then backend/security/lifecycle/migration/packaging tests.
 3. `frontend`: requires validate; ESLint, unit tests, TypeScript/build, Chromium.
 4. `flatpak`: requires both test jobs; provision locked runtimes, P4 build, audit,
    then upload the validated unsigned bundle and checksum/provenance.
@@ -61,18 +71,24 @@ changed. All jobs default to `contents: read` and ephemeral hosted runners.
 ## D. Backend verification
 
 Canonical command: `backend/.venv/bin/python ci/verify.py backend`.
-This enforces backend/app/tests/CI Ruff with `backend/pyproject.toml`, then runs
-all existing backend tests and retained P2/P3/P4 verifier tests plus new CI tests,
-from the required backend working directory. JSON durations and JUnit are saved.
+CI adds `--require-clean-frontend`: it fails with final evidence if generated assets
+already exist at entry, without deleting them. The normal local command allows a
+warm checkout but still runs `npm ci` and the real production build before pytest.
+Node 24.19.0 and npm 11.6.2 are required. Ruff runs under the committed backend
+configuration. The original full test selection is unchanged.
 
-Final run: **546 PASS**, two existing warnings and 28 subtests PASS, 31.64 seconds
-of pytest time. New tests cover workflow policy, final-job failure/skips/cancellation,
-missing executable, deliberate exit 17, runtime pin refusal, payload identity and
-permissions, missing WebEngine helper, prohibited files, corrupt bundle, staged
-artifact/provenance contracts, explicit output and symlink/overlay refusal.
-Backend requirements retain their existing exact pins; they are not hash locked.
-Production wheel hashes remain enforced separately. Clean dependency resolution
-and `pip check` passed. No personal profiles or datasets are used.
+Clean-clone result: **550 PASS**, **31 subtests PASS**, two existing warnings;
+pytest 30.65 s, wrapper 41.472 s. Dependency installation/build added 10.142 s
+(6.663 s npm ci + 3.479 s build), a reasonable local cost without shared artifacts.
+Separate fresh Python dependency installation and `pip check` passed. Backend
+requirements retain their existing pins; production wheel hashes remain enforced
+separately. Synthetic tests used isolated XDG paths, pip/npm caches and profiles.
+
+New regression coverage requires Node and the strict clean-assets command in the
+workflow, checks installation/build ordering before the preserved suite, rejects
+warm input without deleting it, and proves build failure stops downstream tests
+and writes FAIL evidence. The real disposable-clone run demonstrates success
+starting without production assets; mocks alone are not claimed as that proof.
 
 ## E. Frontend verification
 
@@ -82,8 +98,10 @@ lockfile's Chromium installation through Playwright. No separate dev service is
 required for the production-mode integration tests.
 
 ESLint, 273 unit tests, TypeScript/Vite and all 16 browser integration tests pass.
-The final orchestrated results and exact durations are in `evidence/p5a/validation.json`
-and `frontend-final.txt`. Existing Vite large-chunk and BlockNote jsdom viewport
+The corrected clean-clone wrapper took 122.877 s: lint 2.697 s, unit tests
+14.156 s, TypeScript/build 3.394 s and Chromium 102.630 s. Browser installation
+took a separate 56.678 s; that is not backend build overhead. Results and logs
+are in the correction evidence directory; earlier local records remain historical. Existing Vite large-chunk and BlockNote jsdom viewport
 warnings are retained. No frontend application behavior was changed.
 
 Coverage boundaries: component/unit != real Chromium != Qt WebEngine != native
@@ -104,7 +122,7 @@ selects exact P4 lock commits, verifies them and fails if any are missing. Read-
 HTTP probes found all three locked commit objects available. This availability
 probe is not equivalent to installing/verifying them on a hosted runner.
 
-No new source-built P5A Flatpak PASS/size is claimed before hosted execution. P4
+No new source-built P5A Flatpak PASS/size exists: hosted build was skipped after backend failure. P4
 A/B were about 209 MB compressed and 981 MB logical payload; these are historical
 reference values, not a newly produced CI artifact. The Codex environment cannot
 perform the required build validator namespaces. No security workaround is added.
@@ -150,7 +168,7 @@ No signing or GitHub Releases capability is implemented.
 
 Independent backend/frontend jobs run in parallel after validation. Flatpak only
 runs after both pass. Timed step JSON and hosted runner job timings provide the
-future workflow measurements. Hosted duration/cache hit rate are NOT TESTED.
+future workflow measurements. Hosted workflow took 233 s; the first frontend npm cache lookup was a MISS and a cache was saved. Warm hosted restore benefit remains unmeasured.
 
 Local npm download cache: cold 8.578 s, warm 2.963 s, roughly 67 MB. Enabled only
 that cache; keys account for package lock, package/npm configuration and Node
@@ -163,15 +181,52 @@ Real prior-bundle import/audit/rejection took 40.415 s. This is an audit observa
 not a production build or native startup benchmark. Python/runner OS patch and apt
 packages may evolve; recorded inputs do not establish byte reproducibility.
 
-## J. Hosted verification
+## J. Actual GitHub-hosted verification
 
-**NOT TESTED — explicit authorization required to push or dispatch.**
+- Run: [41157614256](https://github.com/74Cerillion/CyrNava/actions/runs/41157614256), attempt 1, push event.
+- Source SHA: `329020b5286ce0d5474e04a781ed61a6079f8edc`.
+- Started 31 October 2026 **10:55:30 KST**, completed **10:59:23 KST** (233 s).
+- Runner: Ubuntu 24.04.5 x86_64, image `ubuntu-24.04` version `20261025.353.1`,
+  runner `2.338.2`; backend CPython `3.12.15`.
+- Logged token permissions: Contents read, Metadata read.
 
-Run ID: none. Hosted source SHA: none. Hosted runner image: none. Uploaded bundle,
-checksum and workflow conclusion: unavailable. No repository settings were changed.
-Follow `P5A_OWNER_CHECKS.md`. Pushing the reviewed changes to the integration branch
-would start the push trigger without manual dispatch. If settings/permissions
-block it, inspect the exact response before requesting a minimal owner change.
+| Job | Result | Job duration |
+| --- | --- | ---: |
+| Workflow validation | PASS; 19 contract tests plus actionlint | 8 s |
+| Backend and security | FAIL; 543 passed, 3 failed, 28 subtests passed | 59 s |
+| Frontend and browser | PASS; lint, 273 units, TypeScript/Vite, 16 browsers | 215 s |
+| Production Flatpak and bundle audit | SKIPPED after required backend failure | 0 s |
+| CI required | FAIL, correctly rejecting the failed/skipped dependencies | 2 s |
+
+Backend lint passed. Pytest failed in 35.39 s:
+
+1. `test_real_backend_restart_revokes_token_preserves_content` — owned backend
+   exits during startup because production frontend assets are absent.
+2. `test_parent_death_pipe_stops_worker_and_lock_survives_gui_release` — same startup prerequisite.
+3. `test_stage_and_install_exclude_owner_data_and_development_tools` — explicit
+   `ValueError: Production frontend build missing`.
+
+At the failed source revision, the backend job installed Python dependencies but did not build the frontend.
+The independent frontend job's generated files are on a different runner and
+cannot satisfy that prerequisite. An isolated code copy without `frontend/dist`
+reproduced `Frontend build missing` and confirmed the owned process was reaped.
+This is a confirmed CI preparation defect; no production architecture change is
+needed to fix it. Earlier local PASS did not demonstrate a clean-checkout run.
+
+Hosted frontend step timings: lint 4.453 s, units 15.831 s, TypeScript/build 5.335 s,
+Chromium 127.796 s (153.415 s for the test wrapper, excluding setup/upload).
+
+Both diagnostic uploads succeeded and their downloaded ZIP digests were independently
+verified. These are **diagnostics, not production Flatpak checksums**:
+
+| Artifact | ID | Bytes | SHA-256 |
+| --- | ---: | ---: | --- |
+| Backend diagnostics | 13026131792 | 12,225 | `30adeec94e96176f536790a7ddfc654f6d5002fb9bdd428eb9e1c2f90407f283` |
+| Frontend diagnostics | 13025193988 | 4,871,567 | `8dacb24c2e2288fa991e3667a691b25c50d9f67da16f99665b7a79512b1d09ba` |
+
+Production Flatpak artifact/checksum: **NOT PRODUCED**. Runtime provisioning,
+production build, exported-payload audit and production upload were not executed.
+No hosted PASS or successful package build is inferred from diagnostic uploads.
 
 ## K. Fail-closed verification
 
@@ -192,12 +247,11 @@ block it, inspect the exact response before requesting a minimal owner change.
 
 Negative results remain in `evidence/p5a/`. No broken test is committed to the
 integration branch, and no release or external workflow was created to simulate failure.
-Actual hosted negative behavior remains unclaimed.
+The actual hosted backend failure blocked the production build, and the final required job exited 1. This confirms failure propagation; it does not constitute successful build validation.
 
 ## L. Remaining risks and limitations
 
-Hosted runtime provisioning/build/icon sandbox validators, artifact upload and
-runner cache behavior still require a real run. If hosted AppArmor/namespace
+Hosted runtime provisioning/build/icon sandbox validators and production artifact upload remain unexecuted because the first backend job failed. The explicit frontend-assets prerequisite now passes local clean-clone verification; a corrected hosted run has not been authorized or executed. If hosted AppArmor/namespace
 policies block validation, stop and diagnose; do not disable sandboxing or change
 kernel security settings as an unreviewed workaround. Upstream pinned historical
 commits may eventually be pruned; fail closed and review lock changes explicitly.
@@ -211,26 +265,46 @@ redundant scanners. Source review remains necessary for untrusted PR changes.
 
 ## M. Recommendation and owner checklist
 
-**P5A STATUS: CONDITIONAL — GITHUB-HOSTED VERIFICATION REQUIRED**
+**P5A STATUS: CONDITIONAL — LOCAL CORRECTION PASSED; HOSTED VERIFICATION PENDING**
 
-- [x] Preserve accepted P4 architecture and existing integration branch.
-- [x] Implement least-privilege, pinned, verification-only workflow.
-- [x] Pass available local backend/frontend/security/CI contract checks.
-- [x] Preserve negative results and distinguish synthetic/native/hosted evidence.
-- [x] Deliver workflow, helpers, audit, checksum/provenance and owner procedure.
-- [ ] Owner authorizes push, or pushes the reviewed candidate.
-- [ ] Actual hosted jobs/build/audit/upload pass and artifacts are reconciled.
-- [ ] Owner explicitly accepts P5A.
+- [x] Preserve branch, application behavior and all existing test suites.
+- [x] Confirm missing-assets root cause and preserve the first hosted FAIL.
+- [x] Independently build production assets in the backend job.
+- [x] Verify from a disposable clone without preexisting assets or dependencies.
+- [x] Pass 550 backend tests, 31 subtests, 273 units and 16 browser tests.
+- [x] Pass 23 CI contract methods, Ruff, actionlint, compile and diff checks.
+- [ ] Obtain authorization for one additional P5A-only commit and push.
+- [ ] Obtain corrected hosted PASS including production build/audit/upload.
+- [ ] Independently verify produced package checksum/provenance; owner accepts P5A.
 
-Stop after P5A. No P5B or P5C work is authorized or implemented.
+## N. Exact correction files and review boundary
 
-## Final local checkpoint
+Implementation: `.github/workflows/ci.yml`, `ci/verify.py`, `ci/validate.py`,
+`ci/test_ci.py`. Documentation: `ci/README.md`, `ci/P5A_REPORT.md`,
+`ci/P5A_OWNER_CHECKS.md`. Current structured assessment:
+`ci/evidence/p5a/validation.json`. Supporting historical hosted records are under
+`ci/evidence/p5a/hosted-attempt-2026-10-31/`; new clean-clone results and regression
+records are under `ci/evidence/p5a/frontend-prerequisite-correction-2026-10-31/`.
+The latter's manifest enumerates each evidence file and checksum. Existing
+backend, frontend, desktop and packaging application sources are unchanged.
 
-Final wrapper timings: backend **32.318 s**, frontend **124.732 s**.
-Frontend steps: lint 2.699 s, units 14.584 s, TypeScript/build 3.828 s,
-Chromium 103.621 s. Workflow contracts: 19 methods with negative subtests.
-Exact results, JUnit and source hashes are in `evidence/p5a/`.
-Local actionlint syntax/expression checks passed; shellcheck was not installed
-locally, so no local shellcheck coverage is claimed. The hosted actionlint may
-use the runner's shellcheck when available. The earlier YAML scalar/context
-mistakes were corrected before this checkpoint and no hosted run used them.
+Available automated suites passed before requesting another hosted execution.
+Local ShellCheck is not installed; actionlint syntax/expression validation passed
+with ShellCheck integration disabled locally. No new Flatpak/native build is
+claimed in this restricted environment. Existing Vite/BlockNote warnings and the
+two backend warnings remain documented.
+
+HEAD remains `329020b5286ce0d5474e04a781ed61a6079f8edc`. All correction/reporting
+changes are local, uncommitted and unpushed. The first approved push remains the
+only push. The original failed hosted run is not rewritten as passing. Following
+owner approval, one additional commit/push should trigger validation, parallel
+backend/frontend checks, then the production build/audit/upload only if both pass.
+Any prerequisite, test or audit failure must fail the final required gate.
+
+Stop at this authorization checkpoint. No release, signing, main merge, public
+repository deployment, P5B or P5C is included.
+
+An exploratory lint expansion to unchanged desktop/packaging sources found 98
+existing style violations outside the established CI lint scope. They were not
+changed or represented as passing; canonical CI Ruff passed. See correction
+evidence `exploratory-lint.json`.

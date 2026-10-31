@@ -1,0 +1,40 @@
+test_explicit_output_is_new_and_cannot_overlay_existing_files (test_ci.BuildDirectoryTests.test_explicit_output_is_new_and_cannot_overlay_existing_files) ... Build directory: /tmp/tmp9r5cxfu5/output
+{
+  "status": "STAGED",
+  "directory": "/tmp/tmp9r5cxfu5/output",
+  "app_id": "io.github._74Cerillion.CyrNava"
+}
+ok
+test_output_refuses_symlink_parent (test_ci.BuildDirectoryTests.test_output_refuses_symlink_parent) ... ok
+test_backend_commands_preserve_cwd_and_all_previous_suites (test_ci.ExecutionTests.test_backend_commands_preserve_cwd_and_all_previous_suites) ... ok
+test_backend_prepares_production_assets_before_preserved_test_suite (test_ci.ExecutionTests.test_backend_prepares_production_assets_before_preserved_test_suite) ... ok
+test_clean_frontend_guard_refuses_warm_assets_without_deleting_them (test_ci.ExecutionTests.test_clean_frontend_guard_refuses_warm_assets_without_deleting_them) ... Clean-checkout regression requires absent frontend/dist
+ok
+test_failed_frontend_build_prevents_backend_execution (test_ci.ExecutionTests.test_failed_frontend_build_prevents_backend_execution) ... CI: python-lint
+CI: frontend-install-for-backend
+CI: frontend-production-build-for-backend
+ok
+test_missing_executable_produces_final_failure (test_ci.ExecutionTests.test_missing_executable_produces_final_failure) ... CI: missing
+ok
+test_no_silent_runtime_substitution (test_ci.ExecutionTests.test_no_silent_runtime_substitution) ... ok
+test_real_deliberate_failure_blocks_later_artifact_step (test_ci.ExecutionTests.test_real_deliberate_failure_blocks_later_artifact_step) ... CI: deliberate-broken-test
+ok
+test_runtime_provisioning_refuses_regular_owner_environment (test_ci.ExecutionTests.test_runtime_provisioning_refuses_regular_owner_environment) ... ok
+test_bad_identity (test_ci.PayloadTests.test_bad_identity) ... ok
+test_corrupt_bundle_never_creates_upload_directory (test_ci.PayloadTests.test_corrupt_bundle_never_creates_upload_directory) ... ok
+test_exported_bundle_audit_checks_provenance_and_only_then_stages_upload (test_ci.PayloadTests.test_exported_bundle_audit_checks_provenance_and_only_then_stages_upload) ... ok
+test_missing_webengine_helper (test_ci.PayloadTests.test_missing_webengine_helper) ... ok
+test_network_permission_regression (test_ci.PayloadTests.test_network_permission_regression) ... ok
+test_prohibited_packaged_file (test_ci.PayloadTests.test_prohibited_packaged_file) ... ok
+test_runtime_and_sandbox_environment_mismatch (test_ci.PayloadTests.test_runtime_and_sandbox_environment_mismatch) ... ok
+test_valid_structural_payload (test_ci.PayloadTests.test_valid_structural_payload) ... ok
+test_actual_workflow (test_ci.WorkflowTests.test_actual_workflow) ... ok
+test_backend_requires_node_and_clean_asset_regression (test_ci.WorkflowTests.test_backend_requires_node_and_clean_asset_regression) ... ok
+test_final_gate_fails_for_failed_skipped_and_cancelled_jobs (test_ci.WorkflowTests.test_final_gate_fails_for_failed_skipped_and_cancelled_jobs) ... ok
+test_package_upload_cannot_run_after_failed_audit (test_ci.WorkflowTests.test_package_upload_cannot_run_after_failed_audit) ... ok
+test_unreviewed_capabilities_are_rejected (test_ci.WorkflowTests.test_unreviewed_capabilities_are_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.115s
+
+OK

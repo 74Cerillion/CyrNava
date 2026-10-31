@@ -95,6 +95,30 @@ def validate(value, pins):
         raise ValueError("Test jobs require workflow validation")
     if set(jobs["flatpak"].get("needs", [])) != {"backend", "frontend"}:
         raise ValueError("Build must wait for both test jobs")
+    backend_steps = jobs["backend"]["steps"]
+    node = next(
+        (
+            i
+            for i, step in enumerate(backend_steps)
+            if step.get("uses", "").startswith("actions/setup-node@")
+        ),
+        None,
+    )
+    verification = next(
+        (
+            i
+            for i, step in enumerate(backend_steps)
+            if step.get("run", "").strip()
+            == "python ci/verify.py backend --require-clean-frontend"
+        ),
+        None,
+    )
+    if node is None or verification is None or node >= verification:
+        raise ValueError(
+            "Backend requires Node and clean frontend preparation before tests"
+        )
+    if backend_steps[node].get("with", {}).get("node-version-file") != ".nvmrc":
+        raise ValueError("Backend frontend build must use the controlled Node version")
     gate = jobs["required"]
     if gate.get("if") != "always()" or set(gate.get("needs", [])) != set(jobs) - {
         "required"

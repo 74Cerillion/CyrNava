@@ -71,6 +71,30 @@ class WorkflowTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     validator.validate(value, self.pins)
 
+    def test_backend_requires_node_and_clean_asset_regression(self):
+        for defect in ("missing-node", "missing-clean-flag", "wrong-node-version"):
+            with self.subTest(defect=defect):
+                value = copy.deepcopy(self.value)
+                steps = value["jobs"]["backend"]["steps"]
+                node = next(
+                    step
+                    for step in steps
+                    if step.get("uses", "").startswith("actions/setup-node@")
+                )
+                if defect == "missing-node":
+                    steps.remove(node)
+                elif defect == "wrong-node-version":
+                    node["with"]["node-version-file"] = "different-version"
+                else:
+                    verify = next(
+                        step
+                        for step in steps
+                        if "ci/verify.py backend" in step.get("run", "")
+                    )
+                    verify["run"] = "python ci/verify.py backend"
+                with self.assertRaises(ValueError):
+                    validator.validate(value, self.pins)
+
     def test_package_upload_cannot_run_after_failed_audit(self):
         value = copy.deepcopy(self.value)
         step = next(
@@ -153,6 +177,68 @@ class ExecutionTests(unittest.TestCase):
         self.assertIn("tests", steps[-1][1])
         self.assertIn("../packaging/flatpak/production/test_packaging.py", steps[-1][1])
         self.assertNotIn("--ignore", steps[-1][1])
+
+    def test_backend_prepares_production_assets_before_preserved_test_suite(self):
+        steps = verification.steps_for("backend", Path("/tmp/synthetic-report"))
+        install = next(
+            i
+            for i, step in enumerate(steps)
+            if step[0] == "frontend-install-for-backend"
+        )
+        build = next(
+            i
+            for i, step in enumerate(steps)
+            if step[0] == "frontend-production-build-for-backend"
+        )
+        tests = next(i for i, step in enumerate(steps) if "pytest" in step[1])
+        self.assertLess(install, build)
+        self.assertLess(build, tests)
+        self.assertEqual(
+            steps[install][1],
+            ["npm", "ci", "--ignore-scripts", "--no-audit", "--no-fund"],
+        )
+        self.assertEqual(steps[build][1], ["npm", "run", "build"])
+        self.assertEqual(steps[build][2], HERE.parent / "frontend")
+
+    def test_failed_frontend_build_prevents_backend_execution(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            result = Path(tmp) / "backend.json"
+            steps = verification.steps_for("backend", Path(tmp))
+            seen = []
+
+            def run(command, **kwargs):
+                seen.append(command)
+                if command == ["npm", "run", "build"]:
+                    raise subprocess.CalledProcessError(23, command)
+
+            with patch.object(verification.subprocess, "run", side_effect=run):
+                self.assertEqual(verification.run_steps(steps, result), 1)
+            record = json.loads(result.read_text())
+            self.assertEqual(record["exit_code"], 23)
+            self.assertEqual(
+                record["steps"][-1]["name"], "frontend-production-build-for-backend"
+            )
+            self.assertFalse(any("pytest" in command for command in seen))
+
+    def test_clean_frontend_guard_refuses_warm_assets_without_deleting_them(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            assets = root / "frontend/dist"
+            assets.mkdir(parents=True)
+            sentinel = assets / "index.html"
+            sentinel.write_text("preserved")
+            with (
+                patch.object(verification, "ROOT", root),
+                patch.object(
+                    sys, "argv", ["verify.py", "backend", "--require-clean-frontend"]
+                ),
+                patch.object(verification, "run_steps") as run,
+            ):
+                self.assertEqual(verification.main(), 1)
+                run.assert_not_called()
+            record = json.loads((root / "ci-output/backend.json").read_text())
+            self.assertEqual(record["error_type"], "FrontendAssetsAlreadyPresent")
+            self.assertEqual(sentinel.read_text(), "preserved")
 
     def test_no_silent_runtime_substitution(self):
         with (

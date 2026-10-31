@@ -1,0 +1,22 @@
+[
+  {
+    "name": "create-fresh-venv",
+    "exit_code": 0,
+    "seconds": 1.5
+  },
+  {
+    "name": "install-backend",
+    "exit_code": 0,
+    "seconds": 6.363
+  },
+  {
+    "name": "install-workflow-parser",
+    "exit_code": 0,
+    "seconds": 0.459
+  },
+  {
+    "name": "pip-check",
+    "exit_code": 0,
+    "seconds": 0.176
+  }
+]

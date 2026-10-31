@@ -18,8 +18,10 @@ BACKEND_TESTS = [
 ]
 
 
-def run_steps(steps, result_path):
+def run_steps(steps, result_path, *, preconditions=None):
     record = {"status": "FAIL", "complete": False, "steps": []}
+    if preconditions is not None:
+        record["preconditions"] = preconditions
     result_path.parent.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
     code = 1
@@ -67,6 +69,16 @@ def steps_for(job, destination):
                 ROOT,
             ),
             (
+                "frontend-install-for-backend",
+                ["npm", "ci", "--ignore-scripts", "--no-audit", "--no-fund"],
+                ROOT / "frontend",
+            ),
+            (
+                "frontend-production-build-for-backend",
+                ["npm", "run", "build"],
+                ROOT / "frontend",
+            ),
+            (
                 "backend-security-lifecycle-migration-packaging",
                 [
                     python,
@@ -95,10 +107,48 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("job", choices=("backend", "frontend"))
     parser.add_argument("--output", type=Path, default=ROOT / "ci-output")
+    parser.add_argument(
+        "--require-clean-frontend",
+        action="store_true",
+        help="Backend CI regression: require frontend/dist to be absent at entry",
+    )
     args = parser.parse_args()
+    if args.require_clean_frontend and args.job != "backend":
+        parser.error("--require-clean-frontend applies only to backend verification")
     destination = args.output.resolve()
+    preconditions = None
+    if args.job == "backend":
+        preconditions = {
+            "frontend_dist_initially_absent": not (ROOT / "frontend/dist").exists(),
+            "clean_frontend_required": args.require_clean_frontend,
+        }
+        if (
+            args.require_clean_frontend
+            and not preconditions["frontend_dist_initially_absent"]
+        ):
+            destination.mkdir(parents=True, exist_ok=True)
+            (destination / "backend.json").write_text(
+                json.dumps(
+                    {
+                        "status": "FAIL",
+                        "complete": True,
+                        "steps": [],
+                        "error_type": "FrontendAssetsAlreadyPresent",
+                        "preconditions": preconditions,
+                    },
+                    indent=2,
+                )
+                + "\n"
+            )
+            print(
+                "Clean-checkout regression requires absent frontend/dist",
+                file=sys.stderr,
+            )
+            return 1
     return run_steps(
-        steps_for(args.job, destination), destination / (args.job + ".json")
+        steps_for(args.job, destination),
+        destination / (args.job + ".json"),
+        preconditions=preconditions,
     )
 
 

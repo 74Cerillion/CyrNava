@@ -1,0 +1,10 @@
+{
+  "commit_sha": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+  "note": "Uncommitted local follow-up required by owner; original committed source/evidence manifests remain historical snapshots",
+  "sha256": {
+    "ci/P5A_REPORT.md": "b79689292b65a368406d40fe9dbc1c287d45b45efad5273ddf05da7d020fe753",
+    "ci/P5A_OWNER_CHECKS.md": "d7dce8fefc92b2f414c28657c5863d3186236ea737187bfe706938de2daff584",
+    "ci/evidence/p5a/validation.json": "c0f43da40810bf8fdb8380d414e9603ea8676392668ac6df1da1fde8868cc2b1",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/push-and-hosted-status.json": "41efca4c7d472ebb8a1ce309daa99e2f26793c9a4627cf62ddc76a12ab4fee3f"
+  }
+}

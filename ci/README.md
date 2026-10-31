@@ -43,7 +43,15 @@ backend/.venv/bin/python ci/verify.py backend
 ```
 
 Flatpak and OSTree must be installed for the existing real timestamp-export test.
-Backend tests also require local socket access. Python verification dependencies
+Backend tests also require local socket access. The backend verifier now independently
+runs locked `npm ci` and the real TypeScript/Vite production build before pytest;
+Node/npm are prerequisites for this command. GitHub invokes it with
+`--require-clean-frontend`, which fails without deleting anything if `frontend/dist`
+already exists. This turns every fresh backend job into the missing-assets
+regression: begin without generated assets, build them, then run the unchanged
+full test suite. Normal local use without the flag permits rebuilding existing
+assets. The frontend job stays independent; no cross-job asset transfer is added.
+Python verification dependencies
 use the existing exact pins in `backend/requirements.txt`; this file predates P5A
 and has no hashes. The workflow parser has its own wheel/hash lock. Application
 runtime wheels retain P4's hash-locked production requirements.
@@ -136,3 +144,22 @@ not establish hosted PASS or native portal coverage.
 
 Do not push, change GitHub settings or manually dispatch this workflow without
 owner authorization. Stop at P5A; no P5B/P5C work is included.
+
+## Clean-checkout prerequisite correction (31 October 2026)
+
+The first hosted run failed because native worker/staging tests need real
+`frontend/dist`, which the backend job did not create. The fix adds the same
+pinned setup-node/npm to that job and puts npm dependency installation plus the
+production frontend build inside `ci/verify.py backend` before pytest. A failed
+frontend install/build fails the backend job without running pytest. Existing
+backend/frontend/security/migration/packaging tests remain required.
+
+Policy regressions reject removal of the backend Node/clean-start prerequisite.
+The clean-start guard is non-destructive; it rejects a warm directory instead of
+removing it. Independent local validation uses a new disposable Git clone of
+commit 329020b plus the four uncommitted candidate source files, fresh Python/npm
+dependencies and isolated XDG data/config/cache paths. No generated assets,
+node_modules, venv or application profile is copied from the working checkout.
+See `evidence/p5a/frontend-prerequisite-correction-2026-10-31/` for setup hashes,
+commands/results, timings, retained failing-run history and current limitations.
+The candidate is not a new hosted PASS and must not be pushed before owner approval.
