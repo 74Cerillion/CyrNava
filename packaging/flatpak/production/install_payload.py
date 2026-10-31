@@ -150,13 +150,13 @@ def audit(prefix):
                 raise ValueError("Escaping relative link: " + str(rel))
             entries.append({"path": str(rel), "symlink": str(link)})
         elif path.is_file():
+            with path.open("rb") as stream:
+                digest = hashlib.file_digest(stream, "sha256").hexdigest()
             entries.append(
                 {
                     "path": str(rel),
                     "bytes": path.stat().st_size,
-                    "sha256": hashlib.file_digest(
-                        path.open("rb"), "sha256"
-                    ).hexdigest(),
+                    "sha256": digest,
                 }
             )
     return {

@@ -1,8 +1,7 @@
 import pytest
-from fastapi.testclient import TestClient
-
 from app.desktop_security import DesktopSession
 from app.main import create_app
+from fastapi.testclient import TestClient
 
 ORIGIN = "http://127.0.0.1:32187"
 

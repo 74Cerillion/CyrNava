@@ -1,0 +1,8 @@
+{
+  "initial_import_failure": "open(O_TMPFILE): Read-only file system",
+  "diagnosis": "Flatpak opens an unnamed temporary file in /var/tmp; strace identified EROFS",
+  "resolution": "Scoped /var/tmp write permission for build verification only; subsequent real import/audit reached expected source-commit rejection",
+  "application_sandbox_changed": false,
+  "kernel_security_changed": false,
+  "hosted_namespace_verification": "NOT TESTED"
+}

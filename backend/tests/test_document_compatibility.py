@@ -6,13 +6,12 @@ import json
 from pathlib import Path
 
 import pytest
-from fastapi.testclient import TestClient
-from PIL import Image
-
 from app.backup import create_backup, restore_backup
 from app.database import Database
 from app.documents import CONTRACT, validate_document
 from app.main import create_app
+from fastapi.testclient import TestClient
+from PIL import Image
 
 FIXTURES = json.loads(
     (Path(__file__).parent / "fixtures/blocknote_v1.json").read_text()

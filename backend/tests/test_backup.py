@@ -6,14 +6,13 @@ import subprocess
 import sys
 
 import pytest
-from fastapi.testclient import TestClient
-from PIL import Image
-
 from app.assets import AssetStore
 from app.backup import BackupError, create_backup, restore_backup, validate_backup
 from app.database import Database
 from app.main import create_app
 from app.profile import ProfileBusy, profile_lock
+from fastapi.testclient import TestClient
+from PIL import Image
 
 
 @pytest.fixture

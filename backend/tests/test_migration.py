@@ -5,7 +5,6 @@ import sqlite3
 import zipfile
 
 import pytest
-
 from app import migration as m
 from app.backup import BackupError
 from app.database import Database
@@ -363,9 +362,8 @@ def test_explicit_browser_draft_recovery_preserves_original(profile, tmp_path):
 
 
 def test_migrated_api_autosave_upload_and_restart(profile, tmp_path):
-    from fastapi.testclient import TestClient
-
     from app.main import create_app
+    from fastapi.testclient import TestClient
     from tests.test_assets import raster, upload
 
     backup = archive(profile, tmp_path)

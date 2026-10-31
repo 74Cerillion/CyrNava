@@ -54,3 +54,6 @@ test-results/
 
 # Local P4 build outputs; never packaged or committed.
 .p4-cache/
+
+# P5A generated CI diagnostics and local tool/download caches
+ci-output/

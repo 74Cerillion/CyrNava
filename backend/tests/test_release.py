@@ -4,10 +4,9 @@ import sys
 from pathlib import Path
 
 import pytest
-from fastapi.testclient import TestClient
-
 from app import __version__
 from app.main import create_app
+from fastapi.testclient import TestClient
 
 
 def test_release_serves_only_build_and_api(tmp_path, document):

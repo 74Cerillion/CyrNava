@@ -12,11 +12,10 @@ import tempfile
 from pathlib import Path
 
 import pytest
-from fastapi.testclient import TestClient
-from PIL import Image
-
 from app.backup import validate_backup
 from app.main import create_app
+from fastapi.testclient import TestClient
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "migrate_to_cyrnava.sh"

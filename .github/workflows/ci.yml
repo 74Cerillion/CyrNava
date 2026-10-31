@@ -1,0 +1,195 @@
+name: CyrNava CI
+
+on:
+  push:
+    branches: [desktop/p2-production-integration, main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cyrnava-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -eo pipefail {0}
+
+env:
+  PIP_DISABLE_PIP_VERSION_CHECK: '1'
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  validate:
+    name: Workflow validation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Install locked workflow parser
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock
+      - name: Validate workflow and negative contracts
+        run: |
+          python ci/validate.py
+          python -m unittest discover -s ci -p 'test_ci.py' -v
+          python ci/bootstrap.py "$RUNNER_TEMP/ci-tools"
+          "$RUNNER_TEMP/ci-tools/actionlint" -color .github/workflows/ci.yml
+
+  backend:
+    name: Backend and security
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Install verification dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends flatpak ostree
+          python -m venv backend/.venv
+          backend/.venv/bin/python -m pip install --only-binary=:all: -r backend/requirements.txt
+          backend/.venv/bin/python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock
+          backend/.venv/bin/python -m pip check
+      - name: Backend, security, lifecycle and migration regressions
+        run: python ci/verify.py backend
+      - name: Preserve synthetic test diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: backend-diagnostics-${{ github.sha }}-${{ github.run_attempt }}
+          path: ci-output/backend*
+          retention-days: 7
+          if-no-files-found: error
+
+  frontend:
+    name: Frontend and browser
+    needs: validate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      PLAYWRIGHT_JUNIT_OUTPUT_FILE: ${{ github.workspace }}/ci-output/browser-junit.xml
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+          cache: npm
+          cache-dependency-path: |
+            frontend/package-lock.json
+            frontend/package.json
+            .nvmrc
+      - name: Install locked frontend and browser dependencies
+        run: |
+          python -m venv backend/.venv
+          backend/.venv/bin/python -m pip install --only-binary=:all: -r backend/requirements.txt
+          backend/.venv/bin/python -m pip check
+          npm install --global npm@11.6.2 --ignore-scripts --no-audit --no-fund
+          npm --prefix frontend ci --ignore-scripts --no-audit --no-fund
+          cd frontend
+          npx --no-install playwright install --with-deps chromium
+      - name: Lint, unit tests, TypeScript, production build and Chromium tests
+        run: python ci/verify.py frontend
+      - name: Preserve synthetic browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: frontend-diagnostics-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            ci-output/frontend.json
+            ci-output/browser-junit.xml
+            frontend/test-results/
+          retention-days: 7
+          if-no-files-found: error
+
+  flatpak:
+    name: Production Flatpak and bundle audit
+    needs: [backend, frontend]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      XDG_CACHE_HOME: ${{ github.workspace }}/ci-output/build-cache
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+          cache: npm
+          cache-dependency-path: |
+            frontend/package-lock.json
+            frontend/package.json
+            .nvmrc
+      - name: Install build tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends flatpak ostree desktop-file-utils appstream
+          npm install --global npm@11.6.2 --ignore-scripts --no-audit --no-fund
+      - name: Provision and verify P4 locked runtime commits
+        run: python ci/flatpak.py prepare --output ci-output/flatpak
+      - name: Build through the P4 production builder
+        run: python ci/flatpak.py build --output ci-output/flatpak
+      - name: Audit exported bundle and generate checksum/provenance
+        run: python ci/flatpak.py audit --output ci-output/flatpak
+      - name: Upload validated unsigned local-installation artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: CyrNava-linux-x86_64-${{ github.sha }}-${{ github.run_attempt }}
+          path: ci-output/flatpak/artifacts/
+          retention-days: 7
+          if-no-files-found: error
+          compression-level: 0
+      - name: Preserve build diagnostics without uploading an unvalidated package
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: flatpak-diagnostics-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            ci-output/flatpak/prepare.json
+            ci-output/flatpak/build.json
+            ci-output/flatpak/audit.json
+            ci-output/flatpak/production-build/result.json
+          retention-days: 7
+          if-no-files-found: error
+
+  required:
+    name: CI required
+    if: always()
+    needs: [validate, backend, frontend, flatpak]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    env:
+      VALIDATE_RESULT: ${{ needs.validate.result }}
+      BACKEND_RESULT: ${{ needs.backend.result }}
+      FRONTEND_RESULT: ${{ needs.frontend.result }}
+      FLATPAK_RESULT: ${{ needs.flatpak.result }}
+    steps:
+      - name: Require every verification and artifact job to succeed
+        run: |
+          for result in "$VALIDATE_RESULT" "$BACKEND_RESULT" "$FRONTEND_RESULT" "$FLATPAK_RESULT"; do
+            test "$result" = success || exit 1
+          done

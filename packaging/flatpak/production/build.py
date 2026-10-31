@@ -313,11 +313,18 @@ def main():
     parser.add_argument("--build-id", default="local-A")
     parser.add_argument("--stage-only", action="store_true")
     parser.add_argument(
+        "--output-directory",
+        type=Path,
+        help="New empty build directory (optional; default remains a private cache directory)",
+    )
+    parser.add_argument(
         "--finish",
         type=Path,
         help="Validate/export an assembled build, without rebuilding inputs",
     )
     args = parser.parse_args()
+    if args.output_directory and args.finish:
+        parser.error("--output-directory and --finish are mutually exclusive")
     os.umask(0o077)
     if args.finish:
         directory = args.finish.resolve()
@@ -346,7 +353,13 @@ def main():
     root.mkdir(parents=True, exist_ok=True, mode=0o700)
     if shutil.disk_usage(root).free < 5 * 1024**3:
         raise SystemExit("At least 5 GiB free required on build volume")
-    directory = Path(tempfile.mkdtemp(prefix=args.build_id + "-", dir=root))
+    if args.output_directory:
+        directory = args.output_directory.absolute()
+        if any(p.is_symlink() for p in (directory, *directory.parents)):
+            raise SystemExit("Symlink build output refused")
+        directory.mkdir(mode=0o700, parents=True, exist_ok=False)
+    else:
+        directory = Path(tempfile.mkdtemp(prefix=args.build_id + "-", dir=root))
     print("Build directory: " + str(directory), flush=True)
     result = {"status": "FAIL", "directory": str(directory), "app_id": APP_ID}
     try:

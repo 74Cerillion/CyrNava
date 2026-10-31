@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-31",
+  "scope": "One P5A commit and one push to origin/desktop/p2-production-integration; no subsequent push authorized",
+  "branch_verified": "desktop/p2-production-integration",
+  "base_commit": "8418339cf3c9ff7ae26f792ed8697b7c16d7450a",
+  "upstream_head_verified": "8418339cf3c9ff7ae26f792ed8697b7c16d7450a",
+  "reviewed_source_hashes_match": true,
+  "sensitive_pattern_scan": "No private-key blocks, GitHub token patterns or AWS access-key ID patterns in new CI/workflow files",
+  "file_review": "Only workflow, CI helper/tests/docs/synthetic evidence, import-order-only existing test cleanup, P4 optional output path and file-handle fix, and CI output ignore rule",
+  "private_application_data_included": false,
+  "binary_artifacts_included": false,
+  "signing_keys_included": false,
+  "junit_hostnames": "Sanitized before staging; raw local reports kept outside repository",
+  "workflow_permissions": {
+    "contents": "read"
+  },
+  "checkout_persist_credentials": false,
+  "production_credentials": "No secrets referenced or signing credentials consumed",
+  "upload_policy": "Only audited unsigned package/checksum/build metadata and synthetic diagnostics; no release/publication/deployment steps",
+  "artifact_upload_safety": "Workflow path and content gates reviewed. Actual future hosted artifact still requires successful audit before upload; no future bytes or checksum are inferred.",
+  "log_normalization": "Trimmed trailing whitespace only; raw copy retained outside repository"
+}
