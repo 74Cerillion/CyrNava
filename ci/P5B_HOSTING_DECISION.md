@@ -1,8 +1,10 @@
-# P5B hosting decision — proposed, not provisioned
+# P5B hosting decision — direction endorsed, not provisioned
 
 31 October 2026. Implementation uses a provider-neutral static repository snapshot.
 Recommendation: R2-compatible object storage for the eventual update remote, with
-GitHub Releases as an optional bundle/provenance mirror. **Owner approval pending.**
+GitHub Releases as an optional bundle/provenance mirror.
+**R2-compatible direction owner-endorsed.** Specific provider/account, endpoint,
+domain and cost/provisioning approval remain separate; no infrastructure is authorized.
 No account, bucket, domain, endpoint, DNS, payment or public deployment was created.
 
 ## Actual baseline and measurement limits

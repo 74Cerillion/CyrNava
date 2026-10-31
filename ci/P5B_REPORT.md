@@ -6,14 +6,22 @@ passes, including real signatures, rejection cases, descriptors and interrupted
 publication protection. Protected GitHub-hosted staging remains unconfigured and
 unexecuted. That remaining evidence gap prevents unconditional acceptance.
 
-No commit, push, production key, hosting resource, environment modification,
-public release, production deployment, main merge, P5C or P6 was performed.
+The owner has accepted native verification and endorsed future R2-compatible hosting
+and owner-controlled offline production signing. These are architectural endorsements,
+not permission for permanent keys, credentials, hosting purchases or deployment.
+The existing implementation is already in commit a9de663; this checkpoint records
+one authorized local P5B documentation/review commit. No push or external configuration
+change is performed by this session; no production key/release/deployment or P5C/P6 work.
 
 ## Accepted baseline and repository state
 
 - Branch: `desktop/p2-production-integration`; starting worktree clean.
-- HEAD and inspected remote branch: `1a28f68c5732ccc1275403060e89ff168a846655`.
-- Local annotated `p5a-accepted` points to that commit. The tag remains local;
+- Original P5B starting HEAD/remote: `1a28f68c5732ccc1275403060e89ff168a846655`.
+- This commit-review checkpoint started clean at existing implementation commit
+  `a9de66384b4b1ae4e5bb47909df1eba7d50468f0`; read-only remote inspection matches it.
+  Preserve that history; the authorized follow-up records endorsements and staging
+  architecture, without duplicating/rebasing the existing implementation.
+- Local annotated `p5a-accepted` points to `1a28f68`, not the later P5B commit. It remains local;
   read-only `ls-remote` found no matching remote tag. No tag was changed.
 - Accepted application build: [P5A run 41181510439](https://github.com/74Cerillion/CyrNava/actions/runs/41181510439),
   source `1ee2077b283b8e5dfc2162119dd439ed3baeb109`, attempt 1.
@@ -25,8 +33,10 @@ public release, production deployment, main merge, P5C or P6 was performed.
 
 The accepted CI workflow, exported-payload auditor, production packaging and locks
 remain byte-identical. Application sources and Flatpak permissions were not edited.
-P5B changes are uncommitted and separately identifiable. `evidence/p5b/baseline.json`
-records the initial state; the final review records hashes and changed paths.
+P5B implementation/native evidence is already tracked in a9de663. Its source hashes
+match the tested candidate. `evidence/p5b/baseline.json` records the original start;
+`evidence/p5b/staging-preparation/` records this checkpoint and review. The older
+pre-commit evidence remains historical, not a claim about the new repository HEAD.
 
 ## Architecture and decisions
 
@@ -56,11 +66,13 @@ object storage is proposed for the eventual update remote, GitHub Releases for a
 optional bundle/provenance mirror. Pages, Releases, R2 and Netlify are compared in
 `P5B_HOSTING_DECISION.md`, with official pricing/limits and the measured 301,341,805-byte,
 5,554-file repository. One repository fits Pages; retained snapshots and growth
-traffic still favor object storage. No permanent endpoint/provider is finalized.
+traffic still favor object storage. The owner endorses R2-compatible architecture;
+provider account, permanent endpoint, cost and provisioning approval remain deferred.
 
 **Signing recommendation:** owner-controlled offline production signing, with an
 offline recovery/certification primary and expiring signing subkey after a separately
-approved ceremony. `P5B_SIGNING_DESIGN.md` compares protected Actions secrets,
+approved ceremony. The owner endorses this custody direction, without authorizing
+key generation. `P5B_SIGNING_DESIGN.md` compares protected Actions secrets,
 offline signing and managed infrastructure; it covers custody, bootstrap, rotation,
 lost keys, compromise, hosting outage and database-compatible recovery.
 
@@ -91,12 +103,16 @@ network publication job or release API call. Inputs pass through quoted environm
 variables, not raw shell interpolation. Offline replay is forbidden in Actions;
 hosted execution rechecks live CI and environment protection.
 
-Read-only inspection found **zero GitHub environments**, so no independent reviewer
+Current read-only inspection found **zero GitHub environments**, so no independent reviewer
 protection is claimed. The workflow fails closed unless `p5b-staging` actually
 requires reviewers, prevents self-review, disables admin bypass and restricts the
 exact integration branch. A sole owner cannot independently approve their own job
 under that policy. Workflow registration on the default branch also needs a
 separately authorized plan; no main merge or default-branch change was performed.
+`P5B_GITHUB_STAGING_PLAN.md` recommends a
+separately approved inert registration-only workflow file on main, with actual
+execution on integration. This avoids merging the integration/application branch.
+A temporary default-branch switch is a broader, separately gated fallback.
 
 ## Repository generation, provenance and publication safety
 
@@ -241,11 +257,12 @@ No native rerun is requested for this documentation update.
 
 1. Review the completed native evidence; Gate 5 is now PASS. Do not repeat a full
    native rehearsal just to regenerate a documentation record.
-2. Endorse the hosting and offline custody designs during owner review. Gate 2 permits
-   a complete proposal; permanent keys, provider purchases, domains, secrets and public
-   hosting are not prerequisites for P5B staging acceptance and remain separately gated.
-3. Authorize a reviewed P5B-only commit/push before remote source changes. Preserve
-   the local p5a-accepted tag; publishing that tag is not required by P5B.
+2. Hosting/offline custody directions are now owner-endorsed. Permanent keys,
+   provider purchases, domains, secrets and public hosting are not P5B staging
+   acceptance prerequisites and remain separately gated.
+3. One local P5B-only follow-up commit is authorized. Request separate authorization
+   for its push; no push/authentication attempt occurs under this commit-only grant.
+   Preserve the local p5a-accepted tag; publishing it is not required by P5B.
 4. Authorize a workflow-registration approach and protected `p5b-staging` environment
    configuration: independent reviewer, prevent self-review, no admin bypass, exact
    integration-branch restriction. Inspect actual settings. The manual workflow's
@@ -271,8 +288,8 @@ No native rerun is requested for this documentation update.
 | Gate | Recommendation |
 | --- | --- |
 | 1. Accepted baseline preserved | PASS for reviewed source and executed regressions |
-| 2. Hosting architecture | Complete proposal; consequential approval pending |
-| 3. Signing infrastructure | PASS — real disposable GPG and native signed OSTree/rejection checks; production custody proposal remains subject to review |
+| 2. Hosting architecture | PASS — R2-compatible direction owner-endorsed; provisioning/endpoint/cost authorization deferred |
+| 3. Signing infrastructure | PASS — real disposable GPG and native signed OSTree/rejection checks; offline custody direction owner-endorsed; permanent key creation deferred |
 | 4. Release workflow | Implemented/policy-tested; hosted protection/execution pending |
 | 5. Signed repository and descriptors | PASS — owner evidence plus independent retained-generation integrity/signature review |
 | 6. Publication safety | PASS for P5B local native staging and interruption protection; future HTTP/cache/update integration is unexecuted |
@@ -281,8 +298,8 @@ No native rerun is requested for this documentation update.
 | 9. Owner acceptance | Pending |
 
 **Recommendation: CONDITIONAL — native acceptance gaps are closed; protected hosted
-workflow verification and formal owner acceptance remain.** Hosting/custody proposals
-are ready for endorsement, without requiring irreversible production setup. HTTP
+workflow verification and formal owner acceptance remain.** Hosting/custody directions
+are now endorsed, without authorizing irreversible production setup. HTTP
 deployment, real install/update lifecycle and production-key operations are later
 separately authorized work, not missing native P5B results. No P5C/P6 work has begun.
 Stop at this updated P5B checkpoint; production signing/hosting/publication remain disabled.

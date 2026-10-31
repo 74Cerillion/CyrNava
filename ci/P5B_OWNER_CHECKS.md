@@ -1,17 +1,18 @@
 # P5B owner checks — staging only, not production authorization
 
-P5A is accepted. P5B implementation is local/uncommitted. No push, hosted workflow
+P5A is accepted. P5B implementation/native evidence already exists in a9de663.
+One local documentation/review follow-up commit is authorized. No push, hosted workflow
 trigger, permanent key, hosting subscription, environment change or release is
 authorized by these instructions. Review `P5B_REPORT.md` for current test results.
 
 ## Decisions for review
 
-- [ ] Review `P5B_HOSTING_DECISION.md`: provider-neutral snapshots now; R2-compatible
+- [x] Owner endorsed `P5B_HOSTING_DECISION.md`: provider-neutral snapshots now; R2-compatible
   storage is proposed for the eventual remote, Releases for an optional bundle mirror.
   No endpoint is selected or provisioned. Approve any domain, cost and account
   setup separately, after native repository size/file-count measurements.
-- [ ] Review `P5B_SIGNING_DESIGN.md`: owner-controlled offline production signing
-  recommended. Approve custody and key-creation ceremony separately; staging
+- [x] Owner endorsed `P5B_SIGNING_DESIGN.md`: owner-controlled offline production signing
+  recommended. Approve detailed key-creation/backup ceremony separately; staging
   fingerprints are never production trust anchors.
 - [ ] Preserve P4 licensing/native-acceptance limitations and P3 schema/backup
   compatibility requirements. P5B does not resolve them by publishing a package.
@@ -88,10 +89,16 @@ before removing only the marked disposable parent. Do not delete any legacy data
 ## Future GitHub environment/workflow setup — requires separate approval
 
 Read-only inspection found zero environments and only the existing CI workflow.
-The release workflow file is not pushed or dispatched. Its definition intentionally
+The release workflow exists on remote integration at a9de663, but not on default
+main; only CI is registered. It has not been dispatched. Its definition intentionally
 cannot succeed without independent protected approval.
 
-- [ ] Authorize any commit/push separately, after reviewing the P5B diff and evidence.
+- [x] One local P5B follow-up commit authorized after review.
+- [ ] Authorize its push separately; no push is included in the commit-only grant.
+- [ ] Review `P5B_GITHUB_STAGING_PLAN.md` and approve the registration strategy.
+  Preferred: narrowly scoped inert workflow-registration file on main, with full
+  execution on integration; no integration merge. This main-file change needs its
+  own authorization.
 - [ ] Determine how the manual workflow will be registered on GitHub's default
   branch. `workflow_dispatch` normally requires its file on that branch. No main
   merge/default-branch change is authorized here; do not bypass this requirement.

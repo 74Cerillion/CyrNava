@@ -1,8 +1,10 @@
-# P5B release signing design — production custody approval pending
+# P5B release signing design — custody direction endorsed; key ceremony deferred
 
 Recommendation: owner-controlled offline production signing, with an offline
 certification/recovery primary and an expiring signing subkey after a separate
-owner-approved key ceremony. **No production key or secret has been created.**
+owner-approved key ceremony. The owner endorses this architectural direction;
+permanent key creation, secrets and credentials remain unauthorized.
+**No production key or secret has been created.**
 P5B implements disposable staging signing only. Changing a flag or supplying a
 manual workflow input cannot enable production signing/publication.
 

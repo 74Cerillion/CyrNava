@@ -1,0 +1,40 @@
+{
+  "active_git_hooks": [],
+  "current_authorization": "Exactly one local P5B-only commit; existing implementation already tracked, so this commit records review/endorsements/staging plan",
+  "default_branch": "main",
+  "existing_commit_review": {
+    "P5B_only_files": 47,
+    "all_tested_implementation_hashes_match": true,
+    "classified_pattern_findings": [
+      {
+        "classification": "Header-only negative-test fixture; no private key body",
+        "path": "ci/release/test_signing.py"
+      }
+    ],
+    "private_key_bodies_credentials_owner_workspace_data_found": false
+  },
+  "existing_implementation_commit": "a9de66384b4b1ae4e5bb47909df1eba7d50468f0",
+  "limitations": "No hosted P5B execution or protection configuration verified; registration-only default-branch definition is a proposal, not an installed/hosted-tested implementation",
+  "local_p5a_tag_object": "65fbe63d5feedb16ec5f755fb5977f622fe775c7",
+  "local_p5a_tag_target": "1a28f68c5732ccc1275403060e89ff168a846655",
+  "owner_decisions": {
+    "future_hosting_direction": "R2-compatible object storage endorsed",
+    "native_signing_integrity_negative_descriptor_interruption_gates": "ACCEPTED PASS",
+    "overall_P5B": "CONDITIONAL",
+    "production_signing_direction": "Owner-controlled offline protected primary and expiring signing subkey endorsed"
+  },
+  "push_dispatch_environment_configuration_main_change_default_branch_change_production_keys_hosting_P5C_P6_authorized": false,
+  "remote_integration_observed": "a9de66384b4b1ae4e5bb47909df1eba7d50468f0",
+  "remote_p5a_tag_http_status": 404,
+  "repository_owner_type": "User",
+  "reviewed_at_utc": "2026-10-31T11:36:10.409569+00:00",
+  "start_worktree": "clean before this documentation checkpoint",
+  "validation": {
+    "full_regression_rerun": "Not needed for documentation-only follow-up; prior verified counts preserved",
+    "git_diff_check": "PASS",
+    "release_workflow_policy": "PASS",
+    "ruff": "PASS",
+    "tested_implementation_unchanged": true
+  },
+  "visibility": "public"
+}

@@ -1,0 +1,42 @@
+{
+  "P5A_local_tag_preserved": true,
+  "historical_evidence_preserved": true,
+  "note": "This review record excludes its own self-referential checksum; final staged inspection includes it.",
+  "one_local_commit_authorized": true,
+  "private_key_credentials_personal_workspace_data_unrelated_files": false,
+  "production_workflow_source_permissions_changed": false,
+  "push_authorized": false,
+  "reviewed_at_utc": "2026-10-31T11:37:18.926320+00:00",
+  "reviewed_files": {
+    "ci/P5B_GITHUB_STAGING_PLAN.md": {
+      "bytes": 10013,
+      "sha256": "af1b80bc06f6172c45201fe1eee768a42ae569b13cc38a5e86300041664190ae"
+    },
+    "ci/P5B_HOSTING_DECISION.md": {
+      "bytes": 11136,
+      "sha256": "b6cc3c778273b8295541f8a9814636b060d7e95ce8a7f84267e4841b283926ef"
+    },
+    "ci/P5B_OWNER_CHECKS.md": {
+      "bytes": 9040,
+      "sha256": "3f04e7e5087f3744bdc5dbab4556902e55e2303c85fd11c95d7a405ae0e34de2"
+    },
+    "ci/P5B_REPORT.md": {
+      "bytes": 21191,
+      "sha256": "2e5656b4b24a4df82408e4d899f4f378845708c2916d926b0d0662b1e92e4ece"
+    },
+    "ci/P5B_SIGNING_DESIGN.md": {
+      "bytes": 10320,
+      "sha256": "4563f2f96c6f3796cb4bb910b2fd7b637028feff623cdd0ae1d83513359b21b3"
+    },
+    "ci/evidence/p5b/staging-preparation/commit-checkpoint.json": {
+      "bytes": 2031,
+      "sha256": "932807c8210e6a80ea94fda93a83f4099a79bacd4655235174b44e70570258d4"
+    },
+    "ci/evidence/p5b/staging-preparation/github-read-only.json": {
+      "bytes": 644,
+      "sha256": "723b0afc7147cab5c22bd34aa52c251742e9fe9d71d61e92c620de277d603ea1"
+    }
+  },
+  "scope": "Complete staged P5B documentation/evidence diff and inherited tested implementation review",
+  "status": "PASS"
+}
