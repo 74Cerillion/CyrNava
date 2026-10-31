@@ -1,0 +1,190 @@
+{
+  "final": "local-verification.json",
+  "final_changes": "Path traversal boundary and transport/redaction regressions; no accepted application source or protection changed.",
+  "format": 1,
+  "preserved_attempts": [
+    {
+      "attempt": "initial",
+      "backend_summary": [
+        "26 failed, 563 passed, 3 warnings, 18 errors, 72 subtests passed in 22.03s"
+      ],
+      "candidate_sha256": {
+        "ci/release/audit_candidate.py": "061d3b80ddf313c9dcfecd1a4077c84ac3f29662de2004c8cec5d3f5fc521490",
+        "ci/release/core.py": "e21857ede8a9947c4856454eb2f02ce1e04644225b975d1a5bd581e8cb993aba",
+        "ci/release/github.py": "5c42e80df122cbddc1dd7f1d0e938e3cc08cf9048a292dbc3d411fd8509a3d76",
+        "ci/release/plan.py": "f7e672e3a77efbb883a413570e782356c2fa4d0a73f9a5f51fb39592562f5202",
+        "ci/release/policy.json": "aa4109debb215014dee7121ff364e9b6756281b9e83922dddd2b7e571c51bf62",
+        "ci/release/preflight.py": "178d04f96ec0e16a0a23c97f2ab969e177b7a57e4a602f0349c71a65d6cc53fb",
+        "ci/release/recovery.py": "87c030904d71c921b5d1942de236d7cc6fe565b64017d2529b3aa797218c567c",
+        "ci/release/stage.py": "a130f04b922776171cd88239e888b4bc4aba088d4eda9b3808cb1b5541180b66",
+        "ci/release/test_policy.py": "38ca870d7a40f024c20df8b71c34127fdc9a41d55758b9d948996e214981102e",
+        "ci/release/test_signing.py": "0b6b74fc03140af7484b33f726af382b8c88e24d06fb4c0290947327a472db64",
+        "ci/release/workflow-contract.json": "3e320d109753a13ee1666987357f300665273279f5c493aa0e8367548204479b",
+        "ci/release/workflow_policy.py": "57ff50181cc5923dd81730d39830d97726b7836d00879b59096de9fde20ff110"
+      },
+      "checks": [
+        {
+          "command": [
+            "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/backend/.venv/bin/python",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "ci/release",
+            "-p",
+            "test_*.py",
+            "-v"
+          ],
+          "name": "release-security",
+          "returncode": 1,
+          "seconds": 0.221
+        },
+        {
+          "command": [
+            "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/backend/.venv/bin/python",
+            "-m",
+            "unittest",
+            "ci/test_ci.py"
+          ],
+          "name": "ci-contracts",
+          "returncode": 0,
+          "seconds": 0.26
+        },
+        {
+          "command": [
+            "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/backend/.venv/bin/python",
+            "-m",
+            "pytest",
+            "-q",
+            "tests",
+            "../packaging/flatpak/test_verify_outage.py",
+            "../packaging/flatpak/test_run_portal_verification.py",
+            "../packaging/flatpak/test_run_migration_verification.py",
+            "../packaging/flatpak/production/test_packaging.py",
+            "../ci/test_ci.py",
+            "../ci/release",
+            "--junitxml=/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/backend-junit.xml"
+          ],
+          "name": "backend-regressions",
+          "returncode": 1,
+          "seconds": 22.753
+        },
+        {
+          "command": [
+            "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/backend/.venv/bin/python",
+            "-m",
+            "ruff",
+            "check",
+            "--config",
+            "backend/pyproject.toml",
+            "backend/app",
+            "backend/tests",
+            "ci"
+          ],
+          "name": "ruff",
+          "returncode": 0,
+          "seconds": 0.028
+        },
+        {
+          "command": [
+            "/tmp/cyrnava-p5a-tools/actionlint",
+            ".github/workflows/ci.yml",
+            ".github/workflows/release.yml"
+          ],
+          "name": "actionlint",
+          "returncode": 0,
+          "seconds": 0.003
+        }
+      ],
+      "explanation": "External venv did not satisfy checkout-local launcher tests; long TMPDIR prevented GPG agent socket creation. No assertions removed.",
+      "raw_diagnostics_sha256": "fd70448cf51f42bf4751963a19c24feb422cace26cb961d058b90940af805257",
+      "raw_local_diagnostics": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/initial-backend-regressions.log"
+    },
+    {
+      "attempt": "intermediate",
+      "backend_summary": [
+        "607 passed, 3 warnings, 79 subtests passed in 38.48s"
+      ],
+      "candidate_sha256": {
+        "ci/release/audit_candidate.py": "061d3b80ddf313c9dcfecd1a4077c84ac3f29662de2004c8cec5d3f5fc521490",
+        "ci/release/core.py": "fb7407cce464c42ad66b8c0310cba3b95c358f916c7de5aa045f06a2826da79e",
+        "ci/release/github.py": "5c42e80df122cbddc1dd7f1d0e938e3cc08cf9048a292dbc3d411fd8509a3d76",
+        "ci/release/plan.py": "f7e672e3a77efbb883a413570e782356c2fa4d0a73f9a5f51fb39592562f5202",
+        "ci/release/policy.json": "aa4109debb215014dee7121ff364e9b6756281b9e83922dddd2b7e571c51bf62",
+        "ci/release/preflight.py": "178d04f96ec0e16a0a23c97f2ab969e177b7a57e4a602f0349c71a65d6cc53fb",
+        "ci/release/recovery.py": "87c030904d71c921b5d1942de236d7cc6fe565b64017d2529b3aa797218c567c",
+        "ci/release/stage.py": "97427e749d08b6976ce6e58e378d43b9e64b2c1318816f1b3591ca64dccba3e1",
+        "ci/release/test_policy.py": "38ca870d7a40f024c20df8b71c34127fdc9a41d55758b9d948996e214981102e",
+        "ci/release/test_signing.py": "3f01576d068c43d007b09c08faaa3e64693ca8c7e73d46369bbe81c68412387a",
+        "ci/release/workflow-contract.json": "3e320d109753a13ee1666987357f300665273279f5c493aa0e8367548204479b",
+        "ci/release/workflow_policy.py": "57ff50181cc5923dd81730d39830d97726b7836d00879b59096de9fde20ff110"
+      },
+      "checks": [
+        {
+          "command": [
+            "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+            "-m",
+            "unittest",
+            "discover",
+            "-s",
+            "ci/release",
+            "-p",
+            "test_*.py",
+            "-v"
+          ],
+          "name": "release-security",
+          "returncode": 0,
+          "seconds": 1.128
+        },
+        {
+          "command": [
+            "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+            "-m",
+            "pytest",
+            "-q",
+            "tests",
+            "../packaging/flatpak/test_verify_outage.py",
+            "../packaging/flatpak/test_run_portal_verification.py",
+            "../packaging/flatpak/test_run_migration_verification.py",
+            "../packaging/flatpak/production/test_packaging.py",
+            "../ci/test_ci.py",
+            "../ci/release",
+            "--junitxml=/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/backend-junit.xml"
+          ],
+          "name": "backend-regressions",
+          "returncode": 0,
+          "seconds": 39.155
+        },
+        {
+          "command": [
+            "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+            "-m",
+            "ruff",
+            "check",
+            "--config",
+            "backend/pyproject.toml",
+            "backend/app",
+            "backend/tests",
+            "ci"
+          ],
+          "name": "ruff",
+          "returncode": 1,
+          "seconds": 0.025
+        },
+        {
+          "command": [
+            "/tmp/cyrnava-p5a-tools/actionlint",
+            ".github/workflows/ci.yml",
+            ".github/workflows/release.yml"
+          ],
+          "name": "actionlint",
+          "returncode": 0,
+          "seconds": 0.003
+        }
+      ],
+      "explanation": "Correct local venv and short private crypto fixtures: 40 P5B tests and 607 backend tests/79 subtests passed. One Ruff E501 formatting issue remained.",
+      "raw_diagnostics_sha256": "80a11eac908939315ad2a636f56080e4c0663725cae29f33ba6c490c75099d6e",
+      "raw_local_diagnostics": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/intermediate-backend-regressions.log"
+    }
+  ]
+}

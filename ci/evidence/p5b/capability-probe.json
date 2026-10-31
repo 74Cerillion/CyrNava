@@ -1,0 +1,11 @@
+{
+  "gpg_generation": {
+    "exit_code": 0
+  },
+  "flatpak_import": {
+    "exit_code": 1,
+    "stdout": "Importing app/io.github._74Cerillion.CyrNava/x86_64/stable (da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac)\n",
+    "stderr": "error: open(O_TMPFILE): Read-only file system\n"
+  },
+  "note": "Disposable key material remains outside Git and evidence."
+}

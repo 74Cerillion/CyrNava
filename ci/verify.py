@@ -15,6 +15,7 @@ BACKEND_TESTS = [
     "../packaging/flatpak/test_run_migration_verification.py",
     "../packaging/flatpak/production/test_packaging.py",
     "../ci/test_ci.py",
+    "../ci/release",
 ]
 
 

@@ -1,0 +1,25 @@
+{
+  "branch": "desktop/p2-production-integration",
+  "head": "1a28f68c5732ccc1275403060e89ff168a846655",
+  "upstream": "origin/desktop/p2-production-integration",
+  "starting_worktree": "clean",
+  "remote_branch": "1a28f68c5732ccc1275403060e89ff168a846655",
+  "local_tag": "1a28f68c5732ccc1275403060e89ff168a846655",
+  "remote_tag": "absent, verified ls-remote",
+  "accepted_run": 41181510439,
+  "accepted_source": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+  "accepted_result": "PASS; owner formally accepted",
+  "workflow_files": [
+    ".github/workflows/ci.yml"
+  ],
+  "stage_root": "/tmp/cyrnava-p5b-2otwcegm",
+  "preserved_hashes": {
+    ".github/workflows/ci.yml": "3f11c9ab58d2f7c8cebca0b153a09ccffae06e314545067ddd6b42f7b8e809f4",
+    "ci/flatpak.py": "74168678c6c3446a601f76bbec735dcfaed4f3b5ebeef5d3092c54d88464cb0f",
+    "ci/validate.py": "9371632e6c4c2f3b9a09ce67f8f7c4e04605f34c5b73df292bc84b87cf80bf2b",
+    "packaging/flatpak/production/build.py": "66f64360e3d18be3fbe2b1718e17a4da76e88c4ea2475d8fd8f97bdd2f9332f4",
+    "packaging/flatpak/production/install_payload.py": "b1fe69f2234fa3c5ef8082df20907741216908bf06fa45b0b365a5763f39bbbc",
+    "packaging/flatpak/production/toolchain.lock.json": "30ba11e377126073164dc13cc103c9873a405766840e8c3992d698bf7f18483e",
+    "packaging/flatpak/production/requirements.lock": "f5f0ae7c0576b45dee80b1a97bd4110064ce29e2a192f6adb027780c14cde742"
+  }
+}

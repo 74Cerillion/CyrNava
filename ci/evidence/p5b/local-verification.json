@@ -1,0 +1,218 @@
+{
+  "backend_junit_suites": [
+    {
+      "errors": "0",
+      "failures": "0",
+      "hostname": "cerillion-Swift-SF314-511",
+      "name": "pytest",
+      "skipped": "0",
+      "tests": "694",
+      "time": "38.547",
+      "timestamp": "2026-10-31T18:27:02.472264+09:00"
+    }
+  ],
+  "candidate_sha256": {
+    ".github/workflows/release.yml": "5398142a4e623f069d27f878d0cd60e7303688620754e6160ec02062c9414163",
+    ".gitignore": "84441157a53577a1426b15e4ea0c1475fa9484b130131057dc61d7e21e0ac424",
+    "ci/release/audit_candidate.py": "061d3b80ddf313c9dcfecd1a4077c84ac3f29662de2004c8cec5d3f5fc521490",
+    "ci/release/core.py": "72e481a234fdb6a9f0611956028dbafc82881a1e7206fbf663b22b4d204db338",
+    "ci/release/github.py": "5c42e80df122cbddc1dd7f1d0e938e3cc08cf9048a292dbc3d411fd8509a3d76",
+    "ci/release/plan.py": "f7e672e3a77efbb883a413570e782356c2fa4d0a73f9a5f51fb39592562f5202",
+    "ci/release/policy.json": "aa4109debb215014dee7121ff364e9b6756281b9e83922dddd2b7e571c51bf62",
+    "ci/release/preflight.py": "178d04f96ec0e16a0a23c97f2ab969e177b7a57e4a602f0349c71a65d6cc53fb",
+    "ci/release/recovery.py": "87c030904d71c921b5d1942de236d7cc6fe565b64017d2529b3aa797218c567c",
+    "ci/release/stage.py": "97427e749d08b6976ce6e58e378d43b9e64b2c1318816f1b3591ca64dccba3e1",
+    "ci/release/test_policy.py": "f4374f235cb427f9d86e73513a4173e28c6cff01223b71e2bd7fa33c48a713b4",
+    "ci/release/test_signing.py": "3f01576d068c43d007b09c08faaa3e64693ca8c7e73d46369bbe81c68412387a",
+    "ci/release/workflow-contract.json": "3e320d109753a13ee1666987357f300665273279f5c493aa0e8367548204479b",
+    "ci/release/workflow_policy.py": "57ff50181cc5923dd81730d39830d97726b7836d00879b59096de9fde20ff110",
+    "ci/verify.py": "5b97848f13e3d2be9ebcffc295ee1d60994e59794903d1cd0fa3ba4f06161b36"
+  },
+  "checks": [
+    {
+      "command": [
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "ci/release",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "name": "release-security",
+      "returncode": 0,
+      "seconds": 1.041,
+      "status": "PASS",
+      "stdout_sha256": "f147d5d57221a9eb8441db84a953b4dc0b39f2833b8670b7ebd99cc074506dfc",
+      "working_directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout"
+    },
+    {
+      "command": [
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "ci",
+        "-p",
+        "test_ci.py",
+        "-v"
+      ],
+      "name": "ci-contracts",
+      "returncode": 0,
+      "seconds": 0.239,
+      "status": "PASS",
+      "stdout_sha256": "7be1e335545a7ab6099f9a7e2d35f4eb6345ae3d41fbf0c6ca209a76cc6e4237",
+      "working_directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout"
+    },
+    {
+      "command": [
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+        "ci/release/workflow_policy.py"
+      ],
+      "name": "release-workflow",
+      "returncode": 0,
+      "seconds": 0.045,
+      "status": "PASS",
+      "stdout_sha256": "b8b7672441766da832f1c3eae81dc3c2104fb60f34370a136abcec7488a7aab9",
+      "working_directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout"
+    },
+    {
+      "command": [
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests",
+        "../packaging/flatpak/test_verify_outage.py",
+        "../packaging/flatpak/test_run_portal_verification.py",
+        "../packaging/flatpak/test_run_migration_verification.py",
+        "../packaging/flatpak/production/test_packaging.py",
+        "../ci/test_ci.py",
+        "../ci/release",
+        "--junitxml=/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/backend-junit.xml"
+      ],
+      "name": "backend-regressions",
+      "returncode": 0,
+      "seconds": 39.175,
+      "status": "PASS",
+      "stdout_sha256": "e409912f37e5c48a3472c4e30c3c6a7a801e03ebf6f798b4ccf4bae8194c6e9c",
+      "working_directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend"
+    },
+    {
+      "command": [
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "--config",
+        "backend/pyproject.toml",
+        "backend/app",
+        "backend/tests",
+        "ci"
+      ],
+      "name": "ruff",
+      "returncode": 0,
+      "seconds": 0.023,
+      "status": "PASS",
+      "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "working_directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout"
+    },
+    {
+      "command": [
+        "/tmp/cyrnava-p5a-tools/actionlint",
+        ".github/workflows/ci.yml",
+        ".github/workflows/release.yml"
+      ],
+      "name": "actionlint",
+      "returncode": 0,
+      "seconds": 0.003,
+      "status": "PASS",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "working_directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout"
+    },
+    {
+      "command": [
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+        "ci/verify.py",
+        "frontend",
+        "--output",
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/frontend"
+      ],
+      "name": "frontend",
+      "returncode": 0,
+      "seconds": 150.802,
+      "status": "PASS",
+      "stdout_sha256": "5b493ab5a0eca48787ae7ef6d072d0d80400a451e70ad680430c4939acf5d445",
+      "working_directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout"
+    }
+  ],
+  "clean_checkout": {
+    "base": "1a28f68c5732ccc1275403060e89ff168a846655",
+    "frontend_dist_initially_absent": true,
+    "overlaid": [
+      ".gitignore",
+      "ci/verify.py",
+      ".github/workflows/release.yml",
+      "ci/release/preflight.py",
+      "ci/release/workflow_policy.py",
+      "ci/release/github.py",
+      "ci/release/workflow-contract.json",
+      "ci/release/test_signing.py",
+      "ci/release/audit_candidate.py",
+      "ci/release/stage.py",
+      "ci/release/core.py",
+      "ci/release/plan.py",
+      "ci/release/test_policy.py",
+      "ci/release/policy.json",
+      "ci/release/recovery.py"
+    ]
+  },
+  "counts": {
+    "backend_subtests": 83,
+    "backend_tests_including_p5b": 611,
+    "browser_lifecycle_tests": 5,
+    "browser_retries": 0,
+    "browser_tests": 20,
+    "frontend_unit_tests": 273,
+    "p5a_contract_tests": 31,
+    "p5b_tests": 44
+  },
+  "executed_at_utc": "2026-10-31T09:30:45.382927+00:00",
+  "format": 1,
+  "frontend_steps": {
+    "complete": true,
+    "seconds": 150.774,
+    "status": "PASS",
+    "steps": [
+      {
+        "name": "frontend-lint",
+        "seconds": 2.944,
+        "status": "PASS"
+      },
+      {
+        "name": "frontend-unit",
+        "seconds": 14.402,
+        "status": "PASS"
+      },
+      {
+        "name": "typescript-production-build",
+        "seconds": 3.598,
+        "status": "PASS"
+      },
+      {
+        "name": "chromium-production-integration",
+        "seconds": 129.829,
+        "status": "PASS"
+      }
+    ]
+  },
+  "scope": "Available automated checks; not native OSTree or hosted P5B execution",
+  "status": "PASS",
+  "warnings": [
+    "Existing Starlette/httpx deprecation",
+    "Two intentional duplicate archive entries in negative tests"
+  ]
+}

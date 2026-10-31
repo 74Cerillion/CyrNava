@@ -1,0 +1,37 @@
+{
+  "active_generation_inventory_rehashed": "PASS",
+  "artifact_and_runtime_binding": "PASS",
+  "eligibility": "PINNED REPLAY \u2014 not hosted P5B or live eligibility evidence",
+  "eligibility_sha256": "a5f8e8322b17837cbd9271c2a824024a7b044468f98364e1678d07269dcf3116",
+  "key_homes_absent": true,
+  "limits": [
+    "No P5B GitHub-hosted workflow run; release_workflow_run_id is null",
+    "Release-tooling commit is base HEAD plus uncommitted work; individual script hashes at execution were not recorded",
+    "No HTTP publication/client-update validation; file URL and local staging only"
+  ],
+  "manifest_signature": "PASS; gpgv with only exported public staging key in isolated verification home",
+  "metrics_independently_recomputed": {
+    "repo_bytes": 301341805,
+    "repo_files": 5554,
+    "signed_metadata_bytes": 2016,
+    "static_delta_bytes": 0
+  },
+  "result_file_mtime_utc": "2026-10-31T10:57:27.798926+00:00",
+  "result_sha256": "02e82002fbbc407636379839a96ec9fe45257c9b4e0ce200b8f48ab245c37367",
+  "reviewed_at_utc": "2026-10-31T11:16:44.050314+00:00",
+  "signing_fingerprint": "AA0C7FC4CB50DB434E13A80A34FA331D0C7DED0E",
+  "source_directory": "/home/cerillion/.cache/cyrnava-p5b.bUyzq5/run",
+  "status": "PASS",
+  "verified_steps": [
+    "candidate",
+    "signed_repository",
+    "wrong_repository_key_rejected",
+    "tampered_repository_rejected",
+    "missing_required_object_rejected",
+    "unexpected_ref_rejected",
+    "native_flatpakrepo_descriptor_remote",
+    "interrupted_publication_preserves_previous"
+  ],
+  "workflow_definition_hash_matches_current": true,
+  "working_copy_note": "public/ lacks manifest.json and descriptors at review; authoritative retained active generation is complete and independently rehashed/signature-verified. No cause inferred or files repaired."
+}

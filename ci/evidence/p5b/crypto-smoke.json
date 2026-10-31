@@ -1,0 +1,12 @@
+{
+  "algorithm": "disposable RSA2048, signing only, one-day expiry",
+  "input_bytes": 93,
+  "key_generation_seconds": 0.185073,
+  "key_home_removed": true,
+  "public_key_bytes": 667,
+  "purpose": "P5B disposable GPG microbenchmark; not native OSTree signing",
+  "signature_bytes": 310,
+  "signature_seconds": 0.010989,
+  "status": "PASS",
+  "verification_seconds": 0.010978
+}

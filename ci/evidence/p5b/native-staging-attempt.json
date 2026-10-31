@@ -1,0 +1,17 @@
+{
+  "complete": true,
+  "error": "Operation failed: /tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/backend/.venv/bin/python /home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci/release/audit_candidate.py (CalledProcessError)",
+  "error_type": "Rejected",
+  "purpose": "P5B disposable staging",
+  "seconds": 2.48,
+  "stage": "signed-repository",
+  "status": "FAIL",
+  "steps": [
+    {
+      "eligibility": "PINNED REPLAY"
+    },
+    {
+      "candidate": "PASS"
+    }
+  ]
+}

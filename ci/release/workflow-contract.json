@@ -1,0 +1,128 @@
+{
+  "concurrency": {
+    "cancel-in-progress": false,
+    "group": "cyrnava-p5b-staging"
+  },
+  "defaults": {
+    "run": {
+      "shell": "bash --noprofile --norc -eo pipefail {0}"
+    }
+  },
+  "env": {
+    "RELEASE_AUTHORIZATION": "${{ inputs.authorization_ref }}",
+    "RELEASE_CHANNEL": "${{ inputs.channel }}",
+    "RELEASE_CI_RUN": "${{ inputs.ci_run_id }}",
+    "RELEASE_SOURCE": "${{ inputs.source_commit }}",
+    "RELEASE_VERSION": "${{ inputs.version }}"
+  },
+  "jobs": {
+    "eligibility": {
+      "runs-on": "ubuntu-24.04",
+      "steps": [
+        {
+          "uses": "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "with": {
+            "persist-credentials": false,
+            "ref": "${{ github.sha }}"
+          }
+        },
+        {
+          "uses": "actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "with": {
+            "python-version": "3.12"
+          }
+        },
+        {
+          "env": {
+            "GITHUB_TOKEN": "${{ github.token }}"
+          },
+          "name": "Verify release policy and configured independent approval protection",
+          "run": "python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock\npython ci/release/workflow_policy.py\npython ci/release/preflight.py\n"
+        }
+      ],
+      "timeout-minutes": 10
+    },
+    "staging": {
+      "environment": "p5b-staging",
+      "needs": "eligibility",
+      "runs-on": "ubuntu-24.04",
+      "steps": [
+        {
+          "uses": "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "with": {
+            "persist-credentials": false,
+            "ref": "${{ github.sha }}"
+          }
+        },
+        {
+          "uses": "actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "with": {
+            "python-version": "3.12"
+          }
+        },
+        {
+          "name": "Install public verification tools",
+          "run": "sudo apt-get update -qq\nsudo apt-get install -y --no-install-recommends flatpak ostree gnupg\n"
+        },
+        {
+          "env": {
+            "GITHUB_TOKEN": "${{ github.token }}"
+          },
+          "name": "Recheck eligibility, create disposable key and verify signed staging repository",
+          "run": "python ci/release/stage.py --live --source-commit \"$RELEASE_SOURCE\" --ci-run-id \"$RELEASE_CI_RUN\" --version \"$RELEASE_VERSION\" --channel \"$RELEASE_CHANNEL\" --authorization-ref \"$RELEASE_AUTHORIZATION\" --output \"$RUNNER_TEMP/cyrnava-p5b\"\n"
+        },
+        {
+          "if": "always()",
+          "name": "Retain safe status only; no key homes, repositories or packages",
+          "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "with": {
+            "if-no-files-found": "error",
+            "name": "p5b-staging-diagnostics-${{ github.sha }}-${{ github.run_attempt }}",
+            "path": "${{ runner.temp }}/cyrnava-p5b/result.json\n${{ runner.temp }}/cyrnava-p5b/eligibility.json\n",
+            "retention-days": 7
+          }
+        }
+      ],
+      "timeout-minutes": 30
+    }
+  },
+  "name": "CyrNava P5B staging rehearsal",
+  "on": {
+    "workflow_dispatch": {
+      "inputs": {
+        "authorization_ref": {
+          "description": "Reviewed disposable-staging authorization reference",
+          "required": true,
+          "type": "string"
+        },
+        "channel": {
+          "description": "Production publication is disabled",
+          "options": [
+            "staging"
+          ],
+          "required": true,
+          "type": "choice"
+        },
+        "ci_run_id": {
+          "description": "Successful approved P5A CI run",
+          "required": true,
+          "type": "string"
+        },
+        "source_commit": {
+          "description": "Full owner-approved source commit SHA",
+          "required": true,
+          "type": "string"
+        },
+        "version": {
+          "description": "Approved existing application version",
+          "required": true,
+          "type": "string"
+        }
+      }
+    }
+  },
+  "permissions": {
+    "actions": "read",
+    "contents": "read"
+  }
+}
