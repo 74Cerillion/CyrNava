@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import type { Page } from '@playwright/test';
+import type { BrowserContext, Page, TestInfo } from '@playwright/test';
 import { execFileSync } from 'node:child_process';
 import { cp, mkdtemp, mkdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -52,8 +52,41 @@ async function installation() {
   return { url, run, stopped, open, cleanup: async () => { run('stop'); await rm(directory, { recursive: true, force: true }); } };
 }
 
-test('managed tabs close, restart and recover immediately closed unconfirmed edits', async ({ context }) => {
+
+// Synthetic-test diagnostics: revisions, status and relative timing only. Never
+// copy request headers, session credentials, titles or document contents here.
+function observeRevisions(context: BrowserContext, testInfo: TestInfo) {
+  const events: object[] = [];
+  const started = Date.now();
+  const record = (value: object) => events.push({ ms: Date.now() - started, ...value });
+  const request = (request: import('@playwright/test').Request) => {
+    if (!new URL(request.url()).pathname.startsWith('/api/notes/')) return;
+    const body = request.postData();
+    record({ event: 'request', method: request.method(), revision: body ? JSON.parse(body).revision : undefined });
+  };
+  const response = async (response: import('@playwright/test').Response) => {
+    if (!new URL(response.url()).pathname.startsWith('/api/notes/')) return;
+    try {
+      const body = await response.json();
+      record({ event: 'response', method: response.request().method(), status: response.status(), revision: body.revision });
+    } catch { /* A closing page may discard its response; checkpoints verify SQLite. */ }
+  };
+  context.on('request', request); context.on('response', response);
+  return { record, finish: async () => {
+    context.off('request', request); context.off('response', response);
+    await mkdir(testInfo.outputDir, { recursive: true });
+    const path = testInfo.outputPath('revision-timeline.json');
+    await writeFile(path, JSON.stringify(events, null, 2));
+    await testInfo.attach('revision-timeline', { path, contentType: 'application/json' });
+  } };
+}
+
+const isNoteRead = (response: import('@playwright/test').Response) =>
+  response.request().method() === 'GET' && /\/api\/notes\/[^/]+$/.test(new URL(response.url()).pathname) && response.ok();
+
+test('managed tabs close, restart and recover immediately closed unconfirmed edits', async ({ context }, testInfo) => {
   const app = await installation();
+  const timeline = observeRevisions(context, testInfo);
   try {
     app.run('open'); const first = await context.newPage(); await app.open(first);
     await first.getByRole('button', { name: 'New note', exact: true }).click();
@@ -71,13 +104,18 @@ test('managed tabs close, restart and recover immediately closed unconfirmed edi
     await expect(second.getByText('Saved', { exact: true })).toBeVisible();
     await second.close(); await app.stopped();
 
-    app.run('open'); const recovery = await context.newPage(); await app.open(recovery);
-    await expect(recovery.getByRole('textbox', { name: 'Note content' })).toContainText('Confirmed paragraph.');
-    // Hold no network save: this edit must survive solely via the sync snapshot.
-    // Context routing outlives the closing page. Page-scoped routes disappear
-    // at close and may let its visibility-triggered flush reach the backend.
+    // Install the write barrier BEFORE opening the next page. A route added
+    // after editor readiness cannot intercept an already dispatched autosave.
     const blockSave = (route: import('@playwright/test').Route) => route.request().method() === 'PATCH' ? route.abort() : route.continue();
     await context.route('**/api/notes/*', blockSave);
+    app.run('open'); const recovery = await context.newPage();
+    const baselineRead = recovery.waitForResponse(isNoteRead);
+    await app.open(recovery);
+    const baseline = await (await baselineRead).json();
+    timeline.record({ event: 'outage-baseline', canonical_revision: baseline.revision });
+    await expect(recovery.getByRole('textbox', { name: 'Note content' })).toContainText('Confirmed paragraph.');
+    // Context routing survives page.close and remains until restart verifies
+    // that neither startup edits nor visibility-triggered flushes committed.
     await recovery.getByRole('textbox', { name: 'Note title' }).fill('Immediately closed draft');
     const paragraph = recovery.getByRole('textbox', { name: 'Note content' }).locator('p').first();
     await paragraph.evaluate((element) => {
@@ -93,13 +131,25 @@ test('managed tabs close, restart and recover immediately closed unconfirmed edi
       const name = Object.keys(localStorage).find((key) => key.startsWith('engage.recovery.v1:'))!;
       return JSON.parse(localStorage.getItem(name)!);
     });
+    expect(nativeDraft.base_revision).toBe(baseline.revision);
+    timeline.record({ event: 'retained-draft', base_revision: nativeDraft.base_revision });
     await expect(recovery.getByText('Unsaved Changes', { exact: true })).toBeVisible();
     // page.close skips beforeunload prompting; it cannot help this recovery test.
     await recovery.close(); await app.stopped();
+    app.run('open'); const reopened = await context.newPage();
+    const restartedRead = reopened.waitForResponse(isNoteRead);
+    await app.open(reopened);
+    const unchanged = await (await restartedRead).json();
+    expect(unchanged).toEqual(baseline);
+    timeline.record({ event: 'outage-source-unchanged', canonical_revision: unchanged.revision, base_revision: nativeDraft.base_revision });
     await context.unroute('**/api/notes/*', blockSave);
-    app.run('open'); const reopened = await context.newPage(); await app.open(reopened);
     await expect(reopened.getByRole('heading', { name: 'Recover unsaved edits' })).toBeVisible();
+    const savedResponse = reopened.waitForResponse((response) => response.request().method() === 'PATCH' && response.ok());
     await reopened.getByRole('button', { name: 'Recover draft', exact: true }).click();
+    const acknowledged = await (await savedResponse).json();
+    expect(acknowledged.revision).toBe(nativeDraft.base_revision + 1);
+    expect(acknowledged.document_json).toEqual(nativeDraft.document_json);
+    timeline.record({ event: 'recovery-acknowledged', revision: acknowledged.revision });
     await expect(reopened.getByText('Saved', { exact: true })).toBeVisible();
     await reopened.reload();
     await expect(reopened.getByRole('textbox', { name: 'Note title' })).toHaveValue('Immediately closed draft');
@@ -109,7 +159,70 @@ test('managed tabs close, restart and recover immediately closed unconfirmed edi
     expect((await response.json()).document_json).toEqual(nativeDraft.document_json);
     await expect(reopened.getByRole('heading', { name: 'Recover unsaved edits' })).toHaveCount(0);
     await reopened.close(); await app.stopped();
-  } finally { await app.cleanup(); }
+  } finally { try { await timeline.finish(); } finally { await app.cleanup(); } }
+});
+
+
+test('a committed write with a lost acknowledgement retains its draft and requires conflict review', async ({ context }, testInfo) => {
+  const app = await installation();
+  const timeline = observeRevisions(context, testInfo);
+  let releaseResponse!: () => void;
+  const responseGate = new Promise<void>((resolve) => { releaseResponse = resolve; });
+  try {
+    app.run('open'); const page = await context.newPage(); await app.open(page);
+    await page.getByRole('button', { name: 'New note', exact: true }).click();
+    await page.getByRole('dialog').getByLabel('Note title').fill('Acknowledgement gate');
+    await page.getByRole('button', { name: 'Create', exact: true }).click();
+    await expect(page.getByRole('textbox', { name: 'Note title' })).toHaveValue('Acknowledgement gate');
+    let committed!: (revision: number) => void;
+    const backendCommitted = new Promise<number>((resolve) => { committed = resolve; });
+    let intercepted = false;
+    await context.route('**/api/notes/*', async (route) => {
+      if (route.request().method() !== 'PATCH') return route.continue();
+      if (intercepted) return route.abort();
+      intercepted = true;
+      // Commit through the real API, but withhold only this response. No sleep,
+      // timeout increase, request retry or application code hook is involved.
+      const response = await route.fetch({ maxRetries: 0 });
+      expect(response.ok()).toBe(true);
+      const saved = await response.json();
+      timeline.record({ event: 'backend-committed-acknowledgement-held', revision: saved.revision });
+      committed(saved.revision);
+      await responseGate;
+      await route.fulfill({ response }).catch(() => { /* The old page is closed. */ });
+    });
+    await page.getByRole('textbox', { name: 'Note title' }).fill('Committed before close');
+    const committedRevision = await backendCommitted;
+    await page.getByRole('textbox', { name: 'Note title' }).fill('Unconfirmed newer title');
+    const retained = await page.evaluate(() => {
+      const key = Object.keys(localStorage).find((name) => name.startsWith('engage.recovery.v1:'))!;
+      return JSON.parse(localStorage.getItem(key)!);
+    });
+    expect(retained.base_revision).toBe(committedRevision - 1);
+    timeline.record({ event: 'retained-before-close', base_revision: retained.base_revision });
+    await page.close(); releaseResponse(); await app.stopped();
+    await context.unrouteAll({ behavior: 'wait' });
+    app.run('open'); const reopened = await context.newPage(); await app.open(reopened);
+    await expect(reopened.getByRole('heading', { name: 'Recover unsaved edits' })).toBeVisible();
+    let writesAfterChoice = 0;
+    const countWrite = (request: import('@playwright/test').Request) => {
+      if (request.method() === 'PATCH' && /\/api\/notes\//.test(request.url())) writesAfterChoice++;
+    };
+    context.on('request', countWrite);
+    await reopened.getByRole('button', { name: 'Recover draft', exact: true }).click();
+    await expect(reopened.getByText('Save Error', { exact: true })).toBeVisible();
+    await expect(reopened.getByRole('button', { name: 'Review conflict and recover' })).toBeVisible();
+    const current = await (await fetch(app.url + '/api/notes/' + retained.note_id)).json();
+    expect(current.revision).toBe(committedRevision);
+    expect(current.title).toBe('Committed before close');
+    const drafts = await reopened.evaluate(() => Object.keys(localStorage)
+      .filter((name) => name.startsWith('engage.recovery.v1:')).map((name) => JSON.parse(localStorage.getItem(name)!)));
+    expect(drafts).toContainEqual(retained);
+    expect(writesAfterChoice).toBe(0);
+    timeline.record({ event: 'stale-draft-protected', canonical_revision: current.revision, base_revision: retained.base_revision, writes_after_choice: writesAfterChoice });
+    context.off('request', countWrite);
+    await reopened.close(); await app.stopped();
+  } finally { releaseResponse(); try { await timeline.finish(); } finally { await app.cleanup(); } }
 });
 
 test('killed isolated browser leaves no managed backend after lease expiry', async ({ playwright, browserName }) => {

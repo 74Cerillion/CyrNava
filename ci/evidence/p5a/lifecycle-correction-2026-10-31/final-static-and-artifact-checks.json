@@ -1,0 +1,14 @@
+{
+  "workflow_contracts": {
+    "status": "PASS",
+    "methods": 23,
+    "seconds": 0.129,
+    "command": "backend/.venv/bin/python -m unittest discover -s ci -p test_ci.py"
+  },
+  "workflow_policy": "PASS",
+  "diff_check": "PASS",
+  "candidate_only_two_test_configuration_files": true,
+  "complete_suite_diagnostic_timeline_files": 2,
+  "production_backend_security_source_unchanged": true,
+  "new_commit_push_or_workflow_run": false
+}

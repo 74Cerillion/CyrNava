@@ -1,0 +1,93 @@
+{
+  "run_id": 41163754626,
+  "files": {
+    "artifact-verification.json": {
+      "sha256": "aafa3eaea25a4e31ec6fbb94ecdce8cca5ec2c77a0c7c27610fb4d4a7aa2cdcf",
+      "bytes": 425
+    },
+    "artifacts.json": {
+      "sha256": "ee0f7fbed9edd57782c3ed65a6465ca4b864add675e8d11107de1487b1f14450",
+      "bytes": 1761
+    },
+    "backend-junit.xml": {
+      "sha256": "dcbf31ec1b3335aa104d31ae6ae6c7e2a81a310c4a53c6f6548b3500aad3d1e6",
+      "bytes": 68106
+    },
+    "backend.json": {
+      "sha256": "e6c89c61f6707c4fabae7727bcf02a98e9a97817bbcb526e39ebec794b54f3b2",
+      "bytes": 622
+    },
+    "backend.log": {
+      "sha256": "ad53a3cbc75bb177d825af5f5ecfd63bd30bbfb4099d8e76b5530dc9430ba35a",
+      "bytes": 47229
+    },
+    "before-hosted-correction-P5A_OWNER_CHECKS.md": {
+      "sha256": "98441ad890ca4a4526b07a306b3a31e4122ac4f4f3c7088c21708dda1dde71d0",
+      "bytes": 3415
+    },
+    "before-hosted-correction-P5A_REPORT.md": {
+      "sha256": "0159cfd1708a32d349689ccacbb022fec63fedd893c92ae295267003e2219eb9",
+      "bytes": 20055
+    },
+    "before-hosted-correction-validation.json": {
+      "sha256": "e32531975a660c523fa8cbf992f5a4a17375e72730d87cb4b7331e41b2f3fc75",
+      "bytes": 16839
+    },
+    "browser-junit.xml": {
+      "sha256": "4624c8fb9c6d2954a00fba4c6d0d794adcb8d3ee7a03b22272bca406e2a20a00",
+      "bytes": 5685
+    },
+    "conflict-recovery.json": {
+      "sha256": "4c35bbddb226ecb7b0923fa0b37949f2d2e30a3f7dd5944d14506d17d0a38874",
+      "bytes": 612
+    },
+    "error-context.md": {
+      "sha256": "01d42a2aa0f7ca78c15082abc239d043818d5b2351ef8d6eccbc44dcd9e12da3",
+      "bytes": 11858
+    },
+    "final-result.json": {
+      "sha256": "4fa5e9af00f00e8dfc32045ccdbc73186c8c03e838e5364967e1033e19966292",
+      "bytes": 4974
+    },
+    "former-backend-failures-now-pass.json": {
+      "sha256": "2df62a0fc7957cdc2874398640c77d7f2a08d6c197079bc6a390e290ef6680ca",
+      "bytes": 230
+    },
+    "frontend.json": {
+      "sha256": "e5da210385c19f6588d05e5809a4f341710376a24d18cbc15bc044a2c7a23f12",
+      "bytes": 535
+    },
+    "frontend.log": {
+      "sha256": "7100b7f785a3f4659657778c10a43af18634c6252e277b9182d8fb6201bee3bc",
+      "bytes": 74836
+    },
+    "jobs.json": {
+      "sha256": "77c15edb4a0db7d37bd8fb602e71fc783f891ef848f40768aa7b99521f0501fc",
+      "bytes": 14871
+    },
+    "required.log": {
+      "sha256": "3a072e6bfd7f24222779bc9a13e11eb22a225e39cc2fcfb3d21b04181dec3fb9",
+      "bytes": 2733
+    },
+    "restoration-evidence.json": {
+      "sha256": "f14a93eef9fc79dc8d31a01b0383ee5a35a0672be2dbd40d5413ae8d4834ef92",
+      "bytes": 3810
+    },
+    "run.json": {
+      "sha256": "8abb1d51c08470e0ddadf33a898466b86e82528f27d3dd134d8dbfbe92cae3bc",
+      "bytes": 13480
+    },
+    "test-failed-1.png": {
+      "sha256": "80c414edde7e440c2d7050b86eba94fa0af9e59baac1817a716d31335479f760",
+      "bytes": 99833
+    },
+    "workflow-validation.log": {
+      "sha256": "d38295b0370bc6dd8b801eb6e288a617fdb8e728d608b2467c2ebddeacd33b91",
+      "bytes": 23637
+    }
+  },
+  "report_sha256": {
+    "P5A_REPORT.md": "37e682e6cbd8792b3230a9b2484dea86597a83edbecb0488b0d8623801673d26",
+    "P5A_OWNER_CHECKS.md": "a91f5e1e42970311292256f0b58d257a5107c0c32af71926d8fec08ad4ea28c4"
+  }
+}

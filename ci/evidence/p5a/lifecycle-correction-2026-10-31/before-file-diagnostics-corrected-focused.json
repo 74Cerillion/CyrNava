@@ -1,0 +1,684 @@
+{
+  "config": {
+    "argv": [
+      "/home/cerillion/.nvm/versions/node/v24.19.0/bin/node",
+      "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/node_modules/.bin/playwright",
+      "test",
+      "e2e/lifecycle.spec.ts",
+      "--grep",
+      "managed tabs close|committed write",
+      "--repeat-each=5",
+      "--trace=on",
+      "--output=/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results",
+      "--reporter=list,json"
+    ],
+    "configFile": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/playwright.config.ts",
+    "rootDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results",
+        "repeatEach": 5,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results",
+        "repeatEach": 5,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "snapshotDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 120000,
+        "use": {
+          "browserName": "chromium",
+          "headless": true,
+          "viewport": {
+            "width": 1280,
+            "height": 1000
+          },
+          "screenshot": "only-on-failure",
+          "trace": "on"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "lifecycle.spec.ts",
+      "file": "lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8418,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:46:25.699Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5NzksCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE5ODQsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjI3NCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjMxOSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA2NiwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA3MiwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDYxLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MTA3LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MTA3LAogICAgImV2ZW50IjogIm91dGFnZS1iYXNlbGluZSIsCiAgICAiY2Fub25pY2FsX3JldmlzaW9uIjogMwogIH0sCiAgewogICAgIm1zIjogNTMxMCwKICAgICJldmVudCI6ICJyZXRhaW5lZC1kcmFmdCIsCiAgICAiYmFzZV9yZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcxMDYsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDcxMTYsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcxMTcsCiAgICAiZXZlbnQiOiAib3V0YWdlLXNvdXJjZS11bmNoYW5nZWQiLAogICAgImNhbm9uaWNhbF9yZXZpc2lvbiI6IDMsCiAgICAiYmFzZV9yZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcyMjgsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcyNDEsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogNAogIH0sCiAgewogICAgIm1zIjogNzI0MiwKICAgICJldmVudCI6ICJyZWNvdmVyeS1hY2tub3dsZWRnZWQiLAogICAgInJldmlzaW9uIjogNAogIH0sCiAgewogICAgIm1zIjogNzMwNCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogNzMyNywKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogNAogIH0KXQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-3e2e3ddc6c38e163e0ce",
+          "file": "lifecycle.spec.ts",
+          "line": 84,
+          "column": 1
+        },
+        {
+          "title": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4745,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:46:34.287Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE3OTMsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE4MDYsCiAgICAiZXZlbnQiOiAiYmFja2VuZC1jb21taXR0ZWQtYWNrbm93bGVkZ2VtZW50LWhlbGQiLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMTgyMCwKICAgICJldmVudCI6ICJyZXRhaW5lZC1iZWZvcmUtY2xvc2UiLAogICAgImJhc2VfcmV2aXNpb24iOiAxCiAgfSwKICB7CiAgICAibXMiOiAzNjIxLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiAzNjM2LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAyCiAgfSwKICB7CiAgICAibXMiOiAzNzU0LAogICAgImV2ZW50IjogInN0YWxlLWRyYWZ0LXByb3RlY3RlZCIsCiAgICAiY2Fub25pY2FsX3JldmlzaW9uIjogMiwKICAgICJiYXNlX3JldmlzaW9uIjogMSwKICAgICJ3cml0ZXNfYWZ0ZXJfY2hvaWNlIjogMAogIH0KXQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-13c0337fb91573bdcf62",
+          "file": "lifecycle.spec.ts",
+          "line": 163,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8398,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:46:39.421Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5NjksCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE5NzYsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjI3NCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjMxNywKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA2NSwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA3MywKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA0OTk1LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MDM5LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDM5LAogICAgImV2ZW50IjogIm91dGFnZS1iYXNlbGluZSIsCiAgICAiY2Fub25pY2FsX3JldmlzaW9uIjogMwogIH0sCiAgewogICAgIm1zIjogNTI3MywKICAgICJldmVudCI6ICJyZXRhaW5lZC1kcmFmdCIsCiAgICAiYmFzZV9yZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcwODAsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDcwODgsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcwOTEsCiAgICAiZXZlbnQiOiAib3V0YWdlLXNvdXJjZS11bmNoYW5nZWQiLAogICAgImNhbm9uaWNhbF9yZXZpc2lvbiI6IDMsCiAgICAiYmFzZV9yZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcxOTEsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcyMDIsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogNAogIH0sCiAgewogICAgIm1zIjogNzIwNCwKICAgICJldmVudCI6ICJyZWNvdmVyeS1hY2tub3dsZWRnZWQiLAogICAgInJldmlzaW9uIjogNAogIH0sCiAgewogICAgIm1zIjogNzI3MywKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogNzI4NSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogNAogIH0KXQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-b3a309a0e1e7397d3a35",
+          "file": "lifecycle.spec.ts",
+          "line": 84,
+          "column": 1
+        },
+        {
+          "title": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4722,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:46:47.981Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE4MTQsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE4MjcsCiAgICAiZXZlbnQiOiAiYmFja2VuZC1jb21taXR0ZWQtYWNrbm93bGVkZ2VtZW50LWhlbGQiLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMTgzOSwKICAgICJldmVudCI6ICJyZXRhaW5lZC1iZWZvcmUtY2xvc2UiLAogICAgImJhc2VfcmV2aXNpb24iOiAxCiAgfSwKICB7CiAgICAibXMiOiAzNjE2LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiAzNjI2LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAyCiAgfSwKICB7CiAgICAibXMiOiAzNzM3LAogICAgImV2ZW50IjogInN0YWxlLWRyYWZ0LXByb3RlY3RlZCIsCiAgICAiY2Fub25pY2FsX3JldmlzaW9uIjogMiwKICAgICJiYXNlX3JldmlzaW9uIjogMSwKICAgICJ3cml0ZXNfYWZ0ZXJfY2hvaWNlIjogMAogIH0KXQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-9327763f00de5e6d4b96",
+          "file": "lifecycle.spec.ts",
+          "line": 163,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8486,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:46:53.097Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5ODksCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE5OTUsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjI4OSwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjMzNiwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA4NywKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA5NiwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA0OTkwLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MDMwLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDMwLAogICAgImV2ZW50IjogIm91dGFnZS1iYXNlbGluZSIsCiAgICAiY2Fub25pY2FsX3JldmlzaW9uIjogMwogIH0sCiAgewogICAgIm1zIjogNTI0MywKICAgICJldmVudCI6ICJyZXRhaW5lZC1kcmFmdCIsCiAgICAiYmFzZV9yZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcxNDcsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDcxNTksCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcxNjAsCiAgICAiZXZlbnQiOiAib3V0YWdlLXNvdXJjZS11bmNoYW5nZWQiLAogICAgImNhbm9uaWNhbF9yZXZpc2lvbiI6IDMsCiAgICAiYmFzZV9yZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcyNjcsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcyNzcsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogNAogIH0sCiAgewogICAgIm1zIjogNzI3OCwKICAgICJldmVudCI6ICJyZWNvdmVyeS1hY2tub3dsZWRnZWQiLAogICAgInJldmlzaW9uIjogNAogIH0sCiAgewogICAgIm1zIjogNzM0NiwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogNzM3NSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogNAogIH0KXQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-d9ca87b87f3ad7f7892f",
+          "file": "lifecycle.spec.ts",
+          "line": 84,
+          "column": 1
+        },
+        {
+          "title": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4773,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:47:01.744Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE4MzAsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE4NDIsCiAgICAiZXZlbnQiOiAiYmFja2VuZC1jb21taXR0ZWQtYWNrbm93bGVkZ2VtZW50LWhlbGQiLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMTg1NSwKICAgICJldmVudCI6ICJyZXRhaW5lZC1iZWZvcmUtY2xvc2UiLAogICAgImJhc2VfcmV2aXNpb24iOiAxCiAgfSwKICB7CiAgICAibXMiOiAzNjU0LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiAzNjY3LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAyCiAgfSwKICB7CiAgICAibXMiOiAzNzkzLAogICAgImV2ZW50IjogInN0YWxlLWRyYWZ0LXByb3RlY3RlZCIsCiAgICAiY2Fub25pY2FsX3JldmlzaW9uIjogMiwKICAgICJiYXNlX3JldmlzaW9uIjogMSwKICAgICJ3cml0ZXNfYWZ0ZXJfY2hvaWNlIjogMAogIH0KXQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-e6b57dcddcf31a4f868a",
+          "file": "lifecycle.spec.ts",
+          "line": 163,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8463,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:47:06.924Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5NjEsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE5NjcsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjI1NywKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjMwNCwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA1OCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA2NSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDY0LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MTA4LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MTA4LAogICAgImV2ZW50IjogIm91dGFnZS1iYXNlbGluZSIsCiAgICAiY2Fub25pY2FsX3JldmlzaW9uIjogMwogIH0sCiAgewogICAgIm1zIjogNTMwMywKICAgICJldmVudCI6ICJyZXRhaW5lZC1kcmFmdCIsCiAgICAiYmFzZV9yZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcwOTgsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDcxMDgsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcxMDksCiAgICAiZXZlbnQiOiAib3V0YWdlLXNvdXJjZS11bmNoYW5nZWQiLAogICAgImNhbm9uaWNhbF9yZXZpc2lvbiI6IDMsCiAgICAiYmFzZV9yZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcyMTYsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcyMjksCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogNAogIH0sCiAgewogICAgIm1zIjogNzIzMCwKICAgICJldmVudCI6ICJyZWNvdmVyeS1hY2tub3dsZWRnZWQiLAogICAgInJldmlzaW9uIjogNAogIH0sCiAgewogICAgIm1zIjogNzI5NiwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogNzMwNiwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogNAogIH0KXQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-7ccc29914405b7d3cf59",
+          "file": "lifecycle.spec.ts",
+          "line": 84,
+          "column": 1
+        },
+        {
+          "title": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4803,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:47:15.558Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE4MzUsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE4NDgsCiAgICAiZXZlbnQiOiAiYmFja2VuZC1jb21taXR0ZWQtYWNrbm93bGVkZ2VtZW50LWhlbGQiLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMTg2MywKICAgICJldmVudCI6ICJyZXRhaW5lZC1iZWZvcmUtY2xvc2UiLAogICAgImJhc2VfcmV2aXNpb24iOiAxCiAgfSwKICB7CiAgICAibXMiOiAzNjgyLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiAzNjk1LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAyCiAgfSwKICB7CiAgICAibXMiOiAzODI0LAogICAgImV2ZW50IjogInN0YWxlLWRyYWZ0LXByb3RlY3RlZCIsCiAgICAiY2Fub25pY2FsX3JldmlzaW9uIjogMiwKICAgICJiYXNlX3JldmlzaW9uIjogMSwKICAgICJ3cml0ZXNfYWZ0ZXJfY2hvaWNlIjogMAogIH0KXQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-be09aa6051c8b4b4a580",
+          "file": "lifecycle.spec.ts",
+          "line": 163,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8462,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:47:20.763Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDIwNTYsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDIwNjMsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjM3NiwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjQyNywKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzE3NCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzE4MiwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDg0LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MTMzLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MTMzLAogICAgImV2ZW50IjogIm91dGFnZS1iYXNlbGluZSIsCiAgICAiY2Fub25pY2FsX3JldmlzaW9uIjogMwogIH0sCiAgewogICAgIm1zIjogNTMzNiwKICAgICJldmVudCI6ICJyZXRhaW5lZC1kcmFmdCIsCiAgICAiYmFzZV9yZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcxMjYsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDcxMzQsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcxMzUsCiAgICAiZXZlbnQiOiAib3V0YWdlLXNvdXJjZS11bmNoYW5nZWQiLAogICAgImNhbm9uaWNhbF9yZXZpc2lvbiI6IDMsCiAgICAiYmFzZV9yZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcyNDMsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcyNTUsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogNAogIH0sCiAgewogICAgIm1zIjogNzI1NywKICAgICJldmVudCI6ICJyZWNvdmVyeS1hY2tub3dsZWRnZWQiLAogICAgInJldmlzaW9uIjogNAogIH0sCiAgewogICAgIm1zIjogNzMzNCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogNzM0NSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogNAogIH0KXQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-836d8e108a8bb4ceb01a",
+          "file": "lifecycle.spec.ts",
+          "line": 84,
+          "column": 1
+        },
+        {
+          "title": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4884,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:47:29.384Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE4MzksCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE4NTIsCiAgICAiZXZlbnQiOiAiYmFja2VuZC1jb21taXR0ZWQtYWNrbm93bGVkZ2VtZW50LWhlbGQiLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMTg2OCwKICAgICJldmVudCI6ICJyZXRhaW5lZC1iZWZvcmUtY2xvc2UiLAogICAgImJhc2VfcmV2aXNpb24iOiAxCiAgfSwKICB7CiAgICAibXMiOiAzNzYxLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiAzNzc3LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAyCiAgfSwKICB7CiAgICAibXMiOiAzODk5LAogICAgImV2ZW50IjogInN0YWxlLWRyYWZ0LXByb3RlY3RlZCIsCiAgICAiY2Fub25pY2FsX3JldmlzaW9uIjogMiwKICAgICJiYXNlX3JldmlzaW9uIjogMSwKICAgICJ3cml0ZXNfYWZ0ZXJfY2hvaWNlIjogMAogIH0KXQ=="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-5ede804fb12a51240c67",
+          "file": "lifecycle.spec.ts",
+          "line": 163,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T03:46:25.270Z",
+    "duration": 69073.69099999999,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

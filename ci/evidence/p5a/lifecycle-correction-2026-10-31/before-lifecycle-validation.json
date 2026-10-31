@@ -1,0 +1,713 @@
+{
+  "phase": "P5A",
+  "date": "2026-10-31",
+  "timezone": "Asia/Seoul",
+  "status": "FAIL \u2014 HOSTED BROWSER LIFECYCLE VERIFICATION FAILED",
+  "branch": "desktop/p2-production-integration",
+  "base_commit": "8418339cf3c9ff7ae26f792ed8697b7c16d7450a",
+  "local_tests": {
+    "backend": {
+      "passed": 550,
+      "subtests_passed": 31,
+      "warnings": 2,
+      "pytest_seconds": 30.65,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "python-lint",
+            "status": "PASS",
+            "seconds": 0.022
+          },
+          {
+            "name": "frontend-install-for-backend",
+            "status": "PASS",
+            "seconds": 6.663
+          },
+          {
+            "name": "frontend-production-build-for-backend",
+            "status": "PASS",
+            "seconds": 3.479
+          },
+          {
+            "name": "backend-security-lifecycle-migration-packaging",
+            "status": "PASS",
+            "seconds": 31.307
+          }
+        ],
+        "preconditions": {
+          "frontend_dist_initially_absent": true,
+          "clean_frontend_required": true
+        },
+        "seconds": 41.472
+      }
+    },
+    "frontend": {
+      "unit_passed": 273,
+      "browser_passed": 16,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "frontend-lint",
+            "status": "PASS",
+            "seconds": 2.697
+          },
+          {
+            "name": "frontend-unit",
+            "status": "PASS",
+            "seconds": 14.156
+          },
+          {
+            "name": "typescript-production-build",
+            "status": "PASS",
+            "seconds": 3.394
+          },
+          {
+            "name": "chromium-production-integration",
+            "status": "PASS",
+            "seconds": 102.63
+          }
+        ],
+        "seconds": 122.877
+      }
+    },
+    "workflow_contracts": {
+      "test_methods": 23,
+      "status": "PASS"
+    },
+    "ruff": "PASS",
+    "actionlint": {
+      "status": "PASS",
+      "version": "1.7.7",
+      "shellcheck": "Not installed locally"
+    },
+    "compileall": "PASS",
+    "diff_check": "PASS"
+  },
+  "dependency_installation": {
+    "npm_cold_and_warm_ci": "PASS",
+    "backend_pinned_clean_resolution": "PASS",
+    "pip_check": "PASS",
+    "workflow_parser_hash_verified_install": "PASS",
+    "actionlint_download_hash_verification": "PASS"
+  },
+  "negative_verification": {
+    "real_subprocess_exit": 17,
+    "downstream_upload_prevented": true,
+    "gate_rejects_failed_skipped_cancelled": true,
+    "actual_old_p4_bundle_rejected": "Build source commit mismatch",
+    "no_old_bundle_uploaded": true
+  },
+  "runtime_availability": "Locked commit objects publicly reachable; hosted GPG installation NOT TESTED",
+  "hosted": {
+    "phase": "P5A",
+    "status": "FAIL",
+    "acceptance_recommendation": "DO NOT ACCEPT; unresolved hosted browser lifecycle failure and unexecuted required production build/audit/upload",
+    "run_id": 41163754626,
+    "attempt": 1,
+    "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41163754626",
+    "source_commit": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+    "event": "push",
+    "created_at_utc": "2026-10-31T03:17:51Z",
+    "completed_at_utc": "2026-10-31T03:21:35Z",
+    "workflow_seconds": 224,
+    "jobs": [
+      {
+        "id": 124426749355,
+        "name": "Workflow validation",
+        "conclusion": "success",
+        "started_at": "2026-10-31T03:18:02Z",
+        "completed_at": "2026-10-31T03:18:21Z"
+      },
+      {
+        "id": 124426855701,
+        "name": "Backend and security",
+        "conclusion": "success",
+        "started_at": "2026-10-31T03:18:22Z",
+        "completed_at": "2026-10-31T03:20:16Z"
+      },
+      {
+        "id": 124426855775,
+        "name": "Frontend and browser",
+        "conclusion": "failure",
+        "started_at": "2026-10-31T03:18:23Z",
+        "completed_at": "2026-10-31T03:21:30Z"
+      },
+      {
+        "id": 124427576107,
+        "name": "CI required",
+        "conclusion": "failure",
+        "started_at": "2026-10-31T03:21:32Z",
+        "completed_at": "2026-10-31T03:21:34Z"
+      },
+      {
+        "id": 124427577386,
+        "name": "Production Flatpak and bundle audit",
+        "conclusion": "skipped",
+        "started_at": "2026-10-31T03:21:31Z",
+        "completed_at": "2026-10-31T03:21:31Z"
+      }
+    ],
+    "backend": {
+      "status": "PASS",
+      "passed": 550,
+      "subtests_passed": 31,
+      "warnings": 2,
+      "pytest_seconds": 46.78,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "python-lint",
+            "status": "PASS",
+            "seconds": 0.037
+          },
+          {
+            "name": "frontend-install-for-backend",
+            "status": "PASS",
+            "seconds": 5.358
+          },
+          {
+            "name": "frontend-production-build-for-backend",
+            "status": "PASS",
+            "seconds": 5.716
+          },
+          {
+            "name": "backend-security-lifecycle-migration-packaging",
+            "status": "PASS",
+            "seconds": 48.756
+          }
+        ],
+        "preconditions": {
+          "frontend_dist_initially_absent": true,
+          "clean_frontend_required": true
+        },
+        "seconds": 59.868
+      },
+      "previous_missing_assets_defect": "Resolved and verified on hosted runner"
+    },
+    "frontend": {
+      "lint": "PASS",
+      "unit_passed": 273,
+      "typescript_production_build": "PASS",
+      "browser_passed": 15,
+      "browser_failed": 1,
+      "browser_seconds": 120.51,
+      "failure": [
+        {
+          "name": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "message": "expect(locator).toBeVisible() failed"
+        }
+      ],
+      "source_location": "frontend/e2e/lifecycle.spec.ts:103",
+      "observed_page": "Save Error; recovered draft based on an older revision; Review conflict and recover",
+      "root_cause": "UNDETERMINED; captured evidence establishes revision conflict after Recover draft, not whether application defect or test synchronization race",
+      "orchestration": {
+        "status": "FAIL",
+        "complete": true,
+        "steps": [
+          {
+            "name": "frontend-lint",
+            "status": "PASS",
+            "seconds": 3.244
+          },
+          {
+            "name": "frontend-unit",
+            "status": "PASS",
+            "seconds": 14.064
+          },
+          {
+            "name": "typescript-production-build",
+            "status": "PASS",
+            "seconds": 4.091
+          },
+          {
+            "name": "chromium-production-integration",
+            "status": "FAIL",
+            "seconds": 120.51
+          }
+        ],
+        "error_type": "CalledProcessError",
+        "exit_code": 1,
+        "seconds": 141.91
+      }
+    },
+    "workflow_validation": {
+      "status": "PASS",
+      "contract_methods": 23,
+      "seconds": 0.192
+    },
+    "production_flatpak": {
+      "build": "SKIPPED",
+      "package_content_audit": "NOT EXECUTED",
+      "validated_unsigned_artifact_upload": "NOT EXECUTED",
+      "package_sha256": null
+    },
+    "diagnostic_artifacts": [
+      {
+        "artifact_id": 13027759948,
+        "kind": "diagnostics only",
+        "sha256": "b799b5eb3739ec8ad4645fc35b9aba4e7cfcd7856324a494ed97917d2fb4af67",
+        "bytes": 10406,
+        "independently_verified": true
+      },
+      {
+        "artifact_id": 13028024573,
+        "kind": "diagnostics only",
+        "sha256": "1a34eed295eb5e989025f8ea53b88276941fca508c0cdc67bed412faa1e44fd2",
+        "bytes": 4971285,
+        "independently_verified": true
+      }
+    ],
+    "scope": {
+      "new_commit": false,
+      "push": false,
+      "workflow_rerun": false,
+      "manual_dispatch": false,
+      "production_application_modified": false,
+      "P5B_started": false,
+      "P5C_started": false
+    },
+    "next_action": "Owner review of hosted failure; no rerun, commit or push without explicit authorization"
+  },
+  "native_qt_portals": "NOT TESTED by this CI; historical P4 limits preserved",
+  "p4_artifacts": "Historical A/B untouched; old A used only for expected-negative audit",
+  "publication": false,
+  "push": true,
+  "commit_created": true,
+  "repository_settings_changed": false,
+  "P5B_started": false,
+  "P5C_started": false,
+  "commit_sha": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+  "authorized_push_attempt": "hosted-attempt-2026-10-31/push-and-hosted-status.json",
+  "hosted_result_record": "hosted-correction-2026-10-31/final-result.json",
+  "postcommit_reports": "Local/uncommitted/unpushed, including correction; no additional commit or push",
+  "previous_local_tests": {
+    "backend": {
+      "status": "PASS",
+      "passed": 546,
+      "subtests_passed": 28,
+      "warnings": 2,
+      "pytest_seconds": 31.64,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "python-lint",
+            "status": "PASS",
+            "seconds": 0.022
+          },
+          {
+            "name": "backend-security-lifecycle-migration-packaging",
+            "status": "PASS",
+            "seconds": 32.296
+          }
+        ],
+        "seconds": 32.318
+      }
+    },
+    "frontend": {
+      "status": "PASS",
+      "unit_passed": 273,
+      "browser_passed": 16,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "frontend-lint",
+            "status": "PASS",
+            "seconds": 2.699
+          },
+          {
+            "name": "frontend-unit",
+            "status": "PASS",
+            "seconds": 14.584
+          },
+          {
+            "name": "typescript-production-build",
+            "status": "PASS",
+            "seconds": 3.828
+          },
+          {
+            "name": "chromium-production-integration",
+            "status": "PASS",
+            "seconds": 103.621
+          }
+        ],
+        "seconds": 124.732
+      }
+    },
+    "workflow_contracts": {
+      "status": "PASS",
+      "test_methods": 19,
+      "negative_subtests": 28
+    },
+    "actionlint": {
+      "status": "PASS",
+      "version": "1.7.7",
+      "shellcheck": "Not installed locally; actionlint shellcheck integration not exercised locally"
+    },
+    "ruff": "PASS",
+    "compileall": "PASS",
+    "diff_check": "PASS"
+  },
+  "correction_record": "frontend-prerequisite-correction-2026-10-31/validation.json",
+  "correction_checkpoint": {
+    "date_utc": "2026-10-31T02:16:42.332103+00:00",
+    "branch": "desktop/p2-production-integration",
+    "authorized_additional_commits": 1,
+    "created_commit": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+    "files_in_commit": 46,
+    "push_status": "BLOCKED",
+    "push_exit_code": 128,
+    "reason": "Terminal has no Git HTTPS credentials; could not read Username",
+    "remote_sha_confirmed_by_github": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+    "remote_changed": false,
+    "corrected_hosted_run": "NOT STARTED",
+    "manual_dispatch": false,
+    "release_or_signing": false,
+    "next_action": "Owner completes the same authorized push from authenticated terminal; no new commit required"
+  },
+  "previous_hosted": {
+    "phase": "P5A",
+    "status": "FAIL",
+    "run_id": 41157614256,
+    "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41157614256",
+    "attempt": 1,
+    "source_commit": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+    "event": "push",
+    "conclusion": "failure",
+    "created_at_utc": "2026-10-31T01:55:30Z",
+    "completed_at_utc": "2026-10-31T01:59:23Z",
+    "workflow_seconds": 233,
+    "jobs": [
+      {
+        "id": 124407772670,
+        "name": "Workflow validation",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-31T01:55:32Z",
+        "completed_at": "2026-10-31T01:55:40Z",
+        "duration_seconds": 8,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Install locked workflow parser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Validate workflow and negative contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          }
+        ]
+      },
+      {
+        "id": 124407811238,
+        "name": "Frontend and browser",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-31T01:55:43Z",
+        "completed_at": "2026-10-31T01:59:18Z",
+        "duration_seconds": 215,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install locked frontend and browser dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Lint, unit tests, TypeScript, production build and Chromium tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Preserve synthetic browser diagnostics",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15
+          }
+        ]
+      },
+      {
+        "id": 124407811240,
+        "name": "Backend and security",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-10-31T01:55:42Z",
+        "completed_at": "2026-10-31T01:56:41Z",
+        "duration_seconds": 59,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Install verification dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Backend, security, lifecycle and migration regressions",
+            "status": "completed",
+            "conclusion": "failure",
+            "number": 5
+          },
+          {
+            "name": "Preserve synthetic test diagnostics",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 11
+          },
+          {
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          }
+        ]
+      },
+      {
+        "id": 124408632120,
+        "name": "CI required",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-10-31T01:59:20Z",
+        "completed_at": "2026-10-31T01:59:22Z",
+        "duration_seconds": 2,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Require every verification and artifact job to succeed",
+            "status": "completed",
+            "conclusion": "failure",
+            "number": 2
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          }
+        ]
+      },
+      {
+        "id": 124408633041,
+        "name": "Production Flatpak and bundle audit",
+        "status": "completed",
+        "conclusion": "skipped",
+        "started_at": "2026-10-31T01:59:19Z",
+        "completed_at": "2026-10-31T01:59:19Z",
+        "duration_seconds": 0,
+        "steps": []
+      }
+    ],
+    "runner": {
+      "image": "ubuntu-24.04",
+      "os": "Ubuntu 24.04.5",
+      "image_version": "20261025.353.1",
+      "runner_version": "2.338.2",
+      "backend_python": "3.12.15",
+      "repository_permissions": {
+        "contents": "read",
+        "metadata": "read"
+      }
+    },
+    "test_results": {
+      "workflow_contracts": {
+        "passed": 19,
+        "seconds": 0.175
+      },
+      "backend": {
+        "passed": 543,
+        "failed": 3,
+        "subtests_passed": 28,
+        "warnings": 2,
+        "pytest_seconds": 35.39
+      },
+      "frontend": {
+        "unit_passed": 273,
+        "browser_passed": 16,
+        "typescript": "PASS",
+        "production_vite_build": "PASS",
+        "lint": "PASS"
+      }
+    },
+    "failure": {
+      "confirmed_cause": "Backend job starts production-serving worker/staging tests without building frontend/dist; separate frontend runner cannot supply generated assets",
+      "reproduced_with_disposable_source": true,
+      "production_application_changed": false,
+      "suggested_correction_not_implemented": "Prepare real production frontend assets before the backend suite, or add a shared verified build prerequisite/artifact. Add a clean-checkout prerequisite regression; never skip these tests."
+    },
+    "flatpak": {
+      "build": "SKIPPED",
+      "exported_payload_audit": "NOT RUN",
+      "artifact_upload": "NOT RUN",
+      "production_checksum": null
+    },
+    "diagnostic_artifacts": [
+      {
+        "id": 13026131792,
+        "name": "backend-diagnostics-329020b5286ce0d5474e04a781ed61a6079f8edc-1",
+        "bytes": 12225,
+        "digest": "sha256:30adeec94e96176f536790a7ddfc654f6d5002fb9bdd428eb9e1c2f90407f283",
+        "expires_at": "2026-11-07T01:56:39Z",
+        "kind": "diagnostic ZIP, not a production Flatpak"
+      },
+      {
+        "id": 13025193988,
+        "name": "frontend-diagnostics-329020b5286ce0d5474e04a781ed61a6079f8edc-1",
+        "bytes": 4871567,
+        "digest": "sha256:8dacb24c2e2288fa991e3667a691b25c50d9f67da16f99665b7a79512b1d09ba",
+        "expires_at": "2026-11-07T01:59:10Z",
+        "kind": "diagnostic ZIP, not a production Flatpak"
+      }
+    ],
+    "npm_cache": {
+      "frontend": "MISS then cache saved; hosted warm restore not measured"
+    },
+    "guard_behavior": "Backend failure blocked production build and final CI required returned failure; no package upload",
+    "scope": {
+      "authorized_commit_count": 1,
+      "source_commit": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+      "owner_completed_push": true,
+      "additional_commit": false,
+      "additional_push": false,
+      "rerun_or_dispatch": false,
+      "production_publication": false,
+      "signing": false,
+      "P5B_started": false,
+      "P5C_started": false
+    },
+    "next_action": "Report failure and stop. Another commit/push requires owner authorization."
+  },
+  "correction_push_completed_by_owner": true,
+  "correction_commit": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+  "post_hosted_reporting": "Local/uncommitted/unpushed; no further commit, push or workflow rerun"
+}

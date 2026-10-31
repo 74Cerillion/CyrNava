@@ -1,0 +1,29 @@
+{
+  "initial_instrumented_run": {
+    "status": "INVALID DIAGNOSTIC ATTEMPTS: 2 timeouts; 1 pass",
+    "cause": "Investigation checkpoint used an auto-waiting save-state locator while the recovery chooser intentionally had no save-state element. Replaced by a non-waiting DOM observation; no application/test timeout changed.",
+    "counted_as_corrected_pass": false
+  },
+  "natural_original_flow": {
+    "passed": 10,
+    "failed": 0
+  },
+  "original_flow_cpu_scheduling_probe": {
+    "passed": 3,
+    "failed": 0,
+    "cpu_rate": 6,
+    "not_a_production_configuration_change": true
+  },
+  "controlled_commit_before_barrier": {
+    "status": "PASS: exact revision-conflict state reproduced",
+    "base_revision": 3,
+    "canonical_revision": 4,
+    "uses_real_SQLite_and_API": true,
+    "response_gate": "Explicit promise released after old page close; no delay or retry"
+  },
+  "historical_host_run": {
+    "trace_available": false,
+    "screenshot_and_error_context_reviewed": true,
+    "exact_historical_interleaving": "Not provable from available hosted artifacts"
+  }
+}

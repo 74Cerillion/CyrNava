@@ -1,0 +1,97 @@
+
+Running 3 tests using 1 worker
+
+(node:31) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✘  1 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (2.0m)
+(node:190) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✘  2 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (2.0m)
+(node:345) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":1965,"event":"request","method":"PATCH","revision":1}
+{"ms":1970,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2288,"event":"request","method":"GET"}
+{"ms":2343,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3092,"event":"request","method":"PATCH","revision":2}
+{"ms":3097,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":5085,"event":"request","method":"GET"}
+{"ms":5130,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":5158,"event":"before-blocking","state":"Saved","drafts":[]}
+{"ms":5338,"event":"draft-captured","state":"Unsaved Changes","drafts":[{"note_id":"8a57b741-65f0-4417-a2d8-896b2e950a64","base_revision":3}]}
+{"ms":7127,"event":"request","method":"GET"}
+{"ms":7137,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7167,"event":"before-recover-choice","state":null,"drafts":[{"note_id":"8a57b741-65f0-4417-a2d8-896b2e950a64","base_revision":3}]}
+{"ms":7245,"event":"request","method":"PATCH","revision":3}
+{"ms":7255,"event":"response","method":"PATCH","status":200,"revision":4}
+{"ms":7260,"event":"after-recover-choice","state":"Saved","drafts":[]}
+{"ms":7326,"event":"request","method":"GET"}
+{"ms":7339,"event":"response","method":"GET","status":200,"revision":4}
+
+  ✓  3 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.5s)
+
+
+  1) e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits
+
+    Test timeout of 120000ms exceeded.
+
+    Error: locator.click: Target page, context or browser has been closed
+
+      120 |     await expect(reopened.getByRole('heading', { name: 'Recover unsaved edits' })).toBeVisible();
+      121 |     await checkpoint('before-recover-choice', reopened);
+    > 122 |     await reopened.getByRole('button', { name: 'Recover draft', exact: true }).click();
+          |                                                                                ^
+      123 |     await checkpoint('after-recover-choice', reopened);
+      124 |     await expect(reopened.getByText('Saved', { exact: true })).toBeVisible();
+      125 |     await reopened.reload();
+        at /tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e/lifecycle.spec.ts:122:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits
+
+    Test timeout of 120000ms exceeded.
+
+    Error: locator.click: Target page, context or browser has been closed
+
+      120 |     await expect(reopened.getByRole('heading', { name: 'Recover unsaved edits' })).toBeVisible();
+      121 |     await checkpoint('before-recover-choice', reopened);
+    > 122 |     await reopened.getByRole('button', { name: 'Recover draft', exact: true }).click();
+          |                                                                                ^
+      123 |     await checkpoint('after-recover-choice', reopened);
+      124 |     await expect(reopened.getByText('Saved', { exact: true })).toBeVisible();
+      125 |     await reopened.reload();
+        at /tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e/lifecycle.spec.ts:122:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits
+    e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits
+  1 passed (4.2m)

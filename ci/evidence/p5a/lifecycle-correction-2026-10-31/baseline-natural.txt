@@ -1,0 +1,185 @@
+
+Running 10 tests using 1 worker
+
+(node:30) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":1974,"event":"request","method":"PATCH","revision":1}
+{"ms":1979,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2268,"event":"request","method":"GET"}
+{"ms":2313,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3067,"event":"request","method":"PATCH","revision":2}
+{"ms":3074,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":4951,"event":"request","method":"GET"}
+{"ms":4996,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7089,"event":"request","method":"GET"}
+{"ms":7110,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7197,"event":"request","method":"PATCH","revision":3}
+{"ms":7207,"event":"response","method":"PATCH","status":200,"revision":4}
+{"ms":7270,"event":"request","method":"GET"}
+{"ms":7281,"event":"response","method":"GET","status":200,"revision":4}
+
+  ✓   1 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.4s)
+(node:189) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":2008,"event":"request","method":"PATCH","revision":1}
+{"ms":2013,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2326,"event":"request","method":"GET"}
+{"ms":2370,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3120,"event":"request","method":"PATCH","revision":2}
+{"ms":3127,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":5010,"event":"request","method":"GET"}
+{"ms":5051,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7092,"event":"request","method":"GET"}
+{"ms":7104,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7213,"event":"request","method":"PATCH","revision":3}
+{"ms":7223,"event":"response","method":"PATCH","status":200,"revision":4}
+{"ms":7291,"event":"request","method":"GET"}
+{"ms":7320,"event":"response","method":"GET","status":200,"revision":4}
+
+  ✓   2 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.4s)
+(node:345) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":1962,"event":"request","method":"PATCH","revision":1}
+{"ms":1969,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2278,"event":"request","method":"GET"}
+{"ms":2324,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3079,"event":"request","method":"PATCH","revision":2}
+{"ms":3086,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":4979,"event":"request","method":"GET"}
+{"ms":5024,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7015,"event":"request","method":"GET"}
+{"ms":7031,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7124,"event":"request","method":"PATCH","revision":3}
+{"ms":7134,"event":"response","method":"PATCH","status":200,"revision":4}
+{"ms":7197,"event":"request","method":"GET"}
+{"ms":7238,"event":"response","method":"GET","status":200,"revision":4}
+
+  ✓   3 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.3s)
+(node:500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":1987,"event":"request","method":"PATCH","revision":1}
+{"ms":1995,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2276,"event":"request","method":"GET"}
+{"ms":2321,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3067,"event":"request","method":"PATCH","revision":2}
+{"ms":3074,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":5074,"event":"request","method":"GET"}
+{"ms":5121,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7113,"event":"request","method":"GET"}
+{"ms":7130,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7219,"event":"request","method":"PATCH","revision":3}
+{"ms":7229,"event":"response","method":"PATCH","status":200,"revision":4}
+{"ms":7296,"event":"request","method":"GET"}
+{"ms":7308,"event":"response","method":"GET","status":200,"revision":4}
+
+  ✓   4 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.5s)
+(node:658) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":1989,"event":"request","method":"PATCH","revision":1}
+{"ms":1995,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2284,"event":"request","method":"GET"}
+{"ms":2329,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3077,"event":"request","method":"PATCH","revision":2}
+{"ms":3084,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":4994,"event":"request","method":"GET"}
+{"ms":5040,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7109,"event":"request","method":"GET"}
+{"ms":7124,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7218,"event":"request","method":"PATCH","revision":3}
+{"ms":7228,"event":"response","method":"PATCH","status":200,"revision":4}
+{"ms":7290,"event":"request","method":"GET"}
+{"ms":7316,"event":"response","method":"GET","status":200,"revision":4}
+
+  ✓   5 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.5s)
+(node:813) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":1949,"event":"request","method":"PATCH","revision":1}
+{"ms":1955,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2229,"event":"request","method":"GET"}
+{"ms":2273,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3020,"event":"request","method":"PATCH","revision":2}
+{"ms":3029,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":5012,"event":"request","method":"GET"}
+{"ms":5052,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7180,"event":"request","method":"GET"}
+{"ms":7199,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7305,"event":"request","method":"PATCH","revision":3}
+{"ms":7317,"event":"response","method":"PATCH","status":200,"revision":4}
+{"ms":7379,"event":"request","method":"GET"}
+{"ms":7407,"event":"response","method":"GET","status":200,"revision":4}
+
+  ✓   6 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.5s)
+(node:971) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":2010,"event":"request","method":"PATCH","revision":1}
+{"ms":2020,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2323,"event":"request","method":"GET"}
+{"ms":2373,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3115,"event":"request","method":"PATCH","revision":2}
+{"ms":3120,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":5004,"event":"request","method":"GET"}
+{"ms":5052,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7186,"event":"request","method":"GET"}
+{"ms":7198,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7297,"event":"request","method":"PATCH","revision":3}
+{"ms":7311,"event":"response","method":"PATCH","status":200,"revision":4}
+{"ms":7373,"event":"request","method":"GET"}
+{"ms":7384,"event":"response","method":"GET","status":200,"revision":4}
+
+  ✓   7 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.6s)
+(node:1128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":2011,"event":"request","method":"PATCH","revision":1}
+{"ms":2016,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2344,"event":"request","method":"GET"}
+{"ms":2400,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3142,"event":"request","method":"PATCH","revision":2}
+{"ms":3151,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":5055,"event":"request","method":"GET"}
+{"ms":5104,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7138,"event":"request","method":"GET"}
+{"ms":7162,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7247,"event":"request","method":"PATCH","revision":3}
+{"ms":7258,"event":"response","method":"PATCH","status":200,"revision":4}
+{"ms":7327,"event":"request","method":"GET"}
+{"ms":7345,"event":"response","method":"GET","status":200,"revision":4}
+
+  ✓   8 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.5s)
+(node:1282) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":1995,"event":"request","method":"PATCH","revision":1}
+{"ms":2001,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2296,"event":"request","method":"GET"}
+{"ms":2346,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3102,"event":"request","method":"PATCH","revision":2}
+{"ms":3109,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":5031,"event":"request","method":"GET"}
+{"ms":5078,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7109,"event":"request","method":"GET"}
+{"ms":7125,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7230,"event":"request","method":"PATCH","revision":3}
+{"ms":7245,"event":"response","method":"PATCH","status":200,"revision":4}
+{"ms":7328,"event":"request","method":"GET"}
+{"ms":7371,"event":"response","method":"GET","status":200,"revision":4}
+
+  ✓   9 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.5s)
+(node:1438) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":2027,"event":"request","method":"PATCH","revision":1}
+{"ms":2034,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2333,"event":"request","method":"GET"}
+{"ms":2379,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3125,"event":"request","method":"PATCH","revision":2}
+{"ms":3138,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":5161,"event":"request","method":"GET"}
+{"ms":5216,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7248,"event":"request","method":"GET"}
+{"ms":7266,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7354,"event":"request","method":"PATCH","revision":3}
+{"ms":7368,"event":"response","method":"PATCH","status":200,"revision":4}
+{"ms":7441,"event":"request","method":"GET"}
+{"ms":7472,"event":"response","method":"GET","status":200,"revision":4}
+
+  ✓  10 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.7s)
+
+  10 passed (1.5m)

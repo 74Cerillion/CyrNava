@@ -2,7 +2,7 @@
   "phase": "P5A",
   "date": "2026-10-31",
   "timezone": "Asia/Seoul",
-  "status": "CONDITIONAL \u2014 LOCAL CORRECTION PASS; CORRECTED HOSTED VERIFICATION PENDING",
+  "status": "CONDITIONAL \u2014 LIFECYCLE TEST CORRECTION LOCALLY VERIFIED; HOSTED VERIFICATION PENDING",
   "branch": "desktop/p2-production-integration",
   "base_commit": "8418339cf3c9ff7ae26f792ed8697b7c16d7450a",
   "local_tests": {
@@ -103,6 +103,278 @@
   },
   "runtime_availability": "Locked commit objects publicly reachable; hosted GPG installation NOT TESTED",
   "hosted": {
+    "phase": "P5A",
+    "status": "FAIL",
+    "acceptance_recommendation": "DO NOT ACCEPT; unresolved hosted browser lifecycle failure and unexecuted required production build/audit/upload",
+    "run_id": 41163754626,
+    "attempt": 1,
+    "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41163754626",
+    "source_commit": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+    "event": "push",
+    "created_at_utc": "2026-10-31T03:17:51Z",
+    "completed_at_utc": "2026-10-31T03:21:35Z",
+    "workflow_seconds": 224,
+    "jobs": [
+      {
+        "id": 124426749355,
+        "name": "Workflow validation",
+        "conclusion": "success",
+        "started_at": "2026-10-31T03:18:02Z",
+        "completed_at": "2026-10-31T03:18:21Z"
+      },
+      {
+        "id": 124426855701,
+        "name": "Backend and security",
+        "conclusion": "success",
+        "started_at": "2026-10-31T03:18:22Z",
+        "completed_at": "2026-10-31T03:20:16Z"
+      },
+      {
+        "id": 124426855775,
+        "name": "Frontend and browser",
+        "conclusion": "failure",
+        "started_at": "2026-10-31T03:18:23Z",
+        "completed_at": "2026-10-31T03:21:30Z"
+      },
+      {
+        "id": 124427576107,
+        "name": "CI required",
+        "conclusion": "failure",
+        "started_at": "2026-10-31T03:21:32Z",
+        "completed_at": "2026-10-31T03:21:34Z"
+      },
+      {
+        "id": 124427577386,
+        "name": "Production Flatpak and bundle audit",
+        "conclusion": "skipped",
+        "started_at": "2026-10-31T03:21:31Z",
+        "completed_at": "2026-10-31T03:21:31Z"
+      }
+    ],
+    "backend": {
+      "status": "PASS",
+      "passed": 550,
+      "subtests_passed": 31,
+      "warnings": 2,
+      "pytest_seconds": 46.78,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "python-lint",
+            "status": "PASS",
+            "seconds": 0.037
+          },
+          {
+            "name": "frontend-install-for-backend",
+            "status": "PASS",
+            "seconds": 5.358
+          },
+          {
+            "name": "frontend-production-build-for-backend",
+            "status": "PASS",
+            "seconds": 5.716
+          },
+          {
+            "name": "backend-security-lifecycle-migration-packaging",
+            "status": "PASS",
+            "seconds": 48.756
+          }
+        ],
+        "preconditions": {
+          "frontend_dist_initially_absent": true,
+          "clean_frontend_required": true
+        },
+        "seconds": 59.868
+      },
+      "previous_missing_assets_defect": "Resolved and verified on hosted runner"
+    },
+    "frontend": {
+      "lint": "PASS",
+      "unit_passed": 273,
+      "typescript_production_build": "PASS",
+      "browser_passed": 15,
+      "browser_failed": 1,
+      "browser_seconds": 120.51,
+      "failure": [
+        {
+          "name": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "message": "expect(locator).toBeVisible() failed"
+        }
+      ],
+      "source_location": "frontend/e2e/lifecycle.spec.ts:103",
+      "observed_page": "Save Error; recovered draft based on an older revision; Review conflict and recover",
+      "root_cause": "UNDETERMINED; captured evidence establishes revision conflict after Recover draft, not whether application defect or test synchronization race",
+      "orchestration": {
+        "status": "FAIL",
+        "complete": true,
+        "steps": [
+          {
+            "name": "frontend-lint",
+            "status": "PASS",
+            "seconds": 3.244
+          },
+          {
+            "name": "frontend-unit",
+            "status": "PASS",
+            "seconds": 14.064
+          },
+          {
+            "name": "typescript-production-build",
+            "status": "PASS",
+            "seconds": 4.091
+          },
+          {
+            "name": "chromium-production-integration",
+            "status": "FAIL",
+            "seconds": 120.51
+          }
+        ],
+        "error_type": "CalledProcessError",
+        "exit_code": 1,
+        "seconds": 141.91
+      }
+    },
+    "workflow_validation": {
+      "status": "PASS",
+      "contract_methods": 23,
+      "seconds": 0.192
+    },
+    "production_flatpak": {
+      "build": "SKIPPED",
+      "package_content_audit": "NOT EXECUTED",
+      "validated_unsigned_artifact_upload": "NOT EXECUTED",
+      "package_sha256": null
+    },
+    "diagnostic_artifacts": [
+      {
+        "artifact_id": 13027759948,
+        "kind": "diagnostics only",
+        "sha256": "b799b5eb3739ec8ad4645fc35b9aba4e7cfcd7856324a494ed97917d2fb4af67",
+        "bytes": 10406,
+        "independently_verified": true
+      },
+      {
+        "artifact_id": 13028024573,
+        "kind": "diagnostics only",
+        "sha256": "1a34eed295eb5e989025f8ea53b88276941fca508c0cdc67bed412faa1e44fd2",
+        "bytes": 4971285,
+        "independently_verified": true
+      }
+    ],
+    "scope": {
+      "new_commit": false,
+      "push": false,
+      "workflow_rerun": false,
+      "manual_dispatch": false,
+      "production_application_modified": false,
+      "P5B_started": false,
+      "P5C_started": false
+    },
+    "next_action": "Owner review of hosted failure; no rerun, commit or push without explicit authorization"
+  },
+  "native_qt_portals": "NOT TESTED by this CI; historical P4 limits preserved",
+  "p4_artifacts": "Historical A/B untouched; old A used only for expected-negative audit",
+  "publication": false,
+  "push": true,
+  "commit_created": true,
+  "repository_settings_changed": false,
+  "P5B_started": false,
+  "P5C_started": false,
+  "commit_sha": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+  "authorized_push_attempt": "hosted-attempt-2026-10-31/push-and-hosted-status.json",
+  "hosted_result_record": "hosted-correction-2026-10-31/final-result.json",
+  "postcommit_reports": "Local/uncommitted/unpushed, including correction; no additional commit or push",
+  "previous_local_tests": {
+    "backend": {
+      "status": "PASS",
+      "passed": 546,
+      "subtests_passed": 28,
+      "warnings": 2,
+      "pytest_seconds": 31.64,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "python-lint",
+            "status": "PASS",
+            "seconds": 0.022
+          },
+          {
+            "name": "backend-security-lifecycle-migration-packaging",
+            "status": "PASS",
+            "seconds": 32.296
+          }
+        ],
+        "seconds": 32.318
+      }
+    },
+    "frontend": {
+      "status": "PASS",
+      "unit_passed": 273,
+      "browser_passed": 16,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "frontend-lint",
+            "status": "PASS",
+            "seconds": 2.699
+          },
+          {
+            "name": "frontend-unit",
+            "status": "PASS",
+            "seconds": 14.584
+          },
+          {
+            "name": "typescript-production-build",
+            "status": "PASS",
+            "seconds": 3.828
+          },
+          {
+            "name": "chromium-production-integration",
+            "status": "PASS",
+            "seconds": 103.621
+          }
+        ],
+        "seconds": 124.732
+      }
+    },
+    "workflow_contracts": {
+      "status": "PASS",
+      "test_methods": 19,
+      "negative_subtests": 28
+    },
+    "actionlint": {
+      "status": "PASS",
+      "version": "1.7.7",
+      "shellcheck": "Not installed locally; actionlint shellcheck integration not exercised locally"
+    },
+    "ruff": "PASS",
+    "compileall": "PASS",
+    "diff_check": "PASS"
+  },
+  "correction_record": "frontend-prerequisite-correction-2026-10-31/validation.json",
+  "correction_checkpoint": {
+    "date_utc": "2026-10-31T02:16:42.332103+00:00",
+    "branch": "desktop/p2-production-integration",
+    "authorized_additional_commits": 1,
+    "created_commit": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+    "files_in_commit": 46,
+    "push_status": "BLOCKED",
+    "push_exit_code": 128,
+    "reason": "Terminal has no Git HTTPS credentials; could not read Username",
+    "remote_sha_confirmed_by_github": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+    "remote_changed": false,
+    "corrected_hosted_run": "NOT STARTED",
+    "manual_dispatch": false,
+    "release_or_signing": false,
+    "next_action": "Owner completes the same authorized push from authenticated terminal; no new commit required"
+  },
+  "previous_hosted": {
     "phase": "P5A",
     "status": "FAIL",
     "run_id": 41157614256,
@@ -435,94 +707,108 @@
     },
     "next_action": "Report failure and stop. Another commit/push requires owner authorization."
   },
-  "native_qt_portals": "NOT TESTED by this CI; historical P4 limits preserved",
-  "p4_artifacts": "Historical A/B untouched; old A used only for expected-negative audit",
-  "publication": false,
-  "push": true,
-  "commit_created": true,
-  "repository_settings_changed": false,
-  "P5B_started": false,
-  "P5C_started": false,
-  "commit_sha": "329020b5286ce0d5474e04a781ed61a6079f8edc",
-  "authorized_push_attempt": "hosted-attempt-2026-10-31/push-and-hosted-status.json",
-  "hosted_result_record": "hosted-attempt-2026-10-31/run-41157614256-final.json",
-  "postcommit_reports": "Local/uncommitted/unpushed, including correction; no additional commit or push",
-  "previous_local_tests": {
-    "backend": {
-      "status": "PASS",
-      "passed": 546,
-      "subtests_passed": 28,
-      "warnings": 2,
-      "pytest_seconds": 31.64,
-      "orchestration": {
-        "status": "PASS",
-        "complete": true,
-        "steps": [
-          {
-            "name": "python-lint",
-            "status": "PASS",
-            "seconds": 0.022
-          },
-          {
-            "name": "backend-security-lifecycle-migration-packaging",
-            "status": "PASS",
-            "seconds": 32.296
-          }
-        ],
-        "seconds": 32.318
-      }
+  "correction_push_completed_by_owner": true,
+  "correction_commit": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+  "post_hosted_reporting": "Local/uncommitted/unpushed; no further commit, push or workflow rerun",
+  "lifecycle_correction": {
+    "phase": "P5A lifecycle verification correction",
+    "date": "2026-10-31",
+    "local_verification": "PASS",
+    "P5A_status": "CONDITIONAL \u2014 corrected hosted verification required; no acceptance claimed",
+    "classification": "Confirmed test fault-injection precondition defect; no production defect demonstrated",
+    "confirmed_mechanism": "Late routing cannot stop an already-dispatched save. Real backend commit advances canonical revision while a held/lost acknowledgement leaves a recovery draft on the older base revision; conflict rejection is correct.",
+    "historical_causality_limit": "Hosted artifacts contain screenshot/error context but no trace or revision timeline; exact original interleaving cannot be proven. Original flow passed 10 natural and 3 CPU-throttled local probes.",
+    "controlled_reproduction": {
+      "status": "PASS: reproduced older-revision conflict",
+      "draft_base": 3,
+      "canonical_revision": 4,
+      "real_API_and_SQLite": true,
+      "arbitrary_delays": false,
+      "automatic_retries": false
     },
-    "frontend": {
-      "status": "PASS",
-      "unit_passed": 273,
-      "browser_passed": 16,
-      "orchestration": {
-        "status": "PASS",
-        "complete": true,
-        "steps": [
-          {
-            "name": "frontend-lint",
-            "status": "PASS",
-            "seconds": 2.699
-          },
-          {
-            "name": "frontend-unit",
-            "status": "PASS",
-            "seconds": 14.584
-          },
-          {
-            "name": "typescript-production-build",
-            "status": "PASS",
-            "seconds": 3.828
-          },
-          {
-            "name": "chromium-production-integration",
-            "status": "PASS",
-            "seconds": 103.621
-          }
-        ],
-        "seconds": 124.732
-      }
+    "correction": "Install PATCH barrier before page startup; retain through restart; assert SQLite unchanged and draft base equals canonical; recover only after these checks and assert actual acknowledgement/revision/content. Preserve stale-draft rejection in new deterministic gated regression.",
+    "tests": {
+      "focused": {
+        "passed": 10,
+        "failed": 0,
+        "repetitions_per_case": 5,
+        "retries": 0,
+        "seconds": 67.463
+      },
+      "frontend": {
+        "unit_passed": 273,
+        "browser_passed": 17,
+        "browser_failed": 0,
+        "lint": "PASS",
+        "typescript_build": "PASS",
+        "orchestration": {
+          "status": "PASS",
+          "complete": true,
+          "steps": [
+            {
+              "name": "frontend-lint",
+              "status": "PASS",
+              "seconds": 2.53
+            },
+            {
+              "name": "frontend-unit",
+              "status": "PASS",
+              "seconds": 13.933
+            },
+            {
+              "name": "typescript-production-build",
+              "status": "PASS",
+              "seconds": 3.474
+            },
+            {
+              "name": "chromium-production-integration",
+              "status": "PASS",
+              "seconds": 112.811
+            }
+          ],
+          "seconds": 132.748
+        }
+      },
+      "ci_contracts": {
+        "passed": 23,
+        "seconds": 0.129
+      },
+      "backend_security": "NOT RERUN: production/backend/shared lifecycle logic unchanged. Prior hosted 550 tests/31 subtests remain separate evidence."
     },
-    "workflow_contracts": {
-      "status": "PASS",
-      "test_methods": 19,
-      "negative_subtests": 28
+    "source_files": {
+      "frontend/e2e/lifecycle.spec.ts": "228d2b0fc52b253f561fb8c132d07ab1738daacb8f01a30af634747c1aa471b9",
+      "frontend/playwright.config.ts": "481befcad000efc964a6401f192e38515b12547d4c82e008c50feb7ea36b2548"
     },
-    "actionlint": {
-      "status": "PASS",
-      "version": "1.7.7",
-      "shellcheck": "Not installed locally; actionlint shellcheck integration not exercised locally"
+    "clean_checkout": {
+      "base": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+      "initial_absence": {
+        "frontend/dist": false,
+        "frontend/node_modules": false,
+        "backend/.venv": false
+      },
+      "only_candidate_overlay": [
+        "frontend/e2e/lifecycle.spec.ts",
+        "frontend/playwright.config.ts"
+      ],
+      "dependencies": "Fresh npm ci and backend venv; reused matching previously downloaded Playwright Chromium binary only",
+      "profiles": "Synthetic temporary legacy workspace and isolated XDG paths"
     },
-    "ruff": "PASS",
-    "compileall": "PASS",
-    "diff_check": "PASS"
+    "security": {
+      "production_code_changed": false,
+      "permissions_changed": false,
+      "conflict_detection_preserved": true,
+      "stale_draft_retained": true,
+      "post_conflict_automatic_writes": 0,
+      "public_trace_data": "Synthetic disposable workspace only; future failure traces retained as diagnostic artifacts",
+      "persistent_diagnostic_files_verified_in_full_suite": 2
+    },
+    "scope": {
+      "new_commit": false,
+      "push": false,
+      "workflow_dispatch_or_rerun": false,
+      "P5B_started": false,
+      "P5C_started": false
+    }
   },
-  "correction_record": "frontend-prerequisite-correction-2026-10-31/validation.json",
-  "correction_checkpoint": {
-    "new_commit": false,
-    "push": false,
-    "workflow_trigger": false,
-    "authorization_required": "One additional commit and push after owner review"
-  }
+  "lifecycle_correction_record": "lifecycle-correction-2026-10-31/validation.json"
 }

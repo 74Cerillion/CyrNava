@@ -1,40 +1,33 @@
-# P5A owner checks — correction ready for review
+# P5A owner checks — lifecycle correction ready
 
-**P5A STATUS: CONDITIONAL — LOCAL CORRECTION PASSED; HOSTED VERIFICATION PENDING**
+**P5A STATUS: CONDITIONAL — HOSTED VERIFICATION REQUIRED; NOT ACCEPTED**
 
-The first hosted [run 41157614256](https://github.com/74Cerillion/CyrNava/actions/runs/41157614256)
-remains FAIL at commit `329020b5286ce0d5474e04a781ed61a6079f8edc`.
-Its evidence and previous reports are preserved. The backend job lacked generated
-production frontend assets; a separate runner's frontend build cannot supply them.
+The latest actual hosted run remains [41163754626](https://github.com/74Cerillion/CyrNava/actions/runs/41163754626),
+FAIL at 72f4c7b. Backend 550 tests/31 subtests passed; the production build was
+skipped after browser recovery failed. Both historical runs remain unchanged.
 
-The local correction gives the backend job its own pinned Node/npm setup and
-locked dependency install/production build. No cross-job artifact or test skip
-was introduced. Existing read-only permissions and fail-closed gates are preserved.
+Confirmed test defect: writes were blocked only after editor startup, which cannot
+stop a request already dispatched. A real-API controlled reproduction commits
+revision 4 with acknowledgement withheld and retains draft base 3; the application's
+conflict rejection is correct. Historical exact ordering is unprovable because no
+hosted trace was captured. Natural original-flow runs passed 10/10 and CPU probes
+3/3; neither reclassifies the recorded failure or proves it flaky.
 
-- [x] Clean baseline clone; explicit four-file candidate overlay; no preexisting dist,
-  node_modules or backend venv. Fresh isolated dependencies and synthetic data.
-- [x] 550 backend tests, 31 subtests; all three prior failures now pass.
-- [x] 273 frontend units, 16 browser tests; lint, TypeScript/build pass.
-- [x] 23 CI contract methods including four new prerequisite regressions.
-- [x] Ruff, actionlint syntax/expression checks, compile and diff checks pass.
-- [x] Reports, exact patch, source hashes, logs and JUnit preserved in
-  `evidence/p5a/frontend-prerequisite-correction-2026-10-31/`.
-- [ ] Owner authorizes one additional P5A-only commit and push to
-  `desktop/p2-production-integration`.
-- [ ] Monitor the resulting hosted run; record source SHA/run ID and all job results.
-- [ ] Require production build/exported-payload audit/upload and verify package hash.
-- [ ] Owner accepts P5A only after required hosted checks succeed.
+- [x] Install write barrier before opening the recovery page; keep through restart.
+- [x] Assert SQLite unchanged, matching draft base, real save response and content.
+- [x] Add deterministic lost-ack regression: preserve newer data and stale draft;
+  recovery choice makes no automatic write and still requires conflict review.
+- [x] Preserve revision/timing diagnostics and future failure traces.
+- [x] Repeated affected tests: 10/10 (five per case), no retries.
+- [x] Full clean-clone frontend: lint, 273 units, TypeScript/build and 17 browsers PASS.
+- [x] CI contracts: 23 PASS. Application/backend/security code unchanged; no new
+  backend suite run claimed. Prior hosted backend result remains separate evidence.
+- [x] Evidence and selected synthetic traces retained in
+  evidence/p5a/lifecycle-correction-2026-10-31/; see manifest and limitations.
+- [ ] Authorize one next P5A-only commit/push to desktop/p2-production-integration.
+- [ ] Verify resulting hosted run including actual Flatpak build/audit/upload/hash.
+- [ ] Owner accepts P5A after required hosted results pass.
 
-Local backend setup adds 10.142 s for npm install/build; the full backend wrapper
-was 41.472 s. Frontend wrapper was 122.877 s. Hosted timing remains unmeasured for
-the correction. ShellCheck is not installed locally; no local ShellCheck PASS is
-claimed. Existing P4 native evidence limitations remain unchanged.
-
-No new commit, push, manual Actions trigger, signing, release, main merge or
-P5B/P5C work occurred. Do not rerun the old revision. Stop for the explicitly
-required commit/push authorization; no owner terminal test is requested now.
-
-An exploratory lint expansion to unchanged desktop/packaging sources found 98
-existing style violations outside the established CI lint scope. They were not
-changed or represented as passing; canonical CI Ruff passed. See correction
-evidence `exploratory-lint.json`.
+No commit, push, dispatch/rerun, release, signing, personal-data migration or
+P5B/P5C occurred. No test skip, weakened conflict protection, timeout increase,
+arbitrary delay or automatic retry was introduced. Stop at commit/push approval.

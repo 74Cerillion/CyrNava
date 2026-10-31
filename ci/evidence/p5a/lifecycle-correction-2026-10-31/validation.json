@@ -1,0 +1,100 @@
+{
+  "phase": "P5A lifecycle verification correction",
+  "date": "2026-10-31",
+  "local_verification": "PASS",
+  "P5A_status": "CONDITIONAL \u2014 corrected hosted verification required; no acceptance claimed",
+  "classification": "Confirmed test fault-injection precondition defect; no production defect demonstrated",
+  "confirmed_mechanism": "Late routing cannot stop an already-dispatched save. Real backend commit advances canonical revision while a held/lost acknowledgement leaves a recovery draft on the older base revision; conflict rejection is correct.",
+  "historical_causality_limit": "Hosted artifacts contain screenshot/error context but no trace or revision timeline; exact original interleaving cannot be proven. Original flow passed 10 natural and 3 CPU-throttled local probes.",
+  "controlled_reproduction": {
+    "status": "PASS: reproduced older-revision conflict",
+    "draft_base": 3,
+    "canonical_revision": 4,
+    "real_API_and_SQLite": true,
+    "arbitrary_delays": false,
+    "automatic_retries": false
+  },
+  "correction": "Install PATCH barrier before page startup; retain through restart; assert SQLite unchanged and draft base equals canonical; recover only after these checks and assert actual acknowledgement/revision/content. Preserve stale-draft rejection in new deterministic gated regression.",
+  "tests": {
+    "focused": {
+      "passed": 10,
+      "failed": 0,
+      "repetitions_per_case": 5,
+      "retries": 0,
+      "seconds": 67.463
+    },
+    "frontend": {
+      "unit_passed": 273,
+      "browser_passed": 17,
+      "browser_failed": 0,
+      "lint": "PASS",
+      "typescript_build": "PASS",
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "frontend-lint",
+            "status": "PASS",
+            "seconds": 2.53
+          },
+          {
+            "name": "frontend-unit",
+            "status": "PASS",
+            "seconds": 13.933
+          },
+          {
+            "name": "typescript-production-build",
+            "status": "PASS",
+            "seconds": 3.474
+          },
+          {
+            "name": "chromium-production-integration",
+            "status": "PASS",
+            "seconds": 112.811
+          }
+        ],
+        "seconds": 132.748
+      }
+    },
+    "ci_contracts": {
+      "passed": 23,
+      "seconds": 0.129
+    },
+    "backend_security": "NOT RERUN: production/backend/shared lifecycle logic unchanged. Prior hosted 550 tests/31 subtests remain separate evidence."
+  },
+  "source_files": {
+    "frontend/e2e/lifecycle.spec.ts": "228d2b0fc52b253f561fb8c132d07ab1738daacb8f01a30af634747c1aa471b9",
+    "frontend/playwright.config.ts": "481befcad000efc964a6401f192e38515b12547d4c82e008c50feb7ea36b2548"
+  },
+  "clean_checkout": {
+    "base": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+    "initial_absence": {
+      "frontend/dist": false,
+      "frontend/node_modules": false,
+      "backend/.venv": false
+    },
+    "only_candidate_overlay": [
+      "frontend/e2e/lifecycle.spec.ts",
+      "frontend/playwright.config.ts"
+    ],
+    "dependencies": "Fresh npm ci and backend venv; reused matching previously downloaded Playwright Chromium binary only",
+    "profiles": "Synthetic temporary legacy workspace and isolated XDG paths"
+  },
+  "security": {
+    "production_code_changed": false,
+    "permissions_changed": false,
+    "conflict_detection_preserved": true,
+    "stale_draft_retained": true,
+    "post_conflict_automatic_writes": 0,
+    "public_trace_data": "Synthetic disposable workspace only; future failure traces retained as diagnostic artifacts",
+    "persistent_diagnostic_files_verified_in_full_suite": 2
+  },
+  "scope": {
+    "new_commit": false,
+    "push": false,
+    "workflow_dispatch_or_rerun": false,
+    "P5B_started": false,
+    "P5C_started": false
+  }
+}

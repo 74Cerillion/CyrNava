@@ -2,34 +2,48 @@
 
 Date: 31 October 2026, Asia/Seoul.
 
-**P5A STATUS: CONDITIONAL — LOCAL CORRECTION PASSED; HOSTED VERIFICATION PENDING**
+**P5A STATUS: CONDITIONAL — LIFECYCLE TEST CORRECTION LOCALLY VERIFIED; HOSTED VERIFICATION PENDING**
 
-## A. Executive summary
+## A. Executive summary — local lifecycle correction ready for review
 
-The backend CI preparation defect is corrected locally. Its job independently installs
-locked frontend dependencies and builds real production assets before running the
-unchanged full backend/security/lifecycle/migration/packaging test selection. It
-uses the same pinned Node setup as the frontend job, without cross-job artifacts.
-Permissions, failure propagation, package audit and upload gates are unchanged.
+**P5A STATUS: CONDITIONAL — CORRECTED HOSTED VERIFICATION REQUIRED**
 
-A disposable clone of `329020b5286ce0d5474e04a781ed61a6079f8edc` began with a
-clean tracked baseline and no `frontend/dist`, `node_modules` or backend venv.
-Only the four corrected source files were overlaid, explicitly uncommitted. Fresh
-isolated dependencies were installed. Backend: **550 passed, 31 subtests passed**,
-two existing warnings; frontend: **273 unit and 16 browser tests passed**. All
-three previously failing tests passed. Four new CI contract tests bring the
-standalone contract suite from 19 to 23 methods. This is local verification,
-not a new GitHub-hosted PASS.
+The browser lifecycle test's outage simulation had an invalid precondition: it
+installed write interception only after the editor loaded, without establishing
+that no save was already dispatched. A controlled real-API/SQLite reproduction
+committed revision 4 while withholding acknowledgement, leaving a recovery draft
+based on revision 3. On restart, the same older-revision conflict seen in the
+hosted screenshot was correctly shown. No production defect was demonstrated;
+production behavior is unchanged. The confirmed defect is in test isolation.
 
-The first and only hosted [run 41157614256](https://github.com/74Cerillion/CyrNava/actions/runs/41157614256)
-remains FAIL. Its original records and pre-correction reports are preserved.
-No new commit, push, manual trigger, release, signing or P5B/P5C work occurred.
-The correction is ready for owner review and authorization of one additional
-commit/push. A successful hosted build, actual bundle audit, upload and checksum
-verification are still required before P5A acceptance.
+The exact request ordering in historical run 41163754626 cannot be independently
+proven: its diagnostic artifact contains screenshot/error context but no trace or
+revision timeline. Natural baseline repetitions passed 10/10, and 3/3 CPU scheduling
+probes passed. We do not label the hosted result flaky or overwrite it with PASS.
+The controlled reproduction confirms a permitted failure ordering, not a missing
+historical observation. This residual uncertainty remains explicit.
 
-Correction evidence: `evidence/p5a/frontend-prerequisite-correction-2026-10-31/`.
-See its `validation.json`, `setup.json`, JUnit, logs, patch and `manifest.json`.
+The corrected test installs its PATCH barrier before page startup, keeps it through
+restart, verifies the canonical note is unchanged and the draft revision matches,
+then checks the real save acknowledgement, content and revision increment. A new
+gated regression confirms a genuinely accepted write with a lost acknowledgement
+still retains its stale draft and requires conflict review without an automatic
+write. Relative timing/revision diagnostics are saved as explicit files under the existing CI diagnostic upload path; failure traces are retained. Cleanup runs even if attaching a diagnostic fails.
+
+Disposable clean-checkout verification passes: **10/10 focused executions** (five
+per case), **273 frontend unit tests**, **17 browser tests**, ESLint and TypeScript/
+production build. **23 CI contract tests** pass. Backend/security suites were not
+rerun because no application/shared lifecycle/backend logic changed; their hosted
+550 tests and 31 subtests remain separately recorded PASS, not a new local result.
+
+No timeout increase, arbitrary delay, test suppression or automatic retry was added.
+No application, sandbox, authentication, workflow permission or packaging code
+changed. No commit, push, dispatch or rerun occurred. Stop for authorization of one
+next P5A-only commit/push. P5A cannot be accepted until all required hosted jobs,
+including production build, exported-content audit and upload, succeed.
+
+Current evidence: `evidence/p5a/lifecycle-correction-2026-10-31/validation.json` and
+`manifest.json`. Both historical hosted failures and earlier reports are preserved.
 
 ## B. Repository baseline
 
@@ -68,7 +82,7 @@ Same-ref concurrency cancels obsolete runs. Timeouts: 10/15/20/45/2 minutes.
 The stable required check name is `CI required`; no branch-protection setting was
 changed. All jobs default to `contents: read` and ephemeral hosted runners.
 
-## D. Backend verification
+## D. Backend verification — local prerequisite proof
 
 Canonical command: `backend/.venv/bin/python ci/verify.py backend`.
 CI adds `--require-clean-frontend`: it fails with final evidence if generated assets
@@ -90,7 +104,7 @@ warm input without deleting it, and proves build failure stops downstream tests
 and writes FAIL evidence. The real disposable-clone run demonstrates success
 starting without production assets; mocks alone are not claimed as that proof.
 
-## E. Frontend verification
+## E. Frontend verification — local baseline (hosted failure in section A)
 
 Canonical command: `backend/.venv/bin/python ci/verify.py frontend`.
 Requires backend venv, Node 24.19.0, npm 11.6.2, `npm ci --ignore-scripts`, and the
@@ -122,7 +136,7 @@ selects exact P4 lock commits, verifies them and fails if any are missing. Read-
 HTTP probes found all three locked commit objects available. This availability
 probe is not equivalent to installing/verifying them on a hosted runner.
 
-No new source-built P5A Flatpak PASS/size exists: hosted build was skipped after backend failure. P4
+No source-built P5A Flatpak PASS/size exists: the first hosted build was skipped after backend failure; the corrected run was skipped after browser failure. P4
 A/B were about 209 MB compressed and 981 MB logical payload; these are historical
 reference values, not a newly produced CI artifact. The Codex environment cannot
 perform the required build validator namespaces. No security workaround is added.
@@ -181,7 +195,7 @@ Real prior-bundle import/audit/rejection took 40.415 s. This is an audit observa
 not a production build or native startup benchmark. Python/runner OS patch and apt
 packages may evolve; recorded inputs do not establish byte reproducibility.
 
-## J. Actual GitHub-hosted verification
+## J. First hosted attempt — preserved historical failure
 
 - Run: [41157614256](https://github.com/74Cerillion/CyrNava/actions/runs/41157614256), attempt 1, push event.
 - Source SHA: `329020b5286ce0d5474e04a781ed61a6079f8edc`.
@@ -251,7 +265,7 @@ The actual hosted backend failure blocked the production build, and the final re
 
 ## L. Remaining risks and limitations
 
-Hosted runtime provisioning/build/icon sandbox validators and production artifact upload remain unexecuted because the first backend job failed. The explicit frontend-assets prerequisite now passes local clean-clone verification; a corrected hosted run has not been authorized or executed. If hosted AppArmor/namespace
+Hosted runtime provisioning/build/icon sandbox validators and production artifact upload remain unexecuted: the first run failed backend verification, and the corrected run passed backend verification but failed a browser lifecycle test. The frontend-assets prerequisite is resolved on the hosted runner; the browser recovery failure remains unresolved. If hosted AppArmor/namespace
 policies block validation, stop and diagnose; do not disable sandboxing or change
 kernel security settings as an unreviewed workaround. Upstream pinned historical
 commits may eventually be pruned; fail closed and review lock changes explicitly.
@@ -263,48 +277,110 @@ signing/hosting remain outside P5A. No dependency vulnerability scan is claimed:
 existing security regressions and actual packaging audits run without adding
 redundant scanners. Source review remains necessary for untrusted PR changes.
 
-## M. Recommendation and owner checklist
+## M. Second hosted attempt — preserved result before lifecycle correction
 
-**P5A STATUS: CONDITIONAL — LOCAL CORRECTION PASSED; HOSTED VERIFICATION PENDING**
+Run 41163754626, attempt 1, push event, commit `72f4c7b0ca1de627b7615f03e20393cf5d423512`.
+Created **12:17:51 KST**, completed **12:21:35 KST**, 224 s including queue/startup.
+Ubuntu 24.04.5 x86_64, image `20261025.353.1`, runner 2.338.2; CPython 3.12.15.
+Logged repository token permissions: Contents read, Metadata read.
 
-- [x] Preserve branch, application behavior and all existing test suites.
-- [x] Confirm missing-assets root cause and preserve the first hosted FAIL.
-- [x] Independently build production assets in the backend job.
-- [x] Verify from a disposable clone without preexisting assets or dependencies.
-- [x] Pass 550 backend tests, 31 subtests, 273 units and 16 browser tests.
-- [x] Pass 23 CI contract methods, Ruff, actionlint, compile and diff checks.
-- [ ] Obtain authorization for one additional P5A-only commit and push.
-- [ ] Obtain corrected hosted PASS including production build/audit/upload.
-- [ ] Independently verify produced package checksum/provenance; owner accepts P5A.
+| Job | Result | Duration |
+| --- | --- | ---: |
+| Workflow validation | PASS; 23 contract methods and actionlint | 19 s |
+| Backend and security | PASS; 550 tests, 31 subtests | 114 s |
+| Frontend and browser | FAIL; 273 units pass; 15 browsers pass, 1 fails | 187 s |
+| Production Flatpak and bundle audit | SKIPPED | 0 s |
+| CI required | FAIL | 2 s |
 
-## N. Exact correction files and review boundary
+Backend wrapper 59.868 s; asset installation/build 5.358 + 5.716 = **11.074 s**;
+pytest 46.78 s. Its evidence explicitly records initially absent frontend/dist.
+Frontend wrapper 141.910 s; lint 3.244, units 14.064, build 4.091, browsers 120.510 s.
+Both jobs restored the npm cache. This does not establish a controlled cache speedup.
 
-Implementation: `.github/workflows/ci.yml`, `ci/verify.py`, `ci/validate.py`,
-`ci/test_ci.py`. Documentation: `ci/README.md`, `ci/P5A_REPORT.md`,
-`ci/P5A_OWNER_CHECKS.md`. Current structured assessment:
-`ci/evidence/p5a/validation.json`. Supporting historical hosted records are under
-`ci/evidence/p5a/hosted-attempt-2026-10-31/`; new clean-clone results and regression
-records are under `ci/evidence/p5a/frontend-prerequisite-correction-2026-10-31/`.
-The latter's manifest enumerates each evidence file and checksum. Existing
-backend, frontend, desktop and packaging application sources are unchanged.
+| Diagnostic artifact | ID | Bytes | Independently verified SHA-256 |
+| --- | ---: | ---: | --- |
+| Backend | 13027759948 | 10,406 | `b799b5eb3739ec8ad4645fc35b9aba4e7cfcd7856324a494ed97917d2fb4af67` |
+| Frontend | 13028024573 | 4,971,285 | `1a34eed295eb5e989025f8ea53b88276941fca508c0cdc67bed412faa1e44fd2` |
 
-Available automated suites passed before requesting another hosted execution.
-Local ShellCheck is not installed; actionlint syntax/expression validation passed
-with ShellCheck integration disabled locally. No new Flatpak/native build is
-claimed in this restricted environment. Existing Vite/BlockNote warnings and the
-two backend warnings remain documented.
+- [x] Confirm exact pushed source and automatically triggered hosted run.
+- [x] Verify backend correction on clean hosted runner; all previous failures pass.
+- [x] Preserve browser failure evidence and verify diagnostic uploads.
+- [x] Confirm fail-closed required gate and absence of production artifact.
+- [ ] Investigate and resolve lifecycle recovery revision-conflict failure.
+- [ ] Obtain explicitly authorized successful hosted verification.
+- [ ] Verify actual production build, exported-content audit, upload and package hash.
+- [ ] Owner accepts P5A after all required checks succeed.
 
-HEAD remains `329020b5286ce0d5474e04a781ed61a6079f8edc`. All correction/reporting
-changes are local, uncommitted and unpushed. The first approved push remains the
-only push. The original failed hosted run is not rewritten as passing. Following
-owner approval, one additional commit/push should trigger validation, parallel
-backend/frontend checks, then the production build/audit/upload only if both pass.
-Any prerequisite, test or audit failure must fail the final required gate.
+## N. Historical hosted-review conclusion (local correction follows)
 
-Stop at this authorization checkpoint. No release, signing, main merge, public
-repository deployment, P5B or P5C is included.
+**Recommendation: FAIL / NOT READY FOR ACCEPTANCE.** The production build, package
+audit and artifact upload cannot be verified because the required workflow did not
+reach them. No result is inferred from old P4 artifacts or passing local tests.
+Native Qt/portal coverage and existing P4 evidence limitations remain separate.
 
-An exploratory lint expansion to unchanged desktop/packaging sources found 98
-existing style violations outside the established CI lint scope. They were not
-changed or represented as passing; canonical CI Ruff passed. See correction
-evidence `exploratory-lint.json`.
+The prior terminal authentication blocker was resolved by the owner's push of the
+same authorized commit. No additional commit or push is required to record the
+current review locally. Current changes are limited to P5A reports and evidence;
+no application or CI implementation was changed. No rerun, dispatch, release,
+signing, deployment, main merge, P5B or P5C occurred. Stop for owner review.
+
+## O. Lifecycle test correction — implementation and verification
+
+Exact source files: `frontend/e2e/lifecycle.spec.ts` and
+`frontend/playwright.config.ts`. Reports: this file, `P5A_OWNER_CHECKS.md` and
+`evidence/p5a/validation.json`; supporting artifacts and complete hashes are listed
+in `evidence/p5a/lifecycle-correction-2026-10-31/manifest.json`. Prior hosted review
+records remain uncommitted from the preceding authorized reporting turn.
+
+The original test remains, with richer invariants and earlier failure injection.
+The original killed-browser, all editor/image/search/close protocol checks remain
+required. New regression uses a promise gate on a real successful PATCH response,
+not a mocked database or synthetic 409. It proves the newer SQLite revision is
+preserved, the stale draft remains byte-for-byte, and recovery choice issues no
+PATCH. This is expected conflict handling; it is not counted as successful saving.
+
+A fresh clone of `72f4c7b` began without dist, node_modules or backend venv. Fresh
+Python and npm dependencies and production assets were prepared with isolated XDG
+storage and synthetic workspaces. Only the two final candidate files overlay the
+clean baseline. Matching Playwright Chromium binary was reused; no user browser or
+profile was accessed. Candidate hashes match the files used for the complete run.
+
+Focused command: `npx --no-install playwright test e2e/lifecycle.spec.ts --grep
+'managed tabs close|committed write' --repeat-each=5 --trace=on --reporter=list,json`.
+Result: **10 passed, 0 failed, 0 retries**, five executions of each affected case.
+Full command: `backend/.venv/bin/python ci/verify.py frontend`: **273 units and
+17 browser tests PASS**, full wrapper **132.748 s** (lint 2.53, units 13.933,
+TypeScript/build 3.474, Chromium 112.811 s). CI contracts: **23 PASS**, 0.129 s.
+Existing Vite chunk/BlockNote warnings remain; no warning suppression was added.
+
+An investigation-only checkpoint originally auto-waited on a save-state element
+absent from the recovery-choice screen, causing two invalid diagnostic timeouts.
+Those attempts are preserved and excluded from application/regression counts;
+non-waiting observation corrected the instrumentation. This did not change the
+application or test timeout. See exploration-classification.json for all probes.
+
+`retain-on-failure` now preserves Playwright traces for future hosted failures.
+Synthetic revision timelines contain only method/status/revision/relative timing;
+no note bodies, titles or authentication headers. Selected local trace ZIPs contain
+only disposable synthetic test traffic, are locally retained and hash recorded;
+they may be ignored by Git. No production credentials or personal data were used.
+
+## P. Current recommendation and authorization checkpoint
+
+**CONDITIONAL: local correction ready; P5A remains unaccepted.** The test's missing
+precondition is confirmed and corrected, but historical causality cannot be proved
+from absent hosted traces. A new hosted run must establish the correction and
+reach production Flatpak build, package-content audit and validated artifact upload.
+Their latest actual result is still SKIPPED / NOT EXECUTED, not PASS.
+
+- [x] Inspect hosted screenshot/context and preserve failures.
+- [x] Trace revisions and reproduce the same conflict with controlled real I/O.
+- [x] Correct test synchronization and verify stale-write protections.
+- [x] Pass repeated focused checks and the complete frontend suite in clean clone.
+- [x] Update reports/evidence and preserve all existing tests/security controls.
+- [ ] Owner authorizes one next P5A-only commit and push.
+- [ ] Successful hosted required jobs, actual bundle audit/upload/hash verification.
+- [ ] Owner accepts P5A.
+
+HEAD remains `72f4c7b0ca1de627b7615f03e20393cf5d423512`. No new commit, push,
+workflow trigger, production user-data access, P5B or P5C work occurred.

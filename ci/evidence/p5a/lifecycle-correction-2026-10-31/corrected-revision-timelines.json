@@ -1,0 +1,777 @@
+[
+  {
+    "test": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+    "status": "passed",
+    "events": [
+      {
+        "ms": 1933,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 1
+      },
+      {
+        "ms": 1939,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 2211,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 2256,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 3001,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 2
+      },
+      {
+        "ms": 3011,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 4894,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 4935,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 4935,
+        "event": "outage-baseline",
+        "canonical_revision": 3
+      },
+      {
+        "ms": 5113,
+        "event": "retained-draft",
+        "base_revision": 3
+      },
+      {
+        "ms": 6996,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 7011,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 7012,
+        "event": "outage-source-unchanged",
+        "canonical_revision": 3,
+        "base_revision": 3
+      },
+      {
+        "ms": 7114,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 3
+      },
+      {
+        "ms": 7125,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 4
+      },
+      {
+        "ms": 7126,
+        "event": "recovery-acknowledged",
+        "revision": 4
+      },
+      {
+        "ms": 7184,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 7197,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 4
+      }
+    ]
+  },
+  {
+    "test": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+    "status": "passed",
+    "events": [
+      {
+        "ms": 1785,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 1
+      },
+      {
+        "ms": 1798,
+        "event": "backend-committed-acknowledgement-held",
+        "revision": 2
+      },
+      {
+        "ms": 1809,
+        "event": "retained-before-close",
+        "base_revision": 1
+      },
+      {
+        "ms": 3616,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 3627,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 3746,
+        "event": "stale-draft-protected",
+        "canonical_revision": 2,
+        "base_revision": 1,
+        "writes_after_choice": 0
+      }
+    ]
+  },
+  {
+    "test": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+    "status": "passed",
+    "events": [
+      {
+        "ms": 1921,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 1
+      },
+      {
+        "ms": 1926,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 2227,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 2275,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 3023,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 2
+      },
+      {
+        "ms": 3028,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 5012,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 5053,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 5053,
+        "event": "outage-baseline",
+        "canonical_revision": 3
+      },
+      {
+        "ms": 5247,
+        "event": "retained-draft",
+        "base_revision": 3
+      },
+      {
+        "ms": 7150,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 7158,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 7160,
+        "event": "outage-source-unchanged",
+        "canonical_revision": 3,
+        "base_revision": 3
+      },
+      {
+        "ms": 7254,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 3
+      },
+      {
+        "ms": 7263,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 4
+      },
+      {
+        "ms": 7264,
+        "event": "recovery-acknowledged",
+        "revision": 4
+      },
+      {
+        "ms": 7327,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 7353,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 4
+      }
+    ]
+  },
+  {
+    "test": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+    "status": "passed",
+    "events": [
+      {
+        "ms": 1807,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 1
+      },
+      {
+        "ms": 1824,
+        "event": "backend-committed-acknowledgement-held",
+        "revision": 2
+      },
+      {
+        "ms": 1848,
+        "event": "retained-before-close",
+        "base_revision": 1
+      },
+      {
+        "ms": 3617,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 3630,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 3725,
+        "event": "stale-draft-protected",
+        "canonical_revision": 2,
+        "base_revision": 1,
+        "writes_after_choice": 0
+      }
+    ]
+  },
+  {
+    "test": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+    "status": "passed",
+    "events": [
+      {
+        "ms": 1926,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 1
+      },
+      {
+        "ms": 1933,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 2205,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 2248,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 2992,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 2
+      },
+      {
+        "ms": 2999,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 4888,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 4928,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 4928,
+        "event": "outage-baseline",
+        "canonical_revision": 3
+      },
+      {
+        "ms": 5116,
+        "event": "retained-draft",
+        "base_revision": 3
+      },
+      {
+        "ms": 6750,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 6759,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 6760,
+        "event": "outage-source-unchanged",
+        "canonical_revision": 3,
+        "base_revision": 3
+      },
+      {
+        "ms": 6863,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 3
+      },
+      {
+        "ms": 6872,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 4
+      },
+      {
+        "ms": 6873,
+        "event": "recovery-acknowledged",
+        "revision": 4
+      },
+      {
+        "ms": 6932,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 6943,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 4
+      }
+    ]
+  },
+  {
+    "test": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+    "status": "passed",
+    "events": [
+      {
+        "ms": 1807,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 1
+      },
+      {
+        "ms": 1818,
+        "event": "backend-committed-acknowledgement-held",
+        "revision": 2
+      },
+      {
+        "ms": 1831,
+        "event": "retained-before-close",
+        "base_revision": 1
+      },
+      {
+        "ms": 3455,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 3470,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 3572,
+        "event": "stale-draft-protected",
+        "canonical_revision": 2,
+        "base_revision": 1,
+        "writes_after_choice": 0
+      }
+    ]
+  },
+  {
+    "test": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+    "status": "passed",
+    "events": [
+      {
+        "ms": 1919,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 1
+      },
+      {
+        "ms": 1926,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 2209,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 2253,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 2996,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 2
+      },
+      {
+        "ms": 3002,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 4884,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 4924,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 4924,
+        "event": "outage-baseline",
+        "canonical_revision": 3
+      },
+      {
+        "ms": 5116,
+        "event": "retained-draft",
+        "base_revision": 3
+      },
+      {
+        "ms": 6995,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 7003,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 7006,
+        "event": "outage-source-unchanged",
+        "canonical_revision": 3,
+        "base_revision": 3
+      },
+      {
+        "ms": 7108,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 3
+      },
+      {
+        "ms": 7117,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 4
+      },
+      {
+        "ms": 7120,
+        "event": "recovery-acknowledged",
+        "revision": 4
+      },
+      {
+        "ms": 7186,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 7213,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 4
+      }
+    ]
+  },
+  {
+    "test": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+    "status": "passed",
+    "events": [
+      {
+        "ms": 1800,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 1
+      },
+      {
+        "ms": 1815,
+        "event": "backend-committed-acknowledgement-held",
+        "revision": 2
+      },
+      {
+        "ms": 1828,
+        "event": "retained-before-close",
+        "base_revision": 1
+      },
+      {
+        "ms": 3610,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 3619,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 3733,
+        "event": "stale-draft-protected",
+        "canonical_revision": 2,
+        "base_revision": 1,
+        "writes_after_choice": 0
+      }
+    ]
+  },
+  {
+    "test": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+    "status": "passed",
+    "events": [
+      {
+        "ms": 1935,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 1
+      },
+      {
+        "ms": 1942,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 2226,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 2267,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 3014,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 2
+      },
+      {
+        "ms": 3020,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 4848,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 4887,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 4887,
+        "event": "outage-baseline",
+        "canonical_revision": 3
+      },
+      {
+        "ms": 5087,
+        "event": "retained-draft",
+        "base_revision": 3
+      },
+      {
+        "ms": 6718,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 6727,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 3
+      },
+      {
+        "ms": 6728,
+        "event": "outage-source-unchanged",
+        "canonical_revision": 3,
+        "base_revision": 3
+      },
+      {
+        "ms": 6834,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 3
+      },
+      {
+        "ms": 6843,
+        "event": "response",
+        "method": "PATCH",
+        "status": 200,
+        "revision": 4
+      },
+      {
+        "ms": 6844,
+        "event": "recovery-acknowledged",
+        "revision": 4
+      },
+      {
+        "ms": 6928,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 6961,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 4
+      }
+    ]
+  },
+  {
+    "test": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+    "status": "passed",
+    "events": [
+      {
+        "ms": 1797,
+        "event": "request",
+        "method": "PATCH",
+        "revision": 1
+      },
+      {
+        "ms": 1808,
+        "event": "backend-committed-acknowledgement-held",
+        "revision": 2
+      },
+      {
+        "ms": 1820,
+        "event": "retained-before-close",
+        "base_revision": 1
+      },
+      {
+        "ms": 3426,
+        "event": "request",
+        "method": "GET"
+      },
+      {
+        "ms": 3444,
+        "event": "response",
+        "method": "GET",
+        "status": 200,
+        "revision": 2
+      },
+      {
+        "ms": 3544,
+        "event": "stale-draft-protected",
+        "canonical_revision": 2,
+        "base_revision": 1,
+        "writes_after_choice": 0
+      }
+    ]
+  }
+]

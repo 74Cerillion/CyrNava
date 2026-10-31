@@ -1,0 +1,28 @@
+{
+  "recovery_format": 1,
+  "note_id": "f37ef3c3-823f-475f-a6af-298014299653",
+  "local_draft": {
+    "title": "My unsaved title",
+    "document_json": [
+      {
+        "type": "paragraph",
+        "content": []
+      }
+    ]
+  },
+  "saved_note": {
+    "id": "f37ef3c3-823f-475f-a6af-298014299653",
+    "folder_id": null,
+    "title": "Other saved version",
+    "document_json": [
+      {
+        "type": "paragraph",
+        "content": []
+      }
+    ],
+    "format_version": 1,
+    "revision": 2,
+    "created_at": "2026-10-31T03:20:45.630379+00:00",
+    "updated_at": "2026-10-31T03:20:45.706768+00:00"
+  }
+}
