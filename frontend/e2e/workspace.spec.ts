@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { editorSelection, paragraphCursor } from './editorSelection';
 import type { Locator, Page } from '@playwright/test';
 import { spawn, execFileSync } from 'node:child_process';
 import type { ChildProcess } from 'node:child_process';
@@ -604,6 +605,8 @@ test('revision conflict retains the draft and exports both versions before expli
 test('Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation', async ({ page }, info) => {
   const env = await environment();
   const external: string[] = [];
+  const selectionStates: unknown[] = [];
+  const captureSelection = async (stage: string, extension: string) => { selectionStates.push({ stage, extension, ...await editorSelection(editor()) }); };
   await page.route('**/*', (route) => {
     if (new URL(route.request().url()).hostname !== '127.0.0.1') { external.push(route.request().url()); return route.abort(); }
     return route.continue();
@@ -649,16 +652,46 @@ test('Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documen
     }, (await readFile(`${png}.png`)).toString('base64'));
     await editor().getByText('Synthetic learning notes only.', { exact: true }).click(); await page.keyboard.press('End'); await page.keyboard.press('Control+v');
     await expect(editor().locator('img')).toHaveCount(1); await saved(page);
-    // Reuse the empty trailing paragraph for the installed native image selector.
-    for (const extension of ['jpg', 'webp']) {
-      await editor().getByText('Synthetic learning notes only.', { exact: true }).click(); await page.keyboard.press('End'); await page.keyboard.press('Enter');
-      await page.keyboard.type('/image'); await page.keyboard.press('Enter');
-      const [chooser] = await Promise.all([page.waitForEvent('filechooser', { timeout: 10_000 }), page.getByRole('button', { name: 'Upload image', exact: true }).click({ timeout: 10_000 })]);
-      await chooser.setFiles(`${png}.${extension}`); await page.keyboard.press('Escape'); await saved(page);
+    // A DOM click/End can precede the editor's selectionchange transaction.
+    // Establish each command's actual paragraph cursor, including after upload.
+    for (const [index, extension] of ['jpg', 'webp'].entries()) {
+      await captureSelection('before-paragraph-click', extension);
+      const paragraph = editor().getByText('Synthetic learning notes only.', { exact: true });
+      const blockId = await paragraph.evaluate((node) => node.closest('[data-id]')!.getAttribute('data-id')!);
+      await paragraph.click();
+      await captureSelection('after-click-before-synchronization', extension);
+      await paragraphCursor(editor(), { blockId });
+      await page.keyboard.press('End');
+      await paragraphCursor(editor(), { blockId });
+      await expect.poll(async () => { const state = await editorSelection(editor()); return state.model.parentOffset === state.model.contentSize; }).toBe(true);
+      await page.keyboard.press('Enter');
+      await paragraphCursor(editor(), { empty: true });
+      await captureSelection('ready-for-image-command', extension);
+      await page.keyboard.type('/image');
+      await paragraphCursor(editor());
+      const imageCommand = page.locator('.bn-suggestion-menu').getByRole('option').filter({ has: page.getByText('Image', { exact: true }) });
+      await expect(imageCommand).toBeVisible();
+      await expect(imageCommand).toHaveAttribute('aria-selected', 'true');
+      await page.keyboard.press('Enter');
+      const upload = page.getByRole('button', { name: 'Upload image', exact: true });
+      await expect(upload).toBeVisible();
+      const [chooser] = await Promise.all([page.waitForEvent('filechooser', { timeout: 10_000 }), upload.click({ timeout: 10_000 })]);
+      await chooser.setFiles(`${png}.${extension}`);
+      await expect(editor().locator('img')).toHaveCount(index + 2);
+      await expect.poll(() => editor().locator('img').evaluateAll((images) => images.every((image) => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth === 600))).toBe(true);
+      await expect(upload).toBeHidden();
+      await saved(page);
+      await expect.poll(async () => {
+        const note = await getJson(`${env.api}/api/notes/${owner.id}`);
+        return note.document_json.filter((block: AssetBlock) => block.type === 'image' && block.props?.url).length;
+      }).toBe(index + 2);
+      await captureSelection('upload-rendered-and-persisted', extension);
     }
     await expect(editor().locator('img')).toHaveCount(3);
     const imageNote = await getJson(`${env.api}/api/notes/${owner.id}`);
     expect(imageNote.document_json.filter((b: { type: string }) => b.type === 'image')).toHaveLength(3);
+    const originalBlocks = (blocks: { type: string; content?: unknown[] }[]) => blocks.filter((block) => block.type !== 'image' && !(block.type === 'paragraph' && !block.content?.length));
+    expect(originalBlocks(imageNote.document_json)).toEqual(originalBlocks(rich.document_json));
     await env.stopBackend(); await env.startBackend(); await page.reload(); await saved(page);
     expect((await getJson(`${env.api}/api/notes/${owner.id}`)).document_json).toEqual(imageNote.document_json);
     await expect.poll(() => editor().locator('img').evaluateAll((images) => images.every((image) => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth === 600))).toBe(true);
@@ -695,6 +728,11 @@ test('Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documen
     await page.keyboard.press('Tab'); // Native focus remains keyboard operable.
     await page.setViewportSize({ width: 390, height: 844 });
     await page.getByRole('textbox', { name: 'Note title', exact: true }).click();
+    // Resizing retains the old hover target until the pointer moves. Measure
+    // the mobile workspace after the closing hover menu has unmounted. A
+    // visibility-hidden transition snapshot still contributes scroll width.
+    await page.mouse.move(0, 0);
+    await expect(page.locator('.bn-side-menu')).toHaveCount(0);
     const layout = await page.evaluate(() => ({ width: window.innerWidth, scroll: document.documentElement.scrollWidth, overflowing: Array.from(document.querySelectorAll('*')).filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 12).map((element) => ({ tag: element.tagName, class: element.className, right: element.getBoundingClientRect().right })) }));
     expect(layout.scroll, JSON.stringify(layout)).toBeLessThanOrEqual(layout.width + 1);
     await page.setViewportSize({ width: 1280, height: 1000 });
@@ -707,7 +745,58 @@ test('Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documen
     await page.getByRole('button', { name: 'Delete permanently', exact: true }).click(); await expect(page.getByRole('dialog')).toBeHidden();
     tree = await getJson(`${env.api}/api/tree`); expect(tree.notes).toHaveLength(2); expect(tree.folders).toHaveLength(2);
     expect(external).toEqual([]);
-  } finally { await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+  } finally {
+    try { await writeFile(info.outputPath('image-selection-states.json'), JSON.stringify(selectionStates, null, 2)); }
+    finally { await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+  }
+});
+
+
+test('image command requires a synchronized paragraph after code-block focus', async ({ page }, info) => {
+  const env = await environment();
+  const editor = page.getByRole('region', { name: 'Note editor' }).getByRole('textbox');
+  const states: unknown[] = [];
+  try {
+    await env.start(); await page.goto(env.url); await create(page, 'note', 'Synthetic image selection regression');
+    await editor.click(); await page.keyboard.type('Image insertion anchor'); await page.keyboard.press('Enter');
+    await page.keyboard.type('``` '); await page.keyboard.type('Synthetic code'); await page.keyboard.press('Enter');
+    await expect.poll(async () => { const state = await editorSelection(editor); return state.synchronized && state.model.parent === 'codeBlock'; }).toBe(true);
+    states.push({ stage: 'code-cursor', ...await editorSelection(editor) });
+    await page.keyboard.type('/image');
+    await expect(editor.locator('[data-content-type="codeBlock"]')).toContainText('/image');
+    await expect(page.locator('.bn-suggestion-menu')).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Upload image', exact: true })).toHaveCount(0);
+    states.push({ stage: 'literal-code-command', ...await editorSelection(editor) });
+
+    const anchor = editor.getByText('Image insertion anchor', { exact: true });
+    const blockId = await anchor.evaluate((node) => node.closest('[data-id]')!.getAttribute('data-id')!);
+    await anchor.click();
+    states.push({ stage: 'clicked-paragraph', ...await editorSelection(editor) });
+    await paragraphCursor(editor, { blockId });
+    await page.keyboard.press('End'); await paragraphCursor(editor, { blockId });
+    await expect.poll(async () => { const state = await editorSelection(editor); return state.model.parentOffset === state.model.contentSize; }).toBe(true);
+    await page.keyboard.press('Enter'); await paragraphCursor(editor, { empty: true });
+    states.push({ stage: 'synchronized-empty-paragraph', ...await editorSelection(editor) });
+    await page.keyboard.type('/image'); await paragraphCursor(editor);
+    const imageCommand = page.locator('.bn-suggestion-menu').getByRole('option').filter({ has: page.getByText('Image', { exact: true }) });
+    await expect(imageCommand).toBeVisible(); await expect(imageCommand).toHaveAttribute('aria-selected', 'true');
+    await page.keyboard.press('Enter');
+    const upload = page.getByRole('button', { name: 'Upload image', exact: true }); await expect(upload).toBeVisible();
+    const png = join(env.directory, 'synthetic-selection.png');
+    execFileSync(python, ['-c', "from PIL import Image; import sys; Image.new('RGB',(600,140),'#20324a').save(sys.argv[1])", png]);
+    const [chooser] = await Promise.all([page.waitForEvent('filechooser'), upload.click()]);
+    await chooser.setFiles(png);
+    await expect.poll(() => editor.locator('img').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth === 600)).toBe(true);
+    await expect(upload).toBeHidden(); await saved(page);
+    const tree = await getJson(`${env.api}/api/tree`);
+    const note = await getJson(`${env.api}/api/notes/${tree.notes[0].id}`);
+    expect(note.document_json.filter((block: AssetBlock) => block.type === 'image' && block.props?.url)).toHaveLength(1);
+    expect(JSON.stringify(note.document_json.filter((block: AssetBlock) => block.type === 'codeBlock'))).toContain('/image');
+    await expect(anchor).toHaveText('Image insertion anchor');
+  } finally {
+    try { await writeFile(info.outputPath('image-selection-states.json'), JSON.stringify(states, null, 2)); }
+    finally { await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+  }
 });
 
 

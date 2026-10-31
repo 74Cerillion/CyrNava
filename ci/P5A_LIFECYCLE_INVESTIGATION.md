@@ -141,3 +141,14 @@ tests + 31 subtests, 273 units + 19 browsers, 15 focused repetitions, 23 CI cont
 The earlier candidate hashes/results above remain historical evidence. Final candidate
 hashes and logs: `evidence/p5a/lifecycle-final-review-2026-10-31/`. Production behavior and
 permissions remain unchanged. No hosted PASS is inferred from these local results.
+
+## Hosted verification amendment — 41176826666
+
+All five lifecycle tests passed in the fourth hosted run. Its no-browser-routing
+case captured a hidden close-intent PATCH 16.850991 ms after the driver marker:
+expected revision 3, SQLite UPDATE rejected, ROLLBACK, HTTP 503, no commit-complete.
+The canonical-equality and recovery assertions passed. This is direct evidence of
+the replacement boundary resisting a real teardown save in the current run. It
+does not retrospectively identify the previous escaped operation. P5A remains FAIL
+because a separate workspace image-command test failed; no production package was
+built. See hosted-sql-boundary-2026-10-31 evidence and the current P5A_REPORT.

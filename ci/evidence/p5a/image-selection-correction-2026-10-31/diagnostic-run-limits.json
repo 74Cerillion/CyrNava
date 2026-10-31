@@ -1,0 +1,9 @@
+{
+  "DOM_baseline": "4 failure / 1 pass; all five executed",
+  "full_model_baseline": "3 failure in later mobile layout assertion; image insertions completed; all three executed",
+  "initial_candidate": "3 failure in later mobile layout assertion; both image insertions synchronized and completed",
+  "keydown_baseline": "1 failure / 4 pass; selector did not resolve mounted editor, so event journals empty; no model causality inferred from these empty journals",
+  "keydown_model_baseline": "First attempt reproduced chooser failure with DOM/model mismatch at Enter; second attempt reached existing 120s test timeout; third was interrupted when evidence sufficient. Exit 130. Not counted as three completed tests or PASS.",
+  "diagnostic_timing_limit": "Instrumentation affects scheduling; raw runs and source retained. Causality statement applies to observed local reproduction; historical internal selection was not directly recorded.",
+  "keydown_edge_labels": "Only before-handler records establish pre-key state. The after-handler label is a queued microtask after the diagnostic listener, not a guaranteed observation after all ProseMirror handlers."
+}

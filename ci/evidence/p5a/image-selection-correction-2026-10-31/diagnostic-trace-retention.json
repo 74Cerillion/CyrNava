@@ -1,0 +1,14 @@
+[
+  {
+    "name": "baseline-filechooser-trace.zip",
+    "sha256": "a0bbe944c35628bc31deeba181ce76f703c6ff54e8ecc729056ebe0b88f5f21a",
+    "retained_originals": "/tmp/cyrnava-p5a-image-ywq4ttao/baseline-results",
+    "not_duplicated_in_review_evidence": "Duplicate filmstrip omitted; log/JSON/state records retained; representative causal trace retained complete."
+  },
+  {
+    "name": "candidate-layout-trace.zip",
+    "sha256": "efd8bd7ff3a0f16889628c883c459f98aa6dfbc5a829cc072c612d0e52a393fe",
+    "retained_originals": "/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results",
+    "not_duplicated_in_review_evidence": "Duplicate filmstrip omitted; log/JSON/state records retained; representative causal trace retained complete."
+  }
+]

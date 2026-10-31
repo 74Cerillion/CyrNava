@@ -1,0 +1,58 @@
+
+Running 5 tests using 1 worker
+
+(node:31) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓  1 e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (9.9s)
+(node:133) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓  2 e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (10.0s)
+(node:236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓  3 e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (10.0s)
+(node:336) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✘  4 e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (16.7s)
+(node:430) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓  5 e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (10.0s)
+
+
+  1) e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation 
+
+    TimeoutError: page.waitForEvent: Timeout 10000ms exceeded while waiting for event "filechooser"
+    =========================== logs ===========================
+    waiting for event "filechooser"
+    ============================================================
+
+      674 |       await editor().getByText('Synthetic learning notes only.', { exact: true }).click(); await page.keyboard.press('End'); await page.keyboard.press('Enter');
+      675 |       await page.keyboard.type('/image'); await page.keyboard.press('Enter');
+    > 676 |       const [chooser] = await Promise.all([page.waitForEvent('filechooser', { timeout: 10_000 }), page.getByRole('button', { name: 'Upload image', exact: true }).click({ timeout: 10_000 })]);
+          |                                                 ^
+      677 |       await chooser.setFiles(`${png}.${extension}`); await page.keyboard.press('Escape'); await saved(page);
+      678 |     }
+      679 |     await expect(editor().locator('img')).toHaveCount(3);
+        at /tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts:676:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../keydown-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat3/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../keydown-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat3/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../keydown-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat3/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../keydown-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat3/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation 
+  4 passed (1.0m)

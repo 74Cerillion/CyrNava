@@ -1,0 +1,139 @@
+<testsuites id="" name="" tests="19" failures="0" skipped="0" errors="1" time="165.58630599999998">
+<testsuite name="lifecycle.spec.ts" timestamp="2026-10-31T06:31:19.013Z" tests="5" failures="0" skipped="0" time="33.744" errors="0">
+<testcase name="managed tabs close, restart and recover immediately closed unconfirmed edits" classname="lifecycle.spec.ts" time="11.355">
+<system-out>
+
+[[ATTACHMENT|../frontend/test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/attachments/revision-timeline-fb8b1472adbe172b1327e4f40e71b42ea5f1cfad.json]]
+
+[[ATTACHMENT|../frontend/test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/attachments/backend-persistence-1df6d8a03f75b8847a9efc8369b02303e09c58bf.jsonl]]
+
+</system-out>
+<system-err>
+</system-err>
+</testcase>
+<testcase name="managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing" classname="lifecycle.spec.ts" time="10.095">
+<system-out>
+
+[[ATTACHMENT|../frontend/test-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing/attachments/revision-timeline-4d0e3138487cc9dbe54ef3c72562f16862100705.json]]
+
+[[ATTACHMENT|../frontend/test-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing/attachments/backend-persistence-b6c32560d8730d261552a36a45260ab52c2a41e5.jsonl]]
+
+</system-out>
+<system-err>
+</system-err>
+</testcase>
+<testcase name="a committed write with a lost acknowledgement retains its draft and requires conflict review" classname="lifecycle.spec.ts" time="5.645">
+<system-out>
+
+[[ATTACHMENT|../frontend/test-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review/attachments/revision-timeline-a2ac485faf43fec53af2a55fdc771bbe5fdccf44.json]]
+
+[[ATTACHMENT|../frontend/test-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review/attachments/backend-persistence-747b2b4523afc8460f22c632720b5f827b6bde8c.jsonl]]
+
+</system-out>
+<system-err>
+</system-err>
+</testcase>
+<testcase name="visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it" classname="lifecycle.spec.ts" time="3.344">
+<system-out>
+
+[[ATTACHMENT|../frontend/test-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it/attachments/revision-timeline-12fea3230205a3280683b0628d418dc5e825c1af.json]]
+
+[[ATTACHMENT|../frontend/test-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it/attachments/backend-persistence-5dad6f1bc1cb549bb16bf3a525a26497d66dda74.jsonl]]
+
+</system-out>
+<system-err>
+</system-err>
+</testcase>
+<testcase name="killed isolated browser leaves no managed backend after lease expiry" classname="lifecycle.spec.ts" time="3.305">
+<system-err>
+</system-err>
+</testcase>
+</testsuite>
+<testsuite name="search.spec.ts" timestamp="2026-10-31T06:31:19.013Z" tests="4" failures="0" skipped="0" time="29.153" errors="0">
+<testcase name="global search opens native rich notes by code prefix, supports keyboard selection and reveals ancestors" classname="search.spec.ts" time="4.54">
+</testcase>
+<testcase name="opening a search result waits for pending saves and a failed save keeps the draft open" classname="search.spec.ts" time="8.042">
+</testcase>
+<testcase name="an unchanged search reflects UI renames, folder moves and deletion, and retries a failed query" classname="search.spec.ts" time="6.434">
+</testcase>
+<testcase name="a schema4 profile migrates, opens rich search results and rebuilds offline without changing canonical data" classname="search.spec.ts" time="10.137">
+<system-err>
+</system-err>
+</testcase>
+</testsuite>
+<testsuite name="workspace.spec.ts" timestamp="2026-10-31T06:31:19.013Z" tests="10" failures="0" skipped="0" time="98.9" errors="1">
+<testcase name="appearance follows system and explicit preferences without changing notes, templates or autosave" classname="workspace.spec.ts" time="12.559">
+</testcase>
+<testcase name="CyrNava reference appearance preserves the live editor, local images and saved content" classname="workspace.spec.ts" time="6.275">
+<system-err>
+</system-err>
+</testcase>
+<testcase name="navigation preference and reusable templates preserve independent rich notes and screenshots" classname="workspace.spec.ts" time="9.288">
+<system-err>
+</system-err>
+</testcase>
+<testcase name="real editing, outage recovery, safe navigation, image lifecycle and offline restoration drill" classname="workspace.spec.ts" time="11.018">
+<system-err>
+</system-err>
+</testcase>
+<testcase name="revision conflict retains the draft and exports both versions before explicit reload" classname="workspace.spec.ts" time="3.497">
+</testcase>
+<testcase name="Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation" classname="workspace.spec.ts" time="18.203">
+<system-out>
+
+[[ATTACHMENT|../frontend/test-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/test-failed-1.png]]
+
+[[ATTACHMENT|../frontend/test-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/error-context.md]]
+
+[[ATTACHMENT|../frontend/test-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/trace.zip]]
+
+</system-out>
+<system-err>
+</system-err>
+<error message="page.waitForEvent: Timeout 10000ms exceeded while waiting for event &quot;filechooser&quot;" type="TimeoutError">
+  workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation 
+
+    TimeoutError: page.waitForEvent: Timeout 10000ms exceeded while waiting for event "filechooser"
+    =========================== logs ===========================
+    waiting for event "filechooser"
+    ============================================================
+
+      654 |       await editor().getByText('Synthetic learning notes only.', { exact: true }).click(); await page.keyboard.press('End'); await page.keyboard.press('Enter');
+      655 |       await page.keyboard.type('/image'); await page.keyboard.press('Enter');
+    &gt; 656 |       const [chooser] = await Promise.all([page.waitForEvent('filechooser', { timeout: 10_000 }), page.getByRole('button', { name: 'Upload image', exact: true }).click({ timeout: 10_000 })]);
+          |                                                 ^
+      657 |       await chooser.setFiles(`${png}.${extension}`); await page.keyboard.press('Escape'); await saved(page);
+      658 |     }
+      659 |     await expect(editor().locator('img')).toHaveCount(3);
+        at /home/runner/work/CyrNava/CyrNava/frontend/e2e/workspace.spec.ts:656:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../test-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../test-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../test-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/trace.zip
+    Usage:
+
+        npx playwright show-trace ../test-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+</error>
+</testcase>
+<testcase name="all exposed editor actions persist; mixed content reconstructs after restart and rapid edits" classname="workspace.spec.ts" time="30.782">
+<system-err>
+</system-err>
+</testcase>
+<testcase name="desktop close protocol drains real autosave and retains an interrupted draft" classname="workspace.spec.ts" time="3.642">
+</testcase>
+<testcase name="desktop close waits for an image upload and its subsequent document save" classname="workspace.spec.ts" time="2.18">
+<system-err>
+</system-err>
+</testcase>
+<testcase name="desktop close does not silently discard an unsubmitted management form" classname="workspace.spec.ts" time="1.456">
+</testcase>
+</testsuite>
+</testsuites>

@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "complete": true,
+  "steps": [
+    {
+      "name": "python-lint",
+      "status": "PASS",
+      "seconds": 0.038
+    },
+    {
+      "name": "frontend-install-for-backend",
+      "status": "PASS",
+      "seconds": 5.733
+    },
+    {
+      "name": "frontend-production-build-for-backend",
+      "status": "PASS",
+      "seconds": 5.589
+    },
+    {
+      "name": "backend-security-lifecycle-migration-packaging",
+      "status": "PASS",
+      "seconds": 48.492
+    }
+  ],
+  "preconditions": {
+    "frontend_dist_initially_absent": true,
+    "clean_frontend_required": true
+  },
+  "seconds": 59.853
+}

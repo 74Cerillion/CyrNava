@@ -1,0 +1,353 @@
+{
+  "config": {
+    "argv": [
+      "/home/cerillion/.nvm/versions/node/v24.19.0/bin/node",
+      "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/node_modules/.bin/playwright",
+      "test",
+      "e2e/workspace.spec.ts",
+      "--grep",
+      "Phase 1 formatting",
+      "--repeat-each=3",
+      "--trace=on",
+      "--reporter=list,json",
+      "--output=/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results"
+    ],
+    "configFile": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/playwright.config.ts",
+    "rootDir": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e",
+        "snapshotDir": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 120000,
+        "use": {
+          "browserName": "chromium",
+          "headless": true,
+          "viewport": {
+            "width": 1280,
+            "height": 1000
+          },
+          "screenshot": "only-on-failure",
+          "trace": "on"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "workspace.spec.ts",
+      "file": "workspace.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10440,
+                  "error": {
+                    "message": "Error: {\"width\":390,\"scroll\":405,\"overflowing\":[{\"tag\":\"DIV\",\"class\":\"\",\"right\":405},{\"tag\":\"DIV\",\"class\":\"bn-side-menu m_4081bf90 mantine-Group-root\",\"right\":405},{\"tag\":\"BUTTON\",\"class\":\"mantine-focus-auto mantine-active bn-button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root\",\"right\":405},{\"tag\":\"SPAN\",\"class\":\"m_8d3afb97 mantine-ActionIcon-icon\",\"right\":404},{\"tag\":\"svg\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":397.5833435058594}]}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m391\u001b[39m\nReceived:    \u001b[31m405\u001b[39m",
+                    "stack": "Error: {\"width\":390,\"scroll\":405,\"overflowing\":[{\"tag\":\"DIV\",\"class\":\"\",\"right\":405},{\"tag\":\"DIV\",\"class\":\"bn-side-menu m_4081bf90 mantine-Group-root\",\"right\":405},{\"tag\":\"BUTTON\",\"class\":\"mantine-focus-auto mantine-active bn-button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root\",\"right\":405},{\"tag\":\"SPAN\",\"class\":\"m_8d3afb97 mantine-ActionIcon-icon\",\"right\":404},{\"tag\":\"svg\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":397.5833435058594}]}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m391\u001b[39m\nReceived:    \u001b[31m405\u001b[39m\n    at /tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts:730:51",
+                    "location": {
+                      "file": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts",
+                      "column": 51,
+                      "line": 730
+                    },
+                    "snippet": "  728 |     await page.getByRole('textbox', { name: 'Note title', exact: true }).click();\n  729 |     const layout = await page.evaluate(() => ({ width: window.innerWidth, scroll: document.documentElement.scrollWidth, overflowing: Array.from(document.querySelectorAll('*')).filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 12).map((element) => ({ tag: element.tagName, class: element.className, right: element.getBoundingClientRect().right })) }));\n> 730 |     expect(layout.scroll, JSON.stringify(layout)).toBeLessThanOrEqual(layout.width + 1);\n      |                                                   ^\n  731 |     await page.setViewportSize({ width: 1280, height: 1000 });\n  732 |\n  733 |     await page.getByRole('button', { name: 'Workspace root', exact: true }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts",
+                        "column": 51,
+                        "line": 730
+                      },
+                      "message": "Error: {\"width\":390,\"scroll\":405,\"overflowing\":[{\"tag\":\"DIV\",\"class\":\"\",\"right\":405},{\"tag\":\"DIV\",\"class\":\"bn-side-menu m_4081bf90 mantine-Group-root\",\"right\":405},{\"tag\":\"BUTTON\",\"class\":\"mantine-focus-auto mantine-active bn-button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root\",\"right\":405},{\"tag\":\"SPAN\",\"class\":\"m_8d3afb97 mantine-ActionIcon-icon\",\"right\":404},{\"tag\":\"svg\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":397.5833435058594}]}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m391\u001b[39m\nReceived:    \u001b[31m405\u001b[39m\n\n  728 |     await page.getByRole('textbox', { name: 'Note title', exact: true }).click();\n  729 |     const layout = await page.evaluate(() => ({ width: window.innerWidth, scroll: document.documentElement.scrollWidth, overflowing: Array.from(document.querySelectorAll('*')).filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 12).map((element) => ({ tag: element.tagName, class: element.className, right: element.getBoundingClientRect().right })) }));\n> 730 |     expect(layout.scroll, JSON.stringify(layout)).toBeLessThanOrEqual(layout.width + 1);\n      |                                                   ^\n  731 |     await page.setViewportSize({ width: 1280, height: 1000 });\n  732 |\n  733 |     await page.getByRole('button', { name: 'Workspace root', exact: true }).click();\n    at /tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts:730:51"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:50:03.528Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts",
+                    "column": 51,
+                    "line": 730
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b163ed09f68681248ada-28448f025744d8999c4b",
+          "file": "workspace.spec.ts",
+          "line": 605,
+          "column": 1
+        },
+        {
+          "title": "Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10510,
+                  "error": {
+                    "message": "Error: {\"width\":390,\"scroll\":405,\"overflowing\":[{\"tag\":\"DIV\",\"class\":\"\",\"right\":405},{\"tag\":\"DIV\",\"class\":\"bn-side-menu m_4081bf90 mantine-Group-root\",\"right\":405},{\"tag\":\"BUTTON\",\"class\":\"mantine-focus-auto mantine-active bn-button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root\",\"right\":405},{\"tag\":\"SPAN\",\"class\":\"m_8d3afb97 mantine-ActionIcon-icon\",\"right\":404},{\"tag\":\"svg\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":397.5833435058594}]}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m391\u001b[39m\nReceived:    \u001b[31m405\u001b[39m",
+                    "stack": "Error: {\"width\":390,\"scroll\":405,\"overflowing\":[{\"tag\":\"DIV\",\"class\":\"\",\"right\":405},{\"tag\":\"DIV\",\"class\":\"bn-side-menu m_4081bf90 mantine-Group-root\",\"right\":405},{\"tag\":\"BUTTON\",\"class\":\"mantine-focus-auto mantine-active bn-button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root\",\"right\":405},{\"tag\":\"SPAN\",\"class\":\"m_8d3afb97 mantine-ActionIcon-icon\",\"right\":404},{\"tag\":\"svg\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":397.5833435058594}]}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m391\u001b[39m\nReceived:    \u001b[31m405\u001b[39m\n    at /tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts:730:51",
+                    "location": {
+                      "file": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts",
+                      "column": 51,
+                      "line": 730
+                    },
+                    "snippet": "  728 |     await page.getByRole('textbox', { name: 'Note title', exact: true }).click();\n  729 |     const layout = await page.evaluate(() => ({ width: window.innerWidth, scroll: document.documentElement.scrollWidth, overflowing: Array.from(document.querySelectorAll('*')).filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 12).map((element) => ({ tag: element.tagName, class: element.className, right: element.getBoundingClientRect().right })) }));\n> 730 |     expect(layout.scroll, JSON.stringify(layout)).toBeLessThanOrEqual(layout.width + 1);\n      |                                                   ^\n  731 |     await page.setViewportSize({ width: 1280, height: 1000 });\n  732 |\n  733 |     await page.getByRole('button', { name: 'Workspace root', exact: true }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts",
+                        "column": 51,
+                        "line": 730
+                      },
+                      "message": "Error: {\"width\":390,\"scroll\":405,\"overflowing\":[{\"tag\":\"DIV\",\"class\":\"\",\"right\":405},{\"tag\":\"DIV\",\"class\":\"bn-side-menu m_4081bf90 mantine-Group-root\",\"right\":405},{\"tag\":\"BUTTON\",\"class\":\"mantine-focus-auto mantine-active bn-button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root\",\"right\":405},{\"tag\":\"SPAN\",\"class\":\"m_8d3afb97 mantine-ActionIcon-icon\",\"right\":404},{\"tag\":\"svg\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":397.5833435058594}]}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m391\u001b[39m\nReceived:    \u001b[31m405\u001b[39m\n\n  728 |     await page.getByRole('textbox', { name: 'Note title', exact: true }).click();\n  729 |     const layout = await page.evaluate(() => ({ width: window.innerWidth, scroll: document.documentElement.scrollWidth, overflowing: Array.from(document.querySelectorAll('*')).filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 12).map((element) => ({ tag: element.tagName, class: element.className, right: element.getBoundingClientRect().right })) }));\n> 730 |     expect(layout.scroll, JSON.stringify(layout)).toBeLessThanOrEqual(layout.width + 1);\n      |                                                   ^\n  731 |     await page.setViewportSize({ width: 1280, height: 1000 });\n  732 |\n  733 |     await page.getByRole('button', { name: 'Workspace root', exact: true }).click();\n    at /tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts:730:51"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:50:14.735Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat1/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat1/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat1/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts",
+                    "column": 51,
+                    "line": 730
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b163ed09f68681248ada-79201ef36251b3040e4c",
+          "file": "workspace.spec.ts",
+          "line": 605,
+          "column": 1
+        },
+        {
+          "title": "Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 10436,
+                  "error": {
+                    "message": "Error: {\"width\":390,\"scroll\":405,\"overflowing\":[{\"tag\":\"DIV\",\"class\":\"\",\"right\":405},{\"tag\":\"DIV\",\"class\":\"bn-side-menu m_4081bf90 mantine-Group-root\",\"right\":405},{\"tag\":\"BUTTON\",\"class\":\"mantine-focus-auto mantine-active bn-button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root\",\"right\":405},{\"tag\":\"SPAN\",\"class\":\"m_8d3afb97 mantine-ActionIcon-icon\",\"right\":404},{\"tag\":\"svg\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":397.5833435058594}]}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m391\u001b[39m\nReceived:    \u001b[31m405\u001b[39m",
+                    "stack": "Error: {\"width\":390,\"scroll\":405,\"overflowing\":[{\"tag\":\"DIV\",\"class\":\"\",\"right\":405},{\"tag\":\"DIV\",\"class\":\"bn-side-menu m_4081bf90 mantine-Group-root\",\"right\":405},{\"tag\":\"BUTTON\",\"class\":\"mantine-focus-auto mantine-active bn-button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root\",\"right\":405},{\"tag\":\"SPAN\",\"class\":\"m_8d3afb97 mantine-ActionIcon-icon\",\"right\":404},{\"tag\":\"svg\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":397.5833435058594}]}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m391\u001b[39m\nReceived:    \u001b[31m405\u001b[39m\n    at /tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts:730:51",
+                    "location": {
+                      "file": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts",
+                      "column": 51,
+                      "line": 730
+                    },
+                    "snippet": "  728 |     await page.getByRole('textbox', { name: 'Note title', exact: true }).click();\n  729 |     const layout = await page.evaluate(() => ({ width: window.innerWidth, scroll: document.documentElement.scrollWidth, overflowing: Array.from(document.querySelectorAll('*')).filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 12).map((element) => ({ tag: element.tagName, class: element.className, right: element.getBoundingClientRect().right })) }));\n> 730 |     expect(layout.scroll, JSON.stringify(layout)).toBeLessThanOrEqual(layout.width + 1);\n      |                                                   ^\n  731 |     await page.setViewportSize({ width: 1280, height: 1000 });\n  732 |\n  733 |     await page.getByRole('button', { name: 'Workspace root', exact: true }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts",
+                        "column": 51,
+                        "line": 730
+                      },
+                      "message": "Error: {\"width\":390,\"scroll\":405,\"overflowing\":[{\"tag\":\"DIV\",\"class\":\"\",\"right\":405},{\"tag\":\"DIV\",\"class\":\"bn-side-menu m_4081bf90 mantine-Group-root\",\"right\":405},{\"tag\":\"BUTTON\",\"class\":\"mantine-focus-auto mantine-active bn-button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root\",\"right\":405},{\"tag\":\"SPAN\",\"class\":\"m_8d3afb97 mantine-ActionIcon-icon\",\"right\":404},{\"tag\":\"svg\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":404},{\"tag\":\"path\",\"class\":{},\"right\":397.5833435058594}]}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m391\u001b[39m\nReceived:    \u001b[31m405\u001b[39m\n\n  728 |     await page.getByRole('textbox', { name: 'Note title', exact: true }).click();\n  729 |     const layout = await page.evaluate(() => ({ width: window.innerWidth, scroll: document.documentElement.scrollWidth, overflowing: Array.from(document.querySelectorAll('*')).filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 12).map((element) => ({ tag: element.tagName, class: element.className, right: element.getBoundingClientRect().right })) }));\n> 730 |     expect(layout.scroll, JSON.stringify(layout)).toBeLessThanOrEqual(layout.width + 1);\n      |                                                   ^\n  731 |     await page.setViewportSize({ width: 1280, height: 1000 });\n  732 |\n  733 |     await page.getByRole('button', { name: 'Workspace root', exact: true }).click();\n    at /tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts:730:51"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:50:26.030Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat2/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat2/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-image-ywq4ttao/candidate-initial-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat2/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts",
+                    "column": 51,
+                    "line": 730
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "b163ed09f68681248ada-f76ab2c8ca742dc536fd",
+          "file": "workspace.spec.ts",
+          "line": 605,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T06:50:02.912Z",
+    "duration": 33996.969000000005,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

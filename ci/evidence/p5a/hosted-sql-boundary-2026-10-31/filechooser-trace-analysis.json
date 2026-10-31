@@ -1,0 +1,182 @@
+{
+  "confirmed": "JPEG chooser/setFiles succeeded; second /image command ended as literal code text. Upload image click and filechooser wait both timed out; no second button was present.",
+  "location": "frontend/e2e/workspace.spec.ts:656",
+  "cause_limit": "Editor focus/selection precondition failed in this execution; why the preceding click/keyboard sequence landed in code is not independently reproduced. No native portal defect established.",
+  "selected_events": [
+    {
+      "type": "before",
+      "callId": "gkcj@4880",
+      "startTime": 115042.592,
+      "class": "Test",
+      "method": "pw:api",
+      "title": "Type \"/image\"",
+      "params": {
+        "text": "/image"
+      },
+      "stack": [
+        {
+          "file": "/home/runner/work/CyrNava/CyrNava/frontend/e2e/workspace.spec.ts",
+          "line": 655,
+          "column": 27
+        }
+      ]
+    },
+    {
+      "type": "after",
+      "callId": "gkcj@4880",
+      "endTime": 115126.615,
+      "annotations": []
+    },
+    {
+      "type": "before",
+      "callId": "gkcj@4884",
+      "startTime": 115169.417,
+      "class": "Test",
+      "method": "pw:api",
+      "title": "Wait for event \"filechooser\"",
+      "params": {},
+      "stack": [
+        {
+          "file": "/home/runner/work/CyrNava/CyrNava/frontend/e2e/workspace.spec.ts",
+          "line": 656,
+          "column": 49
+        }
+      ]
+    },
+    {
+      "type": "after",
+      "callId": "gkcj@4884",
+      "endTime": 115210.053,
+      "annotations": []
+    },
+    {
+      "type": "before",
+      "callId": "gkcj@4895",
+      "startTime": 115217.892,
+      "class": "Test",
+      "method": "pw:api",
+      "title": "Set input files",
+      "params": {
+        "files": "[/tmp/cyrnava-workspace-e2e-cnJAW9/synthetic.png.jpg]"
+      },
+      "stack": [
+        {
+          "file": "/home/runner/work/CyrNava/CyrNava/frontend/e2e/workspace.spec.ts",
+          "line": 657,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "type": "after",
+      "callId": "gkcj@4895",
+      "endTime": 115238.624,
+      "annotations": []
+    },
+    {
+      "type": "before",
+      "callId": "gkcj@4915",
+      "startTime": 116143.186,
+      "class": "Test",
+      "method": "pw:api",
+      "title": "Type \"/image\"",
+      "params": {
+        "text": "/image"
+      },
+      "stack": [
+        {
+          "file": "/home/runner/work/CyrNava/CyrNava/frontend/e2e/workspace.spec.ts",
+          "line": 655,
+          "column": 27
+        }
+      ]
+    },
+    {
+      "type": "after",
+      "callId": "gkcj@4915",
+      "endTime": 116175.145,
+      "annotations": []
+    },
+    {
+      "type": "before",
+      "callId": "gkcj@4917",
+      "startTime": 116175.733,
+      "class": "Test",
+      "method": "pw:api",
+      "title": "Press \"Enter\"",
+      "params": {
+        "key": "Enter"
+      },
+      "stack": [
+        {
+          "file": "/home/runner/work/CyrNava/CyrNava/frontend/e2e/workspace.spec.ts",
+          "line": 655,
+          "column": 63
+        }
+      ]
+    },
+    {
+      "type": "after",
+      "callId": "gkcj@4917",
+      "endTime": 116181.847,
+      "annotations": []
+    },
+    {
+      "type": "before",
+      "callId": "gkcj@4919",
+      "startTime": 116182.401,
+      "class": "Test",
+      "method": "pw:api",
+      "title": "Wait for event \"filechooser\"",
+      "params": {},
+      "stack": [
+        {
+          "file": "/home/runner/work/CyrNava/CyrNava/frontend/e2e/workspace.spec.ts",
+          "line": 656,
+          "column": 49
+        }
+      ]
+    },
+    {
+      "type": "before",
+      "callId": "gkcj@4923",
+      "startTime": 116183.098,
+      "class": "Test",
+      "method": "pw:api",
+      "title": "Click",
+      "subtitle": "getByRole('button', { name: 'Upload image', exact: true })",
+      "params": {
+        "locator": "getByRole('button', { name: 'Upload image', exact: true })"
+      },
+      "stack": [
+        {
+          "file": "/home/runner/work/CyrNava/CyrNava/frontend/e2e/workspace.spec.ts",
+          "line": 656,
+          "column": 163
+        }
+      ]
+    },
+    {
+      "type": "after",
+      "callId": "gkcj@4919",
+      "endTime": 126184.282,
+      "annotations": [],
+      "error": {
+        "name": "",
+        "message": "TimeoutError: page.waitForEvent: Timeout 10000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================",
+        "stack": "TimeoutError: page.waitForEvent: Timeout 10000ms exceeded while waiting for event \"filechooser\"\n=========================== logs ===========================\nwaiting for event \"filechooser\"\n============================================================\n    at /home/runner/work/CyrNava/CyrNava/frontend/e2e/workspace.spec.ts:656:49"
+      }
+    },
+    {
+      "type": "after",
+      "callId": "gkcj@4923",
+      "endTime": 126188.071,
+      "annotations": [],
+      "error": {
+        "name": "",
+        "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Upload image', exact: true })\u001b[22m\n",
+        "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Upload image', exact: true })\u001b[22m\n\n    at /home/runner/work/CyrNava/CyrNava/frontend/e2e/workspace.spec.ts:656:163"
+      }
+    }
+  ]
+}

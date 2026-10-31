@@ -1,0 +1,16 @@
+[
+  {
+    "id": 13033431818,
+    "kind": "frontend diagnostic archive, not a production package",
+    "sha256": "1c331a6d36df70821a896436999e1fbe59d32680dd07b0bc3614b9c9e796c4cb",
+    "bytes": 14017010,
+    "matches_GitHub_digest": true
+  },
+  {
+    "id": 13033203039,
+    "kind": "backend diagnostic archive, not a production package",
+    "sha256": "9b8ee132de881b37a062a392b714d6af69cd7f09441cb455a06101bc7f5f3620",
+    "bytes": 10664,
+    "matches_GitHub_digest": true
+  }
+]

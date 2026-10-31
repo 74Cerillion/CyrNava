@@ -1,0 +1,14 @@
+{
+  "frontend/node_modules/prosemirror-view/src/domobserver.ts": {
+    "sha256": "ce088c9e363f5f1834a7ed9d32e0b19721651ff04398bafc5db6fd86a7ad60cb"
+  },
+  "frontend/node_modules/@tiptap/core/src/Editor.ts": {
+    "sha256": "ce56aa8b5432b2b99d872ec135fe21267eef8a4e1c136352eb092339d4be1cd6"
+  },
+  "frontend/node_modules/@blocknote/react/src/components/FilePanel/FilePanelController.tsx": {
+    "sha256": "15c8d3c7a873be419f9a3f45b8ca2095506c102c020b4e9433c326f77c793b43"
+  },
+  "frontend/node_modules/@blocknote/react/src/components/Popovers/GenericPopover.tsx": {
+    "sha256": "e004c405ed62ebcf1a55f4e304b165f79b4d757862c3b1e96ff156ec7ec852a3"
+  }
+}

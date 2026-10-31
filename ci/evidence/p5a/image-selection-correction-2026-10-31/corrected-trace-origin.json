@@ -1,0 +1,6 @@
+{
+  "raw_trace": "/tmp/cyrnava-p5a-image-ywq4ttao/focused-corrected-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat4/trace.zip",
+  "sha256": "a5c3db5cc548100f42f8e7f3295c24b3cee757702ecb3fbcb42af0c74d2a996a",
+  "derived_trace": "corrected-trace-without-filmstrip.zip",
+  "omitted": "Duplicate screencast JPEG filmstrip only; events, DOM snapshots, network, resources and attachments retained. Original remains in disposable checkout."
+}

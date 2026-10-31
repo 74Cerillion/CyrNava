@@ -1,0 +1,13 @@
+
+Running 3 tests using 1 worker
+
+(node:29) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✘  1 e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (16.7s)
+(node:123) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✘  2 e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (2.0m)
+(node:215) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

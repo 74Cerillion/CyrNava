@@ -2,7 +2,7 @@
   "phase": "P5A",
   "date": "2026-10-31",
   "timezone": "Asia/Seoul",
-  "status": "FAIL / NOT ACCEPTED \u2014 focused investigation and test-only SQL boundary locally verified",
+  "status": "FAIL / NOT ACCEPTED \u2014 image-selection correction locally verified; hosted verification pending",
   "branch": "desktop/p2-production-integration",
   "base_commit": "8418339cf3c9ff7ae26f792ed8697b7c16d7450a",
   "local_tests": {
@@ -105,257 +105,210 @@
   "hosted": {
     "phase": "P5A",
     "status": "FAIL",
-    "acceptance_recommendation": "NOT READY FOR ACCEPTANCE",
-    "run_id": 41172242175,
-    "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41172242175",
+    "acceptance_recommendation": "DO NOT ACCEPT: browser workspace image-command test failed; production Flatpak gates remain unexecuted",
+    "run_id": 41176826666,
+    "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41176826666",
+    "source_commit": "047a99b1473304cc73518dff6427bf7937c542a2",
     "attempt": 1,
     "event": "push",
-    "source_commit": "129700175cf4716446647572979771d27422fc3f",
-    "created_at_utc": "2026-10-31T05:21:03Z",
-    "completed_at_utc": "2026-10-31T05:24:25Z",
-    "workflow_seconds": 202,
+    "created_at_utc": "2026-10-31T06:29:39Z",
+    "completed_at_utc": "2026-10-31T06:34:13Z",
     "jobs": [
       {
-        "id": 124452477483,
+        "id": 124466009556,
         "name": "Workflow validation",
         "conclusion": "success",
-        "started_at": "2026-10-31T05:21:06Z",
-        "completed_at": "2026-10-31T05:21:12Z",
-        "seconds": 6
+        "started_at": "2026-10-31T06:29:42Z",
+        "completed_at": "2026-10-31T06:29:51Z",
+        "seconds": 9.0
       },
       {
-        "id": 124452505529,
+        "id": 124466046223,
         "name": "Backend and security",
         "conclusion": "success",
-        "started_at": "2026-10-31T05:21:14Z",
-        "completed_at": "2026-10-31T05:22:46Z",
-        "seconds": 92
+        "started_at": "2026-10-31T06:29:52Z",
+        "completed_at": "2026-10-31T06:31:25Z",
+        "seconds": 93.0
       },
       {
-        "id": 124452505545,
+        "id": 124466046250,
         "name": "Frontend and browser",
         "conclusion": "failure",
-        "started_at": "2026-10-31T05:21:14Z",
-        "completed_at": "2026-10-31T05:24:20Z",
-        "seconds": 186
+        "started_at": "2026-10-31T06:30:00Z",
+        "completed_at": "2026-10-31T06:34:08Z",
+        "seconds": 248.0
       },
       {
-        "id": 124453135377,
+        "id": 124466951202,
         "name": "CI required",
         "conclusion": "failure",
-        "started_at": "2026-10-31T05:24:22Z",
-        "completed_at": "2026-10-31T05:24:24Z",
-        "seconds": 2
+        "started_at": "2026-10-31T06:34:10Z",
+        "completed_at": "2026-10-31T06:34:12Z",
+        "seconds": 2.0
       },
       {
-        "id": 124453136307,
+        "id": 124466952129,
         "name": "Production Flatpak and bundle audit",
         "conclusion": "skipped",
-        "started_at": "2026-10-31T05:24:20Z",
-        "completed_at": "2026-10-31T05:24:20Z",
-        "seconds": 0
+        "started_at": "2026-10-31T06:34:08Z",
+        "completed_at": "2026-10-31T06:34:08Z",
+        "seconds": 0.0
       }
     ],
-    "workflow_validation": {
-      "status": "PASS",
-      "methods": 23,
-      "seconds": 0.191
-    },
-    "backend": {
-      "status": "PASS",
-      "passed": 550,
+    "tests": {
+      "workflow_contracts": 23,
+      "backend_passed": 559,
       "subtests_passed": 31,
-      "warnings": 2,
-      "pytest_seconds": 44.86,
-      "orchestration": {
-        "status": "PASS",
-        "complete": true,
-        "steps": [
-          {
-            "name": "python-lint",
-            "status": "PASS",
-            "seconds": 0.033
-          },
-          {
-            "name": "frontend-install-for-backend",
-            "status": "PASS",
-            "seconds": 4.594
-          },
-          {
-            "name": "frontend-production-build-for-backend",
-            "status": "PASS",
-            "seconds": 4.87
-          },
-          {
-            "name": "backend-security-lifecycle-migration-packaging",
-            "status": "PASS",
-            "seconds": 47.561
-          }
-        ],
-        "preconditions": {
-          "frontend_dist_initially_absent": true,
-          "clean_frontend_required": true
-        },
-        "seconds": 57.059
-      },
-      "former_missing_asset_failures": "All three independently confirmed PASS in hosted JUnit"
-    },
-    "frontend": {
-      "lint": "PASS",
-      "unit_passed": 273,
-      "typescript_production_build": "PASS",
-      "browser_passed": 16,
+      "backend_warnings": 2,
+      "backend_seconds": 47.14,
+      "frontend_unit_passed": 273,
+      "browser_passed": 18,
       "browser_failed": 1,
-      "failed_test": "managed tabs close, restart and recover immediately closed unconfirmed edits",
-      "failed_at": "frontend/e2e/lifecycle.spec.ts:143",
-      "failure": "Canonical note changed from revision 3 to revision 4 during the intended no-write interval; unconfirmed title and bold paragraph were persisted. Assertion fails before recovery choice.",
-      "lost_acknowledgement_regression": "PASS",
-      "orchestration": {
-        "status": "FAIL",
-        "complete": true,
-        "steps": [
-          {
-            "name": "frontend-lint",
-            "status": "PASS",
-            "seconds": 3.05
-          },
-          {
-            "name": "frontend-unit",
-            "status": "PASS",
-            "seconds": 13.975
-          },
-          {
-            "name": "typescript-production-build",
-            "status": "PASS",
-            "seconds": 3.879
-          },
-          {
-            "name": "chromium-production-integration",
-            "status": "FAIL",
-            "seconds": 119.193
+      "lifecycle_cases_passed": 5,
+      "retries": 0
+    },
+    "failure": {
+      "file": "frontend/e2e/workspace.spec.ts",
+      "test_line": 604,
+      "failure_line": 656,
+      "summary": "Second /image command remained literal text in code block; Upload image button never appeared. Both button click and filechooser event wait timed out. First JPEG chooser and setFiles succeeded.",
+      "classification": "Confirmed invalid editor-command/focus precondition in this execution; underlying focus transition cause not yet reproduced. No native Save portal failure established."
+    },
+    "new_causal_observation": {
+      "test": "managed tabs close/recover without browser routing",
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+      "after_close_intent_marker_ms": 16.850991,
+      "expected_revision": 3,
+      "frontend": {
+        "perf_ms": 623.6000000000058,
+        "time_origin_ms": 1793428298046.1,
+        "sequence": 1,
+        "close_intent": true,
+        "keepalive": false,
+        "service_worker": false,
+        "visibility": "hidden"
+      },
+      "result": "SQLite guard rejected UPDATE, ROLLBACK, HTTP 503; canonical unchanged through restart and recovery passed",
+      "historical_limit": "Direct evidence for this current teardown operation only. Does not identify previous escaped operation or prove Playwright interception behavior in prior run.",
+      "close_intent_chain": [
+        {
+          "event": "fastapi_request_enter",
+          "mono_ns": 131465544333,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "method": "PATCH",
+          "frontend": {
+            "perf_ms": 623.6000000000058,
+            "time_origin_ms": 1793428298046.1,
+            "sequence": 1,
+            "close_intent": true,
+            "keepalive": false,
+            "service_worker": false,
+            "visibility": "hidden"
           }
-        ],
-        "error_type": "CalledProcessError",
-        "exit_code": 1,
-        "seconds": 140.097
-      }
-    },
-    "trace_evidence": {
-      "observations": [
-        {
-          "event": "browser_context_api",
-          "method": "newPage",
-          "trace_monotonic_ms": 2191.378
         },
         {
-          "event": "browser_context_api",
-          "method": "newPage",
-          "trace_monotonic_ms": 4050.902
+          "event": "database_update_enter",
+          "mono_ns": 131467647735,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "expected_revision": 3
         },
         {
-          "event": "browser_context_api",
-          "method": "setNetworkInterceptionPatterns",
-          "trace_monotonic_ms": 6047.582
+          "event": "sqlite_statement",
+          "mono_ns": 131468444421,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "kind": "BEGIN"
         },
         {
-          "event": "browser_context_api",
-          "method": "newPage",
-          "trace_monotonic_ms": 6802.323
+          "event": "sqlite_statement",
+          "mono_ns": 131469420221,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "kind": "UPDATE"
         },
         {
-          "event": "old recovery page close requested",
-          "utc": "2026-10-31T05:22:24.640895+00:00",
-          "trace_monotonic_ms": 7284.009
+          "event": "sqlite_statement",
+          "mono_ns": 131469507504,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "kind": "UPDATE"
         },
         {
-          "event": "browser_context_api",
-          "method": "newPage",
-          "trace_monotonic_ms": 8908.678
+          "event": "sqlite_statement",
+          "mono_ns": 131469563078,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "kind": "UPDATE"
         },
         {
-          "event": "note_http_response",
-          "method": "PATCH",
-          "utc": "2026-10-31T05:22:20.798Z",
-          "revision": 2,
-          "updated_at": "2026-10-31T05:22:20.801973+00:00"
+          "event": "sqlite_statement",
+          "mono_ns": 131469605246,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "kind": "ROLLBACK"
         },
         {
-          "event": "note_http_response",
-          "method": "GET",
-          "utc": "2026-10-31T05:22:21.611Z",
-          "revision": 2,
-          "updated_at": "2026-10-31T05:22:20.801973+00:00"
+          "event": "sqlite_transaction_failed",
+          "mono_ns": 131469716163,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "error_type": "IntegrityError"
         },
         {
-          "event": "note_http_response",
-          "method": "PATCH",
-          "utc": "2026-10-31T05:22:22.414Z",
-          "revision": 3,
-          "updated_at": "2026-10-31T05:22:22.416674+00:00"
+          "event": "database_update_failed",
+          "mono_ns": 131469758602,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "error_type": "IntegrityError"
         },
         {
-          "event": "note_http_response",
-          "method": "GET",
-          "utc": "2026-10-31T05:22:24.369Z",
-          "revision": 3,
-          "updated_at": "2026-10-31T05:22:22.416674+00:00"
+          "event": "fastapi_response",
+          "mono_ns": 131470085775,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "status": 503
         },
         {
-          "event": "note_http_response",
-          "method": "GET",
-          "utc": "2026-10-31T05:22:26.490Z",
-          "revision": 4,
-          "updated_at": "2026-10-31T05:22:24.650597+00:00"
+          "event": "fastapi_request_exit",
+          "mono_ns": 131470598531,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730"
         }
-      ],
-      "revision_at_outage_baseline": 3,
-      "revision_after_restart": 4,
-      "newer_note_updated_at": "2026-10-31T05:22:24.650597+00:00",
-      "write_update_ms_after_page_close_requested": 9.702,
-      "new_note_matches_unconfirmed_title": true,
-      "bold_unconfirmed_content_present": true,
-      "driver_saw_intervening_patch": false,
-      "inference": "Unexpected write closely correlates with old page teardown/visibility flush; browser-context routing did not establish an effective no-write boundary. Exact interception bypass remains unproven without server-side request evidence.",
-      "supersedes": "Late route installation alone cannot explain this run: the route was installed before recovery page startup and retained through restart."
+      ]
     },
-    "diagnosis": {
-      "confirmed": "Browser-context PATCH routing did not establish the no-write boundary despite installation before page startup; the test now detects the unexpected commit explicitly.",
-      "inference": "Close/visibility-triggered autosave and interception teardown are implicated by the approximately 10 ms timing correlation.",
-      "unproven": "Exact mechanism bypassing driver interception; backend-side request correlation is not captured. No production defect or data corruption is established.",
-      "prior_explanation": "Late route installation alone is insufficient and must not be reported as a verified resolution of the hosted failure."
-    },
-    "flatpak": {
-      "build": "SKIPPED",
-      "package_content_audit": "NOT EXECUTED",
-      "validated_unsigned_artifact_upload": "NOT EXECUTED",
-      "production_package_checksum": null
-    },
-    "diagnostic_artifacts": [
+    "production_flatpak_build": "SKIPPED",
+    "exported_package_content_audit": "NOT EXECUTED",
+    "unsigned_production_artifact_upload": "NOT EXECUTED",
+    "production_artifact_sha256": "UNAVAILABLE: no production artifact",
+    "production_provenance": "UNAVAILABLE: no production artifact",
+    "diagnostic_archives_independently_verified": [
       {
-        "artifact_id": 13031313767,
-        "kind": "diagnostic ZIP only",
-        "sha256": "e35e0cc4ba2b0e87412f3437e8f833ae12f566ac974dbb9e8c4bd1be1bd2a86b",
-        "bytes": 10471,
-        "independently_verified": true
+        "id": 13033431818,
+        "kind": "frontend diagnostic archive, not a production package",
+        "sha256": "1c331a6d36df70821a896436999e1fbe59d32680dd07b0bc3614b9c9e796c4cb",
+        "bytes": 14017010,
+        "matches_GitHub_digest": true
       },
       {
-        "artifact_id": 13032025578,
-        "kind": "diagnostic ZIP only",
-        "sha256": "c7ca73e61843fe0c22b2410436250ef24d28a9147ae5af5bce2e2defc88cf50b",
-        "bytes": 6865466,
-        "independently_verified": true
+        "id": 13033203039,
+        "kind": "backend diagnostic archive, not a production package",
+        "sha256": "9b8ee132de881b37a062a392b714d6af69cd7f09441cb455a06101bc7f5f3620",
+        "bytes": 10664,
+        "matches_GitHub_digest": true
       }
     ],
-    "scope": {
-      "new_commit": false,
+    "actions_this_turn": {
+      "read_hosted_results": true,
+      "updated_local_reports": true,
+      "commit": false,
       "push": false,
+      "rerun": false,
       "dispatch": false,
-      "workflow_rerun": false,
-      "application_or_test_code_changed": false,
-      "P5B_started": false,
-      "P5C_started": false
-    },
-    "next_action": "Stop for owner review; preserve the trace and request server-side correlation in a separately authorized investigation. No automatic retry or weaker assertion."
+      "production_publication": false,
+      "P5B_or_P5C": false
+    }
   },
   "native_qt_portals": "NOT TESTED by this CI; historical P4 limits preserved",
   "p4_artifacts": "Historical A/B untouched; old A used only for expected-negative audit",
@@ -1279,5 +1232,391 @@
     },
     "hosted": "PENDING authorized push; latest actual run 41172242175 remains FAIL",
     "authorization": "One commit and one push; no rerun/dispatch/additional commit/push"
+  },
+  "latest_authorized_push": {
+    "date_utc": "2026-10-31T06:04:09.477741+00:00",
+    "commit": "047a99b1473304cc73518dff6427bf7937c542a2",
+    "parent": "129700175cf4716446647572979771d27422fc3f",
+    "branch": "desktop/p2-production-integration",
+    "commit_count": 1,
+    "push_attempt_count": 1,
+    "push_exit_code": 128,
+    "push_status": "BLOCKED: Git HTTPS credentials unavailable; terminal prompts disabled",
+    "remote_updated_by_attempt": false,
+    "new_hosted_run": "NOT STARTED by this failed push",
+    "production_build_audit_upload_checksum_provenance": "NOT EXECUTED for this commit",
+    "P5A": "FAIL / NOT ACCEPTED; hosted verification pending",
+    "next_command": "git push origin 047a99b1473304cc73518dff6427bf7937c542a2:refs/heads/desktop/p2-production-integration",
+    "staged_review": "63 P5A-only files, valid JSON, no credential-pattern hits; original raw evidence whitespace retained; authored source/docs diff check PASS",
+    "additional_commit_push_rerun_dispatch": false,
+    "owner_completed_push": true,
+    "confirmed_hosted_run": 41176826666
+  },
+  "historical_hosted_results": {
+    "41172242175": {
+      "phase": "P5A",
+      "status": "FAIL",
+      "acceptance_recommendation": "NOT READY FOR ACCEPTANCE",
+      "run_id": 41172242175,
+      "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41172242175",
+      "attempt": 1,
+      "event": "push",
+      "source_commit": "129700175cf4716446647572979771d27422fc3f",
+      "created_at_utc": "2026-10-31T05:21:03Z",
+      "completed_at_utc": "2026-10-31T05:24:25Z",
+      "workflow_seconds": 202,
+      "jobs": [
+        {
+          "id": 124452477483,
+          "name": "Workflow validation",
+          "conclusion": "success",
+          "started_at": "2026-10-31T05:21:06Z",
+          "completed_at": "2026-10-31T05:21:12Z",
+          "seconds": 6
+        },
+        {
+          "id": 124452505529,
+          "name": "Backend and security",
+          "conclusion": "success",
+          "started_at": "2026-10-31T05:21:14Z",
+          "completed_at": "2026-10-31T05:22:46Z",
+          "seconds": 92
+        },
+        {
+          "id": 124452505545,
+          "name": "Frontend and browser",
+          "conclusion": "failure",
+          "started_at": "2026-10-31T05:21:14Z",
+          "completed_at": "2026-10-31T05:24:20Z",
+          "seconds": 186
+        },
+        {
+          "id": 124453135377,
+          "name": "CI required",
+          "conclusion": "failure",
+          "started_at": "2026-10-31T05:24:22Z",
+          "completed_at": "2026-10-31T05:24:24Z",
+          "seconds": 2
+        },
+        {
+          "id": 124453136307,
+          "name": "Production Flatpak and bundle audit",
+          "conclusion": "skipped",
+          "started_at": "2026-10-31T05:24:20Z",
+          "completed_at": "2026-10-31T05:24:20Z",
+          "seconds": 0
+        }
+      ],
+      "workflow_validation": {
+        "status": "PASS",
+        "methods": 23,
+        "seconds": 0.191
+      },
+      "backend": {
+        "status": "PASS",
+        "passed": 550,
+        "subtests_passed": 31,
+        "warnings": 2,
+        "pytest_seconds": 44.86,
+        "orchestration": {
+          "status": "PASS",
+          "complete": true,
+          "steps": [
+            {
+              "name": "python-lint",
+              "status": "PASS",
+              "seconds": 0.033
+            },
+            {
+              "name": "frontend-install-for-backend",
+              "status": "PASS",
+              "seconds": 4.594
+            },
+            {
+              "name": "frontend-production-build-for-backend",
+              "status": "PASS",
+              "seconds": 4.87
+            },
+            {
+              "name": "backend-security-lifecycle-migration-packaging",
+              "status": "PASS",
+              "seconds": 47.561
+            }
+          ],
+          "preconditions": {
+            "frontend_dist_initially_absent": true,
+            "clean_frontend_required": true
+          },
+          "seconds": 57.059
+        },
+        "former_missing_asset_failures": "All three independently confirmed PASS in hosted JUnit"
+      },
+      "frontend": {
+        "lint": "PASS",
+        "unit_passed": 273,
+        "typescript_production_build": "PASS",
+        "browser_passed": 16,
+        "browser_failed": 1,
+        "failed_test": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+        "failed_at": "frontend/e2e/lifecycle.spec.ts:143",
+        "failure": "Canonical note changed from revision 3 to revision 4 during the intended no-write interval; unconfirmed title and bold paragraph were persisted. Assertion fails before recovery choice.",
+        "lost_acknowledgement_regression": "PASS",
+        "orchestration": {
+          "status": "FAIL",
+          "complete": true,
+          "steps": [
+            {
+              "name": "frontend-lint",
+              "status": "PASS",
+              "seconds": 3.05
+            },
+            {
+              "name": "frontend-unit",
+              "status": "PASS",
+              "seconds": 13.975
+            },
+            {
+              "name": "typescript-production-build",
+              "status": "PASS",
+              "seconds": 3.879
+            },
+            {
+              "name": "chromium-production-integration",
+              "status": "FAIL",
+              "seconds": 119.193
+            }
+          ],
+          "error_type": "CalledProcessError",
+          "exit_code": 1,
+          "seconds": 140.097
+        }
+      },
+      "trace_evidence": {
+        "observations": [
+          {
+            "event": "browser_context_api",
+            "method": "newPage",
+            "trace_monotonic_ms": 2191.378
+          },
+          {
+            "event": "browser_context_api",
+            "method": "newPage",
+            "trace_monotonic_ms": 4050.902
+          },
+          {
+            "event": "browser_context_api",
+            "method": "setNetworkInterceptionPatterns",
+            "trace_monotonic_ms": 6047.582
+          },
+          {
+            "event": "browser_context_api",
+            "method": "newPage",
+            "trace_monotonic_ms": 6802.323
+          },
+          {
+            "event": "old recovery page close requested",
+            "utc": "2026-10-31T05:22:24.640895+00:00",
+            "trace_monotonic_ms": 7284.009
+          },
+          {
+            "event": "browser_context_api",
+            "method": "newPage",
+            "trace_monotonic_ms": 8908.678
+          },
+          {
+            "event": "note_http_response",
+            "method": "PATCH",
+            "utc": "2026-10-31T05:22:20.798Z",
+            "revision": 2,
+            "updated_at": "2026-10-31T05:22:20.801973+00:00"
+          },
+          {
+            "event": "note_http_response",
+            "method": "GET",
+            "utc": "2026-10-31T05:22:21.611Z",
+            "revision": 2,
+            "updated_at": "2026-10-31T05:22:20.801973+00:00"
+          },
+          {
+            "event": "note_http_response",
+            "method": "PATCH",
+            "utc": "2026-10-31T05:22:22.414Z",
+            "revision": 3,
+            "updated_at": "2026-10-31T05:22:22.416674+00:00"
+          },
+          {
+            "event": "note_http_response",
+            "method": "GET",
+            "utc": "2026-10-31T05:22:24.369Z",
+            "revision": 3,
+            "updated_at": "2026-10-31T05:22:22.416674+00:00"
+          },
+          {
+            "event": "note_http_response",
+            "method": "GET",
+            "utc": "2026-10-31T05:22:26.490Z",
+            "revision": 4,
+            "updated_at": "2026-10-31T05:22:24.650597+00:00"
+          }
+        ],
+        "revision_at_outage_baseline": 3,
+        "revision_after_restart": 4,
+        "newer_note_updated_at": "2026-10-31T05:22:24.650597+00:00",
+        "write_update_ms_after_page_close_requested": 9.702,
+        "new_note_matches_unconfirmed_title": true,
+        "bold_unconfirmed_content_present": true,
+        "driver_saw_intervening_patch": false,
+        "inference": "Unexpected write closely correlates with old page teardown/visibility flush; browser-context routing did not establish an effective no-write boundary. Exact interception bypass remains unproven without server-side request evidence.",
+        "supersedes": "Late route installation alone cannot explain this run: the route was installed before recovery page startup and retained through restart."
+      },
+      "diagnosis": {
+        "confirmed": "Browser-context PATCH routing did not establish the no-write boundary despite installation before page startup; the test now detects the unexpected commit explicitly.",
+        "inference": "Close/visibility-triggered autosave and interception teardown are implicated by the approximately 10 ms timing correlation.",
+        "unproven": "Exact mechanism bypassing driver interception; backend-side request correlation is not captured. No production defect or data corruption is established.",
+        "prior_explanation": "Late route installation alone is insufficient and must not be reported as a verified resolution of the hosted failure."
+      },
+      "flatpak": {
+        "build": "SKIPPED",
+        "package_content_audit": "NOT EXECUTED",
+        "validated_unsigned_artifact_upload": "NOT EXECUTED",
+        "production_package_checksum": null
+      },
+      "diagnostic_artifacts": [
+        {
+          "artifact_id": 13031313767,
+          "kind": "diagnostic ZIP only",
+          "sha256": "e35e0cc4ba2b0e87412f3437e8f833ae12f566ac974dbb9e8c4bd1be1bd2a86b",
+          "bytes": 10471,
+          "independently_verified": true
+        },
+        {
+          "artifact_id": 13032025578,
+          "kind": "diagnostic ZIP only",
+          "sha256": "c7ca73e61843fe0c22b2410436250ef24d28a9147ae5af5bce2e2defc88cf50b",
+          "bytes": 6865466,
+          "independently_verified": true
+        }
+      ],
+      "scope": {
+        "new_commit": false,
+        "push": false,
+        "dispatch": false,
+        "workflow_rerun": false,
+        "application_or_test_code_changed": false,
+        "P5B_started": false,
+        "P5C_started": false
+      },
+      "next_action": "Stop for owner review; preserve the trace and request server-side correlation in a separately authorized investigation. No automatic retry or weaker assertion."
+    }
+  },
+  "local_image_selection_correction": {
+    "phase": "P5A image-selection correction",
+    "date_utc": "2026-10-31T07:01:52.178223+00:00",
+    "source_commit": "047a99b1473304cc73518dff6427bf7937c542a2",
+    "local_candidate": "PASS",
+    "P5A": "FAIL / NOT ACCEPTED; latest actual hosted run 41176826666 remains FAIL",
+    "cause_classification": "Test focus/selection synchronization defect, involving asynchronous DOM/editor selection transitions. No production defect demonstrated.",
+    "confirmed_causal_reproduction": {
+      "extension": "webp",
+      "before_End": {
+        "DOM": {
+          "parent": "paragraph",
+          "position": 239
+        },
+        "model": {
+          "parent": "codeBlock",
+          "position": 330
+        }
+      },
+      "before_Enter": {
+        "DOM": {
+          "parent": "paragraph",
+          "position": 254
+        },
+        "model": {
+          "parent": "codeBlock",
+          "position": 330
+        }
+      },
+      "before_slash": {
+        "DOM": {
+          "parent": "codeBlock",
+          "position": 331
+        },
+        "model": {
+          "parent": "codeBlock",
+          "position": 331
+        }
+      },
+      "meaning": "Click/End changed DOM caret before model update. Enter used the stale code-block selection; slash text remained code and no image command/button existed.",
+      "historical_limit": "Historical DOM code text and trace match this failure class; historical internal ProseMirror selection was not captured, so exact historical scheduling is not claimed."
+    },
+    "correction": [
+      "Read-only test selection helper; require mounted editor, focus, collapsed DOM/model selection agreement, correct paragraph block and end/empty-paragraph position",
+      "Await visible selected Image suggestion before keyboard Enter",
+      "Await real chooser, loaded image, closed upload panel, Saved, and canonical image references before next iteration",
+      "Preserve all rich blocks; regression explicitly tests literal /image in code then correct paragraph insertion",
+      "Keep mobile width assertion; await closing hover menu unmount rather than hidden transition snapshot"
+    ],
+    "tests": {
+      "focused_passed": 10,
+      "repetitions_per_test": 5,
+      "retries": 0,
+      "full_frontend_units_passed": 273,
+      "full_browser_passed": 20,
+      "full_browser_skipped": 0,
+      "frontend_lint_typecheck_build": "PASS",
+      "targeted_backend_harness_passed": 9,
+      "targeted_backend_warnings": 1,
+      "full_backend": "NOT RERUN: no production/application behavior changed; actual hosted 559 + 31 subtests remains recorded separately",
+      "frontend_orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "frontend-lint",
+            "status": "PASS",
+            "seconds": 2.621
+          },
+          {
+            "name": "frontend-unit",
+            "status": "PASS",
+            "seconds": 13.81
+          },
+          {
+            "name": "typescript-production-build",
+            "status": "PASS",
+            "seconds": 3.479
+          },
+          {
+            "name": "chromium-production-integration",
+            "status": "PASS",
+            "seconds": 128.903
+          }
+        ],
+        "seconds": 148.813
+      }
+    },
+    "source_files": {
+      "frontend/e2e/workspace.spec.ts": "864fefc0ba0a82f49c8b139bf410b4ad24a27a3147bfca23b4a3ccf3930a7dd3",
+      "frontend/e2e/editorSelection.ts": "b528027e903a6a9c3102e62f342e5ecc86283cae4d14c5bec968250953e10755"
+    },
+    "production_assets_identical": {
+      "files": 33,
+      "identical": true
+    },
+    "accepted_lifecycle_guard": "UNCHANGED byte-for-byte",
+    "source_production_changes": false,
+    "workflow_permissions_changes": false,
+    "history": "Previous hosted failure and successful lifecycle fault enforcement retained, together with all local diagnostic failures and limits",
+    "actions": {
+      "commit": false,
+      "push": false,
+      "GitHub_rerun_or_dispatch": false,
+      "publication": false,
+      "P5B_or_P5C": false
+    },
+    "recommendation": "Authorize one P5A-only commit/push of test correction and non-sensitive reports/evidence; require fresh hosted build/audit/upload/gate before P5A acceptance.",
+    "final_cleanup_review": "New diagnostic writes are enclosed in try/finally so a write failure cannot bypass backend shutdown. Exact final source reverified: focused 10/10 and frontend 273 units +20 browsers; no retries or skipped tests."
   }
 }

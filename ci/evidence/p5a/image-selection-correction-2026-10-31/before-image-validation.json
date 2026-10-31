@@ -1,0 +1,1512 @@
+{
+  "phase": "P5A",
+  "date": "2026-10-31",
+  "timezone": "Asia/Seoul",
+  "status": "FAIL / NOT ACCEPTED \u2014 lifecycle passed; workspace image command failed",
+  "branch": "desktop/p2-production-integration",
+  "base_commit": "8418339cf3c9ff7ae26f792ed8697b7c16d7450a",
+  "local_tests": {
+    "backend": {
+      "passed": 550,
+      "subtests_passed": 31,
+      "warnings": 2,
+      "pytest_seconds": 30.65,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "python-lint",
+            "status": "PASS",
+            "seconds": 0.022
+          },
+          {
+            "name": "frontend-install-for-backend",
+            "status": "PASS",
+            "seconds": 6.663
+          },
+          {
+            "name": "frontend-production-build-for-backend",
+            "status": "PASS",
+            "seconds": 3.479
+          },
+          {
+            "name": "backend-security-lifecycle-migration-packaging",
+            "status": "PASS",
+            "seconds": 31.307
+          }
+        ],
+        "preconditions": {
+          "frontend_dist_initially_absent": true,
+          "clean_frontend_required": true
+        },
+        "seconds": 41.472
+      }
+    },
+    "frontend": {
+      "unit_passed": 273,
+      "browser_passed": 16,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "frontend-lint",
+            "status": "PASS",
+            "seconds": 2.697
+          },
+          {
+            "name": "frontend-unit",
+            "status": "PASS",
+            "seconds": 14.156
+          },
+          {
+            "name": "typescript-production-build",
+            "status": "PASS",
+            "seconds": 3.394
+          },
+          {
+            "name": "chromium-production-integration",
+            "status": "PASS",
+            "seconds": 102.63
+          }
+        ],
+        "seconds": 122.877
+      }
+    },
+    "workflow_contracts": {
+      "test_methods": 23,
+      "status": "PASS"
+    },
+    "ruff": "PASS",
+    "actionlint": {
+      "status": "PASS",
+      "version": "1.7.7",
+      "shellcheck": "Not installed locally"
+    },
+    "compileall": "PASS",
+    "diff_check": "PASS"
+  },
+  "dependency_installation": {
+    "npm_cold_and_warm_ci": "PASS",
+    "backend_pinned_clean_resolution": "PASS",
+    "pip_check": "PASS",
+    "workflow_parser_hash_verified_install": "PASS",
+    "actionlint_download_hash_verification": "PASS"
+  },
+  "negative_verification": {
+    "real_subprocess_exit": 17,
+    "downstream_upload_prevented": true,
+    "gate_rejects_failed_skipped_cancelled": true,
+    "actual_old_p4_bundle_rejected": "Build source commit mismatch",
+    "no_old_bundle_uploaded": true
+  },
+  "runtime_availability": "Locked commit objects publicly reachable; hosted GPG installation NOT TESTED",
+  "hosted": {
+    "phase": "P5A",
+    "status": "FAIL",
+    "acceptance_recommendation": "DO NOT ACCEPT: browser workspace image-command test failed; production Flatpak gates remain unexecuted",
+    "run_id": 41176826666,
+    "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41176826666",
+    "source_commit": "047a99b1473304cc73518dff6427bf7937c542a2",
+    "attempt": 1,
+    "event": "push",
+    "created_at_utc": "2026-10-31T06:29:39Z",
+    "completed_at_utc": "2026-10-31T06:34:13Z",
+    "jobs": [
+      {
+        "id": 124466009556,
+        "name": "Workflow validation",
+        "conclusion": "success",
+        "started_at": "2026-10-31T06:29:42Z",
+        "completed_at": "2026-10-31T06:29:51Z",
+        "seconds": 9.0
+      },
+      {
+        "id": 124466046223,
+        "name": "Backend and security",
+        "conclusion": "success",
+        "started_at": "2026-10-31T06:29:52Z",
+        "completed_at": "2026-10-31T06:31:25Z",
+        "seconds": 93.0
+      },
+      {
+        "id": 124466046250,
+        "name": "Frontend and browser",
+        "conclusion": "failure",
+        "started_at": "2026-10-31T06:30:00Z",
+        "completed_at": "2026-10-31T06:34:08Z",
+        "seconds": 248.0
+      },
+      {
+        "id": 124466951202,
+        "name": "CI required",
+        "conclusion": "failure",
+        "started_at": "2026-10-31T06:34:10Z",
+        "completed_at": "2026-10-31T06:34:12Z",
+        "seconds": 2.0
+      },
+      {
+        "id": 124466952129,
+        "name": "Production Flatpak and bundle audit",
+        "conclusion": "skipped",
+        "started_at": "2026-10-31T06:34:08Z",
+        "completed_at": "2026-10-31T06:34:08Z",
+        "seconds": 0.0
+      }
+    ],
+    "tests": {
+      "workflow_contracts": 23,
+      "backend_passed": 559,
+      "subtests_passed": 31,
+      "backend_warnings": 2,
+      "backend_seconds": 47.14,
+      "frontend_unit_passed": 273,
+      "browser_passed": 18,
+      "browser_failed": 1,
+      "lifecycle_cases_passed": 5,
+      "retries": 0
+    },
+    "failure": {
+      "file": "frontend/e2e/workspace.spec.ts",
+      "test_line": 604,
+      "failure_line": 656,
+      "summary": "Second /image command remained literal text in code block; Upload image button never appeared. Both button click and filechooser event wait timed out. First JPEG chooser and setFiles succeeded.",
+      "classification": "Confirmed invalid editor-command/focus precondition in this execution; underlying focus transition cause not yet reproduced. No native Save portal failure established."
+    },
+    "new_causal_observation": {
+      "test": "managed tabs close/recover without browser routing",
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+      "after_close_intent_marker_ms": 16.850991,
+      "expected_revision": 3,
+      "frontend": {
+        "perf_ms": 623.6000000000058,
+        "time_origin_ms": 1793428298046.1,
+        "sequence": 1,
+        "close_intent": true,
+        "keepalive": false,
+        "service_worker": false,
+        "visibility": "hidden"
+      },
+      "result": "SQLite guard rejected UPDATE, ROLLBACK, HTTP 503; canonical unchanged through restart and recovery passed",
+      "historical_limit": "Direct evidence for this current teardown operation only. Does not identify previous escaped operation or prove Playwright interception behavior in prior run.",
+      "close_intent_chain": [
+        {
+          "event": "fastapi_request_enter",
+          "mono_ns": 131465544333,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "method": "PATCH",
+          "frontend": {
+            "perf_ms": 623.6000000000058,
+            "time_origin_ms": 1793428298046.1,
+            "sequence": 1,
+            "close_intent": true,
+            "keepalive": false,
+            "service_worker": false,
+            "visibility": "hidden"
+          }
+        },
+        {
+          "event": "database_update_enter",
+          "mono_ns": 131467647735,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "expected_revision": 3
+        },
+        {
+          "event": "sqlite_statement",
+          "mono_ns": 131468444421,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "kind": "BEGIN"
+        },
+        {
+          "event": "sqlite_statement",
+          "mono_ns": 131469420221,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "kind": "UPDATE"
+        },
+        {
+          "event": "sqlite_statement",
+          "mono_ns": 131469507504,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "kind": "UPDATE"
+        },
+        {
+          "event": "sqlite_statement",
+          "mono_ns": 131469563078,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "kind": "UPDATE"
+        },
+        {
+          "event": "sqlite_statement",
+          "mono_ns": 131469605246,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "kind": "ROLLBACK"
+        },
+        {
+          "event": "sqlite_transaction_failed",
+          "mono_ns": 131469716163,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "error_type": "IntegrityError"
+        },
+        {
+          "event": "database_update_failed",
+          "mono_ns": 131469758602,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "error_type": "IntegrityError"
+        },
+        {
+          "event": "fastapi_response",
+          "mono_ns": 131470085775,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+          "status": 503
+        },
+        {
+          "event": "fastapi_request_exit",
+          "mono_ns": 131470598531,
+          "pid": 3687,
+          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730"
+        }
+      ]
+    },
+    "production_flatpak_build": "SKIPPED",
+    "exported_package_content_audit": "NOT EXECUTED",
+    "unsigned_production_artifact_upload": "NOT EXECUTED",
+    "production_artifact_sha256": "UNAVAILABLE: no production artifact",
+    "production_provenance": "UNAVAILABLE: no production artifact",
+    "diagnostic_archives_independently_verified": [
+      {
+        "id": 13033431818,
+        "kind": "frontend diagnostic archive, not a production package",
+        "sha256": "1c331a6d36df70821a896436999e1fbe59d32680dd07b0bc3614b9c9e796c4cb",
+        "bytes": 14017010,
+        "matches_GitHub_digest": true
+      },
+      {
+        "id": 13033203039,
+        "kind": "backend diagnostic archive, not a production package",
+        "sha256": "9b8ee132de881b37a062a392b714d6af69cd7f09441cb455a06101bc7f5f3620",
+        "bytes": 10664,
+        "matches_GitHub_digest": true
+      }
+    ],
+    "actions_this_turn": {
+      "read_hosted_results": true,
+      "updated_local_reports": true,
+      "commit": false,
+      "push": false,
+      "rerun": false,
+      "dispatch": false,
+      "production_publication": false,
+      "P5B_or_P5C": false
+    }
+  },
+  "native_qt_portals": "NOT TESTED by this CI; historical P4 limits preserved",
+  "p4_artifacts": "Historical A/B untouched; old A used only for expected-negative audit",
+  "publication": false,
+  "push": true,
+  "commit_created": true,
+  "repository_settings_changed": false,
+  "P5B_started": false,
+  "P5C_started": false,
+  "commit_sha": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+  "authorized_push_attempt": "hosted-attempt-2026-10-31/push-and-hosted-status.json",
+  "hosted_result_record": "hosted-lifecycle-2026-10-31/final-result.json",
+  "postcommit_reports": "Local/uncommitted/unpushed, including correction; no additional commit or push",
+  "previous_local_tests": {
+    "backend": {
+      "status": "PASS",
+      "passed": 546,
+      "subtests_passed": 28,
+      "warnings": 2,
+      "pytest_seconds": 31.64,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "python-lint",
+            "status": "PASS",
+            "seconds": 0.022
+          },
+          {
+            "name": "backend-security-lifecycle-migration-packaging",
+            "status": "PASS",
+            "seconds": 32.296
+          }
+        ],
+        "seconds": 32.318
+      }
+    },
+    "frontend": {
+      "status": "PASS",
+      "unit_passed": 273,
+      "browser_passed": 16,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "frontend-lint",
+            "status": "PASS",
+            "seconds": 2.699
+          },
+          {
+            "name": "frontend-unit",
+            "status": "PASS",
+            "seconds": 14.584
+          },
+          {
+            "name": "typescript-production-build",
+            "status": "PASS",
+            "seconds": 3.828
+          },
+          {
+            "name": "chromium-production-integration",
+            "status": "PASS",
+            "seconds": 103.621
+          }
+        ],
+        "seconds": 124.732
+      }
+    },
+    "workflow_contracts": {
+      "status": "PASS",
+      "test_methods": 19,
+      "negative_subtests": 28
+    },
+    "actionlint": {
+      "status": "PASS",
+      "version": "1.7.7",
+      "shellcheck": "Not installed locally; actionlint shellcheck integration not exercised locally"
+    },
+    "ruff": "PASS",
+    "compileall": "PASS",
+    "diff_check": "PASS"
+  },
+  "correction_record": "frontend-prerequisite-correction-2026-10-31/validation.json",
+  "correction_checkpoint": {
+    "date_utc": "2026-10-31T02:16:42.332103+00:00",
+    "branch": "desktop/p2-production-integration",
+    "authorized_additional_commits": 1,
+    "created_commit": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+    "files_in_commit": 46,
+    "push_status": "BLOCKED",
+    "push_exit_code": 128,
+    "reason": "Terminal has no Git HTTPS credentials; could not read Username",
+    "remote_sha_confirmed_by_github": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+    "remote_changed": false,
+    "corrected_hosted_run": "NOT STARTED",
+    "manual_dispatch": false,
+    "release_or_signing": false,
+    "next_action": "Owner completes the same authorized push from authenticated terminal; no new commit required"
+  },
+  "previous_hosted": {
+    "phase": "P5A",
+    "status": "FAIL",
+    "run_id": 41157614256,
+    "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41157614256",
+    "attempt": 1,
+    "source_commit": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+    "event": "push",
+    "conclusion": "failure",
+    "created_at_utc": "2026-10-31T01:55:30Z",
+    "completed_at_utc": "2026-10-31T01:59:23Z",
+    "workflow_seconds": 233,
+    "jobs": [
+      {
+        "id": 124407772670,
+        "name": "Workflow validation",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-31T01:55:32Z",
+        "completed_at": "2026-10-31T01:55:40Z",
+        "duration_seconds": 8,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Install locked workflow parser",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Validate workflow and negative contracts",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9
+          },
+          {
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11
+          }
+        ]
+      },
+      {
+        "id": 124407811238,
+        "name": "Frontend and browser",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-31T01:55:43Z",
+        "completed_at": "2026-10-31T01:59:18Z",
+        "duration_seconds": 215,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Install locked frontend and browser dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Lint, unit tests, TypeScript, production build and Chromium tests",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Preserve synthetic browser diagnostics",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Post Run actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15
+          }
+        ]
+      },
+      {
+        "id": 124407811240,
+        "name": "Backend and security",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-10-31T01:55:42Z",
+        "completed_at": "2026-10-31T01:56:41Z",
+        "duration_seconds": 59,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Install verification dependencies",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Backend, security, lifecycle and migration regressions",
+            "status": "completed",
+            "conclusion": "failure",
+            "number": 5
+          },
+          {
+            "name": "Preserve synthetic test diagnostics",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 11
+          },
+          {
+            "name": "Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          }
+        ]
+      },
+      {
+        "id": 124408632120,
+        "name": "CI required",
+        "status": "completed",
+        "conclusion": "failure",
+        "started_at": "2026-10-31T01:59:20Z",
+        "completed_at": "2026-10-31T01:59:22Z",
+        "duration_seconds": 2,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Require every verification and artifact job to succeed",
+            "status": "completed",
+            "conclusion": "failure",
+            "number": 2
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          }
+        ]
+      },
+      {
+        "id": 124408633041,
+        "name": "Production Flatpak and bundle audit",
+        "status": "completed",
+        "conclusion": "skipped",
+        "started_at": "2026-10-31T01:59:19Z",
+        "completed_at": "2026-10-31T01:59:19Z",
+        "duration_seconds": 0,
+        "steps": []
+      }
+    ],
+    "runner": {
+      "image": "ubuntu-24.04",
+      "os": "Ubuntu 24.04.5",
+      "image_version": "20261025.353.1",
+      "runner_version": "2.338.2",
+      "backend_python": "3.12.15",
+      "repository_permissions": {
+        "contents": "read",
+        "metadata": "read"
+      }
+    },
+    "test_results": {
+      "workflow_contracts": {
+        "passed": 19,
+        "seconds": 0.175
+      },
+      "backend": {
+        "passed": 543,
+        "failed": 3,
+        "subtests_passed": 28,
+        "warnings": 2,
+        "pytest_seconds": 35.39
+      },
+      "frontend": {
+        "unit_passed": 273,
+        "browser_passed": 16,
+        "typescript": "PASS",
+        "production_vite_build": "PASS",
+        "lint": "PASS"
+      }
+    },
+    "failure": {
+      "confirmed_cause": "Backend job starts production-serving worker/staging tests without building frontend/dist; separate frontend runner cannot supply generated assets",
+      "reproduced_with_disposable_source": true,
+      "production_application_changed": false,
+      "suggested_correction_not_implemented": "Prepare real production frontend assets before the backend suite, or add a shared verified build prerequisite/artifact. Add a clean-checkout prerequisite regression; never skip these tests."
+    },
+    "flatpak": {
+      "build": "SKIPPED",
+      "exported_payload_audit": "NOT RUN",
+      "artifact_upload": "NOT RUN",
+      "production_checksum": null
+    },
+    "diagnostic_artifacts": [
+      {
+        "id": 13026131792,
+        "name": "backend-diagnostics-329020b5286ce0d5474e04a781ed61a6079f8edc-1",
+        "bytes": 12225,
+        "digest": "sha256:30adeec94e96176f536790a7ddfc654f6d5002fb9bdd428eb9e1c2f90407f283",
+        "expires_at": "2026-11-07T01:56:39Z",
+        "kind": "diagnostic ZIP, not a production Flatpak"
+      },
+      {
+        "id": 13025193988,
+        "name": "frontend-diagnostics-329020b5286ce0d5474e04a781ed61a6079f8edc-1",
+        "bytes": 4871567,
+        "digest": "sha256:8dacb24c2e2288fa991e3667a691b25c50d9f67da16f99665b7a79512b1d09ba",
+        "expires_at": "2026-11-07T01:59:10Z",
+        "kind": "diagnostic ZIP, not a production Flatpak"
+      }
+    ],
+    "npm_cache": {
+      "frontend": "MISS then cache saved; hosted warm restore not measured"
+    },
+    "guard_behavior": "Backend failure blocked production build and final CI required returned failure; no package upload",
+    "scope": {
+      "authorized_commit_count": 1,
+      "source_commit": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+      "owner_completed_push": true,
+      "additional_commit": false,
+      "additional_push": false,
+      "rerun_or_dispatch": false,
+      "production_publication": false,
+      "signing": false,
+      "P5B_started": false,
+      "P5C_started": false
+    },
+    "next_action": "Report failure and stop. Another commit/push requires owner authorization."
+  },
+  "correction_push_completed_by_owner": true,
+  "correction_commit": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+  "post_hosted_reporting": "Local/uncommitted/unpushed; no further commit, push or workflow rerun",
+  "lifecycle_correction": {
+    "phase": "P5A lifecycle verification correction",
+    "date": "2026-10-31",
+    "local_verification": "PASS",
+    "P5A_status": "CONDITIONAL \u2014 corrected hosted verification required; no acceptance claimed",
+    "classification": "Confirmed test fault-injection precondition defect; no production defect demonstrated",
+    "confirmed_mechanism": "Late routing cannot stop an already-dispatched save. Real backend commit advances canonical revision while a held/lost acknowledgement leaves a recovery draft on the older base revision; conflict rejection is correct.",
+    "historical_causality_limit": "Hosted artifacts contain screenshot/error context but no trace or revision timeline; exact original interleaving cannot be proven. Original flow passed 10 natural and 3 CPU-throttled local probes.",
+    "controlled_reproduction": {
+      "status": "PASS: reproduced older-revision conflict",
+      "draft_base": 3,
+      "canonical_revision": 4,
+      "real_API_and_SQLite": true,
+      "arbitrary_delays": false,
+      "automatic_retries": false
+    },
+    "correction": "Install PATCH barrier before page startup; retain through restart; assert SQLite unchanged and draft base equals canonical; recover only after these checks and assert actual acknowledgement/revision/content. Preserve stale-draft rejection in new deterministic gated regression.",
+    "tests": {
+      "focused": {
+        "passed": 10,
+        "failed": 0,
+        "repetitions_per_case": 5,
+        "retries": 0,
+        "seconds": 67.463
+      },
+      "frontend": {
+        "unit_passed": 273,
+        "browser_passed": 17,
+        "browser_failed": 0,
+        "lint": "PASS",
+        "typescript_build": "PASS",
+        "orchestration": {
+          "status": "PASS",
+          "complete": true,
+          "steps": [
+            {
+              "name": "frontend-lint",
+              "status": "PASS",
+              "seconds": 2.53
+            },
+            {
+              "name": "frontend-unit",
+              "status": "PASS",
+              "seconds": 13.933
+            },
+            {
+              "name": "typescript-production-build",
+              "status": "PASS",
+              "seconds": 3.474
+            },
+            {
+              "name": "chromium-production-integration",
+              "status": "PASS",
+              "seconds": 112.811
+            }
+          ],
+          "seconds": 132.748
+        }
+      },
+      "ci_contracts": {
+        "passed": 23,
+        "seconds": 0.129
+      },
+      "backend_security": "NOT RERUN: production/backend/shared lifecycle logic unchanged. Prior hosted 550 tests/31 subtests remain separate evidence."
+    },
+    "source_files": {
+      "frontend/e2e/lifecycle.spec.ts": "228d2b0fc52b253f561fb8c132d07ab1738daacb8f01a30af634747c1aa471b9",
+      "frontend/playwright.config.ts": "481befcad000efc964a6401f192e38515b12547d4c82e008c50feb7ea36b2548"
+    },
+    "clean_checkout": {
+      "base": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+      "initial_absence": {
+        "frontend/dist": false,
+        "frontend/node_modules": false,
+        "backend/.venv": false
+      },
+      "only_candidate_overlay": [
+        "frontend/e2e/lifecycle.spec.ts",
+        "frontend/playwright.config.ts"
+      ],
+      "dependencies": "Fresh npm ci and backend venv; reused matching previously downloaded Playwright Chromium binary only",
+      "profiles": "Synthetic temporary legacy workspace and isolated XDG paths"
+    },
+    "security": {
+      "production_code_changed": false,
+      "permissions_changed": false,
+      "conflict_detection_preserved": true,
+      "stale_draft_retained": true,
+      "post_conflict_automatic_writes": 0,
+      "public_trace_data": "Synthetic disposable workspace only; future failure traces retained as diagnostic artifacts",
+      "persistent_diagnostic_files_verified_in_full_suite": 2
+    },
+    "scope": {
+      "new_commit": false,
+      "push": false,
+      "workflow_dispatch_or_rerun": false,
+      "P5B_started": false,
+      "P5C_started": false
+    }
+  },
+  "lifecycle_correction_record": "lifecycle-correction-2026-10-31/validation.json",
+  "lifecycle_commit_push_status": {
+    "status": "OWNER COMPLETED THE ALREADY-AUTHORIZED PUSH",
+    "remote_and_hosted_source_commit": "129700175cf4716446647572979771d27422fc3f",
+    "automatically_triggered_run": 41172242175,
+    "conclusion": "failure",
+    "no_additional_agent_commit_push_dispatch_or_rerun": true
+  },
+  "hosted_history": [
+    {
+      "phase": "P5A",
+      "status": "FAIL",
+      "acceptance_recommendation": "DO NOT ACCEPT; unresolved hosted browser lifecycle failure and unexecuted required production build/audit/upload",
+      "run_id": 41163754626,
+      "attempt": 1,
+      "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41163754626",
+      "source_commit": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+      "event": "push",
+      "created_at_utc": "2026-10-31T03:17:51Z",
+      "completed_at_utc": "2026-10-31T03:21:35Z",
+      "workflow_seconds": 224,
+      "jobs": [
+        {
+          "id": 124426749355,
+          "name": "Workflow validation",
+          "conclusion": "success",
+          "started_at": "2026-10-31T03:18:02Z",
+          "completed_at": "2026-10-31T03:18:21Z"
+        },
+        {
+          "id": 124426855701,
+          "name": "Backend and security",
+          "conclusion": "success",
+          "started_at": "2026-10-31T03:18:22Z",
+          "completed_at": "2026-10-31T03:20:16Z"
+        },
+        {
+          "id": 124426855775,
+          "name": "Frontend and browser",
+          "conclusion": "failure",
+          "started_at": "2026-10-31T03:18:23Z",
+          "completed_at": "2026-10-31T03:21:30Z"
+        },
+        {
+          "id": 124427576107,
+          "name": "CI required",
+          "conclusion": "failure",
+          "started_at": "2026-10-31T03:21:32Z",
+          "completed_at": "2026-10-31T03:21:34Z"
+        },
+        {
+          "id": 124427577386,
+          "name": "Production Flatpak and bundle audit",
+          "conclusion": "skipped",
+          "started_at": "2026-10-31T03:21:31Z",
+          "completed_at": "2026-10-31T03:21:31Z"
+        }
+      ],
+      "backend": {
+        "status": "PASS",
+        "passed": 550,
+        "subtests_passed": 31,
+        "warnings": 2,
+        "pytest_seconds": 46.78,
+        "orchestration": {
+          "status": "PASS",
+          "complete": true,
+          "steps": [
+            {
+              "name": "python-lint",
+              "status": "PASS",
+              "seconds": 0.037
+            },
+            {
+              "name": "frontend-install-for-backend",
+              "status": "PASS",
+              "seconds": 5.358
+            },
+            {
+              "name": "frontend-production-build-for-backend",
+              "status": "PASS",
+              "seconds": 5.716
+            },
+            {
+              "name": "backend-security-lifecycle-migration-packaging",
+              "status": "PASS",
+              "seconds": 48.756
+            }
+          ],
+          "preconditions": {
+            "frontend_dist_initially_absent": true,
+            "clean_frontend_required": true
+          },
+          "seconds": 59.868
+        },
+        "previous_missing_assets_defect": "Resolved and verified on hosted runner"
+      },
+      "frontend": {
+        "lint": "PASS",
+        "unit_passed": 273,
+        "typescript_production_build": "PASS",
+        "browser_passed": 15,
+        "browser_failed": 1,
+        "browser_seconds": 120.51,
+        "failure": [
+          {
+            "name": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+            "message": "expect(locator).toBeVisible() failed"
+          }
+        ],
+        "source_location": "frontend/e2e/lifecycle.spec.ts:103",
+        "observed_page": "Save Error; recovered draft based on an older revision; Review conflict and recover",
+        "root_cause": "UNDETERMINED; captured evidence establishes revision conflict after Recover draft, not whether application defect or test synchronization race",
+        "orchestration": {
+          "status": "FAIL",
+          "complete": true,
+          "steps": [
+            {
+              "name": "frontend-lint",
+              "status": "PASS",
+              "seconds": 3.244
+            },
+            {
+              "name": "frontend-unit",
+              "status": "PASS",
+              "seconds": 14.064
+            },
+            {
+              "name": "typescript-production-build",
+              "status": "PASS",
+              "seconds": 4.091
+            },
+            {
+              "name": "chromium-production-integration",
+              "status": "FAIL",
+              "seconds": 120.51
+            }
+          ],
+          "error_type": "CalledProcessError",
+          "exit_code": 1,
+          "seconds": 141.91
+        }
+      },
+      "workflow_validation": {
+        "status": "PASS",
+        "contract_methods": 23,
+        "seconds": 0.192
+      },
+      "production_flatpak": {
+        "build": "SKIPPED",
+        "package_content_audit": "NOT EXECUTED",
+        "validated_unsigned_artifact_upload": "NOT EXECUTED",
+        "package_sha256": null
+      },
+      "diagnostic_artifacts": [
+        {
+          "artifact_id": 13027759948,
+          "kind": "diagnostics only",
+          "sha256": "b799b5eb3739ec8ad4645fc35b9aba4e7cfcd7856324a494ed97917d2fb4af67",
+          "bytes": 10406,
+          "independently_verified": true
+        },
+        {
+          "artifact_id": 13028024573,
+          "kind": "diagnostics only",
+          "sha256": "1a34eed295eb5e989025f8ea53b88276941fca508c0cdc67bed412faa1e44fd2",
+          "bytes": 4971285,
+          "independently_verified": true
+        }
+      ],
+      "scope": {
+        "new_commit": false,
+        "push": false,
+        "workflow_rerun": false,
+        "manual_dispatch": false,
+        "production_application_modified": false,
+        "P5B_started": false,
+        "P5C_started": false
+      },
+      "next_action": "Owner review of hosted failure; no rerun, commit or push without explicit authorization"
+    }
+  ],
+  "lifecycle_correction_status": "Local PASS did not resolve hosted failure. Earlier late-interception explanation is insufficient.",
+  "owner_completed_lifecycle_push": true,
+  "post_hosted_report_updates": "Local/uncommitted/unpushed; no additional execution or implementation authorized",
+  "initial_agent_lifecycle_push_attempt": {
+    "recorded_at_utc": "2026-10-31T03:59:32.103021+00:00",
+    "branch": "desktop/p2-production-integration",
+    "created_commit": "129700175cf4716446647572979771d27422fc3f",
+    "parent_commit": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+    "commit_count_this_authorization": 1,
+    "push_attempt_count_this_authorization": 1,
+    "push_exit_code": 128,
+    "push_status": "BLOCKED \u2014 terminal has no Git HTTPS credentials",
+    "remote_sha_confirmed_by_read_only_GitHub_API": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+    "remote_updated": false,
+    "new_hosted_workflow": "NOT STARTED",
+    "package_build_audit_upload": "NOT EXECUTED for this correction",
+    "P5A_acceptance": "CONDITIONAL / UNACCEPTED",
+    "no_additional_commit_push_rerun_dispatch": true,
+    "next_action": "Owner executes the exact already-authorized push in authenticated terminal; then monitor automatically triggered run",
+    "command": "git push origin 129700175cf4716446647572979771d27422fc3f:refs/heads/desktop/p2-production-integration"
+  },
+  "focused_persistence_investigation": {
+    "phase": "P5A focused persistence investigation",
+    "date": "2026-10-31",
+    "P5A_status": "FAIL / NOT ACCEPTED \u2014 latest hosted run remains 41172242175 failure",
+    "local_boundary_candidate": "PASS",
+    "historical_confirmed": [
+      "SQLite revision 3 advanced to 4 with newly typed unconfirmed content during browser-route guard",
+      "Write updated_at approximately 9.7 ms after page.close request",
+      "Interception was installed before the page and new content existed",
+      "No intervening PATCH in browser telemetry; does not prove absence of backend request"
+    ],
+    "historical_hypothesis": "A close/visibility-triggered save passed the browser teardown interception boundary. Exact historical request/operation ID and mechanism remain unproven.",
+    "ruled_out_or_unsupported": {
+      "pre_interception_request_with_new_payload": "New payload did not exist until after routing/page startup; immutable JSON request body cannot already contain those edits",
+      "service_workers": "No evidence in historical trace/source; all five controlled local contexts explicitly report zero registrations/controllers",
+      "keepalive": "Application note fetch does not set keepalive; local correlated saves report false. Session sendBeacon targets lifecycle routes and contains no note data",
+      "whole_context_shutdown": "Historical browser context stayed open and was reused for restart",
+      "other_backend_operation": "No evidence; normal content/revision update path is Database.update via PATCH. No historical server journal exists to identify an alternative."
+    },
+    "confirmed_local_causality": {
+      "runs": 5,
+      "visibility_hidden_saves_rejected_at_SQL_boundary": 5,
+      "visibility_hidden_saves_committed_after_explicit_retry_and_disarm": 5,
+      "actual_close_intent_HTTP_operations_observed": 0,
+      "chain": "Test-instrumented fetch correlation header -> FastAPI ASGI -> synchronous route/threadpool -> Database.update -> BEGIN IMMEDIATE -> note UPDATE -> COMMIT completion -> response",
+      "logging": "monotonic_ns/pid/correlation ID/revisions/status only; no SQL, note content, credentials or authentication headers"
+    },
+    "boundary": {
+      "scope": "All INSERT/UPDATE/DELETE of notes in disposable SQLite profile",
+      "linearization": "BEGIN IMMEDIATE arm transaction serializes with prior writers; arm commit plus recorded canonical fingerprint is boundary",
+      "enforcement": "SQLite BEFORE triggers, independent of browser/proxy/request interception; any connection and queued writer is rejected while armed",
+      "verification": "Canonical row count/IDs/revisions/content/metadata SHA-256 fingerprint, armed state, and actual HTTP 503 probe outside Playwright routing",
+      "negative_tests": "Deliberately disarm/write/rearm or remove guard state -> verification fails; preexisting connection and current writer cases tested",
+      "production_exclusion": "Harness copied/invoked only by fixture launcher; no production activation flag/route/config/env hook; staging excludes harness/frontend instrumentation; production migration rejects its extra schema"
+    },
+    "tests": {
+      "focused": {
+        "passed": 15,
+        "repetitions": 5,
+        "modes": [
+          "browser routing + SQL guard",
+          "SQL guard without browser routing",
+          "controlled visibility causality"
+        ],
+        "retries": 0,
+        "seconds": 99.613
+      },
+      "backend": {
+        "passed": 558,
+        "subtests_passed": 31,
+        "warnings": 2,
+        "pytest_seconds": 29.19,
+        "new_tests": 8,
+        "orchestration": {
+          "status": "PASS",
+          "complete": true,
+          "steps": [
+            {
+              "name": "python-lint",
+              "status": "PASS",
+              "seconds": 0.021
+            },
+            {
+              "name": "frontend-install-for-backend",
+              "status": "PASS",
+              "seconds": 2.515
+            },
+            {
+              "name": "frontend-production-build-for-backend",
+              "status": "PASS",
+              "seconds": 3.341
+            },
+            {
+              "name": "backend-security-lifecycle-migration-packaging",
+              "status": "PASS",
+              "seconds": 29.761
+            }
+          ],
+          "preconditions": {
+            "frontend_dist_initially_absent": true,
+            "clean_frontend_required": true
+          },
+          "seconds": 35.639
+        }
+      },
+      "frontend": {
+        "unit_passed": 273,
+        "browser_passed": 19,
+        "orchestration": {
+          "status": "PASS",
+          "complete": true,
+          "steps": [
+            {
+              "name": "frontend-lint",
+              "status": "PASS",
+              "seconds": 2.707
+            },
+            {
+              "name": "frontend-unit",
+              "status": "PASS",
+              "seconds": 13.889
+            },
+            {
+              "name": "typescript-production-build",
+              "status": "PASS",
+              "seconds": 3.46
+            },
+            {
+              "name": "chromium-production-integration",
+              "status": "PASS",
+              "seconds": 123.902
+            }
+          ],
+          "seconds": 143.959
+        }
+      },
+      "environment_failure_preserved": "Earlier full backend: 555 pass / 2 fail due unchanged 5 GiB disk guard. Only old disposable dependencies were removed; threshold and tests unchanged; subsequent full suite passed."
+    },
+    "candidate_files": {
+      "ci/lifecycle_harness.py": "bb456b6d438d3606dea87a17c210d9026094b2d8c8fd9e6597c1cb79f768dc5d",
+      "backend/tests/test_lifecycle_harness.py": "18e45fae257aefbeb17cda9580bd2eeadebe7f574f6ad5b2ceb1b5e274b9a9e3",
+      "frontend/e2e/lifecycle.spec.ts": "edcbcb5c52df17590ab79c3dea894574a49a236472e923302e1a8050a3b1047a"
+    },
+    "clean_environment": {
+      "root": "/tmp/cyrnava-p5a-boundary-r8jvmtth",
+      "checkout": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout",
+      "initial_generated_paths": {
+        "frontend/dist": false,
+        "frontend/node_modules": false,
+        "backend/.venv": false
+      },
+      "head": "129700175cf4716446647572979771d27422fc3f",
+      "env": {
+        "PIP_CACHE_DIR": "/tmp/cyrnava-p5a-boundary-r8jvmtth/pip-cache",
+        "npm_config_cache": "/tmp/cyrnava-p5a-boundary-r8jvmtth/npm-cache",
+        "XDG_DATA_HOME": "/tmp/cyrnava-p5a-boundary-r8jvmtth/xdg-data",
+        "XDG_CONFIG_HOME": "/tmp/cyrnava-p5a-boundary-r8jvmtth/xdg-config",
+        "XDG_CACHE_HOME": "/tmp/cyrnava-p5a-boundary-r8jvmtth/xdg-cache",
+        "PLAYWRIGHT_BROWSERS_PATH": "/tmp/cyrnava-p5a-prerequisite-e5fgarzw/xdg-cache/ms-playwright"
+      }
+    },
+    "scope": {
+      "production_source_modified": false,
+      "security_permissions_changed": false,
+      "dependencies_changed": false,
+      "personal_data_accessed": false,
+      "new_commit": false,
+      "push": false,
+      "workflow_run_or_rerun": false,
+      "publication": false,
+      "P5B_started": false,
+      "P5C_started": false
+    },
+    "recommendation": "Review/adopt test-only SQL fault boundary and retain correlation journals. Do not spend another hosted cycle until owner approves; historical exact causality remains unresolved, no P5A acceptance claim."
+  },
+  "investigation_record": "lifecycle-causality-2026-10-31/validation.json",
+  "authorized_final_review": {
+    "date_utc": "2026-10-31T06:01:40.847300+00:00",
+    "branch": "desktop/p2-production-integration",
+    "parent": "129700175cf4716446647572979771d27422fc3f",
+    "scope": "P5A test boundary, correlation, regressions, reports and synthetic evidence only",
+    "existing_workspace_protection": "Fixture initialize refuses existing unmarked SQLite database before production initialization; hash unchanged regression passes. CLI arm requires fixture marker and triggers. No production activation path.",
+    "production_changes": false,
+    "production_staging_exclusion": "Explicit allowlists exclude ci, tests, fixture SQL and X-P5A instrumentation; production migration rejects fixture schema. Automated tests pass.",
+    "preserved_tests": "Original close/recovery, lost acknowledgement conflict, autosave and killed browser cases retained. SQL boundary also runs with browser routing absent.",
+    "workflow": "Unchanged; contents:read, no secrets reference or release/signing/deploy step; pinned actions and fail-closed required gate.",
+    "tests": {
+      "backend": 559,
+      "subtests": 31,
+      "frontend_units": 273,
+      "browser": 19,
+      "focused": 15,
+      "ci_contracts": 23
+    },
+    "historical_uncertainty_preserved": true,
+    "diagnostics_review": {
+      "credential_pattern_hits": 0,
+      "sensitive_request_headers": 0,
+      "trace_origins": "loopback only; synthetic fixtures",
+      "entries_reviewed": 319
+    },
+    "hosted": "PENDING authorized push; latest actual run 41172242175 remains FAIL",
+    "authorization": "One commit and one push; no rerun/dispatch/additional commit/push"
+  },
+  "latest_authorized_push": {
+    "date_utc": "2026-10-31T06:04:09.477741+00:00",
+    "commit": "047a99b1473304cc73518dff6427bf7937c542a2",
+    "parent": "129700175cf4716446647572979771d27422fc3f",
+    "branch": "desktop/p2-production-integration",
+    "commit_count": 1,
+    "push_attempt_count": 1,
+    "push_exit_code": 128,
+    "push_status": "BLOCKED: Git HTTPS credentials unavailable; terminal prompts disabled",
+    "remote_updated_by_attempt": false,
+    "new_hosted_run": "NOT STARTED by this failed push",
+    "production_build_audit_upload_checksum_provenance": "NOT EXECUTED for this commit",
+    "P5A": "FAIL / NOT ACCEPTED; hosted verification pending",
+    "next_command": "git push origin 047a99b1473304cc73518dff6427bf7937c542a2:refs/heads/desktop/p2-production-integration",
+    "staged_review": "63 P5A-only files, valid JSON, no credential-pattern hits; original raw evidence whitespace retained; authored source/docs diff check PASS",
+    "additional_commit_push_rerun_dispatch": false,
+    "owner_completed_push": true,
+    "confirmed_hosted_run": 41176826666
+  },
+  "historical_hosted_results": {
+    "41172242175": {
+      "phase": "P5A",
+      "status": "FAIL",
+      "acceptance_recommendation": "NOT READY FOR ACCEPTANCE",
+      "run_id": 41172242175,
+      "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41172242175",
+      "attempt": 1,
+      "event": "push",
+      "source_commit": "129700175cf4716446647572979771d27422fc3f",
+      "created_at_utc": "2026-10-31T05:21:03Z",
+      "completed_at_utc": "2026-10-31T05:24:25Z",
+      "workflow_seconds": 202,
+      "jobs": [
+        {
+          "id": 124452477483,
+          "name": "Workflow validation",
+          "conclusion": "success",
+          "started_at": "2026-10-31T05:21:06Z",
+          "completed_at": "2026-10-31T05:21:12Z",
+          "seconds": 6
+        },
+        {
+          "id": 124452505529,
+          "name": "Backend and security",
+          "conclusion": "success",
+          "started_at": "2026-10-31T05:21:14Z",
+          "completed_at": "2026-10-31T05:22:46Z",
+          "seconds": 92
+        },
+        {
+          "id": 124452505545,
+          "name": "Frontend and browser",
+          "conclusion": "failure",
+          "started_at": "2026-10-31T05:21:14Z",
+          "completed_at": "2026-10-31T05:24:20Z",
+          "seconds": 186
+        },
+        {
+          "id": 124453135377,
+          "name": "CI required",
+          "conclusion": "failure",
+          "started_at": "2026-10-31T05:24:22Z",
+          "completed_at": "2026-10-31T05:24:24Z",
+          "seconds": 2
+        },
+        {
+          "id": 124453136307,
+          "name": "Production Flatpak and bundle audit",
+          "conclusion": "skipped",
+          "started_at": "2026-10-31T05:24:20Z",
+          "completed_at": "2026-10-31T05:24:20Z",
+          "seconds": 0
+        }
+      ],
+      "workflow_validation": {
+        "status": "PASS",
+        "methods": 23,
+        "seconds": 0.191
+      },
+      "backend": {
+        "status": "PASS",
+        "passed": 550,
+        "subtests_passed": 31,
+        "warnings": 2,
+        "pytest_seconds": 44.86,
+        "orchestration": {
+          "status": "PASS",
+          "complete": true,
+          "steps": [
+            {
+              "name": "python-lint",
+              "status": "PASS",
+              "seconds": 0.033
+            },
+            {
+              "name": "frontend-install-for-backend",
+              "status": "PASS",
+              "seconds": 4.594
+            },
+            {
+              "name": "frontend-production-build-for-backend",
+              "status": "PASS",
+              "seconds": 4.87
+            },
+            {
+              "name": "backend-security-lifecycle-migration-packaging",
+              "status": "PASS",
+              "seconds": 47.561
+            }
+          ],
+          "preconditions": {
+            "frontend_dist_initially_absent": true,
+            "clean_frontend_required": true
+          },
+          "seconds": 57.059
+        },
+        "former_missing_asset_failures": "All three independently confirmed PASS in hosted JUnit"
+      },
+      "frontend": {
+        "lint": "PASS",
+        "unit_passed": 273,
+        "typescript_production_build": "PASS",
+        "browser_passed": 16,
+        "browser_failed": 1,
+        "failed_test": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+        "failed_at": "frontend/e2e/lifecycle.spec.ts:143",
+        "failure": "Canonical note changed from revision 3 to revision 4 during the intended no-write interval; unconfirmed title and bold paragraph were persisted. Assertion fails before recovery choice.",
+        "lost_acknowledgement_regression": "PASS",
+        "orchestration": {
+          "status": "FAIL",
+          "complete": true,
+          "steps": [
+            {
+              "name": "frontend-lint",
+              "status": "PASS",
+              "seconds": 3.05
+            },
+            {
+              "name": "frontend-unit",
+              "status": "PASS",
+              "seconds": 13.975
+            },
+            {
+              "name": "typescript-production-build",
+              "status": "PASS",
+              "seconds": 3.879
+            },
+            {
+              "name": "chromium-production-integration",
+              "status": "FAIL",
+              "seconds": 119.193
+            }
+          ],
+          "error_type": "CalledProcessError",
+          "exit_code": 1,
+          "seconds": 140.097
+        }
+      },
+      "trace_evidence": {
+        "observations": [
+          {
+            "event": "browser_context_api",
+            "method": "newPage",
+            "trace_monotonic_ms": 2191.378
+          },
+          {
+            "event": "browser_context_api",
+            "method": "newPage",
+            "trace_monotonic_ms": 4050.902
+          },
+          {
+            "event": "browser_context_api",
+            "method": "setNetworkInterceptionPatterns",
+            "trace_monotonic_ms": 6047.582
+          },
+          {
+            "event": "browser_context_api",
+            "method": "newPage",
+            "trace_monotonic_ms": 6802.323
+          },
+          {
+            "event": "old recovery page close requested",
+            "utc": "2026-10-31T05:22:24.640895+00:00",
+            "trace_monotonic_ms": 7284.009
+          },
+          {
+            "event": "browser_context_api",
+            "method": "newPage",
+            "trace_monotonic_ms": 8908.678
+          },
+          {
+            "event": "note_http_response",
+            "method": "PATCH",
+            "utc": "2026-10-31T05:22:20.798Z",
+            "revision": 2,
+            "updated_at": "2026-10-31T05:22:20.801973+00:00"
+          },
+          {
+            "event": "note_http_response",
+            "method": "GET",
+            "utc": "2026-10-31T05:22:21.611Z",
+            "revision": 2,
+            "updated_at": "2026-10-31T05:22:20.801973+00:00"
+          },
+          {
+            "event": "note_http_response",
+            "method": "PATCH",
+            "utc": "2026-10-31T05:22:22.414Z",
+            "revision": 3,
+            "updated_at": "2026-10-31T05:22:22.416674+00:00"
+          },
+          {
+            "event": "note_http_response",
+            "method": "GET",
+            "utc": "2026-10-31T05:22:24.369Z",
+            "revision": 3,
+            "updated_at": "2026-10-31T05:22:22.416674+00:00"
+          },
+          {
+            "event": "note_http_response",
+            "method": "GET",
+            "utc": "2026-10-31T05:22:26.490Z",
+            "revision": 4,
+            "updated_at": "2026-10-31T05:22:24.650597+00:00"
+          }
+        ],
+        "revision_at_outage_baseline": 3,
+        "revision_after_restart": 4,
+        "newer_note_updated_at": "2026-10-31T05:22:24.650597+00:00",
+        "write_update_ms_after_page_close_requested": 9.702,
+        "new_note_matches_unconfirmed_title": true,
+        "bold_unconfirmed_content_present": true,
+        "driver_saw_intervening_patch": false,
+        "inference": "Unexpected write closely correlates with old page teardown/visibility flush; browser-context routing did not establish an effective no-write boundary. Exact interception bypass remains unproven without server-side request evidence.",
+        "supersedes": "Late route installation alone cannot explain this run: the route was installed before recovery page startup and retained through restart."
+      },
+      "diagnosis": {
+        "confirmed": "Browser-context PATCH routing did not establish the no-write boundary despite installation before page startup; the test now detects the unexpected commit explicitly.",
+        "inference": "Close/visibility-triggered autosave and interception teardown are implicated by the approximately 10 ms timing correlation.",
+        "unproven": "Exact mechanism bypassing driver interception; backend-side request correlation is not captured. No production defect or data corruption is established.",
+        "prior_explanation": "Late route installation alone is insufficient and must not be reported as a verified resolution of the hosted failure."
+      },
+      "flatpak": {
+        "build": "SKIPPED",
+        "package_content_audit": "NOT EXECUTED",
+        "validated_unsigned_artifact_upload": "NOT EXECUTED",
+        "production_package_checksum": null
+      },
+      "diagnostic_artifacts": [
+        {
+          "artifact_id": 13031313767,
+          "kind": "diagnostic ZIP only",
+          "sha256": "e35e0cc4ba2b0e87412f3437e8f833ae12f566ac974dbb9e8c4bd1be1bd2a86b",
+          "bytes": 10471,
+          "independently_verified": true
+        },
+        {
+          "artifact_id": 13032025578,
+          "kind": "diagnostic ZIP only",
+          "sha256": "c7ca73e61843fe0c22b2410436250ef24d28a9147ae5af5bce2e2defc88cf50b",
+          "bytes": 6865466,
+          "independently_verified": true
+        }
+      ],
+      "scope": {
+        "new_commit": false,
+        "push": false,
+        "dispatch": false,
+        "workflow_rerun": false,
+        "application_or_test_code_changed": false,
+        "P5B_started": false,
+        "P5C_started": false
+      },
+      "next_action": "Stop for owner review; preserve the trace and request server-side correlation in a separately authorized investigation. No automatic retry or weaker assertion."
+    }
+  }
+}

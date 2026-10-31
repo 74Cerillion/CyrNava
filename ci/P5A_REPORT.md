@@ -2,40 +2,28 @@
 
 Date: 31 October 2026, Asia/Seoul.
 
-**P5A STATUS: FAIL — HOSTED LIFECYCLE NO-WRITE INVARIANT FAILED**
+**P5A STATUS: FAIL — HOSTED WORKSPACE IMAGE TEST FAILED; LOCAL CORRECTION VERIFIED**
 
-## A. Current status — focused persistence investigation
+## A. Current status — image-selection correction locally verified
 
-**P5A STATUS: FAIL / NOT ACCEPTED.** Latest actual hosted run remains 41172242175.
-No commit, push, dispatch/rerun or production publication occurred in this investigation.
+**P5A remains FAIL / NOT ACCEPTED.** Latest actual hosted run is 41176826666 (FAIL).
+The separate image-command test defect is now reproduced and corrected locally.
+The DOM paragraph caret and editor model code-block selection diverged; Enter was
+sent before they agreed, so `/image` became code text. Test-only preconditions now
+await matching paragraph selection, suggestion readiness and each completed upload.
+No production change was made; accepted SQLite guard source/evidence is preserved.
 
-A trustworthy fixture-only note-write boundary is implemented and locally verified.
-SQLite triggers reject note mutations independently of browser routing; arming serializes
-with existing writers and records a canonical fingerprint. Tests demonstrate effective
-rejection through FastAPI and direct/preexisting connections, persistence through restart,
-and failure when the guard is disabled or canonical data changes. Production code,
-security controls and permissions remain unchanged; staging and migration exclusion tests
-prevent accidental packaging/import of the fixture guard.
+Clean-checkout verification: **10/10 focused**, **273 frontend units + 20 browser
+tests**, lint and TypeScript/build PASS; **9 lifecycle-harness backend regressions**
+PASS. All 33 production frontend assets remain byte-identical. Intermediate failures
+and historical uncertainty are retained in the evidence, not reclassified as PASS.
 
-Correlation now covers test-instrumented fetch, FastAPI/threadpool, Database.update,
-SQLite statement/commit completion and response. Five controlled visibility experiments
-show rejection/rollback while armed and commit after disarm/explicit retry. No actual
-close-intent HTTP request was observed in the local repetitions. The historical escaped
-request cannot be reconstructed from previously absent backend logs; close/visibility
-flush during interception teardown remains a supported hypothesis, not a proven historical
-request identity. Browser routing's inability to establish the write boundary is confirmed.
-
-Clean-checkout results: **15 focused browser passes**, **559 backend tests + 31 subtests**,
-**273 frontend units + 19 browser tests**, lint and TypeScript/build PASS. An initial
-resource-related backend failure and its safe cleanup are retained. No tests, timeout,
-revision safeguards or disk threshold were weakened. See
-[P5A_LIFECYCLE_INVESTIGATION.md](P5A_LIFECYCLE_INVESTIGATION.md) for findings, causal limits,
-implementation, production isolation, exact commands and recommended next step. Current
-supporting record: `evidence/p5a/lifecycle-causality-2026-10-31/validation.json`.
-
-Recommendation: review the fixture-only SQL boundary/correlated diagnostics before
-another authorized hosted cycle. No new hosted execution is requested or performed.
-P5A cannot be accepted without required hosted build/audit/upload verification.
+See [P5A_IMAGE_SELECTION_CORRECTION.md](P5A_IMAGE_SELECTION_CORRECTION.md) for the
+causal positions, exact changes, test commands and limits. Supporting evidence:
+`evidence/p5a/image-selection-correction-2026-10-31/`. Request authorization for one
+P5A-only commit/push; no commit, push, rerun/dispatch or P5B/P5C occurred during local correction.
+Production Flatpak build/audit/upload/provenance remain unexecuted in the latest
+hosted run. Local correction PASS does not confer P5A acceptance.
 
 ## B. Repository baseline
 
@@ -481,3 +469,85 @@ and migration rejects guarded fixtures. Exact historical escaped request remains
 
 P5A remains **FAIL / NOT ACCEPTED**, pending the authorized hosted build/audit/upload
 and required gate. One commit/push is authorized; no rerun/dispatch or further push is permitted.
+
+## T. Authorized commit and Git HTTPS blocker
+
+Created exactly one authorized P5A commit: `047a99b1473304cc73518dff6427bf7937c542a2`. Reviewed all 63 staged files;
+no production application/security/permission/workflow changes or sensitive data.
+Original raw diagnostic whitespace is preserved; authored source/docs checks pass.
+One push attempt exited 128: Git HTTPS credentials are unavailable in this terminal.
+No remote update or new workflow was triggered by that attempt. Required hosted
+build/audit/upload/checksum/provenance checks for this commit are NOT EXECUTED.
+P5A remains FAIL / NOT ACCEPTED; owner must complete the already-authorized push
+from the authenticated Ubuntu terminal. No additional commit or push was performed.
+Evidence: `evidence/p5a/lifecycle-final-review-2026-10-31/push-status.json`.
+
+
+## U. Fourth hosted run — actual results and acceptance decision
+
+[Run 41176826666](https://github.com/74Cerillion/CyrNava/actions/runs/41176826666)
+verified source `047a99b1473304cc73518dff6427bf7937c542a2`, push event, attempt 1.
+Workflow: PASS (23 contracts). Backend/security: PASS (559 tests, 31 subtests,
+2 warnings, 47.14 s). Frontend lint/unit/TypeScript/build: PASS (273 units).
+Browsers: 18 PASS / 1 FAIL; all five lifecycle checks PASS. Final required: FAIL.
+Production Flatpak and bundle audit: SKIPPED because frontend job failed. No new
+production bundle, checksum or provenance exists to verify; diagnostics are not
+misrepresented as a production artifact. Both diagnostic archive digests match GitHub.
+
+The failed test is Phase 1 formatting/clipboard/CRUD/keyboard/documentation at
+`frontend/e2e/workspace.spec.ts:604`, failure at line 656, second image-loop iteration.
+The first image chooser selected JPEG successfully. The next slash command appears
+as literal `/image` inside the existing code block in screenshot and error context;
+there is no Upload image button. Both the click and chooser wait timed out at 10 s.
+This is an observed editor-command/focus precondition failure. The cause of that
+selection transition remains unproven without focused reproduction. Neither a
+chooser implementation defect nor a production lifecycle defect is inferred.
+No test, timeout, production source or security safeguard was changed during review.
+
+New correlated hosted evidence: the no-browser-routing recovery case received a
+close-intent PATCH while hidden, 16.850991 ms after the driver's monotonic marker.
+Expected revision was 3; SQLite UPDATE was aborted, transaction rolled back, and
+FastAPI returned 503. No commit-complete event occurred for that operation. The
+canonical no-write/restart/recovery assertions all passed. This confirms actual
+teardown fault enforcement in this run while retaining historical uncertainty.
+
+**Recommendation: FAIL / NOT ACCEPTED.** Preserve the successful lifecycle
+correction and investigate the separate image-command/focus assumption under
+new authorization. No repeat push, rerun or dispatch was performed. All results
+and source/run identity are recorded in the current evidence directory's
+`final-result.json`, `artifact-verification.json` and `manifest.json`.
+
+
+## V. Image-insertion test correction — local verification checkpoint
+
+Confirmed local reproduction shows DOM paragraph position 254 while ProseMirror
+selects codeBlock position 330 immediately before Enter in the second image loop.
+The following slash is received in codeBlock at position 331. This is a test
+selection synchronization defect, not evidence of native chooser failure.
+
+Only implementation/test changes: `frontend/e2e/editorSelection.ts` (new read-only
+diagnostics/assertions) and `frontend/e2e/workspace.spec.ts` (selection/suggestion/
+upload preconditions, original-rich-text preservation and one code-to-image
+regression). A subsequent viewport assertion now waits for the closing hover menu
+to unmount; its original width bound is preserved. No production source changed.
+
+Final isolated clean-checkout results: 10 focused passes (five per case), 273 units,
+20 browser tests, lint and TypeScript/build PASS; targeted accepted harness suite
+9 PASS. Production asset hashes are identical across all 33 files. The SQLite
+guard and its tests/browser cases remain byte-identical to the accepted commit.
+All historical/diagnostic failures and limitations are preserved. Latest actual
+hosted run remains FAIL. Stop for one P5A-only commit/push authorization.
+
+Final cleanup review: diagnostic writes use `try/finally`, so a write failure cannot
+bypass owned backend shutdown. The exact final source passed another 10/10 focused
+executions and the full 273-unit / 20-browser suite, with no retries or skips.
+
+
+## W. Image-selection correction — owner commit/push authorization
+
+The owner authorized exactly one P5A-only commit and push to
+`origin/desktop/p2-production-integration`. Final source/evidence review verifies
+that production source, permissions and the accepted lifecycle guard are unchanged.
+Local clean-checkout results remain 10 focused, 273 units, 20 browsers and 9 targeted
+backend passes. The latest actual hosted run remains 41176826666 FAIL. No rerun,
+dispatch, release, signing, deployment, main merge or P5B/P5C is authorized.

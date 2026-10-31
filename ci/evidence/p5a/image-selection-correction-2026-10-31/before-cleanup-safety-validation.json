@@ -1,0 +1,109 @@
+{
+  "phase": "P5A image-selection correction",
+  "date_utc": "2026-10-31T07:01:52.178223+00:00",
+  "source_commit": "047a99b1473304cc73518dff6427bf7937c542a2",
+  "local_candidate": "PASS",
+  "P5A": "FAIL / NOT ACCEPTED; latest actual hosted run 41176826666 remains FAIL",
+  "cause_classification": "Test focus/selection synchronization defect, involving asynchronous DOM/editor selection transitions. No production defect demonstrated.",
+  "confirmed_causal_reproduction": {
+    "extension": "webp",
+    "before_End": {
+      "DOM": {
+        "parent": "paragraph",
+        "position": 239
+      },
+      "model": {
+        "parent": "codeBlock",
+        "position": 330
+      }
+    },
+    "before_Enter": {
+      "DOM": {
+        "parent": "paragraph",
+        "position": 254
+      },
+      "model": {
+        "parent": "codeBlock",
+        "position": 330
+      }
+    },
+    "before_slash": {
+      "DOM": {
+        "parent": "codeBlock",
+        "position": 331
+      },
+      "model": {
+        "parent": "codeBlock",
+        "position": 331
+      }
+    },
+    "meaning": "Click/End changed DOM caret before model update. Enter used the stale code-block selection; slash text remained code and no image command/button existed.",
+    "historical_limit": "Historical DOM code text and trace match this failure class; historical internal ProseMirror selection was not captured, so exact historical scheduling is not claimed."
+  },
+  "correction": [
+    "Read-only test selection helper; require mounted editor, focus, collapsed DOM/model selection agreement, correct paragraph block and end/empty-paragraph position",
+    "Await visible selected Image suggestion before keyboard Enter",
+    "Await real chooser, loaded image, closed upload panel, Saved, and canonical image references before next iteration",
+    "Preserve all rich blocks; regression explicitly tests literal /image in code then correct paragraph insertion",
+    "Keep mobile width assertion; await closing hover menu unmount rather than hidden transition snapshot"
+  ],
+  "tests": {
+    "focused_passed": 10,
+    "repetitions_per_test": 5,
+    "retries": 0,
+    "full_frontend_units_passed": 273,
+    "full_browser_passed": 20,
+    "full_browser_skipped": 0,
+    "frontend_lint_typecheck_build": "PASS",
+    "targeted_backend_harness_passed": 9,
+    "targeted_backend_warnings": 1,
+    "full_backend": "NOT RERUN: no production/application behavior changed; actual hosted 559 + 31 subtests remains recorded separately",
+    "frontend_orchestration": {
+      "status": "PASS",
+      "complete": true,
+      "steps": [
+        {
+          "name": "frontend-lint",
+          "status": "PASS",
+          "seconds": 2.511
+        },
+        {
+          "name": "frontend-unit",
+          "status": "PASS",
+          "seconds": 14.326
+        },
+        {
+          "name": "typescript-production-build",
+          "status": "PASS",
+          "seconds": 3.584
+        },
+        {
+          "name": "chromium-production-integration",
+          "status": "PASS",
+          "seconds": 128.677
+        }
+      ],
+      "seconds": 149.098
+    }
+  },
+  "source_files": {
+    "frontend/e2e/workspace.spec.ts": "67a33b5eaedb79fc6552173268db6e37cca4bc3204e34e55347177d765345306",
+    "frontend/e2e/editorSelection.ts": "b528027e903a6a9c3102e62f342e5ecc86283cae4d14c5bec968250953e10755"
+  },
+  "production_assets_identical": {
+    "files": 33,
+    "identical": true
+  },
+  "accepted_lifecycle_guard": "UNCHANGED byte-for-byte",
+  "source_production_changes": false,
+  "workflow_permissions_changes": false,
+  "history": "Previous hosted failure and successful lifecycle fault enforcement retained, together with all local diagnostic failures and limits",
+  "actions": {
+    "commit": false,
+    "push": false,
+    "GitHub_rerun_or_dispatch": false,
+    "publication": false,
+    "P5B_or_P5C": false
+  },
+  "recommendation": "Authorize one P5A-only commit/push of test correction and non-sensitive reports/evidence; require fresh hosted build/audit/upload/gate before P5A acceptance."
+}
