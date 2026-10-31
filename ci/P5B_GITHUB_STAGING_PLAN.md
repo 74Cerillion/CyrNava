@@ -1,144 +1,285 @@
-# P5B GitHub staging registration and approval plan
+# P5B hosted staging preparation — owner-controlled single-maintainer model
 
-31 October 2026. **Recommendation only; no external configuration or dispatch authorized.**
-P5B native verification is owner-accepted PASS. Overall P5B remains CONDITIONAL.
-The owner endorses future R2-compatible hosting and offline production signing;
-neither endorsement authorizes permanent credentials, paid hosting or publication.
+31 October 2026. **One integration commit/push is now owner-authorized; main changes,
+environment configuration and workflow dispatch remain separately gated.** The owner's later explicit
+single-maintainer decision supersedes the earlier independent-reviewer design.
+Historical evidence and earlier design records remain preserved in Git history
+and `evidence/p5b/staging-preparation/`; they are not the current requirements.
 
-## Observed repository state
+## Verified starting point
 
-- Public personal repository `74Cerillion/CyrNava`; default branch `main`.
-- Integration branch and remote both already point to
-  `a9de66384b4b1ae4e5bb47909df1eba7d50468f0` (`P5B Approved`). It contains the
-  previously reviewed implementation and native evidence. Its message does not
-  override the owner's explicit CONDITIONAL acceptance status.
-- The checkout started clean. Preserve this existing commit; do not rewrite,
-  amend or duplicate its implementation. The currently authorized local follow-up
-  commit records endorsements, review and this architecture plan.
-- `p5a-accepted` remains local at `1a28f68c5732ccc1275403060e89ff168a846655`.
-- Read-only API: zero environments, only the existing CI workflow registered;
-  `.github/workflows/release.yml` exists on integration but returns 404 on `main`.
-  Evidence: `evidence/p5b/staging-preparation/github-read-only.json`.
+- Required CI [41205351385](https://github.com/74Cerillion/CyrNava/actions/runs/41205351385)
+  at `7aaefd0f60a735637ee603ac380587a25b73f6cb`: all five required jobs PASS,
+  31 workflow contracts, 611 backend tests + 83 subtests, 273 frontend units,
+  21 browser tests, production Flatpak/exported audit/upload/final gate.
+- Public personal repository `74Cerillion/CyrNava`, ID 1427661036; default `main`.
+  Main tip: **`cbf7cccc686080b2b4b07274a9f5a23fec52999f`**. No existing release
+  workflow file on main, zero environments, only CI registered. These are actual
+  readbacks, not configuration changes. Main tip must be reread before approval/use.
+- Integration remains `desktop/p2-production-integration`, HEAD/remote `7aaefd0`.
+  Local `p5a-accepted` remains at `1a28f68`; no main checkout/merge or tag push.
+- The new single-maintainer policy changes are local and **not** covered by that
+  hosted CI run. A separately approved integration commit/push and successful CI
+  must precede executing the revised hosted staging workflow.
 
-## Default-branch constraint and options
+## Authorization and tradeoff
 
-GitHub requires a `workflow_dispatch` workflow on the default branch. Once
-registered, the operator can choose another branch with the UI or CLI `--ref` /
-REST `ref`. Those parameters select execution source; they do not remove the
-default-branch prerequisite. [Manual workflow documentation](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow),
-[workflow REST API](https://docs.github.com/en/rest/actions/workflows#create-a-workflow-dispatch-event).
+Manual **owner** authorization and owner-initiated `workflow_dispatch` replace
+independent GitHub deployment approval. No second person, required reviewers or
+self-review prevention is required or claimed. This concentrates staging authority
+in the owner's account; compromise or mistaken use of that account no longer has
+a second-person veto. An authorization-reference string is provenance, not a secret
+or proof of an independent approval. No permanent signing/publication authority is
+available to this workflow. Future production signing remains owner-controlled and
+offline, with a separately approved primary/subkey/backup ceremony.
 
-| Approach | Implications | Assessment |
-| --- | --- | --- |
-| Registration-only workflow file on `main`; full execution on integration | Separate, explicitly approved change to one workflow path on main; no application/integration merge or default-branch change | Preferred if owner permits this narrowly scoped main-file change |
-| Temporarily make integration the default branch | No main content merge; changes repository-wide default behavior and must remain coordinated through dispatch/verification/restoration | Fallback only with explicit repository-settings approval |
-| Isolated staging repository | Additional repository/trust setup; current repository ID/source/CI allowlists reject it; would need separately reviewed policy/workflow changes | Unnecessary infrastructure for this case |
-| Dispatch filename/ID/`--ref` without registration, add push/PR triggers, or rely on stale discovery | Does not satisfy the documented prerequisite or changes the accepted manual trust boundary | Not recommended; no workaround execution authorized |
+The existing release implementation remains authoritative. Read-only contents/actions,
+immutable action pins, approved P5A source/artifact/lock hashes, exported-payload audit,
+signatures, negative tests and interrupted local publication protections remain.
+Preflight and the live stage independently check owner actor and triggering actor,
+manual event, exact repository/ref/workflow path, first attempt, workflow SHA and
+checked-out SHA equality; the exact reviewed workflow contract is also checked.
+Wrong refs, other actors/forks, changed workflows, wrong artifact/source and missing
+staging authorization fail closed. Reruns are rejected; any future rerun needs new review.
 
-### Preferred registration-only approach
+There is no post-dispatch human deployment gate in this model: once the owner
+explicitly authorizes and initiates the run, eligible staging starts automatically.
+Review the immutable tooling tip and settings **before** dispatch. A branch ref can
+move between read and dispatch; verify resulting run SHA immediately afterward.
+If it differs, do not claim owner-approved execution or PASS. Manual authorization
+is operational; it does not mathematically bind a chat approval to GitHub's API.
 
-After separate approval, add **only** `.github/workflows/release.yml` to `main`
-through its normal review/protection process. This is not a merge/cherry-pick of
-the integration implementation. Use a valid inert registration definition with
-`workflow_dispatch`, matching input names/types and staging-only choice, read-only
-permissions, and an unconditionally skipped registration job. It must contain no
-checkout, release commands, secret references or reusable-workflow delegation.
-Do not copy the full executable workflow onto main without its dependencies.
+## A — Exact inert registration-only main change (separate authorization)
 
-This proposed registration definition is not installed or hosted-verified yet.
-Review its exact YAML under a separate main-file authorization before use. GitHub
-then selects the full workflow at the explicitly dispatched integration ref; that
-version contains the real eligibility and protected staging jobs. Selecting main
-must perform no signing; the integration preflight independently rejects any ref
-other than `refs/heads/desktop/p2-production-integration`.
+Proposed local source: `ci/release/registration-only.yml`.
+Only proposed destination on main: **`.github/workflows/release.yml`**.
+Add that one file against the main tip above. No application files or integration
+commits are merged, and main stays the default branch.
 
-Record both the main registration commit and immutable integration tooling SHA.
-Before dispatch, compare the branch tip to the approved SHA; after creation,
-verify the run's `head_sha`/ref and workflow definition match. Reject a mismatch,
-do not approve that run, and do not automatically dispatch another. The current
-manual ref is branch-based while checkout uses `github.sha`; this run-SHA review
-is needed to avoid silently accepting branch movement between approval and dispatch.
+```yaml
+name: CyrNava P5B staging rehearsal
 
-This preserves default branch and application history. It still changes a file on
-main, which **is not authorized now**. If the owner disallows any main-file change,
-retain the block and consider the separately authorized fallback instead.
+on:
+  workflow_dispatch:
+    inputs:
+      source_commit:
+        description: Full owner-approved source commit SHA
+        required: true
+        type: string
+      ci_run_id:
+        description: Successful approved P5A CI run
+        required: true
+        type: string
+      version:
+        description: Approved existing application version
+        required: true
+        type: string
+      channel:
+        description: Production publication is disabled
+        required: true
+        type: choice
+        options: [staging]
+      authorization_ref:
+        description: Reviewed disposable-staging authorization reference
+        required: true
+        type: string
 
-### Default-branch-switch fallback
+permissions:
+  contents: read
 
-Temporarily selecting integration as default would satisfy workflow presence
-without merging main. It also changes the default target/source for repository UI,
-new pull requests and default-branch-dependent automation/protection. Review branch
-rules, repository consumers and outstanding PRs first; do not assume rules referring
-to the default branch remain equivalent. Record original settings and a restoration
-plan; neither switch is authorized now.
+jobs:
+  registration:
+    if: ${{ false }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - name: Inert registration marker
+        run: ':'
+```
 
-All execution still uses the exact integration branch and protected environment.
-Do not rely on a workflow remaining runnable after restoring main while its file
-is absent there. This is broader operational change than an inert registration
-file, so it is not the first choice. Changing default branch is not deployment
-approval and never substitutes for an independent reviewer.
+The literal false job condition allocates no runner. A valid job needs a step,
+so its only marker is the shell builtin `:`. Even if that condition were removed,
+that marker has no checkout, signing, release or network action. There are no
+secret references, environment, reusable workflows or deployment capabilities.
+Permissions are read-only; inputs match the executable integration definition
+exactly, including staging as the only channel choice. No input is evaluated by
+the marker. Static checks enforce the entire small shape and reject extra jobs,
+steps, actions, permissions, triggers or changed input schemas.
 
-## Required staging environment
+GitHub requires workflow_dispatch registration on the default branch; execution
+uses the workflow at the selected ref. Dispatching main therefore selects this
+inert definition, while selecting integration uses the reviewed executable release
+workflow. The latter still rejects any ref other than the exact integration branch.
+This selection behavior is documented by GitHub; **not yet demonstrated by an actual
+hosted staging dispatch**. Registration is not release authorization.
+[Manual workflow guide](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow),
+[workflow source selection](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows),
+[execution identity variables](https://docs.github.com/en/actions/reference/workflows-and-actions/variables).
 
-After separate owner authorization, configure `p5b-staging` with:
+### Owner terminal procedure — review now, execute only after Authorization A
 
-1. Required reviewers: nominate a trusted independent person/team. GitHub permits
-   up to six entries but requires only one approval, not approval from all entries.
-2. Enable **Prevent self-review**. The initiating actor cannot approve their own
-   deployment. Prefer owner initiation plus a separate trusted reviewer. Another
-   trusted initiator and owner reviewer also preserves two-person separation, but
-   requires separately approved access. A sole person acting through another token
-   is not independent approval.
-3. Disable **Allow administrators to bypass configured protection rules**; API
-   must report `can_admins_bypass: false`. If unsupported or unverifiable, remain
-   blocked; never silently accept an omitted field or weaker configuration.
-4. Choose **Selected branches and tags**. Create exactly one policy of type
-   `branch`, name `desktop/p2-production-integration`, without wildcards. No tag,
-   main, pull-ref or additional branch policy. Do not choose “Protected branches
-   only”: GitHub can allow all branches if no branch protections exist.
-5. Add **no production secrets**. Disposable keys are generated only after the
-   protected job starts. Workflow token permissions remain `contents: read` and
-   `actions: read`; no release/network-publication write credentials are needed.
+This uses a disposable detached clone, leaving the integration checkout untouched.
+The push is normal fast-forward and fails if main has advanced. If protection or
+authentication blocks it, stop and use the repository's approved review process;
+do not force-push, disable protection or merge integration. The owner needs contents
+write and permission to update workflow files; CLI credentials may need workflow
+permission. Never paste credentials into chat.
 
-GitHub documents these controls for public repositories on current plans, but
-actual account/UI/API behavior must be verified. Required reviewers need at least
-read access; available personal-repository collaborator roles must be checked
-before inviting anyone. No invite, permission change or environment creation is
-authorized by this plan. [Environment protection documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments),
-[environment API](https://docs.github.com/en/rest/deployments/environments).
+```bash
+(
+set -euo pipefail
+p5b_source=/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava
+p5b_main=cbf7cccc686080b2b4b07274a9f5a23fec52999f
+test "$(sha256sum "$p5b_source/ci/release/registration-only.yml" | cut -d' ' -f1)" = 3a8c4ad86f958dc7d437c5ee4e5ad2ac57d8753cc4429252edc0005bf385c7c5
+p5b_actual="$(git ls-remote https://github.com/74Cerillion/CyrNava.git refs/heads/main | cut -f1)"
+test "$p5b_actual" = "$p5b_main"
+p5b_registration_dir="$(mktemp -d "$HOME/.cache/cyrnava-registration.XXXXXX")"
+git clone --no-checkout https://github.com/74Cerillion/CyrNava.git "$p5b_registration_dir"
+git -C "$p5b_registration_dir" checkout --detach "$p5b_main"
+test ! -e "$p5b_registration_dir/.github/workflows/release.yml"
+install -D -m 644 "$p5b_source/ci/release/registration-only.yml" "$p5b_registration_dir/.github/workflows/release.yml"
+git -C "$p5b_registration_dir" add -- .github/workflows/release.yml
+test "$(git -C "$p5b_registration_dir" diff --cached --name-only)" = .github/workflows/release.yml
+git -C "$p5b_registration_dir" diff --cached --check
+git -C "$p5b_registration_dir" diff --cached
+git -C "$p5b_registration_dir" commit -m 'ci: register inert P5B staging workflow on main'
+test "$(git -C "$p5b_registration_dir" rev-parse HEAD^)" = "$p5b_main"
+test "$(git -C "$p5b_registration_dir" diff-tree --no-commit-id --name-only -r HEAD)" = .github/workflows/release.yml
+git -C "$p5b_registration_dir" push origin HEAD:refs/heads/main
+git -C "$p5b_registration_dir" rev-parse HEAD
+git -C "$p5b_registration_dir" ls-remote origin refs/heads/main
+)
+```
 
-Repository administrators can still edit rules/workflow source; disabling deployment
-bypass is not a guarantee against a malicious administrator. Keep source/settings
-review, audit records and least privilege. No production key is exposed even in
-this disposable-staging model.
+Before granting A, record the approved proposal SHA-256 from the local validation
+record; compare it again immediately before copying. After future registration,
+read the main file back at the resulting commit and compare bytes/hash; verify
+only that file changed, main parent matches the approved base, and Actions lists
+its release workflow ID/path. Do not dispatch main merely to test the stub.
 
-## Verification sequence requiring later authorization
+## B — Environment UI configuration (separate authorization)
 
-- Obtain authorization for the pending integration documentation push; observe
-  its normal verification-only CI without dispatching or rerunning anything.
-- Approve one registration strategy, its exact changes and independent reviewer.
-  Configure environment only after its own approval. Read back actual settings.
-  `github.py environment_eligible()` requires reviewer/non-self-review/no-bypass and
-  exactly the single branch policy; current mocks are not hosted proof.
-- Authorize one manual staging execution. Keep the existing full application SHA
-  `1ee2077b283b8e5dfc2162119dd439ed3baeb109`, run 41181510439, version 0.1.0,
-  staging channel and reviewed authorization reference. The tooling commit is the
-  separately approved integration tip, not that older application source.
-- Verify the unprivileged eligibility job passes live CI/source/artifact and
-  environment checks, then the staging job actually waits for independent approval.
-  Preserve initiating/reviewing actors and the reviewed run-SHA/ref; no bypass.
-- The nominated reviewer independently reviews and approves the authorized run.
-  The future run authorization covers execution through this gate; it does not
-  replace the reviewer's decision. This document grants neither authorization.
-- Require native signing/negative checks, descriptor remote validation, interruption
-  protection, key cleanup, live artifact digest/provenance and safe diagnostic upload
-  to pass. Record run/attempt, immutable tooling SHA, workflow hash, approved source,
-  public fingerprint, result/eligibility hashes and final job conclusions. Diagnostic
-  artifacts contain only the two safe JSON records, no key homes or package trees.
-- If GitHub cannot enforce any required protection, document the specific limitation
-  and stop for a separately approved design; do not remove protection or mark PASS.
-  No automatic retry/rerun is authorized on failure.
+Owner's settings page:
+[Settings → Environments](https://github.com/74Cerillion/CyrNava/settings/environments).
+Only the personal repository owner can configure its environments. Public
+repositories support these controls on current GitHub plans; actual UI/readback
+is authoritative. No paid plan or second collaborator is needed for this model.
+[GitHub environment guide](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments).
 
-P5B remains CONDITIONAL until protected hosted verification and formal owner
-acceptance. Permanent key creation, public R2 hosting, GitHub Releases and real
-update/install deployment remain separately gated; P5C/P6 have not begun.
+After explicit B approval:
+
+1. Click **New environment**, enter `p5b-staging`, then **Configure environment**.
+2. Leave **Required reviewers** unchecked/empty. No self-review prevention is needed;
+   no invitation or access grant is required. Do not add a wait timer or custom approval.
+3. Under **Deployment branches and tags**, select **Selected branches and tags**.
+4. Add exactly one rule: type **Branch**, name `desktop/p2-production-integration`.
+   No wildcards, tags, main or pull-request refs. Do not use “Protected branches only”.
+5. Add no secrets or variables carrying credentials: no production keys, signing
+   passphrases, publication credentials or permanent endpoints. Existing workflow
+   refers only to GitHub's read-only job token, never `secrets.*` or OIDC permissions.
+6. Save and revisit the page. Confirm the single rule and empty reviewer/secrets lists.
+   The administrator-bypass flag controls approval rules that this model does not use;
+   it is not an authorization gate, and either API value is accepted. Exact branch
+   restrictions are independently enforced in preflight. No admin bypass protection
+   or independent deployment approval is claimed.
+
+Read back actual settings (read-only; `gh` uses the owner's authenticated account).
+The Python helper needs the reviewed tooling environment with PyYAML 6.0.3 from
+`ci/requirements.lock`; if absent, have Astra validate the JSON using its verified
+tooling interpreter rather than installing unpinned dependencies:
+
+```bash
+gh api repos/74Cerillion/CyrNava/environments/p5b-staging > environment.json
+gh api repos/74Cerillion/CyrNava/environments/p5b-staging/deployment-branch-policies > branches.json
+gh api repos/74Cerillion/CyrNava/environments/p5b-staging/secrets --jq '{total_count}'
+python3 ci/release/registration_policy.py --environment-record environment.json --branches-record branches.json
+```
+
+Expected: correct name, protection_rules contains no required_reviewers rule,
+deployment_branch_policy `{protected_branches:false, custom_branch_policies:true}`,
+exactly one `branch` entry with the name above, secret count zero. No setting is
+assumed applied merely because a write succeeded. The workflow token only needs
+contents/actions read; public environment GETs are readable without privileged tokens.
+An authenticated settings change requires the owner, not a stronger runner token.
+[Environment API](https://docs.github.com/en/rest/deployments/environments),
+[deployment-branch API](https://docs.github.com/en/rest/deployments/branch-policies).
+
+If a required control cannot be verified, stop; do not expand branch access or
+place production secrets into Actions. Environment JSON alone proves configuration,
+not successful hosted enforcement. A production credential must never be made
+available to staging merely because no reviewer gate remains.
+
+## C — One hosted staging dispatch (separate authorization, not granted)
+
+Prerequisites: approved revised integration commit synchronized with successful CI;
+A complete with exact main-file readback; B complete with actual settings readback;
+owner-approved immutable tooling SHA; accepted artifact still available and unexpired.
+The latest CI package is **not** substituted for the older policy-pinned P5A artifact.
+
+| Input | Required value |
+| --- | --- |
+| Execution ref | `desktop/p2-production-integration` |
+| Tooling commit | Exact future owner-approved revised integration SHA; not 7aaefd0 after this local policy change |
+| source_commit | `1ee2077b283b8e5dfc2162119dd439ed3baeb109` |
+| ci_run_id | `41181510439` (attempt 1) |
+| version | `0.1.0` |
+| channel | `staging` |
+| authorization_ref | `P5B-owner-authorized-disposable-staging-only` |
+| Accepted artifact | ID `13035607417`, ZIP SHA-256 `73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b` |
+
+The exact future dispatch, **only after C approval**, is:
+
+```bash
+gh workflow run release.yml --repo 74Cerillion/CyrNava \
+  --ref desktop/p2-production-integration \
+  -f source_commit=1ee2077b283b8e5dfc2162119dd439ed3baeb109 \
+  -f ci_run_id=41181510439 \
+  -f version=0.1.0 \
+  -f channel=staging \
+  -f authorization_ref=P5B-owner-authorized-disposable-staging-only
+```
+
+Immediately before dispatch, compare integration tip to the separately approved
+full tooling SHA, verify the workflow bytes/contract at that SHA, registered workflow
+ID/path, current settings and actor account. Do not copy a placeholder SHA into an
+executable command. The policy now rejects another initiator and any second attempt.
+After dispatch, record run ID, workflow ID and head SHA; independently compare them
+to the approved inputs. The owner readback helper can check downloaded records:
+
+```bash
+gh api repos/74Cerillion/CyrNava/actions/runs/ACTUAL_RUN_ID > run.json
+gh api -H 'Accept: application/vnd.github.raw+json' \
+  'repos/74Cerillion/CyrNava/contents/.github/workflows/release.yml?ref=APPROVED_FULL_TOOLING_SHA' > run-workflow.yml
+python3 ci/release/registration_policy.py \
+  --run-record run.json --run-workflow run-workflow.yml \
+  --tooling-commit APPROVED_FULL_TOOLING_SHA --workflow-id ACTUAL_REGISTERED_WORKFLOW_ID
+```
+
+Those uppercase values are instructions to fill verified values, not executable
+ready-made IDs. The CLI requires all fields together. No staging dispatch has occurred.
+Require eligibility, accepted artifact audit, signed OSTree generation, wrong-key/
+tamper/missing-object/unexpected-ref rejection, native descriptor and interrupted
+publication checks, key cleanup and final PASS/complete. Only safe result.json and
+eligibility.json are uploaded. No repository tree, private key or application package
+is published by staging. Record hashes and source/tooling identities separately.
+No automatic rerun, signing fallback or release publication is permitted on failure.
+
+## Local validation and responsibilities
+
+Final local results: **59 release/registration/signing regressions + 31 CI contracts
+PASS**, plus Ruff, actionlint and all three policy checks. Proposal SHA-256:
+`3a8c4ad86f958dc7d437c5ee4e5ad2ac57d8753cc4429252edc0005bf385c7c5`. Evidence: `evidence/p5b/staging-final-preparation-2026-10-31/`.
+The initial CI-contract check hit the unchanged 5 GiB guard on /tmp; it was rerun
+with small disposable fixtures on spacious /dev/shm, without weakening the guard.
+
+`registration_policy.py` validates the inert YAML and optional readbacks, with no
+network writes or signing. Registration input/privilege mutations, wrong execution
+identities/actors and environment ref-policy changes have synthetic regression tests.
+Both executable workflows remain hash-pinned and policy-validated; the release step
+name/contract now describe owner dispatch rather than independent approval.
+
+Astra can prepare local changes/tests and perform authorized read-only verification.
+The owner must authorize each integration commit/push, A, B and C separately. GitHub
+settings and dispatch can later use the owner's authenticated UI/CLI, or a separately
+authorized connector operation. No collaborator action is needed. Successful native
+rehearsal remains accepted; it is not rerun simply to refresh a record. No P5C/P6.

@@ -35,10 +35,16 @@ licensing, data-migration or native acceptance review.
 | Managed signer/HSM service | May offer hardware policy and audit | Provider credentials, service trust, OpenPGP/OSTree compatibility | Added service cost and integration | Not justified by present needs |
 
 Permanent key creation, import into GitHub, secrets and environment changes require
-separate approval. Public-repository required reviewers are supported in current
-GitHub plans, but their configuration must actually be inspected. The read-only
-P5B inspection found **zero environments**. No reviewer protection is claimed.
-[GitHub environment controls](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments).
+separate approval. The owner approved the single-maintainer staging model: manual
+owner authorization replaces independent deployment approval. No required reviewer
+or self-review prevention is required or claimed. Current read-only inspection
+still finds zero environments; actual settings/hosted execution remain pending.
+Preflight enforces owner initiation, manual trigger, exact repository/ref/workflow
+and immutable checkout; the environment permits only the exact integration branch.
+No production credential is available to staging. This removes the second-person
+veto and concentrates staging authority in the owner's account. Future production
+signing remains offline and separately authorized; this change does not move its
+keys into CI. See `P5B_GITHUB_STAGING_PLAN.md` for the approved tradeoff and gates.
 
 ## Current executable staging design
 

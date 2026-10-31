@@ -17,6 +17,10 @@ def read_workflow(path):
 
 def validate(value):
     require(
+        policy()["authorization_model"] == "single-maintainer-manual-staging",
+        "Owner-approved staging authorization model required",
+    )
+    require(
         set(value["on"]) == {"workflow_dispatch"},
         "Release may only be manually dispatched",
     )

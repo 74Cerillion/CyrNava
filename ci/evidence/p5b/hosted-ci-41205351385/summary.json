@@ -1,0 +1,22 @@
+{
+  "observed_utc": "2026-10-31T13:48:34.439986+00:00",
+  "run_id": 41205351385,
+  "workflow_id": 402398273,
+  "commit": "7aaefd0f60a735637ee603ac380587a25b73f6cb",
+  "status": "PASS",
+  "workflow_contracts": 31,
+  "backend_tests": 611,
+  "backend_subtests": 83,
+  "frontend_units": 273,
+  "browser_tests": 21,
+  "browser_failures": 0,
+  "lifecycle_tests": 5,
+  "appearance_and_placeholder_regressions": "PASS",
+  "runtime_provisioning": "PASS",
+  "Flatpak_build": "PASS",
+  "exported_audit": "PASS",
+  "unsigned_artifact_upload": "PASS",
+  "required_gate": "PASS",
+  "registration_or_configuration_started": false,
+  "meaning": "Required CI at 7aaefd0 passed; not a hosted P5B staging run and not verification of the later uncommitted single-maintainer policy."
+}

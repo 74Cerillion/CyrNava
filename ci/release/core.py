@@ -115,6 +115,11 @@ def policy():
     value = read_json(HERE / "policy.json")
     require(value["production_enabled"] is False, "Production publication is disabled")
     require(
+        value.get("authorization_model") == "single-maintainer-manual-staging"
+        and value.get("staging_owner") == value["repository"].split("/")[0],
+        "Reviewed single-maintainer authorization model required",
+    )
+    require(
         sha(ROOT / ".github/workflows/ci.yml") == value["ci_workflow_sha256"],
         "Accepted CI workflow changed; policy review required",
     )

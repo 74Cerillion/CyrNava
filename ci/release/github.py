@@ -6,7 +6,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from core import Rejected, ci_eligibility, policy, require, sha
+from core import ROOT, Rejected, call, ci_eligibility, policy, require, sha
 
 PREFIX = "https://api.github.com/repos/74Cerillion/CyrNava/"
 
@@ -52,22 +52,15 @@ def get(path, raw=False):
 def environment_eligible(environment, branches):
     require(
         environment.get("name") == policy()["environment"],
-        "Unexpected approval environment",
+        "Unexpected staging environment",
     )
     require(
-        environment.get("can_admins_bypass") is False,
-        "Administrator bypass must be disabled",
-    )
-    reviewers = [
-        r
-        for r in environment.get("protection_rules", [])
-        if r.get("type") == "required_reviewers"
-    ]
-    require(
-        len(reviewers) == 1
-        and reviewers[0].get("prevent_self_review") is True
-        and len(reviewers[0].get("reviewers", [])) > 0,
-        "Required independent reviewer protection missing",
+        isinstance(environment.get("protection_rules"), list)
+        and not any(
+            r.get("type") == "required_reviewers"
+            for r in environment["protection_rules"]
+        ),
+        "Single-maintainer staging must not require deployment reviewers",
     )
     require(
         environment.get("deployment_branch_policy")
@@ -82,6 +75,55 @@ def environment_eligible(environment, branches):
         "Deployment branch allowlist mismatch",
     )
     return True
+
+
+def execution_eligible(context, checkout_commit):
+    """Manual owner authorization, immutable checkout and exact execution origin.
+
+    An authorization-reference string is provenance, not an independent approval
+    or a secret. GitHub actor authentication and explicit owner dispatch are the
+    staging authority. No deployment reviewer protection is claimed.
+    """
+    value = policy()
+    ref = "refs/heads/" + value["workflow_branch"]
+    require(
+        context.get("GITHUB_ACTIONS") == "true"
+        and context.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
+        and context.get("GITHUB_REPOSITORY") == value["repository"]
+        and context.get("GITHUB_REF") == ref,
+        "Only manual staging from the exact reviewed repository and branch is eligible",
+    )
+    owner = value["staging_owner"].lower()
+    require(
+        context.get("GITHUB_ACTOR", "").lower() == owner
+        and context.get("GITHUB_TRIGGERING_ACTOR", "").lower() == owner
+        and context.get("GITHUB_RUN_ATTEMPT") == "1",
+        "One owner-initiated staging attempt required; reruns need policy review",
+    )
+    require(
+        context.get("GITHUB_WORKFLOW_REF")
+        == value["repository"] + "/.github/workflows/release.yml@" + ref
+        and re_full_sha(context.get("GITHUB_SHA", ""))
+        and context.get("GITHUB_WORKFLOW_SHA") == context["GITHUB_SHA"]
+        and checkout_commit == context["GITHUB_SHA"],
+        "Unexpected release workflow identity or mutable checkout",
+    )
+    return True
+
+
+def re_full_sha(value):
+    return len(value) == 40 and all(c in "0123456789abcdef" for c in value)
+
+
+def check_execution():
+    import workflow_policy
+
+    execution_eligible(
+        os.environ, call("git", "-C", ROOT, "rev-parse", "HEAD").decode().strip()
+    )
+    workflow_policy.validate(
+        workflow_policy.read_workflow(ROOT / ".github/workflows/release.yml")
+    )
 
 
 def check_environment():
@@ -107,6 +149,8 @@ def live_evidence(entry):
     ci_eligibility(run, jobs["jobs"], artifact, workflow, entry)
     return {
         "status": "PASS",
+        "authorization_model": policy()["authorization_model"],
+        "deployment_reviewers": "NOT REQUIRED; manual owner authorization",
         "source_commit": entry["source_commit"],
         "ci_run_id": entry["ci_run_id"],
         "ci_run_attempt": entry["ci_run_attempt"],

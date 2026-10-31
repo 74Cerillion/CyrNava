@@ -5,6 +5,12 @@ authorized one correction commit and one push after review. No Actions rerun/dis
 staging configuration, signing-key creation or P5C/P6 work is authorized.
 P5B remains CONDITIONAL; the historical hosted CI result remains FAIL.
 
+Follow-up: correction commit 7aaefd0 was pushed by the owner. Required CI run
+41205351385 passed all gates, including this test/regression, 273 units, all 21
+browser tests and production Flatpak/audit/upload. See P5B_REPORT.md and
+`evidence/p5b/hosted-ci-41205351385/`. The original investigation/limits below
+remain historical; the full hosted event timing in the failed run remains unproven.
+
 ## Confirmed cause: invalid editor-state precondition in the test
 
 Hosted [run 41197927704](https://github.com/74Cerillion/CyrNava/actions/runs/41197927704),

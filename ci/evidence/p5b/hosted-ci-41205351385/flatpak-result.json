@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "directory": "/home/runner/work/CyrNava/CyrNava/ci-output/flatpak/production-build",
+  "app_id": "io.github._74Cerillion.CyrNava",
+  "bundle": "/home/runner/work/CyrNava/CyrNava/ci-output/flatpak/production-build/io.github._74Cerillion.CyrNava.flatpak",
+  "sha256": "01e13b55a60100e6573de8bfbfc87f1b16373c4d7b8ca05047e35c4e27263153",
+  "bytes": 209189544,
+  "logical_installed_bytes": 980984007,
+  "ostree_commit": "049e3ffc86aa1b6060c17db4baf7a5b7bde37e0562f6870a06c3ab62322f6971"
+}

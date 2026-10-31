@@ -1,0 +1,70 @@
+{
+  "observed_utc": "2026-10-31T13:41:12.220358+00:00",
+  "requests": {
+    "repository": {
+      "http_status": 200,
+      "source": "GitHub connector get_repo; an initial unauthenticated repository root request with trailing slash returned 404",
+      "value": {
+        "id": 1427661036,
+        "full_name": "74Cerillion/CyrNava",
+        "owner_type": "User",
+        "visibility": "public",
+        "default_branch": "main",
+        "authenticated_connector_permissions": {
+          "admin": true,
+          "push": true,
+          "pull": true
+        }
+      }
+    },
+    "main": {
+      "http_status": 200,
+      "value": {
+        "name": "main",
+        "sha": "cbf7cccc686080b2b4b07274a9f5a23fec52999f",
+        "protected": false
+      }
+    },
+    "environments": {
+      "http_status": 200,
+      "value": {
+        "total_count": 0,
+        "environments": []
+      }
+    },
+    "workflows": {
+      "http_status": 200,
+      "value": {
+        "total_count": 1,
+        "workflows": [
+          {
+            "id": 402398273,
+            "name": "CyrNava CI",
+            "path": ".github/workflows/ci.yml",
+            "state": "active"
+          }
+        ]
+      }
+    },
+    "main_release": {
+      "http_status": 404
+    },
+    "run": {
+      "http_status": 200,
+      "value": {
+        "id": 41205351385,
+        "workflow_id": 402398273,
+        "run_attempt": 1,
+        "event": "push",
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "7aaefd0f60a735637ee603ac380587a25b73f6cb",
+        "head_branch": "desktop/p2-production-integration",
+        "path": ".github/workflows/ci.yml",
+        "html_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41205351385",
+        "created_at": "2026-10-31T13:23:29Z",
+        "updated_at": "2026-10-31T13:38:40Z"
+      }
+    }
+  }
+}

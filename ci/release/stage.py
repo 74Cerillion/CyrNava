@@ -29,6 +29,7 @@ def main():
         "status": "FAIL",
         "complete": False,
         "purpose": "P5B disposable staging",
+        "authorization_model": "single-maintainer-manual-staging",
         "stage": "eligibility",
         "steps": [],
     }
@@ -51,12 +52,7 @@ def main():
         private.mkdir(mode=0o700)
         if args.live:
             if os.environ.get("GITHUB_ACTIONS") == "true":
-                core.require(
-                    os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
-                    and os.environ.get("GITHUB_REF")
-                    == "refs/heads/" + core.policy()["workflow_branch"],
-                    "Untrusted release trigger/ref",
-                )
+                github.check_execution()
                 github.check_environment()
             evidence = github.live_evidence(entry)
             (output / "eligibility.json").write_bytes(core.encode(evidence))

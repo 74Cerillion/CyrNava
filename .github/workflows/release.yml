@@ -56,7 +56,7 @@ jobs:
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         with:
           python-version: '3.12'
-      - name: Verify release policy and configured independent approval protection
+      - name: Verify owner-dispatched policy and exact staging branch protection
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |

@@ -394,17 +394,10 @@ class WorkflowTests(unittest.TestCase):
             with self.subTest(index=index), self.assertRaises(core.Rejected):
                 workflow_policy.validate(value)
 
-    def test_environment_missing_reviewers_self_review_or_bypass_rejected(self):
+    def test_single_maintainer_environment_requires_exact_branch_not_reviewers(self):
         value = {
             "name": "p5b-staging",
-            "can_admins_bypass": False,
-            "protection_rules": [
-                {
-                    "type": "required_reviewers",
-                    "prevent_self_review": True,
-                    "reviewers": [{"type": "User"}],
-                }
-            ],
+            "protection_rules": [{"type": "branch_policy"}],
             "deployment_branch_policy": {
                 "protected_branches": False,
                 "custom_branch_policies": True,
@@ -418,9 +411,9 @@ class WorkflowTests(unittest.TestCase):
         }
         self.assertTrue(github.environment_eligible(value, branches))
         for mutate in [
-            lambda x: x.update(can_admins_bypass=True),
-            lambda x: x.update(protection_rules=[]),
-            lambda x: x["protection_rules"][0].update(prevent_self_review=False),
+            lambda x: x.update(protection_rules=[{"type": "required_reviewers"}]),
+            lambda x: x.update(deployment_branch_policy=None),
+            lambda x: x.update(name="another-environment"),
         ]:
             changed = copy.deepcopy(value)
             mutate(changed)
@@ -505,6 +498,96 @@ class WorkflowTests(unittest.TestCase):
             core.outside_source(
                 core.ROOT.parent / ".." / core.ROOT.parent.name / core.ROOT.name
             )
+
+
+class HostedExecutionTests(unittest.TestCase):
+    def setUp(self):
+        self.commit = "a" * 40
+        self.context = {
+            "GITHUB_ACTIONS": "true",
+            "GITHUB_EVENT_NAME": "workflow_dispatch",
+            "GITHUB_REPOSITORY": "74Cerillion/CyrNava",
+            "GITHUB_REF": "refs/heads/desktop/p2-production-integration",
+            "GITHUB_ACTOR": "74Cerillion",
+            "GITHUB_TRIGGERING_ACTOR": "74Cerillion",
+            "GITHUB_RUN_ATTEMPT": "1",
+            "GITHUB_SHA": self.commit,
+            "GITHUB_WORKFLOW_SHA": self.commit,
+            "GITHUB_WORKFLOW_REF": (
+                "74Cerillion/CyrNava/.github/workflows/release.yml"
+                "@refs/heads/desktop/p2-production-integration"
+            ),
+        }
+
+    def test_owner_manual_dispatch_with_immutable_execution_identity(self):
+        self.assertTrue(github.execution_eligible(self.context, self.commit))
+
+    def test_wrong_ref_repo_actor_workflow_or_rerun_is_rejected(self):
+        cases = [
+            ("GITHUB_ACTIONS", "false"),
+            ("GITHUB_EVENT_NAME", "push"),
+            ("GITHUB_REPOSITORY", "untrusted/fork"),
+            ("GITHUB_REF", "refs/heads/main"),
+            ("GITHUB_REF", "refs/tags/staging"),
+            ("GITHUB_REF", "refs/pull/1/merge"),
+            ("GITHUB_ACTOR", "another-account"),
+            ("GITHUB_TRIGGERING_ACTOR", "another-account"),
+            ("GITHUB_RUN_ATTEMPT", "2"),
+            ("GITHUB_SHA", "main"),
+            ("GITHUB_WORKFLOW_SHA", "b" * 40),
+            (
+                "GITHUB_WORKFLOW_REF",
+                "untrusted/fork/.github/workflows/release.yml@main",
+            ),
+        ]
+        for name, value in cases:
+            with self.subTest(name=name, value=value), self.assertRaises(core.Rejected):
+                github.execution_eligible({**self.context, name: value}, self.commit)
+
+    def test_missing_context_never_authorizes_execution(self):
+        for name in self.context:
+            changed = self.context.copy()
+            changed.pop(name)
+            with self.subTest(name=name), self.assertRaises(core.Rejected):
+                github.execution_eligible(changed, self.commit)
+
+    def test_wrong_checkout_is_rejected(self):
+        with self.assertRaises(core.Rejected):
+            github.execution_eligible(self.context, "b" * 40)
+
+    def test_preflight_checks_identity_and_environment_before_live_evidence(self):
+        entry = core.policy()["approved_staging_sources"][0]
+        context = {
+            **self.context,
+            "RELEASE_SOURCE": entry["source_commit"],
+            "RELEASE_VERSION": "0.1.0",
+            "RELEASE_CHANNEL": "staging",
+            "RELEASE_AUTHORIZATION": entry["authorization_ref"],
+            "RELEASE_CI_RUN": str(entry["ci_run_id"]),
+        }
+        with (
+            patch.dict(os.environ, context, clear=True),
+            patch.object(github, "check_execution") as execution,
+            patch.object(github, "check_environment") as environment,
+            patch.object(
+                github, "live_evidence", return_value={"status": "PASS"}
+            ) as live,
+        ):
+            preflight.main()
+            execution.assert_called_once()
+            environment.assert_called_once()
+            live.assert_called_once_with(entry)
+        for check in ["check_execution", "check_environment"]:
+            with (
+                patch.dict(os.environ, context, clear=True),
+                patch.object(github, "check_execution"),
+                patch.object(github, "check_environment"),
+                patch.object(github, check, side_effect=core.Rejected("blocked")),
+                patch.object(github, "live_evidence") as live,
+            ):
+                with self.assertRaises(core.Rejected):
+                    preflight.main()
+                live.assert_not_called()
 
 
 if __name__ == "__main__":

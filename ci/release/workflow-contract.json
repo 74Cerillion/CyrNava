@@ -36,7 +36,7 @@
           "env": {
             "GITHUB_TOKEN": "${{ github.token }}"
           },
-          "name": "Verify release policy and configured independent approval protection",
+          "name": "Verify owner-dispatched policy and exact staging branch protection",
           "run": "python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock\npython ci/release/workflow_policy.py\npython ci/release/preflight.py\n"
         }
       ],

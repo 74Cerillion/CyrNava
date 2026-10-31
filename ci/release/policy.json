@@ -8,6 +8,8 @@
   "branch": "stable",
   "version": "0.1.0",
   "environment": "p5b-staging",
+  "authorization_model": "single-maintainer-manual-staging",
+  "staging_owner": "74Cerillion",
   "workflow_branch": "desktop/p2-production-integration",
   "ci_workflow_id": 402398273,
   "ci_workflow_path": ".github/workflows/ci.yml",

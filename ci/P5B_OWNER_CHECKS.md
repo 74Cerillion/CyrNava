@@ -1,9 +1,12 @@
 # P5B owner checks — staging only, not production authorization
 
-P5A is accepted. P5B implementation/native evidence already exists in a9de663.
-One local documentation/review follow-up commit is authorized. No push, hosted workflow
-trigger, permanent key, hosting subscription, environment change or release is
-authorized by these instructions. Review `P5B_REPORT.md` for current test results.
+P5A is accepted. Required CI run 41205351385 at 7aaefd0 is PASS. The owner has
+approved a **single-maintainer, manual owner-authorization** architecture for P5B.
+The revised policy is locally verified. The owner subsequently authorized one
+integration commit/push; main registration, environment setup and staging dispatch
+still require their separate approvals.
+No independent deployment approval or self-review prevention is required or claimed.
+Review `P5B_REPORT.md` and `P5B_GITHUB_STAGING_PLAN.md` for exact evidence/settings.
 
 ## Decisions for review
 
@@ -86,34 +89,47 @@ An optional **separate** delta measurement uses the same command with
 it does not measure a real version-to-version application update. Retain results
 before removing only the marked disposable parent. Do not delete any legacy data.
 
-## Future GitHub environment/workflow setup — requires separate approval
+## Remaining owner steps — each external operation is separately authorized
 
-Read-only inspection found zero environments and only the existing CI workflow.
-The release workflow exists on remote integration at a9de663, but not on default
-main; only CI is registered. It has not been dispatched. Its definition intentionally
-cannot succeed without independent protected approval.
+- [x] Latest required CI verified: 31 workflow contracts, 611 backend tests + 83
+  subtests, 273 unit tests, 21 browser tests, Flatpak/exported audit/upload/final gate.
+- [x] All four downloaded artifact ZIPs independently match GitHub SHA-256; bundle
+  and checksum/provenance/runtime/source records agree. See hosted-ci-41205351385.
+- [x] Owner-approved single-maintainer tradeoff implemented locally: manual owner
+  dispatch replaces independent GitHub deployment approval. No second user needed.
+- [x] Revised local verification: 59 release/registration/signing tests + 31 existing
+  CI contracts, Ruff/actionlint and both workflow/security policies PASS.
+- [x] **Integration update authorization:** one P5B-only commit/push authorized for the revised
+  single-maintainer policy, proposal/tests/docs and safe evidence. Review staged files
+  first. Verify its automatic CI before using that immutable tooling commit.
+- [ ] **Authorization A — main registration:** approve only the inert
+  `.github/workflows/release.yml` addition against main
+  `cbf7cccc686080b2b4b07274a9f5a23fec52999f` (reread tip first). Exact local proposal:
+  `ci/release/registration-only.yml`; full YAML, assessment and detached-clone owner
+  commands are in the staging plan. No integration merge or default-branch change.
+- [ ] **Authorization B — environment:** owner opens repository Settings → Environments,
+  creates `p5b-staging`, leaves Required reviewers empty and adds exactly one Selected
+  branches and tags rule: Branch `desktop/p2-production-integration`. No tags/wildcards,
+  main/pull refs, secrets, production signing keys or publication credentials. No
+  self-review setting or collaborator invitation is needed. Read settings back via
+  GET APIs and local registration_policy.py; secret-name count must be zero.
+- [ ] **Authorization C — dispatch:** approve one owner-initiated manual run from
+  the exact revised integration SHA. Pin source 1ee2077b283b8e5dfc2162119dd439ed3baeb109,
+  CI 41181510439/attempt 1, version 0.1.0, channel staging and authorization reference
+  P5B-owner-authorized-disposable-staging-only. Full future command is in the staging
+  plan. This is not permission to dispatch now or to promote the newest CI artifact.
+- [ ] Before C, verify main registration, settings, registered workflow ID/path,
+  integration tip/tooling SHA, workflow bytes/contract and accepted artifact availability.
+  With no reviewer gate, eligible staging starts after dispatch; review must be before it.
+- [ ] After C, verify run/actor/ref/SHA, eligibility, signed OSTree checks, all negative
+  cases, descriptors, interruption protection, private-key cleanup, safe diagnostic
+  upload and final PASS. Preserve provenance and safe result/eligibility hashes.
+- [ ] Obtain formal owner P5B acceptance after actual hosted staging evidence review.
 
-- [x] One local P5B follow-up commit authorized after review.
-- [ ] Authorize its push separately; no push is included in the commit-only grant.
-- [ ] Review `P5B_GITHUB_STAGING_PLAN.md` and approve the registration strategy.
-  Preferred: narrowly scoped inert workflow-registration file on main, with full
-  execution on integration; no integration merge. This main-file change needs its
-  own authorization.
-- [ ] Determine how the manual workflow will be registered on GitHub's default
-  branch. `workflow_dispatch` normally requires its file on that branch. No main
-  merge/default-branch change is authorized here; do not bypass this requirement.
-- [ ] If separately authorized, create `p5b-staging`, require an independent
-  reviewer, prevent self-review, disable admin bypass, and allow only the exact
-  `desktop/p2-production-integration` branch. Confirm settings through read-only
-  API responses. A missing field, denied API or empty environment fails closed.
-- [ ] A sole owner cannot independently approve their own initiated job with
-  self-review disabled. Add a trusted second reviewer only with approval, or retain
-  the offline owner procedure; do not silently remove the safeguard.
-- [ ] No production secrets are needed for P5B. Use only read-only GitHub token
-  permissions and disposable keys. Do not add a production key to this environment.
-- [ ] Authorize one manual staging workflow execution separately. Use full source
-  SHA, CI run, unchanged version, staging channel and reviewed authorization ref.
-  The workflow rechecks CI and environment protection before signing.
+Current read-only inspection still shows zero environments and no release workflow
+on main. These settings/commands are prepared proposals, not completed operations.
+The owner must authorize A/B/C independently. GitHub credentials stay in the owner's
+UI/CLI; do not paste tokens. No paid hosting, permanent keys, public release or P5C/P6.
 
 ## Permanent key / publication ceremony — not authorized during this rehearsal
 

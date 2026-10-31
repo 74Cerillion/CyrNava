@@ -1,23 +1,25 @@
 # P5B report — secure release preparation and disposable staging
 
-**31 October 2026 — CONDITIONAL; not accepted.** Local implementation and available
-automated security checks pass. The owner's Ubuntu native staging rehearsal now
-passes, including real signatures, rejection cases, descriptors and interrupted
-publication protection. The latest push-triggered required CI run failed one
-appearance browser assertion; packaging was correctly skipped. The focused test-only
-correction now passes clean-checkout verification; the owner authorized one correction
-commit/push, and its hosted result is pending. Protected hosted staging remains unconfigured/unexecuted.
-These hosted gaps prevent unconditional acceptance.
+**31 October 2026 — CONDITIONAL; not accepted.** Required CI run **41205351385** at
+**7aaefd0f60a735637ee603ac380587a25b73f6cb** passed every gate. Native signed-OSTree,
+negative security, descriptor and interrupted-publication evidence remains accepted.
+The owner subsequently approved a single-maintainer model; its revised P5B policy
+is locally verified but uncommitted and has not executed in hosted staging.
+Registration on main, environment configuration and hosted dispatch remain separately
+gated. None has been performed. These gaps prevent unconditional acceptance.
 
-The owner has accepted native verification and endorsed future R2-compatible hosting
-and owner-controlled offline production signing. These are architectural endorsements,
-not permission for permanent keys, credentials, hosting purchases or deployment.
-The implementation is in a9de663; the authorized documentation/review commit is
-3027231c390b1814a98a567e5f30afb4ebff0dab. Codex's single push attempt failed HTTPS
-authentication; the owner completed the authorized push, and the remote was verified
-at 3027231. The owner subsequently authorized this single correction commit/push
-and monitoring of its automatic CI. No workflow dispatch/rerun, external configuration,
-production key/release/deployment or P5C/P6 change is authorized.
+Manual owner authorization now replaces independent GitHub deployment approval.
+No second reviewer or self-review prevention is required or claimed. This concentrates
+staging authority in the owner's account; production signing remains owner-controlled,
+offline and unavailable to staging. Future R2-compatible hosting remains endorsed
+without authorizing credentials, permanent keys, purchases or public deployment.
+
+The implementation history is a9de663 → 3027231 → the reviewed appearance correction
+7aaefd0. The owner completed its authenticated push; remote and local branch agree.
+Local `p5a-accepted` remains unchanged. After reviewing the local results, the owner
+authorized one integration commit/push and its automatic CI verification. Main
+modification, GitHub settings, workflow dispatch/rerun, permanent keys, public releases
+and P5C/P6 remain outside that authorization.
 
 ## Accepted baseline and repository state
 
@@ -43,6 +45,76 @@ P5B implementation/native evidence is already tracked in a9de663. Its source has
 match the tested candidate. `evidence/p5b/baseline.json` records the original start;
 `evidence/p5b/staging-preparation/` records this checkpoint and review. The older
 pre-commit evidence remains historical, not a claim about the new repository HEAD.
+
+## Current hosted CI — appearance correction 7aaefd0: PASS
+
+[Run 41205351385](https://github.com/74Cerillion/CyrNava/actions/runs/41205351385),
+workflow **402398273**, attempt **1**, push event, exact source
+`7aaefd0f60a735637ee603ac380587a25b73f6cb`: **PASS**.
+
+| Required job/check | Actual hosted result |
+| --- | --- |
+| Workflow validation (124549189167) | PASS — 31 contracts |
+| Backend/security (124549221042) | PASS — 611 tests and 83 subtests |
+| Frontend/browser (124549221121) | PASS — lint, 273 units, TypeScript/build, all 21 browser tests including 5 lifecycle and both appearance regressions |
+| Production Flatpak/bundle audit (124550104215) | PASS — locked runtime provisioning, build, exported-package audit and validated unsigned upload |
+| CI required (124552493850) | PASS — all four upstream jobs successful |
+
+All four artifact ZIP sizes/SHA-256 were independently verified against GitHub:
+backend **13043983920**, frontend **13044028910**, Flatpak diagnostics **13044800454**,
+validated package **13044630984**. Package ZIP: **210,238,004 bytes**, SHA-256
+`560a05310a80ae0d397d7b34936563ea3f674dd6f72b2bdb2984aa246ab35b51`.
+Flatpak bundle: **209,189,544 bytes**, SHA-256
+`01e13b55a60100e6573de8bfbfc87f1b16373c4d7b8ca05047e35c4e27263153`.
+
+Downloaded SHA256SUMS, result, build inputs, inventory and provenance were crosschecked
+for source/run/attempt/identity/version, exact runtime locks, bundle digest/size and
+OSTree commit `049e3ffc86aa1b6060c17db4baf7a5b7bde37e0562f6870a06c3ab62322f6971`.
+Actual hosted exported-bundle audit PASS is preserved; no repeat local native import
+or renderer/portal test is claimed. The latest package does not replace policy-pinned
+P5A artifact 13035607417 used for staging.
+
+Evidence: `evidence/p5b/hosted-ci-41205351385/`, including run/jobs/artifacts,
+actual result records/log excerpts, all hashes, browser JUnit and focused empty-caret
+state verification. Raw ZIPs/logs remain ignored under `ci-output/p5b-hosted-41205351385/`.
+Historical failed runs remain unchanged below and in their original evidence records.
+This CI PASS is not protected hosted staging and predates the revised policy below.
+
+## Single-maintainer hosted-staging preparation — locally verified
+
+The owner's explicit later architecture decision supersedes the earlier two-person
+approval requirement. P5B now requires manual dispatch by `74Cerillion`, exact
+integration repository/ref/workflow identity, matching workflow/check-out SHA and
+first attempt. Both preflight and live staging recheck identity and the reviewed
+workflow contract. `p5b-staging` has no required reviewers; exact branch-only policy
+remains mandatory, with no tags, wildcards, main or pull refs. No independent approval
+is claimed. The admin-bypass flag is not treated as an approval safeguard when no
+reviewer gate exists; branch and immutable-source checks remain independently enforced.
+
+Changed policy/preflight/environment tests reject wrong actor/ref/repo/workflow,
+unapproved source, wrong artifacts and missing staging authorization. The existing
+P5A CI definition, action pins, package/lock/auditor code, production application,
+CSS, autosave/recovery/SQL guard and real signing/integrity/publication safeguards
+are unchanged. The release workflow step label and exact contract now accurately
+describe owner dispatch. No production keys or publication credentials are referenced.
+
+`ci/release/registration-only.yml` is the exact inert main-file proposal, stored
+outside .github/workflows on integration. It matches all five input definitions,
+has contents read only and one literal-false job with only a no-op marker. It has
+no checkout, environment, release/signing command or secret. `registration_policy.py`
+and `test_registration.py` validate it and optional future run/settings readbacks.
+Full YAML, main base SHA, security assessment, owner commands and separate A/B/C
+approval steps are in `P5B_GITHUB_STAGING_PLAN.md`.
+
+Local final verification: **59 release/registration/signing tests + 31 existing CI
+contracts PASS**, Ruff/actionlint and CI/release/registration security policies PASS.
+One-day synthetic GPG unit-test keys were cleaned up; no production/permanent key
+or full native OSTree rehearsal was created. The initial CI-contract run encountered
+the unchanged 5 GiB space guard in two tests; the rerun used spacious /dev/shm for
+small synthetic fixtures, preserving the guard and original failure record.
+`evidence/p5b/staging-final-preparation-2026-10-31/` records results, hashes and actual
+GitHub readbacks: main cbf7cccc686080b2b4b07274a9f5a23fec52999f, zero environments,
+and no release definition on main. New policy is not committed, pushed or hosted-tested.
 
 ## Hosted continuous-integration result — 3027231
 
@@ -119,9 +191,9 @@ See `P5B_APPEARANCE_CORRECTION.md` for causality, exact modifications and limits
 `evidence/p5b/appearance-correction-2026-10-31/` records candidate hashes,
 hosted-trace analysis, baseline/focused state checks and complete-suite results.
 Historical hosted evidence remains unchanged in `hosted-ci-41197927704/`.
-The correction has not been committed, pushed or verified by a new hosted run.
-The owner authorized one P5B-only correction commit/push after reviewing these results.
-Do not dispatch or rerun workflows; only monitor the automatically triggered CI.
+At the original local-review checkpoint the correction was uncommitted/unpushed.
+The owner subsequently authorized commit 7aaefd0 and completed its push; actual hosted
+PASS is recorded above. That does not authorize further pushes, reruns or dispatches.
 
 ## Architecture and decisions
 
@@ -188,16 +260,13 @@ network publication job or release API call. Inputs pass through quoted environm
 variables, not raw shell interpolation. Offline replay is forbidden in Actions;
 hosted execution rechecks live CI and environment protection.
 
-Current read-only inspection found **zero GitHub environments**, so no independent reviewer
-protection is claimed. The workflow fails closed unless `p5b-staging` actually
-requires reviewers, prevents self-review, disables admin bypass and restricts the
-exact integration branch. A sole owner cannot independently approve their own job
-under that policy. Workflow registration on the default branch also needs a
-separately authorized plan; no main merge or default-branch change was performed.
-`P5B_GITHUB_STAGING_PLAN.md` recommends a
-separately approved inert registration-only workflow file on main, with actual
-execution on integration. This avoids merging the integration/application branch.
-A temporary default-branch switch is a broader, separately gated fallback.
+Current read-only inspection found **zero GitHub environments**. The new owner-approved
+single-maintainer model requires manual owner dispatch and exact integration-branch
+restriction, not another person's approval. No independent-reviewer protection is
+claimed. Main registration and actual environment setup remain unauthorized.
+`P5B_GITHUB_STAGING_PLAN.md` contains the exact inert registration-only proposal on
+main, with executable staging kept on integration. No default-branch change or
+integration/application merge is proposed or performed.
 
 ## Repository generation, provenance and publication safety
 
@@ -346,26 +415,18 @@ No native rerun is requested for this documentation update.
 2. Hosting/offline custody directions are now owner-endorsed. Permanent keys,
    provider purchases, domains, secrets and public hosting are not P5B staging
    acceptance prerequisites and remain separately gated.
-3. The authorized owner push of 3027231 is verified. Its required CI failed the
-   appearance placeholder assertion. The separately authorized local correction
-   now passes verification. The owner authorized one correction commit/push;
-   no retry/rerun is authorized. A local PASS does not replace hosted verification.
-   Preserve the local p5a-accepted tag; publishing it is not required by P5B.
-4. Authorize a workflow-registration approach and protected `p5b-staging` environment
-   configuration: independent reviewer, prevent self-review, no admin bypass, exact
-   integration-branch restriction. Inspect actual settings. The manual workflow's
-   default-branch registration requirement must be resolved explicitly; no main merge
-   or default-branch change is implied. An approved alternative needs design/policy
-   review; do not bypass protection to accommodate a sole reviewer.
-5. Separately authorize one manual hosted staging run against that immutable P5B
-   tooling commit. Require live source/run/artifact eligibility, approval protection,
-   signed repository/native negative cases, descriptors, publication interruption,
-   safe diagnostics upload and successful final job conclusions. Record workflow
-   run/attempt, tooling SHA, source SHA, checksums, public fingerprint and results.
-   The automatically triggered P5A regression workflow after a future push must also
-   pass all required gates with the added P5B suite. No run is authorized by this report.
-6. After hosted evidence review, obtain explicit owner P5B acceptance. Current native
-   PASS does not establish protected Actions execution or artifact download behavior.
+3. Required CI at 7aaefd0 is now PASS, including the appearance correction. Obtain
+   separate authorization for one integration commit/push of the revised single-maintainer
+   policy/proposal/tests/docs; require its automatic CI to pass. Preserve the local tag.
+4. Separately authorize **A**: one inert registration-only main file, and **B**: the
+   no-reviewer p5b-staging environment with exact branch-only policy and no secrets.
+   Read both back; do not treat registration/configuration as hosted verification.
+5. Separately authorize **C**: one owner-initiated workflow_dispatch at the exact approved
+   revised tooling SHA, promoting the unchanged accepted P5A source/artifact. Require
+   live eligibility, native signing/negative/descriptor/interruption checks, key cleanup,
+   safe diagnostic upload and final PASS. No independent deployment approval is required.
+6. After actual hosted staging evidence review, obtain explicit owner P5B acceptance.
+   Neither current native nor CI PASS proves the new manual staging path executed.
 7. Retain known-good snapshots, no-pruning policy, and independently authenticated
    trust bootstrap. Signing alone does not prevent all rollback/freeze attacks.
 8. Keep P3 backups/schema compatibility authoritative: a binary rollback is not a
@@ -375,21 +436,19 @@ No native rerun is requested for this documentation update.
 
 | Gate | Recommendation |
 | --- | --- |
-| 1. Accepted baseline preserved | Accepted P5A source/security checkpoint preserved; latest required hosted browser regression gate FAIL |
+| 1. Accepted baseline preserved | PASS — accepted P5A controls preserved; required CI at 7aaefd0 PASS; new local policy awaits its own hosted verification |
 | 2. Hosting architecture | PASS — R2-compatible direction owner-endorsed; provisioning/endpoint/cost authorization deferred |
 | 3. Signing infrastructure | PASS — real disposable GPG and native signed OSTree/rejection checks; offline custody direction owner-endorsed; permanent key creation deferred |
-| 4. Release workflow | Implemented/policy-tested; hosted protection/execution pending |
+| 4. Release workflow | Single-maintainer policy locally verified; registration, exact-branch environment and hosted execution pending |
 | 5. Signed repository and descriptors | PASS — owner evidence plus independent retained-generation integrity/signature review |
 | 6. Publication safety | PASS for P5B local native staging and interruption protection; future HTTP/cache/update integration is unexecuted |
 | 7. Security regressions | PASS for executed paths; no claim about unexecuted integrations |
 | 8. Documentation | Delivered with explicit limitations and owner procedure |
 | 9. Owner acceptance | Pending |
 
-**Recommendation: CONDITIONAL — native acceptance gaps are closed; the latest required
-CI is FAIL. Verify the authorized appearance-test correction in new CI,
-then complete protected hosted staging
-verification and formal owner acceptance.** Hosting/custody directions
-are now endorsed, without authorizing irreversible production setup. HTTP
-deployment, real install/update lifecycle and production-key operations are later
-separately authorized work, not missing native P5B results. No P5C/P6 work has begun.
-Stop at this updated P5B checkpoint; production signing/hosting/publication remain disabled.
+**Recommendation: CONDITIONAL — native and required CI acceptance gaps are closed;
+the revised single-maintainer implementation is locally verified.** Obtain the
+separately authorized integration commit/push, main registration, environment setup
+and manual hosted staging execution, then review actual evidence for owner acceptance.
+No production credentials, keys, public hosting/release, main application merge or
+P5C/P6 work is authorized or performed. Hosting/offline-custody directions stay endorsed.
