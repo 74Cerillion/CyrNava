@@ -1,0 +1,35 @@
+Build directory: /home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci/.provision-validation-tmp/test-tmp/tmpy9lb508n/output
+{
+  "status": "STAGED",
+  "directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci/.provision-validation-tmp/test-tmp/tmpy9lb508n/output",
+  "app_id": "io.github._74Cerillion.CyrNava"
+}
+CI: python-lint
+CI: frontend-install-for-backend
+CI: frontend-production-build-for-backend
+CI: missing
+CI: deliberate-broken-test
+{
+  "status": "FAIL",
+  "operation": "prepare",
+  "error_type": "ProvisioningError",
+  "provisioning_failure": {
+    "stage": "verify",
+    "dependency_operation": "info",
+    "ref": "org.kde.Platform//6.11",
+    "expected_commit": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+    "actual_commit": "2222222222222222222222222222222222222222222222222222222222222222",
+    "outcome": "FAIL",
+    "message": "Final installed runtime does not match the approved lock"
+  },
+  "error": "Final installed runtime does not match the approved lock",
+  "complete": true,
+  "seconds": 0.0
+}
+....Clean-checkout regression requires absent frontend/dist
+................CI Flatpak operation failed: ProvisioningError
+...........
+----------------------------------------------------------------------
+Ran 31 tests in 0.173s
+
+OK

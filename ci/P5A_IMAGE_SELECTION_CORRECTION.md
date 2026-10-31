@@ -117,3 +117,12 @@ before acceptance. No commit, push, rerun/dispatch, publication or P5B/P5C occur
 Final cleanup review: diagnostic writes use `try/finally`, so a write failure cannot
 bypass owned backend shutdown. The exact final source passed another 10/10 focused
 executions and the full 273-unit / 20-browser suite, with no retries or skips.
+
+## Hosted verification — 41179709348
+
+The owner-pushed correction at 6743d1d passed both image tests and all 20 browser
+cases, with 273 units and 559 backend tests +31 subtests PASS. Hosted selection
+journals show synchronized paragraph readiness in both image iterations. This
+correction is verified in the hosted environment. P5A remains FAIL because the
+next package gate failed during pinned-runtime provisioning; no production package
+was built or uploaded. See current P5A_REPORT and hosted-image-selection evidence.

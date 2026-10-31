@@ -1,0 +1,34 @@
+[
+  {
+    "command": [
+      "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/backend/.venv/bin/python",
+      "-m",
+      "unittest",
+      "ci.test_ci.ProvisioningTests"
+    ],
+    "returncode": 0,
+    "log": "tests-0.log"
+  },
+  {
+    "command": [
+      "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/backend/.venv/bin/python",
+      "-m",
+      "unittest",
+      "ci/test_ci.py"
+    ],
+    "returncode": 0,
+    "log": "tests-1.log"
+  },
+  {
+    "command": [
+      "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/backend/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "packaging/flatpak/production/test_packaging.py",
+      "backend/tests/test_lifecycle_harness.py"
+    ],
+    "returncode": 1,
+    "log": "tests-2.log"
+  }
+]

@@ -1,0 +1,122 @@
+{
+  "phase": "P5A",
+  "status": "FAIL",
+  "acceptance_recommendation": "NOT ACCEPTED: all application verification passed; Flatpak runtime prepare failed and production package gates did not execute",
+  "run_id": 41179709348,
+  "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41179709348",
+  "attempt": 1,
+  "event": "push",
+  "source_commit": "6743d1d5c76f2db87c2debb6f687a6e57a6826b6",
+  "created_at_utc": "2026-10-31T07:12:52Z",
+  "completed_at_utc": "2026-10-31T07:19:17Z",
+  "jobs": [
+    {
+      "id": 124474421857,
+      "name": "Workflow validation",
+      "conclusion": "success",
+      "started_at": "2026-10-31T07:12:55Z",
+      "completed_at": "2026-10-31T07:13:04Z",
+      "seconds": 9.0
+    },
+    {
+      "id": 124474460935,
+      "name": "Backend and security",
+      "conclusion": "success",
+      "started_at": "2026-10-31T07:13:06Z",
+      "completed_at": "2026-10-31T07:14:39Z",
+      "seconds": 93.0
+    },
+    {
+      "id": 124474461018,
+      "name": "Frontend and browser",
+      "conclusion": "success",
+      "started_at": "2026-10-31T07:13:06Z",
+      "completed_at": "2026-10-31T07:17:01Z",
+      "seconds": 235.0
+    },
+    {
+      "id": 124475225909,
+      "name": "Production Flatpak and bundle audit",
+      "conclusion": "failure",
+      "started_at": "2026-10-31T07:17:03Z",
+      "completed_at": "2026-10-31T07:19:11Z",
+      "seconds": 128.0
+    },
+    {
+      "id": 124475649302,
+      "name": "CI required",
+      "conclusion": "failure",
+      "started_at": "2026-10-31T07:19:13Z",
+      "completed_at": "2026-10-31T07:19:17Z",
+      "seconds": 4.0
+    }
+  ],
+  "tests": {
+    "workflow_contracts": 23,
+    "backend_passed": 559,
+    "subtests_passed": 31,
+    "backend_warnings": 2,
+    "backend_seconds": 47.31,
+    "frontend_units_passed": 273,
+    "browser_passed": 20,
+    "browser_failed": 0,
+    "browser_skipped": 0,
+    "lifecycle_passed": 5,
+    "image_selection_and_regression": "PASS",
+    "retries": 0
+  },
+  "flatpak": {
+    "prepare": "FAIL",
+    "prepare_seconds": 108.078,
+    "recorded_error_type": "ValueError",
+    "confirmed_observations": [
+      "Platform installation followed by explicit commit pin",
+      "SDK installation followed by explicit commit pin",
+      "Later BaseApp install transaction logs another Platform update",
+      "BaseApp commit update reports Nothing to do",
+      "Final prepare raises ValueError; no CalledProcessError or installation command failure recorded",
+      "prepare.json has only error_type and duration; final ref/SHA and exception message omitted"
+    ],
+    "supported_cause": "Runtime pin verification after a dependent installation updated an earlier pinned ref. Current provisioner interleaves install/pin per ref; controlled read-only simulation reproduces Platform mismatch under that dependency update.",
+    "uncertainty": "Exact hosted exception text, mismatched ref and actual final SHA were not recorded. Simulation is not a recovery of those missing values; no definitive claim of exact final Platform SHA.",
+    "production_build": "NOT EXECUTED: skipped after prepare failure",
+    "exported_package_audit": "NOT EXECUTED",
+    "validated_unsigned_artifact_upload": "NOT EXECUTED",
+    "production_artifact_sha256": "UNAVAILABLE: no production artifact",
+    "production_provenance": "UNAVAILABLE: no production artifact",
+    "security": "Fail-closed pin check preserved. No lock/GPG/permissions/security settings changed."
+  },
+  "diagnostic_artifacts_verified": [
+    {
+      "artifact_id": 13034521220,
+      "kind": "backend diagnostics only",
+      "sha256": "383ed57301740f9e0d191e80beb2c0cf2a132bd269e34371afd0747f8c57bce6",
+      "bytes": 10658,
+      "independently_matches_GitHub_digest": true
+    },
+    {
+      "artifact_id": 13034393043,
+      "kind": "frontend diagnostics only",
+      "sha256": "fdacf1ad449f916240ac4dc8af56df90303845beec050697a5a12226a35f6902",
+      "bytes": 4889311,
+      "independently_matches_GitHub_digest": true
+    },
+    {
+      "artifact_id": 13034288533,
+      "kind": "flatpak diagnostics only",
+      "sha256": "038b0ec9fb3699a1747de0e16e66e7687fc55cd5caf3238698e1c3c669483adb",
+      "bytes": 237,
+      "independently_matches_GitHub_digest": true
+    }
+  ],
+  "recommendation": "Investigate/correct runtime provisioning so dependent installs cannot undo final locked commits, preserve all pin checks and GPG verification, and record expected/actual ref/commit on failure. Requires new authorization; no correction or rerun implemented here.",
+  "actions_this_turn": {
+    "commit": false,
+    "push": false,
+    "rerun": false,
+    "dispatch": false,
+    "application_installed_or_executed_for_audit": false,
+    "production_publication": false,
+    "P5B_or_P5C": false
+  }
+}

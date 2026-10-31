@@ -1,0 +1,197 @@
+..F......................................F...                            [100%]
+=================================== FAILURES ===================================
+_______ test_stage_and_install_exclude_owner_data_and_development_tools ________
+
+tmp_path = PosixPath('/tmp/pytest-of-cerillion/pytest-31/test_stage_and_install_exclude0')
+
+    def test_stage_and_install_exclude_owner_data_and_development_tools(tmp_path):
+        inputs = tmp_path / "inputs"
+        inputs.mkdir()
+>       build.stage(inputs)
+
+packaging/flatpak/production/test_packaging.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+directory = PosixPath('/tmp/pytest-of-cerillion/pytest-31/test_stage_and_install_exclude0/inputs')
+source = PosixPath('/tmp/cyrnava-p5a-provision-clean-pxm40rnc/checkout')
+build_id = 'local-A'
+
+    def stage(directory, *, source=SOURCE, build_id="local-A"):
+        if (
+            not build_id
+            or len(build_id) > 60
+            or any(
+                c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-"
+                for c in build_id
+            )
+        ):
+            raise ValueError("Use a short alphanumeric local build ID")
+        app = directory / "application"
+        # Explicit code allowlists. New runtime modules require a reviewed list change.
+        backend = [
+            "__init__",
+            "assets",
+            "backup",
+            "database",
+            "desktop_security",
+            "documents",
+            "lifecycle",
+            "main",
+            "migration",
+            "models",
+            "profile",
+            "release",
+            "search",
+            "search_index",
+            "templates",
+        ]
+        native = [
+            "__init__",
+            "__main__",
+            "application",
+            "backend",
+            "build_identity",
+            "dialogs",
+            "identity",
+            "maintenance",
+            "maintenance_io",
+            "policy",
+            "storage",
+            "worker",
+        ]
+        for relative, names in (("backend/app", backend), ("desktop/native", native)):
+            for name in names:
+                copy_file(
+                    source / relative / (name + ".py"), app / relative / (name + ".py")
+                )
+        copy_file(
+            source / "backend/app/document_format_v1.json",
+            app / "backend/app/document_format_v1.json",
+        )
+        dist = source / "frontend/dist"
+        for path in dist.rglob("*"):
+            if path.is_symlink():
+                raise ValueError("Frontend symlink refused")
+            if path.is_file():
+                relative = path.relative_to(dist)
+                if path.suffix not in {
+                    ".html",
+                    ".js",
+                    ".css",
+                    ".txt",
+                    ".png",
+                    ".woff2",
+                    ".woff",
+                    ".ico",
+                }:
+                    raise ValueError("Unexpected frontend output: " + str(relative))
+                copy_file(path, app / "frontend/dist" / relative)
+        if not (app / "frontend/dist/index.html").is_file():
+>           raise ValueError("Production frontend build missing")
+E           ValueError: Production frontend build missing
+
+packaging/flatpak/production/build.py:131: ValueError
+____ test_production_staging_excludes_fixture_and_frontend_instrumentation _____
+
+tmp_path = PosixPath('/tmp/pytest-of-cerillion/pytest-31/test_production_staging_exclud0')
+
+    def test_production_staging_excludes_fixture_and_frontend_instrumentation(tmp_path):
+        spec = importlib.util.spec_from_file_location(
+            "p5a_packager", ROOT / "packaging/flatpak/production/build.py"
+        )
+        packager = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(packager)
+>       packager.stage(tmp_path)
+
+backend/tests/test_lifecycle_harness.py:168: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+directory = PosixPath('/tmp/pytest-of-cerillion/pytest-31/test_production_staging_exclud0')
+source = PosixPath('/tmp/cyrnava-p5a-provision-clean-pxm40rnc/checkout')
+build_id = 'local-A'
+
+    def stage(directory, *, source=SOURCE, build_id="local-A"):
+        if (
+            not build_id
+            or len(build_id) > 60
+            or any(
+                c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-"
+                for c in build_id
+            )
+        ):
+            raise ValueError("Use a short alphanumeric local build ID")
+        app = directory / "application"
+        # Explicit code allowlists. New runtime modules require a reviewed list change.
+        backend = [
+            "__init__",
+            "assets",
+            "backup",
+            "database",
+            "desktop_security",
+            "documents",
+            "lifecycle",
+            "main",
+            "migration",
+            "models",
+            "profile",
+            "release",
+            "search",
+            "search_index",
+            "templates",
+        ]
+        native = [
+            "__init__",
+            "__main__",
+            "application",
+            "backend",
+            "build_identity",
+            "dialogs",
+            "identity",
+            "maintenance",
+            "maintenance_io",
+            "policy",
+            "storage",
+            "worker",
+        ]
+        for relative, names in (("backend/app", backend), ("desktop/native", native)):
+            for name in names:
+                copy_file(
+                    source / relative / (name + ".py"), app / relative / (name + ".py")
+                )
+        copy_file(
+            source / "backend/app/document_format_v1.json",
+            app / "backend/app/document_format_v1.json",
+        )
+        dist = source / "frontend/dist"
+        for path in dist.rglob("*"):
+            if path.is_symlink():
+                raise ValueError("Frontend symlink refused")
+            if path.is_file():
+                relative = path.relative_to(dist)
+                if path.suffix not in {
+                    ".html",
+                    ".js",
+                    ".css",
+                    ".txt",
+                    ".png",
+                    ".woff2",
+                    ".woff",
+                    ".ico",
+                }:
+                    raise ValueError("Unexpected frontend output: " + str(relative))
+                copy_file(path, app / "frontend/dist" / relative)
+        if not (app / "frontend/dist/index.html").is_file():
+>           raise ValueError("Production frontend build missing")
+E           ValueError: Production frontend build missing
+
+packaging/flatpak/production/build.py:131: ValueError
+=============================== warnings summary ===============================
+../../cyrnava-p5a-boundary-r8jvmtth/checkout/backend/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/backend/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED backend::test_stage_and_install_exclude_owner_data_and_development_tools
+FAILED backend/tests/test_lifecycle_harness.py::test_production_staging_excludes_fixture_and_frontend_instrumentation
+2 failed, 43 passed, 1 warning in 0.32s

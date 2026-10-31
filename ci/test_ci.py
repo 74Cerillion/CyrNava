@@ -415,6 +415,146 @@ class PayloadTests(unittest.TestCase):
         )
 
 
+class ProvisioningTests(unittest.TestCase):
+    """Deterministic transaction model, not hosted/native provisioning proof."""
+
+    def setUp(self):
+        self.lock = json.loads((flatpak.PACKAGING / "toolchain.lock.json").read_text())
+        self.refs = list(self.lock["refs"])
+        self.state = {}
+        self.commands = []
+        self.drift_on_install = False
+        self.bad_pin = False
+        self.unavailable = False
+
+    def command(self, *args):
+        self.commands.append(args)
+        if args[1] == "install":
+            self.state[args[-1]] = "0" * 64
+            if self.drift_on_install and args[-1] == self.refs[-1]:
+                self.state[self.refs[0]] = "1" * 64
+        elif args[1] == "update":
+            if self.unavailable:
+                raise subprocess.CalledProcessError(1, list(args))
+            self.assertIn("--no-deps", args)
+            self.state[args[-1]] = (
+                "2" * 64 if self.bad_pin else self.lock["refs"][args[-1]]
+            )
+
+    def execute(self):
+        builder = flatpak.module("build")
+        with (
+            patch.dict(
+                os.environ,
+                {"GITHUB_ACTIONS": "true", "RUNNER_ENVIRONMENT": "github-hosted"},
+            ),
+            patch.object(flatpak, "run", side_effect=self.command),
+            patch.object(flatpak, "output", side_effect=lambda *a: self.state[a[-1]]),
+            patch.object(builder, "output", side_effect=lambda *a: self.state[a[-1]]),
+            patch.object(builder.platform, "machine", return_value="x86_64"),
+            patch.object(flatpak, "module", return_value=builder),
+        ):
+            return flatpak.prepare_runtimes()
+
+    def test_install_all_then_pin_and_independently_verify(self):
+        result = self.execute()
+        self.assertEqual(
+            [c[1] for c in self.commands],
+            ["remote-add"] + ["install"] * 3 + ["update"] * 3,
+        )
+        self.assertEqual(self.state, self.lock["refs"])
+        self.assertTrue(all(c["outcome"] == "PASS" for c in result["verification"]))
+
+    def test_baseapp_dependency_update_is_restored_before_final_verification(self):
+        self.drift_on_install = True
+        self.execute()
+        self.assertEqual(self.state, self.lock["refs"])
+
+    def test_incorrect_final_revision_fails_with_expected_actual_and_all_checks(self):
+        self.bad_pin = True
+        with self.assertRaises(flatpak.ProvisioningError) as caught:
+            self.execute()
+        diagnostic = caught.exception.diagnostic
+        self.assertEqual(diagnostic["ref"], self.refs[0])
+        self.assertEqual(diagnostic["expected_commit"], self.lock["refs"][self.refs[0]])
+        self.assertEqual(diagnostic["actual_commit"], "2" * 64)
+        self.assertEqual(diagnostic["stage"], "verify")
+        self.assertEqual(len(diagnostic["checks"]), 3)
+        self.assertEqual(diagnostic["outcome"], "FAIL")
+
+    def test_unavailable_locked_commit_has_no_retry_or_floating_fallback(self):
+        self.unavailable = True
+        with self.assertRaises(flatpak.ProvisioningError) as caught:
+            self.execute()
+        diagnostic = caught.exception.diagnostic
+        self.assertEqual(diagnostic["stage"], "pin")
+        self.assertEqual(diagnostic["exception_type"], "CalledProcessError")
+        self.assertIn("returned non-zero exit status 1", diagnostic["message"])
+        self.assertEqual(len([c for c in self.commands if c[1] == "update"]), 1)
+
+    def test_gpg_and_runner_restriction_preserved(self):
+        self.execute()
+        for command in self.commands:
+            self.assertFalse(
+                any("no-gpg" in str(a) or "disable" in str(a) for a in command)
+            )
+        with (
+            patch.dict(os.environ, {"GITHUB_ACTIONS": "false"}),
+            patch.object(flatpak, "run") as run,
+        ):
+            with self.assertRaisesRegex(flatpak.VerificationError, "disposable"):
+                flatpak.prepare_runtimes()
+            run.assert_not_called()
+
+    def test_failure_evidence_is_complete_and_does_not_start_build(self):
+        diagnostic = {
+            "stage": "verify",
+            "dependency_operation": "info",
+            "ref": self.refs[0],
+            "expected_commit": self.lock["refs"][self.refs[0]],
+            "actual_commit": "2" * 64,
+            "outcome": "FAIL",
+            "message": "Final installed runtime does not match the approved lock",
+        }
+        with (
+            tempfile.TemporaryDirectory() as tmp,
+            patch.object(sys, "argv", ["flatpak.py", "prepare", "--output", tmp]),
+            patch.object(
+                flatpak,
+                "prepare_runtimes",
+                side_effect=flatpak.ProvisioningError(diagnostic),
+            ),
+            patch.object(flatpak, "run") as run,
+        ):
+            self.assertEqual(flatpak.main(), 1)
+            record = json.loads((Path(tmp) / "prepare.json").read_text())
+            self.assertTrue(record["complete"])
+            self.assertEqual(record["status"], "FAIL")
+            self.assertEqual(record["provisioning_failure"], diagnostic)
+            run.assert_not_called()
+
+    def test_commit_read_failure_retains_safe_underlying_exception(self):
+        diagnostic = {}
+        with patch.object(
+            flatpak,
+            "output",
+            side_effect=subprocess.CalledProcessError(
+                1, ["flatpak", "info", "--user", "--show-commit", self.refs[0]]
+            ),
+        ):
+            self.assertIsNone(flatpak.installed_commit(self.refs[0], diagnostic))
+        self.assertEqual(diagnostic["exception_type"], "CalledProcessError")
+        self.assertIn("returned non-zero exit status 1", diagnostic["message"])
+
+    def test_unavailable_or_noncommit_output_does_not_leak_into_diagnostics(self):
+        with patch.object(flatpak, "output", return_value="private unexpected text"):
+            self.assertIsNone(flatpak.installed_commit(self.refs[0]))
+        with patch.object(
+            flatpak, "output", side_effect=subprocess.CalledProcessError(1, [])
+        ):
+            self.assertIsNone(flatpak.installed_commit(self.refs[0]))
+
+
 class BuildDirectoryTests(unittest.TestCase):
     def test_explicit_output_is_new_and_cannot_overlay_existing_files(self):
         builder = flatpak.module("build")

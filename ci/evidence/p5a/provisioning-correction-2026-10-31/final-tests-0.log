@@ -1,0 +1,23 @@
+{
+  "status": "FAIL",
+  "operation": "prepare",
+  "error_type": "ProvisioningError",
+  "provisioning_failure": {
+    "stage": "verify",
+    "dependency_operation": "info",
+    "ref": "org.kde.Platform//6.11",
+    "expected_commit": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+    "actual_commit": "2222222222222222222222222222222222222222222222222222222222222222",
+    "outcome": "FAIL",
+    "message": "Final installed runtime does not match the approved lock"
+  },
+  "error": "Final installed runtime does not match the approved lock",
+  "complete": true,
+  "seconds": 0.0
+}
+..CI Flatpak operation failed: ProvisioningError
+......
+----------------------------------------------------------------------
+Ran 8 tests in 0.009s
+
+OK

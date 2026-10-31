@@ -1,0 +1,31 @@
+2026-10-31T07:17:20.3035665Z ##[group]Run python ci/flatpak.py prepare --output ci-output/flatpak
+2026-10-31T07:17:20.3035957Z python ci/flatpak.py prepare --output ci-output/flatpak
+2026-10-31T07:17:20.3056562Z shell: /usr/bin/bash --noprofile --norc -eo pipefail {0}
+2026-10-31T07:17:20.3056741Z env:
+2026-10-31T07:17:20.3056854Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-31T07:17:20.3057071Z   PYTHONUNBUFFERED: 1
+2026-10-31T07:17:20.3057250Z   XDG_CACHE_HOME: /home/runner/work/CyrNava/CyrNava/ci-output/build-cache
+2026-10-31T07:17:20.3057487Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-31T07:17:20.3057708Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-31T07:17:20.3057928Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-31T07:17:20.3058134Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-31T07:17:20.3058339Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-31T07:17:20.3058585Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-31T07:17:20.3058757Z ##[endgroup]
+2026-10-31T07:17:21.3699566Z Installing runtime/org.kde.Platform/x86_64/6.11
+2026-10-31T07:17:41.7994457Z Updating runtime/org.kde.Platform/x86_64/6.11
+2026-10-31T07:17:54.7568016Z Installing runtime/org.kde.Sdk/x86_64/6.11
+2026-10-31T07:18:24.3231127Z Updating runtime/org.kde.Sdk/x86_64/6.11
+2026-10-31T07:18:51.1811311Z Updating runtime/org.kde.Platform/x86_64/6.11
+2026-10-31T07:18:58.2436141Z Installing app/io.qt.PySide.BaseApp/x86_64/6.11
+2026-10-31T07:19:08.4918555Z 
+2026-10-31T07:19:08.4919161Z Nothing to do.
+2026-10-31T07:19:08.5215232Z CI Flatpak operation failed: ValueError
+2026-10-31T07:19:08.5216209Z {
+2026-10-31T07:19:08.5216413Z   "status": "FAIL",
+2026-10-31T07:19:08.5216628Z   "operation": "prepare",
+2026-10-31T07:19:08.5216862Z   "error_type": "ValueError",
+2026-10-31T07:19:08.5217231Z   "complete": true,
+2026-10-31T07:19:08.5217424Z   "seconds": 108.078
+2026-10-31T07:19:08.5217884Z }
+2026-10-31T07:19:08.5294723Z ##[error]Process completed with exit code 1.

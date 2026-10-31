@@ -2,28 +2,74 @@
 
 Date: 31 October 2026, Asia/Seoul.
 
-**P5A STATUS: FAIL — HOSTED WORKSPACE IMAGE TEST FAILED; LOCAL CORRECTION VERIFIED**
+**P5A STATUS: FAIL — FLATPAK RUNTIME PROVISIONING; APPLICATION TESTS PASS**
 
-## A. Current status — image-selection correction locally verified
+## Local provisioning correction — ready for authorization
 
-**P5A remains FAIL / NOT ACCEPTED.** Latest actual hosted run is 41176826666 (FAIL).
-The separate image-command test defect is now reproduced and corrected locally.
-The DOM paragraph caret and editor model code-block selection diverged; Enter was
-sent before they agreed, so `/image` became code text. Test-only preconditions now
-await matching paragraph selection, suggestion readiness and each completed upload.
-No production change was made; accepted SQLite guard source/evidence is preserved.
+The authorized 31 October correction is locally verified, uncommitted and unpushed.
+It does not change the hosted FAIL above. See `P5A_PROVISIONING_CORRECTION.md` and
+`evidence/p5a/provisioning-correction-2026-10-31/` for source hashes, exact commands,
+initial failures, final clean-checkout logs, upstream metadata and security review.
 
-Clean-checkout verification: **10/10 focused**, **273 frontend units + 20 browser
-tests**, lint and TypeScript/build PASS; **9 lifecycle-harness backend regressions**
-PASS. All 33 production frontend assets remain byte-identical. Intermediate failures
-and historical uncertainty are retained in the evidence, not reclassified as PASS.
+Install all dependencies first; pin all three approved commits using `--no-deps`
+only during pin enforcement; verify every final SHA, then retain the production
+builder's independent architecture/ref check. No provisioning mutations follow
+verification. The unchanged builder checks again before assembly and before export.
+Structured failures identify stage, operation, ref, expected/actual SHA (or null),
+exception type/message and outcome; successful prepare evidence lists all ref checks.
+No retry or floating fallback was added. No production code or workflow changed.
 
-See [P5A_IMAGE_SELECTION_CORRECTION.md](P5A_IMAGE_SELECTION_CORRECTION.md) for the
-causal positions, exact changes, test commands and limits. Supporting evidence:
-`evidence/p5a/image-selection-correction-2026-10-31/`. Request authorization for one
-P5A-only commit/push; no commit, push, rerun/dispatch or P5B/P5C occurred during local correction.
-Production Flatpak build/audit/upload/provenance remain unexecuted in the latest
-hosted run. Local correction PASS does not confer P5A acceptance.
+Clean checkout at `6743d1d` plus only the two corrected CI source files:
+**8 provisioning regressions PASS; 31 total CI contracts PASS; 45 production
+packaging/lifecycle-harness tests PASS; Ruff PASS.** Production frontend assets were
+built in that checkout as a packaging prerequisite. No browser rerun was necessary.
+An initial absent-dist failure and tmpfs free-space failures are retained, followed
+by passing runs after satisfying prerequisites; no assertions or gates were weakened.
+
+Real isolated Flatpak remote-add and metadata reads for all three exact commits
+succeeded. Their declared Platform/SDK dependencies agree with the P4 lock names,
+architecture and 6.11 branch. GPG verification is true. A real isolated Platform
+install failed with `open(O_TMPFILE): Read-only file system`; user-namespace creation
+also fails with `uid_map: Operation not permitted`. End-to-end local deployment,
+production build and exported audit are **NOT VERIFIED**. Metadata agreement does
+not establish binary compatibility. No lock incompatibility was demonstrated.
+
+Confirmed source defect: install/pin interleaving permits later dependency resolution
+to undo an earlier pin. Historical run 41179709348 records the later Platform update,
+but omitted its final SHA and exact exception. That uncertainty remains preserved.
+**Recommendation: authorize one P5A-only commit/push for hosted verification.**
+No commit, push, dispatch, rerun, release, signing, deployment or P5B/P5C occurred.
+
+## A. Current hosted result — application tests pass; Flatpak provisioning fails
+
+**P5A remains FAIL / NOT ACCEPTED.** Actual run **41179709348**, attempt 1,
+was push-triggered for `6743d1d5c76f2db87c2debb6f687a6e57a6826b6`. The owner push
+succeeded despite interruption before Git's final confirmation; read-only remote
+verification confirms this exact commit and branch.
+
+Workflow validation **23 PASS**; backend/security **559 tests + 31 subtests PASS**;
+frontend lint/unit/TypeScript/build **273 units PASS**; browsers **20/20 PASS**,
+including all five lifecycle cases, the corrected image-selection test and its new
+regression. Hosted selection journals confirm paragraph readiness in both image
+iterations. The accepted SQLite boundary remains unchanged.
+
+The Flatpak job failed in **prepare**, before any production build: `ValueError`
+after 108.078 s. Logs show a later BaseApp install updating Platform after Platform
+had already been pinned. Source review and a read-only simulation demonstrate the
+provisioner's sensitivity to such dependency updates. Pin verification is the
+supported cause, but the diagnostic omitted the exception message, mismatched ref
+and actual final SHA; those missing values are not inferred as confirmed evidence.
+
+The required gate FAILS. Production build, exported audit and validated unsigned
+package upload are NOT EXECUTED; no production checksum/provenance exists. All
+three diagnostic archives were downloaded and their SHA-256 independently matched
+GitHub. They are diagnostics, not a validated production package.
+
+Evidence: `evidence/p5a/hosted-image-selection-2026-10-31/`, including run/job records,
+prepare.json, provisioning log, selection/transaction journals and control-flow
+analysis. No extra commit, push, rerun/dispatch or implementation change occurred.
+Recommendation: keep P5A unaccepted and authorize a focused provisioning correction
+that preserves final locked refs/GPG verification and exposes safe mismatch details.
 
 ## B. Repository baseline
 
@@ -551,3 +597,66 @@ that production source, permissions and the accepted lifecycle guard are unchang
 Local clean-checkout results remain 10 focused, 273 units, 20 browsers and 9 targeted
 backend passes. The latest actual hosted run remains 41176826666 FAIL. No rerun,
 dispatch, release, signing, deployment, main merge or P5B/P5C is authorized.
+
+
+## X. Authorized image-selection commit — Git HTTPS push blocker
+
+Created exactly one authorized P5A commit: `6743d1d5c76f2db87c2debb6f687a6e57a6826b6`. All 86 staged files
+and 608 text/trace entries passed scope and credential review; traces are synthetic
+loopback only. Production source, permissions, workflow and lifecycle guard remain
+unchanged. Exactly one push attempt exited 128 because Git HTTPS credentials are
+unavailable in this terminal. A read-only `git ls-remote` confirms the branch still
+points to `047a99b1473304cc73518dff6427bf7937c542a2`; no remote update occurred.
+No new hosted run or production package checks exist for this commit. P5A remains
+FAIL / NOT ACCEPTED. The owner must execute the recorded exact push command in
+the authenticated Ubuntu terminal; then monitor the automatically triggered CI.
+No additional commit, push, rerun or dispatch was performed.
+Evidence: `evidence/p5a/image-selection-commit-review-2026-10-31/push-status.json`.
+
+
+## Y. Fifth hosted verification — actual acceptance gates
+
+[Run 41179709348](https://github.com/74Cerillion/CyrNava/actions/runs/41179709348),
+commit `6743d1d5c76f2db87c2debb6f687a6e57a6826b6`, push event, attempt 1.
+The owner completed the already-authorized push; no agent push was repeated.
+
+| Gate | Actual result |
+| --- | --- |
+| Workflow validation | PASS; 23 contracts |
+| Backend/security | PASS; 559 tests + 31 subtests, 2 warnings, 47.31 s |
+| Frontend units/lint/TypeScript/build | PASS; 273 units |
+| Browser integration | PASS; 20, zero failure/skip/retry |
+| Accepted lifecycle cases | PASS; all 5 |
+| Image-selection correction/regression | PASS |
+| Flatpak runtime provisioning | FAIL; ValueError, 108.078 s |
+| Production Flatpak build | NOT EXECUTED |
+| Exported bundle audit | NOT EXECUTED |
+| Validated unsigned package upload | NOT EXECUTED |
+| Production package SHA/provenance | UNAVAILABLE; no package |
+| CI required | FAIL |
+
+Provisioning sequence: Platform install 07:17:21Z; Platform pin update 07:17:41Z;
+SDK install 07:17:54Z; SDK pin update 07:18:24Z; later Platform update 07:18:51Z
+during BaseApp installation; BaseApp installation 07:18:58Z; final BaseApp update
+reports Nothing to do; prepare raises ValueError at 07:19:08Z. Install/update
+commands did not report nonzero exit. The current prepare function installs/pins
+refs one at a time then calls the production builder's fail-closed verify_refs.
+The runner is x86_64; the relevant source failure path is a pinned-ref mismatch.
+However, the wrapper records only generic ValueError and suppresses that path's
+exception text. Exact failing ref and final SHA cannot be independently recovered
+from this run. A read-only controlled simulation of a dependent BaseApp install
+updating Platform reproduces the mismatch; it does not prove the missing hosted
+values. Confirmed observations and supported explanation remain distinguished.
+
+No package exists, so the independent bundle inspection was prepared but **not
+executed**. All three diagnostic ZIPs (backend, frontend, prepare) were downloaded
+and their sizes/digests independently verified against GitHub metadata; no artifact
+checksum is misrepresented as a production package checksum. Historical failures,
+local correction evidence and hosted lifecycle verification remain preserved.
+
+Recommended next correction: arrange provisioning so dependent installation cannot
+undo the final locked commits; verify all refs only after final pin enforcement;
+record safe expected/actual ref/commit mismatch details. Retain lock values, GPG
+verification and all fail-closed gates. No code change, weakening, commit, push,
+rerun, dispatch, production release/signing/deployment, main merge or P5B/P5C occurred
+in this hosted review. **P5A recommendation: FAIL / NOT ACCEPTED.**

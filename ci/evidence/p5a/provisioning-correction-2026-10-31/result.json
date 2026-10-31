@@ -1,0 +1,41 @@
+{
+  "status": "LOCAL CORRECTION PASS; HOSTED VERIFICATION REQUIRED",
+  "p5a_acceptance": "FAIL / NOT ACCEPTED",
+  "base_commit": "6743d1d5c76f2db87c2debb6f687a6e57a6826b6",
+  "historical_run": 41179709348,
+  "confirmed": "Install/pin interleaving permits later BaseApp dependency installation to undo an earlier pin; deterministic model reproduces the sensitivity; hosted log records Platform update after earlier pin.",
+  "uncertainty": "Historical diagnostic omitted failing ref/actual SHA; exact hosted mismatch is not recovered. Runtime metadata compatibility is not ABI or deployment proof.",
+  "local_tests": {
+    "provisioning": 8,
+    "ci_contracts_including_provisioning": 31,
+    "production_packaging_and_lifecycle_harness": 45,
+    "ruff": "PASS",
+    "frontend_build_prerequisite": "PASS"
+  },
+  "real_flatpak": {
+    "version": "1.16.6",
+    "remote_add": "PASS, isolated installation",
+    "locked_commit_metadata": "3/3 fetched successfully",
+    "installation": "BLOCKED: open(O_TMPFILE): Read-only file system",
+    "namespace_probe": "BLOCKED: uid_map Operation not permitted",
+    "full_provisioning_build_audit": "NOT EXECUTED"
+  },
+  "runtime_lock": {
+    "architecture": "x86_64",
+    "python": "3.13",
+    "qt_series": "6.11",
+    "application_version": "0.1.0",
+    "schema": 5,
+    "refs": {
+      "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+      "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+      "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e"
+    }
+  },
+  "source_files": [
+    "ci/flatpak.py",
+    "ci/test_ci.py"
+  ],
+  "browser_suite_rerun": false,
+  "initial_local_failures": "CI build-directory contracts initially hit existing 5 GiB tmpfs space gate; moved temporary test outputs to isolated disk directory. Two packaging tests initially lacked clean-checkout frontend/dist; built frontend then reran all 45. Initial logs preserved. No test or resource gate weakened."
+}

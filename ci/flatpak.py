@@ -11,6 +11,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -48,6 +49,31 @@ def sha(path):
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
+class ProvisioningError(VerificationError):
+    """Structured diagnostics containing only approved refs and commit identifiers."""
+
+    def __init__(self, diagnostic):
+        self.diagnostic = diagnostic
+        super().__init__(diagnostic["message"])
+
+
+def installed_commit(ref, diagnostic=None):
+    try:
+        value = output("flatpak", "info", "--user", "--show-commit", ref)
+    except (OSError, subprocess.SubprocessError) as error:
+        if diagnostic is not None:
+            diagnostic.update(exception_type=type(error).__name__, message=str(error))
+        return None
+    if not re.fullmatch(r"[0-9a-f]{64}", value):
+        if diagnostic is not None:
+            diagnostic.update(
+                exception_type="VerificationError",
+                message="Installed commit output is not a SHA-256 identifier",
+            )
+        return None
+    return value
+
+
 def prepare_runtimes():
     if (
         os.environ.get("GITHUB_ACTIONS") != "true"
@@ -57,7 +83,30 @@ def prepare_runtimes():
             "Runtime provisioning is restricted to disposable GitHub-hosted runners"
         )
     remote = json.loads((ROOT / "ci/tools.json").read_text())["runtime_remote"]
-    run(
+    lock = json.loads((PACKAGING / "toolchain.lock.json").read_text())
+
+    def operation(stage, ref, *command):
+        try:
+            run(*command)
+        except (OSError, subprocess.SubprocessError) as error:
+            # Command arguments are fixed by this source and the committed lock.
+            # Do not record subprocess output, environment, or remote configuration.
+            raise ProvisioningError(
+                {
+                    "stage": stage,
+                    "dependency_operation": command[1],
+                    "ref": ref,
+                    "expected_commit": lock["refs"].get(ref),
+                    "actual_commit": installed_commit(ref) if ref else None,
+                    "exception_type": type(error).__name__,
+                    "message": str(error),
+                    "outcome": "FAIL",
+                }
+            ) from error
+
+    operation(
+        "remote",
+        None,
         "flatpak",
         "remote-add",
         "--user",
@@ -65,10 +114,12 @@ def prepare_runtimes():
         remote["name"],
         remote["descriptor"],
     )
-    lock = json.loads((PACKAGING / "toolchain.lock.json").read_text())
-    for ref, commit in lock["refs"].items():
-        # GPG verification remains on. No latest-version or security-weakening fallback.
-        run(
+    # Resolve all dependencies before pinning anything. Installing BaseApp may
+    # update Platform; that must not invalidate an earlier final pin.
+    for ref in lock["refs"]:
+        operation(
+            "install",
+            ref,
             "flatpak",
             "install",
             "--user",
@@ -77,16 +128,64 @@ def prepare_runtimes():
             remote["name"],
             ref,
         )
-        run(
+    for ref, commit in lock["refs"].items():
+        # Dependencies already exist. Prevent each exact pin from updating another
+        # locked ref. GPG stays enabled; missing commits fail without fallback.
+        operation(
+            "pin",
+            ref,
             "flatpak",
             "update",
             "--user",
             "--noninteractive",
             "--no-related",
+            "--no-deps",
             "--commit=" + commit,
             ref,
         )
-    return module("build").verify_refs()
+    checks = []
+    for ref, expected in lock["refs"].items():
+        check = {"ref": ref, "expected_commit": expected}
+        check["actual_commit"] = installed_commit(ref, check)
+        checks.append(check)
+    for check in checks:
+        check["outcome"] = (
+            "PASS" if check["actual_commit"] == check["expected_commit"] else "FAIL"
+        )
+    failed = next((check for check in checks if check["outcome"] == "FAIL"), None)
+    if failed:
+        raise ProvisioningError(
+            {
+                **failed,
+                "stage": "verify",
+                "dependency_operation": "info",
+                "exception_type": failed.get("exception_type", "VerificationError"),
+                "message": failed.get(
+                    "message",
+                    "Final installed runtime does not match the approved lock",
+                ),
+                "checks": checks,
+            }
+        )
+    # Retain the production builder's independent architecture/ref gate. There
+    # are no installation/update operations after these final checks.
+    try:
+        module("build").verify_refs()
+    except (OSError, ValueError, subprocess.SubprocessError) as error:
+        raise ProvisioningError(
+            {
+                "stage": "builder-verify",
+                "dependency_operation": "verify_refs",
+                "ref": None,
+                "expected_commit": None,
+                "actual_commit": None,
+                "exception_type": type(error).__name__,
+                "message": str(error),
+                "outcome": "FAIL",
+                "checks": checks,
+            }
+        ) from error
+    return {**lock, "verification": checks}
 
 
 def validate_payload(checkout):
@@ -255,6 +354,8 @@ def main():
         result["status"] = "PASS"
     except (OSError, ValueError, KeyError, subprocess.SubprocessError) as error:
         result["error_type"] = type(error).__name__
+        if isinstance(error, ProvisioningError):
+            result["provisioning_failure"] = error.diagnostic
         if isinstance(error, VerificationError):
             result["error"] = str(error)
         print("CI Flatpak operation failed: " + type(error).__name__, file=sys.stderr)

@@ -2,7 +2,7 @@
   "phase": "P5A",
   "date": "2026-10-31",
   "timezone": "Asia/Seoul",
-  "status": "FAIL / NOT ACCEPTED \u2014 image-selection correction locally verified; hosted verification pending",
+  "status": "FAIL / NOT ACCEPTED \u2014 all application tests pass; Flatpak runtime provisioning failed",
   "branch": "desktop/p2-production-integration",
   "base_commit": "8418339cf3c9ff7ae26f792ed8697b7c16d7450a",
   "local_tests": {
@@ -105,54 +105,54 @@
   "hosted": {
     "phase": "P5A",
     "status": "FAIL",
-    "acceptance_recommendation": "DO NOT ACCEPT: browser workspace image-command test failed; production Flatpak gates remain unexecuted",
-    "run_id": 41176826666,
-    "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41176826666",
-    "source_commit": "047a99b1473304cc73518dff6427bf7937c542a2",
+    "acceptance_recommendation": "NOT ACCEPTED: all application verification passed; Flatpak runtime prepare failed and production package gates did not execute",
+    "run_id": 41179709348,
+    "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41179709348",
     "attempt": 1,
     "event": "push",
-    "created_at_utc": "2026-10-31T06:29:39Z",
-    "completed_at_utc": "2026-10-31T06:34:13Z",
+    "source_commit": "6743d1d5c76f2db87c2debb6f687a6e57a6826b6",
+    "created_at_utc": "2026-10-31T07:12:52Z",
+    "completed_at_utc": "2026-10-31T07:19:17Z",
     "jobs": [
       {
-        "id": 124466009556,
+        "id": 124474421857,
         "name": "Workflow validation",
         "conclusion": "success",
-        "started_at": "2026-10-31T06:29:42Z",
-        "completed_at": "2026-10-31T06:29:51Z",
+        "started_at": "2026-10-31T07:12:55Z",
+        "completed_at": "2026-10-31T07:13:04Z",
         "seconds": 9.0
       },
       {
-        "id": 124466046223,
+        "id": 124474460935,
         "name": "Backend and security",
         "conclusion": "success",
-        "started_at": "2026-10-31T06:29:52Z",
-        "completed_at": "2026-10-31T06:31:25Z",
+        "started_at": "2026-10-31T07:13:06Z",
+        "completed_at": "2026-10-31T07:14:39Z",
         "seconds": 93.0
       },
       {
-        "id": 124466046250,
+        "id": 124474461018,
         "name": "Frontend and browser",
-        "conclusion": "failure",
-        "started_at": "2026-10-31T06:30:00Z",
-        "completed_at": "2026-10-31T06:34:08Z",
-        "seconds": 248.0
+        "conclusion": "success",
+        "started_at": "2026-10-31T07:13:06Z",
+        "completed_at": "2026-10-31T07:17:01Z",
+        "seconds": 235.0
       },
       {
-        "id": 124466951202,
+        "id": 124475225909,
+        "name": "Production Flatpak and bundle audit",
+        "conclusion": "failure",
+        "started_at": "2026-10-31T07:17:03Z",
+        "completed_at": "2026-10-31T07:19:11Z",
+        "seconds": 128.0
+      },
+      {
+        "id": 124475649302,
         "name": "CI required",
         "conclusion": "failure",
-        "started_at": "2026-10-31T06:34:10Z",
-        "completed_at": "2026-10-31T06:34:12Z",
-        "seconds": 2.0
-      },
-      {
-        "id": 124466952129,
-        "name": "Production Flatpak and bundle audit",
-        "conclusion": "skipped",
-        "started_at": "2026-10-31T06:34:08Z",
-        "completed_at": "2026-10-31T06:34:08Z",
-        "seconds": 0.0
+        "started_at": "2026-10-31T07:19:13Z",
+        "completed_at": "2026-10-31T07:19:17Z",
+        "seconds": 4.0
       }
     ],
     "tests": {
@@ -160,152 +160,66 @@
       "backend_passed": 559,
       "subtests_passed": 31,
       "backend_warnings": 2,
-      "backend_seconds": 47.14,
-      "frontend_unit_passed": 273,
-      "browser_passed": 18,
-      "browser_failed": 1,
-      "lifecycle_cases_passed": 5,
+      "backend_seconds": 47.31,
+      "frontend_units_passed": 273,
+      "browser_passed": 20,
+      "browser_failed": 0,
+      "browser_skipped": 0,
+      "lifecycle_passed": 5,
+      "image_selection_and_regression": "PASS",
       "retries": 0
     },
-    "failure": {
-      "file": "frontend/e2e/workspace.spec.ts",
-      "test_line": 604,
-      "failure_line": 656,
-      "summary": "Second /image command remained literal text in code block; Upload image button never appeared. Both button click and filechooser event wait timed out. First JPEG chooser and setFiles succeeded.",
-      "classification": "Confirmed invalid editor-command/focus precondition in this execution; underlying focus transition cause not yet reproduced. No native Save portal failure established."
+    "flatpak": {
+      "prepare": "FAIL",
+      "prepare_seconds": 108.078,
+      "recorded_error_type": "ValueError",
+      "confirmed_observations": [
+        "Platform installation followed by explicit commit pin",
+        "SDK installation followed by explicit commit pin",
+        "Later BaseApp install transaction logs another Platform update",
+        "BaseApp commit update reports Nothing to do",
+        "Final prepare raises ValueError; no CalledProcessError or installation command failure recorded",
+        "prepare.json has only error_type and duration; final ref/SHA and exception message omitted"
+      ],
+      "supported_cause": "Runtime pin verification after a dependent installation updated an earlier pinned ref. Current provisioner interleaves install/pin per ref; controlled read-only simulation reproduces Platform mismatch under that dependency update.",
+      "uncertainty": "Exact hosted exception text, mismatched ref and actual final SHA were not recorded. Simulation is not a recovery of those missing values; no definitive claim of exact final Platform SHA.",
+      "production_build": "NOT EXECUTED: skipped after prepare failure",
+      "exported_package_audit": "NOT EXECUTED",
+      "validated_unsigned_artifact_upload": "NOT EXECUTED",
+      "production_artifact_sha256": "UNAVAILABLE: no production artifact",
+      "production_provenance": "UNAVAILABLE: no production artifact",
+      "security": "Fail-closed pin check preserved. No lock/GPG/permissions/security settings changed."
     },
-    "new_causal_observation": {
-      "test": "managed tabs close/recover without browser routing",
-      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
-      "after_close_intent_marker_ms": 16.850991,
-      "expected_revision": 3,
-      "frontend": {
-        "perf_ms": 623.6000000000058,
-        "time_origin_ms": 1793428298046.1,
-        "sequence": 1,
-        "close_intent": true,
-        "keepalive": false,
-        "service_worker": false,
-        "visibility": "hidden"
-      },
-      "result": "SQLite guard rejected UPDATE, ROLLBACK, HTTP 503; canonical unchanged through restart and recovery passed",
-      "historical_limit": "Direct evidence for this current teardown operation only. Does not identify previous escaped operation or prove Playwright interception behavior in prior run.",
-      "close_intent_chain": [
-        {
-          "event": "fastapi_request_enter",
-          "mono_ns": 131465544333,
-          "pid": 3687,
-          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
-          "method": "PATCH",
-          "frontend": {
-            "perf_ms": 623.6000000000058,
-            "time_origin_ms": 1793428298046.1,
-            "sequence": 1,
-            "close_intent": true,
-            "keepalive": false,
-            "service_worker": false,
-            "visibility": "hidden"
-          }
-        },
-        {
-          "event": "database_update_enter",
-          "mono_ns": 131467647735,
-          "pid": 3687,
-          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
-          "expected_revision": 3
-        },
-        {
-          "event": "sqlite_statement",
-          "mono_ns": 131468444421,
-          "pid": 3687,
-          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
-          "kind": "BEGIN"
-        },
-        {
-          "event": "sqlite_statement",
-          "mono_ns": 131469420221,
-          "pid": 3687,
-          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
-          "kind": "UPDATE"
-        },
-        {
-          "event": "sqlite_statement",
-          "mono_ns": 131469507504,
-          "pid": 3687,
-          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
-          "kind": "UPDATE"
-        },
-        {
-          "event": "sqlite_statement",
-          "mono_ns": 131469563078,
-          "pid": 3687,
-          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
-          "kind": "UPDATE"
-        },
-        {
-          "event": "sqlite_statement",
-          "mono_ns": 131469605246,
-          "pid": 3687,
-          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
-          "kind": "ROLLBACK"
-        },
-        {
-          "event": "sqlite_transaction_failed",
-          "mono_ns": 131469716163,
-          "pid": 3687,
-          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
-          "error_type": "IntegrityError"
-        },
-        {
-          "event": "database_update_failed",
-          "mono_ns": 131469758602,
-          "pid": 3687,
-          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
-          "error_type": "IntegrityError"
-        },
-        {
-          "event": "fastapi_response",
-          "mono_ns": 131470085775,
-          "pid": 3687,
-          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
-          "status": 503
-        },
-        {
-          "event": "fastapi_request_exit",
-          "mono_ns": 131470598531,
-          "pid": 3687,
-          "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730"
-        }
-      ]
-    },
-    "production_flatpak_build": "SKIPPED",
-    "exported_package_content_audit": "NOT EXECUTED",
-    "unsigned_production_artifact_upload": "NOT EXECUTED",
-    "production_artifact_sha256": "UNAVAILABLE: no production artifact",
-    "production_provenance": "UNAVAILABLE: no production artifact",
-    "diagnostic_archives_independently_verified": [
+    "diagnostic_artifacts_verified": [
       {
-        "id": 13033431818,
-        "kind": "frontend diagnostic archive, not a production package",
-        "sha256": "1c331a6d36df70821a896436999e1fbe59d32680dd07b0bc3614b9c9e796c4cb",
-        "bytes": 14017010,
-        "matches_GitHub_digest": true
+        "artifact_id": 13034521220,
+        "kind": "backend diagnostics only",
+        "sha256": "383ed57301740f9e0d191e80beb2c0cf2a132bd269e34371afd0747f8c57bce6",
+        "bytes": 10658,
+        "independently_matches_GitHub_digest": true
       },
       {
-        "id": 13033203039,
-        "kind": "backend diagnostic archive, not a production package",
-        "sha256": "9b8ee132de881b37a062a392b714d6af69cd7f09441cb455a06101bc7f5f3620",
-        "bytes": 10664,
-        "matches_GitHub_digest": true
+        "artifact_id": 13034393043,
+        "kind": "frontend diagnostics only",
+        "sha256": "fdacf1ad449f916240ac4dc8af56df90303845beec050697a5a12226a35f6902",
+        "bytes": 4889311,
+        "independently_matches_GitHub_digest": true
+      },
+      {
+        "artifact_id": 13034288533,
+        "kind": "flatpak diagnostics only",
+        "sha256": "038b0ec9fb3699a1747de0e16e66e7687fc55cd5caf3238698e1c3c669483adb",
+        "bytes": 237,
+        "independently_matches_GitHub_digest": true
       }
     ],
+    "recommendation": "Investigate/correct runtime provisioning so dependent installs cannot undo final locked commits, preserve all pin checks and GPG verification, and record expected/actual ref/commit on failure. Requires new authorization; no correction or rerun implemented here.",
     "actions_this_turn": {
-      "read_hosted_results": true,
-      "updated_local_reports": true,
       "commit": false,
       "push": false,
       "rerun": false,
       "dispatch": false,
+      "application_installed_or_executed_for_audit": false,
       "production_publication": false,
       "P5B_or_P5C": false
     }
@@ -1507,6 +1421,214 @@
         "P5C_started": false
       },
       "next_action": "Stop for owner review; preserve the trace and request server-side correlation in a separately authorized investigation. No automatic retry or weaker assertion."
+    },
+    "41176826666": {
+      "phase": "P5A",
+      "status": "FAIL",
+      "acceptance_recommendation": "DO NOT ACCEPT: browser workspace image-command test failed; production Flatpak gates remain unexecuted",
+      "run_id": 41176826666,
+      "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41176826666",
+      "source_commit": "047a99b1473304cc73518dff6427bf7937c542a2",
+      "attempt": 1,
+      "event": "push",
+      "created_at_utc": "2026-10-31T06:29:39Z",
+      "completed_at_utc": "2026-10-31T06:34:13Z",
+      "jobs": [
+        {
+          "id": 124466009556,
+          "name": "Workflow validation",
+          "conclusion": "success",
+          "started_at": "2026-10-31T06:29:42Z",
+          "completed_at": "2026-10-31T06:29:51Z",
+          "seconds": 9.0
+        },
+        {
+          "id": 124466046223,
+          "name": "Backend and security",
+          "conclusion": "success",
+          "started_at": "2026-10-31T06:29:52Z",
+          "completed_at": "2026-10-31T06:31:25Z",
+          "seconds": 93.0
+        },
+        {
+          "id": 124466046250,
+          "name": "Frontend and browser",
+          "conclusion": "failure",
+          "started_at": "2026-10-31T06:30:00Z",
+          "completed_at": "2026-10-31T06:34:08Z",
+          "seconds": 248.0
+        },
+        {
+          "id": 124466951202,
+          "name": "CI required",
+          "conclusion": "failure",
+          "started_at": "2026-10-31T06:34:10Z",
+          "completed_at": "2026-10-31T06:34:12Z",
+          "seconds": 2.0
+        },
+        {
+          "id": 124466952129,
+          "name": "Production Flatpak and bundle audit",
+          "conclusion": "skipped",
+          "started_at": "2026-10-31T06:34:08Z",
+          "completed_at": "2026-10-31T06:34:08Z",
+          "seconds": 0.0
+        }
+      ],
+      "tests": {
+        "workflow_contracts": 23,
+        "backend_passed": 559,
+        "subtests_passed": 31,
+        "backend_warnings": 2,
+        "backend_seconds": 47.14,
+        "frontend_unit_passed": 273,
+        "browser_passed": 18,
+        "browser_failed": 1,
+        "lifecycle_cases_passed": 5,
+        "retries": 0
+      },
+      "failure": {
+        "file": "frontend/e2e/workspace.spec.ts",
+        "test_line": 604,
+        "failure_line": 656,
+        "summary": "Second /image command remained literal text in code block; Upload image button never appeared. Both button click and filechooser event wait timed out. First JPEG chooser and setFiles succeeded.",
+        "classification": "Confirmed invalid editor-command/focus precondition in this execution; underlying focus transition cause not yet reproduced. No native Save portal failure established."
+      },
+      "new_causal_observation": {
+        "test": "managed tabs close/recover without browser routing",
+        "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+        "after_close_intent_marker_ms": 16.850991,
+        "expected_revision": 3,
+        "frontend": {
+          "perf_ms": 623.6000000000058,
+          "time_origin_ms": 1793428298046.1,
+          "sequence": 1,
+          "close_intent": true,
+          "keepalive": false,
+          "service_worker": false,
+          "visibility": "hidden"
+        },
+        "result": "SQLite guard rejected UPDATE, ROLLBACK, HTTP 503; canonical unchanged through restart and recovery passed",
+        "historical_limit": "Direct evidence for this current teardown operation only. Does not identify previous escaped operation or prove Playwright interception behavior in prior run.",
+        "close_intent_chain": [
+          {
+            "event": "fastapi_request_enter",
+            "mono_ns": 131465544333,
+            "pid": 3687,
+            "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+            "method": "PATCH",
+            "frontend": {
+              "perf_ms": 623.6000000000058,
+              "time_origin_ms": 1793428298046.1,
+              "sequence": 1,
+              "close_intent": true,
+              "keepalive": false,
+              "service_worker": false,
+              "visibility": "hidden"
+            }
+          },
+          {
+            "event": "database_update_enter",
+            "mono_ns": 131467647735,
+            "pid": 3687,
+            "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+            "expected_revision": 3
+          },
+          {
+            "event": "sqlite_statement",
+            "mono_ns": 131468444421,
+            "pid": 3687,
+            "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+            "kind": "BEGIN"
+          },
+          {
+            "event": "sqlite_statement",
+            "mono_ns": 131469420221,
+            "pid": 3687,
+            "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+            "kind": "UPDATE"
+          },
+          {
+            "event": "sqlite_statement",
+            "mono_ns": 131469507504,
+            "pid": 3687,
+            "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+            "kind": "UPDATE"
+          },
+          {
+            "event": "sqlite_statement",
+            "mono_ns": 131469563078,
+            "pid": 3687,
+            "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+            "kind": "UPDATE"
+          },
+          {
+            "event": "sqlite_statement",
+            "mono_ns": 131469605246,
+            "pid": 3687,
+            "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+            "kind": "ROLLBACK"
+          },
+          {
+            "event": "sqlite_transaction_failed",
+            "mono_ns": 131469716163,
+            "pid": 3687,
+            "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+            "error_type": "IntegrityError"
+          },
+          {
+            "event": "database_update_failed",
+            "mono_ns": 131469758602,
+            "pid": 3687,
+            "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+            "error_type": "IntegrityError"
+          },
+          {
+            "event": "fastapi_response",
+            "mono_ns": 131470085775,
+            "pid": 3687,
+            "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+            "status": 503
+          },
+          {
+            "event": "fastapi_request_exit",
+            "mono_ns": 131470598531,
+            "pid": 3687,
+            "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730"
+          }
+        ]
+      },
+      "production_flatpak_build": "SKIPPED",
+      "exported_package_content_audit": "NOT EXECUTED",
+      "unsigned_production_artifact_upload": "NOT EXECUTED",
+      "production_artifact_sha256": "UNAVAILABLE: no production artifact",
+      "production_provenance": "UNAVAILABLE: no production artifact",
+      "diagnostic_archives_independently_verified": [
+        {
+          "id": 13033431818,
+          "kind": "frontend diagnostic archive, not a production package",
+          "sha256": "1c331a6d36df70821a896436999e1fbe59d32680dd07b0bc3614b9c9e796c4cb",
+          "bytes": 14017010,
+          "matches_GitHub_digest": true
+        },
+        {
+          "id": 13033203039,
+          "kind": "backend diagnostic archive, not a production package",
+          "sha256": "9b8ee132de881b37a062a392b714d6af69cd7f09441cb455a06101bc7f5f3620",
+          "bytes": 10664,
+          "matches_GitHub_digest": true
+        }
+      ],
+      "actions_this_turn": {
+        "read_hosted_results": true,
+        "updated_local_reports": true,
+        "commit": false,
+        "push": false,
+        "rerun": false,
+        "dispatch": false,
+        "production_publication": false,
+        "P5B_or_P5C": false
+      }
     }
   },
   "local_image_selection_correction": {
@@ -1618,5 +1740,75 @@
     },
     "recommendation": "Authorize one P5A-only commit/push of test correction and non-sensitive reports/evidence; require fresh hosted build/audit/upload/gate before P5A acceptance.",
     "final_cleanup_review": "New diagnostic writes are enclosed in try/finally so a write failure cannot bypass backend shutdown. Exact final source reverified: focused 10/10 and frontend 273 units +20 browsers; no retries or skipped tests."
+  },
+  "image_selection_authorized_push": {
+    "date_utc": "2026-10-31T07:12:13.500463+00:00",
+    "branch": "desktop/p2-production-integration",
+    "created_commit": "6743d1d5c76f2db87c2debb6f687a6e57a6826b6",
+    "parent_commit": "047a99b1473304cc73518dff6427bf7937c542a2",
+    "commit_count_this_authorization": 1,
+    "push_attempt_count_this_authorization": 1,
+    "push_exit_code": 128,
+    "push_status": "BLOCKED: terminal has no Git HTTPS credentials",
+    "remote_branch_sha_verified_with_read_only_ls_remote": "047a99b1473304cc73518dff6427bf7937c542a2",
+    "remote_updated": false,
+    "new_hosted_run": "NOT STARTED",
+    "production_build_audit_upload_checksum_provenance": "NOT EXECUTED for this commit",
+    "P5A": "FAIL / NOT ACCEPTED; latest actual hosted run remains 41176826666 FAIL",
+    "staged_review": {
+      "P5A_files": 86,
+      "text_and_zip_entries": 608,
+      "secret_pattern_hits": 0,
+      "sensitive_request_headers": 0,
+      "trace_origins": "loopback only",
+      "production_guard_workflow_unchanged": true
+    },
+    "next_action": "Owner completes this already-authorized push in authenticated Ubuntu terminal; then inspect automatically triggered CI",
+    "command": "git push origin 6743d1d5c76f2db87c2debb6f687a6e57a6826b6:refs/heads/desktop/p2-production-integration",
+    "no_additional_commit_push_rerun_dispatch": true,
+    "owner_completed_push": true,
+    "confirmed_remote_sha": "6743d1d5c76f2db87c2debb6f687a6e57a6826b6",
+    "confirmed_hosted_run": 41179709348
+  },
+  "provisioning_correction_2026_10_31": {
+    "status": "LOCAL CORRECTION PASS; HOSTED VERIFICATION REQUIRED",
+    "p5a_acceptance": "FAIL / NOT ACCEPTED",
+    "base_commit": "6743d1d5c76f2db87c2debb6f687a6e57a6826b6",
+    "historical_run": 41179709348,
+    "confirmed": "Install/pin interleaving permits later BaseApp dependency installation to undo an earlier pin; deterministic model reproduces the sensitivity; hosted log records Platform update after earlier pin.",
+    "uncertainty": "Historical diagnostic omitted failing ref/actual SHA; exact hosted mismatch is not recovered. Runtime metadata compatibility is not ABI or deployment proof.",
+    "local_tests": {
+      "provisioning": 8,
+      "ci_contracts_including_provisioning": 31,
+      "production_packaging_and_lifecycle_harness": 45,
+      "ruff": "PASS",
+      "frontend_build_prerequisite": "PASS"
+    },
+    "real_flatpak": {
+      "version": "1.16.6",
+      "remote_add": "PASS, isolated installation",
+      "locked_commit_metadata": "3/3 fetched successfully",
+      "installation": "BLOCKED: open(O_TMPFILE): Read-only file system",
+      "namespace_probe": "BLOCKED: uid_map Operation not permitted",
+      "full_provisioning_build_audit": "NOT EXECUTED"
+    },
+    "runtime_lock": {
+      "architecture": "x86_64",
+      "python": "3.13",
+      "qt_series": "6.11",
+      "application_version": "0.1.0",
+      "schema": 5,
+      "refs": {
+        "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+        "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+        "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e"
+      }
+    },
+    "source_files": [
+      "ci/flatpak.py",
+      "ci/test_ci.py"
+    ],
+    "browser_suite_rerun": false,
+    "initial_local_failures": "CI build-directory contracts initially hit existing 5 GiB tmpfs space gate; moved temporary test outputs to isolated disk directory. Two packaging tests initially lacked clean-checkout frontend/dist; built frontend then reran all 45. Initial logs preserved. No test or resource gate weakened."
   }
 }
