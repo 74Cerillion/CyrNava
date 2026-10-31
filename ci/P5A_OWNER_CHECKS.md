@@ -1,33 +1,27 @@
-# P5A owner checks — lifecycle correction ready
+# P5A owner checks — focused lifecycle investigation
 
-**P5A STATUS: CONDITIONAL — HOSTED VERIFICATION REQUIRED; NOT ACCEPTED**
+**P5A remains FAIL / NOT ACCEPTED.** Latest hosted run 41172242175 remains unchanged.
 
-The latest actual hosted run remains [41163754626](https://github.com/74Cerillion/CyrNava/actions/runs/41163754626),
-FAIL at 72f4c7b. Backend 550 tests/31 subtests passed; the production build was
-skipped after browser recovery failed. Both historical runs remain unchanged.
+- [x] Preserve historical trace/revision evidence and superseded hypotheses.
+- [x] Review installed Playwright teardown behavior, worker and keepalive limitations.
+- [x] Instrument disposable frontend/FastAPI/SQLite with operation IDs/monotonic times.
+- [x] Correlate five controlled visibility failures/rollbacks and five later commits.
+- [ ] Identify the exact historical escaped request: backend logs were not captured;
+  local repetitions did not observe a close-intent HTTP request. Do not infer it.
+- [x] Implement independently enforced SQLite note-write guard and fingerprint check.
+- [x] Verify direct HTTP, direct SQL, preexisting connections and writer linearization.
+- [x] Prove unexpected canonical writes/disarmed guard fail verification.
+- [x] Verify plain app has no guard; packaging excludes it and migration rejects it.
+- [x] Fresh-checkout focused checks 15/15; full backend 559 + 31 subtests PASS;
+  frontend 273 units + 19 browsers, lint and TypeScript/build PASS.
+- [x] Preserve initial 5 GiB disk-space test failure and safe dependency-only cleanup.
+- [x] Owner approved findings, fixture-only boundary, and one commit/push.
+- [x] Final launcher refuses existing unmarked databases before mutation; unchanged-source regression PASS.
+- [ ] Successful required hosted jobs, production build/audit/upload and package hash.
+- [ ] Owner accepts P5A.
 
-Confirmed test defect: writes were blocked only after editor startup, which cannot
-stop a request already dispatched. A real-API controlled reproduction commits
-revision 4 with acknowledgement withheld and retains draft base 3; the application's
-conflict rejection is correct. Historical exact ordering is unprovable because no
-hosted trace was captured. Natural original-flow runs passed 10/10 and CPU probes
-3/3; neither reclassifies the recorded failure or proves it flaky.
+See P5A_LIFECYCLE_INVESTIGATION.md and evidence/p5a/lifecycle-causality-2026-10-31/.
+No source-production change, security weakening, new commit, push, workflow trigger,
+publication, real-data access or P5B/P5C occurred. No additional host test is requested.
 
-- [x] Install write barrier before opening the recovery page; keep through restart.
-- [x] Assert SQLite unchanged, matching draft base, real save response and content.
-- [x] Add deterministic lost-ack regression: preserve newer data and stale draft;
-  recovery choice makes no automatic write and still requires conflict review.
-- [x] Preserve revision/timing diagnostics and future failure traces.
-- [x] Repeated affected tests: 10/10 (five per case), no retries.
-- [x] Full clean-clone frontend: lint, 273 units, TypeScript/build and 17 browsers PASS.
-- [x] CI contracts: 23 PASS. Application/backend/security code unchanged; no new
-  backend suite run claimed. Prior hosted backend result remains separate evidence.
-- [x] Evidence and selected synthetic traces retained in
-  evidence/p5a/lifecycle-correction-2026-10-31/; see manifest and limitations.
-- [ ] Authorize one next P5A-only commit/push to desktop/p2-production-integration.
-- [ ] Verify resulting hosted run including actual Flatpak build/audit/upload/hash.
-- [ ] Owner accepts P5A after required hosted results pass.
-
-No commit, push, dispatch/rerun, release, signing, personal-data migration or
-P5B/P5C occurred. No test skip, weakened conflict protection, timeout increase,
-arbitrary delay or automatic retry was introduced. Stop at commit/push approval.
+Final source/package review and repeated clean-checkout results: evidence/p5a/lifecycle-final-review-2026-10-31/. Hosted verification remains pending.

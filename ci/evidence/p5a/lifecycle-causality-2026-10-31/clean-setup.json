@@ -1,0 +1,18 @@
+{
+  "root": "/tmp/cyrnava-p5a-boundary-r8jvmtth",
+  "checkout": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout",
+  "initial_generated_paths": {
+    "frontend/dist": false,
+    "frontend/node_modules": false,
+    "backend/.venv": false
+  },
+  "head": "129700175cf4716446647572979771d27422fc3f",
+  "env": {
+    "PIP_CACHE_DIR": "/tmp/cyrnava-p5a-boundary-r8jvmtth/pip-cache",
+    "npm_config_cache": "/tmp/cyrnava-p5a-boundary-r8jvmtth/npm-cache",
+    "XDG_DATA_HOME": "/tmp/cyrnava-p5a-boundary-r8jvmtth/xdg-data",
+    "XDG_CONFIG_HOME": "/tmp/cyrnava-p5a-boundary-r8jvmtth/xdg-config",
+    "XDG_CACHE_HOME": "/tmp/cyrnava-p5a-boundary-r8jvmtth/xdg-cache",
+    "PLAYWRIGHT_BROWSERS_PATH": "/tmp/cyrnava-p5a-prerequisite-e5fgarzw/xdg-cache/ms-playwright"
+  }
+}

@@ -10,10 +10,13 @@ const root = resolve('..');
 const python = join(root, 'backend/.venv/bin/python');
 const launcher = join(root, 'desktop/launcher.py');
 
-async function installation() {
+async function installation(testInfo?: TestInfo) {
   const directory = await mkdtemp(join(tmpdir(), 'cyrnava-lifecycle-browser-'));
   const release = join(directory, 'release');
   const state = join(directory, 'state');
+  const executable = join(directory, 'launcher-harness.py');
+  await cp(join(root, 'ci/lifecycle_harness.py'), executable);
+  await writeFile(join(directory, 'harness-source.json'), JSON.stringify({ launcher }));
   await mkdir(join(release, 'backend'), { recursive: true }); await mkdir(join(release, 'frontend'));
   await mkdir(state, { mode: 0o700 });
   await symlink(join(root, 'backend/app'), join(release, 'backend/app'));
@@ -31,7 +34,7 @@ async function installation() {
   const url = `http://127.0.0.1:${port}`;
   let launches = 0;
   function run(action: 'open' | 'stop') {
-    execFileSync(python, [launcher, '--config', config, action], { timeout: 25000 });
+    execFileSync(python, [executable, '--config', config, action], { timeout: 25000 });
     if (action === 'open') launches++;
   }
   async function stopped() {
@@ -49,9 +52,57 @@ async function installation() {
     const registered = page.waitForResponse((response) => response.url().includes('/api/lifecycle/sessions/') && response.ok(), { timeout: 10000 });
     await page.goto(url); await registered;
   }
-  return { url, run, stopped, open, cleanup: async () => { run('stop'); await rm(directory, { recursive: true, force: true }); } };
+  const database = join(directory, 'data/engage/engage.sqlite3');
+  const journal = join(state, 'p5a-events.jsonl');
+  function boundary(action: 'arm' | 'disarm' | 'inspect' | 'verify' | 'marker', expected?: unknown) {
+    return JSON.parse(execFileSync(python, [executable, action, database, journal], {
+      input: expected ? JSON.stringify(expected) : undefined, encoding: 'utf8', timeout: 10000,
+    }));
+  }
+  async function close(page: Page) {
+    await page.evaluate(() => { (window as Window & { __p5aCloseIntent?: boolean }).__p5aCloseIntent = true; });
+    boundary('marker');
+    await page.close();
+  }
+  return { url, run, stopped, open, close, boundary,
+    events: async () => (await readFile(journal, 'utf8')).trim().split('\n').map((line) => JSON.parse(line)),
+    cleanup: async () => {
+      try { run('stop'); }
+      finally {
+        try {
+          if (testInfo) {
+            await mkdir(testInfo.outputDir, { recursive: true });
+            const target = testInfo.outputPath('backend-persistence.jsonl');
+            await cp(journal, target);
+            await testInfo.attach('backend-persistence', { path: target, contentType: 'application/x-ndjson' });
+          }
+        } finally { await rm(directory, { recursive: true, force: true }); }
+      }
+    } };
 }
 
+
+// Only the disposable browser context receives this wrapper. Production assets
+// and HTTP code have no instrumentation flag or endpoint.
+async function installSaveCorrelation(context: BrowserContext) {
+  await context.addInitScript(() => {
+    const original = window.fetch.bind(window);
+    let sequence = 0;
+    window.fetch = (input, init) => {
+      const raw = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+      if (init?.method !== 'PATCH' || !new URL(raw, location.href).pathname.startsWith('/api/notes/')) return original(input, init);
+      const headers = new Headers(init.headers);
+      headers.set('X-P5A-Operation', crypto.randomUUID());
+      headers.set('X-P5A-Frontend', JSON.stringify({
+        sequence: ++sequence, perf_ms: performance.now(), time_origin_ms: performance.timeOrigin,
+        visibility: document.visibilityState,
+        close_intent: (window as Window & { __p5aCloseIntent?: boolean }).__p5aCloseIntent === true,
+        keepalive: init.keepalive === true, service_worker: !!navigator.serviceWorker?.controller,
+      }));
+      return original(input, { ...init, headers });
+    };
+  });
+}
 
 // Synthetic-test diagnostics: revisions, status and relative timing only. Never
 // copy request headers, session credentials, titles or document contents here.
@@ -84,8 +135,10 @@ function observeRevisions(context: BrowserContext, testInfo: TestInfo) {
 const isNoteRead = (response: import('@playwright/test').Response) =>
   response.request().method() === 'GET' && /\/api\/notes\/[^/]+$/.test(new URL(response.url()).pathname) && response.ok();
 
-test('managed tabs close, restart and recover immediately closed unconfirmed edits', async ({ context }, testInfo) => {
-  const app = await installation();
+for (const browserRouting of [true, false]) {
+test('managed tabs close, restart and recover immediately closed unconfirmed edits' + (browserRouting ? '' : ' without browser routing'), async ({ context }, testInfo) => {
+  const app = await installation(testInfo);
+  await installSaveCorrelation(context);
   const timeline = observeRevisions(context, testInfo);
   try {
     app.run('open'); const first = await context.newPage(); await app.open(first);
@@ -97,22 +150,31 @@ test('managed tabs close, restart and recover immediately closed unconfirmed edi
     await expect(first.getByText('Saved', { exact: true })).toBeVisible();
     const second = await context.newPage(); await app.open(second);
     await expect(second.getByRole('textbox', { name: 'Note content' })).toContainText('Confirmed paragraph.');
-    await first.close();
+    await app.close(first);
     // Outlive the short test expiration while the second tab keeps renewing.
     await expect.poll(async () => (await fetch(app.url + '/health')).ok).toBe(true);
     await second.getByRole('textbox', { name: 'Note title' }).fill('Second tab remains active');
     await expect(second.getByText('Saved', { exact: true })).toBeVisible();
-    await second.close(); await app.stopped();
+    await app.close(second); await app.stopped();
 
+    const sqlBoundary = app.boundary('arm');
     // Install the write barrier BEFORE opening the next page. A route added
     // after editor readiness cannot intercept an already dispatched autosave.
     const blockSave = (route: import('@playwright/test').Route) => route.request().method() === 'PATCH' ? route.abort() : route.continue();
-    await context.route('**/api/notes/*', blockSave);
+    if (browserRouting) await context.route('**/api/notes/*', blockSave);
     app.run('open'); const recovery = await context.newPage();
     const baselineRead = recovery.waitForResponse(isNoteRead);
     await app.open(recovery);
     const baseline = await (await baselineRead).json();
     timeline.record({ event: 'outage-baseline', canonical_revision: baseline.revision });
+    // Independent HTTP client, outside Playwright routing: the SQL engine must
+    // reject this valid update, and the canonical fingerprint must stay exact.
+    const denied = await fetch(app.url + '/api/notes/' + baseline.id, {
+      method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ revision: baseline.revision, title: 'Synthetic fault-boundary probe' }),
+    });
+    expect(denied.status).toBe(503);
+    app.boundary('verify', sqlBoundary);
     await expect(recovery.getByRole('textbox', { name: 'Note content' })).toContainText('Confirmed paragraph.');
     // Context routing survives page.close and remains until restart verifies
     // that neither startup edits nor visibility-triggered flushes committed.
@@ -135,14 +197,16 @@ test('managed tabs close, restart and recover immediately closed unconfirmed edi
     timeline.record({ event: 'retained-draft', base_revision: nativeDraft.base_revision });
     await expect(recovery.getByText('Unsaved Changes', { exact: true })).toBeVisible();
     // page.close skips beforeunload prompting; it cannot help this recovery test.
-    await recovery.close(); await app.stopped();
+    await app.close(recovery); await app.stopped();
     app.run('open'); const reopened = await context.newPage();
     const restartedRead = reopened.waitForResponse(isNoteRead);
     await app.open(reopened);
     const unchanged = await (await restartedRead).json();
     expect(unchanged).toEqual(baseline);
+    app.boundary('verify', sqlBoundary);
     timeline.record({ event: 'outage-source-unchanged', canonical_revision: unchanged.revision, base_revision: nativeDraft.base_revision });
-    await context.unroute('**/api/notes/*', blockSave);
+    app.boundary('disarm');
+    if (browserRouting) await context.unroute('**/api/notes/*', blockSave);
     await expect(reopened.getByRole('heading', { name: 'Recover unsaved edits' })).toBeVisible();
     const savedResponse = reopened.waitForResponse((response) => response.request().method() === 'PATCH' && response.ok());
     await reopened.getByRole('button', { name: 'Recover draft', exact: true }).click();
@@ -158,13 +222,16 @@ test('managed tabs close, restart and recover immediately closed unconfirmed edi
     const response = await fetch(app.url + '/api/notes/' + nativeDraft.note_id);
     expect((await response.json()).document_json).toEqual(nativeDraft.document_json);
     await expect(reopened.getByRole('heading', { name: 'Recover unsaved edits' })).toHaveCount(0);
-    await reopened.close(); await app.stopped();
+    await app.close(reopened); await app.stopped();
   } finally { try { await timeline.finish(); } finally { await app.cleanup(); } }
 });
 
 
+}
+
 test('a committed write with a lost acknowledgement retains its draft and requires conflict review', async ({ context }, testInfo) => {
-  const app = await installation();
+  const app = await installation(testInfo);
+  await installSaveCorrelation(context);
   const timeline = observeRevisions(context, testInfo);
   let releaseResponse!: () => void;
   const responseGate = new Promise<void>((resolve) => { releaseResponse = resolve; });
@@ -200,7 +267,7 @@ test('a committed write with a lost acknowledgement retains its draft and requir
     });
     expect(retained.base_revision).toBe(committedRevision - 1);
     timeline.record({ event: 'retained-before-close', base_revision: retained.base_revision });
-    await page.close(); releaseResponse(); await app.stopped();
+    await app.close(page); releaseResponse(); await app.stopped();
     await context.unrouteAll({ behavior: 'wait' });
     app.run('open'); const reopened = await context.newPage(); await app.open(reopened);
     await expect(reopened.getByRole('heading', { name: 'Recover unsaved edits' })).toBeVisible();
@@ -221,8 +288,62 @@ test('a committed write with a lost acknowledgement retains its draft and requir
     expect(writesAfterChoice).toBe(0);
     timeline.record({ event: 'stale-draft-protected', canonical_revision: current.revision, base_revision: retained.base_revision, writes_after_choice: writesAfterChoice });
     context.off('request', countWrite);
-    await reopened.close(); await app.stopped();
+    await app.close(reopened); await app.stopped();
   } finally { releaseResponse(); try { await timeline.finish(); } finally { await app.cleanup(); } }
+});
+
+test('visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it', async ({ context }, testInfo) => {
+  const app = await installation(testInfo);
+  await installSaveCorrelation(context);
+  const timeline = observeRevisions(context, testInfo);
+  try {
+    app.run('open'); const page = await context.newPage(); await app.open(page);
+    await page.getByRole('button', { name: 'New note', exact: true }).click();
+    await page.getByRole('dialog').getByLabel('Note title').fill('Visibility causality baseline');
+    await page.getByRole('button', { name: 'Create', exact: true }).click();
+    await expect(page.getByRole('textbox', { name: 'Note title' })).toHaveValue('Visibility causality baseline');
+    const baseline = app.boundary('arm');
+    expect(context.serviceWorkers()).toHaveLength(0);
+    expect(await page.evaluate(async () => navigator.serviceWorker ? (await navigator.serviceWorker.getRegistrations()).length : 0)).toBe(0);
+    await page.getByRole('textbox', { name: 'Note title' }).fill('Synthetic visibility draft');
+    // Controlled visibility event, not a claim that this reproduces the exact
+    // historical teardown schedule. No browser request interception is used.
+    const failed = page.waitForResponse((response) => response.request().method() === 'PATCH');
+    await page.evaluate(() => {
+      Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' });
+      document.dispatchEvent(new Event('visibilitychange'));
+    });
+    expect((await failed).status()).toBe(503);
+    await expect(page.getByText('Save Error', { exact: true })).toBeVisible();
+    app.boundary('verify', baseline);
+    const events = await app.events();
+    const request = [...events].reverse().find((event) => event.event === 'fastapi_request_enter' && event.method === 'PATCH');
+    expect(request.frontend).toMatchObject({ visibility: 'hidden', close_intent: false, keepalive: false, service_worker: false });
+    const correlated = events.filter((event) => event.operation === request.operation);
+    expect(correlated.map((event) => event.event)).toEqual(expect.arrayContaining([
+      'fastapi_request_enter', 'database_update_enter', 'sqlite_transaction_failed', 'database_update_failed', 'fastapi_response',
+    ]));
+    expect(correlated.some((event) => event.event === 'sqlite_commit_complete')).toBe(false);
+    expect(await page.evaluate(() => Object.keys(localStorage).filter((key) => key.startsWith('engage.recovery.v1:')).length)).toBe(1);
+    app.boundary('disarm');
+    const succeeded = page.waitForResponse((response) => response.request().method() === 'PATCH' && response.ok());
+    await page.getByRole('button', { name: 'Retry save', exact: true }).click();
+    const saved = await (await succeeded).json();
+    expect(saved.revision).toBe(baseline.notes[0].revision + 1);
+    await expect(page.getByText('Saved', { exact: true })).toBeVisible();
+    const committed = await app.events();
+    const save = [...committed].reverse().find((event) => event.event === 'database_update_return');
+    const chain = committed.filter((event) => event.operation === save.operation);
+    const names = chain.map((event) => event.event);
+    expect(names.indexOf('fastapi_request_enter')).toBeLessThan(names.indexOf('database_update_enter'));
+    expect(names.indexOf('sqlite_commit_complete')).toBeLessThan(names.indexOf('database_update_return'));
+    expect(names.indexOf('database_update_return')).toBeLessThan(names.indexOf('fastapi_response'));
+    await page.evaluate(() => {
+      Reflect.deleteProperty(document, 'visibilityState');
+      document.dispatchEvent(new Event('visibilitychange'));
+    });
+    await app.close(page); await app.stopped();
+  } finally { try { await timeline.finish(); } finally { await app.cleanup(); } }
 });
 
 test('killed isolated browser leaves no managed backend after lease expiry', async ({ playwright, browserName }) => {

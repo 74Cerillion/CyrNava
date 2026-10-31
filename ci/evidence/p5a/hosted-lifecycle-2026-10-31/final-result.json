@@ -1,0 +1,255 @@
+{
+  "phase": "P5A",
+  "status": "FAIL",
+  "acceptance_recommendation": "NOT READY FOR ACCEPTANCE",
+  "run_id": 41172242175,
+  "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41172242175",
+  "attempt": 1,
+  "event": "push",
+  "source_commit": "129700175cf4716446647572979771d27422fc3f",
+  "created_at_utc": "2026-10-31T05:21:03Z",
+  "completed_at_utc": "2026-10-31T05:24:25Z",
+  "workflow_seconds": 202,
+  "jobs": [
+    {
+      "id": 124452477483,
+      "name": "Workflow validation",
+      "conclusion": "success",
+      "started_at": "2026-10-31T05:21:06Z",
+      "completed_at": "2026-10-31T05:21:12Z",
+      "seconds": 6
+    },
+    {
+      "id": 124452505529,
+      "name": "Backend and security",
+      "conclusion": "success",
+      "started_at": "2026-10-31T05:21:14Z",
+      "completed_at": "2026-10-31T05:22:46Z",
+      "seconds": 92
+    },
+    {
+      "id": 124452505545,
+      "name": "Frontend and browser",
+      "conclusion": "failure",
+      "started_at": "2026-10-31T05:21:14Z",
+      "completed_at": "2026-10-31T05:24:20Z",
+      "seconds": 186
+    },
+    {
+      "id": 124453135377,
+      "name": "CI required",
+      "conclusion": "failure",
+      "started_at": "2026-10-31T05:24:22Z",
+      "completed_at": "2026-10-31T05:24:24Z",
+      "seconds": 2
+    },
+    {
+      "id": 124453136307,
+      "name": "Production Flatpak and bundle audit",
+      "conclusion": "skipped",
+      "started_at": "2026-10-31T05:24:20Z",
+      "completed_at": "2026-10-31T05:24:20Z",
+      "seconds": 0
+    }
+  ],
+  "workflow_validation": {
+    "status": "PASS",
+    "methods": 23,
+    "seconds": 0.191
+  },
+  "backend": {
+    "status": "PASS",
+    "passed": 550,
+    "subtests_passed": 31,
+    "warnings": 2,
+    "pytest_seconds": 44.86,
+    "orchestration": {
+      "status": "PASS",
+      "complete": true,
+      "steps": [
+        {
+          "name": "python-lint",
+          "status": "PASS",
+          "seconds": 0.033
+        },
+        {
+          "name": "frontend-install-for-backend",
+          "status": "PASS",
+          "seconds": 4.594
+        },
+        {
+          "name": "frontend-production-build-for-backend",
+          "status": "PASS",
+          "seconds": 4.87
+        },
+        {
+          "name": "backend-security-lifecycle-migration-packaging",
+          "status": "PASS",
+          "seconds": 47.561
+        }
+      ],
+      "preconditions": {
+        "frontend_dist_initially_absent": true,
+        "clean_frontend_required": true
+      },
+      "seconds": 57.059
+    },
+    "former_missing_asset_failures": "All three independently confirmed PASS in hosted JUnit"
+  },
+  "frontend": {
+    "lint": "PASS",
+    "unit_passed": 273,
+    "typescript_production_build": "PASS",
+    "browser_passed": 16,
+    "browser_failed": 1,
+    "failed_test": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+    "failed_at": "frontend/e2e/lifecycle.spec.ts:143",
+    "failure": "Canonical note changed from revision 3 to revision 4 during the intended no-write interval; unconfirmed title and bold paragraph were persisted. Assertion fails before recovery choice.",
+    "lost_acknowledgement_regression": "PASS",
+    "orchestration": {
+      "status": "FAIL",
+      "complete": true,
+      "steps": [
+        {
+          "name": "frontend-lint",
+          "status": "PASS",
+          "seconds": 3.05
+        },
+        {
+          "name": "frontend-unit",
+          "status": "PASS",
+          "seconds": 13.975
+        },
+        {
+          "name": "typescript-production-build",
+          "status": "PASS",
+          "seconds": 3.879
+        },
+        {
+          "name": "chromium-production-integration",
+          "status": "FAIL",
+          "seconds": 119.193
+        }
+      ],
+      "error_type": "CalledProcessError",
+      "exit_code": 1,
+      "seconds": 140.097
+    }
+  },
+  "trace_evidence": {
+    "observations": [
+      {
+        "event": "browser_context_api",
+        "method": "newPage",
+        "trace_monotonic_ms": 2191.378
+      },
+      {
+        "event": "browser_context_api",
+        "method": "newPage",
+        "trace_monotonic_ms": 4050.902
+      },
+      {
+        "event": "browser_context_api",
+        "method": "setNetworkInterceptionPatterns",
+        "trace_monotonic_ms": 6047.582
+      },
+      {
+        "event": "browser_context_api",
+        "method": "newPage",
+        "trace_monotonic_ms": 6802.323
+      },
+      {
+        "event": "old recovery page close requested",
+        "utc": "2026-10-31T05:22:24.640895+00:00",
+        "trace_monotonic_ms": 7284.009
+      },
+      {
+        "event": "browser_context_api",
+        "method": "newPage",
+        "trace_monotonic_ms": 8908.678
+      },
+      {
+        "event": "note_http_response",
+        "method": "PATCH",
+        "utc": "2026-10-31T05:22:20.798Z",
+        "revision": 2,
+        "updated_at": "2026-10-31T05:22:20.801973+00:00"
+      },
+      {
+        "event": "note_http_response",
+        "method": "GET",
+        "utc": "2026-10-31T05:22:21.611Z",
+        "revision": 2,
+        "updated_at": "2026-10-31T05:22:20.801973+00:00"
+      },
+      {
+        "event": "note_http_response",
+        "method": "PATCH",
+        "utc": "2026-10-31T05:22:22.414Z",
+        "revision": 3,
+        "updated_at": "2026-10-31T05:22:22.416674+00:00"
+      },
+      {
+        "event": "note_http_response",
+        "method": "GET",
+        "utc": "2026-10-31T05:22:24.369Z",
+        "revision": 3,
+        "updated_at": "2026-10-31T05:22:22.416674+00:00"
+      },
+      {
+        "event": "note_http_response",
+        "method": "GET",
+        "utc": "2026-10-31T05:22:26.490Z",
+        "revision": 4,
+        "updated_at": "2026-10-31T05:22:24.650597+00:00"
+      }
+    ],
+    "revision_at_outage_baseline": 3,
+    "revision_after_restart": 4,
+    "newer_note_updated_at": "2026-10-31T05:22:24.650597+00:00",
+    "write_update_ms_after_page_close_requested": 9.702,
+    "new_note_matches_unconfirmed_title": true,
+    "bold_unconfirmed_content_present": true,
+    "driver_saw_intervening_patch": false,
+    "inference": "Unexpected write closely correlates with old page teardown/visibility flush; browser-context routing did not establish an effective no-write boundary. Exact interception bypass remains unproven without server-side request evidence.",
+    "supersedes": "Late route installation alone cannot explain this run: the route was installed before recovery page startup and retained through restart."
+  },
+  "diagnosis": {
+    "confirmed": "Browser-context PATCH routing did not establish the no-write boundary despite installation before page startup; the test now detects the unexpected commit explicitly.",
+    "inference": "Close/visibility-triggered autosave and interception teardown are implicated by the approximately 10 ms timing correlation.",
+    "unproven": "Exact mechanism bypassing driver interception; backend-side request correlation is not captured. No production defect or data corruption is established.",
+    "prior_explanation": "Late route installation alone is insufficient and must not be reported as a verified resolution of the hosted failure."
+  },
+  "flatpak": {
+    "build": "SKIPPED",
+    "package_content_audit": "NOT EXECUTED",
+    "validated_unsigned_artifact_upload": "NOT EXECUTED",
+    "production_package_checksum": null
+  },
+  "diagnostic_artifacts": [
+    {
+      "artifact_id": 13031313767,
+      "kind": "diagnostic ZIP only",
+      "sha256": "e35e0cc4ba2b0e87412f3437e8f833ae12f566ac974dbb9e8c4bd1be1bd2a86b",
+      "bytes": 10471,
+      "independently_verified": true
+    },
+    {
+      "artifact_id": 13032025578,
+      "kind": "diagnostic ZIP only",
+      "sha256": "c7ca73e61843fe0c22b2410436250ef24d28a9147ae5af5bce2e2defc88cf50b",
+      "bytes": 6865466,
+      "independently_verified": true
+    }
+  ],
+  "scope": {
+    "new_commit": false,
+    "push": false,
+    "dispatch": false,
+    "workflow_rerun": false,
+    "application_or_test_code_changed": false,
+    "P5B_started": false,
+    "P5C_started": false
+  },
+  "next_action": "Stop for owner review; preserve the trace and request server-side correlation in a separately authorized investigation. No automatic retry or weaker assertion."
+}

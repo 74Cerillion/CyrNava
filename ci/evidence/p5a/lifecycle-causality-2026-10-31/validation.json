@@ -1,0 +1,155 @@
+{
+  "phase": "P5A focused persistence investigation",
+  "date": "2026-10-31",
+  "P5A_status": "FAIL / NOT ACCEPTED \u2014 latest hosted run remains 41172242175 failure",
+  "local_boundary_candidate": "PASS",
+  "historical_confirmed": [
+    "SQLite revision 3 advanced to 4 with newly typed unconfirmed content during browser-route guard",
+    "Write updated_at approximately 9.7 ms after page.close request",
+    "Interception was installed before the page and new content existed",
+    "No intervening PATCH in browser telemetry; does not prove absence of backend request"
+  ],
+  "historical_hypothesis": "A close/visibility-triggered save passed the browser teardown interception boundary. Exact historical request/operation ID and mechanism remain unproven.",
+  "ruled_out_or_unsupported": {
+    "pre_interception_request_with_new_payload": "New payload did not exist until after routing/page startup; immutable JSON request body cannot already contain those edits",
+    "service_workers": "No evidence in historical trace/source; all five controlled local contexts explicitly report zero registrations/controllers",
+    "keepalive": "Application note fetch does not set keepalive; local correlated saves report false. Session sendBeacon targets lifecycle routes and contains no note data",
+    "whole_context_shutdown": "Historical browser context stayed open and was reused for restart",
+    "other_backend_operation": "No evidence; normal content/revision update path is Database.update via PATCH. No historical server journal exists to identify an alternative."
+  },
+  "confirmed_local_causality": {
+    "runs": 5,
+    "visibility_hidden_saves_rejected_at_SQL_boundary": 5,
+    "visibility_hidden_saves_committed_after_explicit_retry_and_disarm": 5,
+    "actual_close_intent_HTTP_operations_observed": 0,
+    "chain": "Test-instrumented fetch correlation header -> FastAPI ASGI -> synchronous route/threadpool -> Database.update -> BEGIN IMMEDIATE -> note UPDATE -> COMMIT completion -> response",
+    "logging": "monotonic_ns/pid/correlation ID/revisions/status only; no SQL, note content, credentials or authentication headers"
+  },
+  "boundary": {
+    "scope": "All INSERT/UPDATE/DELETE of notes in disposable SQLite profile",
+    "linearization": "BEGIN IMMEDIATE arm transaction serializes with prior writers; arm commit plus recorded canonical fingerprint is boundary",
+    "enforcement": "SQLite BEFORE triggers, independent of browser/proxy/request interception; any connection and queued writer is rejected while armed",
+    "verification": "Canonical row count/IDs/revisions/content/metadata SHA-256 fingerprint, armed state, and actual HTTP 503 probe outside Playwright routing",
+    "negative_tests": "Deliberately disarm/write/rearm or remove guard state -> verification fails; preexisting connection and current writer cases tested",
+    "production_exclusion": "Harness copied/invoked only by fixture launcher; no production activation flag/route/config/env hook; staging excludes harness/frontend instrumentation; production migration rejects its extra schema"
+  },
+  "tests": {
+    "focused": {
+      "passed": 15,
+      "repetitions": 5,
+      "modes": [
+        "browser routing + SQL guard",
+        "SQL guard without browser routing",
+        "controlled visibility causality"
+      ],
+      "retries": 0,
+      "seconds": 99.613
+    },
+    "backend": {
+      "passed": 558,
+      "subtests_passed": 31,
+      "warnings": 2,
+      "pytest_seconds": 29.19,
+      "new_tests": 8,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "python-lint",
+            "status": "PASS",
+            "seconds": 0.021
+          },
+          {
+            "name": "frontend-install-for-backend",
+            "status": "PASS",
+            "seconds": 2.515
+          },
+          {
+            "name": "frontend-production-build-for-backend",
+            "status": "PASS",
+            "seconds": 3.341
+          },
+          {
+            "name": "backend-security-lifecycle-migration-packaging",
+            "status": "PASS",
+            "seconds": 29.761
+          }
+        ],
+        "preconditions": {
+          "frontend_dist_initially_absent": true,
+          "clean_frontend_required": true
+        },
+        "seconds": 35.639
+      }
+    },
+    "frontend": {
+      "unit_passed": 273,
+      "browser_passed": 19,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "frontend-lint",
+            "status": "PASS",
+            "seconds": 2.707
+          },
+          {
+            "name": "frontend-unit",
+            "status": "PASS",
+            "seconds": 13.889
+          },
+          {
+            "name": "typescript-production-build",
+            "status": "PASS",
+            "seconds": 3.46
+          },
+          {
+            "name": "chromium-production-integration",
+            "status": "PASS",
+            "seconds": 123.902
+          }
+        ],
+        "seconds": 143.959
+      }
+    },
+    "environment_failure_preserved": "Earlier full backend: 555 pass / 2 fail due unchanged 5 GiB disk guard. Only old disposable dependencies were removed; threshold and tests unchanged; subsequent full suite passed."
+  },
+  "candidate_files": {
+    "ci/lifecycle_harness.py": "bb456b6d438d3606dea87a17c210d9026094b2d8c8fd9e6597c1cb79f768dc5d",
+    "backend/tests/test_lifecycle_harness.py": "18e45fae257aefbeb17cda9580bd2eeadebe7f574f6ad5b2ceb1b5e274b9a9e3",
+    "frontend/e2e/lifecycle.spec.ts": "edcbcb5c52df17590ab79c3dea894574a49a236472e923302e1a8050a3b1047a"
+  },
+  "clean_environment": {
+    "root": "/tmp/cyrnava-p5a-boundary-r8jvmtth",
+    "checkout": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout",
+    "initial_generated_paths": {
+      "frontend/dist": false,
+      "frontend/node_modules": false,
+      "backend/.venv": false
+    },
+    "head": "129700175cf4716446647572979771d27422fc3f",
+    "env": {
+      "PIP_CACHE_DIR": "/tmp/cyrnava-p5a-boundary-r8jvmtth/pip-cache",
+      "npm_config_cache": "/tmp/cyrnava-p5a-boundary-r8jvmtth/npm-cache",
+      "XDG_DATA_HOME": "/tmp/cyrnava-p5a-boundary-r8jvmtth/xdg-data",
+      "XDG_CONFIG_HOME": "/tmp/cyrnava-p5a-boundary-r8jvmtth/xdg-config",
+      "XDG_CACHE_HOME": "/tmp/cyrnava-p5a-boundary-r8jvmtth/xdg-cache",
+      "PLAYWRIGHT_BROWSERS_PATH": "/tmp/cyrnava-p5a-prerequisite-e5fgarzw/xdg-cache/ms-playwright"
+    }
+  },
+  "scope": {
+    "production_source_modified": false,
+    "security_permissions_changed": false,
+    "dependencies_changed": false,
+    "personal_data_accessed": false,
+    "new_commit": false,
+    "push": false,
+    "workflow_run_or_rerun": false,
+    "publication": false,
+    "P5B_started": false,
+    "P5C_started": false
+  },
+  "recommendation": "Review/adopt test-only SQL fault boundary and retain correlation journals. Do not spend another hosted cycle until owner approves; historical exact causality remains unresolved, no P5A acceptance claim."
+}

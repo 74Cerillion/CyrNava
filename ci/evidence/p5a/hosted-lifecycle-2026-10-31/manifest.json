@@ -1,0 +1,98 @@
+{
+  "run_id": 41172242175,
+  "source_commit": "129700175cf4716446647572979771d27422fc3f",
+  "files": {
+    "artifact-verification.json": {
+      "sha256": "17952b0c8b3b66342023b4c24a9356ecced1ff17e9d556def54dc83775f3b3d8",
+      "bytes": 431
+    },
+    "artifacts.json": {
+      "sha256": "613cef1e3db2c6878e2d8cd515c76083d09d5548216547abbe738bd97e60181f",
+      "bytes": 1761
+    },
+    "backend-junit.xml": {
+      "sha256": "b1281eaba59ebbc47fdf148c7c919fdcd5953642a6077bbabd43382f8eb0e2cc",
+      "bytes": 68106
+    },
+    "backend.json": {
+      "sha256": "4623f5bb04345953e303f08df70a6a728516f58341c997d3d32dce0bd498faba",
+      "bytes": 621
+    },
+    "backend.log": {
+      "sha256": "02bab92c2747c4216b5a635207fe7bf93f4860565037abd26673c073e63d9972",
+      "bytes": 47223
+    },
+    "before-hosted-lifecycle-P5A_OWNER_CHECKS.md": {
+      "sha256": "5230a540a6cbc1a99375820e2aa1cc31eff6f3cfbd2413616df5b993762fa616",
+      "bytes": 3575
+    },
+    "before-hosted-lifecycle-P5A_REPORT.md": {
+      "sha256": "fc2ae25224a3fa7514c839465828c244ae59187ea4a59572e3e1a3b964332342",
+      "bytes": 25810
+    },
+    "before-hosted-lifecycle-validation.json": {
+      "sha256": "5dddddc9a0ead2e3d984cc2774329bb1d525256cdfdf96a43fde591635b16824",
+      "bytes": 27614
+    },
+    "browser-junit.xml": {
+      "sha256": "e4959db7fb3ea0d9b96af527b5763a7579defcb91f00794d074802568bbc7df8",
+      "bytes": 8394
+    },
+    "error-context.md": {
+      "sha256": "679e5774a20973c4eb685ff372cb5dae37dbfde14b2fb589b5ced8ffdc715b5f",
+      "bytes": 18924
+    },
+    "final-result.json": {
+      "sha256": "6198d3391e1bddcb8db0d26e5b2716d9a86a69f5ed9cf2bb4bda540524283b84",
+      "bytes": 8214
+    },
+    "frontend.json": {
+      "sha256": "19a1dcc6f2a76280fedc4ab6a19f9295c11dfdd6c11e5e2100449249ebc18fe2",
+      "bytes": 536
+    },
+    "frontend.log": {
+      "sha256": "9c4d17c82bc7faa205952da574e45124b4aa09ff733d9180ef316e9e7f5ba2cc",
+      "bytes": 78104
+    },
+    "jobs.json": {
+      "sha256": "67cbe9ac92a8609d3938dcc1f60fec805afc601c32a903f9e8f274d690ab3764",
+      "bytes": 14871
+    },
+    "lifecycle-revision-timeline.json": {
+      "sha256": "837af2f28f959cca206a1b2b29925926e0d1c669dbec5c1011c2328f0d2d97a7",
+      "bytes": 1097
+    },
+    "lifecycle-trace.zip": {
+      "sha256": "12ebc5603da2832ccb53660c7c8ec242239371db55316cc3aafce3a43a3fe24c",
+      "bytes": 1932579
+    },
+    "lost-ack-revision-timeline.json": {
+      "sha256": "69ab5359d991d9cd6fe421119c79f0a0dcef668ad246351d77e07106f1c5311f",
+      "bytes": 598
+    },
+    "required.log": {
+      "sha256": "0dc885febec05b5158c1774b058297ee7ca2f0cd71b05033f27198f7b6647068",
+      "bytes": 2741
+    },
+    "run.json": {
+      "sha256": "ac75afc77f254793be4bae190d0dfccf9d14019c4b15b081e898ea7fe860ac46",
+      "bytes": 13498
+    },
+    "test-failed-1.png": {
+      "sha256": "6bd922ca884c45f7d302c2258540e2c9c24815c26f031b905c74a370d18a176d",
+      "bytes": 102266
+    },
+    "trace-analysis.json": {
+      "sha256": "692c668d2fbbc82256adfcc80c17590ebd15583d6e62ad57231d402a2b44c515",
+      "bytes": 2453
+    },
+    "workflow-validation.log": {
+      "sha256": "2e091c3a565f9c42541d3a14a6588aa8a930bbb47f6bfc44007a5b8fe6bbfc65",
+      "bytes": 23636
+    }
+  },
+  "report_hashes": {
+    "P5A_REPORT.md": "56bc4c79db792f78a0c9e73f3884baad367aad32a421f31718fbb8de5f85d183",
+    "P5A_OWNER_CHECKS.md": "a47d05f08105563aee31e24370f0d82c726a8bb16a770d1dccf0f7bad530bf31"
+  }
+}

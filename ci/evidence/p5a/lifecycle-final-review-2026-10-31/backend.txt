@@ -1,0 +1,66 @@
+CI: python-lint
+All checks passed!
+CI: frontend-install-for-backend
+
+added 304 packages in 2s
+CI: frontend-production-build-for-backend
+
+> cyrnava@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 833 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                         1.15 kB │ gzip:   0.56 kB
+dist/assets/inter-v12-latin-100-BQDzDElq.woff2         16.54 kB
+dist/assets/inter-v12-latin-regular-YtgfLPRn.woff2     16.70 kB
+dist/assets/inter-v12-latin-900-CMga-52B.woff2         17.17 kB
+dist/assets/inter-v12-latin-300-DEbyFmpd.woff2         17.32 kB
+dist/assets/inter-v12-latin-200-BxfrU12A.woff2         17.34 kB
+dist/assets/inter-v12-latin-500-DfX5FI9E.woff2         17.55 kB
+dist/assets/inter-v12-latin-600-BvOeHRLc.woff2         17.66 kB
+dist/assets/inter-v12-latin-800-Bdy4lAMa.woff2         17.76 kB
+dist/assets/inter-v12-latin-700-Bj1B9WKG.woff2         17.78 kB
+dist/assets/inter-v12-latin-100-46Mq0mOp.woff          21.24 kB
+dist/assets/inter-v12-latin-regular-CahmJf_6.woff      21.42 kB
+dist/assets/inter-v12-latin-900-ORHAl5ZU.woff          21.98 kB
+dist/assets/inter-v12-latin-300-f7r92Nkj.woff          22.15 kB
+dist/assets/inter-v12-latin-200-DXfqWPZg.woff          22.23 kB
+dist/assets/inter-v12-latin-500-BQ2gQN_M.woff          22.51 kB
+dist/assets/inter-v12-latin-600-D01NXWOK.woff          22.63 kB
+dist/assets/inter-v12-latin-700-B5TOIllR.woff          22.68 kB
+dist/assets/inter-v12-latin-800-DFVvDWwT.woff          22.71 kB
+dist/assets/index-B4IDcU2d.css                        249.46 kB │ gzip:  40.51 kB
+dist/assets/module-mVd_cwoa.js                         76.72 kB │ gzip:  27.52 kB
+dist/assets/native-Cqs-2kTC.js                        429.05 kB │ gzip:  82.21 kB
+dist/assets/index-DB4gpyab.js                       1,208.41 kB │ gzip: 366.37 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 581ms
+CI: backend-security-lifecycle-migration-packaging
+........................................................................ [ 12%]
+........................................................................ [ 25%]
+........................................................................ [ 38%]
+........................................................................ [ 51%]
+........................................................................ [ 64%]
+........................................................................ [ 77%]
+........................................................................ [ 90%]
+......................................... [ 97%]
+..............                                                           [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/backend/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+tests/test_migration.py::test_untrusted_archives_fail_closed[duplicate]
+  /usr/lib/python3.12/zipfile/__init__.py:1650: UserWarning: Duplicate name: 'manifest.json'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+559 passed, 2 warnings, 31 subtests passed in 30.95s

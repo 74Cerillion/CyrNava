@@ -2,48 +2,40 @@
 
 Date: 31 October 2026, Asia/Seoul.
 
-**P5A STATUS: CONDITIONAL — LIFECYCLE TEST CORRECTION LOCALLY VERIFIED; HOSTED VERIFICATION PENDING**
+**P5A STATUS: FAIL — HOSTED LIFECYCLE NO-WRITE INVARIANT FAILED**
 
-## A. Executive summary — local lifecycle correction ready for review
+## A. Current status — focused persistence investigation
 
-**P5A STATUS: CONDITIONAL — CORRECTED HOSTED VERIFICATION REQUIRED**
+**P5A STATUS: FAIL / NOT ACCEPTED.** Latest actual hosted run remains 41172242175.
+No commit, push, dispatch/rerun or production publication occurred in this investigation.
 
-The browser lifecycle test's outage simulation had an invalid precondition: it
-installed write interception only after the editor loaded, without establishing
-that no save was already dispatched. A controlled real-API/SQLite reproduction
-committed revision 4 while withholding acknowledgement, leaving a recovery draft
-based on revision 3. On restart, the same older-revision conflict seen in the
-hosted screenshot was correctly shown. No production defect was demonstrated;
-production behavior is unchanged. The confirmed defect is in test isolation.
+A trustworthy fixture-only note-write boundary is implemented and locally verified.
+SQLite triggers reject note mutations independently of browser routing; arming serializes
+with existing writers and records a canonical fingerprint. Tests demonstrate effective
+rejection through FastAPI and direct/preexisting connections, persistence through restart,
+and failure when the guard is disabled or canonical data changes. Production code,
+security controls and permissions remain unchanged; staging and migration exclusion tests
+prevent accidental packaging/import of the fixture guard.
 
-The exact request ordering in historical run 41163754626 cannot be independently
-proven: its diagnostic artifact contains screenshot/error context but no trace or
-revision timeline. Natural baseline repetitions passed 10/10, and 3/3 CPU scheduling
-probes passed. We do not label the hosted result flaky or overwrite it with PASS.
-The controlled reproduction confirms a permitted failure ordering, not a missing
-historical observation. This residual uncertainty remains explicit.
+Correlation now covers test-instrumented fetch, FastAPI/threadpool, Database.update,
+SQLite statement/commit completion and response. Five controlled visibility experiments
+show rejection/rollback while armed and commit after disarm/explicit retry. No actual
+close-intent HTTP request was observed in the local repetitions. The historical escaped
+request cannot be reconstructed from previously absent backend logs; close/visibility
+flush during interception teardown remains a supported hypothesis, not a proven historical
+request identity. Browser routing's inability to establish the write boundary is confirmed.
 
-The corrected test installs its PATCH barrier before page startup, keeps it through
-restart, verifies the canonical note is unchanged and the draft revision matches,
-then checks the real save acknowledgement, content and revision increment. A new
-gated regression confirms a genuinely accepted write with a lost acknowledgement
-still retains its stale draft and requires conflict review without an automatic
-write. Relative timing/revision diagnostics are saved as explicit files under the existing CI diagnostic upload path; failure traces are retained. Cleanup runs even if attaching a diagnostic fails.
+Clean-checkout results: **15 focused browser passes**, **559 backend tests + 31 subtests**,
+**273 frontend units + 19 browser tests**, lint and TypeScript/build PASS. An initial
+resource-related backend failure and its safe cleanup are retained. No tests, timeout,
+revision safeguards or disk threshold were weakened. See
+[P5A_LIFECYCLE_INVESTIGATION.md](P5A_LIFECYCLE_INVESTIGATION.md) for findings, causal limits,
+implementation, production isolation, exact commands and recommended next step. Current
+supporting record: `evidence/p5a/lifecycle-causality-2026-10-31/validation.json`.
 
-Disposable clean-checkout verification passes: **10/10 focused executions** (five
-per case), **273 frontend unit tests**, **17 browser tests**, ESLint and TypeScript/
-production build. **23 CI contract tests** pass. Backend/security suites were not
-rerun because no application/shared lifecycle/backend logic changed; their hosted
-550 tests and 31 subtests remain separately recorded PASS, not a new local result.
-
-No timeout increase, arbitrary delay, test suppression or automatic retry was added.
-No application, sandbox, authentication, workflow permission or packaging code
-changed. No commit, push, dispatch or rerun occurred. Stop for authorization of one
-next P5A-only commit/push. P5A cannot be accepted until all required hosted jobs,
-including production build, exported-content audit and upload, succeed.
-
-Current evidence: `evidence/p5a/lifecycle-correction-2026-10-31/validation.json` and
-`manifest.json`. Both historical hosted failures and earlier reports are preserved.
+Recommendation: review the fixture-only SQL boundary/correlated diagnostics before
+another authorized hosted cycle. No new hosted execution is requested or performed.
+P5A cannot be accepted without required hosted build/audit/upload verification.
 
 ## B. Repository baseline
 
@@ -324,7 +316,7 @@ current review locally. Current changes are limited to P5A reports and evidence;
 no application or CI implementation was changed. No rerun, dispatch, release,
 signing, deployment, main merge, P5B or P5C occurred. Stop for owner review.
 
-## O. Lifecycle test correction — implementation and verification
+## O. Historical local lifecycle correction — insufficient in third hosted run
 
 Exact source files: `frontend/e2e/lifecycle.spec.ts` and
 `frontend/playwright.config.ts`. Reports: this file, `P5A_OWNER_CHECKS.md` and
@@ -365,7 +357,7 @@ no note bodies, titles or authentication headers. Selected local trace ZIPs cont
 only disposable synthetic test traffic, are locally retained and hash recorded;
 they may be ignored by Git. No production credentials or personal data were used.
 
-## P. Current recommendation and authorization checkpoint
+## P. Historical local recommendation — superseded by third hosted result
 
 **CONDITIONAL: local correction ready; P5A remains unaccepted.** The test's missing
 precondition is confirmed and corrected, but historical causality cannot be proved
@@ -384,3 +376,108 @@ Their latest actual result is still SKIPPED / NOT EXECUTED, not PASS.
 
 HEAD remains `72f4c7b0ca1de627b7615f03e20393cf5d423512`. No new commit, push,
 workflow trigger, production user-data access, P5B or P5C work occurred.
+
+## Authorized lifecycle commit / initial push blocker — subsequently resolved by owner
+
+Created exactly one authorized commit: `129700175cf4716446647572979771d27422fc3f`,
+60 P5A-only files. Staged source/evidence review, credential-pattern checks and
+trace header/origin inspection passed. Three traces contain only disposable
+loopback traffic and synthetic note viewport captures, with no credential-bearing
+headers. Workflow is unchanged, verification-only, contents read. Production
+security/conflict handling is unchanged; historical uncertainty remains explicit.
+
+Historical failure JUnit/error-context files retain their original traceback
+whitespace; all other staged files passed whitespace checks. Historical failures
+were preserved verbatim.
+
+The single push attempt failed (exit 128): terminal has no Git HTTPS credentials.
+Read-only GitHub inspection confirms the remote remains at `72f4c7b`. No new
+workflow was started; no production build/audit/upload result exists for this
+correction. Owner must complete the same already-authorized push from an
+authenticated terminal. No further commit, push, dispatch or rerun occurred.
+
+Current acceptance recommendation remains CONDITIONAL / UNACCEPTED pending actual
+hosted verification. See `evidence/p5a/lifecycle-commit-review-2026-10-31/push-status.json`.
+This post-commit status update is local/uncommitted; it will not cause another push.
+
+## Q. Third hosted run — actual jobs, diagnostics and recommendation
+
+Run 41172242175, attempt 1, source `129700175cf4716446647572979771d27422fc3f`.
+Created **14:21:03 KST**, completed **14:24:25 KST**, 202 s including startup/queue.
+Ubuntu 24.04.5 x86_64, image 20261025.353.1, runner 2.338.2; CPython 3.12.15.
+Logged repository token: Contents read, Metadata read.
+
+| Job | Result | Duration |
+| --- | --- | ---: |
+| Workflow validation | SUCCESS | 6 s |
+| Backend and security | SUCCESS | 92 s |
+| Frontend and browser | FAILURE | 186 s |
+| CI required | FAILURE | 2 s |
+| Production Flatpak and bundle audit | SKIPPED | 0 s |
+
+Backend pytest: 550 PASS, 31 subtests PASS, two warnings, 44.86 s. All original
+missing-assets failures pass in this run's JUnit. Workflow contracts: 23 PASS,
+0.191 s. Frontend wrapper: 140.097 s (lint 3.050, units 13.975, build 3.879,
+Chromium 119.193 s); 273 units, 16 browser passes, one browser failure. Exact
+backend wrapper timings remain in this run's backend.json.
+
+| Diagnostic artifact | ID | Bytes | Independently verified SHA-256 |
+| --- | ---: | ---: | --- |
+| Backend | 13031313767 | 10,471 | `e35e0cc4ba2b0e87412f3437e8f833ae12f566ac974dbb9e8c4bd1be1bd2a86b` |
+| Frontend | 13032025578 | 6,865,466 | `c7ca73e61843fe0c22b2410436250ef24d28a9147ae5af5bce2e2defc88cf50b` |
+
+Trace timing: context interception set at monotonic 6047.582 ms; recovery page
+created at 6802.323 ms, so the route preceded startup. Old page close requested
+at **05:22:24.640895 UTC**; canonical updated_at is **05:22:24.650597 UTC**
+(9.702 ms later, approximately; clock mapping is diagnostic correlation).
+The draft was based on revision 3; restart GET returns revision 4 with both title
+and rich unconfirmed content. The gap is an unexpected real write outside recorded
+browser interception, not merely a slow Saved indicator or a harmless stale UI.
+The earlier-interception fix is therefore insufficient.
+
+**Recommendation: FAIL / NOT READY FOR ACCEPTANCE.** A future authorized investigation
+needs server-side request/revision correlation and a verified effective fault boundary
+for teardown writes. Do not weaken conflict handling, ignore the changed canonical
+note, suppress the test, add arbitrary delays or automatically rerun it. No code
+changes or additional hosted execution were performed during this monitoring turn.
+
+The owner resolved the previous authentication blocker by pushing the exact authorized
+commit. This run does not authorize another commit/push/dispatch. Local report/evidence
+updates are uncommitted and unpushed. Production Flatpak build/audit/upload and checksum
+remain NOT VERIFIED, with no package to independently inspect. Historical P4 native
+limits remain separate. Stop after reporting; no P5B/P5C or publication.
+
+## R. Focused investigation checkpoint
+
+The previous hosted failure and superseded late-routing explanation are preserved in
+section Q and historical evidence. New implementation changes are confined to
+`ci/lifecycle_harness.py`, `backend/tests/test_lifecycle_harness.py` and
+`frontend/e2e/lifecycle.spec.ts`; documentation includes the investigation report,
+owner checks and structured assessment. No production source or workflow file changed.
+
+All local verification results, including the disk-space failure and corrected run,
+are under `evidence/p5a/lifecycle-causality-2026-10-31/`. SQL boundary scope is note
+mutations; it is not a general network outage simulation. The actual hosted bypass
+and operation identity remain unresolved, while controlled local visibility persistence
+is fully correlated. No new commit, push, rerun, publication, P5B or P5C occurred.
+Stop for owner review of findings and proposed test-only correction.
+
+
+## S. Authorized final source and packaging review
+
+The owner approved the fixture-only SQLite boundary and one commit/push. Final review
+added a pre-mutation refusal of any existing unmarked database in the fixture launcher.
+A ninth regression verifies a synthetic existing workspace remains byte-for-byte unchanged.
+No production source, permissions, workflow, API security or persistence controls changed.
+
+Clean-checkout revalidation after this hardening: **559 backend tests + 31 subtests**,
+**273 frontend units + 19 browser tests**, and **15 focused repetitions** PASS, with no
+retries. Workflow contract validation and all **23 CI contract tests** PASS.
+The previous 558-test evidence remains unchanged as a historical candidate record; final
+candidate source hashes/results are in `evidence/p5a/lifecycle-final-review-2026-10-31/`.
+Synthetic trace traffic is loopback-only; credential-pattern and sensitive-header review
+found no secrets. The harness and fixture schema are excluded from production staging,
+and migration rejects guarded fixtures. Exact historical escaped request remains unknown.
+
+P5A remains **FAIL / NOT ACCEPTED**, pending the authorized hosted build/audit/upload
+and required gate. One commit/push is authorized; no rerun/dispatch or further push is permitted.

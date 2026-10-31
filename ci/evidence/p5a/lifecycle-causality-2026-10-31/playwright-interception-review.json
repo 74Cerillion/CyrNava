@@ -1,0 +1,23 @@
+{
+  "installed_version": "1.64.1",
+  "bundle_sha256": "829521b67ed7be90c7d6d6098ff39f2241562d47e4ad7ccab13710924a56001d",
+  "local_source_observations": [
+    {
+      "line": 62959,
+      "snippet": "        const routeHandlers = this._routes.slice();\n        for (const routeHandler of routeHandlers) {\n          if (this._closeWasCalled || this._browserContext.isClosed())\n            return;\n          if (!routeHandler.matches(route2.request().url()))"
+    },
+    {
+      "line": 63369,
+      "snippet": "        this._closeReason = options.reason;\n        if (!options.runBeforeUnload)\n          this._closeWasCalled = true;\n        try {\n          if (this._ownedContext)"
+    },
+    {
+      "line": 63910,
+      "snippet": "        const routeHandlers = this._routes.slice();\n        for (const routeHandler of routeHandlers) {\n          if (page?._closeWasCalled || this.isClosed())\n            return;\n          if (!routeHandler.matches(route2.request().url()))"
+    }
+  ],
+  "official_sources": [
+    "https://github.com/microsoft/playwright/blob/main/packages/playwright-core/src/client/browserContext.ts",
+    "https://playwright.dev/docs/network"
+  ],
+  "conclusion": "Client routing is not guaranteed once close begins; service-worker routing limitations are separately documented. This source observation alone does not reconstruct the historical hidden PATCH."
+}

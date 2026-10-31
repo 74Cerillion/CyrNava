@@ -1,0 +1,37 @@
+[
+  {
+    "ms": 2122,
+    "event": "request",
+    "method": "PATCH",
+    "revision": 1
+  },
+  {
+    "ms": 2140,
+    "event": "backend-committed-acknowledgement-held",
+    "revision": 2
+  },
+  {
+    "ms": 2156,
+    "event": "retained-before-close",
+    "base_revision": 1
+  },
+  {
+    "ms": 4002,
+    "event": "request",
+    "method": "GET"
+  },
+  {
+    "ms": 4029,
+    "event": "response",
+    "method": "GET",
+    "status": 200,
+    "revision": 2
+  },
+  {
+    "ms": 4135,
+    "event": "stale-draft-protected",
+    "canonical_revision": 2,
+    "base_revision": 1,
+    "writes_after_choice": 0
+  }
+]

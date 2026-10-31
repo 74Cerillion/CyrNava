@@ -1,0 +1,45 @@
+
+Running 15 tests using 1 worker
+
+(node:2736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   1 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.7s)
+
+  ✓   2 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing (8.5s)
+
+  ✓   3 e2e/lifecycle.spec.ts:295:1 › visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it (2.7s)
+(node:3022) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   4 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.3s)
+
+  ✓   5 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing (8.3s)
+
+  ✓   6 e2e/lifecycle.spec.ts:295:1 › visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it (2.8s)
+(node:3311) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   7 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.3s)
+
+  ✓   8 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing (8.3s)
+
+  ✓   9 e2e/lifecycle.spec.ts:295:1 › visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it (2.7s)
+(node:3598) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓  10 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.3s)
+
+  ✓  11 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing (8.0s)
+
+  ✓  12 e2e/lifecycle.spec.ts:295:1 › visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it (2.8s)
+(node:3884) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓  13 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.2s)
+
+  ✓  14 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing (8.1s)
+
+  ✓  15 e2e/lifecycle.spec.ts:295:1 › visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it (2.7s)
+
+  15 passed (1.7m)

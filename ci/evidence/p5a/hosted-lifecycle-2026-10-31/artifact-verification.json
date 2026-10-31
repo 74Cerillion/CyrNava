@@ -1,0 +1,16 @@
+[
+  {
+    "artifact_id": 13031313767,
+    "kind": "diagnostic ZIP only",
+    "sha256": "e35e0cc4ba2b0e87412f3437e8f833ae12f566ac974dbb9e8c4bd1be1bd2a86b",
+    "bytes": 10471,
+    "independently_verified": true
+  },
+  {
+    "artifact_id": 13032025578,
+    "kind": "diagnostic ZIP only",
+    "sha256": "c7ca73e61843fe0c22b2410436250ef24d28a9147ae5af5bce2e2defc88cf50b",
+    "bytes": 6865466,
+    "independently_verified": true
+  }
+]

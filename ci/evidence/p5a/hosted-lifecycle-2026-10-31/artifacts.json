@@ -1,0 +1,42 @@
+{
+  "artifacts": [
+    {
+      "id": 13032025578,
+      "name": "frontend-diagnostics-129700175cf4716446647572979771d27422fc3f-1",
+      "size_in_bytes": 6865466,
+      "url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/artifacts/13032025578",
+      "archive_download_url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/artifacts/13032025578/zip",
+      "expired": false,
+      "created_at": "2026-10-31T05:24:17Z",
+      "expires_at": "2026-11-07T05:24:16Z",
+      "updated_at": "2026-10-31T05:24:17Z",
+      "digest": "sha256:c7ca73e61843fe0c22b2410436250ef24d28a9147ae5af5bce2e2defc88cf50b",
+      "workflow_run": {
+        "id": 41172242175,
+        "repository_id": 1427661036,
+        "head_repository_id": 1427661036,
+        "head_branch": "desktop/p2-production-integration",
+        "head_sha": "129700175cf4716446647572979771d27422fc3f"
+      }
+    },
+    {
+      "id": 13031313767,
+      "name": "backend-diagnostics-129700175cf4716446647572979771d27422fc3f-1",
+      "size_in_bytes": 10471,
+      "url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/artifacts/13031313767",
+      "archive_download_url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/artifacts/13031313767/zip",
+      "expired": false,
+      "created_at": "2026-10-31T05:22:43Z",
+      "expires_at": "2026-11-07T05:22:43Z",
+      "updated_at": "2026-10-31T05:22:43Z",
+      "digest": "sha256:e35e0cc4ba2b0e87412f3437e8f833ae12f566ac974dbb9e8c4bd1be1bd2a86b",
+      "workflow_run": {
+        "id": 41172242175,
+        "repository_id": 1427661036,
+        "head_repository_id": 1427661036,
+        "head_branch": "desktop/p2-production-integration",
+        "head_sha": "129700175cf4716446647572979771d27422fc3f"
+      }
+    }
+  ]
+}
