@@ -1,0 +1,104 @@
+<testsuites id="" name="" tests="21" failures="0" skipped="0" errors="0" time="131.435453">
+<testsuite name="lifecycle.spec.ts" timestamp="2026-10-31T12:01:55.878Z" hostname="" tests="5" failures="0" skipped="0" time="28.536" errors="0">
+<testcase name="managed tabs close, restart and recover immediately closed unconfirmed edits" classname="lifecycle.spec.ts" time="8.503">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/attachments/revision-timeline-5b98d68fa3d98140df4d5065b587893ff0077513.json]]
+
+[[ATTACHMENT|test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/attachments/backend-persistence-8f4a355468e85c21fa2913b4ce2775701d253bc8.jsonl]]
+]]>
+</system-out>
+<system-err>
+</system-err>
+</testcase>
+<testcase name="managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing" classname="lifecycle.spec.ts" time="8.382">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing/attachments/revision-timeline-65ed69c7e6ecef2f8d94331db2d860fac9cbdf6e.json]]
+
+[[ATTACHMENT|test-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing/attachments/backend-persistence-f2722e7db6a388a9624ad56ea27bb99cfb891d88.jsonl]]
+]]>
+</system-out>
+<system-err>
+</system-err>
+</testcase>
+<testcase name="a committed write with a lost acknowledgement retains its draft and requires conflict review" classname="lifecycle.spec.ts" time="4.915">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review/attachments/revision-timeline-b9292723ba84b7daf1cf3a45e2987cef75b2a263.json]]
+
+[[ATTACHMENT|test-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review/attachments/backend-persistence-305feb6bc8b76dcd28303bff6980448657d28244.jsonl]]
+]]>
+</system-out>
+<system-err>
+</system-err>
+</testcase>
+<testcase name="visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it" classname="lifecycle.spec.ts" time="2.788">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it/attachments/revision-timeline-ed11a4fe750fef584989f335aa188633c1404fe0.json]]
+
+[[ATTACHMENT|test-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it/attachments/backend-persistence-dd8b5a03150f140c0b3ab21c02d2c54ba722ee24.jsonl]]
+]]>
+</system-out>
+<system-err>
+</system-err>
+</testcase>
+<testcase name="killed isolated browser leaves no managed backend after lease expiry" classname="lifecycle.spec.ts" time="3.948">
+<system-err>
+</system-err>
+</testcase>
+</testsuite>
+<testsuite name="search.spec.ts" timestamp="2026-10-31T12:01:55.878Z" hostname="" tests="4" failures="0" skipped="0" time="24.349" errors="0">
+<testcase name="global search opens native rich notes by code prefix, supports keyboard selection and reveals ancestors" classname="search.spec.ts" time="3.58">
+</testcase>
+<testcase name="opening a search result waits for pending saves and a failed save keeps the draft open" classname="search.spec.ts" time="7.08">
+</testcase>
+<testcase name="an unchanged search reflects UI renames, folder moves and deletion, and retries a failed query" classname="search.spec.ts" time="6.572">
+</testcase>
+<testcase name="a schema4 profile migrates, opens rich search results and rebuilds offline without changing canonical data" classname="search.spec.ts" time="7.117">
+<system-err>
+</system-err>
+</testcase>
+</testsuite>
+<testsuite name="workspace.spec.ts" timestamp="2026-10-31T12:01:55.878Z" hostname="" tests="12" failures="0" skipped="0" time="77.827" errors="0">
+<testcase name="appearance follows system and explicit preferences without changing notes, templates or autosave" classname="workspace.spec.ts" time="10.735">
+</testcase>
+<testcase name="placeholder rendering requires the selected empty paragraph, not the last paragraph alone" classname="workspace.spec.ts" time="2.341">
+</testcase>
+<testcase name="CyrNava reference appearance preserves the live editor, local images and saved content" classname="workspace.spec.ts" time="4.246">
+<system-err>
+</system-err>
+</testcase>
+<testcase name="navigation preference and reusable templates preserve independent rich notes and screenshots" classname="workspace.spec.ts" time="7.234">
+<system-err>
+</system-err>
+</testcase>
+<testcase name="real editing, outage recovery, safe navigation, image lifecycle and offline restoration drill" classname="workspace.spec.ts" time="8.094">
+<system-err>
+</system-err>
+</testcase>
+<testcase name="revision conflict retains the draft and exports both versions before explicit reload" classname="workspace.spec.ts" time="2.74">
+</testcase>
+<testcase name="Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation" classname="workspace.spec.ts" time="10.58">
+<system-err>
+</system-err>
+</testcase>
+<testcase name="image command requires a synchronized paragraph after code-block focus" classname="workspace.spec.ts" time="2.561">
+<system-err>
+</system-err>
+</testcase>
+<testcase name="all exposed editor actions persist; mixed content reconstructs after restart and rapid edits" classname="workspace.spec.ts" time="24.857">
+<system-err>
+</system-err>
+</testcase>
+<testcase name="desktop close protocol drains real autosave and retains an interrupted draft" classname="workspace.spec.ts" time="2.172">
+</testcase>
+<testcase name="desktop close waits for an image upload and its subsequent document save" classname="workspace.spec.ts" time="1.44">
+<system-err>
+</system-err>
+</testcase>
+<testcase name="desktop close does not silently discard an unsubmitted management form" classname="workspace.spec.ts" time="0.827">
+</testcase>
+</testsuite>
+</testsuites>

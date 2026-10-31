@@ -109,6 +109,29 @@ async function readable(locator: Locator, minimum = 4.5, pseudo?: string) {
   expect(ratio, `Text contrast for ${await locator.getAttribute('class')}`).toBeGreaterThanOrEqual(minimum);
 }
 
+async function lastParagraphEnd(page: Page, editor: Locator) {
+  const paragraph = editor.locator('[data-content-type="paragraph"]').last();
+  const blockId = await paragraph.evaluate((node) => node.closest('[data-id]')!.getAttribute('data-id')!);
+  // A DOM Range at the editor root is not a synchronized ProseMirror cursor.
+  // Navigate as a user, then verify both representations before typing.
+  await paragraph.click(); await paragraphCursor(editor, { blockId });
+  await page.keyboard.press('Control+End'); await paragraphCursor(editor, { blockId });
+  await expect.poll(async () => { const state = await editorSelection(editor); return state.model.parentOffset === state.model.contentSize; }).toBe(true);
+  return { paragraph, blockId };
+}
+
+async function placeholderState(paragraph: Locator) {
+  return paragraph.evaluate((element) => {
+    const inline = element.querySelector('.bn-inline-content')!;
+    const selection = window.getSelection();
+    const style = getComputedStyle(element, '::after');
+    return { blockId: element.closest('[data-id]')!.getAttribute('data-id'), editable: (element as HTMLElement).isContentEditable,
+      textLength: element.textContent!.length, trailingBreakOnlyChild: inline.matches(':has(> .ProseMirror-trailingBreak:only-child)'),
+      decorated: element.hasAttribute('data-is-empty-and-focused'), onlyEmptyBlock: element.hasAttribute('data-is-only-empty-block'),
+      caretInside: !!selection?.anchorNode && inline.contains(selection.anchorNode), content: style.content, color: style.color, opacity: style.opacity };
+  });
+}
+
 test('appearance follows system and explicit preferences without changing notes, templates or autosave', async ({ page }, info) => {
   const env = await environment();
   const external: string[] = []; const errors: string[] = []; const writes: string[] = [];
@@ -130,12 +153,9 @@ test('appearance follows system and explicit preferences without changing notes,
     await expect(page.getByRole('region', { name: 'Note editor' }).locator('.bn-container')).toHaveAttribute('data-color-scheme', value);
     await expect(page.getByRole('region', { name: 'Note editor' }).locator('.bn-mantine').first()).toHaveAttribute('data-mantine-color-scheme', value);
   }
-  async function atEnd() {
-    await editor().evaluate((element) => {
-      (element as HTMLElement).focus(); const range = document.createRange();
-      range.selectNodeContents(element); range.collapse(false);
-      const selection = window.getSelection()!; selection.removeAllRanges(); selection.addRange(range);
-    });
+  const states: unknown[] = [];
+  async function capture(stage: string) {
+    states.push({ stage, ...await editorSelection(editor()), placeholder: await placeholderState(editor().locator('[data-content-type="paragraph"]').last()) });
   }
   try {
     await env.start(); await page.emulateMedia({ colorScheme: 'light' });
@@ -154,7 +174,7 @@ test('appearance follows system and explicit preferences without changing notes,
     await createDialog.getByLabel('Note title', { exact: true }).fill('Appearance training');
     await createDialog.getByLabel('Starting content', { exact: true }).selectOption('builtin:enumeration');
     await createDialog.getByRole('button', { name: 'Create', exact: true }).click(); await saved(page);
-    await atEnd(); await page.keyboard.press('Control+b'); await page.keyboard.type('Theme-safe bold');
+    await lastParagraphEnd(page, editor()); await page.keyboard.press('Control+b'); await page.keyboard.type('Theme-safe bold');
     await page.keyboard.press('Control+b'); await page.keyboard.press('Enter'); await page.keyboard.type('Native document content.'); await saved(page);
     const owner = (await getJson(`${env.api}/api/tree`)).notes[0];
     const persisted = () => getJson(`${env.api}/api/notes/${owner.id}`);
@@ -211,8 +231,12 @@ test('appearance follows system and explicit preferences without changing notes,
       await readable(page.getByText('Text', { exact: true }).last());
       await readable(page.locator('.bn-color-picker-dropdown').getByRole('menuitem').first());
       await page.screenshot({ path: info.outputPath(`appearance-${mode}-formatting.png`), fullPage: true });
-      await page.keyboard.press('Escape'); await atEnd();
-      await page.keyboard.press('Enter'); await page.keyboard.type('/');
+      await page.keyboard.press('Escape'); await lastParagraphEnd(page, editor());
+      await page.keyboard.press('Enter');
+      const placeholder = editor().locator('[data-content-type="paragraph"]').last();
+      const blockId = await placeholder.evaluate((node) => node.closest('[data-id]')!.getAttribute('data-id')!);
+      await paragraphCursor(editor(), { blockId, empty: true });
+      await page.keyboard.type('/');
       const menu = page.locator('.bn-suggestion-menu'); await expect(menu).toBeVisible();
       await expect.poll(() => menu.evaluate((element) => {
         let node: Element | null = element;
@@ -223,8 +247,14 @@ test('appearance follows system and explicit preferences without changing notes,
       await readable(menu.locator('.bn-mt-suggestion-menu-item-subtitle').first());
       await expect(menu.locator('xpath=ancestor::*[@data-mantine-color-scheme][1]')).toHaveAttribute('data-mantine-color-scheme', mode);
       await page.screenshot({ path: info.outputPath(`appearance-${mode}-slash-menu.png`), fullPage: true });
-      await page.keyboard.press('Escape'); await page.keyboard.press('Backspace'); await saved(page);
-      const placeholder = editor().locator('[data-content-type="paragraph"]').last();
+      await page.keyboard.press('Escape'); await capture(`${mode}:after-Escape`);
+      await expect(menu).toBeHidden(); await paragraphCursor(editor(), { blockId });
+      await page.keyboard.press('Backspace'); await capture(`${mode}:after-Backspace`);
+      await saved(page); await capture(`${mode}:after-Saved`);
+      await paragraphCursor(editor(), { blockId, empty: true });
+      await expect(editor()).toHaveAttribute('contenteditable', 'true');
+      await expect(placeholder).toHaveAttribute('data-is-empty-and-focused', 'true');
+      await expect.poll(() => placeholderState(placeholder)).toMatchObject({ editable: true, textLength: 0, trailingBreakOnlyChild: true, caretInside: true });
       await expect.poll(() => placeholder.evaluate((element) => getComputedStyle(element, '::after').content)).toContain('Enter text');
       await readable(placeholder, 4.5, '::after');
       await page.getByRole('button', { name: 'New note', exact: true }).click();
@@ -266,7 +296,61 @@ test('appearance follows system and explicit preferences without changing notes,
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.screenshot({ path: info.outputPath('appearance-dark-mobile.png'), fullPage: true });
     expect(external).toEqual([]); expect(errors).toEqual([]);
-  } finally { release(); await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+  } finally {
+    try { await writeFile(info.outputPath('appearance-selection-states.json'), JSON.stringify(states, null, 2)); }
+    finally { release(); await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+  }
+});
+
+test('placeholder rendering requires the selected empty paragraph, not the last paragraph alone', async ({ page }, info) => {
+  const env = await environment();
+  const editor = page.getByRole('region', { name: 'Note editor' }).getByRole('textbox');
+  const states: unknown[] = [];
+  try {
+    await env.start(); await page.goto(env.url); await create(page, 'note', 'Synthetic placeholder selection');
+    await editor.click(); await page.keyboard.type('Nonempty selection anchor'); await page.keyboard.press('Enter');
+    await paragraphCursor(editor, { empty: true }); await page.keyboard.press('Enter');
+    await paragraphCursor(editor, { empty: true }); await saved(page);
+    const nonempty = editor.getByText('Nonempty selection anchor', { exact: true });
+    const anchorId = await nonempty.evaluate((node) => node.closest('[data-id]')!.getAttribute('data-id')!);
+    const last = editor.locator('[data-content-type="paragraph"]').last();
+    const lastId = await last.evaluate((node) => node.closest('[data-id]')!.getAttribute('data-id')!);
+    const tree = await getJson(`${env.api}/api/tree`);
+    const canonical = await getJson(`${env.api}/api/notes/${tree.notes[0].id}`);
+    for (const mode of ['light', 'dark'] as const) {
+      await page.getByRole('combobox', { name: 'Appearance', exact: true }).selectOption(mode);
+      await nonempty.click(); await paragraphCursor(editor, { blockId: anchorId });
+      const inactive = await placeholderState(last);
+      // BlockNote's default hint belongs to its selected empty block. An empty
+      // block elsewhere must not be mistaken for that selected block.
+      expect(inactive).toMatchObject({ editable: true, textLength: 0, trailingBreakOnlyChild: true, decorated: false, onlyEmptyBlock: false, caretInside: false, content: 'none' });
+      states.push({ stage: `${mode}:empty-but-not-selected`, ...await editorSelection(editor), placeholder: inactive });
+
+      // Recreate the removed test-only shortcut as a negative control. Read
+      // both positions in the same JS turn; never type from this invalid state.
+      const domOnly = await editor.evaluate((element) => {
+        const view = (element as HTMLElement & { editor: { view: import('@tiptap/pm/view').EditorView } }).editor.view;
+        const range = document.createRange(); range.selectNodeContents(element); range.collapse(false);
+        const selection = window.getSelection()!; selection.removeAllRanges(); selection.addRange(range);
+        const model = view.state.selection;
+        const position = view.posAtDOM(selection.anchorNode!, selection.anchorOffset);
+        return { domPosition: position, modelFrom: model.from, modelTo: model.to,
+          synchronized: model.anchor === position && model.head === position };
+      });
+      expect(domOnly.synchronized).toBe(false);
+      states.push({ stage: `${mode}:DOM-only-shortcut-negative-control`, ...domOnly });
+
+      await lastParagraphEnd(page, editor); await paragraphCursor(editor, { blockId: lastId, empty: true });
+      await expect(last).toHaveAttribute('data-is-empty-and-focused', 'true');
+      await expect.poll(() => placeholderState(last)).toMatchObject({ editable: true, textLength: 0, trailingBreakOnlyChild: true, caretInside: true, content: expect.stringContaining('Enter text') });
+      await readable(last, 4.5, '::after');
+      states.push({ stage: `${mode}:selected-empty`, ...await editorSelection(editor), placeholder: await placeholderState(last) });
+    }
+    expect(await getJson(`${env.api}/api/notes/${tree.notes[0].id}`)).toEqual(canonical);
+  } finally {
+    try { await writeFile(info.outputPath('placeholder-selection-states.json'), JSON.stringify(states, null, 2)); }
+    finally { await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+  }
 });
 
 test('CyrNava reference appearance preserves the live editor, local images and saved content', async ({ page }, info) => {

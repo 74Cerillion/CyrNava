@@ -1,0 +1,34 @@
+[
+  {
+    "id": 13041349352,
+    "name": "frontend-diagnostics-3027231c390b1814a98a567e5f30afb4ebff0dab-1",
+    "size_in_bytes": 7221161,
+    "digest": "sha256:3683e7481341ff620a0233f4332648140b8b6d709f1faa7016291212dc71321a",
+    "expired": false,
+    "created_at": "2026-10-31T11:45:38Z",
+    "expires_at": "2026-11-07T11:45:36Z",
+    "workflow_run": {
+      "id": 41197927704,
+      "repository_id": 1427661036,
+      "head_repository_id": 1427661036,
+      "head_branch": "desktop/p2-production-integration",
+      "head_sha": "3027231c390b1814a98a567e5f30afb4ebff0dab"
+    }
+  },
+  {
+    "id": 13040369207,
+    "name": "backend-diagnostics-3027231c390b1814a98a567e5f30afb4ebff0dab-1",
+    "size_in_bytes": 11727,
+    "digest": "sha256:64a1f23fa23d2405383aca4245d67484537843238c22fc52efc09fc2e257ed8c",
+    "expired": false,
+    "created_at": "2026-10-31T11:43:50Z",
+    "expires_at": "2026-11-07T11:43:49Z",
+    "workflow_run": {
+      "id": 41197927704,
+      "repository_id": 1427661036,
+      "head_repository_id": 1427661036,
+      "head_branch": "desktop/p2-production-integration",
+      "head_sha": "3027231c390b1814a98a567e5f30afb4ebff0dab"
+    }
+  }
+]

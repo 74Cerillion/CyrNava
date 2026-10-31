@@ -1,0 +1,3 @@
+Actual GitHub-hosted backend log excerpt; run 41197927704, job 124527869026.
+2026-10-31T11:43:01.0889841Z All checks passed!
+2026-10-31T11:43:48.7110055Z 611 passed, 3 warnings, 83 subtests passed in 40.49s

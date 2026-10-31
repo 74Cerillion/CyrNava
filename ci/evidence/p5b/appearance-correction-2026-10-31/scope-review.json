@@ -1,0 +1,46 @@
+{
+  "reviewed_utc": "2026-10-31T12:06:53.138284+00:00",
+  "branch": "desktop/p2-production-integration",
+  "HEAD": "3027231c390b1814a98a567e5f30afb4ebff0dab",
+  "p5a_accepted_target": "1a28f68c5732ccc1275403060e89ff168a846655",
+  "executable_change": "frontend/e2e/workspace.spec.ts only; docs/evidence also updated",
+  "production_application_backend_desktop_packaging_release_workflow_sources_unchanged": true,
+  "protected_files": [
+    {
+      "path": ".github/workflows/release.yml",
+      "unchanged_from_HEAD": true,
+      "sha256": "5398142a4e623f069d27f878d0cd60e7303688620754e6160ec02062c9414163"
+    },
+    {
+      "path": "ci/release/core.py",
+      "unchanged_from_HEAD": true,
+      "sha256": "72e481a234fdb6a9f0611956028dbafc82881a1e7206fbf663b22b4d204db338"
+    },
+    {
+      "path": "ci/release/policy.json",
+      "unchanged_from_HEAD": true,
+      "sha256": "aa4109debb215014dee7121ff364e9b6756281b9e83922dddd2b7e571c51bf62"
+    },
+    {
+      "path": "frontend/e2e/lifecycle.spec.ts",
+      "unchanged_from_HEAD": true,
+      "sha256": "edcbcb5c52df17590ab79c3dea894574a49a236472e923302e1a8050a3b1047a"
+    },
+    {
+      "path": "frontend/e2e/editorSelection.ts",
+      "unchanged_from_HEAD": true,
+      "sha256": "b528027e903a6a9c3102e62f342e5ecc86283cae4d14c5bec968250953e10755"
+    },
+    {
+      "path": "frontend/src/styles.css",
+      "unchanged_from_HEAD": true,
+      "sha256": "f71b8b54dab8423348e53d1ff31525999a46a68a862ffd1638b40a90f2733b08"
+    }
+  ],
+  "evidence_review": "Synthetic diagnostics and public run metadata only; no raw screenshot/trace ZIPs, signing material, session credentials, signed download URLs or personal workspace files included. Credential-pattern scan found no matches.",
+  "clean_checkout_final_source_sha256": "0d530d1a82c521079cf829b442c619ecc405319fd71bb24bb34f74af8a9fa993",
+  "diff_check": "PASS",
+  "staged_files": [],
+  "new_commit_push_dispatch_keys_or_external_configuration": false,
+  "scope": "P5B appearance-test correction only; awaiting owner commit/push authorization"
+}

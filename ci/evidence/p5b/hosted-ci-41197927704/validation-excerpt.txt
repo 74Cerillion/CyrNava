@@ -1,0 +1,4 @@
+Actual GitHub-hosted workflow validation log excerpt; run 41197927704, job 124527835762.
+2026-10-31T11:42:24.6793213Z Workflow security/dependency contract: PASS
+2026-10-31T11:42:25.1857585Z Ran 31 tests in 0.210s
+2026-10-31T11:42:25.1858090Z OK

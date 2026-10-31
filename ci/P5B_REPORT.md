@@ -3,15 +3,21 @@
 **31 October 2026 — CONDITIONAL; not accepted.** Local implementation and available
 automated security checks pass. The owner's Ubuntu native staging rehearsal now
 passes, including real signatures, rejection cases, descriptors and interrupted
-publication protection. Protected GitHub-hosted staging remains unconfigured and
-unexecuted. That remaining evidence gap prevents unconditional acceptance.
+publication protection. The latest push-triggered required CI run failed one
+appearance browser assertion; packaging was correctly skipped. The focused test-only
+correction now passes clean-checkout verification; the owner authorized one correction
+commit/push, and its hosted result is pending. Protected hosted staging remains unconfigured/unexecuted.
+These hosted gaps prevent unconditional acceptance.
 
 The owner has accepted native verification and endorsed future R2-compatible hosting
 and owner-controlled offline production signing. These are architectural endorsements,
 not permission for permanent keys, credentials, hosting purchases or deployment.
-The existing implementation is already in commit a9de663; this checkpoint records
-one authorized local P5B documentation/review commit. No push or external configuration
-change is performed by this session; no production key/release/deployment or P5C/P6 work.
+The implementation is in a9de663; the authorized documentation/review commit is
+3027231c390b1814a98a567e5f30afb4ebff0dab. Codex's single push attempt failed HTTPS
+authentication; the owner completed the authorized push, and the remote was verified
+at 3027231. The owner subsequently authorized this single correction commit/push
+and monitoring of its automatic CI. No workflow dispatch/rerun, external configuration,
+production key/release/deployment or P5C/P6 change is authorized.
 
 ## Accepted baseline and repository state
 
@@ -37,6 +43,85 @@ P5B implementation/native evidence is already tracked in a9de663. Its source has
 match the tested candidate. `evidence/p5b/baseline.json` records the original start;
 `evidence/p5b/staging-preparation/` records this checkpoint and review. The older
 pre-commit evidence remains historical, not a claim about the new repository HEAD.
+
+## Hosted continuous-integration result — 3027231
+
+[Run 41197927704](https://github.com/74Cerillion/CyrNava/actions/runs/41197927704),
+workflow ID **402398273**, attempt **1**, push event, exact commit
+`3027231c390b1814a98a567e5f30afb4ebff0dab`: **FAIL**.
+This is ordinary P5A continuous integration, not protected P5B staging execution.
+
+| Required job/check | Hosted result |
+| --- | --- |
+| Workflow validation | PASS — 31 contracts |
+| Backend and security | PASS — 611 tests, 83 subtests; clean frontend-assets prerequisite verified |
+| Frontend lint, unit tests, TypeScript/build | PASS — 273 unit tests |
+| Browser integration | FAIL — 19 passed, 1 failed; all 5 lifecycle tests passed |
+| Production Flatpak build and exported bundle audit | SKIPPED — correctly gated by frontend failure |
+| Validated unsigned application artifact upload | NOT EXECUTED; no application package produced |
+| Backend/frontend diagnostic uploads | PASS — both downloaded ZIP sizes/SHA-256 independently match GitHub |
+| CI required | FAIL — frontend failure and skipped Flatpak job correctly rejected |
+
+The failed test begins at `frontend/e2e/workspace.spec.ts:112`; its assertion at
+line **228** expects the last paragraph's CSS `::after` content to contain
+`Enter text`. Actual content stayed `none` for the 10,000 ms predicate timeout.
+At the initial review this established the failing observation without determining
+its cause. That historical record is preserved. The subsequent authorized investigation
+established an invalid test precondition; see the separate correction assessment below.
+
+Evidence is in `evidence/p5b/hosted-ci-41197927704/`: run/jobs/artifact metadata,
+actual log excerpts, frontend/backend result records, browser JUnit, generated
+failure context and summary. The generated Playwright context's instruction text
+is diagnostic content, not an owner request to implement a fix. Original diagnostic
+ZIPs (including the screenshot/trace) are retained under the ignored
+`ci-output/p5b-hosted-41197927704/`; no binaries, signed download URLs or credentials
+were copied into the report. Digests and member paths are recorded for recovery
+after GitHub's seven-day artifact retention expires. No package checksum/provenance
+can be verified for this run because the package job never executed.
+
+The owner's provisional approval of registration-only staging preparation is
+recorded; exact main-file YAML and environment settings still require separate
+authorization. No main/environment change or staging dispatch occurred.
+
+## Local appearance-test correction — commit/push authorized; hosted result pending
+
+The retained hosted screenshot, trace snapshots, error context and generated CSS
+show the last paragraph was empty/editable but lacked BlockNote's selected-empty
+paragraph decoration. After Escape and Backspace, an earlier paragraph changed
+from `/ bold` to ` bold`; the last paragraph stayed empty and undecorated through
+Saved. Its computed placeholder content `none` was correct for that unselected
+target. Saved is a persistence assertion, not a caret-placement guarantee.
+
+The old test moved a DOM Range to the editor root's end without establishing the
+ProseMirror selection. Three instrumented original runs passed locally but reproduced
+that DOM/model mismatch in every helper call. The entire historical failure is not
+claimed to reproduce locally, and its exact event-loop interleaving remains unrecorded.
+No production application/CSS defect is established.
+
+Only executable change: `frontend/e2e/workspace.spec.ts`. Real click/Control+End
+navigation now waits for observable, synchronized paragraph selection and the exact
+new empty block before typing. Escape/Backspace/Saved diagnostics record focus,
+DOM/model positions and computed styles without note bodies or session credentials.
+The original light/dark `Enter text` and contrast assertions remain. A new regression
+checks the unselected-empty negative case, reproduces the DOM-only mismatch without
+typing from it, and verifies that selecting the intended empty paragraph displays
+the real hint while canonical note/revision data remains unchanged.
+
+Final source in a fresh detached checkout at `3027231` passes **20 focused runs**
+(10 appearance + 10 regression, zero retries) and the **complete frontend suite**:
+lint, **273 unit tests**, TypeScript/production build and **21 browser tests**,
+including all **5 lifecycle** tests. No production/backend behavior changed, so
+backend tests were not rerun; their hosted **611 tests / 83 subtests PASS** is
+preserved. The accepted SQL lifecycle guard, signing code, security controls,
+workflow and package payload rules remain unchanged. No keys were generated.
+
+See `P5B_APPEARANCE_CORRECTION.md` for causality, exact modifications and limits;
+`evidence/p5b/appearance-correction-2026-10-31/` records candidate hashes,
+hosted-trace analysis, baseline/focused state checks and complete-suite results.
+Historical hosted evidence remains unchanged in `hosted-ci-41197927704/`.
+The correction has not been committed, pushed or verified by a new hosted run.
+The owner authorized one P5B-only correction commit/push after reviewing these results.
+Do not dispatch or rerun workflows; only monitor the automatically triggered CI.
 
 ## Architecture and decisions
 
@@ -167,7 +252,8 @@ their existing free-space safeguards.
 | P5B workflow policy | PASS |
 | Ruff and actionlint for both workflows | PASS |
 | Clean-checkout production frontend build | PASS |
-| Full frontend/browser verification | PASS — lint, 273 unit tests, TypeScript/build, all 20 browser tests including 5 lifecycle tests; zero retries |
+| Initial P5B local full frontend/browser verification | PASS — lint, 273 unit tests, TypeScript/build, all 20 original browser tests including 5 lifecycle tests; zero retries. Hosted follow-up is 19/20 and FAIL as recorded above. |
+| Local appearance correction, exact final source in clean checkout | PASS — 20 focused runs; lint, 273 unit tests, TypeScript/build and 21 browser tests including 5 lifecycle tests; zero retries. New hosted verification NOT EXECUTED. |
 | Live accepted P5A eligibility recheck | PASS — read-only, no run triggered |
 | Disposable GPG smoke/signature verification | PASS; key homes removed |
 | Actual native staging generation | PASS — owner Ubuntu run; signed OSTree repository and accepted artifact validation |
@@ -260,8 +346,10 @@ No native rerun is requested for this documentation update.
 2. Hosting/offline custody directions are now owner-endorsed. Permanent keys,
    provider purchases, domains, secrets and public hosting are not P5B staging
    acceptance prerequisites and remain separately gated.
-3. One local P5B-only follow-up commit is authorized. Request separate authorization
-   for its push; no push/authentication attempt occurs under this commit-only grant.
+3. The authorized owner push of 3027231 is verified. Its required CI failed the
+   appearance placeholder assertion. The separately authorized local correction
+   now passes verification. The owner authorized one correction commit/push;
+   no retry/rerun is authorized. A local PASS does not replace hosted verification.
    Preserve the local p5a-accepted tag; publishing it is not required by P5B.
 4. Authorize a workflow-registration approach and protected `p5b-staging` environment
    configuration: independent reviewer, prevent self-review, no admin bypass, exact
@@ -287,7 +375,7 @@ No native rerun is requested for this documentation update.
 
 | Gate | Recommendation |
 | --- | --- |
-| 1. Accepted baseline preserved | PASS for reviewed source and executed regressions |
+| 1. Accepted baseline preserved | Accepted P5A source/security checkpoint preserved; latest required hosted browser regression gate FAIL |
 | 2. Hosting architecture | PASS — R2-compatible direction owner-endorsed; provisioning/endpoint/cost authorization deferred |
 | 3. Signing infrastructure | PASS — real disposable GPG and native signed OSTree/rejection checks; offline custody direction owner-endorsed; permanent key creation deferred |
 | 4. Release workflow | Implemented/policy-tested; hosted protection/execution pending |
@@ -297,8 +385,10 @@ No native rerun is requested for this documentation update.
 | 8. Documentation | Delivered with explicit limitations and owner procedure |
 | 9. Owner acceptance | Pending |
 
-**Recommendation: CONDITIONAL — native acceptance gaps are closed; protected hosted
-workflow verification and formal owner acceptance remain.** Hosting/custody directions
+**Recommendation: CONDITIONAL — native acceptance gaps are closed; the latest required
+CI is FAIL. Verify the authorized appearance-test correction in new CI,
+then complete protected hosted staging
+verification and formal owner acceptance.** Hosting/custody directions
 are now endorsed, without authorizing irreversible production setup. HTTP
 deployment, real install/update lifecycle and production-key operations are later
 separately authorized work, not missing native P5B results. No P5C/P6 work has begun.

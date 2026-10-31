@@ -1,0 +1,79 @@
+{
+  "status": "CONFIRMED INVALID TEST PRECONDITION",
+  "source_run": 41197927704,
+  "artifact_id": 13041349352,
+  "trace_sha256": "1b1b30dcba1feeabb1ce0f20b9bbeeccaa6833f9c2786eaed074b2189bde1515",
+  "observations": [
+    {
+      "call_id": "xkfk@2564",
+      "phase": "after",
+      "timestamp_monotonic_ms": 56747.202,
+      "editor_contenteditable": "true",
+      "editor_focus_class_present": true,
+      "last_paragraph": {
+        "block_id": "ad6ab979-107c-472b-8438-42ed11402323",
+        "text_length": 0,
+        "empty_focus_decoration_present": false,
+        "trailing_break_present": true
+      },
+      "earlier_edited_paragraph": {
+        "block_id": "c3fb8942-b29b-42f2-aebf-acefd45c201c",
+        "synthetic_text": "/ bold"
+      }
+    },
+    {
+      "call_id": "xkfk@2566",
+      "phase": "after",
+      "timestamp_monotonic_ms": 56754.769,
+      "editor_contenteditable": "true",
+      "editor_focus_class_present": true,
+      "last_paragraph": {
+        "block_id": "ad6ab979-107c-472b-8438-42ed11402323",
+        "text_length": 0,
+        "empty_focus_decoration_present": false,
+        "trailing_break_present": true
+      },
+      "earlier_edited_paragraph": {
+        "block_id": "c3fb8942-b29b-42f2-aebf-acefd45c201c",
+        "synthetic_text": " bold"
+      }
+    },
+    {
+      "call_id": "xkfk@2568",
+      "phase": "after",
+      "timestamp_monotonic_ms": 57565.852,
+      "editor_contenteditable": "true",
+      "editor_focus_class_present": true,
+      "last_paragraph": {
+        "block_id": "ad6ab979-107c-472b-8438-42ed11402323",
+        "text_length": 0,
+        "empty_focus_decoration_present": false,
+        "trailing_break_present": true
+      },
+      "earlier_edited_paragraph": {
+        "block_id": "c3fb8942-b29b-42f2-aebf-acefd45c201c",
+        "synthetic_text": " bold"
+      }
+    }
+  ],
+  "captured_placeholder_styles": [
+    ".placeholder-selector-b1138c78-8dbc-4f01-9a70-a1748342f851 .bn-block-content[data-is-empty-and-focused]:has(.ProseMirror-trailingBreak:only-child)::after { content: \"Enter text or type '/' for commands\"; }\n.placeholder-selector-b1138c78-8dbc-4f01-9a70-a1748342f851 .bn-block-content[data-is-only-empty-block]:has(.ProseMirror-trailingBreak:only-child)::after { }\n.placeholder-selector-b1138c78-8dbc-4f01-9a70-a1748342f851 .bn-block-content[data-content-type=\"comment_reply\"]:has(.ProseMirror-trailingBreak:only-child)::after { content: \"Add comment...\"; }\n.placeholder-selector-b1138c78-8dbc-4f01-9a70-a1748342f851 .bn-block-content[data-content-type=\"edit_comment\"]:has(.ProseMirror-trailingBreak:only-child)::after { content: \"Edit comment...\"; }\n.placeholder-selector-b1138c78-8dbc-4f01-9a70-a1748342f851 .bn-block-content[data-content-type=\"new_comment\"]:has(.ProseMirror-trailingBreak:only-child)::after { content: \"Write a comment...\"; }\n.placeholder-selector-b1138c78-8dbc-4f01-9a70-a1748342f851 .bn-block-content[data-content-type=\"checkListItem\"]:has(.ProseMirror-trailingBreak:only-child)::after { content: \"List\"; }\n.placeholder-selector-b1138c78-8dbc-4f01-9a70-a1748342f851 .bn-block-content[data-content-type=\"numberedListItem\"]:has(.ProseMirror-trailingBreak:only-child)::after { content: \"List\"; }\n.placeholder-selector-b1138c78-8dbc-4f01-9a70-a1748342f851 .bn-block-content[data-content-type=\"bulletListItem\"]:has(.ProseMirror-trailingBreak:only-child)::after { content: \"List\"; }\n.placeholder-selector-b1138c78-8dbc-4f01-9a70-a1748342f851 .bn-block-content[data-content-type=\"toggleListItem\"]:has(.ProseMirror-trailingBreak:only-child)::after { content: \"Toggle\"; }\n.placeholder-selector-b1138c78-8dbc-4f01-9a70-a1748342f851 .bn-block-content[data-content-type=\"heading\"]:has(.ProseMirror-trailingBreak:only-child)::after { content: \"Heading\"; }"
+  ],
+  "source_contract": {
+    "BlockNote": "0.56.0",
+    "placeholder_extension": "@blocknote/core/src/extensions/Placeholder/Placeholder.ts",
+    "requirements": [
+      "editor editable",
+      "empty model selection outside code block",
+      "selected model parent empty",
+      "data-is-empty-and-focused decoration",
+      "only-child ProseMirror-trailingBreak"
+    ],
+    "app_css": "frontend/src/styles.css changes placeholder color/opacity, not content"
+  },
+  "limits": [
+    "Historical ProseMirror object/DOM caret offsets were not logged; do not invent their exact values",
+    "The trace directly proves earlier paragraph editing and undecorated last paragraph after Saved",
+    "Instrumented clean-checkout runs separately reproduce the DOM-only/model mismatch; precise hosted event-loop scheduling is unrecorded"
+  ]
+}

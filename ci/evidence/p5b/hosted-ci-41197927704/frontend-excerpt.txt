@@ -1,0 +1,30 @@
+Actual GitHub-hosted frontend failure excerpt; run 41197927704, job 124527868993.
+2026-10-31T11:43:21.5980104Z  Test Files  22 passed (22)
+2026-10-31T11:43:21.5980765Z       Tests  273 passed (273)
+2026-10-31T11:45:36.5824690Z   1 failed
+2026-10-31T11:45:36.5825361Z   19 passed (2.2m)
+2026-10-31T11:45:36.5816404Z     Error: expect(received).toContain(expected) // indexOf
+2026-10-31T11:45:36.5816543Z 
+2026-10-31T11:45:36.5816620Z     Expected substring: "Enter text"
+2026-10-31T11:45:36.5816804Z     Received string:    "none"
+2026-10-31T11:45:36.5816898Z 
+2026-10-31T11:45:36.5816948Z     Call Log:
+2026-10-31T11:45:36.5817129Z     - Timeout 10000ms exceeded while waiting on the predicate
+2026-10-31T11:45:36.5817313Z 
+2026-10-31T11:45:36.5817517Z       226 |       await page.keyboard.press('Escape'); await page.keyboard.press('Backspace'); await saved(page);
+2026-10-31T11:45:36.5817889Z       227 |       const placeholder = editor().locator('[data-content-type="paragraph"]').last();
+2026-10-31T11:45:36.5818372Z     > 228 |       await expect.poll(() => placeholder.evaluate((element) => getComputedStyle(element, '::after').content)).toContain('Enter text');
+2026-10-31T11:45:36.5818761Z           |                                                                                                                ^
+2026-10-31T11:45:36.5819051Z       229 |       await readable(placeholder, 4.5, '::after');
+2026-10-31T11:45:36.5819376Z       230 |       await page.getByRole('button', { name: 'New note', exact: true }).click();
+2026-10-31T11:45:36.5819812Z       231 |       const dialog = page.getByRole('dialog'); await readable(dialog); await readable(dialog.getByLabel('Starting content', { exact: true }));
+2026-10-31T11:45:36.5820229Z         at /home/runner/work/CyrNava/CyrNava/frontend/e2e/workspace.spec.ts:228:112
+2026-10-31T11:45:36.5820397Z 
+2026-10-31T11:45:36.5820728Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-31T11:45:36.5821383Z     test-results/workspace-appearance-follo-a34bf-notes-templates-or-autosave/test-failed-1.png
+2026-10-31T11:45:36.5821845Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-31T11:45:36.5821998Z 
+2026-10-31T11:45:36.5822229Z     Error Context: test-results/workspace-appearance-follo-a34bf-notes-templates-or-autosave/error-context.md
+2026-10-31T11:45:36.5822476Z 
+2026-10-31T11:45:36.5822684Z     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-31T11:45:36.5823044Z     test-results/workspace-appearance-follo-a34bf-notes-templates-or-autosave/trace.zip

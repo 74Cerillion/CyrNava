@@ -1,0 +1,92 @@
+{
+  "status": "FAIL",
+  "run_id": 41197927704,
+  "workflow_id": 402398273,
+  "attempt": 1,
+  "commit_sha": "3027231c390b1814a98a567e5f30afb4ebff0dab",
+  "branch": "desktop/p2-production-integration",
+  "event": "push",
+  "url": "https://github.com/74Cerillion/CyrNava/actions/runs/41197927704",
+  "owner_push_remote_verified": true,
+  "expected_remote_sha": "3027231c390b1814a98a567e5f30afb4ebff0dab",
+  "job_conclusions": {
+    "Workflow validation": "success",
+    "Backend and security": "success",
+    "Frontend and browser": "failure",
+    "Production Flatpak and bundle audit": "skipped",
+    "CI required": "failure"
+  },
+  "workflow_contract_tests": 31,
+  "backend_tests": 611,
+  "backend_subtests": 83,
+  "frontend_unit_tests": 273,
+  "browser_tests_passed": 19,
+  "browser_tests_failed": 1,
+  "lifecycle_tests_passed": 5,
+  "browser_suites": [
+    {
+      "name": "lifecycle.spec.ts",
+      "timestamp": "2026-10-31T11:43:25.438Z",
+      "hostname": "",
+      "tests": "5",
+      "failures": "0",
+      "skipped": "0",
+      "time": "28.151",
+      "errors": "0"
+    },
+    {
+      "name": "search.spec.ts",
+      "timestamp": "2026-10-31T11:43:25.438Z",
+      "hostname": "",
+      "tests": "4",
+      "failures": "0",
+      "skipped": "0",
+      "time": "23.814",
+      "errors": "0"
+    },
+    {
+      "name": "workspace.spec.ts",
+      "timestamp": "2026-10-31T11:43:25.438Z",
+      "hostname": "",
+      "tests": "11",
+      "failures": "1",
+      "skipped": "0",
+      "time": "77.975",
+      "errors": "0"
+    }
+  ],
+  "failure": {
+    "test": "appearance follows system and explicit preferences without changing notes, templates or autosave",
+    "test_location": "frontend/e2e/workspace.spec.ts:112",
+    "assertion_location": "frontend/e2e/workspace.spec.ts:228",
+    "expected": "paragraph ::after content contains Enter text",
+    "actual": "none",
+    "predicate_timeout_ms": 10000,
+    "root_cause": "Not established; do not classify as flaky or application/test defect from this assertion alone"
+  },
+  "packaging": "SKIPPED because frontend failed",
+  "exported_package_audit": "NOT EXECUTED",
+  "unsigned_application_artifact": "NOT PRODUCED; diagnostic uploads only",
+  "verified_diagnostic_artifacts": [
+    {
+      "artifact_id": 13040369207,
+      "name": "backend-diagnostics-3027231c390b1814a98a567e5f30afb4ebff0dab-1",
+      "bytes": 11727,
+      "sha256": "64a1f23fa23d2405383aca4245d67484537843238c22fc52efc09fc2e257ed8c",
+      "downloaded_digest_matches_GitHub": true,
+      "retained_local_path": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-hosted-41197927704/backend.zip"
+    },
+    {
+      "artifact_id": 13041349352,
+      "name": "frontend-diagnostics-3027231c390b1814a98a567e5f30afb4ebff0dab-1",
+      "bytes": 7221161,
+      "sha256": "3683e7481341ff620a0233f4332648140b8b6d709f1faa7016291212dc71321a",
+      "downloaded_digest_matches_GitHub": true,
+      "retained_local_path": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-hosted-41197927704/frontend.zip"
+    }
+  ],
+  "staging_workflow": "NOT DISPATCHED",
+  "P5B_status": "CONDITIONAL; current required CI is FAIL and protected staging remains unverified",
+  "native_acceptance": "Previously owner-accepted PASS preserved",
+  "actions_taken": "Read-only monitoring, diagnostic retrieval/hash verification and local documentation/evidence only; no code fix, commit, push, rerun or dispatch"
+}
