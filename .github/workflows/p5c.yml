@@ -1,0 +1,36 @@
+{
+  "name": "CyrNava P5C integrated release verification",
+  "on": {
+    "workflow_dispatch": {
+      "inputs": {
+        "tooling_commit": {
+          "description": "Exact owner-approved immutable P5C tooling SHA",
+          "required": true,
+          "type": "string"
+        },
+        "authorization_ref": {
+          "description": "P5C-owner-authorized-disposable-integration-only",
+          "required": true,
+          "type": "string"
+        }
+      }
+    }
+  },
+  "permissions": {
+    "contents": "read",
+    "actions": "read"
+  },
+  "jobs": {
+    "registration": {
+      "if": "${{ false }}",
+      "runs-on": "ubuntu-24.04",
+      "timeout-minutes": 1,
+      "steps": [
+        {
+          "name": "Inert registration marker",
+          "run": ":"
+        }
+      ]
+    }
+  }
+}
