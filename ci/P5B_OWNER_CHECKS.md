@@ -1,5 +1,57 @@
 # P5B owner checks — staging only, not production authorization
 
+## Final owner acceptance — 1 November 2026
+
+**P5B — ACCEPTED / COMPLETE.** The owner's explicit acceptance supersedes the
+historical pending/conditional checklists below.
+
+- [x] Owner reviewed the final technical assessment and independently verified the hosted execution.
+- [x] Accepted tooling: `3ea472efcd6c3338debe16161de601286a5f177d`.
+- [x] Accepted staging: 41265875118, attempt 1, SUCCESS; workflow 403136895.
+- [x] Accepted source: `1ee2077b283b8e5dfc2162119dd439ed3baeb109`; P5A CI 41181510439.
+- [x] All required P5B signing, integrity, negative-security, descriptor, interruption, cleanup and diagnostic-provenance gates passed.
+- [x] Successful execution evidence and historical failures preserved without rewriting their original records.
+- [x] Pinned artifact hashes, workflow identities, security requirements and integration branch preserved.
+- [x] Final acceptance record and proposed documentation-only commit prepared for review.
+
+Administrative follow-up, separate from completed acceptance:
+
+- [ ] Owner separately authorizes the proposed final documentation commit.
+- [ ] Owner separately authorizes any push.
+
+Next milestone is **P5C — Integrated Release Pipeline Verification**, requiring
+separate authorization. No P5C/P6 implementation, main merge, permanent key,
+hosting purchase, publication or production deployment is authorized or performed.
+See `P5B_CLOSEOUT_REVIEW.md`, the formal acceptance section in `P5B_REPORT.md`,
+and `evidence/p5b/owner-acceptance-2026-11-01/acceptance.json`.
+
+## Historical technical checkpoints
+
+**P5B STATUS: PASS — READY FOR FORMAL OWNER ACCEPTANCE.**
+Actual hosted staging **41265875118**, attempt 1, at approved tooling
+`3ea472efcd6c3338debe16161de601286a5f177d`, completed SUCCESS after exactly one
+new manual dispatch. Both jobs and all signing/integrity/negative/descriptor/
+interruption gates passed. Complete PASS was persisted after guarded disposable-key
+cleanup; the two-member JSON diagnostic ZIP was independently hash/provenance
+verified. Repository: 301,341,805 bytes / 5,554 files; total 176.678 seconds.
+Formal owner acceptance remains pending. No production key, hosting, publication,
+additional commit/push, workflow rerun or P5C/P6 work is authorized or performed.
+See final `P5B_REPORT.md` and `evidence/p5b/hosted-staging-41265875118/`.
+The prior conditional/failure/checklist/authorization entries below are historical.
+
+**Current hosted result — 1 November 2026: ordinary CI PASS; P5B CONDITIONAL / NOT ACCEPTED.**
+The single authorized correction commit/push is complete at `3ea472efcd6c3338debe16161de601286a5f177d`.
+Run **41264318875**, attempt 1, passed all five jobs: 31 contracts, 640 backend tests
++ 175 subtests, 273 frontend units, 21 browser cases, production Flatpak build,
+exported-package audit, unsigned upload and required gate. All four downloaded ZIP
+checksums and package provenance independently verified. See current `P5B_REPORT.md`
+and `evidence/p5b/hosted-ci-41264318875/`.
+
+Next: request separate owner authorization for ONE NEW staging dispatch at exact
+`3ea472e`, retaining pinned source `1ee2077` and CI `41181510439`. No dispatch/rerun
+or further commit/push is authorized. Main, inert registration, staging environment,
+local tag and security controls are unchanged. Results below are historical snapshots.
+
 **Owner-authorized commit/push checkpoint — 1 November 2026.** One P5B-only source-checkout correction commit and normal fast-forward push are now authorized from `d32ae20`. Review and ordinary hosted CI are pending. No manual staging dispatch or rerun is authorized; it requires separate approval after successful CI. Earlier authorization/readiness statements below are historical snapshots.
 
 **Current local source-checkout correction, 1 November 2026 — P5B CONDITIONAL / NOT ACCEPTED.** Local verification passes 73 release tests (9 new), 31 CI contracts, Ruff, actionlint and all policies. A fresh shallow remote clone reproduces the missing-ancestor checkout failure; a fresh full-history clone verifies the exact accepted source and auditor hashes. Staging now requires full history and fixed redacted Git diagnostics. Source verification precedes disposable key creation.

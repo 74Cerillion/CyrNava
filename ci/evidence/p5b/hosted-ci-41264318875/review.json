@@ -1,0 +1,12 @@
+{
+  "credentials_or_private_keys": false,
+  "ephemeral_download_urls_retained": false,
+  "files_reviewed": 29,
+  "limits": "No second local native audit/import; hosted package audit verified. No hosted P5B staging executed in this authorization.",
+  "new_source_regressions": 9,
+  "personal_workspace_data": false,
+  "provenance_verified": true,
+  "status": "PASS",
+  "text_only": true,
+  "unsigned_zip_and_bundle_hashes_verified": true
+}

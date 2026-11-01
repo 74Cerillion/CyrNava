@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-11-01T02:24:18.759776+00:00",
+  "integration_commit": "3ea472efcd6c3338debe16161de601286a5f177d",
+  "main_commit": "1e62cd5ef4d36d048a505e9e4a7029296edfd3da",
+  "inert_registration_unchanged": true,
+  "staging_run_ids": [
+    41256746729,
+    41261468749
+  ],
+  "manual_staging_executions_added": 0,
+  "local_acceptance_tag_commit": "1a28f68c5732ccc1275403060e89ff168a846655"
+}

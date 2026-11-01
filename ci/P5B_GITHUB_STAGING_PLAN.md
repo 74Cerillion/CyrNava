@@ -1,5 +1,47 @@
 # P5B hosted staging preparation — owner-controlled single-maintainer model
 
+## Closed phase — owner accepted 1 November 2026
+
+**P5B — ACCEPTED / COMPLETE.** The owner formally accepted tooling `3ea472e`
+and hosted staging 41265875118, attempt 1, SUCCESS, with pinned source `1ee2077`
+and P5A CI 41181510439. All required P5B gates passed. See `P5B_REPORT.md` and
+`evidence/p5b/owner-acceptance-2026-11-01/acceptance.json`.
+
+The execution authorizations below are historical and consumed; they do not
+permit another dispatch, retry, commit or push. Main, environment configuration,
+workflow security, pinned inputs and current integration branch are preserved.
+Next milestone: **P5C — Integrated Release Pipeline Verification**, not authorized
+or started. Final documentation synchronization requires separate commit/push
+approval; no permanent keys, paid hosting, application publication or production
+deployment is authorized by P5B acceptance.
+
+## Historical staging preparation and execution checkpoints
+
+**P5B STATUS: PASS — READY FOR FORMAL OWNER ACCEPTANCE.**
+Actual hosted staging **41265875118**, attempt 1, at approved tooling
+`3ea472efcd6c3338debe16161de601286a5f177d`, completed SUCCESS after exactly one
+new manual dispatch. Both jobs and all signing/integrity/negative/descriptor/
+interruption gates passed. Complete PASS was persisted after guarded disposable-key
+cleanup; the two-member JSON diagnostic ZIP was independently hash/provenance
+verified. Repository: 301,341,805 bytes / 5,554 files; total 176.678 seconds.
+Formal owner acceptance remains pending. No production key, hosting, publication,
+additional commit/push, workflow rerun or P5C/P6 work is authorized or performed.
+See final `P5B_REPORT.md` and `evidence/p5b/hosted-staging-41265875118/`.
+The prior conditional/failure/checklist/authorization entries below are historical.
+
+**Current hosted result — 1 November 2026: ordinary CI PASS; P5B CONDITIONAL / NOT ACCEPTED.**
+The single authorized correction commit/push is complete at `3ea472efcd6c3338debe16161de601286a5f177d`.
+Run **41264318875**, attempt 1, passed all five jobs: 31 contracts, 640 backend tests
++ 175 subtests, 273 frontend units, 21 browser cases, production Flatpak build,
+exported-package audit, unsigned upload and required gate. All four downloaded ZIP
+checksums and package provenance independently verified. See current `P5B_REPORT.md`
+and `evidence/p5b/hosted-ci-41264318875/`.
+
+Next: request separate owner authorization for ONE NEW staging dispatch at exact
+`3ea472e`, retaining pinned source `1ee2077` and CI `41181510439`. No dispatch/rerun
+or further commit/push is authorized. Main, inert registration, staging environment,
+local tag and security controls are unchanged. Results below are historical snapshots.
+
 **Owner-authorized commit/push checkpoint — 1 November 2026.** One P5B-only source-checkout correction commit and normal fast-forward push are now authorized from `d32ae20`. Review and ordinary hosted CI are pending. No manual staging dispatch or rerun is authorized; it requires separate approval after successful CI. Earlier authorization/readiness statements below are historical snapshots.
 
 **Current local source-checkout correction, 1 November 2026 — P5B CONDITIONAL / NOT ACCEPTED.** Full-history staging checkout and exact security contract are locally verified. The accepted P5A source/artifact are unchanged. Source preparation is verified before disposable key generation, with allowlisted diagnostic operation names. A fresh shallow reproduction confirms the local defect without claiming missing historical hosted stderr.
