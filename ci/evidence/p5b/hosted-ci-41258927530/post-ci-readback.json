@@ -1,0 +1,15 @@
+{
+  "accepted_p5a_artifact_digest": "sha256:73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b",
+  "accepted_p5a_artifact_expired": false,
+  "accepted_p5a_artifact_expires_at": "2026-11-07T07:53:28Z",
+  "accepted_p5a_artifact_id": 13035607417,
+  "checked_at": "2026-11-01T01:16:09.659860+00:00",
+  "environment_unchanged": true,
+  "main_registration_unchanged": true,
+  "new_manual_dispatches": 0,
+  "remote_refs": {
+    "desktop/p2-production-integration": "d32ae20bfcd9ad3e6ccab530c62e2e2eb1918b8e",
+    "main": "1e62cd5ef4d36d048a505e9e4a7029296edfd3da"
+  },
+  "staging_runs_total": 1
+}

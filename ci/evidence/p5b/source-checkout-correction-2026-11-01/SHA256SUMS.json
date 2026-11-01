@@ -1,0 +1,17 @@
+{
+  "accepted-artifact.json": "307f03917990006749938708bcaff3485ae83f27368bdd2906814c09e88884ce",
+  "actionlint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "checks.json": "4c995bd3b53940f931b3eb91b29b8a6370666ab2b2bc5ac0663e6d131f1defcc",
+  "ci-contracts.log": "5e5c4a02e36e9c36ac30cf50e5c65447b66ab9e5d7c12b24b495876954450eec",
+  "ci-policy.log": "6929f9534e22bc6fa880e0273e930cbca7230a10ad605b44103eec52e5d3f6a6",
+  "format.log": "eee76f865de5a9f2456950f710ae5d5f9b5bd0ea02aa54f614c5eed6642a0bfd",
+  "full-history-verification.json": "8ad7c557633432c5a20a0dfa5c73afa828302e9b86228c331bd9090fcbbc621d",
+  "precommit-state.json": "bd9e0670154d065c0bb0b08ad0c3aea51543d34f6f0cf4b0ffe5d1e5f85d1f51",
+  "registration-policy.log": "236acab1878bd5eaeb95bfa33f4b157ad71ca87b7567ceff45fc75f951a977f2",
+  "release-tests.log": "30ddf96cf6396b6be2f6b00739503acca4fd5b6f890b28cd51d7678eb7c78d20",
+  "ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+  "shallow-reproduction.json": "ef7e5fdeec0c6dcbf4eecb2c6342264f104383caa4e6186f135cbc44b403184c",
+  "source-tests.log": "58a193a2ff413d203189ec5dcbd14a1ee623b8352d253c9ba47c16d1755c60f0",
+  "verification.json": "a461e14d2eae2c90c72fb1fce6f6f464469c4af0e99ace64ad10459e0fd3f3ef",
+  "workflow-policy.log": "b8b7672441766da832f1c3eae81dc3c2104fb60f34370a136abcec7488a7aab9"
+}

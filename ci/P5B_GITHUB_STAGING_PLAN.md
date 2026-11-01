@@ -1,5 +1,29 @@
 # P5B hosted staging preparation — owner-controlled single-maintainer model
 
+**Owner-authorized commit/push checkpoint — 1 November 2026.** One P5B-only source-checkout correction commit and normal fast-forward push are now authorized from `d32ae20`. Review and ordinary hosted CI are pending. No manual staging dispatch or rerun is authorized; it requires separate approval after successful CI. Earlier authorization/readiness statements below are historical snapshots.
+
+**Current local source-checkout correction, 1 November 2026 — P5B CONDITIONAL / NOT ACCEPTED.** Full-history staging checkout and exact security contract are locally verified. The accepted P5A source/artifact are unchanged. Source preparation is verified before disposable key generation, with allowlisted diagnostic operation names. A fresh shallow reproduction confirms the local defect without claiming missing historical hosted stderr.
+
+No correction commit/push or new hosted execution has occurred. Next gates: explicit owner authorization for one correction commit/push; ordinary CI PASS at its immutable SHA; separate authorization for one new staging execution; all hosted security/cleanup/provenance checks PASS. No earlier dispatch authorization may be reused. See current `P5B_REPORT.md` and `evidence/p5b/source-checkout-correction-2026-11-01/`. The snapshots below are historical.
+
+**Latest execution, 1 November 2026:** separate owner authorization was consumed
+by exactly one new manual run **41261468749**, attempt 1, at `d32ae20`. Eligibility,
+locked setup and downloaded candidate validation passed; immutable-source Git
+preparation failed before the exported-payload audit/signed repository checks.
+P5B remains FAIL / CONDITIONAL. Evidence and causality limits are recorded in
+current `P5B_REPORT.md` and `evidence/p5b/hosted-staging-41261468749/`.
+No retry, source correction or additional dispatch is authorized. Earlier
+readiness/approval snapshots below are historical, not current execution authority.
+
+**Current checkpoint, 1 November 2026:** the single authorized correction commit
+`d32ae20bfcd9ad3e6ccab530c62e2e2eb1918b8e` is synchronized. Ordinary CI
+**41258927530**, attempt 1, passed all five jobs; artifact hashes and provenance
+are independently verified. See current `P5B_REPORT.md` and
+`evidence/p5b/hosted-ci-41258927530/`. P5B remains CONDITIONAL until a separately
+authorized new manual staging execution passes. No dispatch/rerun is authorized
+now. Future approval must name this corrected tooling SHA and retain the pinned
+P5A source/run/artifact; earlier command/authorization snapshots below are historical.
+
 **Latest local correction, 1 November 2026:** the staging job now installs the
 unchanged hash-locked CI parser independently. Setup/import failures retain
 redacted FAIL evidence. Clean-checkout verification passes 64 release regressions,

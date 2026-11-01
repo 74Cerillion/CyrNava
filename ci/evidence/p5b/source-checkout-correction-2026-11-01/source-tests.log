@@ -1,0 +1,14 @@
+test_full_history_resolves_exact_accepted_source_detached (test_source_checkout.SourceCheckoutTests.test_full_history_resolves_exact_accepted_source_detached) ... ok
+test_missing_history_cannot_reach_key_or_publication (test_source_checkout.SourceCheckoutTests.test_missing_history_cannot_reach_key_or_publication) ... ok
+test_nonimmutable_source_rejected_before_any_git_operation (test_source_checkout.SourceCheckoutTests.test_nonimmutable_source_rejected_before_any_git_operation) ... ok
+test_shallow_missing_ancestor_fails_at_detached_checkout (test_source_checkout.SourceCheckoutTests.test_shallow_missing_ancestor_fails_at_detached_checkout) ... ok
+test_unavailable_sha_never_falls_back_to_tooling (test_source_checkout.SourceCheckoutTests.test_unavailable_sha_never_falls_back_to_tooling) ... ok
+test_unexpected_checkout_result_cannot_reach_key_audit_or_signing (test_source_checkout.SourceCheckoutTests.test_unexpected_checkout_result_cannot_reach_key_audit_or_signing) ... ok
+test_fixed_git_operation_categories_never_expose_sensitive_details (test_source_checkout.SourcePolicyTests.test_fixed_git_operation_categories_never_expose_sensitive_details) ... ok
+test_staging_requires_full_history_and_immutable_credential_free_checkout (test_source_checkout.SourcePolicyTests.test_staging_requires_full_history_and_immutable_credential_free_checkout) ... ok
+test_unreviewed_operation_label_cannot_leak_arguments (test_source_checkout.SourcePolicyTests.test_unreviewed_operation_label_cannot_leak_arguments) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.101s
+
+OK

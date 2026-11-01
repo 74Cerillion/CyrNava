@@ -88,7 +88,22 @@ def outside_source(path):
     return path
 
 
-def call(*args, timeout=300, env=None):
+def call(*args, timeout=300, env=None, operation=None):
+    # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+    # paths, URLs or subprocess output as an operation label.
+    require(
+        operation is None
+        or (
+            str(args[0]) == "git"
+            and operation
+            in {
+                "accepted-source-clone",
+                "accepted-source-checkout",
+                "accepted-source-verify",
+            }
+        ),
+        "Unreviewed operation label",
+    )
     try:
         return subprocess.run(
             [str(a) for a in args],
@@ -99,6 +114,15 @@ def call(*args, timeout=300, env=None):
         ).stdout
     except (OSError, subprocess.SubprocessError) as error:
         # Commands may receive signing paths; never print argv, stderr or environment.
+        if operation is not None:
+            category = (
+                f"exit-{error.returncode}"
+                if isinstance(error, subprocess.CalledProcessError)
+                else "timeout"
+                if isinstance(error, subprocess.TimeoutExpired)
+                else "unavailable"
+            )
+            raise Rejected(f"Git operation failed: {operation} ({category})") from None
         raise Rejected(
             f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
         ) from None
@@ -655,8 +679,52 @@ def verify_descriptors(public, parent, entry):
     )
 
 
+def checkout_accepted_source(source, source_commit):
+    # The accepted auditor compares package provenance to a real Git checkout.
+    # Use a disposable detached checkout of the approved immutable source, not
+    # the later release-tooling commit. Do not execute application code from it.
+    require(
+        re.fullmatch(r"[a-f0-9]{40}", source_commit) is not None,
+        "Full immutable accepted-source SHA required",
+    )
+    call(
+        "git",
+        "clone",
+        "--quiet",
+        "--no-hardlinks",
+        "--no-checkout",
+        ROOT,
+        source,
+        operation="accepted-source-clone",
+    )
+    call(
+        "git",
+        "-C",
+        source,
+        "checkout",
+        "--quiet",
+        "--detach",
+        source_commit,
+        operation="accepted-source-checkout",
+    )
+    require(
+        call(
+            "git", "-C", source, "rev-parse", "HEAD", operation="accepted-source-verify"
+        )
+        .decode()
+        .strip()
+        == source_commit,
+        "Immutable source checkout mismatch",
+    )
+    return source
+
+
 def generate_repository(candidate, public, private, entry, url, *, deltas=False):
     started = time.monotonic()
+    # Reject unavailable or unexpected audit sources before creating a key.
+    source = checkout_accepted_source(
+        private / "approved-source", entry["source_commit"]
+    )
     home = private / "key"
     fingerprint = make_key(home)
     public.mkdir(mode=0o755)
@@ -664,17 +732,6 @@ def generate_repository(candidate, public, private, entry, url, *, deltas=False)
     # Reuse the P5A exporter audit. No source rebuilding and no application launch.
     audit = private / "payload-audit"
     audit.mkdir()
-    # The accepted auditor compares package provenance to a real Git checkout.
-    # Use a disposable detached checkout of the approved immutable source, not
-    # the later release-tooling commit. Do not execute application code from it.
-    source = private / "approved-source"
-    call("git", "clone", "--quiet", "--no-hardlinks", "--no-checkout", ROOT, source)
-    call("git", "-C", source, "checkout", "--quiet", "--detach", entry["source_commit"])
-    require(
-        call("git", "-C", source, "rev-parse", "HEAD").decode().strip()
-        == entry["source_commit"],
-        "Immutable source checkout mismatch",
-    )
     # The accepted CI auditor binds GITHUB_SHA to its checked-out source. In a
     # promotion job that source is intentionally older than the release tooling.
     # Isolate this binding in a child; retain actual release-job context below.

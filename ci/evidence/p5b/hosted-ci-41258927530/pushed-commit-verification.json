@@ -1,0 +1,550 @@
+{
+  "commit": "d32ae20bfcd9ad3e6ccab530c62e2e2eb1918b8e",
+  "commits_created": 1,
+  "fast_forward": true,
+  "files": [
+    {
+      "additions": 4,
+      "deletions": 0,
+      "filename": ".github/workflows/release.yml",
+      "sha": "950b0b23cb42980b6c63a87486de88f8e3812921",
+      "status": "modified"
+    },
+    {
+      "additions": 30,
+      "deletions": 5,
+      "filename": "ci/P5B_GITHUB_STAGING_PLAN.md",
+      "sha": "8089f118579ecd276485bad40f652a1b676352a8",
+      "status": "modified"
+    },
+    {
+      "additions": 28,
+      "deletions": 7,
+      "filename": "ci/P5B_OWNER_CHECKS.md",
+      "sha": "3011b5f62aafda1fe04dcdb0093b3f53d09f0f65",
+      "status": "modified"
+    },
+    {
+      "additions": 308,
+      "deletions": 14,
+      "filename": "ci/P5B_REPORT.md",
+      "sha": "dde0e493bfb643dea2334c4fbbd7c3daf392c1f4",
+      "status": "modified"
+    },
+    {
+      "additions": 17,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/SHA256SUMS.json",
+      "sha": "73ba4c1415cd712dfbaee85408429903b62ee37b",
+      "status": "added"
+    },
+    {
+      "additions": 205,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/accepted-ci.yml",
+      "sha": "886d6c19d06a1553a289a8d1c8bf38d1d4887562",
+      "status": "added"
+    },
+    {
+      "additions": 11,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/branches.json",
+      "sha": "11b1e4190751f19af254fb4b05d5bbf52da2e2ca",
+      "status": "added"
+    },
+    {
+      "additions": 21,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/environment.json",
+      "sha": "6c548204d33e265315af6c4cbbf63d6b9fffd28c",
+      "status": "added"
+    },
+    {
+      "additions": 10,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/integration-ref.json",
+      "sha": "1378c8ef1707fc0e4f6de78a629c2eb74287d1a1",
+      "status": "added"
+    },
+    {
+      "additions": 100,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/main-commit.json",
+      "sha": "7e0bfdf7c611ee29e9ee604b34b94bf53aec2249",
+      "status": "added"
+    },
+    {
+      "additions": 10,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/main-ref.json",
+      "sha": "93fa17fda1d75028c669051cb1ac08a14b71a2ad",
+      "status": "added"
+    },
+    {
+      "additions": 20,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/p5a-artifact.json",
+      "sha": "e62e81afcead8a702f280393055cc76144507562",
+      "status": "added"
+    },
+    {
+      "additions": 521,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/p5a-jobs.json",
+      "sha": "60ace20c11e5e2e226704761ce8e64005a2ba06d",
+      "status": "added"
+    },
+    {
+      "additions": 223,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/p5a-run.json",
+      "sha": "4d99a39c33a82a5fc8ec710aacf70ec60d0d6a4a",
+      "status": "added"
+    },
+    {
+      "additions": 4,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/prior-runs.json",
+      "sha": "00b8fd6e0c19d8d55ac5e33bc3a8ead1af20738c",
+      "status": "added"
+    },
+    {
+      "additions": 18,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/privacy-review.json",
+      "sha": "53e206537d9b1437aab9a36b38645ddb5ae06244",
+      "status": "added"
+    },
+    {
+      "additions": 12,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/registered-workflow.json",
+      "sha": "75b54dae2b5c790433f99f3e1b06a1a830ad4ff4",
+      "status": "added"
+    },
+    {
+      "additions": 38,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/registration.yml",
+      "sha": "2bd57b7733f241e7f6a8b9afd86f1caa403bc994",
+      "status": "added"
+    },
+    {
+      "additions": 97,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/release.yml",
+      "sha": "c68aac892e0d5e6c0a628ce7c4259288ab57da00",
+      "status": "added"
+    },
+    {
+      "additions": 29,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/authorization-c-preflight-2026-11-01/summary.json",
+      "sha": "066880a12b059e3755c203bc213151fc79fafce9",
+      "status": "added"
+    },
+    {
+      "additions": 396,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/correction-commit-review-2026-11-01.json",
+      "sha": "246d74c9e9b22a1cca2e90c71a101743b7397d03",
+      "status": "added"
+    },
+    {
+      "additions": 14,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/SHA256SUMS.json",
+      "sha": "9a1a25cd2574f3c52435f3d5d52a8033f3f2c523",
+      "status": "added"
+    },
+    {
+      "additions": 20,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/accepted-artifact.json",
+      "sha": "e62e81afcead8a702f280393055cc76144507562",
+      "status": "added"
+    },
+    {
+      "additions": 0,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/actionlint.log",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "status": "added"
+    },
+    {
+      "additions": 66,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/ci-contract-tests-final.log",
+      "sha": "c2b77ebbe1ef218f217ceb2bdff88c2cf4bf0cbb",
+      "status": "added"
+    },
+    {
+      "additions": 84,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/ci-contract-tests-initial-space-guard.log",
+      "sha": "502604447ed610885eda0d6ecc4cd990db854315",
+      "status": "added"
+    },
+    {
+      "additions": 30,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/independent-job-bootstrap.json",
+      "sha": "a8f0926c0059fefa4d5c99a9e2a72466ab4cfa3a",
+      "status": "added"
+    },
+    {
+      "additions": 32,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/live-eligibility.json",
+      "sha": "1677ca3ebe9bce20d0c66c478810bf2f2b9d1695",
+      "status": "added"
+    },
+    {
+      "additions": 3,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/policy-checks.log",
+      "sha": "0bb033f386df94fbac9da3bcaf064557b0b39581",
+      "status": "added"
+    },
+    {
+      "additions": 12,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/precommit-readback.json",
+      "sha": "7aa36d1eea30b84e0a9e33de361519d840a4a9e9",
+      "status": "added"
+    },
+    {
+      "additions": 7,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/preinstall-regression.log",
+      "sha": "687bed417ee41246aee2857a8a36359696881ab6",
+      "status": "added"
+    },
+    {
+      "additions": 94,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/release-tests.log",
+      "sha": "2f6a2d0224306511ed29281b2d20308e1cbdb147",
+      "status": "added"
+    },
+    {
+      "additions": 2,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/ruff.log",
+      "sha": "5466c65f6f129746ef170fc05e0d04f1fd475f7a",
+      "status": "added"
+    },
+    {
+      "additions": 66,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/dependency-correction-2026-11-01/verification.json",
+      "sha": "2e98b41fe6617309b7f798ecfdcb9d10e61f2e34",
+      "status": "added"
+    },
+    {
+      "additions": 681,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/appearance-state-verification.json",
+      "sha": "d19202f2384fd168f61c6282238307b8d36d0a99",
+      "status": "added"
+    },
+    {
+      "additions": 30,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/artifact-verification.json",
+      "sha": "adbde6dc9a546098a21a59ad6cb57f97f8a1edc3",
+      "status": "added"
+    },
+    {
+      "additions": 80,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/artifacts.json",
+      "sha": "a478358b0985bfd853440cbc84340839532e9df8",
+      "status": "added"
+    },
+    {
+      "additions": 4,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/backend-excerpt.txt",
+      "sha": "de2ffb062ec329ae0bf747c370f5e1b205cfc6bf",
+      "status": "added"
+    },
+    {
+      "additions": 1,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/backend-junit.xml",
+      "sha": "76cbb8791000440bb433a1a254181ee2c6fc8066",
+      "status": "added"
+    },
+    {
+      "additions": 31,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/backend.json",
+      "sha": "8b12e8b166000ca465d987924253210387a800b9",
+      "status": "added"
+    },
+    {
+      "additions": 104,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/browser-junit.xml",
+      "sha": "f571f29702a3e444a1b88633c12c8f512ac0f2dc",
+      "status": "added"
+    },
+    {
+      "additions": 33,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/flatpak-audit.json",
+      "sha": "6e40fd9a1efb06b1b5c2713e18547a82e7b2a6d3",
+      "status": "added"
+    },
+    {
+      "additions": 6,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/flatpak-build.json",
+      "sha": "e0c4eeba82cf433c543b3c4fc08aeddbed35b7b7",
+      "status": "added"
+    },
+    {
+      "additions": 15,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/flatpak-excerpt.txt",
+      "sha": "c3209d0ddabba1a67a83f8d9cbda021dbe98f969",
+      "status": "added"
+    },
+    {
+      "additions": 38,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/flatpak-prepare.json",
+      "sha": "4a394aa9122e99be7a456f191e73319fb586cc76",
+      "status": "added"
+    },
+    {
+      "additions": 10,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/flatpak-result.json",
+      "sha": "51c076b11f0afa6facfb50f7024d06c2f8dcf39e",
+      "status": "added"
+    },
+    {
+      "additions": 12,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/frontend-excerpt.txt",
+      "sha": "962ced8d3b9936b1239ed9514a7a63976d1cb177",
+      "status": "added"
+    },
+    {
+      "additions": 27,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/frontend.json",
+      "sha": "d07491661b3957e5b2c7552b4f45005ebfda7904",
+      "status": "added"
+    },
+    {
+      "additions": 336,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/jobs.json",
+      "sha": "90338ac24507e7a4fbdf715291f1059949944fdb",
+      "status": "added"
+    },
+    {
+      "additions": 129,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/package-build-inputs.json",
+      "sha": "a7de738bca05422be5ef633ec308edd56d5aba04",
+      "status": "added"
+    },
+    {
+      "additions": 30,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/package-provenance.json",
+      "sha": "4f5d672c3d179642ea3ee8195e318e4b31848d5f",
+      "status": "added"
+    },
+    {
+      "additions": 10,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/package-result.json",
+      "sha": "51c076b11f0afa6facfb50f7024d06c2f8dcf39e",
+      "status": "added"
+    },
+    {
+      "additions": 24,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/package-verification.json",
+      "sha": "337afb90772c5b1b1efc8dd9ade50aef264896b1",
+      "status": "added"
+    },
+    {
+      "additions": 4,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/required-excerpt.txt",
+      "sha": "e175cad91757272264981b748c8f11a20b80966e",
+      "status": "added"
+    },
+    {
+      "additions": 138,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/review.json",
+      "sha": "db5d0f7ef23c37c730657776c8732489c8bf5946",
+      "status": "added"
+    },
+    {
+      "additions": 14,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/run.json",
+      "sha": "7c6e9dc4df2bc79e203f81195c10ca58e7b51761",
+      "status": "added"
+    },
+    {
+      "additions": 97,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/staging-policy-test-verification.json",
+      "sha": "ac92547ce4351e84161d31dbdbf90ffac65313e6",
+      "status": "added"
+    },
+    {
+      "additions": 28,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/staging-readiness-read-only.json",
+      "sha": "4a974386ed3629f048690476686371db7466e8b2",
+      "status": "added"
+    },
+    {
+      "additions": 20,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/summary.json",
+      "sha": "1d91e24a077f700de3744667f8e82d34a1613dc1",
+      "status": "added"
+    },
+    {
+      "additions": 4,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-ci-41207770532/validation-excerpt.txt",
+      "sha": "33a39316a8e6c6b067d2c84ab9d021f42443b0a4",
+      "status": "added"
+    },
+    {
+      "additions": 14,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/SHA256SUMS.json",
+      "sha": "90cb269accf52759758b45cb93d198f277b470dd",
+      "status": "added"
+    },
+    {
+      "additions": 16,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/artifact-verification.json",
+      "sha": "19654d925b0600718714ee8cac3c2fe67880f998",
+      "status": "added"
+    },
+    {
+      "additions": 23,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/artifacts.json",
+      "sha": "d18cc880f99e16b27934587c8a1ea3f2a6985b8c",
+      "status": "added"
+    },
+    {
+      "additions": 31,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/assessment.json",
+      "sha": "e5ee9fd835efd05de6e6eef7bb1fc832c1833dec",
+      "status": "added"
+    },
+    {
+      "additions": 11,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/branches.json",
+      "sha": "11b1e4190751f19af254fb4b05d5bbf52da2e2ca",
+      "status": "added"
+    },
+    {
+      "additions": 20,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/eligibility-excerpt.log",
+      "sha": "2f029929680ac03cca16f4b609a3c5f05bde784f",
+      "status": "added"
+    },
+    {
+      "additions": 21,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/environment.json",
+      "sha": "6c548204d33e265315af6c4cbbf63d6b9fffd28c",
+      "status": "added"
+    },
+    {
+      "additions": 120,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/jobs.json",
+      "sha": "96229efb7833568ac9b5522abc2f4449ef4eb7bb",
+      "status": "added"
+    },
+    {
+      "additions": 97,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/release.yml",
+      "sha": "c68aac892e0d5e6c0a628ce7c4259288ab57da00",
+      "status": "added"
+    },
+    {
+      "additions": 9,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/result.json",
+      "sha": "64c9b326aa059cbdb35b1b3275d2b47a2a2d8697",
+      "status": "added"
+    },
+    {
+      "additions": 29,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/run-initial.json",
+      "sha": "67d7de5ed6c5e617c12edafc6b104379eb54c808",
+      "status": "added"
+    },
+    {
+      "additions": 29,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/run.json",
+      "sha": "ce8a67048e73982fb8c2d318ed83869ebefcf653",
+      "status": "added"
+    },
+    {
+      "additions": 32,
+      "deletions": 0,
+      "filename": "ci/evidence/p5b/hosted-staging-41256746729/staging-failure-excerpt.log",
+      "sha": "faf67099fefa87ae8dc2616318770ebc785bc05c",
+      "status": "added"
+    },
+    {
+      "additions": 18,
+      "deletions": 0,
+      "filename": "ci/release/stage.py",
+      "sha": "6392707d94d1baf4da6b4869a570a0750eb8e2c1",
+      "status": "modified"
+    },
+    {
+      "additions": 262,
+      "deletions": 0,
+      "filename": "ci/release/test_dependencies.py",
+      "sha": "801b2cbfffd961cbda97fa63a2d538a0587ad82f",
+      "status": "added"
+    },
+    {
+      "additions": 1,
+      "deletions": 1,
+      "filename": "ci/release/workflow-contract.json",
+      "sha": "b3e0c4add3fbbbab83b4b98a58ec52c262078d21",
+      "status": "modified"
+    },
+    {
+      "additions": 9,
+      "deletions": 0,
+      "filename": "ci/release/workflow_policy.py",
+      "sha": "72ce82ff8ced1a34129cf9b57574a609e40bf39c",
+      "status": "modified"
+    }
+  ],
+  "parent": "abbb1b7a723d0b42dae1fa2b3312cb7667299e96",
+  "pushes_performed": 1,
+  "remote_files_match_all_local_blobs": true,
+  "status": "PASS"
+}

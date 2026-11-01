@@ -1,6 +1,310 @@
 # P5B report — secure release preparation and disposable staging
 
-## Current correction readiness — 1 November 2026
+**Owner-authorized commit/push checkpoint — 1 November 2026.** One P5B-only source-checkout correction commit and normal fast-forward push are now authorized from `d32ae20`. Review and ordinary hosted CI are pending. No manual staging dispatch or rerun is authorized; it requires separate approval after successful CI. Earlier authorization/readiness statements below are historical snapshots.
+
+## Current local accepted-source checkout correction — 1 November 2026
+
+**P5B remains CONDITIONAL / NOT ACCEPTED. Local correction is ready for owner review.**
+No commit, push, workflow dispatch, retry, main/environment modification, application
+change, build or native OSTree rehearsal was performed under this authorization.
+The previously failed hosted executions and successful ordinary CI remain preserved.
+
+### Confirmed defect and historical limits
+
+A new public-remote clone of the exact approved tooling branch at `d32ae20`, with
+`--depth=1`, reproduced the existing sequence using the unmodified release code:
+local clone **PASS**, detached checkout of accepted source `1ee2077` **FAIL** with
+`Operation failed: git (CalledProcessError)`. `cat-file` confirmed the accepted
+ancestor was absent. No shared object directory or alternates were used. Thus
+missing history is a confirmed reproducible source-checkout defect. The old hosted
+message still does not prove which individual Git subprocess failed in that run;
+this local reproduction does not retroactively create missing hosted telemetry.
+
+A second fresh public-remote full-history clone at the same tooling commit,
+with only the five reviewed correction files overlaid, successfully prepared a
+clean detached source checkout at exactly
+`1ee2077b283b8e5dfc2162119dd439ed3baeb109`. Every accepted auditor file hash in
+`policy.json` matched. The release-tooling commit was never substituted for the
+application source; the accepted auditor, approval list and provenance checks
+remain unchanged.
+
+### Narrow correction and security review
+
+| File | Correction |
+| --- | --- |
+| `.github/workflows/release.yml` | Add `fetch-depth: 0` only to staging's immutable tooling checkout |
+| `ci/release/core.py` | Extract exact-SHA detached source preparation; verify it before creating a disposable key; add fixed Git operation names and safe failure categories |
+| `ci/release/workflow_policy.py` | Require full staging history while preserving exact immutable ref and disabled credential persistence |
+| `ci/release/workflow-contract.json` | Exact reviewed contract adds only staging `fetch-depth: 0` |
+| `ci/release/test_source_checkout.py` | Nine new Git/source-boundary, workflow-policy and diagnostic regressions |
+| `ci/P5B_REPORT.md`, `ci/P5B_OWNER_CHECKS.md`, `ci/P5B_GITHUB_STAGING_PLAN.md` | Current findings, local evidence and remaining approval gates; historical records preserved |
+| `ci/evidence/p5b/source-checkout-correction-2026-11-01/` | Sanitized reproduction, hashes, clean-checkout results and artifact readback |
+
+Full history is the simplest maintainable correction: checkout already supports it,
+and no additional authenticated fetch code or remote selection is introduced.
+Measured Git object storage was **30,274,546 bytes shallow** versus **30,755,355
+bytes full** (480,809 bytes additional in these clones). These are local object
+storage measurements, not network-transfer or permanent growth guarantees.
+A targeted immutable-commit fetch could reduce history in a much larger future
+repository, but adds remote-fetch/error/policy handling for little current benefit.
+Neither approach changes the requirement to verify the detached source's exact SHA.
+
+Public Git failures now identify `accepted-source-clone`,
+`accepted-source-checkout` or `accepted-source-verify`, with only `exit-N`, `timeout`
+or `unavailable`. Labels are allowlisted. Arguments, URLs, stderr, paths and
+environment values are never copied into diagnostics. Tests inject credential-like
+synthetic strings into command/error/environment fields and prove their exclusion.
+A missing source or mismatching revision stops before key generation, payload
+audit, signing or public output creation. Existing cleanup and signing logic remains
+in effect after source preparation. No new production signing authority is added.
+Manual-only staging, read-only permissions, action pins, owner/ref restrictions,
+locked dependencies, accepted source/artifact identity and publication controls are
+unchanged. Production application code and Flatpak permissions are untouched.
+
+Updated integrity hashes:
+
+- Release workflow: `5aa32ef85715323490a9375336c245b6dbc1911d480fb4aafc4bc3ba7f8bfb1c`
+- Exact contract: `c47e12e61786633ebf342778dab85644944b6c11e8c74b9ce00dfe85ace45100`
+- CI workflow remains `3f11c9ab58d2f7c8cebca0b153a09ccffae06e314545067ddd6b42f7b8e809f4`
+- CI dependency lock remains `2322c771f1efab20a6dfd3ec414de1c5ad934099aae347ceef167fdb4dd5de73`
+
+### Actual local verification
+
+The disposable full clone came directly from GitHub, had no alternates, no frontend
+build assets and no backend venv. A newly created Python 3.12 venv installed the
+unchanged hash-locked requirements; tests did not rely on the development parser.
+The focused Git tests create additional two-commit synthetic repositories, with
+independent full and shallow object stores and disposable destinations.
+
+| Check | Result |
+| --- | --- |
+| Exact old shallow sequence | Expected clone success / detached checkout failure reproduced |
+| Corrected full historical source and auditor hashes | PASS — exact clean detached accepted source |
+| New focused regressions | PASS — **9 tests** |
+| Full release regressions | PASS — **73 tests** (previous 64 + 9) |
+| Existing CI security/packaging contracts | PASS — **31 tests** |
+| Ruff on all CI Python; changed-Python formatting | PASS |
+| actionlint 1.7.7, newly downloaded through unchanged hash-verifying bootstrap | PASS — executable workflows and inert registration |
+| Exact release, inert registration and ordinary CI policies | PASS |
+
+Coverage includes missing shallow ancestor, correct full-history detached checkout,
+unavailable/invalid SHA rejection, wrong resolved revision blocking all later
+operations, missing history blocking key/public output, shallow workflow rejection,
+and redacted clone/checkout/verification failure categories. Existing eligibility
+regressions also reject unapproved source SHAs. CI contracts used a disposable
+`/dev/shm` temporary directory to satisfy their unchanged free-space guard; no
+resource checks were weakened and no actual Flatpak build was performed.
+
+Commands from the disposable checkout (Python is the fresh sibling `job` venv):
+
+```bash
+../job/bin/python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock
+../job/bin/python -m unittest discover -s ci/release -p test_source_checkout.py -v
+../job/bin/python -m unittest discover -s ci/release -p 'test_*.py' -v
+TMPDIR=/dev/shm/cyrnava-p5b-source-tests ../job/bin/python -m unittest discover -s ci -p test_ci.py -v
+../job/bin/python ci/release/workflow_policy.py
+../job/bin/python ci/release/registration_policy.py
+../job/bin/python ci/validate.py
+```
+
+Tool results, source hashes and all ten check outcomes are recorded with the
+curated evidence; the existing pinned Ruff 0.17.1 executable checked all `ci/`
+Python, and freshly hash-verified actionlint checked both workflows plus inert
+registration. No full frontend/backend suite was repeated because production code
+and application tests are unchanged; all relevant release and CI contracts passed.
+Release regressions include existing small disposable GPG unit tests, not the
+expensive native OSTree staging rehearsal.
+
+### Artifact availability and next owner checkpoint
+
+A fresh connected GitHub read confirms accepted artifact **13035607417**, run
+**41181510439**, source **1ee2077**, remains available and unexpired until
+**2026-11-07T07:53:28Z**. Its ZIP digest remains
+`73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b`.
+All pinned bundle/input/inventory hashes and accepted auditor hashes remain
+unchanged in policy. This is a live metadata/identity readback; the 210 MB artifact
+was not downloaded or rebuilt again during this correction. Previously independent
+archive verification remains preserved and a future staging run must reverify it.
+
+Ready to request **one P5B-only correction commit and normal fast-forward push**.
+That requires explicit owner authorization. Ordinary hosted CI must then pass at
+the new immutable tooling commit. A further **separately authorized** manual staging
+execution must verify signing, repository integrity/negative tests, descriptor,
+interrupted publication, key cleanup and diagnostic hashes/provenance before owner
+acceptance. Neither local success nor old ordinary CI establishes those hosted gates.
+
+## Historical second hosted staging assessment — 1 November 2026
+
+**P5B STATUS: FAIL / CONDITIONAL — FURTHER ACTION REQUIRED.**
+
+After the owner's separate second-staging authorization, all pre-dispatch checks
+passed. The installed authenticated GitHub CLI submitted exactly **one new**
+manual dispatch. Actual [run 41261468749](https://github.com/74Cerillion/CyrNava/actions/runs/41261468749),
+workflow **403136895**, attempt **1**, executed as `74Cerillion` on
+`desktop/p2-production-integration` at approved tooling
+**d32ae20bfcd9ad3e6ccab530c62e2e2eb1918b8e**. Its final conclusion is **failure**.
+Historical failed run 41256746729 was not rerun.
+
+Preflight independently checked the exact remote branch/tooling bytes and
+workflow contract; unchanged inert main registration at `1e62cd5`; unchanged
+exact-branch environment with no tags/reviewers/unexpected protection rules;
+authenticated zero secrets and zero variables; the locked parser install in
+both jobs; successful ordinary CI 41258927530; and live pinned P5A eligibility.
+Accepted artifact 13035607417 was available, unexpired and matched its pinned
+digest. Inputs remained source `1ee2077b283b8e5dfc2162119dd439ed3baeb109`, CI run
+`41181510439`, version `0.1.0`, channel `staging`, and authorization reference
+`P5B-owner-authorized-disposable-staging-only`.
+
+| Required gate | Actual hosted result |
+| --- | --- |
+| Owner/repository/ref/immutable tooling identity | PASS — actual run metadata and workflow bytes verified |
+| Eligibility job 124715440186 | PASS — live accepted source, CI jobs and artifact eligibility |
+| Hash-locked setup in both independent jobs | PASS — actual logs show PyYAML 6.0.3 installed in each job; previous dependency defect resolved |
+| Approved artifact download/hash/extraction/candidate metadata | PASS — eligibility and candidate steps completed |
+| Immutable accepted-source preparation | FAIL — Git subprocess while preparing the audit checkout |
+| Independent exported payload audit in this staging job | NOT REACHED |
+| Disposable signing-key generation | Reached before the first Git operation per reviewed source order; no fingerprint persisted because the release report did not return |
+| Signed repository/signatures/negative tests | NOT REACHED |
+| Native descriptor/interrupted-publication checks | NOT REACHED |
+| Key cleanup | Guarded finally completed with no cleanup_warning; no dedicated cleanup assertion or independent runner-filesystem probe is available, so no stronger cleanup acceptance claim is made |
+| Safe diagnostic upload | PASS — result.json and eligibility.json only |
+| Independent diagnostic ZIP hash/provenance | PASS |
+| Staging job 124715482535 / final workflow conclusion | FAIL |
+
+### Exact failure and remaining causality uncertainty
+
+The complete structured result reports stage `signed-repository`, steps
+`eligibility: PASS` and `candidate: PASS`, error type `Rejected`, and exactly:
+
+```text
+Operation failed: git (CalledProcessError)
+```
+
+Elapsed staging-script time was **4.769 seconds**. `core.generate_repository`
+creates its disposable key, then clones the local tooling checkout and attempts
+to check out the older immutable accepted P5A source before invoking the payload
+auditor. The hosted checkout log confirms **fetch-depth 1** and a fetch of only
+the tooling tip. **Likely cause:** that shallow local repository does not provide
+the older accepted source commit to the disposable clone. This is an inference
+from actual checkout logs and reviewed source, not a claim that stderr proves it.
+The safe error intentionally omits argv/stderr and therefore does not distinguish
+clone, detached checkout or rev-parse failure. No local reproduction, source fix,
+additional hosted run or retry was undertaken under this execution authorization.
+
+The signed repository was not generated, so no signing fingerprint can be
+recorded from this failed run. The cleanup guard follows the failed operation,
+kills any generated key agent and removes its key home, recording a warning on
+failure; the final record contains no such warning. Its absence is protocol
+evidence, not a separate remote filesystem observation. No private signing
+material was uploaded.
+
+### Preserved evidence and next boundary
+
+Diagnostic artifact **13065456983**, **897 bytes**, ZIP SHA-256:
+`18511f21dd83688b7824edd71ee32e22ee1358c9f42658ff605d6a2f40306dcc`.
+The downloaded digest matches GitHub metadata and the upload log; metadata binds
+the artifact to this run and approved tooling SHA. The two members hash to:
+
+- `result.json`: `7b185f1db1acf2468de231f7712e03c1bf1033ef3b929840edbd6d135f8cd5a5`
+- `eligibility.json`: `b0601e26b6aa45db86c24eca906dd7159ed82842c37d647adc2f8a4c018936fa`
+
+Preflight/dispatch evidence is in `evidence/p5b/second-staging-preflight-2026-11-01/`.
+Actual run/jobs/results, logs, verified artifact metadata, source-boundary assessment
+and hashes are in `evidence/p5b/hosted-staging-41261468749/`. Raw ZIP remains ignored
+under `ci-output/p5b-hosted-staging-41261468749/`. Both hosted failures and the
+successful ordinary CI/native rehearsal remain preserved.
+
+Post-run readback confirms main and integration remain at `1e62cd5` / `d32ae20`,
+environment settings are unchanged, and exactly two manual staging runs exist:
+the historical failed run and this single new failed run. No source/workflow
+correction, commit, push, rerun, extra dispatch, environment/main modification,
+permanent key, public repository/application publication or P5C/P6 work occurred.
+
+Next step requires owner review and separate authorization for a focused
+immutable-source checkout investigation/correction. It must preserve the pinned
+accepted source/artifact and fail closed; do not substitute the tooling source
+or a newer artifact to avoid the failure. No third execution is authorized.
+
+## Historical hosted ordinary CI — correction d32ae20: PASS
+
+**1 November 2026: ordinary CI PASS; P5B remains CONDITIONAL / NOT ACCEPTED.**
+The owner-authorized single correction commit
+`d32ae20bfcd9ad3e6ccab530c62e2e2eb1918b8e` was created and pushed once by normal
+fast-forward from `abbb1b7`. Remote parent, all 77 changed paths and every file
+blob independently match the reviewed local commit. Public evidence excludes
+unnecessary email fields, private keys, credentials and binary artifacts.
+
+Actual [CI run 41258927530](https://github.com/74Cerillion/CyrNava/actions/runs/41258927530),
+workflow **402398273**, attempt **1**, push event, exact branch
+`desktop/p2-production-integration` and source `d32ae20`: **all five jobs PASS**.
+
+| Hosted job | Verified result |
+| --- | --- |
+| Workflow validation — 124707940209 | PASS — all 31 contracts |
+| Backend/security — 124707973628 | PASS — 631 tests and 158 subtests; all five new dependency regressions explicitly verified in downloaded JUnit |
+| Frontend/browser — 124707973645 | PASS — lint, 273 unit tests, TypeScript/production build and all 21 browser tests, including five lifecycle cases |
+| Production Flatpak/exported audit — 124709352764 | PASS — all three actual runtime commits match locks; production build; actual exported-bundle import/checkout/audit; validated unsigned upload |
+| CI required — 124711560066 | PASS — all four upstream jobs successful |
+
+### Independent artifact and provenance verification
+
+All four downloaded ZIP lengths and SHA-256 digests match GitHub artifact metadata;
+each artifact's run/source/repository binding matches the approved execution.
+
+| Artifact | Bytes | ZIP SHA-256 |
+| --- | ---: | --- |
+| Backend diagnostics 13064336883 | 12,188 | `1687444fc6e338719307724b50686513630a0ac933df86e17ff7a751d529be68` |
+| Frontend diagnostics 13064761229 | 4,892,523 | `9fc4281603a4f051ee6bff11f4e22db2ccf74c496fac780d89bfaf52ec660192` |
+| Flatpak diagnostics 13064517200 | 2,042 | `870537b57910e50652bd7b0114c404354cfb94a8f6ae16015812295d78abcf08` |
+| Validated unsigned package 13065086140 | 210,241,548 | `30c784428ad004131647155610124a580ec765ae02fde92891d7f1584e5dcd05` |
+
+The downloaded Flatpak bundle is **209,193,088 bytes**, SHA-256
+`3671ad864b1726e2e6bb36b3a4c8fb99a135817cb08976a002e93dc4f6ae03c8`.
+OSTree commit is
+`34abfa4daf5b174bdb2ef98c1e9bb2b5cb83b15233af4e016eb91fccd1957ee3`.
+Its bytes match SHA256SUMS, package/build result and provenance. Actual exported
+audit metadata agrees on source, app ID/version, digest/size, commit, run/attempt
+and runtime locks. Inventory records **5,320 unique safe payload paths** and
+**980,984,007 logical bytes**, with no packaged `ci/release` harness.
+The backend result also confirms production frontend assets were initially absent
+and built before testing, preserving the prior clean-frontend regression.
+
+This independent review checks downloaded bytes and metadata against the actual
+hosted exported-package audit. It does not claim an additional local native import,
+renderer/portal run, signed staging repository or production signing attestation.
+Raw ZIPs/traces/inventory remain ignored under `ci-output/p5b-hosted-ci-41258927530/`.
+Curated run/jobs/results/log excerpts, checksum/provenance checks and explicit
+dependency-test verification are in `evidence/p5b/hosted-ci-41258927530/`.
+
+### Remaining owner gate — one new staging authorization
+
+Post-CI readback confirms main is still `1e62cd5`, its inert registration workflow
+is byte-identical, and `p5b-staging` has the same exact branch-only configuration.
+There is still exactly **one** manual staging run: historical failed attempt
+41256746729. No new staging dispatch or rerun occurred. The local acceptance tag
+and accepted P5A controls remain unchanged.
+
+Accepted staging artifact **13035607417**, P5A run **41181510439** attempt 1 and
+source **1ee2077b283b8e5dfc2162119dd439ed3baeb109**, remains available/unexpired
+with pinned digest
+`73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b`.
+Live eligibility still PASS. The new ordinary-CI package is **not** substituted.
+
+Request separate owner authorization for **one new manual staging execution** of
+workflow **403136895** at exact tooling commit
+**d32ae20bfcd9ad3e6ccab530c62e2e2eb1918b8e**, using the unchanged P5A source/run,
+version `0.1.0`, channel `staging`, and authorization reference
+`P5B-owner-authorized-disposable-staging-only`. Perform fresh preflight before
+dispatch; do not rerun the failed attempt or reuse approval for old tooling.
+
+P5B acceptance still requires actual live signing, signature/negative tests,
+descriptor/interruption checks, disposable-key cleanup and diagnostic provenance
+to pass in that separately authorized run. No permanent key, environment/main
+change, public release/deployment or P5C/P6 work occurred. Exactly one commit and
+one push were used. These hosted-result documentation/evidence updates remain
+local and uncommitted; no additional commit/push is authorized.
+
+## Historical local correction readiness — 1 November 2026
 
 **LOCAL CORRECTION: PASS. P5B: CONDITIONAL / NOT ACCEPTED.** The owner authorized
 local implementation/testing after reviewing hosted failure 41256746729, then

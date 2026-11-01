@@ -1,0 +1,25 @@
+{
+  "artifact_id": 13065086140,
+  "bundle_bytes": 209193088,
+  "bundle_sha256": "3671ad864b1726e2e6bb36b3a4c8fb99a135817cb08976a002e93dc4f6ae03c8",
+  "checksums_and_provenance_crosschecked": true,
+  "ci_release_harness_not_packaged": true,
+  "inventory_sha256": "d55676dae8fa9a333e29ee816cccb900d575b43eb89aca53fa47bf89c214d7e0",
+  "limits": "Actual hosted exported-bundle audit PASS; independent downloaded-byte and metadata verification. No repeated local native import or renderer/portal test. Current package is not substituted for policy-pinned P5A staging artifact.",
+  "logical_installed_bytes": 980984007,
+  "member_sizes": {
+    "SHA256SUMS": 105,
+    "build-inputs.json": 12564,
+    "io.github._74Cerillion.CyrNava.flatpak": 209193088,
+    "package-inventory.json": 1033311,
+    "provenance.json": 1172,
+    "result.json": 508
+  },
+  "ostree_commit": "34abfa4daf5b174bdb2ef98c1e9bb2b5cb83b15233af4e016eb91fccd1957ee3",
+  "payload_entries": 5320,
+  "runtime_lock_matches": true,
+  "source_commit": "d32ae20bfcd9ad3e6ccab530c62e2e2eb1918b8e",
+  "status": "PASS",
+  "workflow_run_attempt": 1,
+  "workflow_run_id": 41258927530
+}

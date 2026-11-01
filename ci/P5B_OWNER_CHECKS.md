@@ -1,5 +1,38 @@
 # P5B owner checks — staging only, not production authorization
 
+**Owner-authorized commit/push checkpoint — 1 November 2026.** One P5B-only source-checkout correction commit and normal fast-forward push are now authorized from `d32ae20`. Review and ordinary hosted CI are pending. No manual staging dispatch or rerun is authorized; it requires separate approval after successful CI. Earlier authorization/readiness statements below are historical snapshots.
+
+**Current local source-checkout correction, 1 November 2026 — P5B CONDITIONAL / NOT ACCEPTED.** Local verification passes 73 release tests (9 new), 31 CI contracts, Ruff, actionlint and all policies. A fresh shallow remote clone reproduces the missing-ancestor checkout failure; a fresh full-history clone verifies the exact accepted source and auditor hashes. Staging now requires full history and fixed redacted Git diagnostics. Source verification precedes disposable key creation.
+
+No correction commit/push or new hosted execution has occurred. Next gates: explicit owner authorization for one correction commit/push; ordinary CI PASS at its immutable SHA; separate authorization for one new staging execution; all hosted security/cleanup/provenance checks PASS. No earlier dispatch authorization may be reused. See current `P5B_REPORT.md` and `evidence/p5b/source-checkout-correction-2026-11-01/`. The snapshots below are historical.
+
+**Latest result, 1 November 2026: P5B FAIL / CONDITIONAL.** The separately
+authorized second manual execution **41261468749**, attempt 1, ran at exact
+approved `d32ae20`. Eligibility and both locked dependency installs PASS;
+download/hash/candidate validation PASS. It then failed at `signed-repository`:
+`Operation failed: git (CalledProcessError)` during accepted-source preparation.
+Signed-repository security tests were not reached. The shallow checkout is the
+likely cause; exact Git argv/stderr were not retained, so causality is not fully
+proven. Diagnostic ZIP checksum/provenance verified. No retry or correction was
+performed. Owner review/separate investigation authorization is required next.
+See current `P5B_REPORT.md` and `evidence/p5b/hosted-staging-41261468749/`.
+
+**Latest hosted result, 1 November 2026:** correction commit `d32ae20` was pushed
+once; ordinary CI **41258927530**, attempt 1, passed every gate: 31 contracts,
+631 backend tests + 158 subtests, 273 units, 21 browser tests, production build,
+actual exported audit, validated unsigned upload and required gate. All four
+artifact ZIP hashes and package provenance were independently verified.
+
+- [x] Single authorized correction commit and normal fast-forward push completed.
+- [x] Ordinary CI PASS on exact `d32ae20bfcd9ad3e6ccab530c62e2e2eb1918b8e`.
+- [ ] Owner separately authorizes one new manual staging run at this tooling SHA.
+- [ ] Hosted staging/security/cleanup/diagnostic gates pass; owner accepts P5B.
+
+**P5B remains CONDITIONAL / NOT ACCEPTED.** No new staging dispatch/rerun is
+authorized or performed. Main, registration and environment remain unchanged.
+See current `P5B_REPORT.md` and `evidence/p5b/hosted-ci-41258927530/`.
+Earlier readiness/checklist entries below are historical snapshots.
+
 **Local correction ready, 1 November 2026:** clean-checkout PASS for 64 release
 tests (5 new), 31 CI contracts, Ruff, actionlint and policy/integrity checks.
 The unchanged pinned PyYAML dependency is installed independently in staging;

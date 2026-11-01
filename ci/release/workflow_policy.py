@@ -41,7 +41,7 @@ def validate(value):
         "Signing requires eligibility and a protected staging environment",
     )
     pins = json.loads((ROOT / "ci/tools.json").read_text())["actions"]
-    for job in jobs.values():
+    for name, job in jobs.items():
         commands = "\n".join(step.get("run", "") for step in job["steps"])
         install = commands.find(
             "python -m pip install --require-hashes --only-binary=:all: "
@@ -82,8 +82,13 @@ def validate(value):
                 if action == "actions/checkout":
                     require(
                         step["with"]
-                        == {"ref": "${{ github.sha }}", "persist-credentials": False},
-                        "Checkout must be immutable without persisted credentials",
+                        == {
+                            "ref": "${{ github.sha }}",
+                            "persist-credentials": False,
+                            **({"fetch-depth": 0} if name == "staging" else {}),
+                        },
+                        "Checkout must be immutable, credential-free "
+                        "and provide staging history",
                     )
     # Exact reviewed command/inputs/upload surfaces prevent accidental additions
     # escaping the semantic checks. Updating this contract requires source review.
