@@ -1,5 +1,24 @@
 # P5B hosted staging preparation — owner-controlled single-maintainer model
 
+**Latest local correction, 1 November 2026:** the staging job now installs the
+unchanged hash-locked CI parser independently. Setup/import failures retain
+redacted FAIL evidence. Clean-checkout verification passes 64 release regressions,
+31 CI contracts, Ruff, actionlint and all policies. No correction commit/push or
+new hosted execution has occurred. See current `P5B_REPORT.md` and
+`evidence/p5b/dependency-correction-2026-11-01/`. The owner has now authorized
+one correction commit/push; ordinary CI must pass before separate approval
+of a new staging dispatch at the corrected immutable SHA. The old abbb1b7
+authorization must not be reused to run unreviewed tooling.
+
+**1 November 2026 current readback:** A and B are complete. C was authorized and
+consumed by owner dispatch of run **41256746729**, attempt 1, at exact tooling
+commit `abbb1b7`. Eligibility PASS; staging FAIL on missing `yaml` in its separate
+Python environment. Diagnostic artifact hash/provenance independently verified.
+See `P5B_REPORT.md` and `evidence/p5b/hosted-staging-41256746729/`.
+**Do not repeat the historical registration/configuration/dispatch procedures
+below. No rerun or second dispatch is authorized.** The earlier plan/readbacks
+below are retained as historical preparation, not current execution status.
+
 31 October 2026. **One integration commit/push is now owner-authorized; main changes,
 environment configuration and workflow dispatch remain separately gated.** The owner's later explicit
 single-maintainer decision supersedes the earlier independent-reviewer design.
@@ -7,6 +26,12 @@ Historical evidence and earlier design records remain preserved in Git history
 and `evidence/p5b/staging-preparation/`; they are not the current requirements.
 
 ## Verified starting point
+
+Latest verification: **CI run 41207770532 at abbb1b7a723d0b42dae1fa2b3312cb7667299e96
+PASS** — all 31 contracts, 626 backend tests + 144 subtests, 273 units, 21 browser
+tests, Flatpak build/exported audit/upload and final required gate. Checksums/provenance
+are independently verified in `evidence/p5b/hosted-ci-41207770532/`. The integration
+commit/push is complete. A/B/C remain unapproved and unexecuted.
 
 - Required CI [41205351385](https://github.com/74Cerillion/CyrNava/actions/runs/41205351385)
   at `7aaefd0f60a735637ee603ac380587a25b73f6cb`: all five required jobs PASS,
@@ -16,11 +41,11 @@ and `evidence/p5b/staging-preparation/`; they are not the current requirements.
   Main tip: **`cbf7cccc686080b2b4b07274a9f5a23fec52999f`**. No existing release
   workflow file on main, zero environments, only CI registered. These are actual
   readbacks, not configuration changes. Main tip must be reread before approval/use.
-- Integration remains `desktop/p2-production-integration`, HEAD/remote `7aaefd0`.
+- Integration remains `desktop/p2-production-integration`, HEAD/remote `abbb1b7`.
   Local `p5a-accepted` remains at `1a28f68`; no main checkout/merge or tag push.
-- The new single-maintainer policy changes are local and **not** covered by that
-  hosted CI run. A separately approved integration commit/push and successful CI
-  must precede executing the revised hosted staging workflow.
+- The single-maintainer revision is covered by successful required CI 41207770532.
+  The older 41205351385 evidence above is historical. Actual manual P5B staging has
+  not executed and still requires registration, environment setup and dispatch approvals.
 
 ## Authorization and tradeoff
 
@@ -219,7 +244,7 @@ The latest CI package is **not** substituted for the older policy-pinned P5A art
 | Input | Required value |
 | --- | --- |
 | Execution ref | `desktop/p2-production-integration` |
-| Tooling commit | Exact future owner-approved revised integration SHA; not 7aaefd0 after this local policy change |
+| Tooling commit | Candidate `abbb1b7a723d0b42dae1fa2b3312cb7667299e96`, verified by CI; Authorization C must explicitly approve this SHA for execution |
 | source_commit | `1ee2077b283b8e5dfc2162119dd439ed3baeb109` |
 | ci_run_id | `41181510439` (attempt 1) |
 | version | `0.1.0` |

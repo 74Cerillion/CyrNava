@@ -1,0 +1,38 @@
+name: CyrNava P5B staging rehearsal
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_commit:
+        description: Full owner-approved source commit SHA
+        required: true
+        type: string
+      ci_run_id:
+        description: Successful approved P5A CI run
+        required: true
+        type: string
+      version:
+        description: Approved existing application version
+        required: true
+        type: string
+      channel:
+        description: Production publication is disabled
+        required: true
+        type: choice
+        options: [staging]
+      authorization_ref:
+        description: Reviewed disposable-staging authorization reference
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  registration:
+    if: ${{ false }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 1
+    steps:
+      - name: Inert registration marker
+        run: ':'

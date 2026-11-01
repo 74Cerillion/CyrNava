@@ -1,0 +1,28 @@
+{
+  "observed_utc": "2026-10-31T14:05:29.137113+00:00",
+  "main_tip": "cbf7cccc686080b2b4b07274a9f5a23fec52999f",
+  "external_mutations": false,
+  "environments": {
+    "http_status": 200,
+    "total_count": 0
+  },
+  "main_release": {
+    "http_status": 404
+  },
+  "accepted_artifact": {
+    "id": 13035607417,
+    "name": "CyrNava-linux-x86_64-1ee2077b283b8e5dfc2162119dd439ed3baeb109-1",
+    "size_in_bytes": 210238004,
+    "digest": "sha256:73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b",
+    "expired": false,
+    "expires_at": "2026-11-07T07:53:28Z",
+    "workflow_run": {
+      "id": 41181510439,
+      "repository_id": 1427661036,
+      "head_repository_id": 1427661036,
+      "head_branch": "desktop/p2-production-integration",
+      "head_sha": "1ee2077b283b8e5dfc2162119dd439ed3baeb109"
+    }
+  },
+  "policy_digest_matches": true
+}

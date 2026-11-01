@@ -1,10 +1,31 @@
 # P5B owner checks — staging only, not production authorization
 
-P5A is accepted. Required CI run 41205351385 at 7aaefd0 is PASS. The owner has
+**Local correction ready, 1 November 2026:** clean-checkout PASS for 64 release
+tests (5 new), 31 CI contracts, Ruff, actionlint and policy/integrity checks.
+The unchanged pinned PyYAML dependency is installed independently in staging;
+missing-import/setup failures now produce redacted FAIL diagnostics.
+P5B remains **CONDITIONAL / NOT ACCEPTED**. Next owner gates:
+
+- [x] Owner authorized one P5B-only correction commit/push after reviewing the diff.
+- [ ] Verify ordinary hosted CI passes on that new immutable tooling commit.
+- [ ] Separately authorize one new manual staging execution at that commit.
+- [ ] Accept P5B only after all hosted staging/security/cleanup/diagnostic gates pass.
+
+Only that one correction commit/push is authorized; no new staging dispatch or
+GitHub configuration change is authorized. The accepted P5A artifact is unchanged.
+See `P5B_REPORT.md` for exact files, hashes, tests and retained historical evidence.
+
+**1 November 2026: P5B FAIL / CONDITIONAL.** A/B completed; the owner executed
+the single authorized C dispatch, run **41256746729**, attempt 1, on approved
+tooling `abbb1b7`. Eligibility PASS; staging FAIL because PyYAML was not installed
+in that separate job. Diagnostic ZIP hash/provenance verified; signing and native
+security tests were not reached. No repeat is authorized. See current
+`P5B_REPORT.md`; the earlier checklist/procedures below remain historical.
+
+P5A is accepted. Required CI run 41207770532 at abbb1b7 is PASS. The owner has
 approved a **single-maintainer, manual owner-authorization** architecture for P5B.
-The revised policy is locally verified. The owner subsequently authorized one
-integration commit/push; main registration, environment setup and staging dispatch
-still require their separate approvals.
+The revised policy is committed, pushed and verified by automatic CI. Main
+registration, environment setup and staging dispatch still require separate approvals.
 No independent deployment approval or self-review prevention is required or claimed.
 Review `P5B_REPORT.md` and `P5B_GITHUB_STAGING_PLAN.md` for exact evidence/settings.
 
@@ -91,17 +112,17 @@ before removing only the marked disposable parent. Do not delete any legacy data
 
 ## Remaining owner steps — each external operation is separately authorized
 
-- [x] Latest required CI verified: 31 workflow contracts, 611 backend tests + 83
+- [x] Latest required CI verified: 31 workflow contracts, 626 backend tests + 144
   subtests, 273 unit tests, 21 browser tests, Flatpak/exported audit/upload/final gate.
 - [x] All four downloaded artifact ZIPs independently match GitHub SHA-256; bundle
-  and checksum/provenance/runtime/source records agree. See hosted-ci-41205351385.
+  and checksum/provenance/runtime/source records agree. See hosted-ci-41207770532.
 - [x] Owner-approved single-maintainer tradeoff implemented locally: manual owner
   dispatch replaces independent GitHub deployment approval. No second user needed.
 - [x] Revised local verification: 59 release/registration/signing tests + 31 existing
   CI contracts, Ruff/actionlint and both workflow/security policies PASS.
 - [x] **Integration update authorization:** one P5B-only commit/push authorized for the revised
   single-maintainer policy, proposal/tests/docs and safe evidence. Review staged files
-  first. Verify its automatic CI before using that immutable tooling commit.
+  first. Commit abbb1b7 was pushed; automatic CI 41207770532 passed all gates.
 - [ ] **Authorization A — main registration:** approve only the inert
   `.github/workflows/release.yml` addition against main
   `cbf7cccc686080b2b4b07274a9f5a23fec52999f` (reread tip first). Exact local proposal:

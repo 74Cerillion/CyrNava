@@ -1,10 +1,259 @@
 # P5B report — secure release preparation and disposable staging
 
-**31 October 2026 — CONDITIONAL; not accepted.** Required CI run **41205351385** at
-**7aaefd0f60a735637ee603ac380587a25b73f6cb** passed every gate. Native signed-OSTree,
+## Current correction readiness — 1 November 2026
+
+**LOCAL CORRECTION: PASS. P5B: CONDITIONAL / NOT ACCEPTED.** The owner authorized
+local implementation/testing after reviewing hosted failure 41256746729, then
+approved one P5B-only correction commit and normal fast-forward push after review.
+This checkpoint contains that reviewed correction; ordinary hosted CI is pending.
+No second staging execution is authorized. Its separate approval must follow
+successful ordinary CI on the corrected immutable tooling commit.
+
+### Cause, changes and integrity
+
+The hosted traceback below confirms that the separate staging interpreter lacked
+PyYAML during workflow-policy revalidation. The corrected staging run block first
+executes exactly
+`python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock`.
+The existing lock still pins **PyYAML 6.0.3 with the same wheel hash**. Dependencies
+are installed independently in both Python jobs; no cross-job environment or
+artifact dependency is introduced.
+
+| Modified implementation file | Narrow change |
+| --- | --- |
+| `.github/workflows/release.yml` | Install the existing locked parser before staging; installation failure invokes a failure-only JSON recorder and exits nonzero |
+| `ci/release/stage.py` | `--setup-failed` can only report FAIL, before private data/download/key creation; catch ImportError with a fixed redacted message and exception type |
+| `ci/release/workflow_policy.py` | Require a locked parser install before release Python commands in every independent job |
+| `ci/release/workflow-contract.json` | Update the exact approved run block; all other workflow surfaces unchanged |
+| `ci/release/test_dependencies.py` | Five new regressions for per-job setup/order/integrity, real missing-YAML failure, real shell failure propagation and diagnostic redaction |
+
+Workflow SHA-256 changes from
+`3b2a08b287380693393ed2c5cffc22bd155f53efd42dc13be4ef351b55812922` to
+`8e33dc0be70e24c445bd2b373f2468ad242c1852cd817a774896ede4628468e5`.
+Exact contract SHA-256 is now
+`53164eb5108ffbb85ae189a1a497b83f4520cd6ae2a882635bc0f012a8e9676e`.
+The accepted P5A workflow hash, release source/artifact policy, CI dependency lock,
+action pins, runtime/auditor locks and inert registration proposal are unchanged;
+no associated trust-policy hash needs changing. Signing/core, eligibility,
+preflight, recovery and publication code remain byte-identical. Production
+application code, sandbox permissions and security controls are unchanged.
+
+The failure-only recorder uses the existing output containment/new-directory
+checks and never overwrites prior evidence. Import exception strings/module names,
+subprocess output and environment values are not copied into its structured
+error. A missing dependency cannot be treated as PASS or bypass policy validation.
+Existing signing-key cleanup/finalization remains intact.
+
+### Clean-checkout verification
+
+A disposable detached checkout of `abbb1b7` received exactly the five candidate
+implementation/test files above. It had no frontend/dist, backend venv or reused
+generated application assets. Two separately created Python 3.12 venvs, with
+system-site packages disabled, independently demonstrated **no YAML before setup**.
+Each then installed the unchanged lock, passed pip check, imported version 6.0.3
+and successfully ran the actual workflow-policy validator. No shared installed
+parser was assumed. Exact tested source hashes match the development candidate.
+
+| Verification | Actual local result |
+| --- | --- |
+| Pre-install missing-import and redaction tests in the fresh staging venv | PASS — 2 focused tests before installing YAML |
+| Full release regressions | PASS — **64 tests**, comprising the previous 59 and 5 new tests |
+| Ordinary CI security/packaging contracts | PASS — **31 tests** |
+| Ruff check / changed-Python format check | PASS — fresh tooling venv, existing backend-pinned Ruff 0.17.1 |
+| actionlint | PASS — both executable workflows and inert proposal; unchanged bootstrap verified the pinned 1.7.7 archive hash |
+| Exact release, inert registration and CI policies | PASS |
+
+The real missing-import regression uses a new stdlib-only venv and executes the
+actual hosted identity/workflow-import path. Tripwires prove no environment fetch,
+CI fetch, package download/extraction, signing or repository processing occurs.
+The exact workflow shell blocks are also executed with pip deliberately failing;
+both jobs stop, and staging retains a complete redacted FAIL at
+`python-dependencies`. This shell test models installation failure; it does not
+claim a live GitHub or native signing execution.
+
+Initial CI-contract testing encountered the unchanged 5 GiB guard because the
+requested /dev/shm directory did not persist between isolated tool invocations;
+Python fell back to the smaller /tmp volume. The final invocation created and
+asserted TMPDIR on spacious /dev/shm before running all 31 tests successfully.
+No guard/test was weakened, and the initial environmental failure log is retained.
+
+Commands in the clean checkout (each Python path is a separately created venv):
+
+```bash
+../job-eligibility/bin/python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock
+../job-staging/bin/python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock
+../job-staging/bin/python -m unittest discover -s ci/release -p 'test_*.py' -v
+TMPDIR=/dev/shm/cyrnava-p5b-dependency-tests ../job-eligibility/bin/python -m unittest discover -s ci -p test_ci.py -v
+../tools/bin/python -m ruff check --config backend/pyproject.toml ci
+../tools/actionlint/actionlint .github/workflows/release.yml .github/workflows/ci.yml ci/release/registration-only.yml
+../job-staging/bin/python ci/release/workflow_policy.py
+../job-staging/bin/python ci/release/registration_policy.py
+../job-staging/bin/python ci/validate.py
+```
+
+Evidence/logs/source hashes: `evidence/p5b/dependency-correction-2026-11-01/`.
+The disposable checkout and venvs are ignored under
+`ci-output/p5b-dependency-correction/`. No application rebuild or full native
+OSTree rehearsal was needed; the unchanged cryptography/publication regressions
+are included in the 64-test release suite. Hosted failure evidence and the
+accepted owner-native rehearsal remain preserved.
+
+### Remaining hosted gates and owner action
+
+Live recheck confirms accepted artifact **13035607417** remains available and
+unexpired until **2026-11-07T07:53:28Z**, with the same pinned ZIP SHA-256
+`73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b`.
+Source/run/jobs/workflow/provenance still pass the existing live eligibility check.
+The approved bundle/input/inventory hashes in policy.json have not changed; no
+replacement artifact is proposed.
+
+1. Owner authorized one P5B-only correction commit/push, with complete staged review.
+2. Verify ordinary CI on that new immutable tooling SHA, including package audit
+   and artifact upload. Local PASS does not establish hosted PASS.
+3. Obtain **separate authorization** for one new manual staging dispatch at the
+   corrected SHA; do not rerun failed attempt 41256746729.
+4. Require all live eligibility, signing, signature/negative tests, descriptor,
+   interruption, key cleanup and diagnostic-hash/provenance gates to pass before
+   recommending P5B acceptance.
+
+Pre-commit public-evidence review omitted unnecessary author/committer email
+fields from two preflight API snapshots. Original snapshots are preserved locally
+in ignored audit storage; `authorization-c-preflight-2026-11-01/privacy-review.json`
+records the derivation/hashes. Historical failure evidence remains unchanged.
+The final readback confirmed main, inert registration and environment unchanged.
+
+Only the five source/test files, local reports/checklist/plan and non-sensitive
+evidence were changed in this correction. No commit, push, dispatch/rerun,
+GitHub environment/main change, production key, public release or P5C/P6 work
+was performed.
+
+## Historical hosted assessment — 1 November 2026
+
+**P5B STATUS: FAIL / CONDITIONAL — FURTHER ACTION REQUIRED.**
+
+The owner submitted the single authorized manual dispatch. Actual hosted
+[run 41256746729](https://github.com/74Cerillion/CyrNava/actions/runs/41256746729),
+workflow **403136895**, attempt **1**, ran on exactly
+`abbb1b7a723d0b42dae1fa2b3312cb7667299e96` and
+`desktop/p2-production-integration`, initiated/triggered by `74Cerillion`.
+The immutable workflow/source readback passed the existing execution validator.
+Logs confirm the authorized inputs: source
+`1ee2077b283b8e5dfc2162119dd439ed3baeb109`, CI run `41181510439`, version `0.1.0`,
+channel `staging`, authorization `P5B-owner-authorized-disposable-staging-only`.
+The owner's guarded terminal command completed its authenticated zero-secret/
+zero-variable checks before dispatch. Post-run public readback confirms the exact
+single branch/no-tag environment restrictions and no additional approval rules.
+
+| Required gate | Actual hosted result |
+| --- | --- |
+| Owner/manual execution, workflow/ref/tooling identity | PASS |
+| Eligibility job 124701415505 | PASS — workflow security contract, live accepted P5A source/run/artifact eligibility, exact branch environment |
+| Staging job 124701454407 | FAIL — missing Python dependency during workflow-policy revalidation |
+| Downloaded accepted package hash/content audit | NOT REACHED in staging job |
+| Disposable key generation / signing fingerprint | NOT REACHED / none |
+| Signed repository, signature and negative security tests | NOT REACHED |
+| Native descriptor and interrupted-publication tests | NOT REACHED |
+| Disposable key cleanup | NOT APPLICABLE — failure before any key generation; no cleanup PASS claimed |
+| Safe diagnostic upload | PASS — result.json only |
+| Diagnostic ZIP checksum and run/tooling provenance | PASS — independently downloaded and verified |
+
+### Confirmed cause and diagnostic limitation
+
+The eligibility job installs hash-pinned `ci/requirements.lock` (PyYAML 6.0.3).
+The separate staging job sets up a fresh Python interpreter but never installs
+that lock. Its `stage.py --live` calls `github.check_execution()`, which invokes
+`workflow_policy.read_workflow()` and imports `ci/validate.py`. Hosted traceback
+at **2026-11-01T00:27:18Z** ends at `import yaml` with
+`ModuleNotFoundError: No module named 'yaml'`. This is a staging-job dependency
+provisioning defect, not evidence of a signing, sandbox or application failure.
+Dependencies installed in the eligibility job were not available on this runner.
+
+The `finally` block preserved a complete FAIL result at stage `eligibility`, empty
+steps and 0.007 seconds. `ModuleNotFoundError` is not caught by the current authored
+error handler, so the result has no `error`/`error_type`; the retained traceback
+establishes the cause. Staging `eligibility.json` was not written. The prior
+eligibility job's PASS record remains available in its independently fetched logs.
+Do not interpret diagnostic-upload success as completion of the security checks.
+
+Diagnostic artifact **13063163006** is **283 bytes**, ZIP SHA-256
+`46f94f80b8f098204c0bca8dce2b6df1d5809539686fdce10687708becbe60e3`.
+Its only member is `result.json`, SHA-256
+`7e1e1d1f114fbbe110cae2eb068e5995de1bc02e8b74057e02cc1228552bbdf3`.
+The ZIP digest matches both GitHub metadata and the upload log. Artifact metadata
+binds it to this run and tooling commit. No key homes, private keys, package or
+repository tree are included. This is diagnostic provenance, not a production
+signing attestation. Evidence: `evidence/p5b/hosted-staging-41256746729/`; raw ZIP
+is ignored under `ci-output/p5b-hosted-staging-41256746729/`.
+
+Recommended correction, **not implemented under Authorization C**: install the
+existing hash-locked CI requirements independently in the staging job before its
+policy revalidation, update the exact workflow contract, and cover missing-dependency
+provisioning with a fresh-job regression. Also preserve actionable structured
+failure evidence for an import/setup failure. No security check should be removed.
+Local correction/testing, any later commit/push and another dispatch require
+appropriate further authorization; do not rerun this failed attempt.
+
+Post-run main/integration tips remain `1e62cd5` / `abbb1b7`. Exactly one staging
+run exists. Accepted native evidence and successful CI 41207770532 are preserved.
+Only local reports/evidence were updated; no workflow, application, signing or
+security code was changed. No new commit, push, rerun, dispatch, production key,
+public application publication, environment change or P5C/P6 work occurred.
+
+## Historical pre-dispatch assessment — 1 November 2026, Authorization C
+
+**P5B STATUS: CONDITIONAL — FURTHER ACTION REQUIRED.** Authorization C approves
+one manual staging run, but **no dispatch has been attempted**. The connector has
+no supported workflow-dispatch operation, and the local terminal has no `gh`
+installation/authenticated dispatch capability. Owner execution is required;
+absence of hosted results is not a failed signing test or a PASS.
+
+Final public preflight independently confirms:
+
+- Integration is exactly `abbb1b7a723d0b42dae1fa2b3312cb7667299e96`.
+- Main is `1e62cd5ef4d36d048a505e9e4a7029296edfd3da`, with the approved parent
+  `cbf7cccc686080b2b4b07274a9f5a23fec52999f` and only the inert registration
+  workflow added. All prior application files/history are preserved; main remains
+  the default branch. Registration bytes match the approved proposal SHA-256
+  `3a8c4ad86f958dc7d437c5ee4e5ad2ac57d8753cc4429252edc0005bf385c7c5`.
+- Registered workflow **403136895** is active at `.github/workflows/release.yml`;
+  it currently has **zero runs**. The integration workflow is byte-identical to
+  the approved tooling commit and passes the exact manual-only/read-only policy.
+- Environment **25906950906**, `p5b-staging`, has only the `branch_policy`
+  protection rule, custom restrictions enabled, and exactly the branch
+  `desktop/p2-production-integration`, with no tags. No reviewer/wait/custom
+  approval rule is present. The owner screenshot shows empty secrets and variables;
+  the public API cannot independently prove their counts. The owner dispatch
+  command must fail closed unless authenticated counts are both zero.
+- The actual accepted P5A run **41181510439**, attempt **1**, all five successful
+  jobs, source **1ee2077b283b8e5dfc2162119dd439ed3baeb109**, accepted workflow
+  bytes and artifact **13035607417** pass the existing CI-eligibility verifier.
+  Artifact metadata is available, unexpired until **2026-11-07T07:53:28Z**, and
+  matches pinned ZIP SHA-256
+  `73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b`.
+  The actual hosted run must still download/hash/audit the artifact before signing.
+
+Readbacks, exact workflow files, preflight summary and file hashes are preserved in
+`evidence/p5b/authorization-c-preflight-2026-11-01/`. An initial repository metadata
+GET used a trailing slash and returned 404; the supported connector independently
+confirmed the repository/default branch. No write or dispatch accompanied that GET.
+
+Hosted run ID, attempt, disposable fingerprint, signature/negative tests, key
+cleanup and diagnostic upload/hash/provenance verification are **NOT EXECUTED**.
+They remain the outstanding acceptance gate. No keys, settings changes, additional
+commits/pushes, public deployment, release or P5C/P6 work were performed.
+
+The dated sections below preserve the earlier CI and preparation history; their
+statements that registration/environment creation were pending describe that
+earlier checkpoint, superseded by the A/B readbacks above.
+
+## Historical assessment — 31 October 2026
+
+**31 October 2026 — CONDITIONAL; not accepted.** Required CI run **41207770532** at
+**abbb1b7a723d0b42dae1fa2b3312cb7667299e96** passed every gate. Native signed-OSTree,
 negative security, descriptor and interrupted-publication evidence remains accepted.
 The owner subsequently approved a single-maintainer model; its revised P5B policy
-is locally verified but uncommitted and has not executed in hosted staging.
+is committed/pushed as `abbb1b7a723d0b42dae1fa2b3312cb7667299e96`; automatic CI
+run 41207770532 passed. The actual manual staging workflow has not executed.
 Registration on main, environment configuration and hosted dispatch remain separately
 gated. None has been performed. These gaps prevent unconditional acceptance.
 
@@ -15,7 +264,8 @@ offline and unavailable to staging. Future R2-compatible hosting remains endorse
 without authorizing credentials, permanent keys, purchases or public deployment.
 
 The implementation history is a9de663 → 3027231 → the reviewed appearance correction
-7aaefd0. The owner completed its authenticated push; remote and local branch agree.
+7aaefd0, followed by the owner-authorized single-maintainer commit abbb1b7. The owner
+completed its authenticated push; remote and local branch agree at abbb1b7.
 Local `p5a-accepted` remains unchanged. After reviewing the local results, the owner
 authorized one integration commit/push and its automatic CI verification. Main
 modification, GitHub settings, workflow dispatch/rerun, permanent keys, public releases
@@ -46,7 +296,50 @@ match the tested candidate. `evidence/p5b/baseline.json` records the original st
 `evidence/p5b/staging-preparation/` records this checkpoint and review. The older
 pre-commit evidence remains historical, not a claim about the new repository HEAD.
 
-## Current hosted CI — appearance correction 7aaefd0: PASS
+## Current hosted CI — single-maintainer revision abbb1b7: PASS
+
+[Run 41207770532](https://github.com/74Cerillion/CyrNava/actions/runs/41207770532),
+workflow **402398273**, attempt **1**, push event, exact source
+`abbb1b7a723d0b42dae1fa2b3312cb7667299e96`: **PASS**.
+
+| Required job/check | Actual hosted result |
+| --- | --- |
+| Workflow validation (124556264768) | PASS — all 31 contracts |
+| Backend/security (124556308627) | PASS — 626 tests and 144 subtests, including new staging identity/environment/registration cases |
+| Frontend/browser (124556308499) | PASS — lint, 273 units, TypeScript/build and all 21 browser tests, including five lifecycle and both appearance regressions |
+| Production Flatpak/bundle audit (124556969346) | PASS — locked runtime provisioning, production build, actual exported-bundle audit, unsigned upload |
+| CI required (124559507714) | PASS — all four upstream jobs successful |
+
+All four artifact ZIP lengths/SHA-256 independently match GitHub: backend
+**13045495676**, frontend **13044952845**, Flatpak diagnostics **13045073811** and
+validated unsigned package **13045049016**. Package ZIP is **210,247,204 bytes**,
+SHA-256 `a85282d65891e18402c7d883f560d0150a2562cb6918e37e45c87ca6608e7c06`.
+Flatpak bundle is **209,198,744 bytes**, SHA-256
+`7a6df1f204939d91d0a0f46adb83da98ad590cd38ac02eba56b8a9fc4139d219`.
+OSTree commit: `135b4d0365e9b164464ec66eb5710edb5393f6c74e012c94e44f97f3b6cff822`.
+
+Downloaded checksum, build result/inputs, provenance and inventory were crosschecked
+for exact source, run/attempt, app ID/version, bundle hash/size, runtime locks and
+OSTree commit. All **5,320 payload paths** equal the previous successful build's
+paths. Hosted exported-payload audit PASS is preserved; no repeat local native
+import or renderer/portal verification is claimed. The policy still promotes the
+older accepted P5A artifact 13035607417, not this latest CI artifact. That accepted
+artifact's live metadata remains unexpired and matches its pinned digest/source.
+
+Evidence is in `evidence/p5b/hosted-ci-41207770532/`: actual run/jobs/results/log
+excerpts, all artifact hashes, browser JUnit/focused states, explicit new-policy
+test collection verification, package/provenance checks and read-only staging
+readiness. Raw ZIPs/logs remain ignored under `ci-output/p5b-hosted-41207770532/`.
+Historical failed runs and previous successful run 41205351385 remain preserved.
+
+Remote integration is verified at abbb1b7; main remains
+`cbf7cccc686080b2b4b07274a9f5a23fec52999f` and the local acceptance tag is unchanged.
+Read-only API still shows zero environments and no release definition on main.
+No additional commit/push, rerun/dispatch, main change or settings update occurred.
+These report/evidence updates remain local and uncommitted after the authorized push.
+**This CI PASS verifies the revised code/tests/package, not actual manual hosted staging.**
+
+## Previous hosted CI — appearance correction 7aaefd0: PASS
 
 [Run 41205351385](https://github.com/74Cerillion/CyrNava/actions/runs/41205351385),
 workflow **402398273**, attempt **1**, push event, exact source
@@ -114,7 +407,8 @@ the unchanged 5 GiB space guard in two tests; the rerun used spacious /dev/shm f
 small synthetic fixtures, preserving the guard and original failure record.
 `evidence/p5b/staging-final-preparation-2026-10-31/` records results, hashes and actual
 GitHub readbacks: main cbf7cccc686080b2b4b07274a9f5a23fec52999f, zero environments,
-and no release definition on main. New policy is not committed, pushed or hosted-tested.
+and no release definition on main. The policy was subsequently committed/pushed
+as abbb1b7; its current automatic CI result is recorded above. Hosted staging remains unexecuted.
 
 ## Hosted continuous-integration result — 3027231
 
@@ -415,9 +709,9 @@ No native rerun is requested for this documentation update.
 2. Hosting/offline custody directions are now owner-endorsed. Permanent keys,
    provider purchases, domains, secrets and public hosting are not P5B staging
    acceptance prerequisites and remain separately gated.
-3. Required CI at 7aaefd0 is now PASS, including the appearance correction. Obtain
-   separate authorization for one integration commit/push of the revised single-maintainer
-   policy/proposal/tests/docs; require its automatic CI to pass. Preserve the local tag.
+3. The single-maintainer revision is synchronized at abbb1b7 and required CI
+   41207770532 is PASS. No additional integration commit/push or rerun is authorized.
+   Preserve the local acceptance tag and current verified source.
 4. Separately authorize **A**: one inert registration-only main file, and **B**: the
    no-reviewer p5b-staging environment with exact branch-only policy and no secrets.
    Read both back; do not treat registration/configuration as hosted verification.
@@ -436,10 +730,10 @@ No native rerun is requested for this documentation update.
 
 | Gate | Recommendation |
 | --- | --- |
-| 1. Accepted baseline preserved | PASS — accepted P5A controls preserved; required CI at 7aaefd0 PASS; new local policy awaits its own hosted verification |
+| 1. Accepted baseline preserved | PASS — accepted P5A controls preserved; required CI at revised tooling abbb1b7 PASS |
 | 2. Hosting architecture | PASS — R2-compatible direction owner-endorsed; provisioning/endpoint/cost authorization deferred |
 | 3. Signing infrastructure | PASS — real disposable GPG and native signed OSTree/rejection checks; offline custody direction owner-endorsed; permanent key creation deferred |
-| 4. Release workflow | Single-maintainer policy locally verified; registration, exact-branch environment and hosted execution pending |
+| 4. Release workflow | Single-maintainer policy/tests pass local and hosted CI; registration, exact-branch environment and actual manual staging execution pending |
 | 5. Signed repository and descriptors | PASS — owner evidence plus independent retained-generation integrity/signature review |
 | 6. Publication safety | PASS for P5B local native staging and interruption protection; future HTTP/cache/update integration is unexecuted |
 | 7. Security regressions | PASS for executed paths; no claim about unexecuted integrations |
@@ -447,8 +741,8 @@ No native rerun is requested for this documentation update.
 | 9. Owner acceptance | Pending |
 
 **Recommendation: CONDITIONAL — native and required CI acceptance gaps are closed;
-the revised single-maintainer implementation is locally verified.** Obtain the
-separately authorized integration commit/push, main registration, environment setup
-and manual hosted staging execution, then review actual evidence for owner acceptance.
+the revised single-maintainer implementation passes hosted CI at abbb1b7.** Obtain
+separate authorization for main registration, environment setup and one manual hosted
+staging execution, then review actual evidence for owner acceptance.
 No production credentials, keys, public hosting/release, main application merge or
 P5C/P6 work is authorized or performed. Hosting/offline-custody directions stay endorsed.

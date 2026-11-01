@@ -1,0 +1,21 @@
+{
+  "can_admins_bypass": true,
+  "created_at": "2026-10-31T23:29:57Z",
+  "deployment_branch_policy": {
+    "custom_branch_policies": true,
+    "protected_branches": false
+  },
+  "html_url": "https://github.com/74Cerillion/CyrNava/deployments/activity_log?environments_filter=p5b-staging",
+  "id": 25906950906,
+  "name": "p5b-staging",
+  "node_id": "EN_kwDOVRhg7M8AAAAGCCyy-g",
+  "protection_rules": [
+    {
+      "id": 70830065,
+      "node_id": "GA_kwDOVRhg7M4EOMfx",
+      "type": "branch_policy"
+    }
+  ],
+  "updated_at": "2026-10-31T23:29:57Z",
+  "url": "https://api.github.com/repos/74Cerillion/CyrNava/environments/p5b-staging"
+}

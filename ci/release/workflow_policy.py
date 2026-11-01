@@ -42,6 +42,15 @@ def validate(value):
     )
     pins = json.loads((ROOT / "ci/tools.json").read_text())["actions"]
     for job in jobs.values():
+        commands = "\n".join(step.get("run", "") for step in job["steps"])
+        install = commands.find(
+            "python -m pip install --require-hashes --only-binary=:all: "
+            "-r ci/requirements.lock"
+        )
+        require(
+            0 <= install < commands.find("python ci/release/"),
+            "Every independent release job must install locked dependencies first",
+        )
         require(
             job.get("runs-on") == "ubuntu-24.04"
             and 0 < job.get("timeout-minutes", 0) <= 30,

@@ -1,0 +1,20 @@
+{
+  "observed_utc": "2026-10-31T14:12:31.067887+00:00",
+  "run_id": 41207770532,
+  "workflow_id": 402398273,
+  "commit": "abbb1b7a723d0b42dae1fa2b3312cb7667299e96",
+  "status": "PASS",
+  "workflow_contracts": 31,
+  "backend_tests": 626,
+  "backend_subtests": 144,
+  "frontend_units": 273,
+  "browser_tests": 21,
+  "browser_failures": 0,
+  "lifecycle_tests": 5,
+  "Flatpak_build": "PASS",
+  "exported_audit": "PASS",
+  "unsigned_upload": "PASS",
+  "required_gate": "PASS",
+  "staging_execution": "NOT DISPATCHED; still requires separate authorization and registration/environment setup",
+  "meaning": "Successful push CI at the revised single-maintainer tooling commit. Actual manual P5B staging has not executed; main registration, environment configuration and owner dispatch remain separately gated."
+}

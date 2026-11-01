@@ -24,6 +24,11 @@ def main():
     source.add_argument("--live", action="store_true")
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--static-deltas", action="store_true")
+    parser.add_argument(
+        "--setup-failed",
+        action="store_true",
+        help="Record locked-dependency setup failure only; never process a release",
+    )
     args = parser.parse_args()
     record = {
         "status": "FAIL",
@@ -48,6 +53,12 @@ def main():
         output.mkdir(mode=0o700)
         created = True
         (output / ".p5b-disposable-root").write_text("P5B STAGING ONLY\n")
+        if args.setup_failed:
+            record["stage"] = "python-dependencies"
+            raise core.Rejected(
+                "Hash-locked CI dependency installation failed; "
+                "no release processing started"
+            )
         private = output / "private"
         private.mkdir(mode=0o700)
         if args.live:
@@ -208,6 +219,13 @@ def main():
                     v["bytes"] for k, v in files.items() if k.startswith("repo/deltas/")
                 ),
             },
+        )
+    except ImportError as error:
+        # Import messages/names may contain paths, tokens or arbitrary module data.
+        record["error_type"] = type(error).__name__
+        record["error"] = (
+            "Required staging dependency could not be imported; "
+            "install hash-locked ci/requirements.lock dependencies; no fallback used"
         )
     except (core.Rejected, OSError, ValueError, KeyError) as error:
         record["error_type"] = type(error).__name__

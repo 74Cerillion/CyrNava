@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "artifact_id": 13045049016,
+  "bundle_sha256": "7a6df1f204939d91d0a0f46adb83da98ad590cd38ac02eba56b8a9fc4139d219",
+  "bundle_bytes": 209198744,
+  "source_commit": "abbb1b7a723d0b42dae1fa2b3312cb7667299e96",
+  "workflow_run_id": 41207770532,
+  "workflow_run_attempt": 1,
+  "ostree_commit": "135b4d0365e9b164464ec66eb5710edb5393f6c74e012c94e44f97f3b6cff822",
+  "checksums_and_provenance_crosschecked": true,
+  "runtime_lock_matches": true,
+  "inventory_sha256": "0400b264a8de8e3a53eff7d463f5a87dd2c72fc3dfb858b7c4e4b83363b0bbe2",
+  "payload_entries": 5320,
+  "payload_paths_equal_previous_successful_build": true,
+  "member_sizes": {
+    "SHA256SUMS": 105,
+    "io.github._74Cerillion.CyrNava.flatpak": 209198744,
+    "build-inputs.json": 12564,
+    "package-inventory.json": 1033311,
+    "provenance.json": 1172,
+    "result.json": 508
+  },
+  "limits": "Hosted exported-bundle audit PASS. Independent local review verifies downloaded bytes and metadata, not a repeated native import/renderer/portal run. The accepted staging artifact remains P5A ID 13035607417; this current CI package is not substituted."
+}

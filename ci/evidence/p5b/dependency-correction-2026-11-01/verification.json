@@ -1,0 +1,66 @@
+{
+  "actionlint": "PASS (1.7.7, archive hash verified by unchanged ci/bootstrap.py)",
+  "base_commit": "abbb1b7a723d0b42dae1fa2b3312cb7667299e96",
+  "checkout_initial_backend_venv": false,
+  "checkout_initial_frontend_dist": false,
+  "ci_contracts": {
+    "result": "PASS",
+    "tests": 31
+  },
+  "clean_checkout": "ci-output/p5b-dependency-correction/checkout (detached base plus exactly five candidate files)",
+  "commits_or_pushes": 0,
+  "fresh_job_environments": [
+    "job-eligibility",
+    "job-staging"
+  ],
+  "historical_failure_run": 41256746729,
+  "initial_environment_limitation": "Initial CI contracts encountered unchanged 5 GiB guard because /dev/shm fixture directory was created in an earlier tool invocation and was not present in the later isolated invocation. Final run created and asserted TMPDIR on /dev/shm in the same invocation; all 31 passed without test/guard changes. Initial log retained.",
+  "native_ostree_rehearsal_not_repeated": "Signing/core code unchanged; 64 release regressions include disposable GPG model tests, not a full native repository rebuild",
+  "ordinary_ci_not_executed": true,
+  "policy_checks": [
+    "release workflow PASS",
+    "inert registration/readback PASS",
+    "CI security/dependency PASS"
+  ],
+  "preinstall_missing_import_and_redaction": {
+    "result": "PASS",
+    "tests": 2
+  },
+  "production_sources_changed": false,
+  "release_regressions": {
+    "new_tests": 5,
+    "result": "PASS",
+    "tests": 64
+  },
+  "remaining_gates": [
+    "owner authorizes one correction commit/push",
+    "ordinary hosted CI passes on correction SHA",
+    "owner separately authorizes one new manual staging execution at correction SHA",
+    "hosted signing/security/diagnostic acceptance gates all pass"
+  ],
+  "ruff": "PASS (0.17.1, fresh verification-tools environment)",
+  "second_staging_not_dispatched": true,
+  "source_sha256": {
+    ".github/workflows/release.yml": "8e33dc0be70e24c445bd2b373f2468ad242c1852cd817a774896ede4628468e5",
+    "ci/release/stage.py": "ea05f4833be8cf77adcb5270c6ad2445aa4dfcf2a977ea3d5dc830ad753944ba",
+    "ci/release/test_dependencies.py": "16d57c728fe942a8de62b1acda8808881b3c6f509d36c0d9b986c7f6df372f03",
+    "ci/release/workflow-contract.json": "53164eb5108ffbb85ae189a1a497b83f4520cd6ae2a882635bc0f012a8e9676e",
+    "ci/release/workflow_policy.py": "195208f977a11f62e241e31bbbb2a839716ea2932b19ac182b8973699b218640"
+  },
+  "status": "LOCAL PASS; P5B CONDITIONAL / NOT ACCEPTED",
+  "unchanged_file_sha256": {
+    ".github/workflows/ci.yml": "3f11c9ab58d2f7c8cebca0b153a09ccffae06e314545067ddd6b42f7b8e809f4",
+    "ci/release/core.py": "ee56a92073cfd1795d90fd804dc1ee870c948d846973c4bfe0b6b75b63a70fd3",
+    "ci/release/github.py": "466ebcdf38e3fa404a628131a9804449f62faedb4ad0d52b029025e532453efc",
+    "ci/release/plan.py": "f7e672e3a77efbb883a413570e782356c2fa4d0a73f9a5f51fb39592562f5202",
+    "ci/release/policy.json": "d66a7f3c4de34d259349f2e28f47b53ed240170b6643650b673e29aa7e2a43f4",
+    "ci/release/preflight.py": "290de0f9081a1704cab03a6d1e7dab02385b3a29c14d2472b1d95e87a6f14bef",
+    "ci/release/recovery.py": "87c030904d71c921b5d1942de236d7cc6fe565b64017d2529b3aa797218c567c",
+    "ci/release/registration-only.yml": "3a8c4ad86f958dc7d437c5ee4e5ad2ac57d8753cc4429252edc0005bf385c7c5",
+    "ci/requirements.lock": "2322c771f1efab20a6dfd3ec414de1c5ad934099aae347ceef167fdb4dd5de73",
+    "ci/tools.json": "c13a0a5f9374fa95b722fce61869f5c121ea01d3f51776e91c86ef1137436c2c"
+  },
+  "verified_at": "2026-11-01T00:39:29.965855+00:00",
+  "workflow_contract_previous_sha256": "aedd68eb808cc963aebe744ad7d5ebc2f0f52e0bc72a575a18c9551b5c9d65ef",
+  "workflow_previous_sha256": "3b2a08b287380693393ed2c5cffc22bd155f53efd42dc13be4ef351b55812922"
+}
