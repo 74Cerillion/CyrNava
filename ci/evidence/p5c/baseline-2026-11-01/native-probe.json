@@ -1,0 +1,33 @@
+{
+  "private_key_removed": true,
+  "probe": "disposable synthetic fixture only",
+  "results": [
+    {
+      "code": 0,
+      "operation": "finish",
+      "stderr": ""
+    },
+    {
+      "code": 0,
+      "operation": "export",
+      "stderr": ""
+    },
+    {
+      "code": 0,
+      "operation": "summary",
+      "stderr": ""
+    },
+    {
+      "code": 1,
+      "operation": "install",
+      "stderr": "error: GPG: Unable to configure context: Read-only file system\n",
+      "stdout": ""
+    },
+    {
+      "operation": "install-with-private-GNUPGHOME-and-TMPDIR",
+      "code": 0,
+      "stderr": "bwrap: No permissions to create a new namespace, likely because the kernel does not allow non-privileged user namespaces. See <https://deb.li/bubblewrap> or <file:///usr/share/doc/bubblewrap/README.Debian.gz>.\nbwrap: No permissions to create a new namespace, likely because the kernel does not allow non-privileged user namespaces. See <https://deb.li/bubblewrap> or <file:///usr/share/doc/bubblewrap/README.Debian.gz>.\nbwrap: No permissions to create a new namespace, likely because the kernel does not allow non-privileged user namespaces. See <https://deb.li/bubblewrap> or <file:///usr/share/doc/bubblewrap/README.Debian.gz>.\n",
+      "stdout": "Installing app/io.github._74Cerillion.CyrNava.P5CFixture/x86_64/stable\n"
+    }
+  ]
+}

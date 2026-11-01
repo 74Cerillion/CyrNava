@@ -1,0 +1,109 @@
+{
+  "concurrency": {
+    "cancel-in-progress": false,
+    "group": "cyrnava-p5c-integration"
+  },
+  "defaults": {
+    "run": {
+      "shell": "bash --noprofile --norc -eo pipefail {0}"
+    }
+  },
+  "env": {
+    "P5C_AUTHORIZATION": "${{ inputs.authorization_ref }}",
+    "P5C_TOOLING": "${{ inputs.tooling_commit }}"
+  },
+  "jobs": {
+    "eligibility": {
+      "runs-on": "ubuntu-24.04",
+      "steps": [
+        {
+          "uses": "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "with": {
+            "fetch-depth": 0,
+            "persist-credentials": false,
+            "ref": "${{ github.sha }}"
+          }
+        },
+        {
+          "uses": "actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "with": {
+            "python-version": "3.12"
+          }
+        },
+        {
+          "env": {
+            "GITHUB_TOKEN": "${{ github.token }}"
+          },
+          "name": "Verify owner-dispatched policy and exact staging branch protection",
+          "run": "python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock\npython ci/release/integration_policy.py --preflight --tooling-commit \"$P5C_TOOLING\"\n"
+        }
+      ],
+      "timeout-minutes": 10
+    },
+    "staging": {
+      "environment": "p5b-staging",
+      "needs": "eligibility",
+      "runs-on": "ubuntu-24.04",
+      "steps": [
+        {
+          "uses": "actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803",
+          "with": {
+            "fetch-depth": 0,
+            "persist-credentials": false,
+            "ref": "${{ github.sha }}"
+          }
+        },
+        {
+          "uses": "actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1",
+          "with": {
+            "python-version": "3.12"
+          }
+        },
+        {
+          "name": "Install public verification tools",
+          "run": "sudo apt-get update -qq\nsudo apt-get install -y --no-install-recommends flatpak ostree gnupg\n"
+        },
+        {
+          "env": {
+            "GITHUB_TOKEN": "${{ github.token }}"
+          },
+          "name": "Verify actual artifact installation and synthetic controlled updates",
+          "run": "python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock || {\n  python ci/release/integration.py --setup-failed --live --output \"$RUNNER_TEMP/p5c\" --diagnostics \"$RUNNER_TEMP/p5c-diag\"\n  exit 1\n}\npython ci/release/integration.py --live --tooling-commit \"$P5C_TOOLING\" --output \"$RUNNER_TEMP/p5c\" --diagnostics \"$RUNNER_TEMP/p5c-diag\"\n"
+        },
+        {
+          "if": "always()",
+          "name": "Retain safe status only; no key homes, repositories or packages",
+          "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "with": {
+            "if-no-files-found": "error",
+            "name": "p5c-integration-diagnostics-${{ github.sha }}-${{ github.run_attempt }}",
+            "path": "${{ runner.temp }}/p5c-diag/result.json\n${{ runner.temp }}/p5c-diag/eligibility.json\n${{ runner.temp }}/p5c-diag/readiness.json\n${{ runner.temp }}/p5c-diag/SHA256SUMS.json\n",
+            "retention-days": 7
+          }
+        }
+      ],
+      "timeout-minutes": 30
+    }
+  },
+  "name": "CyrNava P5C integrated release verification",
+  "on": {
+    "workflow_dispatch": {
+      "inputs": {
+        "authorization_ref": {
+          "description": "P5C-owner-authorized-disposable-integration-only",
+          "required": true,
+          "type": "string"
+        },
+        "tooling_commit": {
+          "description": "Exact owner-approved immutable P5C tooling SHA",
+          "required": true,
+          "type": "string"
+        }
+      }
+    }
+  },
+  "permissions": {
+    "actions": "read",
+    "contents": "read"
+  }
+}
