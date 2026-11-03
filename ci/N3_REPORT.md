@@ -1,10 +1,12 @@
 # N3 — Data-safe manual updater and uninstaller
 
-3 November 2026. **N3 VERIFIED PASS / RECOMMENDED FOR OWNER ACCEPTANCE.**
+3 November 2026. **N3 ACCEPTED / COMPLETE. N4 local implementation authorized.**
 The owner completed the focused native GUI/reinstall verification; 29 independent
-evidence/identity/preservation checks PASS. Formal N3 owner acceptance is pending.
+evidence/identity/preservation checks PASS. The owner subsequently accepted N3;
+[formal acceptance record](evidence/n3/formal-owner-acceptance.json) preserves the exact decision.
 N2 is formally ACCEPTED / COMPLETE. The owner's acceptance and N3-only authorization
-are recorded in `ci/evidence/n2/formal-owner-acceptance.json`. N4 is not authorized.
+are recorded in `ci/evidence/n2/formal-owner-acceptance.json`. N4 implementation was
+separately authorized after this review; no commits/signing/publication were authorized.
 The active target remains native Ubuntu 26.04 x86_64 / GNOME Wayland via versioned
 GitHub Releases archives. Flatpak remains paused historical/fallback.
 
@@ -53,8 +55,8 @@ build, signing, Git write, CI, publication or N4 operation was performed by the
 reviewer. N1/N2 acceptance, P1–P5 and R11/R12 records retain their original scopes.
 
 No required N3 evidence remains missing within the support boundary below.
-The remaining decision is formal owner acceptance, not another native rehearsal.
-N4 requires separate authorization; production authenticity, redistribution
+The owner has now formally accepted this reviewed scope; no further N3 rehearsal
+is required. N4 implementation is separately authorized; production authenticity, redistribution
 obligations and public release are not certified by this disposable candidate.
 
 ## Implementation and support boundary

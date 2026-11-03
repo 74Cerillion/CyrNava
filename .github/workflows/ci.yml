@@ -131,20 +131,16 @@ jobs:
           retention-days: 7
           if-no-files-found: error
 
-  flatpak:
-    name: Production Flatpak and bundle audit
+  native:
+    name: Native Ubuntu package and exported-archive audit
     needs: [backend, frontend]
-    runs-on: ubuntu-24.04
-    timeout-minutes: 45
-    env:
-      XDG_CACHE_HOME: ${{ github.workspace }}/ci-output/build-cache
+    runs-on: ubuntu-26.04
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           persist-credentials: false
-      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
-        with:
-          python-version: '3.12'
+          fetch-depth: 0
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version-file: .nvmrc
@@ -154,52 +150,56 @@ jobs:
             frontend/package-lock.json
             frontend/package.json
             .nvmrc
-      - name: Install build tools
+      - name: Verify immutable source and install native build prerequisites
+        env:
+          EXPECTED_SOURCE: ${{ github.sha }}
         run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SOURCE"
+          test -z "$(git status --porcelain)"
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends flatpak ostree desktop-file-utils appstream
+          sudo apt-get install -y --no-install-recommends python3.14-venv build-essential desktop-file-utils libnss3 libnspr4 libasound2t64 libegl1 libopengl0 libxkbcommon-x11-0 libxcb-cursor0 libxcomposite1 libxdamage1 libxrandr2 libxtst6 libfontconfig1
           npm install --global npm@11.6.2 --ignore-scripts --no-audit --no-fund
-      - name: Provision and verify P4 locked runtime commits
-        run: python ci/flatpak.py prepare --output ci-output/flatpak
-      - name: Build through the P4 production builder
-        run: python ci/flatpak.py build --output ci-output/flatpak
-      - name: Audit exported bundle and generate checksum/provenance
-        run: python ci/flatpak.py audit --output ci-output/flatpak
-      - name: Upload validated unsigned local-installation artifact
+          npm --prefix frontend ci --ignore-scripts --no-audit --no-fund
+      - name: Native installer, security and transaction regressions
+        run: |
+          /usr/bin/python3.14 -B -m unittest discover -s packaging/native -p 'test_*.py' -v
+          /usr/bin/python3.14 -B -m unittest discover -s packaging/native/feasibility -p 'test_*.py' -v
+      - name: Assemble, audit and install exact source without GUI or signing
+        run: /usr/bin/python3.14 -B ci/native.py --output ci-output/native --version 0.1.0-n4.1
+      - name: Upload audited unsigned native verification artifacts
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: CyrNava-linux-x86_64-${{ github.sha }}-${{ github.run_attempt }}
-          path: ci-output/flatpak/artifacts/
+          name: CyrNava-native-ubuntu-x86_64-${{ github.sha }}-${{ github.run_attempt }}
+          path: ci-output/native/artifacts/
           retention-days: 7
           if-no-files-found: error
           compression-level: 0
-      - name: Preserve build diagnostics without uploading an unvalidated package
+      - name: Preserve safe native stage results
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: flatpak-diagnostics-${{ github.sha }}-${{ github.run_attempt }}
+          name: native-diagnostics-${{ github.sha }}-${{ github.run_attempt }}
           path: |
-            ci-output/flatpak/prepare.json
-            ci-output/flatpak/build.json
-            ci-output/flatpak/audit.json
-            ci-output/flatpak/production-build/result.json
+            ci-output/native/result.json
+            ci-output/native/audit.json
+            ci-output/native/install.json
           retention-days: 7
           if-no-files-found: error
 
   required:
     name: CI required
     if: always()
-    needs: [validate, backend, frontend, flatpak]
+    needs: [validate, backend, frontend, native]
     runs-on: ubuntu-24.04
     timeout-minutes: 2
     env:
       VALIDATE_RESULT: ${{ needs.validate.result }}
       BACKEND_RESULT: ${{ needs.backend.result }}
       FRONTEND_RESULT: ${{ needs.frontend.result }}
-      FLATPAK_RESULT: ${{ needs.flatpak.result }}
+      NATIVE_RESULT: ${{ needs.native.result }}
     steps:
       - name: Require every verification and artifact job to succeed
         run: |
-          for result in "$VALIDATE_RESULT" "$BACKEND_RESULT" "$FRONTEND_RESULT" "$FLATPAK_RESULT"; do
+          for result in "$VALIDATE_RESULT" "$BACKEND_RESULT" "$FRONTEND_RESULT" "$NATIVE_RESULT"; do
             test "$result" = success || exit 1
           done

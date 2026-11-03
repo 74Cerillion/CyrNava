@@ -1,21 +1,24 @@
-# Current owner checkpoint — N3
+# Current owner checkpoint — N1–N3 accepted; N4 locally verified, release conditional
 
-3 November 2026. **N1/N2 ACCEPTED / COMPLETE. N3 VERIFIED PASS / RECOMMENDED FOR
-OWNER ACCEPTANCE.**
+3 November 2026. **N1/N2/N3 ACCEPTED / COMPLETE. N4 local implementation VERIFIED;
+public release CONDITIONAL.**
+The owner formally accepted N3's independently reviewed native GUI/reinstall,
+security, update/recovery and data-preservation scope. Exact artifact/result and
+owner decision: [N3_REPORT.md](N3_REPORT.md),
+[formal acceptance](evidence/n3/formal-owner-acceptance.json).
 
-- [x] Owner formally accepted N2 and authorized N3 only; acceptance evidence preserved.
-- [x] Shared updater/checkpoint/recovery/uninstaller/reinstaller implemented.
-- [x] Actual isolated package upgrades, data preservation, rollback/return and recovery PASS.
-- [x] 175 native and 92 backend regressions; lint/syntax/Desktop Entry checks PASS.
-- [x] Reviewed exact-client policy loaded in enforce mode; saved non-GUI bootstrap PASS.
-- [x] Actual N3 GUI/renderer/authentication/appearance/reinstall PASS in both native phases.
-- [x] Independent identities, saved-data/origin, journals and accepted N2 preservation PASS.
-- [ ] Formal N3 owner acceptance.
-- [ ] N4 authorization — not granted.
-
-See [N3_OWNER_CHECKS.md](N3_OWNER_CHECKS.md) and [N3_REPORT.md](N3_REPORT.md).
-The owner executed the load and native test; no rerun, host-policy modification,
-production signing, Git write, publication or N4 work occurred in this review.
+N4 source assembly/export audit and actual isolated headless installation PASS;
+994 local tests PASS. An unsigned v0.1 public-identity proposal exists, with exact
+hashes in [N4_REPORT.md](N4_REPORT.md). Final public-identity native evidence,
+vendor source/notice closure, clean-source hosted CI, genuine release signing and
+separately approved publication remain. Original code MIT attribution is
+**Copyright (c) 2026 74Cerillion**;
+owner confirms rights to the CyrNava name/logo. Third-party terms/source obligations,
+production signing, final native package evidence and hosted verification remain
+explicit. Current work: [N4_REPORT.md](N4_REPORT.md), [N4_OWNER_CHECKS.md](N4_OWNER_CHECKS.md).
+No commits, pushes, GitHub executions, host-policy changes, signing or publication
+are authorized. Flatpak stays paused historical/fallback, with no duplicate P6 gate.
+Original evidence and the earlier checkpoints below retain their original scope.
 
 ## Historical checkpoints — N2 review
 

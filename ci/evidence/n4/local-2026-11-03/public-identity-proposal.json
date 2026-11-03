@@ -1,0 +1,37 @@
+{
+  "added_source_files": [
+    "backend/pyproject.toml",
+    "backend/requirements.txt"
+  ],
+  "application_binary_rebuilt": false,
+  "archive": "ci-output/native-n4-release-proposal-1/CyrNava-0.1.0-ubuntu-x86_64.zip",
+  "archive_sha256": "994e526870bd82828a2c2c90c1a71860ea2e1ac828c0e1bfaf7e504261ecf790",
+  "audit": {
+    "GUI": "NOT EXECUTED",
+    "archive_sha256": "994e526870bd82828a2c2c90c1a71860ea2e1ac828c0e1bfaf7e504261ecf790",
+    "manifest_sha256": "db5076086f16c0f2c01f2278f7b3591450b2444f6aaf3c03bbe7185469029967",
+    "payload_files": 99,
+    "redistribution_clearance": "PENDING; audit is not legal clearance",
+    "renderer": "NOT EXECUTED",
+    "scope": "native exported-package/source/bootstrap audit",
+    "signature": "NOT CREATED",
+    "source_files": 196,
+    "status": "PASS"
+  },
+  "changed_source_files": [
+    "ci/test_ci.py",
+    "ci/verify.py",
+    "packaging/native/policy_setup.py",
+    "packaging/native/release.py",
+    "packaging/native/test_native_release.py"
+  ],
+  "installer_archive_sha256": "9c508116919ff4aedc085b7b9bb29800307a45f7d6ed1b7ba743eb9476df261a",
+  "manifest": "ci-output/native-n4-release-metadata-3/manifest.json",
+  "manifest_sha256": "db5076086f16c0f2c01f2278f7b3591450b2444f6aaf3c03bbe7185469029967",
+  "previous_packet_preserved": true,
+  "public_native_verification": "PENDING OWNER",
+  "publication": "NOT AUTHORIZED",
+  "signature": "NOT CREATED",
+  "source_archive_sha256": "18b53aeefde74708561339561488c435d85f4527dd223ba6f7e2f0accdc562e6",
+  "status": "AUDITED UNSIGNED PROPOSAL"
+}

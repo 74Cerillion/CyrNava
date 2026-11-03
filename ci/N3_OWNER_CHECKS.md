@@ -1,7 +1,6 @@
 # N3 owner checkpoint
 
-3 November 2026. **N1/N2 ACCEPTED / COMPLETE. N3 VERIFIED PASS / RECOMMENDED FOR
-OWNER ACCEPTANCE. N4 unauthorized.** Report: [N3_REPORT.md](N3_REPORT.md).
+3 November 2026. **N1/N2/N3 ACCEPTED / COMPLETE. N4 local implementation authorized.** Report: [N3_REPORT.md](N3_REPORT.md).
 
 - [x] Shared native updater/recovery/uninstaller and thin shell wrappers implemented.
 - [x] Authenticated release path retains trusted-key, signature, hash and extraction checks.
@@ -15,7 +14,7 @@ OWNER ACCEPTANCE. N4 unauthorized.** Report: [N3_REPORT.md](N3_REPORT.md).
 - [x] Actual final-package GUI/renderer/authentication/menu/appearance/reinstall checks PASS in both phases.
 - [x] Saved data/origin bytes and actual completed uninstall/reinstall inventories independently checked.
 - [x] Package/source/provider/accepted N2 identities preserved; 29 independent review checks PASS.
-- [ ] Formal N3 owner acceptance. No N4 implementation begins automatically.
+- [x] Formal N3 owner acceptance; separate N4 implementation authorization recorded.
 
 Actual result: `ci-output/native-n3-owner-1/result.json`, PASS / complete.
 SHA-256: `f933f6f48449106860c87b33f22ac2b192ed11cad7bb041e34901df42a295bf7`.
@@ -23,9 +22,11 @@ Independent review: [review.json](evidence/n3/native-review-2026-11-03/review.js
 Original records and private logs remain in place. Existing regressions were not
 rerun; no implementation or native execution occurred in this review.
 
-## Formal acceptance option
+## Completed formal owner acceptance
 
-If satisfied with the documented support boundary and evidence, the owner may state:
+Owner decision: “Owner accepts N3. Go ahead and update your logs and start working
+on N4 - Let's finish this tonight!” See [acceptance record](evidence/n3/formal-owner-acceptance.json).
+The previous review option is retained below as history:
 
 > I formally accept N3 — Data-safe manual updater and uninstaller.
 > N4 remains pending separate authorization.

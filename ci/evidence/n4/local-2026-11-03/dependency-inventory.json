@@ -1,0 +1,2438 @@
+{
+  "complete_SBOM": false,
+  "corresponding_source": "PENDING EXACT SOURCE/BUILD CORRESPONDENCE REVIEW",
+  "distributions": [
+    {
+      "ELF_files": [],
+      "declared_license": "MIT",
+      "name": "annotated-doc",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 1086,
+          "path": "annotated_doc-0.0.5.dist-info/licenses/LICENSE",
+          "sha256": "fff170779a6acbf65abdb405c087f1cee1786691e4a96a4034517e4a504a0cdf"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "117bac03a25ede5df5440e855b32d556049ca169ead221505badf432fed4b101",
+      "upstream": [
+        "Homepage, https://github.com/fastapi/annotated-doc",
+        "Documentation, https://github.com/fastapi/annotated-doc",
+        "Repository, https://github.com/fastapi/annotated-doc",
+        "Issues, https://github.com/fastapi/annotated-doc/issues",
+        "Changelog, https://github.com/fastapi/annotated-doc/release-notes.md"
+      ],
+      "version": "0.0.5",
+      "wheel": "annotated_doc-0.0.5-py3-none-any.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "MIT",
+      "name": "annotated-types",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 1083,
+          "path": "annotated_types-0.8.0.dist-info/licenses/LICENSE",
+          "sha256": "fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0",
+      "upstream": [
+        "Homepage, https://github.com/annotated-types/annotated-types",
+        "Source, https://github.com/annotated-types/annotated-types",
+        "Changelog, https://github.com/annotated-types/annotated-types/releases"
+      ],
+      "version": "0.8.0",
+      "wheel": "annotated_types-0.8.0-py3-none-any.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "MIT",
+      "name": "anyio",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 1081,
+          "path": "anyio-4.15.1.dist-info/licenses/LICENSE",
+          "sha256": "5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "6152fdbbf9a77fdec97731721bebf7c4c44f7c29b424b0065826173efc7ed101",
+      "upstream": [
+        "Documentation, https://anyio.readthedocs.io/en/latest/",
+        "Changelog, https://anyio.readthedocs.io/en/stable/versionhistory.html",
+        "Source code, https://github.com/agronholm/anyio",
+        "Issue tracker, https://github.com/agronholm/anyio/issues"
+      ],
+      "version": "4.15.1",
+      "wheel": "anyio-4.15.1-py3-none-any.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "BSD-3-Clause",
+      "name": "click",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 1475,
+          "path": "click-8.5.0.dist-info/licenses/LICENSE.txt",
+          "sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "255bc9599cf7748b4b1a446ccc735421bd08a2ae529a8b88597d3de5664ee360",
+      "upstream": [
+        "Changes, https://click.palletsprojects.com/page/changes/",
+        "Chat, https://discord.gg/pallets",
+        "Documentation, https://click.palletsprojects.com/",
+        "Donate, https://palletsprojects.com/donate",
+        "Source, https://github.com/pallets/click/"
+      ],
+      "version": "8.5.0",
+      "wheel": "click-8.5.0-py3-none-any.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "MIT",
+      "name": "fastapi",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 1086,
+          "path": "fastapi-0.156.3.dist-info/licenses/LICENSE",
+          "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "d70cc7c6b34c75f26c9312bf84cc696dac19b8858cb460d29f7b1a21d9594ad9",
+      "upstream": [
+        "Homepage, https://github.com/fastapi/fastapi",
+        "Documentation, https://fastapi.tiangolo.com/",
+        "Repository, https://github.com/fastapi/fastapi",
+        "Issues, https://github.com/fastapi/fastapi/issues",
+        "Changelog, https://fastapi.tiangolo.com/release-notes/"
+      ],
+      "version": "0.156.3",
+      "wheel": "fastapi-0.156.3-py3-none-any.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "MIT",
+      "name": "h11",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 1124,
+          "path": "h11-0.16.0.dist-info/licenses/LICENSE.txt",
+          "sha256": "37db5bb85926db28a427a25867f10b1232003aea1be69ccb851138adb8e6f361"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86",
+      "upstream": [],
+      "version": "0.16.0",
+      "wheel": "h11-0.16.0-py3-none-any.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "BSD-3-Clause",
+      "name": "idna",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 1541,
+          "path": "idna-3.20.dist-info/licenses/LICENSE.md",
+          "sha256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c",
+      "upstream": [
+        "Changelog, https://github.com/kjd/idna/blob/master/HISTORY.md",
+        "Issue tracker, https://github.com/kjd/idna/issues",
+        "Source, https://github.com/kjd/idna"
+      ],
+      "version": "3.20",
+      "wheel": "idna-3.20-py3-none-any.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "Apache-2.0",
+      "name": "opentelemetry-api",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 11357,
+          "path": "opentelemetry_api-1.45.1.dist-info/licenses/LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "b31553efa588ae44bc306f863c785c5333a9ecc091248c6ee68b4b6c87fdedfb",
+      "upstream": [
+        "Homepage, https://github.com/open-telemetry/opentelemetry-python/tree/main/opentelemetry-api",
+        "Repository, https://github.com/open-telemetry/opentelemetry-python"
+      ],
+      "version": "1.45.1",
+      "wheel": "opentelemetry_api-1.45.1-py3-none-any.whl"
+    },
+    {
+      "ELF_files": [
+        {
+          "bytes": 97873,
+          "path": "PIL/_avif.cpython-314-x86_64-linux-gnu.so"
+        },
+        {
+          "bytes": 3486065,
+          "path": "PIL/_imaging.cpython-314-x86_64-linux-gnu.so"
+        },
+        {
+          "bytes": 163721,
+          "path": "PIL/_imagingcms.cpython-314-x86_64-linux-gnu.so"
+        },
+        {
+          "bytes": 345257,
+          "path": "PIL/_imagingft.cpython-314-x86_64-linux-gnu.so"
+        },
+        {
+          "bytes": 142464,
+          "path": "PIL/_imagingmath.cpython-314-x86_64-linux-gnu.so"
+        },
+        {
+          "bytes": 39536,
+          "path": "PIL/_imagingmorph.cpython-314-x86_64-linux-gnu.so"
+        },
+        {
+          "bytes": 47456,
+          "path": "PIL/_imagingtk.cpython-314-x86_64-linux-gnu.so"
+        },
+        {
+          "bytes": 106505,
+          "path": "PIL/_webp.cpython-314-x86_64-linux-gnu.so"
+        },
+        {
+          "bytes": 2100545,
+          "path": "pillow.libs/libXau-154567c4.so.6.0.0"
+        },
+        {
+          "bytes": 4918457,
+          "path": "pillow.libs/libavif-c6062d5f.so.16.4.2"
+        },
+        {
+          "bytes": 146089,
+          "path": "pillow.libs/libbrotlicommon-53534446.so.1.2.0"
+        },
+        {
+          "bytes": 68105,
+          "path": "pillow.libs/libbrotlidec-7e5462ba.so.1.2.0"
+        },
+        {
+          "bytes": 1179825,
+          "path": "pillow.libs/libfreetype-57f805ba.so.6.20.6"
+        },
+        {
+          "bytes": 1529553,
+          "path": "pillow.libs/libharfbuzz-fb49c9fc.so.0.61450.0"
+        },
+        {
+          "bytes": 859489,
+          "path": "pillow.libs/libjpeg-6dc8d115.so.62.4.0"
+        },
+        {
+          "bytes": 422689,
+          "path": "pillow.libs/liblcms2-88eaba2f.so.2.0.19"
+        },
+        {
+          "bytes": 202625,
+          "path": "pillow.libs/liblzma-de26b416.so.5.8.4"
+        },
+        {
+          "bytes": 476905,
+          "path": "pillow.libs/libopenjp2-e530e1bf.so.2.5.4"
+        },
+        {
+          "bytes": 226481,
+          "path": "pillow.libs/libpng16-1d1ba958.so.16.58.0"
+        },
+        {
+          "bytes": 47841,
+          "path": "pillow.libs/libsharpyuv-0066295b.so.0.1.2"
+        },
+        {
+          "bytes": 617449,
+          "path": "pillow.libs/libtiff-20b7e810.so.6.3.0"
+        },
+        {
+          "bytes": 745233,
+          "path": "pillow.libs/libwebp-51b0b3f7.so.7.2.0"
+        },
+        {
+          "bytes": 35985,
+          "path": "pillow.libs/libwebpdemux-9fe2abcc.so.2.0.17"
+        },
+        {
+          "bytes": 65921,
+          "path": "pillow.libs/libwebpmux-8fb1c9f6.so.3.1.2"
+        },
+        {
+          "bytes": 228569,
+          "path": "pillow.libs/libxcb-9065bb12.so.1.1.0"
+        },
+        {
+          "bytes": 815025,
+          "path": "pillow.libs/libzstd-40ad5e7e.so.1.5.7"
+        }
+      ],
+      "declared_license": "MIT-CMU",
+      "name": "pillow",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 70307,
+          "path": "pillow-13.0.0.dist-info/licenses/LICENSE",
+          "sha256": "dda12a98c1979cf3d94df1cff45d27a4cb3f04a60c76f76902ac54cac03ec0ce"
+        },
+        {
+          "bytes": 1358,
+          "path": "pillow-13.0.0.dist-info/sboms/auditwheel.cdx.json",
+          "sha256": "583049cf7ad8d9fa9c949695ec46bcf5c5ee12b5097527b1ba297757fecbd987"
+        },
+        {
+          "bytes": 21892,
+          "path": "pillow-13.0.0.dist-info/sboms/pillow-13.0.0.cdx.json",
+          "sha256": "fe1ca6e3a4f73e7018a3805a75a19377453f342d203712f37387ad6ee853fd44"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "e91c2b1cbeae768c98752e67e717e283d68dae45717b41f2d91eaee648e37b7d",
+      "upstream": [
+        "Release notes, https://pillow.readthedocs.io/en/stable/releasenotes/index.html",
+        "Changelog, https://github.com/python-pillow/Pillow/releases",
+        "Documentation, https://pillow.readthedocs.io",
+        "Funding, https://tidelift.com/lifter/search/pypi/pillow",
+        "Homepage, https://python-pillow.org",
+        "Mastodon, https://fosstodon.org/@pillow",
+        "Security, https://pillow.readthedocs.io/en/stable/handbook/security.html",
+        "Source, https://github.com/python-pillow/Pillow"
+      ],
+      "version": "13.0.0",
+      "wheel": "pillow-13.0.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "MIT",
+      "name": "pydantic",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 1129,
+          "path": "pydantic-2.14.1.dist-info/licenses/LICENSE",
+          "sha256": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "9195d967ec791692a04438115466764fb8b9a27b31f14a760437694f40d6b454",
+      "upstream": [
+        "Homepage, https://github.com/pydantic/pydantic",
+        "Documentation, https://pydantic.dev/docs/validation/latest/get-started/",
+        "Funding, https://github.com/sponsors/samuelcolvin",
+        "Source, https://github.com/pydantic/pydantic",
+        "Changelog, https://pydantic.dev/docs/validation/latest/get-started/changelog/"
+      ],
+      "version": "2.14.1",
+      "wheel": "pydantic-2.14.1-py3-none-any.whl"
+    },
+    {
+      "ELF_files": [
+        {
+          "bytes": 4856000,
+          "path": "pydantic_core/_pydantic_core.cpython-314-x86_64-linux-gnu.so"
+        }
+      ],
+      "declared_license": "MIT",
+      "name": "pydantic_core",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 1080,
+          "path": "pydantic_core-2.50.1.dist-info/licenses/LICENSE",
+          "sha256": "2afdd30d54b4d62b6f488a6bcc1546e84ec5061f13f4209c03d012348783795a"
+        },
+        {
+          "bytes": 121146,
+          "path": "pydantic_core-2.50.1.dist-info/sboms/pydantic-core.cyclonedx.json",
+          "sha256": "0f4cf513efa194d1fed0f1c1116db94f22a661f5953ccee29b85c26a44ff99bb"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "42b54c2c90ad348b5e3a85e03e715d572c1fde357ef104cdfe3b03b697a404ea",
+      "upstream": [
+        "Funding, https://github.com/sponsors/samuelcolvin",
+        "Homepage, https://github.com/pydantic",
+        "Source, https://github.com/pydantic/pydantic/tree/main/pydantic-core"
+      ],
+      "version": "2.50.1",
+      "wheel": "pydantic_core-2.50.1-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "name": "PySide6",
+      "notice_coverage": "MISSING IN WHEEL",
+      "notice_documents": [],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "ef2bdb61b1ad7e5e8db8ca7fb1a60d8b7960dfd490c582d005d8903044ab44f1",
+      "upstream": [
+        "Homepage, https://pyside.org",
+        "Documentation, https://doc.qt.io/qtforpython",
+        "Repository, https://code.qt.io/cgit/pyside/pyside-setup.git/",
+        "Changelog, https://code.qt.io/cgit/pyside/pyside-setup.git/tree/doc/changelogs",
+        "Tracker, https://qt-project.atlassian.net/browse/PYSIDE"
+      ],
+      "version": "6.11.3",
+      "wheel": "pyside6-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl"
+    },
+    {
+      "ELF_files": [
+        {
+          "bytes": 383448,
+          "path": "PySide6/Qt3DAnimation.abi3.so"
+        },
+        {
+          "bytes": 384344,
+          "path": "PySide6/Qt3DCore.abi3.so"
+        },
+        {
+          "bytes": 660536,
+          "path": "PySide6/Qt3DExtras.abi3.so"
+        },
+        {
+          "bytes": 304472,
+          "path": "PySide6/Qt3DInput.abi3.so"
+        },
+        {
+          "bytes": 95512,
+          "path": "PySide6/Qt3DLogic.abi3.so"
+        },
+        {
+          "bytes": 1392024,
+          "path": "PySide6/Qt3DRender.abi3.so"
+        },
+        {
+          "bytes": 541904,
+          "path": "PySide6/QtBluetooth.abi3.so"
+        },
+        {
+          "bytes": 457016,
+          "path": "PySide6/QtCanvasPainter.abi3.so"
+        },
+        {
+          "bytes": 1009480,
+          "path": "PySide6/QtCharts.abi3.so"
+        },
+        {
+          "bytes": 813936,
+          "path": "PySide6/QtDataVisualization.abi3.so"
+        },
+        {
+          "bytes": 1104752,
+          "path": "PySide6/QtGraphs.abi3.so"
+        },
+        {
+          "bytes": 209912,
+          "path": "PySide6/QtGraphsWidgets.abi3.so"
+        },
+        {
+          "bytes": 189752,
+          "path": "PySide6/QtHttpServer.abi3.so"
+        },
+        {
+          "bytes": 597544,
+          "path": "PySide6/QtLocation.abi3.so"
+        },
+        {
+          "bytes": 719640,
+          "path": "PySide6/QtMultimedia.abi3.so"
+        },
+        {
+          "bytes": 150248,
+          "path": "PySide6/QtMultimediaWidgets.abi3.so"
+        },
+        {
+          "bytes": 299120,
+          "path": "PySide6/QtNetworkAuth.abi3.so"
+        },
+        {
+          "bytes": 228696,
+          "path": "PySide6/QtNfc.abi3.so"
+        },
+        {
+          "bytes": 268376,
+          "path": "PySide6/QtPdf.abi3.so"
+        },
+        {
+          "bytes": 150840,
+          "path": "PySide6/QtPdfWidgets.abi3.so"
+        },
+        {
+          "bytes": 379832,
+          "path": "PySide6/QtPositioning.abi3.so"
+        },
+        {
+          "bytes": 193336,
+          "path": "PySide6/QtQuick3D.abi3.so"
+        },
+        {
+          "bytes": 483008,
+          "path": "PySide6/QtRemoteObjects.abi3.so"
+        },
+        {
+          "bytes": 280024,
+          "path": "PySide6/QtScxml.abi3.so"
+        },
+        {
+          "bytes": 479256,
+          "path": "PySide6/QtSensors.abi3.so"
+        },
+        {
+          "bytes": 474264,
+          "path": "PySide6/QtSerialBus.abi3.so"
+        },
+        {
+          "bytes": 140848,
+          "path": "PySide6/QtSerialPort.abi3.so"
+        },
+        {
+          "bytes": 158560,
+          "path": "PySide6/QtSpatialAudio.abi3.so"
+        },
+        {
+          "bytes": 247496,
+          "path": "PySide6/QtStateMachine.abi3.so"
+        },
+        {
+          "bytes": 161312,
+          "path": "PySide6/QtTextToSpeech.abi3.so"
+        },
+        {
+          "bytes": 91824,
+          "path": "PySide6/QtWebChannel.abi3.so"
+        },
+        {
+          "bytes": 635112,
+          "path": "PySide6/QtWebEngineCore.abi3.so"
+        },
+        {
+          "bytes": 126936,
+          "path": "PySide6/QtWebEngineQuick.abi3.so"
+        },
+        {
+          "bytes": 134040,
+          "path": "PySide6/QtWebEngineWidgets.abi3.so"
+        },
+        {
+          "bytes": 158584,
+          "path": "PySide6/QtWebSockets.abi3.so"
+        },
+        {
+          "bytes": 126936,
+          "path": "PySide6/QtWebView.abi3.so"
+        },
+        {
+          "bytes": 60369,
+          "path": "PySide6/balsam"
+        },
+        {
+          "bytes": 125169,
+          "path": "PySide6/balsamui"
+        },
+        {
+          "bytes": 104577,
+          "path": "PySide6/qsb"
+        },
+        {
+          "bytes": 688240,
+          "path": "PySide6/Qt/lib/libQt63DAnimation.so.6"
+        },
+        {
+          "bytes": 653160,
+          "path": "PySide6/Qt/lib/libQt63DCore.so.6"
+        },
+        {
+          "bytes": 886760,
+          "path": "PySide6/Qt/lib/libQt63DExtras.so.6"
+        },
+        {
+          "bytes": 573416,
+          "path": "PySide6/Qt/lib/libQt63DInput.so.6"
+        },
+        {
+          "bytes": 64616,
+          "path": "PySide6/Qt/lib/libQt63DLogic.so.6"
+        },
+        {
+          "bytes": 402920,
+          "path": "PySide6/Qt/lib/libQt63DQuick.so.6"
+        },
+        {
+          "bytes": 185584,
+          "path": "PySide6/Qt/lib/libQt63DQuickAnimation.so.6"
+        },
+        {
+          "bytes": 286576,
+          "path": "PySide6/Qt/lib/libQt63DQuickExtras.so.6"
+        },
+        {
+          "bytes": 77552,
+          "path": "PySide6/Qt/lib/libQt63DQuickInput.so.6"
+        },
+        {
+          "bytes": 19440,
+          "path": "PySide6/Qt/lib/libQt63DQuickLogic.so.6"
+        },
+        {
+          "bytes": 731632,
+          "path": "PySide6/Qt/lib/libQt63DQuickRender.so.6"
+        },
+        {
+          "bytes": 122736,
+          "path": "PySide6/Qt/lib/libQt63DQuickScene2D.so.6"
+        },
+        {
+          "bytes": 97904,
+          "path": "PySide6/Qt/lib/libQt63DQuickScene3D.so.6"
+        },
+        {
+          "bytes": 3070128,
+          "path": "PySide6/Qt/lib/libQt63DRender.so.6"
+        },
+        {
+          "bytes": 1359848,
+          "path": "PySide6/Qt/lib/libQt6Bluetooth.so.6"
+        },
+        {
+          "bytes": 733040,
+          "path": "PySide6/Qt/lib/libQt6CanvasPainter.so.6"
+        },
+        {
+          "bytes": 2294760,
+          "path": "PySide6/Qt/lib/libQt6Charts.so.6"
+        },
+        {
+          "bytes": 761576,
+          "path": "PySide6/Qt/lib/libQt6ChartsQml.so.6"
+        },
+        {
+          "bytes": 1578864,
+          "path": "PySide6/Qt/lib/libQt6DataVisualization.so.6"
+        },
+        {
+          "bytes": 570488,
+          "path": "PySide6/Qt/lib/libQt6DataVisualizationQml.so.6"
+        },
+        {
+          "bytes": 14376,
+          "path": "PySide6/Qt/lib/libQt6FFmpegStub-crypto.so.3"
+        },
+        {
+          "bytes": 43472,
+          "path": "PySide6/Qt/lib/libQt6FFmpegStub-ssl.so.3"
+        },
+        {
+          "bytes": 14664,
+          "path": "PySide6/Qt/lib/libQt6FFmpegStub-va-drm.so.2"
+        },
+        {
+          "bytes": 14664,
+          "path": "PySide6/Qt/lib/libQt6FFmpegStub-va-x11.so.2"
+        },
+        {
+          "bytes": 31136,
+          "path": "PySide6/Qt/lib/libQt6FFmpegStub-va.so.2"
+        },
+        {
+          "bytes": 3222504,
+          "path": "PySide6/Qt/lib/libQt6Graphs.so.6"
+        },
+        {
+          "bytes": 177136,
+          "path": "PySide6/Qt/lib/libQt6GraphsWidgets.so.6"
+        },
+        {
+          "bytes": 282856,
+          "path": "PySide6/Qt/lib/libQt6HttpServer.so.6"
+        },
+        {
+          "bytes": 2191240,
+          "path": "PySide6/Qt/lib/libQt6Location.so.6"
+        },
+        {
+          "bytes": 1900368,
+          "path": "PySide6/Qt/lib/libQt6Multimedia.so.6"
+        },
+        {
+          "bytes": 377200,
+          "path": "PySide6/Qt/lib/libQt6MultimediaQuick.so.6"
+        },
+        {
+          "bytes": 48112,
+          "path": "PySide6/Qt/lib/libQt6MultimediaWidgets.so.6"
+        },
+        {
+          "bytes": 341104,
+          "path": "PySide6/Qt/lib/libQt6NetworkAuth.so.6"
+        },
+        {
+          "bytes": 246760,
+          "path": "PySide6/Qt/lib/libQt6Nfc.so.6"
+        },
+        {
+          "bytes": 4506016,
+          "path": "PySide6/Qt/lib/libQt6Pdf.so.6"
+        },
+        {
+          "bytes": 684904,
+          "path": "PySide6/Qt/lib/libQt6PdfQuick.so.6"
+        },
+        {
+          "bytes": 101736,
+          "path": "PySide6/Qt/lib/libQt6PdfWidgets.so.6"
+        },
+        {
+          "bytes": 674512,
+          "path": "PySide6/Qt/lib/libQt6Positioning.so.6"
+        },
+        {
+          "bytes": 429424,
+          "path": "PySide6/Qt/lib/libQt6PositioningQuick.so.6"
+        },
+        {
+          "bytes": 2014600,
+          "path": "PySide6/Qt/lib/libQt6Quick3D.so.6"
+        },
+        {
+          "bytes": 60144,
+          "path": "PySide6/Qt/lib/libQt6Quick3DAssetImport.so.6"
+        },
+        {
+          "bytes": 324336,
+          "path": "PySide6/Qt/lib/libQt6Quick3DAssetUtils.so.6"
+        },
+        {
+          "bytes": 440864,
+          "path": "PySide6/Qt/lib/libQt6Quick3DEffects.so.6"
+        },
+        {
+          "bytes": 342560,
+          "path": "PySide6/Qt/lib/libQt6Quick3DGlslParser.so.6"
+        },
+        {
+          "bytes": 879856,
+          "path": "PySide6/Qt/lib/libQt6Quick3DHelpers.so.6"
+        },
+        {
+          "bytes": 625264,
+          "path": "PySide6/Qt/lib/libQt6Quick3DHelpersImpl.so.6"
+        },
+        {
+          "bytes": 63808,
+          "path": "PySide6/Qt/lib/libQt6Quick3DIblBaker.so.6"
+        },
+        {
+          "bytes": 14576,
+          "path": "PySide6/Qt/lib/libQt6Quick3DParticleEffects.so.6"
+        },
+        {
+          "bytes": 2235760,
+          "path": "PySide6/Qt/lib/libQt6Quick3DParticles.so.6"
+        },
+        {
+          "bytes": 4743808,
+          "path": "PySide6/Qt/lib/libQt6Quick3DRuntimeRender.so.6"
+        },
+        {
+          "bytes": 103672,
+          "path": "PySide6/Qt/lib/libQt6Quick3DSpatialAudio.so.6"
+        },
+        {
+          "bytes": 510968,
+          "path": "PySide6/Qt/lib/libQt6Quick3DUtils.so.6"
+        },
+        {
+          "bytes": 1119840,
+          "path": "PySide6/Qt/lib/libQt6Quick3DXr.so.6"
+        },
+        {
+          "bytes": 1257808,
+          "path": "PySide6/Qt/lib/libQt6RemoteObjects.so.6"
+        },
+        {
+          "bytes": 62192,
+          "path": "PySide6/Qt/lib/libQt6RemoteObjectsQml.so.6"
+        },
+        {
+          "bytes": 583784,
+          "path": "PySide6/Qt/lib/libQt6Scxml.so.6"
+        },
+        {
+          "bytes": 124008,
+          "path": "PySide6/Qt/lib/libQt6ScxmlQml.so.6"
+        },
+        {
+          "bytes": 278888,
+          "path": "PySide6/Qt/lib/libQt6Sensors.so.6"
+        },
+        {
+          "bytes": 353136,
+          "path": "PySide6/Qt/lib/libQt6SensorsQuick.so.6"
+        },
+        {
+          "bytes": 505704,
+          "path": "PySide6/Qt/lib/libQt6SerialBus.so.6"
+        },
+        {
+          "bytes": 142952,
+          "path": "PySide6/Qt/lib/libQt6SerialPort.so.6"
+        },
+        {
+          "bytes": 5665544,
+          "path": "PySide6/Qt/lib/libQt6ShaderTools.so.6"
+        },
+        {
+          "bytes": 867824,
+          "path": "PySide6/Qt/lib/libQt6SpatialAudio.so.6"
+        },
+        {
+          "bytes": 403312,
+          "path": "PySide6/Qt/lib/libQt6StateMachine.so.6"
+        },
+        {
+          "bytes": 130032,
+          "path": "PySide6/Qt/lib/libQt6StateMachineQml.so.6"
+        },
+        {
+          "bytes": 131184,
+          "path": "PySide6/Qt/lib/libQt6TextToSpeech.so.6"
+        },
+        {
+          "bytes": 525616,
+          "path": "PySide6/Qt/lib/libQt6VirtualKeyboard.so.6"
+        },
+        {
+          "bytes": 101104,
+          "path": "PySide6/Qt/lib/libQt6VirtualKeyboardQml.so.6"
+        },
+        {
+          "bytes": 64760,
+          "path": "PySide6/Qt/lib/libQt6VirtualKeyboardSettings.so.6"
+        },
+        {
+          "bytes": 261224,
+          "path": "PySide6/Qt/lib/libQt6WebChannel.so.6"
+        },
+        {
+          "bytes": 48496,
+          "path": "PySide6/Qt/lib/libQt6WebChannelQuick.so.6"
+        },
+        {
+          "bytes": 204300256,
+          "path": "PySide6/Qt/lib/libQt6WebEngineCore.so.6"
+        },
+        {
+          "bytes": 865904,
+          "path": "PySide6/Qt/lib/libQt6WebEngineQuick.so.6"
+        },
+        {
+          "bytes": 170544,
+          "path": "PySide6/Qt/lib/libQt6WebEngineQuickDelegatesQml.so.6"
+        },
+        {
+          "bytes": 162800,
+          "path": "PySide6/Qt/lib/libQt6WebEngineWidgets.so.6"
+        },
+        {
+          "bytes": 246376,
+          "path": "PySide6/Qt/lib/libQt6WebSockets.so.6"
+        },
+        {
+          "bytes": 52456,
+          "path": "PySide6/Qt/lib/libQt6WebView.so.6"
+        },
+        {
+          "bytes": 82032,
+          "path": "PySide6/Qt/lib/libQt6WebViewQuick.so.6"
+        },
+        {
+          "bytes": 14863017,
+          "path": "PySide6/Qt/lib/libavcodec.so"
+        },
+        {
+          "bytes": 14863017,
+          "path": "PySide6/Qt/lib/libavcodec.so.61"
+        },
+        {
+          "bytes": 14863017,
+          "path": "PySide6/Qt/lib/libavcodec.so.61.19.101"
+        },
+        {
+          "bytes": 2732801,
+          "path": "PySide6/Qt/lib/libavformat.so"
+        },
+        {
+          "bytes": 2732801,
+          "path": "PySide6/Qt/lib/libavformat.so.61"
+        },
+        {
+          "bytes": 2732801,
+          "path": "PySide6/Qt/lib/libavformat.so.61.7.103"
+        },
+        {
+          "bytes": 1116257,
+          "path": "PySide6/Qt/lib/libavutil.so"
+        },
+        {
+          "bytes": 1116257,
+          "path": "PySide6/Qt/lib/libavutil.so.59"
+        },
+        {
+          "bytes": 1116257,
+          "path": "PySide6/Qt/lib/libavutil.so.59.39.100"
+        },
+        {
+          "bytes": 124937,
+          "path": "PySide6/Qt/lib/libswresample.so"
+        },
+        {
+          "bytes": 124937,
+          "path": "PySide6/Qt/lib/libswresample.so.5"
+        },
+        {
+          "bytes": 124937,
+          "path": "PySide6/Qt/lib/libswresample.so.5.3.100"
+        },
+        {
+          "bytes": 612529,
+          "path": "PySide6/Qt/lib/libswscale.so"
+        },
+        {
+          "bytes": 612529,
+          "path": "PySide6/Qt/lib/libswscale.so.8"
+        },
+        {
+          "bytes": 612529,
+          "path": "PySide6/Qt/lib/libswscale.so.8.3.100"
+        },
+        {
+          "bytes": 18297,
+          "path": "PySide6/Qt/libexec/QtWebEngineProcess"
+        },
+        {
+          "bytes": 3127032,
+          "path": "PySide6/Qt/plugins/assetimporters/libassimp.so"
+        },
+        {
+          "bytes": 85696,
+          "path": "PySide6/Qt/plugins/canbus/libqtpassthrucanbus.so"
+        },
+        {
+          "bytes": 60096,
+          "path": "PySide6/Qt/plugins/canbus/libqtpeakcanbus.so"
+        },
+        {
+          "bytes": 68544,
+          "path": "PySide6/Qt/plugins/canbus/libqtsocketcanbus.so"
+        },
+        {
+          "bytes": 51904,
+          "path": "PySide6/Qt/plugins/canbus/libqttinycanbus.so"
+        },
+        {
+          "bytes": 56128,
+          "path": "PySide6/Qt/plugins/canbus/libqtvirtualcanbus.so"
+        },
+        {
+          "bytes": 92872,
+          "path": "PySide6/Qt/plugins/geometryloaders/libdefaultgeometryloader.so"
+        },
+        {
+          "bytes": 84680,
+          "path": "PySide6/Qt/plugins/geometryloaders/libgltfgeometryloader.so"
+        },
+        {
+          "bytes": 39760,
+          "path": "PySide6/Qt/plugins/geoservices/libqtgeoservices_itemsoverlay.so"
+        },
+        {
+          "bytes": 324800,
+          "path": "PySide6/Qt/plugins/geoservices/libqtgeoservices_osm.so"
+        },
+        {
+          "bytes": 781776,
+          "path": "PySide6/Qt/plugins/multimedia/libffmpegmediaplugin.so"
+        },
+        {
+          "bytes": 85832,
+          "path": "PySide6/Qt/plugins/position/libqtposition_geoclue2.so"
+        },
+        {
+          "bytes": 76864,
+          "path": "PySide6/Qt/plugins/position/libqtposition_nmea.so"
+        },
+        {
+          "bytes": 77000,
+          "path": "PySide6/Qt/plugins/position/libqtposition_positionpoll.so"
+        },
+        {
+          "bytes": 1528048,
+          "path": "PySide6/Qt/plugins/renderers/libopenglrenderer.so"
+        },
+        {
+          "bytes": 637696,
+          "path": "PySide6/Qt/plugins/renderers/librhirenderer.so"
+        },
+        {
+          "bytes": 27192,
+          "path": "PySide6/Qt/plugins/renderplugins/libscene2d.so"
+        },
+        {
+          "bytes": 2845984,
+          "path": "PySide6/Qt/plugins/sceneparsers/libassimpsceneimport.so"
+        },
+        {
+          "bytes": 334656,
+          "path": "PySide6/Qt/plugins/sceneparsers/libgltfsceneexport.so"
+        },
+        {
+          "bytes": 273728,
+          "path": "PySide6/Qt/plugins/sceneparsers/libgltfsceneimport.so"
+        },
+        {
+          "bytes": 64456,
+          "path": "PySide6/Qt/plugins/scxmldatamodel/libqscxmlecmascriptdatamodel.so"
+        },
+        {
+          "bytes": 43712,
+          "path": "PySide6/Qt/plugins/sensors/libqtsensors_generic.so"
+        },
+        {
+          "bytes": 90320,
+          "path": "PySide6/Qt/plugins/sensors/libqtsensors_iio-sensor-proxy.so"
+        },
+        {
+          "bytes": 56136,
+          "path": "PySide6/Qt/plugins/texttospeech/libqtexttospeech_mock.so"
+        },
+        {
+          "bytes": 56008,
+          "path": "PySide6/Qt/plugins/texttospeech/libqtexttospeech_speechd.so"
+        },
+        {
+          "bytes": 51912,
+          "path": "PySide6/Qt/plugins/webview/libqtwebview_webengine.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/Qt3D/Animation/libquick3danimationplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/Qt3D/Core/libquick3dcoreplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/Qt3D/Extras/libquick3dextrasplugin.so"
+        },
+        {
+          "bytes": 123592,
+          "path": "PySide6/Qt/qml/Qt3D/Input/libquick3dinputplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/Qt3D/Logic/libquick3dlogicplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/Qt3D/Render/libquick3drenderplugin.so"
+        },
+        {
+          "bytes": 977864,
+          "path": "PySide6/Qt/qml/Qt5Compat/GraphicalEffects/libqtgraphicaleffectsplugin.so"
+        },
+        {
+          "bytes": 552912,
+          "path": "PySide6/Qt/qml/Qt5Compat/GraphicalEffects/private/libqtgraphicaleffectsprivateplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtCharts/libqtchartsqml2plugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtDataVisualization/libdatavisualizationqmlplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtGraphs/libgraphsplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtLocation/libdeclarative_locationplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtMultimedia/libquickmultimediaplugin.so"
+        },
+        {
+          "bytes": 48456,
+          "path": "PySide6/Qt/qml/QtPositioning/libpositioningquickplugin.so"
+        },
+        {
+          "bytes": 19392,
+          "path": "PySide6/Qt/qml/QtQuick3D/libqquick3dplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick3D/AssetUtils/libqtquick3dassetutilsplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick3D/Effects/libqtquick3deffectplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick3D/Helpers/libqtquick3dhelpersplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtQuick3D/Helpers/impl/libqtquick3dhelpersimplplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtQuick3D/ParticleEffects/libqtquick3dparticleeffectsplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtQuick3D/Particles3D/libqtquick3dparticles3dplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick3D/SpatialAudio/libquick3dspatialaudioplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtQuick3D/Xr/libquick3dxrplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtRemoteObjects/libdeclarative_remoteobjectsplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtScxml/libdeclarative_scxmlplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtSensors/libsensorsquickplugin.so"
+        },
+        {
+          "bytes": 91208,
+          "path": "PySide6/Qt/qml/QtTextToSpeech/libtexttospeechqmlplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtWebChannel/libwebchannelquickplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtWebEngine/libqtwebenginequickplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtWebEngine/ControlsDelegates/libqtwebenginequickdelegatesplugin.so"
+        },
+        {
+          "bytes": 69320,
+          "path": "PySide6/Qt/qml/QtWebSockets/libqmlwebsocketsplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtWebView/libqtwebviewquickplugin.so"
+        }
+      ],
+      "declared_license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "name": "PySide6_Addons",
+      "notice_coverage": "MISSING IN WHEEL",
+      "notice_documents": [],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "5cab663fbff1b7a1fa7e641754de3ca1ea410407fc70bd4e240144b42d09a69c",
+      "upstream": [
+        "Homepage, https://pyside.org",
+        "Documentation, https://doc.qt.io/qtforpython",
+        "Repository, https://code.qt.io/cgit/pyside/pyside-setup.git/",
+        "Changelog, https://code.qt.io/cgit/pyside/pyside-setup.git/tree/doc/changelogs",
+        "Tracker, https://qt-project.atlassian.net/browse/PYSIDE"
+      ],
+      "version": "6.11.3",
+      "wheel": "pyside6_addons-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl"
+    },
+    {
+      "ELF_files": [
+        {
+          "bytes": 119064,
+          "path": "PySide6/QtConcurrent.abi3.so"
+        },
+        {
+          "bytes": 4044680,
+          "path": "PySide6/QtCore.abi3.so"
+        },
+        {
+          "bytes": 332168,
+          "path": "PySide6/QtDBus.abi3.so"
+        },
+        {
+          "bytes": 572152,
+          "path": "PySide6/QtDesigner.abi3.so"
+        },
+        {
+          "bytes": 4786248,
+          "path": "PySide6/QtGui.abi3.so"
+        },
+        {
+          "bytes": 328472,
+          "path": "PySide6/QtHelp.abi3.so"
+        },
+        {
+          "bytes": 1229688,
+          "path": "PySide6/QtNetwork.abi3.so"
+        },
+        {
+          "bytes": 8878264,
+          "path": "PySide6/QtOpenGL.abi3.so"
+        },
+        {
+          "bytes": 129584,
+          "path": "PySide6/QtOpenGLWidgets.abi3.so"
+        },
+        {
+          "bytes": 315504,
+          "path": "PySide6/QtPrintSupport.abi3.so"
+        },
+        {
+          "bytes": 556648,
+          "path": "PySide6/QtQml.abi3.so"
+        },
+        {
+          "bytes": 932232,
+          "path": "PySide6/QtQuick.abi3.so"
+        },
+        {
+          "bytes": 91640,
+          "path": "PySide6/QtQuickControls2.abi3.so"
+        },
+        {
+          "bytes": 61624,
+          "path": "PySide6/QtQuickTest.abi3.so"
+        },
+        {
+          "bytes": 138456,
+          "path": "PySide6/QtQuickWidgets.abi3.so"
+        },
+        {
+          "bytes": 477728,
+          "path": "PySide6/QtSql.abi3.so"
+        },
+        {
+          "bytes": 122744,
+          "path": "PySide6/QtSvg.abi3.so"
+        },
+        {
+          "bytes": 150032,
+          "path": "PySide6/QtSvgWidgets.abi3.so"
+        },
+        {
+          "bytes": 203032,
+          "path": "PySide6/QtTest.abi3.so"
+        },
+        {
+          "bytes": 121376,
+          "path": "PySide6/QtUiTools.abi3.so"
+        },
+        {
+          "bytes": 6106232,
+          "path": "PySide6/QtWidgets.abi3.so"
+        },
+        {
+          "bytes": 248952,
+          "path": "PySide6/QtXml.abi3.so"
+        },
+        {
+          "bytes": 1933465,
+          "path": "PySide6/assistant"
+        },
+        {
+          "bytes": 722697,
+          "path": "PySide6/designer"
+        },
+        {
+          "bytes": 292520,
+          "path": "PySide6/libpyside6.abi3.so.6.11"
+        },
+        {
+          "bytes": 82520,
+          "path": "PySide6/libpyside6qml.abi3.so.6.11"
+        },
+        {
+          "bytes": 1453377,
+          "path": "PySide6/linguist"
+        },
+        {
+          "bytes": 818033,
+          "path": "PySide6/lrelease"
+        },
+        {
+          "bytes": 1128585,
+          "path": "PySide6/lupdate"
+        },
+        {
+          "bytes": 2748865,
+          "path": "PySide6/qmlformat"
+        },
+        {
+          "bytes": 125521,
+          "path": "PySide6/qmllint"
+        },
+        {
+          "bytes": 5011081,
+          "path": "PySide6/qmlls"
+        },
+        {
+          "bytes": 37777,
+          "path": "PySide6/svgtoqml"
+        },
+        {
+          "bytes": 23008,
+          "path": "PySide6/Qt/lib/libQt6Concurrent.so.6"
+        },
+        {
+          "bytes": 7541032,
+          "path": "PySide6/Qt/lib/libQt6Core.so.6"
+        },
+        {
+          "bytes": 894184,
+          "path": "PySide6/Qt/lib/libQt6DBus.so.6"
+        },
+        {
+          "bytes": 6036312,
+          "path": "PySide6/Qt/lib/libQt6Designer.so.6"
+        },
+        {
+          "bytes": 3688816,
+          "path": "PySide6/Qt/lib/libQt6DesignerComponents.so.6"
+        },
+        {
+          "bytes": 311448,
+          "path": "PySide6/Qt/lib/libQt6EglFSDeviceIntegration.so.6"
+        },
+        {
+          "bytes": 195056,
+          "path": "PySide6/Qt/lib/libQt6EglFsKmsSupport.so.6"
+        },
+        {
+          "bytes": 11498552,
+          "path": "PySide6/Qt/lib/libQt6Gui.so.6"
+        },
+        {
+          "bytes": 644584,
+          "path": "PySide6/Qt/lib/libQt6Help.so.6"
+        },
+        {
+          "bytes": 56176,
+          "path": "PySide6/Qt/lib/libQt6LabsAnimation.so.6"
+        },
+        {
+          "bytes": 139000,
+          "path": "PySide6/Qt/lib/libQt6LabsFolderListModel.so.6"
+        },
+        {
+          "bytes": 376560,
+          "path": "PySide6/Qt/lib/libQt6LabsPlatform.so.6"
+        },
+        {
+          "bytes": 222448,
+          "path": "PySide6/Qt/lib/libQt6LabsQmlModels.so.6"
+        },
+        {
+          "bytes": 56176,
+          "path": "PySide6/Qt/lib/libQt6LabsSettings.so.6"
+        },
+        {
+          "bytes": 52208,
+          "path": "PySide6/Qt/lib/libQt6LabsSharedImage.so.6"
+        },
+        {
+          "bytes": 1818256,
+          "path": "PySide6/Qt/lib/libQt6LabsStyleKit.so.6"
+        },
+        {
+          "bytes": 324080,
+          "path": "PySide6/Qt/lib/libQt6LabsStyleKitImpl.so.6"
+        },
+        {
+          "bytes": 64240,
+          "path": "PySide6/Qt/lib/libQt6LabsSynchronizer.so.6"
+        },
+        {
+          "bytes": 56176,
+          "path": "PySide6/Qt/lib/libQt6LabsWavefrontMesh.so.6"
+        },
+        {
+          "bytes": 446312,
+          "path": "PySide6/Qt/lib/libQt6Lottie.so.6"
+        },
+        {
+          "bytes": 190968,
+          "path": "PySide6/Qt/lib/libQt6LottieVectorImageGenerator.so.6"
+        },
+        {
+          "bytes": 35832,
+          "path": "PySide6/Qt/lib/libQt6LottieVectorImageHelpers.so.6"
+        },
+        {
+          "bytes": 2149512,
+          "path": "PySide6/Qt/lib/libQt6Network.so.6"
+        },
+        {
+          "bytes": 706664,
+          "path": "PySide6/Qt/lib/libQt6OpenGL.so.6"
+        },
+        {
+          "bytes": 60144,
+          "path": "PySide6/Qt/lib/libQt6OpenGLWidgets.so.6"
+        },
+        {
+          "bytes": 527088,
+          "path": "PySide6/Qt/lib/libQt6PrintSupport.so.6"
+        },
+        {
+          "bytes": 6788592,
+          "path": "PySide6/Qt/lib/libQt6Qml.so.6"
+        },
+        {
+          "bytes": 2550432,
+          "path": "PySide6/Qt/lib/libQt6QmlCompiler.so.6"
+        },
+        {
+          "bytes": 155752,
+          "path": "PySide6/Qt/lib/libQt6QmlCore.so.6"
+        },
+        {
+          "bytes": 60176,
+          "path": "PySide6/Qt/lib/libQt6QmlLocalStorage.so.6"
+        },
+        {
+          "bytes": 184808,
+          "path": "PySide6/Qt/lib/libQt6QmlMeta.so.6"
+        },
+        {
+          "bytes": 1231720,
+          "path": "PySide6/Qt/lib/libQt6QmlModels.so.6"
+        },
+        {
+          "bytes": 146536,
+          "path": "PySide6/Qt/lib/libQt6QmlNetwork.so.6"
+        },
+        {
+          "bytes": 89616,
+          "path": "PySide6/Qt/lib/libQt6QmlWorkerScript.so.6"
+        },
+        {
+          "bytes": 147312,
+          "path": "PySide6/Qt/lib/libQt6QmlXmlListModel.so.6"
+        },
+        {
+          "bytes": 8274512,
+          "path": "PySide6/Qt/lib/libQt6Quick.so.6"
+        },
+        {
+          "bytes": 105328,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2.so.6"
+        },
+        {
+          "bytes": 2121592,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2Basic.so.6"
+        },
+        {
+          "bytes": 102272,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2BasicStyleImpl.so.6"
+        },
+        {
+          "bytes": 245384,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2FluentWinUI3StyleImpl.so.6"
+        },
+        {
+          "bytes": 1727608,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2Fusion.so.6"
+        },
+        {
+          "bytes": 204928,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2FusionStyleImpl.so.6"
+        },
+        {
+          "bytes": 3599864,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2Imagine.so.6"
+        },
+        {
+          "bytes": 64000,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2ImagineStyleImpl.so.6"
+        },
+        {
+          "bytes": 418288,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2Impl.so.6"
+        },
+        {
+          "bytes": 2224408,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2Material.so.6"
+        },
+        {
+          "bytes": 370176,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2MaterialStyleImpl.so.6"
+        },
+        {
+          "bytes": 1830648,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2Universal.so.6"
+        },
+        {
+          "bytes": 159616,
+          "path": "PySide6/Qt/lib/libQt6QuickControls2UniversalStyleImpl.so.6"
+        },
+        {
+          "bytes": 191344,
+          "path": "PySide6/Qt/lib/libQt6QuickDialogs2.so.6"
+        },
+        {
+          "bytes": 3406968,
+          "path": "PySide6/Qt/lib/libQt6QuickDialogs2QuickImpl.so.6"
+        },
+        {
+          "bytes": 35312,
+          "path": "PySide6/Qt/lib/libQt6QuickDialogs2Utils.so.6"
+        },
+        {
+          "bytes": 372336,
+          "path": "PySide6/Qt/lib/libQt6QuickEffects.so.6"
+        },
+        {
+          "bytes": 430448,
+          "path": "PySide6/Qt/lib/libQt6QuickLayouts.so.6"
+        },
+        {
+          "bytes": 740272,
+          "path": "PySide6/Qt/lib/libQt6QuickParticles.so.6"
+        },
+        {
+          "bytes": 393904,
+          "path": "PySide6/Qt/lib/libQt6QuickShapes.so.6"
+        },
+        {
+          "bytes": 239096,
+          "path": "PySide6/Qt/lib/libQt6QuickShapesDesignHelpers.so.6"
+        },
+        {
+          "bytes": 2957680,
+          "path": "PySide6/Qt/lib/libQt6QuickTemplates2.so.6"
+        },
+        {
+          "bytes": 341352,
+          "path": "PySide6/Qt/lib/libQt6QuickTest.so.6"
+        },
+        {
+          "bytes": 114800,
+          "path": "PySide6/Qt/lib/libQt6QuickTimeline.so.6"
+        },
+        {
+          "bytes": 89848,
+          "path": "PySide6/Qt/lib/libQt6QuickTimelineBlendTrees.so.6"
+        },
+        {
+          "bytes": 77424,
+          "path": "PySide6/Qt/lib/libQt6QuickVectorImage.so.6"
+        },
+        {
+          "bytes": 301688,
+          "path": "PySide6/Qt/lib/libQt6QuickVectorImageGenerator.so.6"
+        },
+        {
+          "bytes": 164472,
+          "path": "PySide6/Qt/lib/libQt6QuickVectorImageHelpers.so.6"
+        },
+        {
+          "bytes": 142576,
+          "path": "PySide6/Qt/lib/libQt6QuickWidgets.so.6"
+        },
+        {
+          "bytes": 356360,
+          "path": "PySide6/Qt/lib/libQt6Sql.so.6"
+        },
+        {
+          "bytes": 691176,
+          "path": "PySide6/Qt/lib/libQt6Svg.so.6"
+        },
+        {
+          "bytes": 51816,
+          "path": "PySide6/Qt/lib/libQt6SvgWidgets.so.6"
+        },
+        {
+          "bytes": 478720,
+          "path": "PySide6/Qt/lib/libQt6Test.so.6"
+        },
+        {
+          "bytes": 632296,
+          "path": "PySide6/Qt/lib/libQt6UiTools.so.6"
+        },
+        {
+          "bytes": 1243472,
+          "path": "PySide6/Qt/lib/libQt6WaylandClient.so.6"
+        },
+        {
+          "bytes": 2138416,
+          "path": "PySide6/Qt/lib/libQt6WaylandCompositor.so.6"
+        },
+        {
+          "bytes": 43344,
+          "path": "PySide6/Qt/lib/libQt6WaylandEglCompositorHwIntegration.so.6"
+        },
+        {
+          "bytes": 8159592,
+          "path": "PySide6/Qt/lib/libQt6Widgets.so.6"
+        },
+        {
+          "bytes": 146704,
+          "path": "PySide6/Qt/lib/libQt6WlShellIntegration.so.6"
+        },
+        {
+          "bytes": 779720,
+          "path": "PySide6/Qt/lib/libQt6XcbQpa.so.6"
+        },
+        {
+          "bytes": 178480,
+          "path": "PySide6/Qt/lib/libQt6Xml.so.6"
+        },
+        {
+          "bytes": 32035888,
+          "path": "PySide6/Qt/lib/libicudata.so.73"
+        },
+        {
+          "bytes": 4477136,
+          "path": "PySide6/Qt/lib/libicui18n.so.73"
+        },
+        {
+          "bytes": 2571736,
+          "path": "PySide6/Qt/lib/libicuuc.so.73"
+        },
+        {
+          "bytes": 81297,
+          "path": "PySide6/Qt/libexec/qmlcachegen"
+        },
+        {
+          "bytes": 134017,
+          "path": "PySide6/Qt/libexec/qmlimportscanner"
+        },
+        {
+          "bytes": 283425,
+          "path": "PySide6/Qt/libexec/qmltyperegistrar"
+        },
+        {
+          "bytes": 137697,
+          "path": "PySide6/Qt/libexec/rcc"
+        },
+        {
+          "bytes": 725825,
+          "path": "PySide6/Qt/libexec/uic"
+        },
+        {
+          "bytes": 50184,
+          "path": "PySide6/Qt/plugins/designer/libPySidePlugin.so"
+        },
+        {
+          "bytes": 27328,
+          "path": "PySide6/Qt/plugins/designer/libqquickwidget.so"
+        },
+        {
+          "bytes": 39616,
+          "path": "PySide6/Qt/plugins/designer/libqwebengineview.so"
+        },
+        {
+          "bytes": 35400,
+          "path": "PySide6/Qt/plugins/egldeviceintegrations/libqeglfs-emu-integration.so"
+        },
+        {
+          "bytes": 178768,
+          "path": "PySide6/Qt/plugins/egldeviceintegrations/libqeglfs-kms-egldevice-integration.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/plugins/egldeviceintegrations/libqeglfs-kms-integration.so"
+        },
+        {
+          "bytes": 27208,
+          "path": "PySide6/Qt/plugins/egldeviceintegrations/libqeglfs-x11-integration.so"
+        },
+        {
+          "bytes": 68552,
+          "path": "PySide6/Qt/plugins/generic/libqevdevkeyboardplugin.so"
+        },
+        {
+          "bytes": 60864,
+          "path": "PySide6/Qt/plugins/generic/libqevdevmouseplugin.so"
+        },
+        {
+          "bytes": 56264,
+          "path": "PySide6/Qt/plugins/generic/libqevdevtabletplugin.so"
+        },
+        {
+          "bytes": 134336,
+          "path": "PySide6/Qt/plugins/generic/libqevdevtouchplugin.so"
+        },
+        {
+          "bytes": 92992,
+          "path": "PySide6/Qt/plugins/generic/libqtuiotouchplugin.so"
+        },
+        {
+          "bytes": 68152,
+          "path": "PySide6/Qt/plugins/iconengines/libqsvgicon.so"
+        },
+        {
+          "bytes": 43576,
+          "path": "PySide6/Qt/plugins/imageformats/libqgif.so"
+        },
+        {
+          "bytes": 47672,
+          "path": "PySide6/Qt/plugins/imageformats/libqicns.so"
+        },
+        {
+          "bytes": 39480,
+          "path": "PySide6/Qt/plugins/imageformats/libqico.so"
+        },
+        {
+          "bytes": 539192,
+          "path": "PySide6/Qt/plugins/imageformats/libqjpeg.so"
+        },
+        {
+          "bytes": 35384,
+          "path": "PySide6/Qt/plugins/imageformats/libqpdf.so"
+        },
+        {
+          "bytes": 27192,
+          "path": "PySide6/Qt/plugins/imageformats/libqsvg.so"
+        },
+        {
+          "bytes": 27192,
+          "path": "PySide6/Qt/plugins/imageformats/libqtga.so"
+        },
+        {
+          "bytes": 510536,
+          "path": "PySide6/Qt/plugins/imageformats/libqtiff.so"
+        },
+        {
+          "bytes": 27192,
+          "path": "PySide6/Qt/plugins/imageformats/libqwbmp.so"
+        },
+        {
+          "bytes": 523000,
+          "path": "PySide6/Qt/plugins/imageformats/libqwebp.so"
+        },
+        {
+          "bytes": 81592,
+          "path": "PySide6/Qt/plugins/networkinformation/libqconnman.so"
+        },
+        {
+          "bytes": 23224,
+          "path": "PySide6/Qt/plugins/networkinformation/libqglib.so"
+        },
+        {
+          "bytes": 81600,
+          "path": "PySide6/Qt/plugins/networkinformation/libqnetworkmanager.so"
+        },
+        {
+          "bytes": 31440,
+          "path": "PySide6/Qt/plugins/platforminputcontexts/libcomposeplatforminputcontextplugin.so"
+        },
+        {
+          "bytes": 185296,
+          "path": "PySide6/Qt/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so"
+        },
+        {
+          "bytes": 23112,
+          "path": "PySide6/Qt/plugins/platforminputcontexts/libqtvirtualkeyboardplugin.so"
+        },
+        {
+          "bytes": 19000,
+          "path": "PySide6/Qt/plugins/platforms/libqeglfs.so"
+        },
+        {
+          "bytes": 406072,
+          "path": "PySide6/Qt/plugins/platforms/libqlinuxfb.so"
+        },
+        {
+          "bytes": 39480,
+          "path": "PySide6/Qt/plugins/platforms/libqminimal.so"
+        },
+        {
+          "bytes": 43584,
+          "path": "PySide6/Qt/plugins/platforms/libqminimalegl.so"
+        },
+        {
+          "bytes": 117312,
+          "path": "PySide6/Qt/plugins/platforms/libqoffscreen.so"
+        },
+        {
+          "bytes": 229184,
+          "path": "PySide6/Qt/plugins/platforms/libqvkkhrdisplay.so"
+        },
+        {
+          "bytes": 122296,
+          "path": "PySide6/Qt/plugins/platforms/libqvnc.so"
+        },
+        {
+          "bytes": 19000,
+          "path": "PySide6/Qt/plugins/platforms/libqwayland.so"
+        },
+        {
+          "bytes": 19000,
+          "path": "PySide6/Qt/plugins/platforms/libqxcb.so"
+        },
+        {
+          "bytes": 237384,
+          "path": "PySide6/Qt/plugins/platformthemes/libqgtk3.so"
+        },
+        {
+          "bytes": 155712,
+          "path": "PySide6/Qt/plugins/platformthemes/libqxdgdesktopportal.so"
+        },
+        {
+          "bytes": 125896,
+          "path": "PySide6/Qt/plugins/printsupport/libcupsprintersupport.so"
+        },
+        {
+          "bytes": 57904,
+          "path": "PySide6/Qt/plugins/qmllint/libqdslintplugin.so"
+        },
+        {
+          "bytes": 174656,
+          "path": "PySide6/Qt/plugins/qmllint/libquicklintplugin.so"
+        },
+        {
+          "bytes": 257856,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_debugger.so"
+        },
+        {
+          "bytes": 118208,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_inspector.so"
+        },
+        {
+          "bytes": 27456,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_local.so"
+        },
+        {
+          "bytes": 27328,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_messages.so"
+        },
+        {
+          "bytes": 43808,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_native.so"
+        },
+        {
+          "bytes": 64072,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_nativedebugger.so"
+        },
+        {
+          "bytes": 236992,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_preview.so"
+        },
+        {
+          "bytes": 125888,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_profiler.so"
+        },
+        {
+          "bytes": 35528,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_quick3dprofiler.so"
+        },
+        {
+          "bytes": 35528,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_quickeventreplay.so"
+        },
+        {
+          "bytes": 35528,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_quickprofiler.so"
+        },
+        {
+          "bytes": 101568,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_server.so"
+        },
+        {
+          "bytes": 23232,
+          "path": "PySide6/Qt/plugins/qmltooling/libqmldbg_tcp.so"
+        },
+        {
+          "bytes": 142136,
+          "path": "PySide6/Qt/plugins/sqldrivers/libqsqlibase.so"
+        },
+        {
+          "bytes": 1628712,
+          "path": "PySide6/Qt/plugins/sqldrivers/libqsqlite.so"
+        },
+        {
+          "bytes": 93112,
+          "path": "PySide6/Qt/plugins/sqldrivers/libqsqlmimer.so"
+        },
+        {
+          "bytes": 102104,
+          "path": "PySide6/Qt/plugins/sqldrivers/libqsqlmysql.so"
+        },
+        {
+          "bytes": 138424,
+          "path": "PySide6/Qt/plugins/sqldrivers/libqsqloci.so"
+        },
+        {
+          "bytes": 125624,
+          "path": "PySide6/Qt/plugins/sqldrivers/libqsqlodbc.so"
+        },
+        {
+          "bytes": 117688,
+          "path": "PySide6/Qt/plugins/sqldrivers/libqsqlpsql.so"
+        },
+        {
+          "bytes": 100928,
+          "path": "PySide6/Qt/plugins/tls/libqcertonlybackend.so"
+        },
+        {
+          "bytes": 363104,
+          "path": "PySide6/Qt/plugins/tls/libqopensslbackend.so"
+        },
+        {
+          "bytes": 27208,
+          "path": "PySide6/Qt/plugins/vectorimageformats/libqlottievectorimage.so"
+        },
+        {
+          "bytes": 117944,
+          "path": "PySide6/Qt/plugins/wayland-decoration-client/libadwaita.so"
+        },
+        {
+          "bytes": 43576,
+          "path": "PySide6/Qt/plugins/wayland-decoration-client/libbradient.so"
+        },
+        {
+          "bytes": 31376,
+          "path": "PySide6/Qt/plugins/wayland-graphics-integration-client/libdmabuf-server.so"
+        },
+        {
+          "bytes": 31360,
+          "path": "PySide6/Qt/plugins/wayland-graphics-integration-client/libdrm-egl-server.so"
+        },
+        {
+          "bytes": 76488,
+          "path": "PySide6/Qt/plugins/wayland-graphics-integration-client/libqt-plugin-wayland-egl.so"
+        },
+        {
+          "bytes": 31368,
+          "path": "PySide6/Qt/plugins/wayland-graphics-integration-client/libshm-emulation-server.so"
+        },
+        {
+          "bytes": 31360,
+          "path": "PySide6/Qt/plugins/wayland-graphics-integration-client/libvulkan-server.so"
+        },
+        {
+          "bytes": 51888,
+          "path": "PySide6/Qt/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-dmabuf-server-buffer.so"
+        },
+        {
+          "bytes": 47776,
+          "path": "PySide6/Qt/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-drm-egl-server-buffer.so"
+        },
+        {
+          "bytes": 47776,
+          "path": "PySide6/Qt/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-shm-emulation-server.so"
+        },
+        {
+          "bytes": 72344,
+          "path": "PySide6/Qt/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-vulkan-server.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-wayland-egl.so"
+        },
+        {
+          "bytes": 51832,
+          "path": "PySide6/Qt/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-wayland-eglstream-controller.so"
+        },
+        {
+          "bytes": 35480,
+          "path": "PySide6/Qt/plugins/wayland-shell-integration/libfullscreen-shell-v1.so"
+        },
+        {
+          "bytes": 60184,
+          "path": "PySide6/Qt/plugins/wayland-shell-integration/libivi-shell.so"
+        },
+        {
+          "bytes": 47736,
+          "path": "PySide6/Qt/plugins/wayland-shell-integration/libqt-shell.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/plugins/wayland-shell-integration/libwl-shell-plugin.so"
+        },
+        {
+          "bytes": 146808,
+          "path": "PySide6/Qt/plugins/wayland-shell-integration/libxdg-shell.so"
+        },
+        {
+          "bytes": 55880,
+          "path": "PySide6/Qt/plugins/xcbglintegrations/libqxcb-egl-integration.so"
+        },
+        {
+          "bytes": 76392,
+          "path": "PySide6/Qt/plugins/xcbglintegrations/libqxcb-glx-integration.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/Qt/labs/StyleKit/liblabsstylekitplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/Qt/labs/StyleKit/impl/liblabsstylekitimplplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/Qt/labs/animation/liblabsanimationplugin.so"
+        },
+        {
+          "bytes": 6872,
+          "path": "PySide6/Qt/qml/Qt/labs/assetdownloader/objects-RelWithDebInfo/QmlAssetDownloaderPrivate_resources_1/.qt/rcc/qrc_qmake_Qt_labs_assetdownloader_init.cpp.o"
+        },
+        {
+          "bytes": 1081760,
+          "path": "PySide6/Qt/qml/Qt/labs/assetdownloader/objects-RelWithDebInfo/QmlAssetDownloaderPrivateplugin_init/QmlAssetDownloaderPrivateplugin_init.cpp.o"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/Qt/labs/folderlistmodel/libqmlfolderlistmodelplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/Qt/labs/platform/liblabsplatformplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/Qt/labs/qmlmodels/liblabsmodelsplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/Qt/labs/settings/libqmlsettingsplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/Qt/labs/sharedimage/libsharedimageplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/Qt/labs/synchronizer/liblabssynchronizerplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/Qt/labs/wavefrontmesh/libqmlwavefrontmeshplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtCore/libqtqmlcoreplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtNetwork/libqmlnetworkplugin.so"
+        },
+        {
+          "bytes": 19000,
+          "path": "PySide6/Qt/qml/QtQml/libqmlplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtQml/Models/libmodelsplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQml/StateMachine/libqtqmlstatemachineplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQml/WorkerScript/libworkerscriptplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQml/XmlListModel/libqmlxmllistmodelplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtQuick/libqtquick2plugin.so"
+        },
+        {
+          "bytes": 39496,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/libqtquickcontrols2plugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/Basic/libqtquickcontrols2basicstyleplugin.so"
+        },
+        {
+          "bytes": 19032,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/Basic/impl/libqtquickcontrols2basicstyleimplplugin.so"
+        },
+        {
+          "bytes": 3607512,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/FluentWinUI3/libqtquickcontrols2fluentwinui3styleplugin.so"
+        },
+        {
+          "bytes": 19040,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/FluentWinUI3/impl/libqtquickcontrols2fluentwinui3styleimplplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/Fusion/libqtquickcontrols2fusionstyleplugin.so"
+        },
+        {
+          "bytes": 19032,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/Fusion/impl/libqtquickcontrols2fusionstyleimplplugin.so"
+        },
+        {
+          "bytes": 19032,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/Imagine/libqtquickcontrols2imaginestyleplugin.so"
+        },
+        {
+          "bytes": 19032,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/Imagine/impl/libqtquickcontrols2imaginestyleimplplugin.so"
+        },
+        {
+          "bytes": 19032,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/Material/libqtquickcontrols2materialstyleplugin.so"
+        },
+        {
+          "bytes": 19032,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/Material/impl/libqtquickcontrols2materialstyleimplplugin.so"
+        },
+        {
+          "bytes": 19032,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/Universal/libqtquickcontrols2universalstyleplugin.so"
+        },
+        {
+          "bytes": 19032,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/Universal/impl/libqtquickcontrols2universalstyleimplplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtQuick/Controls/impl/libqtquickcontrols2implplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick/Dialogs/libqtquickdialogsplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtQuick/Dialogs/quickimpl/libqtquickdialogs2quickimplplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtQuick/Effects/libeffectsplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick/Layouts/libqquicklayoutsplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick/LocalStorage/libqmllocalstorageplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtQuick/Particles/libparticlesplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtQuick/Pdf/libpdfquickplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick/Scene2D/libqtquickscene2dplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick/Scene3D/libqtquickscene3dplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtQuick/Shapes/libqmlshapesplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtQuick/Shapes/DesignHelpers/libqtquickshapesdesignhelpersplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick/Templates/libqtquicktemplates2plugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick/Timeline/libqtquicktimelineplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtQuick/Timeline/BlendTrees/libqtquicktimelineblendtreesplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick/VectorImage/libqquickvectorimageplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtQuick/VectorImage/Helpers/libqquickvectorimagehelpersplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/libqtvkbplugin.so"
+        },
+        {
+          "bytes": 785608,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/Components/libqtvkbcomponentsplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/Core/libvirtualkeyboardplugin.so"
+        },
+        {
+          "bytes": 72264,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/Layouts/libqtvkblayoutsplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/Plugins/libqtvkbpluginsplugin.so"
+        },
+        {
+          "bytes": 52416,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/Plugins/Hangul/libqtvkbhangulplugin.so"
+        },
+        {
+          "bytes": 1639096,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/Plugins/OpenWNN/libqtvkbopenwnnplugin.so"
+        },
+        {
+          "bytes": 1224048,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/Plugins/Pinyin/libqtvkbpinyinplugin.so"
+        },
+        {
+          "bytes": 322752,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/Plugins/TCIme/libqtvkbtcimeplugin.so"
+        },
+        {
+          "bytes": 36032,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/Plugins/Thai/libqtvkbthaiplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/Settings/libqtvkbsettingsplugin.so"
+        },
+        {
+          "bytes": 121792,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/Styles/libqtvkbstylesplugin.so"
+        },
+        {
+          "bytes": 354888,
+          "path": "PySide6/Qt/qml/QtQuick/VirtualKeyboard/Styles/Builtin/libqtvkbbuiltinstylesplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtQuick/Window/libquickwindowplugin.so"
+        },
+        {
+          "bytes": 55880,
+          "path": "PySide6/Qt/qml/QtQuick/tooling/libquicktoolingplugin.so"
+        },
+        {
+          "bytes": 19008,
+          "path": "PySide6/Qt/qml/QtTest/libquicktestplugin.so"
+        },
+        {
+          "bytes": 68736,
+          "path": "PySide6/Qt/qml/QtWayland/Client/TextureSharing/libwaylandtexturesharingplugin.so"
+        },
+        {
+          "bytes": 19016,
+          "path": "PySide6/Qt/qml/QtWayland/Compositor/libqwaylandcompositorplugin.so"
+        },
+        {
+          "bytes": 19032,
+          "path": "PySide6/Qt/qml/QtWayland/Compositor/IviApplication/libwaylandcompositoriviapplicationplugin.so"
+        },
+        {
+          "bytes": 19032,
+          "path": "PySide6/Qt/qml/QtWayland/Compositor/PresentationTime/libwaylandcompositorpresentationtimeplugin.so"
+        },
+        {
+          "bytes": 218640,
+          "path": "PySide6/Qt/qml/QtWayland/Compositor/QtShell/libwaylandcompositorqtshellplugin.so"
+        },
+        {
+          "bytes": 48984,
+          "path": "PySide6/Qt/qml/QtWayland/Compositor/TextureSharingExtension/libwaylandtexturesharingextensionplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtWayland/Compositor/WlShell/libwaylandcompositorwlshellplugin.so"
+        },
+        {
+          "bytes": 19024,
+          "path": "PySide6/Qt/qml/QtWayland/Compositor/XdgShell/libwaylandcompositorxdgshellplugin.so"
+        }
+      ],
+      "declared_license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "name": "PySide6_Essentials",
+      "notice_coverage": "MISSING IN WHEEL",
+      "notice_documents": [],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "c6a5c3b58bf55aef6e09a7de690ff6133335014ab81a7f22f56363ea08e8f6a3",
+      "upstream": [
+        "Homepage, https://pyside.org",
+        "Documentation, https://doc.qt.io/qtforpython",
+        "Repository, https://code.qt.io/cgit/pyside/pyside-setup.git/",
+        "Changelog, https://code.qt.io/cgit/pyside/pyside-setup.git/tree/doc/changelogs",
+        "Tracker, https://qt-project.atlassian.net/browse/PYSIDE"
+      ],
+      "version": "6.11.3",
+      "wheel": "pyside6_essentials-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl"
+    },
+    {
+      "ELF_files": [
+        {
+          "bytes": 23792,
+          "path": "shiboken6/Shiboken.abi3.so"
+        },
+        {
+          "bytes": 441840,
+          "path": "shiboken6/libshiboken6.abi3.so.6.11"
+        }
+      ],
+      "declared_license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "name": "shiboken6",
+      "notice_coverage": "MISSING IN WHEEL",
+      "notice_documents": [],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "e601c957011345c741b88f661a12486f478db881d6777bdf37e3dc7a8d3387c6",
+      "upstream": [
+        "Homepage, https://pyside.org",
+        "Documentation, https://doc.qt.io/qtforpython",
+        "Repository, https://code.qt.io/cgit/pyside/pyside-setup.git/",
+        "Changelog, https://code.qt.io/cgit/pyside/pyside-setup.git/tree/doc/changelogs",
+        "Tracker, https://qt-project.atlassian.net/browse/PYSIDE"
+      ],
+      "version": "6.11.3",
+      "wheel": "shiboken6-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "BSD-3-Clause",
+      "name": "starlette",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 1518,
+          "path": "starlette-1.9.0.dist-info/licenses/LICENSE.md",
+          "sha256": "dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "fd3f159936e882d06c1108f84688f7cda2cf85fc6a592a50edbd175e882c2ddc",
+      "upstream": [
+        "Homepage, https://github.com/Kludex/starlette",
+        "Documentation, https://starlette.dev/",
+        "Changelog, https://starlette.dev/release-notes/",
+        "Funding, https://github.com/sponsors/Kludex",
+        "Source, https://github.com/Kludex/starlette"
+      ],
+      "version": "1.9.0",
+      "wheel": "starlette-1.9.0-py3-none-any.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "PSF-2.0",
+      "name": "typing_extensions",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 13936,
+          "path": "typing_extensions-4.16.0.dist-info/licenses/LICENSE",
+          "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+      "upstream": [
+        "Bug Tracker, https://github.com/python/typing_extensions/issues",
+        "Changes, https://github.com/python/typing_extensions/blob/main/CHANGELOG.md",
+        "Documentation, https://typing-extensions.readthedocs.io/",
+        "Home, https://github.com/python/typing_extensions",
+        "Q & A, https://github.com/python/typing/discussions",
+        "Repository, https://github.com/python/typing_extensions"
+      ],
+      "version": "4.16.0",
+      "wheel": "typing_extensions-4.16.0-py3-none-any.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "MIT",
+      "name": "typing-inspection",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 1090,
+          "path": "typing_inspection-0.4.4.dist-info/licenses/LICENSE",
+          "sha256": "804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "65b8397ba37ccbce054456aaccddfc91e6e3083c92824df348d96ca832f3f147",
+      "upstream": [
+        "Homepage, https://github.com/pydantic/typing-inspection",
+        "Documentation, https://pydantic.github.io/typing-inspection/dev/",
+        "Source, https://github.com/pydantic/typing-inspection",
+        "Changelog, https://github.com/pydantic/typing-inspection/blob/main/HISTORY.md"
+      ],
+      "version": "0.4.4",
+      "wheel": "typing_inspection-0.4.4-py3-none-any.whl"
+    },
+    {
+      "ELF_files": [],
+      "declared_license": "BSD-3-Clause",
+      "name": "uvicorn",
+      "notice_coverage": "DOCUMENTS PRESENT; REVIEW REQUIRED",
+      "notice_documents": [
+        {
+          "bytes": 1526,
+          "path": "uvicorn-0.54.0.dist-info/licenses/LICENSE.md",
+          "sha256": "efe1acf3e62fb99c288b0ec73e5a773b7268ef4320fe757ea994214e4b63c371"
+        }
+      ],
+      "redistribution_clearance": "NOT INFERRED FROM METADATA",
+      "sha256": "505bdb0f318731d45f1f712071fc781a8981f6847a31c902c9f5e652d4f67faf",
+      "upstream": [
+        "Changelog, https://uvicorn.dev/release-notes",
+        "Funding, https://github.com/sponsors/Kludex",
+        "Homepage, https://uvicorn.dev/",
+        "Source, https://github.com/Kludex/uvicorn"
+      ],
+      "version": "0.54.0",
+      "wheel": "uvicorn-0.54.0-py3-none-any.whl"
+    }
+  ],
+  "format": 1,
+  "scope": "exact distributed wheel contents; host libraries separate"
+}

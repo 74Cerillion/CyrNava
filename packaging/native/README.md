@@ -1,13 +1,14 @@
 # Native Ubuntu installation and manual maintenance
 
-3 November 2026. **N1/N2 accepted; N3 VERIFIED PASS / RECOMMENDED FOR OWNER
-ACCEPTANCE. N4 unauthorized.** Current candidate:
-`ci-output/native-n3-candidate-3/`, isolated client `ci-output/native-n3-client-1/`.
-Report/support boundary: [N3_REPORT.md](../../ci/N3_REPORT.md); formal acceptance
-option: [N3_OWNER_CHECKS.md](../../ci/N3_OWNER_CHECKS.md). The owner completed the
-reviewed exact-client policy load and both GUI/reinstall phases; independent review
-PASS. No normal installation was changed. These remain unsigned disposable outputs;
-N3 acceptance and production release are separate decisions.
+3 November 2026. **N1–N3 owner-accepted; N4 local implementation verified,
+public release CONDITIONAL.**
+Accepted N3 artifact/source/native evidence is preserved in
+[N3_REPORT.md](../../ci/N3_REPORT.md). N4 adds current-source assembly, exported
+package/source/installer auditing, native CI and release materials; it does not
+publish or sign a release. The actual development install, unsigned public-identity
+proposal, 994 local test results and remaining trust/notice/native/hosted gates are
+in [N4_REPORT.md](../../ci/N4_REPORT.md).
+User-facing preparation guide: [native installation](../../docs/native-installation.md).
 
 ## N3 manual-maintenance interfaces
 

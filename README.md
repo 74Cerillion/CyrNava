@@ -1,3 +1,11 @@
+> **Native Ubuntu release track:** N1–N3 are owner-accepted. N4 native CI and
+> public-release preparation are in progress; no public native package is published
+> yet. Target: Ubuntu 26.04 x86_64 / GNOME Wayland. See the
+> [native installation/manual-update guide](docs/native-installation.md),
+> [release preparation notes](docs/native-release-notes-v0.1.0.md) and
+> [dependency/source obligations](docs/native-source-obligations.md).
+> Original code is MIT, Copyright (c) 2026 74Cerillion. Flatpak is paused historical/fallback.
+
 # CyrNava
 
 **v0.1.0 release candidate · Phase 1 local knowledge workspace · Linux**

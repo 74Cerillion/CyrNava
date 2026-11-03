@@ -1,0 +1,18 @@
+{
+  "N4": "LOCAL IMPLEMENTATION AUTHORIZED",
+  "accepted_archive_sha256": "f87fc9f81e8a633397af66a11211bd7a9cd35c3a77bc061d58ba2170ec86f947",
+  "accepted_manifest_sha256": "6f18cbd08dbccf4c578b0412805856d143f38f5c1d927ae2e753f85bbcbab096",
+  "accepted_source_record": "bfa0b8005a3ddc519354fd7907e9b972fde8126b plus manifest-pinned N1/N2/N3 inputs; no artifact identity substituted",
+  "boundaries": "No commits/pushes/CI execution/host-security changes/signing/publication authorized",
+  "current_owner_committed_baseline": "b27e33bb0b31ecd93a3792c6b6a889686dfae575",
+  "format": 1,
+  "native_result": "ci-output/native-n3-owner-1/result.json",
+  "native_result_sha256": "f933f6f48449106860c87b33f22ac2b192ed11cad7bb041e34901df42a295bf7",
+  "owner_statement": "Owner accepts N3. Go ahead and update your logs and start working on N4 - Let's finish this tonight!",
+  "phase": "N3 \u2014 Data-safe manual updater and uninstaller",
+  "recorded_at_utc": "2026-11-03T08:03:53.852505+00:00",
+  "status": "ACCEPTED / COMPLETE",
+  "support_boundary": "schema 5; identical application/data/Qt consumer family; data-preserving removal retains program versions and checkpoints",
+  "technical_review": "ci/evidence/n3/native-review-2026-11-03/review.json",
+  "technical_review_sha256": "b83b0e6174ec5ecd0eb7516093d71cd9b15f38f49fbbf18666a5643972f0eb17"
+}

@@ -1,0 +1,12 @@
+{
+  "GUI": "NOT EXECUTED",
+  "archive_sha256": "b59a3bd4a3178d704d0dfab736f6e6d546578cf5744a6dcda1264b83e3c9736d",
+  "manifest_sha256": "cce75b79af6461783d5d331eeeb93ce92aa3d0d5e6ab1a2827a3abcfdcd5fe88",
+  "payload_files": 99,
+  "redistribution_clearance": "PENDING; audit is not legal clearance",
+  "renderer": "NOT EXECUTED",
+  "scope": "native exported-package/source/bootstrap audit",
+  "signature": "NOT CREATED",
+  "source_files": 194,
+  "status": "PASS"
+}

@@ -1,0 +1,26 @@
+{
+  "GUI": "NOT EXECUTED",
+  "archive_sha256": "b59a3bd4a3178d704d0dfab736f6e6d546578cf5744a6dcda1264b83e3c9736d",
+  "complete": true,
+  "production_signature": "NOT CREATED",
+  "release_readiness": "CONDITIONAL; hosted/native final-package/signature/redistribution gates remain",
+  "renderer": "NOT EXECUTED",
+  "scope": "native source assembly/audit/installed headless checks",
+  "seconds": 21.661,
+  "status": "PASS",
+  "steps": [
+    {
+      "operation": "frontend-build",
+      "status": "PASS"
+    },
+    {
+      "archive_sha256": "b59a3bd4a3178d704d0dfab736f6e6d546578cf5744a6dcda1264b83e3c9736d",
+      "operation": "source-assembly-and-export-audit",
+      "status": "PASS"
+    },
+    {
+      "operation": "installed-headless-verification",
+      "status": "PASS"
+    }
+  ]
+}

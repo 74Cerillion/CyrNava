@@ -1,18 +1,24 @@
-# Current native roadmap — N1/N2 accepted; N3 verified
+# Current native roadmap — N1–N3 accepted; N4 locally verified, release conditional
 
-3 November 2026. **N1/N2 ACCEPTED / COMPLETE; N3 VERIFIED PASS / RECOMMENDED FOR
-OWNER ACCEPTANCE.** Owner attempt 1 passes both actual imported-workspace and
-after-reinstall GNOME GUI/security/provider/authentication/cleanup phases, saved
-data/origin and System → Dark → post-reinstall Dark confirmation. Independent
-review of identities, profile bytes and completed journals passes all 29 checks.
-Actual isolated native update/checkpoint/compatible rollback/uninstall/reinstall and
-portable recovery checks pass; unchanged-source 175 native and 92 backend results
-retain their scopes. Formal N3 owner acceptance remains pending. Current evidence
-and bounded support policy: [N3_REPORT.md](N3_REPORT.md).
-Acceptance option: [N3_OWNER_CHECKS.md](N3_OWNER_CHECKS.md). N1 remains accepted;
-N4 remains planned and unauthorized. Original phase scopes below are not expanded.
-The native Ubuntu/GitHub Releases target, accepted ordinary-user tradeoff, required
-renderer sandbox and MIT selection remain unchanged. Flatpak stays paused history.
+3 November 2026. **N1/N2/N3 ACCEPTED / COMPLETE. N4 local implementation VERIFIED;
+public release CONDITIONAL.**
+The owner formally accepted N3's independently reviewed native GUI/reinstall,
+security, update/recovery and data-preservation scope. Exact artifact/result and
+owner decision: [N3_REPORT.md](N3_REPORT.md),
+[formal acceptance](evidence/n3/formal-owner-acceptance.json).
+
+N4 source assembly/export audit and actual isolated headless installation PASS;
+994 local tests PASS. An unsigned v0.1 public-identity proposal exists, with exact
+hashes in [N4_REPORT.md](N4_REPORT.md). Final public-identity native evidence,
+vendor source/notice closure, clean-source hosted CI, genuine release signing and
+separately approved publication remain. Original code MIT attribution is
+**Copyright (c) 2026 74Cerillion**;
+owner confirms rights to the CyrNava name/logo. Third-party terms/source obligations,
+production signing, final native package evidence and hosted verification remain
+explicit. Current work: [N4_REPORT.md](N4_REPORT.md), [N4_OWNER_CHECKS.md](N4_OWNER_CHECKS.md).
+No commits, pushes, GitHub executions, host-policy changes, signing or publication
+are authorized. Flatpak stays paused historical/fallback, with no duplicate P6 gate.
+Original evidence and the earlier checkpoints below retain their original scope.
 
 ## Historical checkpoints — N2 review
 

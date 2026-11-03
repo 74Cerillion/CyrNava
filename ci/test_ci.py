@@ -46,7 +46,7 @@ class WorkflowTests(unittest.TestCase):
             lambda v: v["on"]["push"].update(paths=["frontend/**"]),
             lambda v: v["jobs"]["backend"].update(**{"continue-on-error": True}),
             lambda v: v["jobs"]["backend"].update(permissions={"contents": "write"}),
-            lambda v: v["jobs"]["flatpak"].update(needs=["backend"]),
+            lambda v: v["jobs"]["native"].update(needs=["backend"]),
             lambda v: v["jobs"]["required"].update(**{"if": "success()"}),
             lambda v: v["jobs"]["backend"]["steps"][0].update(
                 uses="actions/checkout@v6"
@@ -99,8 +99,8 @@ class WorkflowTests(unittest.TestCase):
         value = copy.deepcopy(self.value)
         step = next(
             s
-            for s in value["jobs"]["flatpak"]["steps"]
-            if s.get("with", {}).get("path") == "ci-output/flatpak/artifacts/"
+            for s in value["jobs"]["native"]["steps"]
+            if s.get("with", {}).get("path") == "ci-output/native/artifacts/"
         )
         step["if"] = "always()"
         with self.assertRaises(ValueError):
@@ -114,7 +114,7 @@ class WorkflowTests(unittest.TestCase):
                 "VALIDATE_RESULT",
                 "BACKEND_RESULT",
                 "FRONTEND_RESULT",
-                "FLATPAK_RESULT",
+                "NATIVE_RESULT",
             )
         }
         self.assertEqual(
@@ -131,8 +131,30 @@ class WorkflowTests(unittest.TestCase):
                         0,
                     )
 
+    def test_native_target_history_commands_and_upload_contract(self):
+        for change in ("history", "runner", "extra-command", "upload-profile"):
+            value = copy.deepcopy(self.value)
+            job = value["jobs"]["native"]
+            if change == "history":
+                job["steps"][0]["with"]["fetch-depth"] = 1
+            elif change == "runner":
+                job["runs-on"] = "ubuntu-latest"
+            elif change == "extra-command":
+                job["steps"][-3]["run"] += "\necho unreviewed"
+            else:
+                job["steps"][-2]["with"]["path"] = "ci-output/native/client/"
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                validator.validate(value, self.pins)
+
 
 class ExecutionTests(unittest.TestCase):
+    def test_lint_preserves_frozen_evidence_and_checks_new_native_code(self):
+        command = verification.steps_for("backend", Path("/tmp/synthetic-report"))[0][1]
+        self.assertIn("--extend-exclude", command)
+        self.assertIn("ci/evidence/**", command)
+        for name in ("release.py", "policy_setup.py", "test_native_release.py"):
+            self.assertIn("packaging/native/" + name, command)
+
     def test_real_deliberate_failure_blocks_later_artifact_step(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

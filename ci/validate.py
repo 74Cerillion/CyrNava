@@ -43,11 +43,12 @@ def validate(value, pins):
     ):
         raise ValueError("Required checks must not be path-filtered")
     jobs = value["jobs"]
-    if set(jobs) != {"validate", "backend", "frontend", "flatpak", "required"}:
+    if set(jobs) != {"validate", "backend", "frontend", "native", "required"}:
         raise ValueError("Unexpected job graph")
     for name, job in jobs.items():
         if (
-            job.get("runs-on") != "ubuntu-24.04"
+            job.get("runs-on")
+            != ("ubuntu-26.04" if name == "native" else "ubuntu-24.04")
             or not 0 < job.get("timeout-minutes", 0) <= 45
         ):
             raise ValueError("Unexpected runner or unbounded job")
@@ -93,7 +94,7 @@ def validate(value, pins):
         or jobs["frontend"].get("needs") != "validate"
     ):
         raise ValueError("Test jobs require workflow validation")
-    if set(jobs["flatpak"].get("needs", [])) != {"backend", "frontend"}:
+    if set(jobs["native"].get("needs", [])) != {"backend", "frontend"}:
         raise ValueError("Build must wait for both test jobs")
     backend_steps = jobs["backend"]["steps"]
     node = next(
@@ -124,17 +125,26 @@ def validate(value, pins):
         "required"
     }:
         raise ValueError("Final required check must cover all jobs, including failures")
-    steps = jobs["flatpak"]["steps"]
+    steps = jobs["native"]["steps"]
     audit = next(
-        i for i, s in enumerate(steps) if "ci/flatpak.py audit" in s.get("run", "")
+        (i for i, s in enumerate(steps) if "ci/native.py --output" in s.get("run", "")),
+        None,
     )
     package = next(
-        i
-        for i, s in enumerate(steps)
-        if s.get("with", {}).get("path") == "ci-output/flatpak/artifacts/"
+        (
+            i
+            for i, s in enumerate(steps)
+            if s.get("with", {}).get("path") == "ci-output/native/artifacts/"
+        ),
+        None,
     )
-    if package <= audit or "if" in steps[package]:
+    if audit is None or package is None or package <= audit or "if" in steps[package]:
         raise ValueError("Package upload must be gated by successful audit")
+    if steps[0].get("with", {}).get("fetch-depth") != 0:
+        raise ValueError("Native immutable source audit requires full history")
+    contract = json.loads((ROOT / "ci/native-workflow-contract.json").read_text())
+    if value != contract:
+        raise ValueError("Exact reviewed native CI security contract changed")
     return True
 
 
