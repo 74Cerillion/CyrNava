@@ -1,0 +1,29 @@
+{
+  "CI_prerequisites": "Reused installed dependency environments; fresh TypeScript/Vite output byte-identical to preserved frontend used for backend/browser tests. No npm reinstall, dependency download or Qt build",
+  "N4_source_audit_subset": {
+    "included_in_native_total": true,
+    "passed": 16
+  },
+  "counts": {
+    "active_backend_packaging_workflow": 574,
+    "frontend_units": 277,
+    "historical_release_current_code_verified_CI_fixture": 351,
+    "native_feasibility": 54,
+    "native_tooling_including_disposable_signature_fixtures": 197,
+    "production_browser": 21
+  },
+  "lint_typescript_build_actionlint_workflow_contract": "PASS",
+  "resource_parallelism": "frontend unit workers=1; browser workers=1, retries=0",
+  "retained_failed_experiments": [
+    "focus-reproduction.log: 1 intentionally delayed initial-focus case failed before correction; immediate case passed",
+    "historical-release-r1.log: 334 passed, 17 GPG setup errors with long child TMPDIR; retained; short child-only temp layout corrected fixture compatibility",
+    "workflow-r1.log: two path tests hit actual /tmp 5 GiB precondition; original result retained. Mocked-capacity path fixtures plus independent low-space refusal regression now pass; no real build precondition is relabeled",
+    "remaining-22-causal.private.log: 22 expected failures with observed original hash rejection; a causal experiment, not passing application tests"
+  ],
+  "status": "PASS in stated local scopes",
+  "unique_total": 1474,
+  "workflow_subset": {
+    "included_in_active_backend_total": true,
+    "passed": 38
+  }
+}

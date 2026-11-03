@@ -15,7 +15,6 @@ BACKEND_TESTS = [
     "../packaging/flatpak/test_run_migration_verification.py",
     "../packaging/flatpak/production/test_packaging.py",
     "../ci/test_ci.py",
-    "../ci/release",
 ]
 
 
@@ -95,6 +94,17 @@ def steps_for(job, destination):
                     "--junitxml=" + str(destination / "backend-junit.xml"),
                 ],
                 ROOT / "backend",
+            ),
+            (
+                "historical-release-security-regressions",
+                [
+                    python,
+                    "-B",
+                    "ci/historical_release.py",
+                    "--output",
+                    str(destination / "backend-historical-junit.xml"),
+                ],
+                ROOT,
             ),
         ]
     return [

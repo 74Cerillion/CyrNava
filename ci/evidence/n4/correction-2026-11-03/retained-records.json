@@ -1,0 +1,24 @@
+{
+  "directory": "ci-output/native-n4-correction-1",
+  "private_raw_output": "Retained locally; not copied into source/evidence publication set",
+  "sha256": {
+    "backend-current-full.log": "33047d0f47267258ac387faa8a6aa860ea224e06b827bc8be0cee6d48c75daaf",
+    "browser-full.private.log": "0f67fc970f9aac476e371d84d25cdeba8dea28348e6f7deb52b22b56ffe46aa4",
+    "feasibility-full.log": "949e0c9e576b10b9edf5c24ebc18d789d1b97e4d75c59d467b2ef4c700e7e867",
+    "focus-corrected.log": "92f7505e09a48569ae0a4a4f06501ac93ce0baefc8a52660726b1ce8e809794a",
+    "focus-original.log": "3daac7b6c9003190b758848e7cb8eae17f63adc0d478ccdc1ceec2dfd5a933bc",
+    "focus-reproduction.log": "df4fafc774c907f0d42f8666e79b88f69a54035d78f613b53c3b7d2d6b690cfa",
+    "frontend-build.private.log": "7a2976309264dcfc5399a5146b3e5c8ef26d4c442b059e6ef049305ec6be73f6",
+    "frontend-full.log": "dff5ba5ebb5da7778a97a4b856d754e3a86537badd34225c6277bae08c72f39b",
+    "frontend-lint.log": "9d2612e6b6e1832078cd08426401a1168a7cc0966f9f9edea0d95e3bdb9d9a74",
+    "historical-final.log": "1abcf4aed7a9d0368ac34ed568525404782e25ccaca366dceaec05b7ba7c5af6",
+    "historical-release-r1.log": "be5814372292e5354cb4e9d4d504eae2a84cf8d6cf11d2dfba8f6ce8e7296f45",
+    "historical-release-r2.log": "80eca7326fb71944f926a6a175151e5746a2119d8613e7104d5a4275884afca9",
+    "n4-source-tests.log": "13b429ed6a2be16db8970eaf94b0af83e786f492f5092e00359e05bbc7098a49",
+    "native-full.log": "da3696b6e3cbae36afcc4a1a8ed78b10952a80e27c3fce30202dbc9b0e045270",
+    "python-lint.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "remaining-22-causal.private.log": "77f32662d81a0971080bb7d7efcafb4a645026a747fd2ce3e30b271c3ad1f604",
+    "workflow-r1.log": "2b6aa3b8d364c879de35452975036c331c7d7fb05ec1243af167f92f49b4da3d",
+    "workflow-r2.log": "741bfba35cff33d5efbeac3067da38645f74d90faf876b836075a395efc0303f"
+  }
+}

@@ -1,6 +1,175 @@
 # N4 — Native CI and public-release preparation
 
-3 November 2026. **LOCAL IMPLEMENTATION VERIFIED; N4 / public release CONDITIONAL.**
+3 November 2026. **LOCAL CORRECTIONS VERIFIED / READY FOR REVIEW.
+Last hosted ordinary CI remains FAIL; N4 / public release CONDITIONAL.**
+
+## Latest checkpoint — authorized local corrective preparation
+
+The owner authorized investigation and preparation after run 41607482461 failed.
+No further project commit, push or GitHub execution was authorized or performed.
+The integration checkout remains at `7d3bd86ad335b1a518c5dd7df09106b847d2256d`;
+the index is empty and the corrective batch is uncommitted.
+
+**Historical release-test cause confirmed for all 74 failures.** The original
+JUnit traces identify the unchanged accepted-CI hash guard in 52 failures. A
+focused observer then reproduced the remaining 22 failures on the active checkout
+and recorded the same original guard rejection in every case, without replacing
+its result. These are preserved expected-failure causal observations, not passing
+regressions. [Causal evidence](evidence/n4/correction-2026-11-03/remaining-22-causal.json).
+
+`ci/historical_release.py` now copies the **current unchanged** legacy code/tests,
+locks and auditors into a small disposable source fixture. Only its CI file is
+replaced with the exact accepted bytes recovered from
+`b27e33bb0b31ecd93a3792c6b6a889686dfae575:.github/workflows/ci.yml`, hash
+`3f11c9ab58d2f7c8cebca0b153a09ccffae06e314545067ddd6b42f7b8e809f4`.
+This is a unit-test fixture, not a restored release target or old-code substitute.
+Every copied source is hash-checked after testing. Current/native CI validation
+runs separately; the accepted real policy still rejects the new native CI bytes.
+No policy, workflow identity, artifact/source allowlist, signature guard or useful
+historical test is relaxed or removed. `ci/verify.py` requires both test selections
+to succeed before backend PASS. All 351 legacy regressions pass in that fixture.
+
+**Frontend correction is test synchronization only.** A controlled delayed initial
+selection-focus handoff reproduced the original expected-input/observed-tree
+failure, while the immediate case passed. The autosave test now explicitly waits
+for initial tree focus before editing, and still requires the title to retain
+focus after saving. Immediate/deferred handoffs and independent tree refresh,
+tab-stop and blocking-operation focus behavior are covered. The hosted record
+did not retain initial event ordering, so that exact ordering remains unproved;
+no production focus defect or application-code fix is claimed.
+
+Two path-only build unit tests also depended on the actual temporary filesystem's
+5 GiB capacity. Their stage is mocked; capacity is now an explicit synthetic
+precondition, with a new independent low-space refusal assertion. The production
+guard and original disk-precondition failures remain unchanged. The fixture's
+first long temporary layout caused 17 real-GPG setup errors; these remain recorded.
+A short child-only temporary path corrected that fixture compatibility. All real
+signature tests use fresh disposable one-day synthetic keys, with successful test
+cleanup; no production identity or expired accepted rehearsal credential is used.
+
+| Final local selection | Actual result |
+| --- | --- |
+| Current backend, packaging and workflow | 574 PASS; includes 38 workflow/fixture tests |
+| Historical release/security/current-code fixture | 351 PASS; 198 subtests PASS separately |
+| Frontend unit | 277 PASS, 22 files, one worker |
+| Production Chromium browser | 21 PASS, 2.2 minutes, one worker, zero retries |
+| Native installation/security/maintenance tooling | 197 PASS, including the 6 actual disposable-signature tests omitted in the earlier preparation |
+| Native feasibility | 54 PASS |
+| New source-closure/audit focused subset | 16 PASS, included in native count |
+| Ruff, frontend lint, TypeScript/Vite, actionlint and exact workflow contract | PASS |
+
+Unique local total: **1,474 passing tests**, without adding subset counts twice.
+The CI-equivalent test selections used the existing dependency environments rather
+than reinstalling them. A fresh TypeScript/Vite output matches every preserved
+`frontend/dist` byte used by backend/browser tests. No native GUI, A/B preparation,
+new Qt build, dependency download, host-policy operation or normal installation ran.
+The native assembly/install job itself has not been rerun in this correction pass.
+
+The fresh review packet is `ci-output/native-n4-corrected-metadata-1/`:
+
+- Application ZIP remains `ci-output/native-n4-release-proposal-1/CyrNava-0.1.0-ubuntu-x86_64.zip`,
+  SHA-256 `994e526870bd82828a2c2c90c1a71860ea2e1ac828c0e1bfaf7e504261ecf790`.
+- Corrected review manifest SHA-256:
+  `dd1d694a141f9cfbe0edc44b1ee892f4fade3e26380e6ef7fbb0e32d3eef7f0b`.
+- Source ZIP SHA-256:
+  `1ddee3e29fc1492e2af7c712c2480b53513e02645f5cb617d368dc6ba4355400`.
+  Its 285 source files now include the retained historical-test inputs required
+  by the new helper; it still excludes evidence trees, environments and private data.
+- Installer ZIP is byte-identical, SHA-256:
+  `9c508116919ff4aedc085b7b9bb29800307a45f7d6ed1b7ba743eb9476df261a`.
+
+This is an **audited unsigned local review packet**, based on 7d3bd86 plus explicit
+uncommitted source/file hashes. It reuses the immutable application ZIP, with no
+binary rebuild or replacement of accepted artifacts. Its source/manifest is distinct
+from earlier packets, which remain intact. It is not a new hosted/signed release.
+
+Browser scratch briefly reduced observed free space to 5,361,344,512 bytes, below
+the 5 GiB preparation floor. No new packet/build was started then. The running
+test's own successful cleanup restored 5,435,625,472 bytes before source-packet
+creation; no retained evidence or cache was deleted. This transient observation is
+retained rather than reported as uninterrupted resource-floor PASS. Final allocation
+and free-space measurements are in the corrective evidence.
+
+[Correction result](evidence/n4/correction-2026-11-03/result.json),
+[test scopes](evidence/n4/correction-2026-11-03/tests.json),
+[review packet](evidence/n4/correction-2026-11-03/review-packet.json).
+Exact files/hashes for a proposed corrective commit are in
+`ci/evidence/n4/correction-2026-11-03/commit-proposal.json`. **Next owner checkpoint:
+review and separately authorize one corrective commit and normal integration push
+for ordinary CI.** The original hosted run remains FAIL; no acceptance is inferred
+from local tests. Vendor notices/source correspondence, final public-identity native
+verification, genuine production signing and publication remain separate.
+
+## Historical checkpoint — authorized integration commit and push
+
+The owner approved the reviewed 46-file batch and one normal integration push.
+Commit **`7d3bd86ad335b1a518c5dd7df09106b847d2256d`**, parent
+`b27e33bb0b31ecd93a3792c6b6a889686dfae575`, tree
+`1585cd42985f7a8b4ab6dbf9c4bdd27ee39badf3`, was created unsigned and pushed once to
+`origin/desktop/p2-production-integration`. Remote parent/tree/exact paths were
+independently read back. `main` remains default and unchanged at
+`4021bc292267c19b7ebebf219b4f682f8f99bf4c`. No merge or release signing occurred.
+
+[Ordinary CI run 41607482461](https://github.com/74Cerillion/CyrNava/actions/runs/41607482461),
+attempt 1, push event, completed **FAIL** (3 November, 18:00:11–18:02:04 Korea time).
+
+| Hosted job | Actual result |
+| --- | --- |
+| Workflow validation | PASS |
+| Backend and security | FAIL: 846 tests passed, 74 failed; 154 subtests passed |
+| Frontend and browser | FAIL: unit tests 272 passed, 1 failed; later production-build/browser steps not executed in this job |
+| Native Ubuntu package and exported-archive audit | SKIPPED by required dependencies; no hosted native package produced |
+| CI required | FAIL; no bypass |
+
+The frontend failure is `frontend/src/App.test.tsx:409`, “does not steal editor
+focus when autosave refreshes the directory titles.” Expected focus was the note
+title input; actual focus was the corresponding note tree item. The retained result
+does not establish whether this is an application race or a test synchronization
+defect. Do not call it flaky or silently retry it.
+
+Fifty-two of the 74 backend/release failure traces explicitly contain the historical
+guard at `ci/release/core.py:147`: “Accepted CI workflow changed; policy review
+required.” The unchanged accepted Flatpak policy expects CI hash
+`3f11c9ab58d2f7c8cebca0b153a09ccffae06e314545067ddd6b42f7b8e809f4`;
+the reviewed native workflow is
+`94e6a3404f138b615450a9ee409405e0cd15de76f04e3fb4665647ebea62e64d`.
+The other 22 failures concern early owner-approval/phase expectations and need
+specific triage; their exact cause has not been independently reproduced.
+No historical policy/hash or accepted application artifact was altered to suppress
+these failures. The future correction should isolate historical-policy fixtures
+from the new active CI target while retaining useful tests and security assertions.
+
+The earlier 422 backend application passes did **not** cover the complete
+920-case backend/release selection in `ci/verify.py`. This local coverage gap was
+missed. The earlier 994 local passes remain valid in their recorded scopes; they
+do not override this hosted FAIL or certify the final native package.
+
+Both actual diagnostic ZIPs were retained and independently matched GitHub's API
+digests, sizes and exact commit/run provenance:
+
+- Backend artifact `13217735615`, 24,724 bytes, SHA-256
+  `ae278d25699d0503db40b2a24bf3c61cb555f9b5d76e00eec68c106b200da5a3`.
+- Frontend artifact `13217641247`, 337 bytes, SHA-256
+  `c909c2f14827cf3cf4ac720d83d056cdbedf40d4cb2da0f25fba88936be98d26`.
+
+Sanitized evidence: [hosted result](evidence/n4/hosted-41607482461/result.json),
+[artifact integrity](evidence/n4/hosted-41607482461/artifact-integrity.json),
+[remote readback](evidence/n4/hosted-41607482461/remote-readback.json).
+Original job output/downloads remain private under `ci-output/native-n4-push-1/`.
+The initial local staging attempt was blocked by a read-only `.git`; explicit
+sandbox access was then granted before the single commit. No Git/source defect
+was inferred from that permission failure.
+
+**Stopped at the failure checkpoint:** no implementation correction, CI rerun,
+second commit or second push. These post-run report/evidence updates remain local
+and uncommitted. Proposed next bounded work is to reproduce/correct the focus
+failure, make historical release tests hermetic without weakening accepted policy,
+and run the full CI-equivalent selection before presenting a corrective batch.
+Signing, final native testing, vendor source/notice closure and publication remain
+separate; no keys or owner GUI interaction are needed for this investigation.
+
+## Prior local preparation checkpoint — preserved scope
+
 N1–N3 are owner-accepted. Current owner-committed baseline:
 `b27e33bb0b31ecd93a3792c6b6a889686dfae575`, branch
 `desktop/p2-production-integration`; the working tree was initially clean.

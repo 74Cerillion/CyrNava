@@ -1,7 +1,16 @@
-# Current native-release status — N1–N3 accepted; N4 locally verified, release conditional
+# Current native-release status — N1–N3 accepted; N4 corrections ready, release conditional
 
 3 November 2026. **N1/N2/N3 ACCEPTED / COMPLETE. N4 local implementation VERIFIED;
 public release CONDITIONAL.**
+Local corrective preparation now passes 1,474 tests, with an audited source-only
+review packet and identical application/installer bytes. No further commit/push
+or hosted run occurred. Review and separate corrective commit/push authorization
+are the next checkpoint; [N4_REPORT.md](N4_REPORT.md) records scopes and uncertainty.
+Latest authorized commit/push: `7d3bd86ad335b1a518c5dd7df09106b847d2256d`.
+Ordinary hosted CI `41607482461`, attempt 1, is **FAIL**: historical release-policy
+checks and one frontend focus assertion failed; native package job SKIPPED.
+Diagnostic integrity/provenance verified. No retry/second commit/push occurred.
+Exact failure and separate next checkpoint: [N4_REPORT.md](N4_REPORT.md).
 The owner formally accepted N3's independently reviewed native GUI/reinstall,
 security, update/recovery and data-preservation scope. Exact artifact/result and
 owner decision: [N3_REPORT.md](N3_REPORT.md),

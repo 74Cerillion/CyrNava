@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { useState } from 'react';
 import { expect, it, vi } from 'vitest';
 import { DirectoryTree } from './DirectoryTree';
@@ -81,4 +81,36 @@ it('Enter toggles folders or opens notes, F2 renames, and Delete requests confir
   expect(manage).toHaveBeenLastCalledWith('rename', expect.objectContaining({ kind: 'note' }));
   fireEvent.keyDown(root, { key: 'Delete' });
   expect(manage).toHaveBeenLastCalledWith('delete', expect.objectContaining({ kind: 'folder' }));
+});
+
+function FocusHarness({ directory = data, busy = false }: { directory?: DirectoryData; busy?: boolean }) {
+  return <><input aria-label="Synthetic editor" /><DirectoryTree data={directory} expanded={new Set()}
+    selected="note:b" openedNote="b" busy={busy} onToggle={() => {}} onSelect={() => {}} onManage={() => {}} /></>;
+}
+
+it('keeps editor focus across an autosave title refresh after initial selection', () => {
+  const { rerender } = render(<FocusHarness />);
+  expect(item('Note Root note')).toHaveFocus();
+  const editor = screen.getByLabelText('Synthetic editor');
+  act(() => editor.focus());
+  const updated = { ...data, notes: data.notes.map((note) => note.id === 'b' ? { ...note, title: 'Saved title' } : note) };
+  rerender(<FocusHarness directory={updated} />);
+  expect(item('Note Saved title')).toHaveAttribute('aria-selected', 'true');
+  expect(editor).toHaveFocus();
+});
+
+it('keeps tree focus and its tab stop when only directory labels refresh', () => {
+  const { rerender } = render(<FocusHarness />);
+  const selected = item('Note Root note');
+  expect(selected).toHaveFocus();
+  rerender(<FocusHarness directory={structuredClone(data)} />);
+  expect(selected).toHaveFocus();
+  expect(selected).toHaveAttribute('tabindex', '0');
+});
+
+it('still restores selected-row focus when a blocking operation finishes', () => {
+  const { rerender } = render(<FocusHarness busy />);
+  act(() => screen.getByLabelText('Synthetic editor').focus());
+  rerender(<FocusHarness />);
+  expect(item('Note Root note')).toHaveFocus();
 });

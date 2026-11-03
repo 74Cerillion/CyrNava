@@ -1,0 +1,28 @@
+{
+  "additional_builds_or_downloads": "No Qt/native binary rebuild or dependency download; fresh frontend build only",
+  "allocated_bytes_by_owned_path": {
+    "ci-output/native-n4-1": 55099392,
+    "ci-output/native-n4-build-1": 1282666496,
+    "ci-output/native-n4-corrected-metadata-1": 4644864,
+    "ci-output/native-n4-correction-1": 10452992,
+    "ci-output/native-n4-frontend-source-1": 6934528,
+    "ci-output/native-n4-frontend-source-2": 155648,
+    "ci-output/native-n4-push-1": 745472,
+    "ci-output/native-n4-release-metadata-2": 3588096,
+    "ci-output/native-n4-release-metadata-3": 3588096,
+    "ci-output/native-n4-release-proposal-1": 275439616,
+    "ci-output/native-n4-source-1": 498610176,
+    "ci-output/native-n4-source-2": 1067618304,
+    "ci/evidence/n4": 253952
+  },
+  "cap_bytes": 3221225472,
+  "deletion": "No retained evidence/cache or personal data deleted; only newly created fixture/test scratch cleaned by its normal test lifecycle",
+  "floor_bytes": 5368709120,
+  "free_bytes": 5427458048,
+  "measured_at_utc": "2026-11-03T09:33:05.138118+00:00",
+  "measurement_limit": "Allocated blocks and filesystem free space are measured separately; other filesystem activity is not attributed to this task",
+  "new_source_packet_written_after_free_floor_restored": true,
+  "observed_browser_transient_minimum_free_bytes": 5361344512,
+  "owned_allocated_bytes": 3209797632,
+  "transient_floor_status": "BELOW FLOOR DURING EXISTING TEST SCRATCH; no new packet/build then; restored by successful test cleanup"
+}

@@ -88,6 +88,15 @@ class PayloadTests(unittest.TestCase):
         names = release.source_files(HERE.parents[1])
         self.assertIn("desktop/native/application.py", names)
         self.assertIn("LICENSE", names)
+        for name in (
+            "ci/historical_release.py",
+            "ci/fixtures/p5b-accepted-ci.yml",
+            "ci/release/core.py",
+            "packaging/flatpak/production/toolchain.lock.json",
+            ".github/workflows/release.yml",
+            ".github/workflows/p5c.yml",
+        ):
+            self.assertIn(name, names)
         self.assertNotIn("ci/p6-cleanup-inventory.json", names)
         self.assertFalse(
             any(n.startswith(("ci-output/", "ci/evidence/")) for n in names)

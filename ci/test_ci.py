@@ -12,6 +12,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 HERE = Path(__file__).resolve().parent
@@ -27,6 +28,7 @@ def load(name):
 validator = load("validate")
 verification = load("verify")
 flatpak = load("flatpak")
+historical = load("historical_release")
 
 
 class WorkflowTests(unittest.TestCase):
@@ -195,10 +197,19 @@ class ExecutionTests(unittest.TestCase):
 
     def test_backend_commands_preserve_cwd_and_all_previous_suites(self):
         steps = verification.steps_for("backend", Path("/tmp/synthetic-report"))
-        self.assertEqual(steps[-1][2], HERE.parent / "backend")
-        self.assertIn("tests", steps[-1][1])
-        self.assertIn("../packaging/flatpak/production/test_packaging.py", steps[-1][1])
-        self.assertNotIn("--ignore", steps[-1][1])
+        current = next(
+            s for s in steps if s[0] == "backend-security-lifecycle-migration-packaging"
+        )
+        legacy = next(
+            s for s in steps if s[0] == "historical-release-security-regressions"
+        )
+        self.assertEqual(current[2], HERE.parent / "backend")
+        self.assertIn("tests", current[1])
+        self.assertIn("../packaging/flatpak/production/test_packaging.py", current[1])
+        self.assertNotIn("--ignore", current[1])
+        self.assertIn("ci/historical_release.py", legacy[1])
+        self.assertEqual(legacy[2], HERE.parent)
+        self.assertNotIn("../ci/release", current[1])
 
     def test_backend_prepares_production_assets_before_preserved_test_suite(self):
         steps = verification.steps_for("backend", Path("/tmp/synthetic-report"))
@@ -596,6 +607,13 @@ class BuildDirectoryTests(unittest.TestCase):
                     ],
                 ),
                 patch.object(builder, "stage"),
+                # This test exercises path creation with a mocked stage, not
+                # actual build capacity. The low-space guard has its own test.
+                patch.object(
+                    builder.shutil,
+                    "disk_usage",
+                    return_value=SimpleNamespace(free=6 * 1024**3),
+                ),
             ):
                 self.assertEqual(builder.main(), 0)
                 self.assertEqual(
@@ -617,6 +635,11 @@ class BuildDirectoryTests(unittest.TestCase):
             with (
                 patch.dict(os.environ, {"XDG_CACHE_HOME": str(root / "cache")}),
                 patch.object(
+                    builder.shutil,
+                    "disk_usage",
+                    return_value=SimpleNamespace(free=6 * 1024**3),
+                ),
+                patch.object(
                     sys,
                     "argv",
                     [
@@ -629,6 +652,101 @@ class BuildDirectoryTests(unittest.TestCase):
             ):
                 with self.assertRaisesRegex(SystemExit, "Symlink"):
                     builder.main()
+
+    def test_insufficient_capacity_still_blocks_before_staging(self):
+        builder = flatpak.module("build")
+        with (
+            tempfile.TemporaryDirectory() as tmp,
+            patch.dict(os.environ, {"XDG_CACHE_HOME": tmp}),
+            patch.object(sys, "argv", ["build.py", "--stage-only"]),
+            patch.object(
+                builder.shutil, "disk_usage", return_value=SimpleNamespace(free=1)
+            ),
+            patch.object(builder, "stage") as stage,
+            self.assertRaisesRegex(SystemExit, "At least 5 GiB free"),
+        ):
+            builder.main()
+        stage.assert_not_called()
+
+
+class HistoricalFixtureTests(unittest.TestCase):
+    def test_accepted_policy_still_rejects_native_CI(self):
+        source = HERE.parent
+        active = (source / ".github/workflows/ci.yml").read_bytes()
+        policy = (source / "ci/release/policy.json").read_bytes()
+        with tempfile.TemporaryDirectory() as tmp:
+            fixture = Path(tmp) / "source"
+            hashes = historical.fixture(source, fixture)
+            self.assertEqual(hashes[".github/workflows/ci.yml"], historical.CI_SHA256)
+            self.assertNotIn("ci/evidence/", "\n".join(hashes))
+            self.assertNotIn("ci-output/", "\n".join(hashes))
+            for name, expected in hashes.items():
+                if name != ".github/workflows/ci.yml":
+                    self.assertEqual(
+                        (fixture / name).read_bytes(), (source / name).read_bytes()
+                    )
+                self.assertEqual(
+                    historical.digest((fixture / name).read_bytes()), expected
+                )
+            spec = importlib.util.spec_from_file_location(
+                "fixture_core", fixture / "ci/release/core.py"
+            )
+            core = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(core)
+            self.assertFalse(core.policy()["production_enabled"])
+            (fixture / ".github/workflows/ci.yml").write_bytes(active)
+            with self.assertRaisesRegex(core.Rejected, "Accepted CI workflow changed"):
+                core.policy()
+        self.assertEqual((source / ".github/workflows/ci.yml").read_bytes(), active)
+        self.assertEqual((source / "ci/release/policy.json").read_bytes(), policy)
+
+    def test_wrong_historical_bytes_or_policy_pin_stop_before_output(self):
+        for wrong in ("bytes", "pin"):
+            with self.subTest(wrong=wrong), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp) / "input"
+                (root / "ci/fixtures").mkdir(parents=True)
+                (root / "ci/release").mkdir()
+                content = (HERE.parent / historical.CI_FIXTURE).read_bytes()
+                (root / historical.CI_FIXTURE).write_bytes(
+                    content + (b"# changed" if wrong == "bytes" else b"")
+                )
+                (root / "ci/release/policy.json").write_text(
+                    json.dumps(
+                        {
+                            "ci_workflow_sha256": "0" * 64
+                            if wrong == "pin"
+                            else historical.CI_SHA256,
+                        }
+                    )
+                )
+                output = Path(tmp) / "output"
+                with self.assertRaisesRegex(ValueError, "hash mismatch"):
+                    historical.fixture(root, output)
+                self.assertFalse(output.exists())
+
+    def test_existing_output_is_preserved(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "sentinel").write_text("preserve")
+            with self.assertRaises(ValueError):
+                historical.fixture(HERE.parent, root)
+            self.assertEqual((root / "sentinel").read_text(), "preserve")
+
+    def test_fixture_source_symlink_is_rejected(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / "input"
+            historical.fixture(HERE.parent, root)
+            (root / "ci/fixtures").mkdir()
+            (root / historical.CI_FIXTURE).write_bytes(
+                (HERE.parent / historical.CI_FIXTURE).read_bytes()
+            )
+            original = root / "ci/release/core.py"
+            original.unlink()
+            original.symlink_to(HERE / "release/core.py")
+            output = Path(tmp) / "output"
+            with self.assertRaisesRegex(ValueError, "symlink"):
+                historical.fixture(root, output)
+            self.assertFalse(output.exists())
 
 
 if __name__ == "__main__":
