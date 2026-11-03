@@ -2,7 +2,50 @@
 
 3 November 2026. **N1–N3 ACCEPTED / COMPLETE; N4 authorized, release CONDITIONAL.**
 
-**Latest: local corrective batch VERIFIED / READY FOR REVIEW.** All 74 historical
+**Latest: fixture-parent correction LOCALLY VERIFIED / READY FOR REVIEW.** Five
+test-fixture `mkdir` calls now create missing parents. The new independent
+five-case regression reproduces the original failure before the fix. A fresh
+full committed-source snapshot plus only this test-file patch passes 198 native,
+54 feasibility and 38 workflow tests (**290 total, no skips**), the exact workflow
+contract and lint. The native suite starts with `ci-output` absent. Six synthetic
+signature fixtures pass and their test keys are cleaned up. Application, installer,
+workflow, security policy and accepted artifacts remain unchanged.
+
+- [x] Authorized local fixture-parent correction and clean-checkout verification complete.
+- [x] Original hosted FAIL records, raw diagnostics and unrelated uncommitted work preserved.
+- [x] New evidence tied to exact source/test-patch hashes; no build, GUI or host-policy load.
+- [ ] Owner reviews the local patch and separately authorizes any corrective commit/push.
+- [ ] Hosted native regression/assembly/audit/install PASS; last run 41612661098 remains FAIL.
+
+Details: [N4_REPORT.md](N4_REPORT.md),
+[verification evidence](evidence/n4/fixture-parent-2026-11-03/result.json).
+No commit, push, hosted workflow execution, production signing or publication
+occurred during this correction. Release remains CONDITIONAL.
+
+The following corrective-push checkpoint is historical.
+
+**Historical: corrective commit/push VERIFIED; hosted CI FAIL.** The owner-authorized
+26-file commit is `b5ad466b5c5694900e4463ffdef10f0b7c84a732`; one normal fast-forward
+integration push and exact remote readback passed. `main` remains unchanged.
+[CI 41612661098](https://github.com/74Cerillion/CyrNava/actions/runs/41612661098),
+attempt 1: validation, backend and frontend/browser PASS; native regression setup
+FAIL with 12 missing-parent fixture errors; required gate FAIL. No native package
+was produced. Both diagnostic ZIP hashes/provenance were independently verified.
+The smallest proposed next correction is fresh-checkout parent creation in the
+AppArmor test fixtures, with focused clean-checkout regression verification.
+No implementation correction or retry occurred after failure. See
+[N4_REPORT.md](N4_REPORT.md) and
+[hosted evidence](evidence/n4/hosted-41612661098/result.json).
+
+- [x] One corrective commit/push completed within its exact reviewed scope.
+- [x] Actual hosted passes/failures and diagnostic integrity preserved.
+- [x] Previous accepted artifacts, application/security controls and main preserved.
+- [ ] Clean-checkout fixture correction and verification, under new owner scope.
+- [ ] Hosted native regression/assembly/audit/install PASS; separate commit/push authorization.
+
+The following local-preparation checkpoint is historical.
+
+**Historical: local corrective batch VERIFIED / READY FOR REVIEW.** All 74 historical
 release failures reach the unchanged CI-hash guard. Current legacy tests now run
 in an isolated fixture using its verified accepted CI bytes; policy stays intact.
 The frontend test waits for initial tree focus before measuring autosave focus;

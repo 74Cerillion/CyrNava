@@ -1,0 +1,54 @@
+{
+  "artifacts": [
+    {
+      "bytes": 24345,
+      "commit": "b5ad466b5c5694900e4463ffdef10f0b7c84a732",
+      "entry_count": 4,
+      "id": 13220185867,
+      "junit": [
+        {
+          "errors": 0,
+          "failures": 0,
+          "file": "backend-historical-junit.xml",
+          "skipped": 0,
+          "tests": 549
+        },
+        {
+          "errors": 0,
+          "failures": 0,
+          "file": "backend-junit.xml",
+          "skipped": 0,
+          "tests": 611
+        }
+      ],
+      "name": "backend-diagnostics-b5ad466b5c5694900e4463ffdef10f0b7c84a732-1",
+      "run_id": 41612661098,
+      "sha256": "1b4b4315f011dcf956e8b26cc7a02a91fa712b55cbab2f34306077f33e9f0762",
+      "status": "PASS"
+    },
+    {
+      "bytes": 4894336,
+      "commit": "b5ad466b5c5694900e4463ffdef10f0b7c84a732",
+      "entry_count": 65,
+      "id": 13219129189,
+      "junit": [
+        {
+          "errors": 0,
+          "failures": 0,
+          "file": "ci-output/browser-junit.xml",
+          "skipped": 0,
+          "tests": 21
+        }
+      ],
+      "name": "frontend-diagnostics-b5ad466b5c5694900e4463ffdef10f0b7c84a732-1",
+      "run_id": 41612661098,
+      "sha256": "42553f6d20a016aa2e1aac5952fb3148b5f777cdcbc1227cce21972973f93c63",
+      "status": "PASS"
+    }
+  ],
+  "commit": "b5ad466b5c5694900e4463ffdef10f0b7c84a732",
+  "native_package_produced": false,
+  "run_id": 41612661098,
+  "scope": "actual diagnostic ZIP hashes, CRC, size and immutable source/run provenance; no native artifact produced",
+  "status": "PASS"
+}

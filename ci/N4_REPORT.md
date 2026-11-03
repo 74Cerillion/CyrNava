@@ -1,9 +1,134 @@
 # N4 — Native CI and public-release preparation
 
-3 November 2026. **LOCAL CORRECTIONS VERIFIED / READY FOR REVIEW.
+3 November 2026. **CLEAN-CHECKOUT FIX LOCALLY VERIFIED / READY FOR REVIEW.
 Last hosted ordinary CI remains FAIL; N4 / public release CONDITIONAL.**
 
-## Latest checkpoint — authorized local corrective preparation
+## Latest checkpoint — authorized fixture-parent correction
+
+After reviewing run 41612661098, the owner authorized the small fixture-parent
+correction and local clean-checkout regression verification. Only
+`packaging/native/test_apparmor.py` changes implementation: its five fixture
+`mkdir` calls now use `parents=True`. Production application, installer, dependency
+locks, workflow and AppArmor policy bytes are unchanged. A new regression runs
+each of the five affected setup paths in a separate minimal source fixture with
+`ci-output` absent, so execution order cannot conceal missing-parent assumptions.
+
+Before the five-call fix, that regression reproduced **five expected failures**,
+each the original `FileNotFoundError`, errno 2. The failed test output and exact
+pre-fix source remain private and preserved. After the correction, the full
+committed source tree at `b5ad466b5c5694900e4463ffdef10f0b7c84a732` was extracted
+with `git archive` into a fresh disposable directory, with only the corrected
+test file overlaid. No existing output, environment, personal profile or `.git`
+metadata was copied. All source bytes were checked unchanged after testing.
+
+| Fresh source-snapshot check | Actual result |
+| --- | --- |
+| Exact native CI unittest command, starting with no `ci-output` | 198 PASS, zero skips; includes the new five-case regression |
+| Following native feasibility command | 54 PASS, zero skips |
+| Current workflow/negative-contract unit tests | 38 PASS, zero skips |
+| Exact workflow security/dependency contract | PASS |
+| Ruff on changed test file and diff whitespace check | PASS |
+
+Unique passing test total: **290**. The six real disposable-signature tests are
+included in the 198 native tests. They generated fresh one-day synthetic fixtures
+and removed their private key directory successfully; no production identity was
+used. No test assertion, renderer check, host-policy requirement or signature
+guard was bypassed. This corrects test setup only and does not establish a new
+application or renderer result.
+
+The disposable snapshot contained 1,604 committed files / 48,039,524 source bytes.
+Observed peak temporary allocation was 53,477,376 bytes, below its 128 MiB bound;
+the snapshot and newly generated scratch were removed by normal test cleanup.
+The recorded verification took 3.996 seconds. Existing dependency environments
+were reused. All nine pre-existing uncommitted files were verified unchanged
+before these report updates, and 43 protected artifact/application/security files
+still match their original hashes. No retained evidence, accepted artifact,
+working environment or owner data was deleted.
+
+Source remains at `b5ad466b5c5694900e4463ffdef10f0b7c84a732`; corrected test SHA-256
+is `3fc70892596a674d48d81eb3e7355b5d66d2021ffd3f003c7ea7cee6f6b48b37`;
+test-only patch SHA-256 is
+`1dcd33962a4cf375fe4aafd8a5bd687934cdcc4f76d719cdb72c6a1f238435aa`.
+[Local verification evidence](evidence/n4/fixture-parent-2026-11-03/result.json).
+
+**Owner checkpoint:** review this uncommitted test-only correction and the
+preserved hosted-failure documentation. The exact paths/hashes are in the
+[commit proposal](evidence/n4/fixture-parent-2026-11-03/commit-proposal.json).
+A further commit/normal push and hosted verification need separate authorization.
+No build, GUI, host-policy load,
+dependency download, commit, push, signing or GitHub execution occurred in this
+correction pass. Runs 41607482461 and 41612661098 remain **FAIL** under their
+original identities. No native hosted package exists from those runs. Final
+package verification, vendor notice/source closure, genuine release signing and
+publication remain pending; N1–N3 stay accepted.
+
+## Historical checkpoint — corrective push and hosted result
+
+The owner authorized one corrective commit and one normal integration push.
+Commit **`b5ad466b5c5694900e4463ffdef10f0b7c84a732`**, parent
+`7d3bd86ad335b1a518c5dd7df09106b847d2256d`, tree
+`8c1ebd9bc9a71b0b8e1cc707086f3fb2b17c3f62`, contains exactly the 26 reviewed
+paths and approved bytes. Staged review, protected-file checks, normal fast-forward
+push, and independent GitHub API/remote Git readback passed. `main` remains default
+and unchanged at `4021bc292267c19b7ebebf219b4f682f8f99bf4c`.
+
+[Ordinary CI 41612661098](https://github.com/74Cerillion/CyrNava/actions/runs/41612661098),
+attempt 1, push event, completed **FAIL** (3 November, 18:38:29–18:42:57 Korea time).
+
+| Hosted job | Actual result |
+| --- | --- |
+| Workflow validation | PASS; 38 contract/fixture tests |
+| Backend and security | PASS; 574 current tests plus 37 subtests, 351 historical tests plus 198 subtests |
+| Frontend and browser | PASS; 277 unit tests, lint, TypeScript/production build, 21 Chromium tests |
+| Native Ubuntu package and exported-archive audit | FAIL during regression setup; 189 tests reported, 12 errors; suite incomplete |
+| CI required | FAIL; no bypass |
+
+**Confirmed new failure: clean-checkout fixture setup.**
+`packaging/native/test_apparmor.py` lines 128, 151, 170, 216 and 359 call
+`parent.mkdir(mode=0o700, exist_ok=True)` for
+`ci-output/native-n2-apparmor-tests-1`. The fresh native checkout has no `ci-output`
+parent, so those calls raise `FileNotFoundError`, errno 2. All 12 retained errors
+name that same missing fixture directory. This includes a class setup failure;
+the full 197-test native suite did not complete. The later feasibility command,
+assembly, exported-package audit and isolated headless installation were skipped.
+No hosted native package was produced. The always-run diagnostic upload also
+failed because the unstarted assembly had produced no result/audit/install JSON.
+
+The local native suite had an existing output parent and did not exercise this
+clean-checkout precondition. Its earlier PASS remains valid only in that scope.
+The failed setup does not establish a renderer or application failure: the affected
+security assertions and package execution were not reached. No policy or security
+check was disabled, and no application/host-policy correction is justified by this
+record. The proposed smallest correction is to make these test fixtures create
+their missing parent and verify the native suite with `ci-output` initially absent.
+**No implementation correction, test rerun, second commit/push or workflow retry
+was performed after this failure.** A new corrective batch requires owner review
+and separate authorization before any further commit/push.
+
+Both actual diagnostic ZIPs match GitHub API digests, sizes and exact run/commit
+provenance, with valid CRCs and no JUnit failures/errors/skips:
+
+- Backend artifact `13220185867`, 24,345 bytes, SHA-256
+  `1b4b4315f011dcf956e8b26cc7a02a91fa712b55cbab2f34306077f33e9f0762`.
+- Frontend artifact `13219129189`, 4,894,336 bytes, SHA-256
+  `42553f6d20a016aa2e1aac5952fb3148b5f777cdcbc1227cce21972973f93c63`.
+
+JUnit totals include subtests: 611 current backend, 549 historical, 21 browser.
+They must not be added to the corresponding parent-test totals as unique tests.
+Original job logs and downloads remain private in
+`ci-output/native-n4-corrective-push-1/`; no native artifact was downloaded or
+inferred. A prepared in-memory native artifact checker was not executed because
+there is no package to verify. The previous hosted FAIL, all local findings,
+accepted artifacts and N1–N3 acceptance remain intact.
+
+[Hosted result](evidence/n4/hosted-41612661098/result.json),
+[diagnostic integrity](evidence/n4/hosted-41612661098/artifact-integrity.json),
+[remote readback](evidence/n4/hosted-41612661098/remote-readback.json).
+These post-run report/evidence changes remain local and uncommitted. Vendor
+notice/source closure, final public-identity native verification, genuine
+production signing and publication remain separate release requirements.
+
+## Historical checkpoint — authorized local corrective preparation
 
 The owner authorized investigation and preparation after run 41607482461 failed.
 No further project commit, push or GitHub execution was authorized or performed.

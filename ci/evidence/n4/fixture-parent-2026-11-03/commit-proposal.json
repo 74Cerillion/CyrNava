@@ -1,0 +1,41 @@
+{
+  "application_dependency_workflow_security_changes": false,
+  "branch": "desktop/p2-production-integration",
+  "next_authorization": "One corrective commit and one normal integration push for fresh ordinary CI; no main change/GUI/host-policy/signing/publication",
+  "parent": "b5ad466b5c5694900e4463ffdef10f0b7c84a732",
+  "paths": [
+    "ci/N4_OWNER_CHECKS.md",
+    "ci/N4_REPORT.md",
+    "ci/P6_NATIVE_DISTRIBUTION_ROADMAP.md",
+    "ci/P6_OWNER_CHECKS.md",
+    "ci/P6_REPORT.md",
+    "ci/evidence/n4/fixture-parent-2026-11-03/commit-proposal.json",
+    "ci/evidence/n4/fixture-parent-2026-11-03/resources.json",
+    "ci/evidence/n4/fixture-parent-2026-11-03/result.json",
+    "ci/evidence/n4/fixture-parent-2026-11-03/retained-records.json",
+    "ci/evidence/n4/hosted-41612661098/artifact-integrity.json",
+    "ci/evidence/n4/hosted-41612661098/remote-readback.json",
+    "ci/evidence/n4/hosted-41612661098/result.json",
+    "ci/evidence/n4/hosted-41612661098/retained-records.json",
+    "packaging/native/test_apparmor.py"
+  ],
+  "scope": "One test file: five parent-creation fixes and independent fresh-fixture regression; current status documents, prior hosted-failure evidence and new local verification only",
+  "sha256": {
+    "ci/N4_OWNER_CHECKS.md": "f695827d2981b9051abe21a0cef6c42837f436f2880e701277967887418581af",
+    "ci/N4_REPORT.md": "039bbde701510b5bea8c01b3726a2ab96e96b4275c1d6021b63000ec6c8258e5",
+    "ci/P6_NATIVE_DISTRIBUTION_ROADMAP.md": "0467585a1773410de9df1832732d5e16c54ce2f5cf2bc586eb7010a35d1c9842",
+    "ci/P6_OWNER_CHECKS.md": "335d0fe20766b3cc11bb2a5c0980d06ad7fc030b8f5942e46db38533a492abda",
+    "ci/P6_REPORT.md": "467bdd080453fdd9a81ae2ea29f53a9be6566a7be12ca81d4371de3d1534f5ea",
+    "ci/evidence/n4/fixture-parent-2026-11-03/resources.json": "c97ff3cf0591892fd2741002d698ca0f808944a05bd6cdbf4e6bcd50512da7ed",
+    "ci/evidence/n4/fixture-parent-2026-11-03/result.json": "688651675527c37a80a07933250a7e056113230a62abafbfd8a5875e62a84adc",
+    "ci/evidence/n4/fixture-parent-2026-11-03/retained-records.json": "f757887b609bebad9c715c3d0df8bae79504e8a0fb2a0ce3b6b2e71d2da7805a",
+    "ci/evidence/n4/hosted-41612661098/artifact-integrity.json": "983cb9e313987ee509ccd2891c3183c3348cc3c374464268e1a3831bc99eeb04",
+    "ci/evidence/n4/hosted-41612661098/remote-readback.json": "5fdd580a496fb454182aaf2c6e143becfe4923dc258b7dc873cceb3ed5349aaf",
+    "ci/evidence/n4/hosted-41612661098/result.json": "498d6578d5ec67888613810326112693a1655bf92d83e06e5e6e2d5dac435b69",
+    "ci/evidence/n4/hosted-41612661098/retained-records.json": "c480d45fa977b43a0fb00b20c8f540e73c679ba9f6400372ffec64cd96e0b0cf",
+    "packaging/native/test_apparmor.py": "3fc70892596a674d48d81eb3e7355b5d66d2021ffd3f003c7ea7cee6f6b48b37"
+  },
+  "status": "UNCOMMITTED REVIEW PROPOSAL; NO COMMIT/PUSH AUTHORIZATION",
+  "tests": "290 local PASS, zero skips; exact native/feasibility CI regression commands on fresh committed-source snapshot plus this one patch; original hosted run 41612661098 remains FAIL",
+  "title": "Create native test fixture parents on fresh checkouts"
+}

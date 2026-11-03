@@ -1,0 +1,100 @@
+{
+  "N4_acceptance": "CONDITIONAL; native CI incomplete",
+  "attempt": 1,
+  "branch": "desktop/p2-production-integration",
+  "commit": "b5ad466b5c5694900e4463ffdef10f0b7c84a732",
+  "commit_count_this_authorization": 1,
+  "complete": true,
+  "created_at_utc": "2026-11-03T09:38:29Z",
+  "event": "push",
+  "further_commit_push": false,
+  "implementation_correction_after_failure": false,
+  "jobs": [
+    {
+      "conclusion": "success",
+      "failed_steps": [],
+      "id": 125838189729,
+      "name": "Workflow validation"
+    },
+    {
+      "conclusion": "success",
+      "failed_steps": [],
+      "id": 125838272494,
+      "name": "Frontend and browser"
+    },
+    {
+      "conclusion": "success",
+      "failed_steps": [],
+      "id": 125838272643,
+      "name": "Backend and security"
+    },
+    {
+      "conclusion": "failure",
+      "failed_steps": [
+        "Native installer, security and transaction regressions",
+        "Preserve safe native stage results"
+      ],
+      "id": 125839784213,
+      "name": "Native Ubuntu package and exported-archive audit"
+    },
+    {
+      "conclusion": "failure",
+      "failed_steps": [
+        "Require every verification and artifact job to succeed"
+      ],
+      "id": 125840011989,
+      "name": "CI required"
+    }
+  ],
+  "native_GUI": "NOT EXECUTED",
+  "native_package": "NOT PRODUCED; source assembly/audit/installed headless stage skipped",
+  "native_regressions": {
+    "errno": 2,
+    "errors": 12,
+    "exception": "FileNotFoundError",
+    "feasibility_suite": "NOT EXECUTED; preceding command failed",
+    "file": "packaging/native/test_apparmor.py",
+    "file_sha256": "7b937d41c4c2174032537d16137963c842d21c8262e08feaa769b4cc5d57a2d2",
+    "fixture_mkdir_lines": [
+      128,
+      151,
+      170,
+      216,
+      359
+    ],
+    "planned_suite_completed": false,
+    "reported_tests_run": 189,
+    "root_cause": "Test fixtures attempt to create ci-output/native-n2-apparmor-tests-1 with parents=False; clean checkout has no ci-output parent",
+    "security_assertions_at_failed_setup": "NOT REACHED; no host policy load/GUI performed"
+  },
+  "next_proposed_scope": "Correct only fresh-checkout test-fixture parent creation; test with absent ci-output; full native/focused regressions before separate commit/push review",
+  "normal_push_count_this_authorization": 1,
+  "parent": "7d3bd86ad335b1a518c5dd7df09106b847d2256d",
+  "phase": "N4",
+  "remaining_release_requirements": [
+    "hosted native assembly/install/audit PASS",
+    "actual third-party notices and covered-source correspondence/delivery",
+    "final public-identity package native verification",
+    "owner-selected production signing and separate publication authority"
+  ],
+  "retained_prior_run": {
+    "conclusion": "FAIL; unchanged",
+    "id": 41607482461
+  },
+  "run_id": 41612661098,
+  "secondary_diagnostic_failure": "Upload required native result paths, but source assembly never began and no native result/audit/install JSON exists",
+  "status": "FAIL",
+  "updated_at_utc": "2026-11-03T09:42:57Z",
+  "url": "https://github.com/74Cerillion/CyrNava/actions/runs/41612661098",
+  "verified_hosted_passes": {
+    "active_backend_subtests_separate": 37,
+    "active_backend_tests": 574,
+    "browser_tests": 21,
+    "frontend_units": 277,
+    "historical_subtests_separate": 198,
+    "historical_tests": 351,
+    "workflow_tests": 38
+  },
+  "workflow_path": ".github/workflows/ci.yml",
+  "workflow_retry_or_rerun": false
+}

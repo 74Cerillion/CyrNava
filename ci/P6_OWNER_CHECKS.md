@@ -1,16 +1,19 @@
-# Current owner checkpoint — N1–N3 accepted; N4 corrections ready, release conditional
+# Current owner checkpoint — N1–N3 accepted; N4 hosted CI incomplete
 
 3 November 2026. **N1/N2/N3 ACCEPTED / COMPLETE. N4 local implementation VERIFIED;
 public release CONDITIONAL.**
-Local corrective preparation now passes 1,474 tests, with an audited source-only
-review packet and identical application/installer bytes. No further commit/push
-or hosted run occurred. Review and separate corrective commit/push authorization
-are the next checkpoint; [N4_REPORT.md](N4_REPORT.md) records scopes and uncertainty.
-Latest authorized commit/push: `7d3bd86ad335b1a518c5dd7df09106b847d2256d`.
-Ordinary hosted CI `41607482461`, attempt 1, is **FAIL**: historical release-policy
-checks and one frontend focus assertion failed; native package job SKIPPED.
-Diagnostic integrity/provenance verified. No retry/second commit/push occurred.
-Exact failure and separate next checkpoint: [N4_REPORT.md](N4_REPORT.md).
+Latest authorized local correction: test-only fixture-parent fix VERIFIED.
+A new independent five-case regression reproduces the missing-parent failures
+before the fix. A fresh full committed-source snapshot plus only that test patch,
+starting with no `ci-output`, passes 198 native, 54 feasibility and 38 workflow
+tests (**290 total, zero skips**), workflow contract and lint. No application,
+installer, dependency, workflow or security-policy changes. No new build, GUI,
+host-policy load, commit, push or GitHub execution. Source remains at
+`b5ad466b5c5694900e4463ffdef10f0b7c84a732`; main is untouched. Hosted runs
+`41607482461` and `41612661098` remain **FAIL**, with no native package produced.
+Review of the local correction and separate commit/push authority are next;
+hosted native verification is still pending. [N4_REPORT.md](N4_REPORT.md) retains
+exact evidence identities and remaining release requirements.
 The owner formally accepted N3's independently reviewed native GUI/reinstall,
 security, update/recovery and data-preservation scope. Exact artifact/result and
 owner decision: [N3_REPORT.md](N3_REPORT.md),

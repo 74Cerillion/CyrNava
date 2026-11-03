@@ -1,0 +1,20 @@
+{
+  "cleanup": "Only fresh source snapshot and test-generated scratch removed by normal test lifecycle; no earlier evidence or workspace output removed",
+  "directory": "ci-output/native-n4-fixture-parent-1",
+  "raw_output": "Private synthetic test logs; not copied into source evidence",
+  "sha256": {
+    "baseline.json": "bce982ba515a42e78364558e23737e1bf748d8ca71c4f381922f5cab4b72b0a9",
+    "before-fix-test_apparmor.py": "9f5c1c587a7f61847a4ee55818dc0f45b2abf80cc43b4ffe3288a16614f69a05",
+    "before-fix.json": "7c43ad2bb155a7949a2c4babaef1c8c74e9b325ce9b47cab64de48671ddb73d1",
+    "before-fix.private.log": "2884525d6048f5d5e9970d75ba78ed268284967432fe73240c047a71508eda70",
+    "clean-checkout.json": "5f8557864589398063339dfad9db598da8d78b189f7d0f618803eba534e80f21",
+    "feasibility.private.log": "6868b4c6a690631e82b9ba3269d174e68370b0fc1d6be38c01ba2d9389623b85",
+    "final-checks.json": "5abb0a0a4131211630a6bce0793c16f752a7c71afc18d58e4f552a8377199dbf",
+    "native.private.log": "19b56fafe92129814fb6b4b3b6a0addfbeaad096ea7c9bb93d351e19d08ba57f",
+    "progress.json": "2e3512051bf7ad0bef85238d2cbacf4ea363f94399dd942eb09e7de5792a5d24",
+    "test-fixture.patch": "1dcd33962a4cf375fe4aafd8a5bd687934cdcc4f76d719cdb72c6a1f238435aa",
+    "verify_clean_checkout.py": "11d72517ffb47b1dbe2d2aff0bb46920dc287fdd088bf49f4eafb150f0d9be9a",
+    "workflow-contract.private.log": "6929f9534e22bc6fa880e0273e930cbca7230a10ad605b44103eec52e5d3f6a6",
+    "workflow.private.log": "62e00a91c14d38f2026863283bd702dc73d7c0b575f2b65267a259045e557969"
+  }
+}

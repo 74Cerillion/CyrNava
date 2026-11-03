@@ -31,6 +31,49 @@ install_tests = module(
 engine = install_tests.engine
 
 
+class CleanCheckoutTests(unittest.TestCase):
+    def test_each_fixture_setup_works_without_an_output_parent(self):
+        files = (
+            "packaging/native/test_apparmor.py",
+            "packaging/native/test_install_engine.py",
+            "packaging/native/apparmor_support.py",
+            "packaging/native/desktop_process.py",
+            "packaging/native/bootstrap.c",
+            "desktop/install_engine.py",
+        )
+        cases = (
+            "PolicyTests.test_public_kernel_metadata_reports_actual_unconfined_not_expected_enforce",
+            "PolicyTests.test_offline_parser_accepts_enforce_and_explicit_access_without_loading",
+            "PolicyTests.test_engine_refuses_direct_python_launch_without_policy_before_reexec",
+            "LauncherTests.test_actual_compiled_launcher_refuses_absent_attachment_without_python",
+            "RootTransactionTests.test_bad_digest_does_not_create_or_load",
+        )
+        for case in cases:
+            with self.subTest(case=case), tempfile.TemporaryDirectory(
+                prefix="n4-fresh-"
+            ) as temporary:
+                source = Path(temporary) / "source"
+                for name in files:
+                    target = source / name
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(ROOT / name, target)
+                # Exercise each real setup independently: another test must not
+                # create ci-output first and conceal a clean-checkout failure.
+                self.assertFalse((source / "ci-output").exists())
+                result = subprocess.run(
+                    [sys.executable, "-B", "-m", "unittest", "test_apparmor." + case],
+                    cwd=source / "packaging/native",
+                    check=False,
+                    capture_output=True,
+                    text=True,
+                    timeout=60,
+                )
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                self.assertTrue(
+                    (source / "ci-output/native-n2-apparmor-tests-1").is_dir()
+                )
+
+
 class PolicyTests(unittest.TestCase):
     root = Path("/home/synthetic/exact install % $")
 
@@ -125,7 +168,7 @@ class PolicyTests(unittest.TestCase):
         self,
     ):
         parent = ROOT / "ci-output/native-n2-apparmor-tests-1"
-        parent.mkdir(mode=0o700, exist_ok=True)
+        parent.mkdir(mode=0o700, parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(dir=parent) as temporary:
             base = Path(temporary)
             name = aa.profile_name(self.root)
@@ -148,7 +191,7 @@ class PolicyTests(unittest.TestCase):
 
     def test_offline_parser_accepts_enforce_and_explicit_access_without_loading(self):
         parent = ROOT / "ci-output/native-n2-apparmor-tests-1"
-        parent.mkdir(mode=0o700, exist_ok=True)
+        parent.mkdir(mode=0o700, parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(dir=parent) as temporary:
             file = Path(temporary) / "parser-fixture"
             file.write_bytes(
@@ -167,7 +210,7 @@ class PolicyTests(unittest.TestCase):
 
     def test_engine_refuses_direct_python_launch_without_policy_before_reexec(self):
         parent = ROOT / "ci-output/native-n2-apparmor-tests-1"
-        parent.mkdir(mode=0o700, exist_ok=True)
+        parent.mkdir(mode=0o700, parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(dir=parent) as temporary:
             release = Path(temporary) / "releases/0.1.0-n2.2-1234567890abcdef"
             with (
@@ -213,7 +256,7 @@ class LauncherTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         parent = ROOT / "ci-output/native-n2-apparmor-tests-1"
-        parent.mkdir(mode=0o700, exist_ok=True)
+        parent.mkdir(mode=0o700, parents=True, exist_ok=True)
         cls.temporary = tempfile.TemporaryDirectory(dir=parent)
         cls.base = Path(cls.temporary.name)
         cls.binary = cls.base / "compiled"
@@ -356,7 +399,7 @@ class RootTransactionTests(unittest.TestCase):
 
     def setUp(self):
         parent = ROOT / "ci-output/native-n2-apparmor-tests-1"
-        parent.mkdir(mode=0o700, exist_ok=True)
+        parent.mkdir(mode=0o700, parents=True, exist_ok=True)
         self.temporary = tempfile.TemporaryDirectory(dir=parent)
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name)
