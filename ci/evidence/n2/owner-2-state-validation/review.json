@@ -1,0 +1,19 @@
+{
+  "status": "FAIL / first GUI phase PASS, post-close marker mismatch",
+  "source_attempt": "ci-output/native-n2-owner-2",
+  "result_sha256": "7a85ddb0ae9ead9a096bb66a197396bcc49474fc33bde9479fae3d4be10a62b2",
+  "validator_log_sha256": "98e6924d96b781ebfcfe67bc0a6926434ef7b4a0bb81b5c8c7cdee357a192c45",
+  "driver_sha256": "e4eb3402216e4cb963ff615d6e762029d5113fa9c0349945cba8033196e126ad",
+  "expected_marker": "N2 desktop verified",
+  "saved_marker": "N2 Desktop Verified",
+  "saved_bold": true,
+  "attached_image_present": true,
+  "sqlite_integrity": "ok",
+  "workspace_files_sha256": {
+    "engage.sqlite3": "b15dd7c963e02522ffe154f3fe8424e2312525d6f5dae0015cbc871bebd8ac7e",
+    ".engage.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "assets/bd286977-ffd5-4101-8c42-8217269c17d8": "3bc66aa479ab9a005a388d46f5055c7fc7cd6036b8405e115304ee7f6e83e418"
+  },
+  "GUI_restart": "NOT EXECUTED",
+  "profile_modified_by_review": false
+}

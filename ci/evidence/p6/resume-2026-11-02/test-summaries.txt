@@ -1,0 +1,6 @@
+Candidate unittest: 14 PASS (fixtures only)
+Ruff, Bash syntax and --help: PASS
+Frontend lint +273 unit tests +TypeScript: PASS
+Playwright production-mode 21 PASS / zero retries (current source/dist, not candidate)
+Combined persistent-fixture backend: 587 passed +45 subtests; 1 disposable-GPG setup ERROR; remainder unexecuted.
+Earlier fixture failures preserved privately. No native/candidate/signature PASS.

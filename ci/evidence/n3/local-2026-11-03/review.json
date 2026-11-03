@@ -1,0 +1,190 @@
+{
+  "GUI": "NOT EXECUTED",
+  "N1": "ACCEPTED / COMPLETE",
+  "N2": "ACCEPTED / COMPLETE",
+  "N3": "LOCAL PASS / CONDITIONAL pending owner-host native verification",
+  "N4": "NOT AUTHORIZED / NOT STARTED",
+  "accepted_N2_artifacts_and_original_synthetic_profile_unchanged": true,
+  "actual_local_transactions": {
+    "compatible_binary_rollback": "PASS",
+    "explicit_reinstall_preserved_data": "PASS",
+    "return_to_later_verified_binary": "PASS",
+    "same_artifact_reinstall": "PASS",
+    "uninstall": "PASS"
+  },
+  "backend_regressions": {
+    "GUI": "NOT EXECUTED",
+    "scope": "existing backup/migration/native desktop/navigation/dialog regressions under development CPython 3.12; actual package operations separately use installed CPython 3.14",
+    "status": "PASS",
+    "tests": 92,
+    "warnings": 2
+  },
+  "candidate": {
+    "archive_bytes": 271609291,
+    "archive_relative_path": "ci-output/native-n3-candidate-3/CyrNava-0.1.0-n3.2-ubuntu-x86_64.zip",
+    "archive_sha256": "f87fc9f81e8a633397af66a11211bd7a9cd35c3a77bc061d58ba2170ec86f947",
+    "assembly_source_sha256": "2a2e92ea89305d583a753be05fbed7910d4a0c7be3133f045295ceb12b04d98f",
+    "inherited_application_patch_sha256": "a5e88d7f4102aed8f44f2f54b7991638dee8e5f7df605dbbf4c941a3bde8c43c",
+    "manifest_sha256": "6f18cbd08dbccf4c578b0412805856d143f38f5c1d927ae2e753f85bbcbab096",
+    "signature": "NOT CREATED; disposable candidate only",
+    "source_head": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+    "uncommitted_source_file_hashes": {
+      "desktop/install_engine.py": "dfb8d835afa3dc0f6390e4390df900bfbe8a53593be37c85afa6b7f17c34e9aa",
+      "desktop/native/application.py": "98810679510961c9b63634094d359e6cd2dbbdcd67a6c5778c8cacd3226d279c",
+      "desktop/native/installed_configuration.py": "9ab964ce98883a29c9868fb33fbcd3e23e1a8a844865ad316470917135f62ad8",
+      "desktop/native_operations.py": "6c391bb14d9f60cd0730014f92209699556e1bd7effddd7456230ddc833a3e82",
+      "desktop/native_profile_check.py": "cae7246067f5417b23f8c5541b24f78a5e90afc1647fed78e2606da82ffecbbd",
+      "packaging/native/apparmor_support.py": "46ecc66754a25c94ae2909d93dee4eb861091c3e4c976d878daaf46b5d86a351",
+      "packaging/native/bootstrap.c": "e829f5a85cb94435139224776bbf52676ac53fdeae948b9d5043d4b07652cccb",
+      "packaging/native/feasibility/backend_check.py": "739707827e5f5086481b1ce29d88c56ec0f98e9813980596876867885ae78b48",
+      "packaging/native/feasibility/dependencies.json": "621c640f428886a7944b654fe6726f2b3ab82644e4911a051f8281ab392eb8a3",
+      "packaging/native/feasibility/requirements.lock": "24876b72281d5427fc9c5c41cdb19a918815e9547e74c5eb4d2c93ac22e4a576",
+      "packaging/native/feasibility/run_probe.py": "36ac17bf50f9fb780f952b06e7b326f6c8ff7e37b61e0e7f558898218835f530",
+      "packaging/native/launch.py": "b04f692ef5f153a4358c6cbaa79a953162766b9b1e7b9d1ffb56af7ce97e22b6",
+      "packaging/native/provider_check.py": "3314dd445de5066fb78e4580bf4367736641272f0ed792d1237f6939be8f4eb9"
+    },
+    "version": "0.1.0-n3.2"
+  },
+  "code_files_sha256": {
+    "desktop/install_engine.py": "dfb8d835afa3dc0f6390e4390df900bfbe8a53593be37c85afa6b7f17c34e9aa",
+    "desktop/native_operations.py": "6c391bb14d9f60cd0730014f92209699556e1bd7effddd7456230ddc833a3e82",
+    "desktop/native_profile_check.py": "cae7246067f5417b23f8c5541b24f78a5e90afc1647fed78e2606da82ffecbbd",
+    "packaging/native/build_candidate.py": "2a2e92ea89305d583a753be05fbed7910d4a0c7be3133f045295ceb12b04d98f",
+    "packaging/native/test_native_operations.py": "8653f3e7cf21ca824ccd87aa6a9bf84feb48ff37a290208ff24bbb3836e69d2f",
+    "packaging/native/test_native_profile_check.py": "5fdc259504606264f82f7db1dd0b10c8c101b54d4ee2c0a3e63a42ec9d46489a",
+    "packaging/native/test_verify_update.py": "89b41c59d384f436b15a14e87c72e78a485d3de39859360d30955f8691601330",
+    "packaging/native/uninstall.sh": "6a15551978b489a08b9f7a1612f4afcd2c18ee737a62fff2dbe30d7fa8b9c1e8",
+    "packaging/native/update.sh": "d954f252b3e3da48ad6e9dbd1a738082786e1bd353293f1f3b7f665a5e995188",
+    "packaging/native/verify_update.py": "cbd1e893ebef3994c118af6d7cabde76bf287d91f74bca41bd2c61a1dcd01d31",
+    "uninstall_cyrnava.sh": "c23219c8e691696aeddf7aeedd6076d67fb8d3a044346227f1f58d57cddc9d5b",
+    "update_cyrnava.sh": "f10c9d50e25f36c519dfc457eb3f410eaf02ea3c6391907b5662124fbdbe93df"
+  },
+  "documentation_files_sha256": {
+    "ci/N2_OWNER_CHECKS.md": "7a00f2b621ef753fab01f61a9f6954e00c1b9ed820cc75e7ad5cd7d605ac89aa",
+    "ci/N2_REPORT.md": "a0f470f36c6cf2c2d4d94502e3744b17aaf7bbdecda2f8ed180bc15dc76b7c13",
+    "ci/N3_OWNER_CHECKS.md": "fd27c73cd0115c4df1a16d447fff152b33d4cfb25b1cf0108ba92bcc7b888eb1",
+    "ci/N3_REPORT.md": "db84fc3f83a4b7a6e4e3d6fbdba977088c3af92bd5f1f01cb1f6a99847610fd1",
+    "ci/P6_NATIVE_DISTRIBUTION_ROADMAP.md": "2154da37021d85768df73b2234e2c388fc5eee4e78b602f97f65bdb380a6982a",
+    "ci/P6_OWNER_CHECKS.md": "70b734b74f543a27b10208772325b7a6fa01f06df62a76c32101cfbca6f937b3",
+    "ci/P6_REPORT.md": "1914e35c9f94baf7a748d5d5dee0599ede9b3a1c4b6320a35d94c17060c313b0",
+    "packaging/native/README.md": "77b3be19bd8b5aa655dc1a2d3770cbb2a5d2c7c9d3bd98b72f6037fcebe58b91"
+  },
+  "first_failed_attempt": {
+    "GUI": "NOT EXECUTED",
+    "candidate": "native-n3-candidate-1; retained",
+    "correction": "Explicit packaged backend module root; isolated subprocess regression",
+    "live_transaction_created": false,
+    "operation": "stopped-profile-audit bootstrap",
+    "private_log_sha256": "6236a86c860a2333a883b5a84a495f2ba11428396f46cefe9ddbacf6462618e7",
+    "root_cause": "New auditor omitted application/backend from its isolated Python module search path; ModuleNotFoundError for app",
+    "selected_release_unchanged": "0.1.0-n2.3-02f6594eb0011a90",
+    "status": "FAIL"
+  },
+  "format": 1,
+  "full_profile_bytes_preserved": true,
+  "host_policy_proposal": {
+    "complete": true,
+    "host_policy": "NOT MODIFIED",
+    "kernel_after": {
+      "profile": "cyrnava-native-u1000-7180461d3e5719da3d409effaeb8b936",
+      "state": "ABSENT"
+    },
+    "kernel_before": {
+      "profile": "cyrnava-native-u1000-7180461d3e5719da3d409effaeb8b936",
+      "state": "ABSENT"
+    },
+    "manifest_sha256": "6f18cbd08dbccf4c578b0412805856d143f38f5c1d927ae2e753f85bbcbab096",
+    "native_launch": "NOT EXECUTED",
+    "operation": "prepare",
+    "parser": "PASS",
+    "policy_sha256": "2e8eba098eafda2302478f1b4be7ce4320e7c8250acfa7733a30d3231ba0d1bd",
+    "profile": "cyrnava-native-u1000-7180461d3e5719da3d409effaeb8b936",
+    "status": "PREPARED"
+  },
+  "host_policy_source_unchanged": true,
+  "installed": {
+    "provider_files_verified": 4414,
+    "receipt_sha256": "b4572e42f58d0007a48c3d7ee78ba9b3e8b286c2580933c9b89eb6330b68f423",
+    "release": "0.1.0-n3.2-f87fc9f81e8a6333"
+  },
+  "limitations": [
+    "Native GUI/renderer/appearance gate remains pending; fixtures/headless results do not satisfy it",
+    "Initial schema-5/exact dependency and application-consumer family only; future app/storage/Qt compatibility needs review",
+    "Uninstall removes activation and retains payloads/checkpoints/data; no disk purge/reclaim claim",
+    "No production key/signature/release or public redistribution clearance",
+    "No commits/pushes/CI execution or N4 implementation"
+  ],
+  "newer_schema_refusal": {
+    "GUI": "NOT EXECUTED",
+    "database_bytes_unchanged": true,
+    "rejected_exit_code": 1,
+    "scope": "actual final-package schema-6 refusal; synthetic isolated copy only",
+    "selected_installation_unchanged": true,
+    "status": "PASS"
+  },
+  "next_owner_decision": "Approve exact new disposable-client profile loading and focused two-launch native imported-workspace/reinstall check",
+  "owner_authorization": "Formal N2 acceptance and N3-only local implementation; no Git/signing/publication permission inferred",
+  "owner_driver_sha256": "cbd1e893ebef3994c118af6d7cabde76bf287d91f74bca41bd2c61a1dcd01d31",
+  "portable_recovery": {
+    "GUI": "NOT EXECUTED",
+    "backup_sha256": "3c5db6b7568e9c3b968a4db63cdd073f332183ef72ee0c5d71f1c30e6f726575",
+    "content_fingerprint": "8fc8a3883f5403526fe9300c7ea8569cce0392f07b802da273a209991b9342b3",
+    "counts": {
+      "assets": 1,
+      "folders": 1,
+      "notes": 1
+    },
+    "generation": "fb725a877a564800809310201d15e030",
+    "new_workspace_Qt_profile_initially_empty": true,
+    "old_workspace_retained": true,
+    "origin_unchanged": true,
+    "original_Qt_profile_unchanged": true,
+    "preference_reset_contract": "browser preferences explicitly excluded; actual appearance NOT OBSERVED without GUI",
+    "schema": 5,
+    "scope": "actual target-environment portable backup and new-workspace recovery using unchanged domain APIs",
+    "status": "PASS"
+  },
+  "proposed_policy_load_script_sha256": "ab27e2121c93ed43b8a9c3f1ed082b5e0a93299927a5af7f306fb16ac071f4fd",
+  "regressions": {
+    "GUI": "NOT EXECUTED",
+    "errors": 0,
+    "failures": 0,
+    "new_signing_keys": "NOT CREATED",
+    "scope": "N2 unchanged regressions plus N3 transaction/auditor/owner-handoff fixtures",
+    "skipped": 0,
+    "status": "PASS",
+    "tests": 175
+  },
+  "resource_measurements": {
+    "allocated_bytes": {
+      "native-n3-candidate-1": 271753216,
+      "native-n3-candidate-2": 271753216,
+      "native-n3-candidate-3": 271753216,
+      "native-n3-client-1": 3035267072,
+      "native-n3-local-1": 622592,
+      "native-n3-policy-review-1": 20480
+    },
+    "cap_bytes": 4294967296,
+    "filesystem_free_bytes": 9117888512,
+    "free_floor_bytes": 5368709120,
+    "tmp_free_bytes": 3671289856,
+    "total_allocated_bytes": 3851169792
+  },
+  "reviewed_at_utc": "2026-11-03T04:31:07.526659+00:00",
+  "security_inheritance": {
+    "AST_unchanged_functions": [
+      "verify_signature",
+      "signature_status",
+      "extract",
+      "host_supported",
+      "checked_path",
+      "regular",
+      "installed",
+      "launch",
+      "setup_environment",
+      "installation_lock"
+    ],
+    "status": "PASS"
+  },
+  "static_checks": "Ruff, formatting, shell syntax, Desktop Entry validation PASS"
+}

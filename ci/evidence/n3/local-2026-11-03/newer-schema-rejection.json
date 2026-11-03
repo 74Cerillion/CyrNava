@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "scope": "actual final-package schema-6 refusal; synthetic isolated copy only",
+  "rejected_exit_code": 1,
+  "database_bytes_unchanged": true,
+  "selected_installation_unchanged": true,
+  "GUI": "NOT EXECUTED"
+}

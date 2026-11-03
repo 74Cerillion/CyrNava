@@ -1,0 +1,125 @@
+................................................... [ 18%]
+......................................... [ 32%]
+..................................... [ 46%]
+..................................... [ 59%]
+.............................................................................................................. [ 98%]
+.FF                                                                      [100%]
+=================================== FAILURES ===================================
+_ BuildDirectoryTests.test_explicit_output_is_new_and_cannot_overlay_existing_files _
+
+self = <test_ci.BuildDirectoryTests testMethod=test_explicit_output_is_new_and_cannot_overlay_existing_files>
+
+    def test_explicit_output_is_new_and_cannot_overlay_existing_files(self):
+        builder = flatpak.module("build")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            destination = root / "output"
+            with (
+                patch.dict(os.environ, {"XDG_CACHE_HOME": str(root / "cache")}),
+                patch.object(
+                    sys,
+                    "argv",
+                    [
+                        "build.py",
+                        "--stage-only",
+                        "--output-directory",
+                        str(destination),
+                    ],
+                ),
+                patch.object(builder, "stage"),
+            ):
+>               self.assertEqual(builder.main(), 0)
+                                 ^^^^^^^^^^^^^^
+
+ci-output/p6-r11-clean/checkout/ci/test_ci.py:578: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def main():
+        parser = argparse.ArgumentParser(description=__doc__)
+        parser.add_argument("--build-id", default="local-A")
+        parser.add_argument("--stage-only", action="store_true")
+        parser.add_argument(
+            "--output-directory",
+            type=Path,
+            help="New empty build directory (optional; default remains a private cache directory)",
+        )
+        parser.add_argument(
+            "--finish",
+            type=Path,
+            help="Validate/export an assembled build, without rebuilding inputs",
+        )
+        args = parser.parse_args()
+        if args.output_directory and args.finish:
+            parser.error("--output-directory and --finish are mutually exclusive")
+        os.umask(0o077)
+        if args.finish:
+            directory = args.finish.resolve()
+            prior = directory / "result.json"
+            if prior.exists():
+                import time
+    
+                shutil.copyfile(
+                    prior,
+                    directory / ("result-before-finish-" + str(time.time_ns()) + ".json"),
+                )
+            result = {"status": "FAIL", "directory": str(directory), "app_id": APP_ID}
+            try:
+                result.update(finish(directory))
+            except (OSError, ValueError, subprocess.CalledProcessError) as error:
+                result.update(error_type=type(error).__name__, error=str(error))
+            (directory / "result.json").write_text(json.dumps(result, indent=2) + "\n")
+            print(json.dumps(result, indent=2), flush=True)
+            return 0 if result["status"] == "PASS" else 1
+        cache = Path(os.environ.get("XDG_CACHE_HOME", str(Path.home() / ".cache")))
+        if not cache.is_absolute():
+            raise SystemExit("XDG_CACHE_HOME must be absolute")
+        root = cache / "cyrnava-builds/p4"
+        if any(p.is_symlink() for p in (root, *root.parents)):
+            raise SystemExit("Symlink build root refused")
+        root.mkdir(parents=True, exist_ok=True, mode=0o700)
+        if shutil.disk_usage(root).free < 5 * 1024**3:
+>           raise SystemExit("At least 5 GiB free required on build volume")
+E           SystemExit: At least 5 GiB free required on build volume
+
+ci-output/p6-r11-clean/checkout/packaging/flatpak/production/build.py:355: SystemExit
+____________ BuildDirectoryTests.test_output_refuses_symlink_parent ____________
+SystemExit: At least 5 GiB free required on build volume
+
+During handling of the above exception, another exception occurred:
+
+self = <test_ci.BuildDirectoryTests testMethod=test_output_refuses_symlink_parent>
+
+    def test_output_refuses_symlink_parent(self):
+        builder = flatpak.module("build")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            link = root / "link"
+            link.symlink_to(root, target_is_directory=True)
+            with (
+                patch.dict(os.environ, {"XDG_CACHE_HOME": str(root / "cache")}),
+                patch.object(
+                    sys,
+                    "argv",
+                    [
+                        "build.py",
+                        "--stage-only",
+                        "--output-directory",
+                        str(link / "output"),
+                    ],
+                ),
+            ):
+>               with self.assertRaisesRegex(SystemExit, "Symlink"):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: "Symlink" does not match "At least 5 GiB free required on build volume"
+
+ci-output/p6-r11-clean/checkout/ci/test_ci.py:608: AssertionError
+=============================== warnings summary ===============================
+ci-output/p6-r11-clean/checkout/ci/release/test_policy.py::ArchiveTests::test_unsafe_or_extra_zip_entries_rejected
+  /usr/lib/python3.12/zipfile/__init__.py:1650: UserWarning: Duplicate name: 'io.github._74Cerillion.CyrNava.flatpak'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ci-output/p6-r11-clean/checkout/ci/test_ci.py::BuildDirectoryTests::test_explicit_output_is_new_and_cannot_overlay_existing_files
+FAILED ci-output/p6-r11-clean/checkout/ci/test_ci.py::BuildDirectoryTests::test_output_refuses_symlink_parent
+2 failed, 277 passed, 1 warning, 228 subtests passed in 8.83s

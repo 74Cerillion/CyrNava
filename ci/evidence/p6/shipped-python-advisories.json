@@ -1,0 +1,27 @@
+{
+  "status": "COMPLETE WITH FINDINGS",
+  "source": "OSV querybatch",
+  "queried": 40,
+  "total": 40,
+  "findings": [
+    {
+      "purl": "pkg:pypi/mako@1.4.1.dev0",
+      "advisory_ids": [
+        "GHSA-5639-2j2p-m4mx",
+        "PYSEC-2026-4243"
+      ]
+    },
+    {
+      "purl": "pkg:pypi/setuptools@80.10.2",
+      "advisory_ids": [
+        "GHSA-h35f-9h28-mq5c",
+        "GHSA-xmj3-9gf7-h52w",
+        "PYSEC-2026-3447"
+      ]
+    }
+  ],
+  "checked_at_utc": "2026-11-01T08:55:17.533014+00:00",
+  "meaning": "Advisory matching only, not vulnerability clearance; unenumerated runtime/native components remain outside scope",
+  "scope": "actual app/runtime Python METADATA only; not all Qt/native/Chromium components",
+  "inventory_sha256": "35acfd3adab8e0f8cca33b6183a874887a21614db28e14184f8306ef38cdf8d9"
+}

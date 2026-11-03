@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "files_reviewed": 15,
+  "text_only": true,
+  "credentials_private_keys_owner_data_or_ephemeral_URLs": false,
+  "repository_package_or_profile_uploads": false,
+  "exact_uploaded_file_count": 4,
+  "source_and_workflow_code_changes": false,
+  "known_findings_and_limits_preserved": true,
+  "new_commits_pushes_or_reruns": 0
+}

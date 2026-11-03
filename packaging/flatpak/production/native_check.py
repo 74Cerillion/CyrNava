@@ -6,6 +6,7 @@ import os
 import sys
 import time
 import urllib.request
+from contextlib import nullcontext
 from pathlib import Path
 from unittest.mock import patch
 
@@ -105,7 +106,78 @@ def preference_state(value):
     }, digest
 
 
-def main():
+def profile_filesystem_failure(error, root):
+    """Allowlisted operation/line/category only; never emit filename or message."""
+    import re
+
+    details = {"errno": error.errno if type(error.errno) is int else None}
+    details["path_category"] = "unavailable"
+    if isinstance(error.filename, str):
+        try:
+            relative = Path(error.filename).absolute().relative_to(root.absolute())
+        except ValueError:
+            details["path_category"] = "outside-profile"
+        else:
+            first = relative.parts[0] if relative.parts else ""
+            if re.fullmatch(r"web-profile(?:-[0-9a-f]{32})?", first):
+                category = "qt-web-profile"
+            elif re.fullmatch(r"web-cache(?:-[0-9a-f]{32})?", first):
+                category = "qt-web-cache"
+            elif first in {"workspace", "workspaces"}:
+                category = "workspace-storage"
+            else:
+                category = {
+                    "active-workspace.json": "workspace-pointer",
+                    ".instance.lock": "instance-lock",
+                    "desktop.json": "desktop-configuration",
+                }.get(first, "other-profile-entry")
+            details["path_category"] = category
+    frames = []
+    tb = error.__traceback__
+    operations = {
+        "__init__": "profile-scan-or-selection",
+        "private_directory": "private-directory-validation",
+        "open_private": "private-file-open",
+        "select_paths": "workspace-path-selection",
+    }
+    while tb is not None:
+        code = tb.tb_frame.f_code
+        if (
+            Path(code.co_filename).as_posix().endswith("desktop/native/storage.py")
+            and code.co_name in operations
+        ):
+            frames.append({"operation": operations[code.co_name], "line": tb.tb_lineno})
+        tb = tb.tb_next
+    details["storage_frames"] = frames[-8:]
+    return details
+
+
+def checked_profile(root, result, record, stage):
+    """Persist the boundary before constructing the unchanged production Profile."""
+    allowed = {
+        "maintenance_profile_open_before_manager",
+        "maintenance_profile_open_after_manager",
+        "recovery_profile_open",
+        "post_close_profile_open",
+    }
+    if stage not in allowed:
+        raise ValueError("Unknown native verifier profile stage")
+    result["stage"] = stage
+    durable_json(record, result)
+    return Profile(root)
+
+
+def workspace_identity(profile):
+    # Bind a preference baseline to a workspace and its separate Qt storage.
+    return {
+        "workspace": hashlib.sha256(profile.selection.encode()).hexdigest(),
+        "qt_profile": hashlib.sha256(
+            profile.qt.relative_to(profile.root).as_posix().encode()
+        ).hexdigest(),
+    }
+
+
+def main(*, preferences=None):
     phase, run_id, host_net, canary = sys.argv[1:]
     import re
 
@@ -142,19 +214,25 @@ def main():
 
             from desktop.native.maintenance import manage
 
-            profile = Profile(profile_root)
+            profile = checked_profile(
+                profile_root, result, record, "maintenance_profile_open_before_manager"
+            )
             old_selection, old_content = (
                 profile.selection,
                 content_fingerprint(profile.data),
             )
+            result["previous_workspace_identity"] = workspace_identity(profile)
             profile.close()
             app = QApplication(["CyrNava native backup and import test"])
             result["stage"] = "awaiting_native_backup_and_import"
             durable_json(record, result)
             manage(app, profile_root)
-            profile = Profile(profile_root)
+            profile = checked_profile(
+                profile_root, result, record, "maintenance_profile_open_after_manager"
+            )
             try:
                 result["stage"] = "validating_imported_workspace"
+                result["workspace_identity"] = workspace_identity(profile)
                 result["checks"].update(
                     maintenance_state(
                         profile.selection != old_selection,
@@ -174,7 +252,9 @@ def main():
             finally:
                 profile.close()
         elif phase == "recovery":
-            profile = Profile(profile_root)
+            profile = checked_profile(
+                profile_root, result, record, "recovery_profile_open"
+            )
             try:
                 assert saved_edit(profile)
                 original = profile.selection
@@ -215,6 +295,10 @@ def main():
             class MeasuredBackend(Backend):
                 def start(self):
                     nonlocal owned
+                    if preferences is not None:
+                        result["live_workspace_identity"] = workspace_identity(
+                            self.profile
+                        )
                     then = time.monotonic()
                     super().start()
                     owned = self
@@ -299,13 +383,31 @@ def main():
                             (time.monotonic() - then) * 1000, 1
                         )
 
+            from PySide6.QtWidgets import QMainWindow
+
+            class GuardedWindow(QMainWindow):
+                def show(self):
+                    # Test-only gate; no input can precede the first observation.
+                    self.setEnabled(False)
+                    super().show()
+
             class ProbeApp(QApplication):
                 def __init__(self, args):
                     super().__init__(args)
                     self.sampled = False
+                    self.preference_prompted = False
                     self.timer = QTimer(self)
                     self.timer.timeout.connect(self.observe)
                     self.timer.start(200)
+                    if preferences is not None:
+                        QTimer.singleShot(45000, self.baseline_deadline)
+
+                def baseline_deadline(self):
+                    if not self.preference_prompted:
+                        result["stage"] = "preinteraction_baseline_unavailable"
+                        result["checks"]["preinteraction_preference_verified"] = "FAIL"
+                        durable_json(record, result)
+                        self.quit()
 
                 def observe(self):
                     window = next(
@@ -322,6 +424,28 @@ def main():
                         return
 
                     def preference(value):
+                        if preferences is not None:
+                            preferences.observe(value, result)
+                            if (
+                                preferences.first is not None
+                                and not self.preference_prompted
+                            ):
+                                self.preference_prompted = True
+                                result["stage"] = "preinteraction_preference_gate"
+                                valid = preferences.before_owner(
+                                    result, result["live_workspace_identity"]
+                                )
+                                durable_json(record, result)
+                                if not valid:
+                                    QTimer.singleShot(0, self.quit)
+                                    return
+                                QMessageBox.information(
+                                    None,
+                                    "P6 targeted preference verification",
+                                    preferences.instructions(),
+                                )
+                                window.setEnabled(True)
+                            return
                         checks, digest = preference_state(value)
                         if digest:
                             result["checks"].update(checks)
@@ -330,7 +454,13 @@ def main():
                         # must not erase the last valid preference sample.
 
                     window.page.runJavaScript(
-                        "JSON.stringify({appearance:localStorage.getItem('engage.appearance.v1'),theme:localStorage.getItem('cyrnava.theme.v1')})",
+                        preferences.javascript()
+                        if preferences is not None
+                        else (
+                            "JSON.stringify({appearance:"
+                            "localStorage.getItem('engage.appearance.v1'),"
+                            "theme:localStorage.getItem('cyrnava.theme.v1')})"
+                        ),
                         preference,
                     )
                     if self.sampled:
@@ -412,22 +542,37 @@ def main():
                 patch.object(application, "configuration", lambda: profile_root),
                 patch.object(application, "Backend", MeasuredBackend),
                 patch("PySide6.QtWidgets.QApplication", ProbeApp),
+                (
+                    patch("PySide6.QtWidgets.QMainWindow", GuardedWindow)
+                    if preferences is not None
+                    else nullcontext()
+                ),
             ):
                 assert application.run() == 0
             result["checks"]["owned_backend_reaped"] = (
                 "PASS" if owned and owned.child.poll() is not None else "FAIL"
             )
-            profile = Profile(profile_root)
+            profile = checked_profile(
+                profile_root, result, record, "post_close_profile_open"
+            )
             try:
                 result["stage"] = "saved_owner_edit_checks"
                 result["checks"].update(owner_edit_state(profile))
+                result["workspace_identity"] = workspace_identity(profile)
+                if preferences is not None:
+                    preferences.finish(result, result["workspace_identity"])
+                preference_check = (
+                    preferences.check_name
+                    if preferences is not None
+                    else "dark_preference_saved"
+                )
                 missing = [
                     name
                     for name in (
                         "required_title_saved",
                         "screenshot_asset_saved",
                         "folder_saved",
-                        "dark_preference_saved",
+                        preference_check,
                     )
                     if result["checks"].get(name) != "PASS"
                 ]
@@ -442,6 +587,10 @@ def main():
             raise AssertionError("Incomplete P4 checks")
         result.update(status="PASS", complete=True)
     except Exception as error:  # noqa: BLE001 - retain redacted final host evidence
+        if isinstance(error, OSError):
+            result["filesystem_failure"] = profile_filesystem_failure(
+                error, profile_root
+            )
         result.update(
             status="FAIL",
             complete=True,

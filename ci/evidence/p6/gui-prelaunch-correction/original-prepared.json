@@ -1,0 +1,95 @@
+{
+  "A": {
+    "application_id": "io.github._74Cerillion.CyrNava",
+    "architecture": "x86_64",
+    "authorization_ref": "P5B-owner-authorized-disposable-staging-only",
+    "bundle_sha256": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db",
+    "ci_artifact_id": 13035607417,
+    "ci_run_id": 41181510439,
+    "flatpakrepo_native_validation": "Post-publication check recorded separately in result.json",
+    "format": 1,
+    "generation_seconds": 110.122,
+    "ostree_commit": "da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac",
+    "publication_result": "NOT PUBLISHED",
+    "publication_target": "file:///home/cerillion/.cache/p6/real-pair-r2/store/current/repo",
+    "purpose": "p5b-staging",
+    "refs": [
+      "app/io.github._74Cerillion.CyrNava/x86_64/stable",
+      "appstream/x86_64",
+      "appstream2/x86_64"
+    ],
+    "release_tooling_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+    "release_workflow_definition_sha256": "5aa32ef85715323490a9375336c245b6dbc1911d480fb4aafc4bc3ba7f8bfb1c",
+    "release_workflow_run_id": null,
+    "repository": "74Cerillion/CyrNava",
+    "runtime_lock": {
+      "application_version": "0.1.0",
+      "architecture": "x86_64",
+      "python": "3.13",
+      "qt_series": "6.11",
+      "refs": {
+        "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+        "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+        "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86"
+      },
+      "schema": 5
+    },
+    "sign_and_summary_seconds": 0.139,
+    "signing_fingerprint": "B8882601428AC0F08E9209FC353B6BEE05E7D9FC",
+    "source_ci_workflow_id": 402398273,
+    "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+    "static_deltas": false,
+    "version": "0.1.0"
+  },
+  "B": {
+    "application_id": "io.github._74Cerillion.CyrNava",
+    "architecture": "x86_64",
+    "authorization_ref": "P6-disposable-real-update-B-pending-owner-approval",
+    "bundle_sha256": "ef732c240d8a01e33a638cd10e83fb985c7ba9e678b573ba508cd48c3934f47c",
+    "ci_artifact_id": 13075346402,
+    "ci_run_id": 41285343063,
+    "flatpakrepo_native_validation": "Post-publication check recorded separately in result.json",
+    "format": 1,
+    "generation_seconds": 110.122,
+    "ostree_commit": "f759380dca9aa36e4674ad6dffb24d3e2340342da5fe04537ac17031a3bada15",
+    "p6_B_approval_sha256": "53aa5025f977629cf6ba3920b390493b6da257987663279d7e1e85c28f231a22",
+    "publication_result": "NOT PUBLISHED",
+    "publication_target": "file:///home/cerillion/.cache/p6/real-pair-r2/store/current/repo",
+    "purpose": "p5b-staging",
+    "refs": [
+      "app/io.github._74Cerillion.CyrNava/x86_64/stable",
+      "appstream/x86_64",
+      "appstream2/x86_64"
+    ],
+    "release_tooling_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+    "release_workflow_definition_sha256": "5aa32ef85715323490a9375336c245b6dbc1911d480fb4aafc4bc3ba7f8bfb1c",
+    "release_workflow_run_id": null,
+    "repository": "74Cerillion/CyrNava",
+    "runtime_lock": {
+      "application_version": "0.1.0",
+      "architecture": "x86_64",
+      "python": "3.13",
+      "qt_series": "6.11",
+      "refs": {
+        "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+        "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+        "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86"
+      },
+      "schema": 5
+    },
+    "sign_and_summary_seconds": 0.139,
+    "signing_fingerprint": "B8882601428AC0F08E9209FC353B6BEE05E7D9FC",
+    "source_ci_workflow_id": 402398273,
+    "source_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+    "static_deltas": false,
+    "version": "0.1.0"
+  },
+  "checks": {
+    "A_payload_audit_and_repository": "PASS",
+    "B_payload_audit": "PASS",
+    "disposable_signing_key_removed": "PASS"
+  },
+  "complete": true,
+  "fingerprint": "B8882601428AC0F08E9209FC353B6BEE05E7D9FC",
+  "status": "PASS"
+}

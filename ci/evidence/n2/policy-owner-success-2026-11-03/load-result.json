@@ -1,0 +1,20 @@
+{
+  "complete": true,
+  "host_policy": "LOADED",
+  "kernel_after": {
+    "mode": "enforce",
+    "profile": "cyrnava-native-u1000-3a204b7f4af431e67379cf52f5c54981",
+    "state": "PRESENT"
+  },
+  "kernel_before": {
+    "profile": "cyrnava-native-u1000-3a204b7f4af431e67379cf52f5c54981",
+    "state": "ABSENT"
+  },
+  "manifest_sha256": "d7d0f2bbc58c17aef58fff83c4e2e805875f013df8aa061830a687e07d3c688f",
+  "native_launch": "NOT EXECUTED",
+  "operation": "load",
+  "parser": "PASS",
+  "policy_sha256": "48cd1e0b685e5f8d4b84f08e2790ff5e5c8e2f220861ae5199f3e6597a619841",
+  "profile": "cyrnava-native-u1000-3a204b7f4af431e67379cf52f5c54981",
+  "status": "PASS"
+}

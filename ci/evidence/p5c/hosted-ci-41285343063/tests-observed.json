@@ -1,0 +1,12 @@
+{
+  "workflow_validation_contracts": 31,
+  "backend_tests": 663,
+  "backend_subtests": 197,
+  "P5C_new_tests_verified_in_JUnit": 23,
+  "frontend_unit_tests": 273,
+  "browser_tests": 21,
+  "browser_failures": 0,
+  "browser_errors": 0,
+  "browser_skipped": 0,
+  "scope": "Ordinary CI tests, packaging, upload and final gate all PASS"
+}

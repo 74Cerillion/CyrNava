@@ -1,0 +1,534 @@
+"""N2 menu observation regressions; synthetic proc trees and non-GUI children."""
+
+import importlib.util
+import io
+import json
+import os
+import subprocess
+import sys
+import tempfile
+import threading
+import unittest
+from contextlib import redirect_stdout
+from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def module(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    value = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(value)
+    return value
+
+
+menu = module("n2_observation", ROOT / "packaging/native/verify_menu.py")
+
+
+class ObservationTests(unittest.TestCase):
+    def setUp(self):
+        parent = ROOT / "ci-output/native-n2-review-1/menu-observation-tests"
+        parent.mkdir(parents=True, exist_ok=True)
+        self.temp = tempfile.TemporaryDirectory(dir=parent)
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        self.check = module(
+            "n2_observation_live_policy",
+            ROOT / "packaging/native/feasibility/check_application.py",
+        )
+        self.check.CANDIDATE = self.root / "candidate"
+        self.sandbox = self.check.support("sandbox_probe")
+
+    def test_real_child_spawned_by_non_main_thread_is_not_lost(self):
+        ready, stop = threading.Event(), threading.Event()
+        holder = {}
+
+        def worker():
+            child = subprocess.Popen(
+                [
+                    sys.executable,
+                    "-B",
+                    "-c",
+                    "import time;time.sleep(10)",
+                    str(self.check.CANDIDATE / "application/desktop/native/worker.py"),
+                ]
+            )
+            holder["process"] = child
+            ready.set()
+            try:
+                stop.wait(5)
+            finally:
+                child.terminate()
+                child.wait(timeout=5)
+
+        thread = threading.Thread(target=worker)
+        thread.start()
+        try:
+            self.assertTrue(ready.wait(3))
+            old = self.check.sample_tree(os.getpid(), {}, self.sandbox)
+            owned = {}
+            new, _ = menu.sample_menu_tree(self.check, os.getpid(), owned, self.sandbox)
+            self.assertFalse(
+                old["backend"], "Fixture must reproduce main-thread-only omission"
+            )
+            self.assertTrue(new["backend"])
+            self.assertIn(holder["process"].pid, owned)
+        finally:
+            stop.set()
+            thread.join(timeout=10)
+        self.assertFalse(thread.is_alive())
+
+    def test_read_denial_is_recorded_safely_and_does_not_pass(self):
+        real = Path.read_text
+        maps = Path("/proc") / str(os.getpid()) / "maps"
+
+        def read(path, *args, **kwargs):
+            if path == maps:
+                raise PermissionError(
+                    13, "private path and environment must not be copied"
+                )
+            return real(path, *args, **kwargs)
+
+        with patch.object(Path, "read_text", read):
+            found, diagnostic = menu.sample_menu_tree(
+                self.check, os.getpid(), {}, self.sandbox
+            )
+        self.assertFalse(found["qt_providers"])
+        self.assertIn("GUI-Qt-maps:13", diagnostic["read_errors"])
+        self.assertNotIn("private path", json.dumps(diagnostic))
+
+    def fake_tree(self):
+        proc = self.root / "proc"
+        parent, renderer = proc / "111", proc / "222"
+        helper = (
+            self.check.CANDIDATE
+            / ".venv/lib/python3.14/site-packages/PySide6/Qt/libexec/QtWebEngineProcess"
+        )
+        for p in (parent, renderer):
+            (p / "task" / p.name).mkdir(parents=True)
+            (p / "task" / p.name / "children").write_text("")
+            (p / "ns").mkdir()
+            (p / "cmdline").write_bytes(b"synthetic\0")
+            (p / "exe").symlink_to("/usr/bin/python3.14")
+        # Renderer spawned by GUI thread 112, not its thread-group leader 111.
+        (parent / "task/112").mkdir()
+        (parent / "task/112/children").write_text("222")
+        (renderer / "exe").unlink()
+        (renderer / "exe").symlink_to(helper)
+        (renderer / "cmdline").write_bytes(os.fsencode(helper) + b"\0--type=renderer\0")
+        for key in ("user", "pid", "net"):
+            (parent / "ns" / key).symlink_to("parent-" + key)
+            (renderer / "ns" / key).symlink_to("renderer-" + key)
+        (parent / "maps").write_text(
+            "0-1 r-xp 0000 00:00 0 "
+            + str(self.check.CANDIDATE / ".venv/libQt6Core.so.6")
+            + "\n"
+        )
+        status = {"NoNewPrivs": "1", "Seccomp": "2"}
+        self.check.proc_state = lambda _pid: (None, status)
+        sandbox = SimpleNamespace(
+            process_start_time=lambda _p: "same-birth",
+            renderer_role=self.sandbox.renderer_role,
+        )
+        return proc, renderer, helper, status, sandbox
+
+    def sample_fake(self, proc, sandbox):
+        with patch.object(
+            menu, "Path", side_effect=lambda p: proc if p == "/proc" else Path(p)
+        ):
+            return menu.sample_menu_tree(self.check, 111, {}, sandbox)
+
+    def test_threaded_renderer_retains_all_original_security_assertions(self):
+        proc, _, _, _, sandbox = self.fake_tree()
+        found, diagnostic = self.sample_fake(proc, sandbox)
+        self.assertTrue(found["renderer"])
+        self.assertTrue(found["qt_providers"])
+        self.assertTrue(diagnostic["renderer_checks"]["all_checks_same_renderer"])
+
+    def test_no_new_privs_or_seccomp_failure_is_rejected(self):
+        proc, _, _, status, sandbox = self.fake_tree()
+        for key in ("NoNewPrivs", "Seccomp"):
+            old = status[key]
+            status[key] = "0"
+            self.assertFalse(self.sample_fake(proc, sandbox)[0]["renderer"])
+            status[key] = old
+
+    def test_missing_namespace_separation_is_rejected(self):
+        proc, renderer, _, _, sandbox = self.fake_tree()
+        for key in ("user", "pid", "net"):
+            path = renderer / "ns" / key
+            path.unlink()
+            path.symlink_to("parent-" + key)
+            self.assertFalse(self.sample_fake(proc, sandbox)[0]["renderer"])
+            path.unlink()
+            path.symlink_to("renderer-" + key)
+
+    def test_wrong_helper_or_missing_renderer_role_is_rejected(self):
+        proc, renderer, helper, _, sandbox = self.fake_tree()
+        (renderer / "cmdline").write_bytes(os.fsencode(helper) + b"\0--type=utility\0")
+        self.assertFalse(self.sample_fake(proc, sandbox)[0]["renderer"])
+        (renderer / "cmdline").write_bytes(os.fsencode(helper) + b"\0--type=renderer\0")
+        (renderer / "exe").unlink()
+        (renderer / "exe").symlink_to("/wrong/helper")
+        self.assertFalse(self.sample_fake(proc, sandbox)[0]["renderer"])
+
+    def test_bounded_observation_keeps_partial_evidence_before_failure(self):
+        check = SimpleNamespace(
+            support=lambda _: SimpleNamespace(process_start_time=lambda _: 100),
+            still_alive=lambda *_: True,
+            unauthenticated_rejected=lambda: True,
+        )
+        values = []
+        sample = {
+            "backend": True,
+            "renderer": False,
+            "qt_providers": True,
+            "foreign_qt": False,
+        }
+        with (
+            patch.object(menu, "find_gui", return_value=42),
+            patch.object(
+                menu, "sample_menu_tree", return_value=(sample, {"helpers_seen": 0})
+            ),
+            self.assertRaisesRegex(
+                RuntimeError, "Live evidence incomplete after 30 seconds"
+            ),
+        ):
+            menu.observe_menu_launch(
+                check,
+                self.root / "launch.py",
+                evidence_seconds=0,
+                record_observation=values.append,
+            )
+        self.assertEqual(values[-1]["missing_checks"], ["renderer"])
+        self.assertEqual(values[-1]["observed"]["backend"], "PASS")
+        self.assertEqual(values[-1]["unauthenticated_backend_rejected"], "NOT TESTED")
+        self.assertTrue(values[-1]["final"])
+
+    def test_attempt_5_renderer_with_seccomp_but_no_namespaces_fails(self):
+        # Exact sanitized observation shape from the owner, not a fabricated PASS.
+        diagnostic = {
+            "renderer_roles_seen": 1,
+            "read_errors": {},
+            "renderer_checks": {
+                "NoNewPrivs": True,
+                "Seccomp": True,
+                "stable_identity": True,
+                "all_checks_same_renderer": False,
+                "namespace_separation": {"user": False, "pid": False, "net": False},
+            },
+        }
+        self.assertEqual(
+            menu.renderer_failure(diagnostic), "renderer_namespace_separation_failed"
+        )
+        check = SimpleNamespace(
+            support=lambda _: SimpleNamespace(process_start_time=lambda _: 100),
+            still_alive=lambda *_: True,
+            unauthenticated_rejected=lambda: True,
+        )
+        values = []
+        with (
+            patch.object(menu, "find_gui", return_value=42),
+            patch.object(
+                menu,
+                "sample_menu_tree",
+                return_value=(
+                    {
+                        "backend": True,
+                        "renderer": False,
+                        "qt_providers": True,
+                        "foreign_qt": False,
+                    },
+                    diagnostic,
+                ),
+            ),
+            self.assertRaises(menu.MenuEvidenceError) as error,
+        ):
+            menu.observe_menu_launch(
+                check,
+                self.root / "launch.py",
+                evidence_seconds=0,
+                record_observation=values.append,
+            )
+        self.assertEqual(
+            error.exception.category, "renderer_namespace_separation_failed"
+        )
+        self.assertEqual(values[-1]["observed"]["renderer"], "FAIL")
+        self.assertEqual(
+            values[-1]["renderer_failure_category"],
+            "renderer_namespace_separation_failed",
+        )
+
+    def test_missing_process_or_denied_reads_are_not_mislabeled_as_namespace_failure(
+        self,
+    ):
+        self.assertEqual(
+            menu.renderer_failure({"read_errors": {"executable:13": 1}}),
+            "renderer_not_observed",
+        )
+        self.assertEqual(
+            menu.renderer_failure({"renderer_roles_seen": 1}),
+            "renderer_identity_or_security_incomplete",
+        )
+        self.assertEqual(
+            menu.renderer_failure(
+                {
+                    "renderer_roles_seen": 1,
+                    "read_errors": {"renderer-namespace-user:13": 1},
+                    "renderer_checks": {
+                        "stable_identity": True,
+                        "namespace_separation": {
+                            "user": False,
+                            "pid": False,
+                            "net": False,
+                        },
+                    },
+                }
+            ),
+            "renderer_identity_or_security_incomplete",
+        )
+
+    def policy_fixture(self):
+        proc, renderer, _helper, _status, sandbox = self.fake_tree()
+        expected = "cyrnava-native-u1000-" + "a" * 32
+        self.check.EXPECTED_APPARMOR = expected
+        backend = proc / "333"
+        (backend / "task/333").mkdir(parents=True)
+        (backend / "task/333/children").write_text("")
+        (backend / "cmdline").write_bytes(
+            b"python\0"
+            + os.fsencode(self.check.CANDIDATE / "application/desktop/native/worker.py")
+            + b"\0"
+        )
+        (backend / "exe").symlink_to("/usr/bin/python3.14")
+        (proc / "111/task/111/children").write_text("333")
+        for p in (proc / "111", renderer, backend):
+            (p / "attr/apparmor").mkdir(parents=True)
+            (p / "attr/apparmor/current").write_text(expected + " (enforce)\n")
+        return proc, renderer, sandbox
+
+    def test_expected_policy_must_cover_GUI_backend_and_actual_renderer(self):
+        proc, _, sandbox = self.policy_fixture()
+        found, diagnostic = self.sample_fake(proc, sandbox)
+        self.assertTrue(
+            all(found[k] for k in ("renderer", "backend", "qt_providers", "apparmor"))
+        )
+        self.assertEqual(
+            {e["role"] for e in diagnostic["apparmor_labels"]},
+            {"GUI", "backend", "helper"},
+        )
+
+    def test_correct_namespaces_do_not_hide_wrong_helper_profile(self):
+        proc, renderer, sandbox = self.policy_fixture()
+        (renderer / "attr/apparmor/current").write_text(
+            "private-unexpected-policy-path (enforce)\n"
+        )
+        found, diagnostic = self.sample_fake(proc, sandbox)
+        self.assertFalse(found["renderer"])
+        self.assertFalse(found["apparmor"])
+        self.assertTrue(diagnostic["apparmor_mismatch"])
+        self.assertNotIn("private-unexpected-policy-path", json.dumps(diagnostic))
+
+    def test_matching_policy_does_not_replace_namespaces_or_NoNewPrivs(self):
+        proc, renderer, sandbox = self.policy_fixture()
+        path = renderer / "ns/user"
+        path.unlink()
+        path.symlink_to("parent-user")
+        self.assertFalse(self.sample_fake(proc, sandbox)[0]["renderer"])
+        path.unlink()
+        path.symlink_to("renderer-user")
+        self.check.proc_state = lambda _pid: (None, {"NoNewPrivs": "0", "Seccomp": "2"})
+        self.assertFalse(self.sample_fake(proc, sandbox)[0]["renderer"])
+
+    def test_GUI_and_backend_must_also_inherit_expected_profile(self):
+        proc, _, sandbox = self.policy_fixture()
+        for pid in ("111", "333"):
+            with self.subTest(pid=pid):
+                attr = proc / pid / "attr/apparmor/current"
+                original = attr.read_text()
+                attr.write_text("unconfined\n")
+                found, diagnostic = self.sample_fake(proc, sandbox)
+                self.assertFalse(found["apparmor"])
+                self.assertTrue(diagnostic["apparmor_mismatch"])
+                attr.write_text(original)
+
+    def test_unreadable_policy_is_incomplete_and_cannot_pass(self):
+        proc, renderer, sandbox = self.policy_fixture()
+        (renderer / "attr/apparmor/current").unlink()
+        found, diagnostic = self.sample_fake(proc, sandbox)
+        self.assertFalse(found["renderer"])
+        self.assertFalse(found["apparmor"])
+        self.assertTrue(diagnostic["apparmor_incomplete"])
+        self.assertIn("apparmor-helper:2", diagnostic["read_errors"])
+
+    def test_named_unconfined_profile_never_counts_as_enforced_renderer(self):
+        proc, renderer, sandbox = self.policy_fixture()
+        (renderer / "attr/apparmor/current").write_text(
+            self.check.EXPECTED_APPARMOR + " (unconfined)\n"
+        )
+        found, diagnostic = self.sample_fake(proc, sandbox)
+        self.assertFalse(found["renderer"])
+        self.assertFalse(found["apparmor"])
+        self.assertTrue(diagnostic["apparmor_mismatch"])
+
+    def test_changed_policy_causes_bounded_failure_without_auth_or_PASS(self):
+        check = SimpleNamespace(
+            EXPECTED_APPARMOR="synthetic",
+            support=lambda _: SimpleNamespace(process_start_time=lambda _: 100),
+            still_alive=lambda *_: True,
+        )
+        values = []
+        with (
+            patch.object(menu, "find_gui", return_value=42),
+            patch.object(
+                menu,
+                "sample_menu_tree",
+                return_value=(
+                    {
+                        "backend": True,
+                        "renderer": True,
+                        "qt_providers": True,
+                        "apparmor": False,
+                        "foreign_qt": False,
+                    },
+                    {"apparmor_mismatch": True},
+                ),
+            ),
+            self.assertRaisesRegex(RuntimeError, "AppArmor profile mismatch"),
+        ):
+            menu.observe_menu_launch(
+                check, self.root / "launch.py", record_observation=values.append
+            )
+        self.assertTrue(values[-1]["final"])
+        self.assertEqual(values[-1]["unauthenticated_backend_rejected"], "NOT TESTED")
+
+    def test_success_repeats_close_instruction_without_burying_it_in_diagnostics(self):
+        clock = SimpleNamespace(now=0.0)
+        auth = SimpleNamespace(calls=0)
+
+        def authenticate():
+            auth.calls += 1
+            return True
+
+        def sleep(seconds):
+            clock.now += seconds
+
+        check = SimpleNamespace(
+            EXPECTED_APPARMOR="synthetic",
+            support=lambda _: SimpleNamespace(process_start_time=lambda _: 100),
+            still_alive=lambda *_: clock.now < 11,
+            unauthenticated_rejected=authenticate,
+        )
+        values, terminal = [], io.StringIO()
+        with (
+            patch.object(menu, "find_gui", return_value=42),
+            patch.object(menu.time, "monotonic", side_effect=lambda: clock.now),
+            patch.object(menu.time, "sleep", side_effect=sleep),
+            patch.object(
+                menu,
+                "sample_menu_tree",
+                side_effect=lambda *_: (
+                    {
+                        "backend": True,
+                        "renderer": True,
+                        "qt_providers": True,
+                        "apparmor": True,
+                        "foreign_qt": False,
+                    },
+                    {"read_errors": {}},
+                ),
+            ),
+            redirect_stdout(terminal),
+        ):
+            result = menu.observe_menu_launch(
+                check, self.root / "launch.py", record_observation=values.append
+            )
+        self.assertGreaterEqual(terminal.getvalue().count(menu.CLOSE_INSTRUCTION), 3)
+        self.assertNotIn("N2 observation:", terminal.getvalue())
+        self.assertEqual(auth.calls, 1)
+        self.assertTrue(all(value["ready_to_close"] for value in values[1:]))
+        self.assertTrue(values[-1]["final"])
+        self.assertEqual(result["renderer"], "PASS")
+        self.assertEqual(result["owned_process_cleanup"], "PASS")
+
+    def test_failed_authentication_never_prints_close_as_a_success(self):
+        check = SimpleNamespace(
+            support=lambda _: SimpleNamespace(process_start_time=lambda _: 100),
+            still_alive=lambda *_: True,
+            unauthenticated_rejected=lambda: False,
+        )
+        values, terminal = [], io.StringIO()
+        with (
+            patch.object(menu, "find_gui", return_value=42),
+            patch.object(
+                menu,
+                "sample_menu_tree",
+                return_value=(
+                    {
+                        "backend": True,
+                        "renderer": True,
+                        "qt_providers": True,
+                        "foreign_qt": False,
+                    },
+                    {},
+                ),
+            ),
+            redirect_stdout(terminal),
+            self.assertRaisesRegex(RuntimeError, "Backend authentication failed"),
+        ):
+            menu.observe_menu_launch(
+                check, self.root / "launch.py", record_observation=values.append
+            )
+        self.assertNotIn(menu.CLOSE_INSTRUCTION, terminal.getvalue())
+        self.assertFalse(any(value["ready_to_close"] for value in values))
+
+
+class ConfirmationTests(unittest.TestCase):
+    def test_blank_enter_reprompts_and_only_explicit_confirmation_succeeds(self):
+        terminal = io.StringIO()
+        with (
+            patch("builtins.input", side_effect=["", "  confirm   N2 menu  "]) as ask,
+            redirect_stdout(terminal),
+        ):
+            menu.confirm_menu()
+        self.assertEqual(ask.call_count, 2)
+        self.assertIn("no visual confirmation recorded", terminal.getvalue())
+
+    def test_blank_or_unrecognized_input_never_silently_passes(self):
+        with (
+            patch("builtins.input", side_effect=["", "yes", ""]),
+            redirect_stdout(io.StringIO()),
+            self.assertRaises(menu.MenuConfirmationError) as error,
+        ):
+            menu.confirm_menu()
+        self.assertEqual(error.exception.category, "owner-confirmation-missing")
+
+    def test_explicit_negative_is_not_retried_or_promoted_to_PASS(self):
+        with (
+            patch("builtins.input", return_value="NO") as ask,
+            self.assertRaises(menu.MenuConfirmationError) as error,
+        ):
+            menu.confirm_menu()
+        self.assertEqual(ask.call_count, 1)
+        self.assertEqual(error.exception.category, "owner-visual-check-not-confirmed")
+
+    def test_closed_input_has_a_specific_safe_failure_category(self):
+        with (
+            patch("builtins.input", side_effect=EOFError),
+            self.assertRaises(menu.MenuConfirmationError) as error,
+        ):
+            menu.confirm_menu()
+        self.assertEqual(error.exception.category, "owner-confirmation-unavailable")
+
+    def test_interruption_is_never_confirmation(self):
+        with (
+            patch("builtins.input", side_effect=KeyboardInterrupt),
+            self.assertRaises(KeyboardInterrupt),
+        ):
+            menu.confirm_menu()
+
+
+if __name__ == "__main__":
+    unittest.main()

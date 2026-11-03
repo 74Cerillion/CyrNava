@@ -1,0 +1,17 @@
+{
+  "scope": "Assessment before/after, not deletion. No audited target deleted; only task-created fixtures cleaned by tests. Filesystem free changes include unrelated activity.",
+  "before": {
+    "repository_allocated_bytes": 6505811968,
+    "filesystem_available_bytes": 3746414592
+  },
+  "after": {
+    "repository_allocated_bytes": 6514012160,
+    "filesystem_available_bytes": 3734163456
+  },
+  "actual_audited_targets_deleted": [],
+  "audited_target_count_still_present": 20,
+  "pending_estimated_reclaim_bytes": 2675286016,
+  "new_metadata_cache_allocated_bytes": 8065024,
+  "tmp_available_bytes": 3670740992,
+  "note": "The owner-run engine separately prints actual before/after measurements upon confirmed deletion."
+}

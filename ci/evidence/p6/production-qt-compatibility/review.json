@@ -1,0 +1,20 @@
+{
+  "phase_status": "P6 CONDITIONAL",
+  "decision": "Assessment-only stop under authorization section 5; no safe production replacement established",
+  "production_implementation_changed": false,
+  "protected_path_changes": [
+    "packaging/flatpak/production/README.md"
+  ],
+  "HEAD": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "branch": "desktop/p2-production-integration",
+  "staged_files": [],
+  "retained_record_statuses": {
+    "historical-gui-attempt-r9": "FAIL",
+    "historical-gui-attempt-r11": "FAIL",
+    "targeted-b-attempt-r12": "PASS"
+  },
+  "final_elf_reproduction_identical": true,
+  "no_build_native_execution_commit_push_workflow_key_creation_publication": true,
+  "p5a_accepted_tag_object": "65fbe63d5feedb16ec5f755fb5977f622fe775c7",
+  "p5a_accepted_target_commit": "1a28f68c5732ccc1275403060e89ff168a846655"
+}

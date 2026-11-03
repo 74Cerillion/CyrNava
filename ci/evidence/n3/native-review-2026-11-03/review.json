@@ -1,0 +1,230 @@
+{
+  "N1": "ACCEPTED / COMPLETE",
+  "N2": "ACCEPTED / COMPLETE",
+  "N3_formal_owner_acceptance": "PENDING",
+  "N4": "NOT AUTHORIZED; NOT STARTED",
+  "actual_native_checks": {
+    "exact_profile_preserved_through_reinstall": "PASS",
+    "menu_discovery": "PASS",
+    "owner_visual_and_appearance": "PASS",
+    "saved_data_workspace_origin": "PASS",
+    "temporary_menu_entry_removed": "PASS"
+  },
+  "actual_native_phases": {
+    "after-reinstall": {
+      "apparmor": "PASS",
+      "backend": "PASS",
+      "exit_code": "NOT AVAILABLE for external GNOME child",
+      "owned_process_cleanup": "PASS",
+      "qt_providers": "PASS",
+      "renderer": "PASS",
+      "unauthenticated_backend_rejected": "PASS"
+    },
+    "imported-workspace": {
+      "apparmor": "PASS",
+      "backend": "PASS",
+      "exit_code": "NOT AVAILABLE for external GNOME child",
+      "owned_process_cleanup": "PASS",
+      "qt_providers": "PASS",
+      "renderer": "PASS",
+      "unauthenticated_backend_rejected": "PASS"
+    }
+  },
+  "appearance_evidence": "explicit driver confirmation and owner statement: initial imported System, owner selected Dark, Dark/note/image/icon/grouping preserved after reinstall; no private Qt preference content published",
+  "candidate": {
+    "N1_receipt_sha256": "7f713ed31e2ce7d63a1a67e806d671b38ff2f7bafd2d66592f68ff70d575c41e",
+    "archive": "ci-output/native-n3-candidate-3/CyrNava-0.1.0-n3.2-ubuntu-x86_64.zip",
+    "archive_bytes": 271609291,
+    "archive_sha256": "f87fc9f81e8a633397af66a11211bd7a9cd35c3a77bc061d58ba2170ec86f947",
+    "assembly_source_sha256": "2a2e92ea89305d583a753be05fbed7910d4a0c7be3133f045295ceb12b04d98f",
+    "branch": "desktop/p2-production-integration",
+    "inherited_application_patch_sha256": "a5e88d7f4102aed8f44f2f54b7991638dee8e5f7df605dbbf4c941a3bde8c43c",
+    "installed_receipt_sha256": "b4572e42f58d0007a48c3d7ee78ba9b3e8b286c2580933c9b89eb6330b68f423",
+    "installed_release": "0.1.0-n3.2-f87fc9f81e8a6333",
+    "manifest_sha256": "6f18cbd08dbccf4c578b0412805856d143f38f5c1d927ae2e753f85bbcbab096",
+    "source_HEAD": "bfa0b8005a3ddc519354fd7907e9b972fde8126b"
+  },
+  "checks": {
+    "accepted_N2_package_unchanged": "PASS",
+    "accepted_N2_policy_preserved": "PASS",
+    "accepted_N2_profile_unchanged": "PASS",
+    "after-reinstall_observation_complete": "PASS",
+    "after-reinstall_security_and_cleanup": "PASS",
+    "all_required_checks": "PASS",
+    "all_three_data_audits_equal_PASS": "PASS",
+    "both_native_phases_present": "PASS",
+    "branch_and_HEAD_unchanged": "PASS",
+    "desktop_entry_unchanged": "PASS",
+    "exact_N3_kernel_profile_enforce": "PASS",
+    "exact_client_profile": "PASS",
+    "exact_package_and_manifest": "PASS",
+    "exact_receipt": "PASS",
+    "imported-workspace_observation_complete": "PASS",
+    "imported-workspace_security_and_cleanup": "PASS",
+    "latest_completed_uninstall_reinstall_inventory_matches": "PASS",
+    "menu_entry_removed": "PASS",
+    "namespace_controls_enabled": "PASS",
+    "no_incomplete_transaction_or_uninstalled_marker": "PASS",
+    "no_running_client_GUI": "PASS",
+    "prior_regression_records_PASS": "PASS",
+    "result_complete_PASS": "PASS",
+    "saved_data_workspace_origin_bytes_unchanged": "PASS",
+    "saved_load_and_bootstrap_PASS_unchanged": "PASS",
+    "successful_data_preserving_uninstall_and_reinstall": "PASS",
+    "unchanged_reviewed_driver_and_observer": "PASS",
+    "unchanged_source_and_fixture_scope": "PASS",
+    "uninstall_checkpoint_matches_inventory": "PASS"
+  },
+  "completed_transactions": {
+    "ci-output/native-n3-client-1/completed-9acfd8cc7f514d34a6bf5d2f0b1e82ff.json": "9029d4583dc02fe31fb8efd47014ab8e4b0ef7bc00a880fd2279c2d6d9d64faa",
+    "ci-output/native-n3-client-1/completed-d1f8e2fe3e014fe4baca02fc4e2c7c43.json": "4794bef6e1e943acc40b9684af2fb82ee3106375833db69425c8ee63b8ecb80a"
+  },
+  "driver_sha256": "cbd1e893ebef3994c118af6d7cabde76bf287d91f74bca41bd2c61a1dcd01d31",
+  "evidence_limits": [
+    "External GNOME child exit codes are unavailable; actual disappearance and owned-descendant cleanup passed. No exit code 0 is invented.",
+    "The observer latches successfully observed live checks for each launch. Final snapshots contain one executable ENOENT read; after-reinstall closing snapshot has zero renderer roles and no renderer_checks object. Its cumulative PASS is preserved and traced to the exact unchanged observer, not fabricated as a contemporaneous numeric snapshot. The first closing snapshot retains all same-renderer protection checks.",
+    "Whole-profile byte equality applies to the stopped uninstall/reinstall transaction; normal subsequent Qt cache writes are not misreported as byte-for-byte unchanged.",
+    "Initial support is schema 5 with identical application/data consumers and Qt dependency family; future application/schema/Qt changes and arbitrary browser-profile downgrades are not certified.",
+    "Native draft crash recovery was not newly exercised; stopped storage preservation and unchanged earlier regression evidence retain their original scope.",
+    "Unsigned disposable candidate only; production release authenticity, licensing/branding/source distribution and native CI are N4 matters requiring separate authorization."
+  ],
+  "format": 1,
+  "inherited_results": {
+    "actual_transactions": "ci-output/native-n3-local-1/actual-transactions.json",
+    "backend_regressions": {
+      "GUI": "NOT EXECUTED",
+      "scope": "existing backup/migration/native desktop/navigation/dialog regressions under development CPython 3.12; actual package operations separately use installed CPython 3.14",
+      "status": "PASS",
+      "tests": 92,
+      "warnings": 2
+    },
+    "backup_and_recovery": "ci-output/native-n3-local-1/portable-recovery.json",
+    "native_regressions": {
+      "GUI": "NOT EXECUTED",
+      "errors": 0,
+      "failures": 0,
+      "new_signing_keys": "NOT CREATED",
+      "scope": "N2 unchanged regressions plus N3 transaction/auditor/owner-handoff fixtures",
+      "skipped": 0,
+      "status": "PASS",
+      "tests": 175
+    },
+    "newer_schema_refusal": "ci-output/native-n3-local-1/newer-schema-rejection.json",
+    "rerun_in_this_review": false,
+    "source_scope_unchanged": true,
+    "static_checks": "Ruff, formatting, shell syntax, Desktop Entry validation PASS"
+  },
+  "native_attempt": "ci-output/native-n3-owner-1",
+  "native_result_sha256": "f933f6f48449106860c87b33f22ac2b192ed11cad7bb041e34901df42a295bf7",
+  "observer_sha256": "1456d268cda4654eacd1ba4f330116db5570a23a0a4ef4302ea60721c84920f2",
+  "original_records_sha256": {
+    "ci-output/native-n3-local-1/backend-regressions.json": "6d9cd08f29d68427b0bfe0a85a412dc3b4e9010a5fc712297176dc1166cc2c41",
+    "ci-output/native-n3-local-1/regressions-final.json": "9eebd0e70ef50878b9a13e9fa33509019e54e399c95c419370289dad8c9b237d",
+    "ci-output/native-n3-local-1/review.json": "02b9a3571bdea071bf27b3808e4adc1ef76e3164c81dec44e3674f74dc360f56",
+    "ci-output/native-n3-owner-1/after-reinstall-data.json": "783211ec67db136751153282011eb13aea6298ff59465651f6b0eb0fcd491ae1",
+    "ci-output/native-n3-owner-1/after-reinstall-observation.json": "64c6753efce27efc83508a559cfff5cf518c3de4556b87ed7dddb3655a5aa899",
+    "ci-output/native-n3-owner-1/imported-workspace-data.json": "783211ec67db136751153282011eb13aea6298ff59465651f6b0eb0fcd491ae1",
+    "ci-output/native-n3-owner-1/imported-workspace-observation.json": "60b55a5413c680086d0c80fbb19eab3fc9edd386384ed6bb95d4686668d80436",
+    "ci-output/native-n3-owner-1/initial-data.json": "783211ec67db136751153282011eb13aea6298ff59465651f6b0eb0fcd491ae1",
+    "ci-output/native-n3-owner-1/progress.json": "3bee7b051490d8577776ac431691defd50d0a66f9599c126ddc5b38894f18fbc",
+    "ci-output/native-n3-owner-1/result.json": "f933f6f48449106860c87b33f22ac2b192ed11cad7bb041e34901df42a295bf7",
+    "ci-output/native-n3-policy-owner-load-1/bootstrap-check.json": "253fd6679eca64f877596b302589c4194edf384423c39d0943521da55f31fefc",
+    "ci-output/native-n3-policy-owner-load-1/result.json": "f74c9d07d7e781f972d0d93b7c76124769498b5310859f3ca51104c2f75d3c95"
+  },
+  "owner_statement": "Pass on all counts. Go ahead and do your independent verification and then offer me the formal acceptance option.",
+  "policy": {
+    "N3": {
+      "mode": "enforce",
+      "profile": "cyrnava-native-u1000-7180461d3e5719da3d409effaeb8b936",
+      "state": "PRESENT"
+    },
+    "accepted_N2": {
+      "mode": "enforce",
+      "profile": "cyrnava-native-u1000-3a204b7f4af431e67379cf52f5c54981",
+      "state": "PRESENT"
+    },
+    "namespace_controls": {
+      "apparmor_restrict_unprivileged_userns": "1",
+      "unprivileged_userns_clone": "1"
+    },
+    "source_sha256": "2e8eba098eafda2302478f1b4be7ce4320e7c8250acfa7733a30d3231ba0d1bd"
+  },
+  "preservation": "original native/load/local/failed evidence and accepted N1/N2 package/profile retained; P1-P5 and R11/R12 not reopened",
+  "private_logs": {
+    "after-reinstall-data.private.log": {
+      "bytes": 0,
+      "copied": false,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "imported-workspace-data.private.log": {
+      "bytes": 0,
+      "copied": false,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "initial-data.private.log": {
+      "bytes": 0,
+      "copied": false,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "review_actions": "read-only hashes, records, kernel metadata and byte inventories; documentation and sanitized evidence only. No native rerun, build, dependency change, policy load, Git write, signing, publication or N4 work.",
+  "reviewed_at_utc": "2026-11-03T07:54:04.837948+00:00",
+  "saved_data_audit": {
+    "GUI": "NOT EXECUTED",
+    "data_migrated": false,
+    "origin_sha256": "bf216f39e07106df7b1195cc4e8c953728a487c48b6e7aa086ad5eecea0df1d7",
+    "scope": "all-stopped-workspaces-read-only-domain-validation",
+    "status": "PASS",
+    "workspace_selection_sha256": "3f3648c670f386fbcf6fc30271af344885bc6f8815ba161d7e9d4921d630cd9b",
+    "workspaces": [
+      {
+        "counts": {
+          "assets": 1,
+          "folders": 1,
+          "notes": 1
+        },
+        "schema": 5
+      },
+      {
+        "counts": {
+          "assets": 1,
+          "folders": 1,
+          "notes": 1
+        },
+        "schema": 5
+      }
+    ]
+  },
+  "scope": "independent review of actual N3 imported-workspace and after-reinstall native GUI results plus unchanged locally verified update/recovery support boundary",
+  "source_pins": {
+    "desktop/install_engine.py": "dfb8d835afa3dc0f6390e4390df900bfbe8a53593be37c85afa6b7f17c34e9aa",
+    "desktop/native/application.py": "98810679510961c9b63634094d359e6cd2dbbdcd67a6c5778c8cacd3226d279c",
+    "desktop/native/installed_configuration.py": "9ab964ce98883a29c9868fb33fbcd3e23e1a8a844865ad316470917135f62ad8",
+    "desktop/native_operations.py": "6c391bb14d9f60cd0730014f92209699556e1bd7effddd7456230ddc833a3e82",
+    "desktop/native_profile_check.py": "cae7246067f5417b23f8c5541b24f78a5e90afc1647fed78e2606da82ffecbbd",
+    "packaging/native/apparmor_support.py": "46ecc66754a25c94ae2909d93dee4eb861091c3e4c976d878daaf46b5d86a351",
+    "packaging/native/bootstrap.c": "e829f5a85cb94435139224776bbf52676ac53fdeae948b9d5043d4b07652cccb",
+    "packaging/native/build_candidate.py": "2a2e92ea89305d583a753be05fbed7910d4a0c7be3133f045295ceb12b04d98f",
+    "packaging/native/feasibility/backend_check.py": "739707827e5f5086481b1ce29d88c56ec0f98e9813980596876867885ae78b48",
+    "packaging/native/feasibility/dependencies.json": "621c640f428886a7944b654fe6726f2b3ab82644e4911a051f8281ab392eb8a3",
+    "packaging/native/feasibility/requirements.lock": "24876b72281d5427fc9c5c41cdb19a918815e9547e74c5eb4d2c93ac22e4a576",
+    "packaging/native/feasibility/run_probe.py": "36ac17bf50f9fb780f952b06e7b326f6c8ff7e37b61e0e7f558898218835f530",
+    "packaging/native/launch.py": "b04f692ef5f153a4358c6cbaa79a953162766b9b1e7b9d1ffb56af7ce97e22b6",
+    "packaging/native/provider_check.py": "3314dd445de5066fb78e4580bf4367736641272f0ed792d1237f6939be8f4eb9",
+    "packaging/native/test_native_operations.py": "8653f3e7cf21ca824ccd87aa6a9bf84feb48ff37a290208ff24bbb3836e69d2f",
+    "packaging/native/test_native_profile_check.py": "5fdc259504606264f82f7db1dd0b10c8c101b54d4ee2c0a3e63a42ec9d46489a",
+    "packaging/native/test_verify_update.py": "89b41c59d384f436b15a14e87c72e78a485d3de39859360d30955f8691601330",
+    "packaging/native/uninstall.sh": "6a15551978b489a08b9f7a1612f4afcd2c18ee737a62fff2dbe30d7fa8b9c1e8",
+    "packaging/native/update.sh": "d954f252b3e3da48ad6e9dbd1a738082786e1bd353293f1f3b7f665a5e995188",
+    "packaging/native/verify_update.py": "cbd1e893ebef3994c118af6d7cabde76bf287d91f74bca41bd2c61a1dcd01d31",
+    "uninstall_cyrnava.sh": "c23219c8e691696aeddf7aeedd6076d67fb8d3a044346227f1f58d57cddc9d5b",
+    "update_cyrnava.sh": "f10c9d50e25f36c519dfc457eb3f410eaf02ea3c6391907b5662124fbdbe93df"
+  },
+  "status": "VERIFIED PASS / RECOMMENDED FOR OWNER ACCEPTANCE",
+  "verified_files": {
+    "current_synthetic_profile": 93,
+    "dependency_providers": 4414,
+    "payload": 96
+  },
+  "whole_profile_preservation": "actual uninstall/reinstall matched every profile file/byte in driver and completed journals; later normal Qt launch can update caches"
+}

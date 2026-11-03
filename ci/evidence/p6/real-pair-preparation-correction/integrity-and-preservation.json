@@ -1,0 +1,76 @@
+{
+  "B_audit_still_empty": true,
+  "B_repository_still_absent": true,
+  "approval_json_sha256": "53aa5025f977629cf6ba3920b390493b6da257987663279d7e1e85c28f231a22",
+  "approved_artifacts": {
+    "A": {
+      "cached_ZIP_sha256": "73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b",
+      "entry": {
+        "artifact_id": 13035607417,
+        "artifact_zip_sha256": "73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b",
+        "authorization_ref": "P5B-owner-authorized-disposable-staging-only",
+        "bundle_sha256": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db",
+        "ci_run_attempt": 1,
+        "ci_run_id": 41181510439,
+        "inputs_sha256": "bd156019a2aa68ab2e7beb2c0758f5c741c231e3bca45614201070366e0e97ac",
+        "inventory_sha256": "826def102fefcd12c9a00bb10f1d2d1ba3dea970c6a6ea373ad5e158b6843197",
+        "ostree_commit": "da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac",
+        "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109"
+      },
+      "retained_candidate_validation": {
+        "bundle_sha256": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db",
+        "ci_artifact_id": 13035607417,
+        "ci_run_id": 41181510439,
+        "ostree_commit": "da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac",
+        "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+        "version": "0.1.0"
+      },
+      "status": "PASS"
+    },
+    "B": {
+      "cached_ZIP_sha256": "2d11ce5057ae66cd4dc526dac607a2344b89dbc1fcef5e62038ad59583c93fbe",
+      "entry": {
+        "artifact_id": 13075346402,
+        "artifact_zip_sha256": "2d11ce5057ae66cd4dc526dac607a2344b89dbc1fcef5e62038ad59583c93fbe",
+        "authorization_ref": "P6-disposable-real-update-B-pending-owner-approval",
+        "bundle_sha256": "ef732c240d8a01e33a638cd10e83fb985c7ba9e678b573ba508cd48c3934f47c",
+        "ci_run_attempt": 1,
+        "ci_run_id": 41285343063,
+        "inputs_sha256": "42281a23d1b80aae748c3956c48bbf6da220bf609079d69fbef1ef26d40cf64f",
+        "inventory_sha256": "898ec911e021da89cc3dcb0451830490e916aad560ad9535cb7a558058b245cd",
+        "ostree_commit": "f759380dca9aa36e4674ad6dffb24d3e2340342da5fe04537ac17031a3bada15",
+        "source_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b"
+      },
+      "retained_candidate_validation": {
+        "bundle_sha256": "ef732c240d8a01e33a638cd10e83fb985c7ba9e678b573ba508cd48c3934f47c",
+        "ci_artifact_id": 13075346402,
+        "ci_run_id": 41285343063,
+        "ostree_commit": "f759380dca9aa36e4674ad6dffb24d3e2340342da5fe04537ac17031a3bada15",
+        "source_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+        "version": "0.1.0"
+      },
+      "status": "PASS"
+    }
+  },
+  "cleanup_evidence": "Retained PASS and absent p/key; original finally block requires successful gpgconf --kill before rmtree. No private key material copied.",
+  "disposable_signing_key_home_absent": true,
+  "failed_output_preserved": true,
+  "failed_record_sha256": "6d96611d1b3c75a1a7f1151568705aa5575c3aaddd01908119c6e056708460d3",
+  "no_native_rehearsal_or_GUI": true,
+  "original_proposal_sha256": "faf402979140916f061ff373ed4400ccd42adbe1d618476994d7bf6165977d85",
+  "retained_candidate_records_and_bundles_unchanged": true,
+  "status": "PASS",
+  "unchanged_accepted_controls_sha256": {
+    ".github/workflows/ci.yml": "3f11c9ab58d2f7c8cebca0b153a09ccffae06e314545067ddd6b42f7b8e809f4",
+    ".github/workflows/p5c.yml": "62d81a27185e329a0aca14a10e1a1441f6f91572b3f9e61cbd293e0bb8f9e576",
+    ".github/workflows/release.yml": "5aa32ef85715323490a9375336c245b6dbc1911d480fb4aafc4bc3ba7f8bfb1c",
+    "ci/flatpak.py": "74168678c6c3446a601f76bbec735dcfaed4f3b5ebeef5d3092c54d88464cb0f",
+    "ci/release/audit_candidate.py": "061d3b80ddf313c9dcfecd1a4077c84ac3f29662de2004c8cec5d3f5fc521490",
+    "ci/release/core.py": "02e759307a20514c77b01fda817b776a14b40722981fa666e2dacbc3451f6fde",
+    "ci/release/policy.json": "d66a7f3c4de34d259349f2e28f47b53ed240170b6643650b673e29aa7e2a43f4",
+    "packaging/flatpak/production/build.py": "66f64360e3d18be3fbe2b1718e17a4da76e88c4ea2475d8fd8f97bdd2f9332f4",
+    "packaging/flatpak/production/host_verify.py": "adc03e27b1e8615df16cc52d707f990291890060ec83c0f0a5d04a6cc771f7e4",
+    "packaging/flatpak/production/install_payload.py": "b1fe69f2234fa3c5ef8082df20907741216908bf06fa45b0b365a5763f39bbbc",
+    "packaging/flatpak/production/toolchain.lock.json": "30ba11e377126073164dc13cc103c9873a405766840e8c3992d698bf7f18483e"
+  }
+}

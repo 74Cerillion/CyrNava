@@ -1,4 +1,18 @@
 # Local production Flatpak — P4
+**2 November 2026 compatibility notice:** the accepted historical manifest/lock
+below combines application PySide/shiboken 6.11.2 with runtime-owned Qt. It fails
+when ordinary runtime updating selects the observed Qt 6.11.3 private ABI. R12
+historical replay PASS does not close this production blocker. Keep these files
+unchanged as accepted provenance; do not use runtime pinning as a public-release
+solution. No replacement manifest/lock is installed by this assessment.
+
+See [P6 Qt compatibility assessment](../../../ci/P6_QT_COMPATIBILITY.md) for
+source/ELF evidence, official-wheel measurements and the concrete separate
+app-owned Qt build proposal. The existing package auditor, permissions, identity,
+launcher and source/signing requirements remain mandatory. Candidate builds must
+also reject mixed Qt private providers and independently verify Flatpak renderer
+sandboxing and ordinary dependency updates.
+
 
 This builds **io.github._74Cerillion.CyrNava**, branch **stable**, from the existing
 0.1.0 application/schema 5. It does not publish, sign, install automatically,

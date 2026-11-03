@@ -1,0 +1,41 @@
+{
+  "active_runtime_after_install": "fb23e178d082b117df7924f9a84710992ec233ebc007385feb85d349c4c81415",
+  "app_contains_separate_python_executable": false,
+  "helper_line": 15,
+  "helper_sha256": "8cec1f8e659063a05c9279aa5d89127a0325b5c7e8c138bdb48d0853d00bd248",
+  "helper_statement": "from PySide6.QtCore import QTimer, QUrl",
+  "library_RPATH": "$ORIGIN/:/usr/lib/x86_64-linux-gnu:$ORIGIN/../shiboken6/",
+  "module_sha256": "402cc44072387fffa2b968677d299cb65b89f7c59b5eda31b5e4f9d0f7cffbdc",
+  "native_execution": false,
+  "normal_launcher_matches_packaged_source": true,
+  "private_output_hashes_verified": {
+    "stderr": {
+      "bytes": 281,
+      "sha256": "e6256b39e537f8e51a8e434093850f0e1d331c13480290ebeb29274c9f4b75ab",
+      "truncated": false
+    },
+    "stdout": {
+      "bytes": 322,
+      "sha256": "663c6fc53ea085e210e7d96cfe10dbb1bd8ad93e345d5e753c427c2345481967",
+      "truncated": false
+    }
+  },
+  "provider_basename": "libQt6Core.so.6.11.3",
+  "provider_exports": [
+    "_ZN14QObjectPrivateC2E16QtPrivate_6_11_3@@Qt_6_PRIVATE_API"
+  ],
+  "provider_sha256": "d51151a1b8a9e465b267ba8bd10da52bb773885ae4b68ab88436866e4901362b",
+  "raw_output_copied_to_repository": false,
+  "recorded_runtime_retrieval_commit": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+  "required_symbol_absent_from_provider": true,
+  "required_symbol_undefined_in_module": true,
+  "runtime_python_basename": "python3.13",
+  "sanitized_error": {
+    "demangled": "QObjectPrivate::QObjectPrivate(QtPrivate_6_11_2)",
+    "exception": "ImportError",
+    "object": "QtCore.abi3.so",
+    "symbol_version": "Qt_6_PRIVATE_API",
+    "undefined_symbol": "_ZN14QObjectPrivateC2E16QtPrivate_6_11_2"
+  },
+  "status": "CONFIRMED NATIVE QT PRIVATE ABI MISMATCH AND P6 RUNTIME DRIFT"
+}

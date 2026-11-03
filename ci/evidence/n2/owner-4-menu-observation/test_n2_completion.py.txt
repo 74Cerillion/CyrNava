@@ -1,0 +1,270 @@
+"""N2 real public-key verification and isolated menu fixtures; no GUI launches."""
+
+import importlib.util
+import json
+import os
+import subprocess
+import tempfile
+import time
+import unittest
+from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import Mock, patch
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def module(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    value = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(value)
+    return value
+
+
+engine = module("n2_completion_engine", ROOT / "desktop/install_engine.py")
+menu = module("n2_menu_fixtures", ROOT / "packaging/native/verify_menu.py")
+
+
+class RealSignatureTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.parent = Path("/tmp/cyrnava-n2-signature-check")
+        if cls.parent.exists():
+            raise RuntimeError("Existing disposable key fixture preserved")
+        cls.parent.mkdir(mode=0o700)
+        cls.temporary = tempfile.TemporaryDirectory(prefix="tests-", dir=cls.parent)
+        cls.home = Path(cls.temporary.name)
+        cls.base = [
+            "/usr/bin/gpg",
+            "--no-options",
+            "--batch",
+            "--homedir",
+            str(cls.home),
+            "--pinentry-mode",
+            "loopback",
+            "--passphrase",
+            "",
+        ]
+        try:
+            cls.gpg(
+                [
+                    "--quick-generate-key",
+                    "N2 disposable regression <n2-test@example.invalid>",
+                    "ed25519",
+                    "sign",
+                    "1d",
+                ]
+            )
+            result = cls.gpg(["--with-colons", "--list-keys"])
+            cls.fingerprint = next(
+                r.split(":")[9]
+                for r in result.stdout.decode().splitlines()
+                if r.startswith("fpr:")
+            )
+            # Long verification path reproduces the actual installer layout.
+            parent = ROOT / "ci-output/native-n2-review-1/signature-regressions"
+            parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+            cls.output_tmp = tempfile.TemporaryDirectory(dir=parent)
+            cls.output = Path(cls.output_tmp.name)
+            cls.payload = cls.output / "manifest.json"
+            cls.payload.write_text('{"scope":"N2 disposable signature regression"}\n')
+            cls.signature = cls.output / "manifest.asc"
+            cls.public = cls.output / "public.asc"
+            cls.binary = cls.output / "public.gpg"
+            cls.gpg(["--armor", "--output", cls.public, "--export", cls.fingerprint])
+            cls.gpg(["--output", cls.binary, "--export", cls.fingerprint])
+            cls.gpg(
+                [
+                    "--armor",
+                    "--digest-algo",
+                    "SHA256",
+                    "--output",
+                    cls.signature,
+                    "--detach-sign",
+                    cls.payload,
+                ]
+            )
+        except BaseException:
+            cls.tearDownClass()
+            raise
+
+    @classmethod
+    def gpg(cls, arguments):
+        return subprocess.run(
+            cls.base + list(map(str, arguments)),
+            capture_output=True,
+            timeout=15,
+            check=True,
+        )
+
+    @classmethod
+    def tearDownClass(cls):
+        subprocess.run(
+            ["/usr/bin/gpgconf", "--homedir", str(cls.home), "--kill", "gpg-agent"],
+            capture_output=True,
+            check=False,
+            timeout=15,
+        )
+        cls.temporary.cleanup()
+        cls.parent.rmdir()
+        if hasattr(cls, "output_tmp"):
+            cls.output_tmp.cleanup()
+
+    def verify(self, key=None, fingerprint=None, payload=None):
+        return engine.verify_signature(
+            payload or self.payload,
+            self.signature,
+            key or self.public,
+            fingerprint or self.fingerprint,
+            self.output,
+        )
+
+    def test_real_armored_key_signature_at_long_install_path(self):
+        self.assertEqual(self.verify()["primary"], self.fingerprint)
+
+    def test_binary_public_key_is_supported(self):
+        self.assertEqual(self.verify(key=self.binary)["signer"], self.fingerprint)
+
+    def test_public_verifier_never_imports_or_starts_agent(self):
+        real_run = subprocess.run
+        with patch.object(engine.subprocess, "run", wraps=real_run) as run:
+            self.verify()
+        commands = [call.args[0] for call in run.call_args_list]
+        self.assertTrue(all("--no-autostart" in c for c in commands))
+        self.assertFalse(any("--import" in c for c in commands))
+        self.assertTrue(all("--no-default-keyring" in c for c in commands[1:]))
+        self.assertTrue(all("--no-auto-key-retrieve" in c for c in commands))
+
+    def test_wrong_actual_primary_fingerprint_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "primary key absent"):
+            self.verify(fingerprint="0" * 40)
+
+    def test_tampered_signed_content_is_rejected(self):
+        payload = self.output / "tampered.json"
+        payload.write_bytes(self.payload.read_bytes() + b" ")
+        with self.assertRaises(subprocess.CalledProcessError):
+            self.verify(payload=payload)
+
+    def test_actual_key_expiry_remains_enforced(self):
+        with (
+            patch.object(engine.time, "time", return_value=time.time() + 2 * 86400),
+            self.assertRaisesRegex(ValueError, "key outside validity"),
+        ):
+            self.verify()
+
+
+class MenuTests(unittest.TestCase):
+    def setUp(self):
+        parent = ROOT / "ci-output/native-n2-review-1/menu-tests"
+        parent.mkdir(parents=True, exist_ok=True)
+        self.temporary = tempfile.TemporaryDirectory(dir=parent)
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        self.source = self.root / "source.desktop"
+        self.source.write_text(
+            "[Desktop Entry]\nType=Application\nName=N2 synthetic menu fixture\nExec=/usr/bin/true\nTerminal=false\n"
+        )
+        self.target = self.root / "data/applications/org.cyrnava.CyrNava.Devel.desktop"
+
+    def test_registration_is_exact_and_removed_when_unchanged(self):
+        expected = menu.register(engine, self.source, self.target)
+        self.assertEqual(self.target.read_bytes(), self.source.read_bytes())
+        menu.unregister(engine, self.target, expected)
+        self.assertFalse(self.target.exists())
+
+    def test_existing_registration_is_preserved(self):
+        menu.register(engine, self.source, self.target)
+        with self.assertRaises(FileExistsError):
+            menu.register(engine, self.source, self.target)
+        self.assertEqual(self.target.read_bytes(), self.source.read_bytes())
+
+    def test_changed_registration_is_not_deleted(self):
+        expected = menu.register(engine, self.source, self.target)
+        self.target.write_text("changed by someone else")
+        with self.assertRaisesRegex(ValueError, "Changed menu entry preserved"):
+            menu.unregister(engine, self.target, expected)
+        self.assertTrue(self.target.is_file())
+
+    def test_symlink_destination_is_rejected(self):
+        self.target.parent.mkdir(parents=True)
+        self.target.symlink_to(self.source)
+        with self.assertRaisesRegex(ValueError, "Symbolic link"):
+            menu.register(engine, self.source, self.target)
+
+    def test_world_writable_directory_is_rejected(self):
+        self.target.parent.mkdir(parents=True)
+        self.target.parent.chmod(0o777)
+        with self.assertRaisesRegex(ValueError, "Unsafe menu"):
+            menu.register(engine, self.source, self.target)
+
+    def test_real_GIO_registry_discovers_isolated_entry_by_id_without_launch(self):
+        menu.register(engine, self.source, self.target)
+        program = (
+            "import importlib.util,json,pathlib;"
+            f"s=importlib.util.spec_from_file_location('menu',{str(ROOT / 'packaging/native/verify_menu.py')!r});"
+            "m=importlib.util.module_from_spec(s);s.loader.exec_module(m);"
+            f"print(json.dumps(m.gio_discovery(pathlib.Path({str(self.target)!r}))))"
+        )
+        result = subprocess.run(
+            ["/usr/bin/python3.14", "-B", "-c", program],
+            env=dict(os.environ, XDG_DATA_HOME=str(self.target.parent.parent)),
+            capture_output=True,
+            check=True,
+            timeout=5,
+        )
+        discovery = json.loads(result.stdout)
+        self.assertTrue(
+            all(discovery[k] for k in ("correct_path", "correct_id", "should_show"))
+        )
+        self.assertEqual(discovery["name"], "N2 synthetic menu fixture")
+
+    def monitor(self, *, foreign=False, authenticated=True, renderer=True):
+        sandbox = SimpleNamespace(process_start_time=lambda _: 100)
+        check = SimpleNamespace(
+            support=lambda _: sandbox,
+            still_alive=Mock(side_effect=[True, False]),
+            sample_tree=lambda *_: {
+                "foreign_qt": foreign,
+                "backend": True,
+                "renderer": renderer,
+                "qt_providers": True,
+            },
+            unauthenticated_rejected=lambda: authenticated,
+        )
+        with (
+            patch.object(menu, "find_gui", return_value=42),
+            patch.object(menu.time, "sleep"),
+        ):
+            return menu.observe_menu_launch(check, self.root / "launch.py")
+
+    def test_live_monitor_requires_renderer_auth_and_providers(self):
+        result = self.monitor()
+        self.assertEqual(result["renderer"], "PASS")
+        self.assertEqual(result["exit_code"], "NOT AVAILABLE for external GNOME child")
+
+    def test_foreign_qt_is_rejected(self):
+        with self.assertRaisesRegex(RuntimeError, "Foreign Qt"):
+            self.monitor(foreign=True)
+
+    def test_failed_authentication_is_rejected(self):
+        with self.assertRaisesRegex(RuntimeError, "authentication"):
+            self.monitor(authenticated=False)
+
+    def test_missing_renderer_is_not_promoted_to_pass(self):
+        with self.assertRaisesRegex(RuntimeError, "live evidence incomplete"):
+            self.monitor(renderer=False)
+
+    def test_missing_manual_launch_has_bounded_timeout(self):
+        with (
+            patch.object(menu, "find_gui", return_value=None),
+            self.assertRaisesRegex(TimeoutError, "No manual GNOME"),
+        ):
+            menu.observe_menu_launch(
+                SimpleNamespace(support=lambda _: None),
+                self.root / "launch.py",
+                startup_seconds=0,
+            )
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,17 @@
+{
+  "policy": "historical-replay-only",
+  "transactions": [
+    {
+      "after": "fb23e178d082b117df7924f9a84710992ec233ebc007385feb85d349c4c81415",
+      "after_monotonic": 133048.881298825,
+      "before": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+      "drift": true,
+      "operation": "install-a",
+      "ordinary_runtime_compatible": false,
+      "restoration": "NOT_ATTEMPTED",
+      "started_monotonic": 133035.161157071,
+      "transaction": "PASS",
+      "validation": "FAIL"
+    }
+  ]
+}

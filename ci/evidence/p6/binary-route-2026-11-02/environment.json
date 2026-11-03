@@ -1,0 +1,21 @@
+{
+  "OS": {
+    "ID": "ubuntu",
+    "PRETTY_NAME": "Ubuntu 26.04.1 LTS",
+    "VERSION_ID": "26.04"
+  },
+  "architecture": "x86_64",
+  "filesystem_available_final": 3729903616,
+  "flatpak_version": "Flatpak 1.16.6",
+  "memory_bytes_final": {
+    "MemAvailable": 3669905408,
+    "MemTotal": 16011239424,
+    "SwapFree": 57344,
+    "SwapTotal": 4294963200
+  },
+  "native_session_access": "NOT established by environment variable; namespace probe denied",
+  "normal_host_installation_changes": false,
+  "p5a_accepted_peeled": "1a28f68c5732ccc1275403060e89ff168a846655",
+  "session_type_environment": "wayland",
+  "tmp_available_final": 3670740992
+}

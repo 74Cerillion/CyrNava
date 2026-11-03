@@ -1,0 +1,22 @@
+{
+  "recorded_r6_driver": {
+    "status": "FAIL",
+    "trace": [
+      "installation-success",
+      "verify-restored-signature"
+    ],
+    "transaction": "PASS",
+    "restoration": "NOT_ATTEMPTED"
+  },
+  "corrected_driver": {
+    "status": "PASS",
+    "trace": [
+      "installation-success",
+      "restore-exact-commit",
+      "verify-restored-signature",
+      "imports-eligible"
+    ],
+    "ordinary_runtime_compatible": false
+  },
+  "scope": "Synthetic I/O only; actual installation/transaction/import-eligibility code. No native commands, imports or GUI."
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "generation": "A",
+    "status": "UNCHANGED",
+    "zip_sha256": "73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b",
+    "bundle_sha256": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db"
+  },
+  {
+    "generation": "B",
+    "status": "UNCHANGED",
+    "zip_sha256": "2d11ce5057ae66cd4dc526dac607a2344b89dbc1fcef5e62038ad59583c93fbe",
+    "bundle_sha256": "ef732c240d8a01e33a638cd10e83fb985c7ba9e678b573ba508cd48c3934f47c"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "id": 403379040,
+  "name": "CyrNava P5C integrated release verification",
+  "path": ".github/workflows/p5c.yml",
+  "state": "active",
+  "created_at": "2026-11-01T09:00:00.000Z",
+  "updated_at": "2026-11-01T09:00:00.000Z",
+  "html_url": "https://github.com/74Cerillion/CyrNava/blob/main/.github/workflows/p5c.yml"
+}

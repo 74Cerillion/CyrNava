@@ -15,20 +15,36 @@
 - [x] Owner reviewed final local results, unresolved advisory and proposal.
 - [x] Owner authorized one implementation commit and integration push.
 - [x] Reviewed workflow installed byte-for-byte on the local integration branch.
-- [ ] Authorized integration commit synchronized; ordinary CI and artifact verified.
-- [ ] Separate hosted execution authorization and successful hosted P5C evidence.
-- [ ] Formal owner acceptance after required gates pass.
+- [x] Authorized integration commit `bfa0b80` synchronized by one fast-forward push.
+- [x] Ordinary CI `41285343063`, attempt 1: all five required jobs PASS.
+- [x] Hosted counts: 31 contracts, 663 backend tests + 197 subtests, 273 units, 21 browser tests.
+- [x] All 23 new P5C cases verified in hosted JUnit.
+- [x] Flatpak build/exported audit/upload PASS; all four artifact ZIP hashes and package provenance checked.
+- [x] Ordinary-CI checkpoint: main/default branch and P5B controls unchanged; zero P5C executions then.
+- [x] Authorization A: main registration `4021bc2`, workflow `403379040`, independently verified.
+- [x] Authorization B: exactly one owner-authenticated dispatch, tooling `bfa0b80`.
+- [x] Hosted integration `41287523702`, attempt 1: eligibility and staging SUCCESS.
+- [x] Accepted source/artifact, signed provenance and actual installed commit/source PASS.
+- [x] All 13 hosted synthetic update/security checks and key cleanup PASS.
+- [x] Diagnostic ZIP/hash/four-file whitelist and 20 code/provenance hashes independently checked.
+- [x] Final readback: refs/environment unchanged; exactly one successful P5C execution.
+- [x] Formal owner acceptance received on 1 November 2026: P5C — ACCEPTED / COMPLETE.
 
-**LOCAL PASS / READY FOR HOSTED VERIFICATION — 1 November 2026.**
-The reviewed proposal is installed locally as `.github/workflows/p5c.yml`.
-Default-branch registration and P5C execution remain unperformed.
-Any inert default-branch registration requires its own review/authorization.
-The accepted artifact currently expires 7 November 2026 at 07:53:28 UTC; verify
-availability and pinned identity again before hosted authorization. Application
-launch/runtime download were not tested. Production redistribution, complete
-runtime SBOM/advisory review and hosting remain separate gates.
+**P5C — ACCEPTED / COMPLETE — 1 November 2026.**
+The inert main registration and one hosted execution are complete under separate
+authorizations. Formal owner acceptance is recorded in
+`ci/evidence/p5c/formal-owner-acceptance.json`. P5A/P5B acceptance remains unchanged.
+The unresolved minimatch
+advisory, incomplete SBOM, licensing, runtime download, application launch,
+real-upgrade and reproducibility limitations remain. Hosted repository byte/file
+totals were not exposed by the approved diagnostics; no local values were substituted.
 
 Exactly one P5C-only implementation commit and normal integration push are now
-authorized. Additional commits/pushes, workflow dispatch/rerun, environment/main
+complete. Report/checklist and hosted evidence updates remain local/uncommitted.
+Additional commits/pushes, workflow dispatch/rerun, environment/main
 changes, permanent keys, production credentials/hosting/publication and P6 remain
-unapproved. Post-push results must be recorded before the next owner checkpoint.
+unapproved. No additional execution is requested or necessary for the passed
+technical gates. A documentation-only closeout proposal is prepared in
+`ci/P5C_CLOSEOUT_PROPOSAL.md`; no staging, commit or push is authorized or performed.
+Next milestone: P6 — Distribution, Installation, and Update Validation.
+P6 remains PENDING AUTHORIZATION / NOT STARTED.

@@ -1,0 +1,16 @@
+{
+  "path": ".p4-cache/cyrnava-builds/p4/local-A-6m4ne70o/build/files",
+  "status": "SAFE TO PROPOSE FOR DELETION; not deleted",
+  "allocated_bytes": 997265408,
+  "estimated_reclaim_bytes": 997265408,
+  "fingerprint": "83cbd006b9d0c0cb40bc68ecf434923fed8e104a119435b6244173c7927a84e8",
+  "exact_payload_inventory_entries": 5320,
+  "inventory_equal_to_staged_and_retained": true,
+  "retained_inventory": "desktop/native/evidence/p4/package-inventory.json",
+  "retained_inventory_sha256": "daf4f3d6ae60974e3095af908fa82cb25bdbdd20326046426dd28a4c9f4a3a8a",
+  "preserved_bundle": ".p4-cache/cyrnava-builds/p4/local-A-6m4ne70o/io.github._74Cerillion.CyrNava.flatpak",
+  "preserved_bundle_sha256": "856cc0ccd82bca263320e2d692a5b3d316543ae320cd76d9cd42bf42e54a3170",
+  "native_verifier_dependency": "host_verify.build_result reads retained result.json and bundle; no build/files dependency. Existing build.py --finish requires files but the retained P4 checklist explicitly says do not repeat --finish; retiring this generated extraction does not retire bundle/native replay.",
+  "regeneration": "Import retained exact bundle into a new temporary OSTree repo and check out its app commit; do not rebuild Qt or recover this copy from an unrelated newer package. Corresponding P4 source/staged inputs also kept.",
+  "exclusions": "Parent build metadata/export, var/run symlink, repository, wheels, application source, bundle, native records and result/provenance all remain outside target."
+}

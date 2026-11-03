@@ -1,0 +1,40 @@
+{
+  "status": "LOCAL PASS; P6 CONDITIONAL",
+  "root_cause": "Premature local historical-object signature verification before restoration, not strict post-install guard rejection",
+  "historical_authorization_propagated": true,
+  "application_transaction_succeeded": true,
+  "native_restoration_attempted_in_r6": false,
+  "ordinary_runtime_compatible": false,
+  "changed_source_files": [
+    "ci/release/historical_runtime.py",
+    "ci/release/native_diagnostics.py",
+    "ci/release/test_historical_runtime.py",
+    "ci/release/test_historical_install.py"
+  ],
+  "changed_documentation": [
+    "ci/P6_REPORT.md",
+    "ci/P6_OWNER_CHECKS.md",
+    "ci/P6_RELEASE_RUNBOOK.md",
+    "ci/P6_RUNTIME_REMEDIATION.md"
+  ],
+  "updated_indexes": [
+    "ci/evidence/p6/proposed-files.json",
+    "ci/evidence/p6/SHA256SUMS.json"
+  ],
+  "new_evidence_directory": "ci/evidence/p6/r6-restoration-order",
+  "unchanged_driver_files": [
+    "ci/release/real_update.py",
+    "ci/release/native_distribution.py"
+  ],
+  "unchanged_security_paths": [
+    "ci/release/core.py",
+    "ci/release/client.py",
+    "ci/release/policy.json",
+    ".github/workflows",
+    "packaging/flatpak/production",
+    "desktop/native"
+  ],
+  "native_rerun": false,
+  "commit_push_dispatch": false,
+  "next_proposed_attempt": "historical-import-attempt-r7; imports only; separate authorization required"
+}

@@ -1,0 +1,84 @@
+{
+  "B_approval_only_authorization_flag_changed": true,
+  "P4_bundle_sha256": "856cc0ccd82bca263320e2d692a5b3d316543ae320cd76d9cd42bf42e54a3170",
+  "artifacts": [
+    {
+      "bundle_sha256": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db",
+      "label": "owner_requested_reference",
+      "ostree_commit": "da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac",
+      "path": "/tmp/cyrnava-p5a-hosted-41181510439/package.zip",
+      "preservation": "KEEP; not a new candidate",
+      "provenance": {
+        "app_id": "io.github._74Cerillion.CyrNava",
+        "artifact_bytes": 209189544,
+        "audit_seconds": 56.872,
+        "built_at_utc": "2026-10-31T07:53:28.151250+00:00",
+        "native_renderer_portals": "NOT TESTED by package audit",
+        "ostree_commit": "da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac",
+        "ostree_timestamp": "2026-10-29T23:00:00Z",
+        "runner_image": "ubuntu24",
+        "runner_image_version": "20261026.354.1",
+        "runner_os": "Linux",
+        "runtime": {
+          "application_version": "0.1.0",
+          "architecture": "x86_64",
+          "python": "3.13",
+          "qt_series": "6.11",
+          "refs": {
+            "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+            "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+            "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86"
+          },
+          "schema": 5
+        },
+        "sha256": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db",
+        "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+        "status": "PASS",
+        "version": "0.1.0",
+        "workflow_run_attempt": "1",
+        "workflow_run_id": "41181510439"
+      },
+      "zip_sha256": "73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b"
+    },
+    {
+      "bundle_sha256": "ef732c240d8a01e33a638cd10e83fb985c7ba9e678b573ba508cd48c3934f47c",
+      "label": "historical_P6_B",
+      "ostree_commit": "f759380dca9aa36e4674ad6dffb24d3e2340342da5fe04537ac17031a3bada15",
+      "path": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5c-hosted-41285343063/package.zip",
+      "preservation": "KEEP; not a new candidate",
+      "provenance": {
+        "app_id": "io.github._74Cerillion.CyrNava",
+        "artifact_bytes": 209190752,
+        "audit_seconds": 46.499,
+        "built_at_utc": "2026-11-01T07:46:53.781650+00:00",
+        "native_renderer_portals": "NOT TESTED by package audit",
+        "ostree_commit": "f759380dca9aa36e4674ad6dffb24d3e2340342da5fe04537ac17031a3bada15",
+        "ostree_timestamp": "2026-10-29T23:00:00Z",
+        "runner_image": "ubuntu24",
+        "runner_image_version": "20261026.354.1",
+        "runner_os": "Linux",
+        "runtime": {
+          "application_version": "0.1.0",
+          "architecture": "x86_64",
+          "python": "3.13",
+          "qt_series": "6.11",
+          "refs": {
+            "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+            "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+            "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86"
+          },
+          "schema": 5
+        },
+        "sha256": "ef732c240d8a01e33a638cd10e83fb985c7ba9e678b573ba508cd48c3934f47c",
+        "source_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+        "status": "PASS",
+        "version": "0.1.0",
+        "workflow_run_attempt": "1",
+        "workflow_run_id": "41285343063"
+      },
+      "zip_sha256": "2d11ce5057ae66cd4dc526dac607a2344b89dbc1fcef5e62038ad59583c93fbe"
+    }
+  ],
+  "owner_reference_naming": "Owner-requested reference is historical A in P6; historical B remains distinct. No input substitution.",
+  "status": "PASS"
+}

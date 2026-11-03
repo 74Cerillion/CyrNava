@@ -1,0 +1,15 @@
+{
+  "repository": "74Cerillion/CyrNava",
+  "read_only": true,
+  "integration": {
+    "ref": "desktop/p2-production-integration",
+    "sha": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+    "url": "https://github.com/74Cerillion/CyrNava/commit/bfa0b8005a3ddc519354fd7907e9b972fde8126b"
+  },
+  "main": {
+    "ref": "main",
+    "sha": "4021bc292267c19b7ebebf219b4f682f8f99bf4c",
+    "url": "https://github.com/74Cerillion/CyrNava/commit/4021bc292267c19b7ebebf219b4f682f8f99bf4c"
+  },
+  "mutation": false
+}

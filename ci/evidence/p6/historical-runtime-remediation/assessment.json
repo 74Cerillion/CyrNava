@@ -1,0 +1,21 @@
+{
+  "status": "LOCAL PASS; P6 CONDITIONAL",
+  "exact_implementation_and_document_changes": [
+    "ci/release/historical_runtime.py",
+    "ci/release/test_historical_runtime.py",
+    "ci/release/native_distribution.py",
+    "ci/release/real_update.py",
+    "ci/release/progress.py",
+    "ci/release/native_diagnostics.py",
+    "ci/release/test_native_diagnostics.py",
+    "ci/P6_RUNTIME_REMEDIATION.md",
+    "ci/P6_REPORT.md",
+    "ci/P6_OWNER_CHECKS.md",
+    "ci/P6_RELEASE_RUNBOOK.md"
+  ],
+  "supporting_evidence": "ci/evidence/p6/historical-runtime-remediation/",
+  "scope": "Explicit historical opt-in plus both-generation import gate; production compatibility recommendation only",
+  "no_native_execution": true,
+  "no_commit_push_or_workflow": true,
+  "production_compatibility": "OPEN public-release blocker"
+}

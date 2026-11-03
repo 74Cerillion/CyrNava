@@ -1,0 +1,134 @@
+{
+  "status": "PASS",
+  "recorded_at_utc": "2026-11-01T08:07:22.435470+00:00",
+  "owner": "74Cerillion",
+  "main_commit": "4021bc292267c19b7ebebf219b4f682f8f99bf4c",
+  "tooling_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "workflow_id": 403379040,
+  "workflow_path": ".github/workflows/p5c.yml",
+  "previous_executions": 0,
+  "main_registration_sha256": "a2bcc41f15785fe35c105b412ca694d8e8acad71933b168f47e9272ad6456bc9",
+  "executable_workflow_sha256": "62d81a27185e329a0aca14a10e1a1441f6f91572b3f9e61cbd293e0bb8f9e576",
+  "exact_workflow_contract": "PASS",
+  "environment": {
+    "name": "p5b-staging",
+    "protection_rules": [
+      "branch_policy"
+    ],
+    "deployment_branch_policy": {
+      "protected_branches": false,
+      "custom_branch_policies": true
+    },
+    "permitted_branches": [
+      {
+        "name": "desktop/p2-production-integration",
+        "type": "branch"
+      }
+    ],
+    "secret_and_variable_counts": {
+      "environments/p5b-staging/secrets": 0,
+      "environments/p5b-staging/variables": 0,
+      "actions/secrets": 0,
+      "actions/variables": 0
+    }
+  },
+  "accepted_artifact": {
+    "id": 13035607417,
+    "name": "CyrNava-linux-x86_64-1ee2077b283b8e5dfc2162119dd439ed3baeb109-1",
+    "size_in_bytes": 210238004,
+    "digest": "sha256:73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b",
+    "expired": false,
+    "expires_at": "2026-11-07T07:53:28Z"
+  },
+  "accepted_source_eligibility": {
+    "status": "PASS",
+    "authorization_model": "single-maintainer-manual-staging",
+    "deployment_reviewers": "NOT REQUIRED; manual owner authorization",
+    "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+    "ci_run_id": 41181510439,
+    "ci_run_attempt": 1,
+    "artifact_id": 13035607417,
+    "workflow_sha256": "3f11c9ab58d2f7c8cebca0b153a09ccffae06e314545067ddd6b42f7b8e809f4",
+    "required_jobs": [
+      {
+        "name": "Workflow validation",
+        "conclusion": "success"
+      },
+      {
+        "name": "Backend and security",
+        "conclusion": "success"
+      },
+      {
+        "name": "Frontend and browser",
+        "conclusion": "success"
+      },
+      {
+        "name": "Production Flatpak and bundle audit",
+        "conclusion": "success"
+      },
+      {
+        "name": "CI required",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "ordinary_CI": {
+    "id": 41285343063,
+    "attempt": 1,
+    "sha": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 124785394295,
+        "name": "Workflow validation",
+        "conclusion": "success"
+      },
+      {
+        "id": 124785425643,
+        "name": "Frontend and browser",
+        "conclusion": "success"
+      },
+      {
+        "id": 124785425715,
+        "name": "Backend and security",
+        "conclusion": "success"
+      },
+      {
+        "id": 124786218275,
+        "name": "Production Flatpak and bundle audit",
+        "conclusion": "success"
+      },
+      {
+        "id": 124787744724,
+        "name": "CI required",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "runner_preflight": {
+    "type": "public ubuntu-24.04 x64 GitHub-hosted VM",
+    "documented_SSD_GB": 14,
+    "documentation": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+    "conservative_required_free_bytes": 8268348064,
+    "actual_free_space": "Runtime guard measures and rejects insufficient space before signing",
+    "native_tools": [
+      "git",
+      "flatpak",
+      "ostree",
+      "gpg",
+      "gpgconf"
+    ],
+    "native_install_step": "apt public flatpak ostree gnupg; no SDK/application rebuild",
+    "isolated_paths": "fresh runner.temp/p5c; private GnuPG, TMPDIR and XDG directories; short paths",
+    "independent_jobs": "Both full-history credential-free checkout and unchanged hash-locked Python setup verified",
+    "diagnostic_files": [
+      "result.json",
+      "eligibility.json",
+      "readiness.json",
+      "SHA256SUMS.json"
+    ]
+  },
+  "production_capabilities": "No environment/repository secrets or variables; no secrets references; read-only contents/actions; nonpublishing approved code",
+  "dispatch": "NOT YET SUBMITTED",
+  "authorizations": "Exactly one new dispatch; no retry/rerun, commit/push or settings change"
+}

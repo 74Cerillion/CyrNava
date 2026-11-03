@@ -1,0 +1,187 @@
+"""Assemble one unsigned N2 candidate from accepted N1 inputs, entirely offline."""
+
+import argparse
+import hashlib
+import importlib.util
+import json
+import os
+import shutil
+import stat
+import zipfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+N1 = ROOT / "ci-output/p6-native-n1-1"
+RECEIPT = "7f713ed31e2ce7d63a1a67e806d671b38ff2f7bafd2d66592f68ff70d575c41e"
+VERSION = "0.1.0-n2.3"
+
+
+def sha(path):
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def export_installer(output):
+    """Export the same engine as the archived one; no repository needed by users.
+
+    These checksums identify an UNSIGNED bootstrap. Authenticating its download
+    and signing release materials remain owner-controlled, outside this build.
+    """
+    manifest = json.loads((output / "manifest.json").read_text())
+    source = ROOT / "desktop/install_engine.py"
+    if sha(source) != manifest["files"]["install_engine.py"]["sha256"]:
+        raise ValueError("Installer differs from the archived implementation")
+    shell = (
+        (ROOT / "packaging/native/install.sh")
+        .read_text()
+        .replace(
+            "$entry_dir/../../desktop/install_engine.py", "$entry_dir/install_engine.py"
+        )
+    )
+    for name, data in (
+        ("install_engine.py", source.read_bytes()),
+        ("install.sh", shell.encode()),
+    ):
+        with (output / name).open("xb") as stream:
+            stream.write(data)
+    (output / "installer-checksums.json").write_text(
+        json.dumps(
+            {
+                "status": "UNSIGNED",
+                "files": {
+                    name: sha(output / name)
+                    for name in ("install_engine.py", "install.sh")
+                },
+            },
+            indent=2,
+        )
+        + "\n"
+    )
+
+
+def build(output):
+    output = output.absolute()
+    if (
+        output.parent != ROOT / "ci-output"
+        or output.exists()
+        or any(p.is_symlink() for p in (output, *output.parents))
+    ):
+        raise ValueError("Fresh direct repository ci-output directory required")
+    if shutil.disk_usage(output.parent).free < 5 * 1024**3:
+        raise ValueError("Keep the reviewed 5GiB free-space floor")
+    if sha(N1 / "n1.json") != RECEIPT:
+        raise ValueError("Accepted N1 receipt changed")
+    receipt = json.loads((N1 / "n1.json").read_text())
+    for relative, expected in receipt["application_files"].items():
+        if sha(N1 / "application" / relative) != expected:
+            raise ValueError("Accepted N1 payload changed")
+    # Reuse the accepted built frontend, and carry only reviewed application files.
+    source = {
+        "application/" + p: N1 / "application" / p
+        for p in receipt["application_files"]
+        if not p.endswith(("build_identity.py", "n1_configuration.py"))
+    }
+    for name in ("application.py", "installed_configuration.py"):
+        source["application/desktop/native/" + name] = ROOT / "desktop/native" / name
+    for name in ("requirements.lock", "dependencies.json"):
+        source[name] = ROOT / "packaging/native/feasibility" / name
+    source["system_schemas.py"] = ROOT / "packaging/native/feasibility/run_probe.py"
+    source["backend_check.py"] = ROOT / "packaging/native/feasibility/backend_check.py"
+    source["install_engine.py"] = ROOT / "desktop/install_engine.py"
+    for name in ("launch.py", "provider_check.py"):
+        source[name] = ROOT / "packaging/native" / name
+    dependencies = json.loads(source["dependencies.json"].read_text())
+    for entry in dependencies["files"]:
+        path = N1 / "wheels" / entry["filename"]
+        if path.stat().st_size != entry["bytes"] or sha(path) != entry["sha256"]:
+            raise ValueError("Accepted dependency wheel changed")
+        source["wheels/" + path.name] = path
+    # No normal user data, N1 profile, evidence/logs, venv or signing material copied.
+    identity = (
+        'from pathlib import Path\nAPP_ID = "org.cyrnava.CyrNava.Devel"\n'
+        'CHANNEL = "development"\nDEPLOYMENT = "native-installed"\n'
+        'WINDOW_TITLE = "CyrNava — N2 installation candidate"\n'
+        'ICON_PATH = str(Path(__file__).resolve().parents[2] / "frontend/dist/assets/branding/cyrnava-256.png")\n'
+    ).encode()
+    output.mkdir(mode=0o700)
+    spec = importlib.util.spec_from_file_location(
+        "n2_candidate_apparmor", ROOT / "packaging/native/apparmor_support.py"
+    )
+    apparmor = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(apparmor)
+    compiled = output / "cyrnava-native"
+    bootstrap_build = apparmor.compile_bootstrap(
+        ROOT / "packaging/native/bootstrap.c", compiled
+    )
+    source["cyrnava-native"] = compiled
+    source["bootstrap.c"] = ROOT / "packaging/native/bootstrap.c"
+    source["apparmor_support.py"] = ROOT / "packaging/native/apparmor_support.py"
+    archive = output / ("CyrNava-" + VERSION + "-ubuntu-x86_64.zip")
+    files = {}
+    with zipfile.ZipFile(archive, "x", compression=zipfile.ZIP_STORED) as target:
+        for name in sorted([*source, "application/desktop/native/build_identity.py"]):
+            content = (
+                identity
+                if name.endswith("build_identity.py")
+                else source[name].read_bytes()
+            )
+            mode = 0o700 if name == "cyrnava-native" else 0o600
+            info = zipfile.ZipInfo(name, date_time=(2026, 11, 3, 0, 0, 0))
+            info.create_system = 3
+            info.external_attr = (stat.S_IFREG | mode) << 16
+            target.writestr(info, content)
+            files[name] = {
+                "bytes": len(content),
+                "mode": mode,
+                "sha256": hashlib.sha256(content).hexdigest(),
+            }
+    review = json.loads((N1 / "final-review.json").read_text())
+    manifest = {
+        "format": 1,
+        "kind": "candidate",
+        "apparmor": apparmor.CONTRACT,
+        "bootstrap_build": bootstrap_build,
+        "assembly_source_sha256": sha(Path(__file__)),
+        "version": VERSION,
+        "app_id": "org.cyrnava.CyrNava.Devel",
+        "target": "ubuntu-26.04-x86_64-wayland-cpython314",
+        "archive_sha256": sha(archive),
+        "expanded_bytes": sum(e["bytes"] for e in files.values()),
+        "n1_receipt_sha256": RECEIPT,
+        "source_head": review["source_head"],
+        "n1_application_patch_sha256": review["application_patch_sha256"],
+        "n2_source_files": {
+            str(p.relative_to(ROOT)): sha(p)
+            for p in source.values()
+            if p.is_relative_to(ROOT) and not p.is_relative_to(ROOT / "ci-output")
+        },
+        "files": files,
+    }
+    (output / "manifest.json").write_text(
+        json.dumps(manifest, sort_keys=True, indent=2) + "\n"
+    )
+    export_installer(output)
+    print(
+        json.dumps(
+            {
+                "status": "ASSEMBLED",
+                "kind": "unsigned-disposable-N2",
+                "archive": str(archive),
+                "archive_sha256": sha(archive),
+                "manifest_sha256": sha(output / "manifest.json"),
+                "archive_bytes": archive.stat().st_size,
+                "expanded_bytes": manifest["expanded_bytes"],
+                "production_signature": "NOT CREATED",
+                "native_launch": "NOT EXECUTED",
+            },
+            indent=2,
+        )
+    )
+
+
+if __name__ == "__main__":
+    os.umask(0o077)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", required=True, type=Path)
+    args = parser.parse_args()
+    build(args.output)

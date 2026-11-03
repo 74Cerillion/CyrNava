@@ -1,0 +1,45 @@
+
+> cyrnava@0.1.0 test:release
+> CYRNAVA_E2E_RELEASE=1 playwright test
+
+
+Running 21 tests using 1 worker
+
+(node:38) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   1 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (9.6s)
+
+  ✓   2 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing (8.6s)
+
+  ✓   3 e2e/lifecycle.spec.ts:232:1 › a committed write with a lost acknowledgement retains its draft and requires conflict review (4.9s)
+
+  ✓   4 e2e/lifecycle.spec.ts:295:1 › visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it (2.9s)
+
+  ✓   5 e2e/lifecycle.spec.ts:349:1 › killed isolated browser leaves no managed backend after lease expiry (4.0s)
+  ✓   6 e2e/search.spec.ts:128:1 › global search opens native rich notes by code prefix, supports keyboard selection and reveals ancestors (3.7s)
+  ✓   7 e2e/search.spec.ts:190:1 › opening a search result waits for pending saves and a failed save keeps the draft open (7.6s)
+  ✓   8 e2e/search.spec.ts:252:1 › an unchanged search reflects UI renames, folder moves and deletion, and retries a failed query (6.5s)
+
+  ✓   9 e2e/search.spec.ts:318:1 › a schema4 profile migrates, opens rich search results and rebuilds offline without changing canonical data (7.4s)
+  ✓  10 e2e/workspace.spec.ts:135:1 › appearance follows system and explicit preferences without changing notes, templates or autosave (11.2s)
+  ✓  11 e2e/workspace.spec.ts:305:1 › placeholder rendering requires the selected empty paragraph, not the last paragraph alone (2.5s)
+
+  ✓  12 e2e/workspace.spec.ts:356:1 › CyrNava reference appearance preserves the live editor, local images and saved content (4.4s)
+
+  ✓  13 e2e/workspace.spec.ts:445:1 › navigation preference and reusable templates preserve independent rich notes and screenshots (7.6s)
+
+  ✓  14 e2e/workspace.spec.ts:560:1 › real editing, outage recovery, safe navigation, image lifecycle and offline restoration drill (9.9s)
+  ✓  15 e2e/workspace.spec.ts:665:1 › revision conflict retains the draft and exports both versions before explicit reload (3.4s)
+
+  ✓  16 e2e/workspace.spec.ts:689:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (12.5s)
+
+  ✓  17 e2e/workspace.spec.ts:839:1 › image command requires a synchronized paragraph after code-block focus (2.9s)
+
+  ✓  18 e2e/workspace.spec.ts:887:1 › all exposed editor actions persist; mixed content reconstructs after restart and rapid edits (27.0s)
+  ✓  19 e2e/workspace.spec.ts:1009:1 › desktop close protocol drains real autosave and retains an interrupted draft (2.3s)
+
+  ✓  20 e2e/workspace.spec.ts:1046:1 › desktop close waits for an image upload and its subsequent document save (1.4s)
+  ✓  21 e2e/workspace.spec.ts:1085:1 › desktop close does not silently discard an unsubmitted management form (872ms)
+
+  21 passed (2.4m)

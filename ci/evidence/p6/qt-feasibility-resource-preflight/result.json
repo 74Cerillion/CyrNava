@@ -1,0 +1,26 @@
+{
+  "observed_utc": "2026-11-02T04:44:12.062949+00:00",
+  "status": "RESOURCE BLOCKED / NO CANDIDATE",
+  "metadata_and_preservation_validation": {
+    "status": "PASS",
+    "checks": [
+      "Six explicit 6.11.3 archive identity/expected-hash records; no payload validation claimed",
+      "Three v6.11.3 annotated tags resolved to exact commits",
+      "Ten exact pinned upstream patch hashes, including unchanged Flatpak sandbox patch",
+      "Pinned raw upstream recipes identify matching 6.11.3 source commits",
+      "All recorded production/application/workflow/security files unchanged",
+      "A/B archive, approved JSON, prepared pair and R9/R11/R12 record hashes unchanged",
+      "Branch/HEAD/staging unchanged; no artifact or executable candidate manifest"
+    ]
+  },
+  "build_and_candidate_regressions": "NOT EXECUTED; mandatory pre-build capacity stop; no executable implementation change",
+  "existing_test_evidence_reused": "Prior exact code/input scopes only; no new regression run or candidate-success claim",
+  "candidate_import_render_launcher_runtime_update": "NOT EXECUTED",
+  "candidate_artifact_size_bytes": null,
+  "build_peak_memory_bytes": null,
+  "build_peak_disk_bytes": null,
+  "build_elapsed_seconds": null,
+  "recommendation": "Not viable within current measured local resources; architecture unproven",
+  "next_owner_decision": "Existing persistent build path with 150 GiB free and adequate idle RAM, or approved existing Linux machine",
+  "no_native_GUI_installation_build_commit_push_workflow_signing_publication": true
+}

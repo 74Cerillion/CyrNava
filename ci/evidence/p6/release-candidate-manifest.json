@@ -1,0 +1,65 @@
+{
+  "P6_tooling_base_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "P6_tooling_state": "uncommitted local implementation; not final release source",
+  "accepted_CI_run": 41181510439,
+  "accepted_OSTree_commit": "da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac",
+  "accepted_application_source": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+  "accepted_artifact_ZIP_sha256": "73e6d58a91ff2e57ca7b801b120ca61eceb399202349345508b8fbf6ce4eba6b",
+  "accepted_artifact_id": 13035607417,
+  "accepted_bundle_sha256": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db",
+  "application_id": "io.github._74Cerillion.CyrNava",
+  "architecture": "x86_64",
+  "branch": "stable",
+  "candidate_dependency_lock_sha256": "15ea009817e106931e02f72be1b72c261e83c9eedff153ba03da10540946e421",
+  "descriptors": {
+    "cyrnava-staging.flatpakref": "e4f03e7676760804e8fdbf4f7ab253278947b3b7446c54bedf68dc04d48d88f4",
+    "cyrnava-staging.flatpakrepo": "4b05d59ecf75bd8a7cf58bc7c806e2ff4865503290600256e9526032ac853038"
+  },
+  "distribution_endpoint": null,
+  "format": 1,
+  "local_disposable_signing_fingerprint": "EF0051362978E5032D912C311BC0EFA9A99067F6",
+  "meaning": "Existing verified binary is a reference candidate only. New dependency remediation belongs to the P6 source tree and is not attributed retroactively to accepted source. No disposable key is a production trust anchor.",
+  "native_local_generation": "5009ebe428b38bff47b12611fb55eba3d93a6294caba5d03d6d912e031eb181e",
+  "native_local_manifest_sha256": "5009ebe428b38bff47b12611fb55eba3d93a6294caba5d03d6d912e031eb181e",
+  "native_local_manifest_signature_sha256": "10970db6cc0061170aa75d4f54757ac9f307cd51ad0546a98d505aba94eb7b8a",
+  "product_inventory_sha256": "35acfd3adab8e0f8cca33b6183a874887a21614db28e14184f8306ef38cdf8d9",
+  "production_signing_fingerprint": null,
+  "publication_authorized": false,
+  "release_created": false,
+  "release_notes": {
+    "path": "docs/release-notes-v0.1.0.md",
+    "sha256": "85655388631ba41414d9fbb3190c1a52abb91b957ac84d0ed3c4500e1ec89537"
+  },
+  "runtime_lock": {
+    "application_version": "0.1.0",
+    "architecture": "x86_64",
+    "python": "3.13",
+    "qt_series": "6.11",
+    "refs": {
+      "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+      "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+      "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86"
+    },
+    "schema": 5
+  },
+  "schema": 5,
+  "status": "REVIEW CANDIDATE; PUBLICATION BLOCKED",
+  "tag_created": false,
+  "unresolved": [
+    "final P6 committed source/CI/bundle provenance",
+    "real GUI and real A/B update exercise",
+    "original-code/logo redistribution and third-party review",
+    "permanent offline trust and owner signing adapter",
+    "approved HTTPS provider/gateway and independent clean client",
+    "hosted P6 verification and formal acceptance"
+  ],
+  "version": "0.1.0",
+  "runtime_advisory_review": {
+    "matches": 3,
+    "status": "bounded non-reachable assessment under declared Linux use; runtime packages unpatched",
+    "evidence": "ci/evidence/p6/runtime-advisory-triage.json"
+  },
+  "proposed_public_tag": "v0.1.0 (review only)",
+  "tag_target": null,
+  "final_application_source": null
+}

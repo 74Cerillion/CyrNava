@@ -1,0 +1,10 @@
+{
+  "tests": 175,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "status": "PASS",
+  "GUI": "NOT EXECUTED",
+  "new_signing_keys": "NOT CREATED",
+  "scope": "N2 unchanged regressions plus N3 transaction/auditor/owner-handoff fixtures"
+}

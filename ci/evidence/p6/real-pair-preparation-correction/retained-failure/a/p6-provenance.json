@@ -1,0 +1,14 @@
+{
+  "B_approval_sha256": "53aa5025f977629cf6ba3920b390493b6da257987663279d7e1e85c28f231a22",
+  "candidate_code_sha256": {
+    "distribution.py": "391a01d03643f3f305e0d99c9794de554e696c1efb68750ff8fce000a23a2ad3",
+    "native_distribution.py": "a29799741225a811b52ef51259368468e4067664093dc755b1e43dd2cc9a9e9b",
+    "real_update.py": "804674c2e17903ff28e66520492672ffcd1479105fc053558f4dede01ee091d2",
+    "trust.py": "5b302aa94c1295f5cb5f5f962585890e43b33d936c8667881548d4f47f3d371c"
+  },
+  "purpose": "P6 disposable real application update",
+  "source_A": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+  "source_B": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "tooling_base_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "tooling_state": "exact worktree hashes; not an assertion of clean committed code"
+}

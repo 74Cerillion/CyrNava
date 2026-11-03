@@ -8,6 +8,7 @@ import time
 from pathlib import Path
 from uuid import uuid4
 
+from . import build_identity
 from .backend import SOURCE, Backend
 from .build_identity import ICON_PATH, WINDOW_TITLE
 from .dialogs import choose_draft_destination, choose_images
@@ -22,6 +23,16 @@ from .storage import APP_ID, Profile
 
 
 def configuration():
+    # Only the separately assembled N1 development payload contains this module
+    # and explicit build identity. The normal/Flatpak entry cannot opt in by env.
+    if getattr(build_identity, "DEPLOYMENT", "flatpak") == "native-n1":
+        from .n1_configuration import configuration as native_configuration
+
+        return native_configuration(SOURCE)
+    if getattr(build_identity, "DEPLOYMENT", "flatpak") == "native-installed":
+        from .installed_configuration import configuration as native_configuration
+
+        return native_configuration(SOURCE)
     info = configparser.ConfigParser()
     info.read("/.flatpak-info")
     if (

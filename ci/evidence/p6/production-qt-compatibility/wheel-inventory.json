@@ -1,0 +1,58 @@
+[
+  {
+    "filename": "pyside6-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "entries": 67,
+    "uncompressed_bytes": 4890090,
+    "platform_plugins": [],
+    "theme_plugins": [],
+    "helper": [],
+    "webengine_resources": []
+  },
+  {
+    "filename": "pyside6_addons-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "entries": 1305,
+    "uncompressed_bytes": 438520408,
+    "platform_plugins": [],
+    "theme_plugins": [],
+    "helper": [
+      "PySide6/Qt/libexec/QtWebEngineProcess"
+    ],
+    "webengine_resources": [
+      "PySide6/Qt/resources/qtwebengine_devtools_resources.pak",
+      "PySide6/Qt/resources/qtwebengine_resources.pak",
+      "PySide6/Qt/resources/qtwebengine_resources_100p.pak",
+      "PySide6/Qt/resources/qtwebengine_resources_200p.pak"
+    ]
+  },
+  {
+    "filename": "pyside6_essentials-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "entries": 2462,
+    "uncompressed_bytes": 236684178,
+    "platform_plugins": [
+      "PySide6/Qt/plugins/platforms/libqeglfs.so",
+      "PySide6/Qt/plugins/platforms/libqlinuxfb.so",
+      "PySide6/Qt/plugins/platforms/libqminimal.so",
+      "PySide6/Qt/plugins/platforms/libqminimalegl.so",
+      "PySide6/Qt/plugins/platforms/libqoffscreen.so",
+      "PySide6/Qt/plugins/platforms/libqvkkhrdisplay.so",
+      "PySide6/Qt/plugins/platforms/libqvnc.so",
+      "PySide6/Qt/plugins/platforms/libqwayland.so",
+      "PySide6/Qt/plugins/platforms/libqxcb.so"
+    ],
+    "theme_plugins": [
+      "PySide6/Qt/plugins/platformthemes/libqgtk3.so",
+      "PySide6/Qt/plugins/platformthemes/libqxdgdesktopportal.so"
+    ],
+    "helper": [],
+    "webengine_resources": []
+  },
+  {
+    "filename": "shiboken6-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "entries": 58,
+    "uncompressed_bytes": 659401,
+    "platform_plugins": [],
+    "theme_plugins": [],
+    "helper": [],
+    "webengine_resources": []
+  }
+]

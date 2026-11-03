@@ -1,0 +1,43 @@
+{
+  "diagnostic": {
+    "apparmor_labels": [
+      {
+        "expected_profile": true,
+        "readable": true,
+        "role": "GUI"
+      },
+      {
+        "expected_profile": true,
+        "readable": true,
+        "role": "helper"
+      },
+      {
+        "expected_profile": true,
+        "readable": true,
+        "role": "helper"
+      },
+      {
+        "expected_profile": true,
+        "readable": true,
+        "role": "helper"
+      }
+    ],
+    "helpers_seen": 3,
+    "processes_seen": 5,
+    "read_errors": {
+      "executable:2": 1
+    },
+    "renderer_roles_seen": 0
+  },
+  "final": true,
+  "missing_checks": [],
+  "observed": {
+    "apparmor": "PASS",
+    "backend": "PASS",
+    "qt_providers": "PASS",
+    "renderer": "PASS"
+  },
+  "ready_to_close": true,
+  "renderer_failure_category": null,
+  "unauthenticated_backend_rejected": "PASS"
+}

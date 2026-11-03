@@ -1,0 +1,77 @@
+{
+  "changed_code": [
+    "ci/release/progress.py",
+    "ci/release/real_update.py",
+    "ci/release/native_distribution.py",
+    "ci/release/test_progress.py"
+  ],
+  "changed_docs": [
+    "ci/P6_REPORT.md",
+    "ci/P6_OWNER_CHECKS.md",
+    "ci/P6_RELEASE_RUNBOOK.md"
+  ],
+  "combined_focused_tests": 32,
+  "confirmed_observations": [
+    "runtime remote with both signature checks enabled",
+    "six extension deployments, Platform deployment absent",
+    "OSTree transfer staging retained",
+    "no application deployment",
+    "no active publication pointer",
+    "no native edit evidence or application data"
+  ],
+  "correction": {
+    "GUI_phase_timeout_seconds": 900,
+    "attempt_isolation": "fresh --attempt-root; prepared pair read-only; failed client/results untouched",
+    "cancel_cleanup": "own process group TERM; 5 seconds; KILL if required; 5 seconds",
+    "descriptor_timeout_seconds": 300,
+    "new_retries_or_relaxed_checks": false,
+    "operation_events": "fixed names; flushed stdout; monotonic elapsed/deadlines; latest progress plus journal",
+    "runtime_download_pin_timeout_seconds": 1800,
+    "runtime_heartbeat_seconds": 10
+  },
+  "empty_FAIL_explanation": "KeyboardInterrupt bypassed the ordinary except clause; finally finalized initial FAIL/empty checks before outer main caught the interruption. Complete means record finalized.",
+  "focused_subtests": 12,
+  "interactive_prompt_assessment": "Runtime install/pin already --noninteractive; no evidence of a prompt. Descriptor setup completed. Corrected runtime subprocess stdin is DEVNULL; GUI script input remains PIPE.",
+  "launch_assessment": "Generation A launch not reached through the recorded driver sequence; not evidence of Qt, application or sandbox failure",
+  "most_likely_wait": "runtime-install: upstream KDE Platform and related extensions, before Platform deployment",
+  "native_preparation_GUI_or_GitHub_execution_this_turn": false,
+  "new_regressions": 12,
+  "next_owner_execution": {
+    "authorization_required": true,
+    "fresh_attempt_absent_when_checked": true,
+    "fresh_attempt_root": "~/.cache/p6/gui-attempt-r3",
+    "prepared_root": "~/.cache/p6/real-pair-r2",
+    "repeat_preparation": false
+  },
+  "no_commit_push_host_security_permission_or_production_changes": true,
+  "prepared_r2_status": "PASS; complete; A/B payload audits and key cleanup PASS",
+  "preservation": {
+    "accepted_security_controls_unchanged": [
+      "ci/release/client.py",
+      "ci/release/core.py",
+      "ci/release/audit_candidate.py",
+      "ci/release/policy.json",
+      "ci/flatpak.py",
+      ".github/workflows/ci.yml",
+      ".github/workflows/release.yml",
+      ".github/workflows/p5c.yml",
+      "packaging/flatpak/production/host_verify.py",
+      "packaging/flatpak/production/native_check.py",
+      "packaging/flatpak/production/toolchain.lock.json"
+    ],
+    "approval_and_A_B_zip_hashes_unchanged": true,
+    "disposable_preparation_key_absent": true,
+    "preparation_seals_unchanged": true,
+    "retained_r2_hashes_unchanged": true
+  },
+  "recorded_at_utc": "2026-11-01T10:01:12.382268+00:00",
+  "remaining_uncertainty": "Old wrapper captured raw output without progress. Exact network object/endpoint, verification/disk activity, lock or helper IPC at interruption is unrecorded. No new native execution was performed to infer it.",
+  "status": "LOCAL DIAGNOSTIC CORRECTION PASS; P6 CONDITIONAL; OWNER GUI CHECKPOINT",
+  "test_results": {
+    "exit_code": 0,
+    "final_source_overlay_matches": true,
+    "seconds": 8.599,
+    "status": "PASS",
+    "summary": "189 passed, 1 warning, 216 subtests passed in 8.38s"
+  }
+}

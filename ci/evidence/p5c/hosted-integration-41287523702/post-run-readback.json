@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "recorded_at_utc": "2026-11-01T08:13:38.915232+00:00",
+  "remote_main": "4021bc292267c19b7ebebf219b4f682f8f99bf4c",
+  "remote_integration": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "default_branch": "main",
+  "P5C_runs_total": 1,
+  "run_id": 41287523702,
+  "run_attempt": 1,
+  "workflow_conclusion": "success",
+  "environment_rules_branches_and_secret_variable_counts": "UNCHANGED",
+  "commits_pushes_branch_or_settings_changes_this_authorization": 0,
+  "dispatches_this_authorization": 1,
+  "reruns": 0,
+  "production_publication": "NONE",
+  "application_source_allowlist": "UNCHANGED"
+}

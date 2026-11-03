@@ -1,0 +1,56 @@
+[
+  {
+    "name": "PySide6",
+    "version": "6.11.3",
+    "requires_python": "<3.15,>=3.10",
+    "requires_dist": [
+      "shiboken6==6.11.3",
+      "PySide6_Essentials==6.11.3",
+      "PySide6_Addons==6.11.3",
+      "tomli>=2.0.1; python_version < \"3.11\""
+    ],
+    "filename": "pyside6-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "bytes": 572119,
+    "sha256": "ef2bdb61b1ad7e5e8db8ca7fb1a60d8b7960dfd490c582d005d8903044ab44f1",
+    "url": "https://files.pythonhosted.org/packages/5a/87/1de807123dd5edbc09d9b645a635ff308696e9d1f302c7201b4d821c8860/pyside6-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "metadata_sha256": "f89e41776ed869e7a212d27f7a0f23a7e4e7fc07729c43abacb5c1d317f38e9a"
+  },
+  {
+    "name": "PySide6_Essentials",
+    "version": "6.11.3",
+    "requires_python": "<3.15,>=3.10",
+    "requires_dist": [
+      "shiboken6==6.11.3"
+    ],
+    "filename": "pyside6_essentials-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "bytes": 80292754,
+    "sha256": "c6a5c3b58bf55aef6e09a7de690ff6133335014ab81a7f22f56363ea08e8f6a3",
+    "url": "https://files.pythonhosted.org/packages/91/23/9692f9b9a7cf89c0e8b99da228a728064aa827dc115b5dc974156bcf14fc/pyside6_essentials-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "metadata_sha256": "684c4665c1ea642d46ae6eb938255596b97d673d9efa1462a18ad574ac0baabf"
+  },
+  {
+    "name": "PySide6_Addons",
+    "version": "6.11.3",
+    "requires_python": "<3.15,>=3.10",
+    "requires_dist": [
+      "shiboken6==6.11.3",
+      "PySide6_Essentials==6.11.3"
+    ],
+    "filename": "pyside6_addons-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "bytes": 175307424,
+    "sha256": "5cab663fbff1b7a1fa7e641754de3ca1ea410407fc70bd4e240144b42d09a69c",
+    "url": "https://files.pythonhosted.org/packages/00/f1/d1313576cb6ee71d02d4d5762401f70310319ffe3b2a650b8d3101e4b07f/pyside6_addons-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "metadata_sha256": "af52426d67e73e9dbbd4ad1fc2abaf5ecb42763d4dfd387cf0ac840356fe6cea"
+  },
+  {
+    "name": "shiboken6",
+    "version": "6.11.3",
+    "requires_python": "<3.15,>=3.10",
+    "requires_dist": null,
+    "filename": "shiboken6-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "bytes": 272494,
+    "sha256": "e601c957011345c741b88f661a12486f478db881d6777bdf37e3dc7a8d3387c6",
+    "url": "https://files.pythonhosted.org/packages/7c/4a/696e3a9ed26436b1b41ca22dd21e7bce214ba1a1e1dea5c84b5627444c65/shiboken6-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "metadata_sha256": "a28446a931c0ca37460b6459e7371b6244adaefa6f04b659edd34b7c0d13db66"
+  }
+]

@@ -1,0 +1,202 @@
+{
+  "P6": "CONDITIONAL",
+  "status": "HTTP REFUSAL DIAGNOSED; ACQUISITION STILL BLOCKED",
+  "candidate": null,
+  "retained_owner_attempt": {
+    "path": "ci-output/p6-binary-candidate-1",
+    "result_sha256": "2a501d36842ff56ccf3f29ded1b2f805f1a35ab9a5ce10aaeb49ff8840ca5d56",
+    "operations_sha256": "1d7f9f7207269679b736368caf7fc4f0e8a35dba47c3b60f4adf9bd572958762",
+    "private_log_hashes_verified": true,
+    "namespace_probe_exit": 0,
+    "remote_policy": "expected official HTTPS URL; gpg-verify=true and gpg-verify-summary=true; trusted public-key hash matches lock",
+    "identities_matched": [
+      "fb23e178d082b117df7924f9a84710992ec233ebc007385feb85d349c4c81415",
+      "f77a65229fcb9dc1468944cd6a2b5aa327d1877725d681467805dae6ed68aebe",
+      "25537519d4e093f4b32515f89d24ae7ca6eddfa2ff5dd21e1a82a7bad9189572",
+      "06c99098f7ed648656bbb4ddb77f9c463216f88eea553c899bd20106ea82de6c"
+    ],
+    "failed_operation": "pull-0",
+    "failed_url": "https://dl.flathub.org/repo/objects/fb/23e178d082b117df7924f9a84710992ec233ebc007385feb85d349c4c81415.commit",
+    "no_downloads_deployment_or_build_after_failure": true
+  },
+  "controlled_HTTP_observations": [
+    {
+      "operation": "descriptor",
+      "http_status": "200",
+      "safe_headers": {
+        "server": "nginx",
+        "content-type": "application/octet-stream",
+        "via": "1.1 varnish, 1.1 varnish",
+        "x-cache": "HIT, HIT",
+        "content-length": "4040"
+      },
+      "body_bytes": 4040,
+      "body_sha256": "3371dd250e61d9e1633630073fefda153cd4426f72f4afa0c3373ae2e8fea03a",
+      "redirect_advertised": false
+    },
+    {
+      "operation": "runtime-commit",
+      "http_status": "200",
+      "safe_headers": {
+        "server": "nginx",
+        "content-type": "application/octet-stream",
+        "via": "1.1 varnish, 1.1 varnish",
+        "x-cache": "HIT, HIT",
+        "content-length": "5020"
+      },
+      "body_bytes": 5020,
+      "body_sha256": "fb23e178d082b117df7924f9a84710992ec233ebc007385feb85d349c4c81415",
+      "redirect_advertised": false
+    },
+    {
+      "operation": "object-libostree-UA",
+      "http_status": "403",
+      "safe_headers": {
+        "server": "Varnish",
+        "retry-after": "0",
+        "content-type": "text/html; charset=utf-8",
+        "via": "1.1 varnish",
+        "x-cache": "MISS",
+        "content-length": "420"
+      },
+      "body_bytes": 420,
+      "body_sha256": "367a78224de90bc2518abb57a61818b0c495749f4b1671852e7b345c66118f1a",
+      "redirect_advertised": false
+    },
+    {
+      "operation": "object-clean-env",
+      "http_status": "200",
+      "safe_headers": {
+        "server": "nginx",
+        "content-type": "application/octet-stream",
+        "via": "1.1 varnish, 1.1 varnish",
+        "x-cache": "HIT, HIT",
+        "content-length": "5020"
+      },
+      "body_bytes": 5020,
+      "body_sha256": "fb23e178d082b117df7924f9a84710992ec233ebc007385feb85d349c4c81415",
+      "redirect_advertised": false
+    },
+    {
+      "operation": "object-identified-cyrnava",
+      "http_status": "403",
+      "safe_headers": {
+        "server": "Varnish",
+        "retry-after": "0",
+        "content-type": "text/html; charset=utf-8",
+        "via": "1.1 varnish",
+        "x-cache": "MISS",
+        "content-length": "420"
+      },
+      "body_bytes": 420,
+      "body_sha256": "96a04e781f716f9f7ecaa5d1743a9ee6de4c66ebe7f0aa25139ce5e0fda5f06b",
+      "redirect_advertised": false
+    },
+    {
+      "operation": "object-flatpak-UA",
+      "http_status": "403",
+      "safe_headers": {
+        "server": "Varnish",
+        "retry-after": "0",
+        "content-type": "text/html; charset=utf-8",
+        "via": "1.1 varnish",
+        "x-cache": "MISS",
+        "content-length": "420"
+      },
+      "body_bytes": 420,
+      "body_sha256": "c10fe4ae4938d5b63d972ff59dd01a5ae14cfa1d5dd77b8b0b632eca4e9f7989",
+      "redirect_advertised": false
+    },
+    {
+      "operation": "object-project-first-UA",
+      "http_status": "403",
+      "safe_headers": {
+        "server": "Varnish",
+        "retry-after": "0",
+        "content-type": "text/html; charset=utf-8",
+        "via": "1.1 varnish",
+        "x-cache": "MISS",
+        "content-length": "420"
+      },
+      "body_bytes": 420,
+      "body_sha256": "5ca8ed8abcf49a4e25df1225c7f5737ce7767dedefd85bf622a8d5e49e06a025",
+      "redirect_advertised": false
+    },
+    {
+      "operation": "runtime-commitmeta",
+      "http_status": "200",
+      "safe_headers": {
+        "server": "nginx",
+        "content-type": "application/octet-stream",
+        "via": "1.1 varnish, 1.1 varnish",
+        "x-cache": "HIT, HIT",
+        "content-length": "592"
+      },
+      "body_bytes": 592,
+      "body_sha256": "793ce733c71d5f70f46fc6b7b2d8f0e725a3b861303ca273ea63d35eb219f6d2",
+      "redirect_advertised": false
+    }
+  ],
+  "immutable_commit_proof": {
+    "commit_sha256": "fb23e178d082b117df7924f9a84710992ec233ebc007385feb85d349c4c81415",
+    "direct_GET_bytes": 5020,
+    "sha256_matches": true,
+    "gpg_verify_remote_exit": 0,
+    "good_signature": true,
+    "signed_ref_binding": "runtime/org.kde.Platform/x86_64/6.11",
+    "fresh_advertised_ref_matches": true,
+    "parent": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+    "scope": "metadata only in separate diagnostic repo; no runtime filesystem acquisition/deployment/build"
+  },
+  "confirmed": "Same HTTPS object responds 200 with curl identification, 403 with libostree identification. Clean environment curl still 200. Ref and signed object are valid/available. No redirects advertised. Varnish identifies the denying HTTP response.",
+  "remaining_uncertainty": "Exact HTTP delivery-policy rule, responsible operator/intermediary and whether the same UA-dependent response occurs on owner host. No VPN/proxy causality inferred.",
+  "driver_correction": "NONE: no established URL/ref/security defect; acquisition UA not disguised or changed to evade refusal",
+  "next_action": "One three-GET normal-host comparison using p6_http_diagnostic.sh; then upstream/CDN review if host reproduces. No build continuation command issued.",
+  "tests": {
+    "new_http_fixture_tests": 4,
+    "existing_candidate_fixture_tests": 14,
+    "total_pass": 18,
+    "ruff": "PASS",
+    "bash_syntax": "PASS",
+    "diagnostic_help": "PASS",
+    "native_acquisition": "NOT EXECUTED",
+    "build": "NOT EXECUTED"
+  },
+  "original_driver_sha256": "707e727d476520f991767351a096fc44673b5d14d8672a0468b6d4f071d6ebb7",
+  "diagnostic_files": {
+    "p6_http_diagnostic.sh": "ef1d6909d8da6f15c99190b22cd00972b43b4a67f746399e0d8b84647ce33223",
+    "packaging/flatpak/compatibility/binary-6.11.3/http_probe.py": "bcea7dc9304fd629c9fbb729942aad799d2268ec32542f70ca6829d2b710827b",
+    "packaging/flatpak/compatibility/binary-6.11.3/test_http_probe.py": "f710ba9673db5d338633289c4507a48216b12fec860b4b771881ae5450aa2b61"
+  },
+  "private_diagnostics_sha256": {
+    "object-project-first-UA.curl.private": "6abd0c653ffab20cd332cca94a62e8e3d598cc9b43900d367650e803d693f4a0",
+    "object-flatpak-UA.headers.private": "6ed7d90e5210af802419c814dbd083ceb7eee3bae01b7e545a44ae09ace4a6d1",
+    "runtime-commitmeta.body.private": "793ce733c71d5f70f46fc6b7b2d8f0e725a3b861303ca273ea63d35eb219f6d2",
+    "object-flatpak-UA.body.private": "c10fe4ae4938d5b63d972ff59dd01a5ae14cfa1d5dd77b8b0b632eca4e9f7989",
+    "object-project-first-UA.body.private": "5ca8ed8abcf49a4e25df1225c7f5737ce7767dedefd85bf622a8d5e49e06a025",
+    "object-project-first-UA.headers.private": "862437fba8fbd54e6dcd8186c1e83ebc2e85570f0ee7fd930f770b727418e2ed",
+    "metadata-flatpak.private.log": "2653556ffc1809ac4b67d8f5dc084e2ecfee3333704574e11cc3227ba553cc72",
+    "runtime-commitmeta.headers.private": "0caa434a624855209fd6ce9bdcb1c7f948c8ae285226620b0270a075c0a3e9de",
+    "object-clean-env.headers.private": "302341d3b9e735f260221a98f97ea655adc3baaf97969e0989761cdba1692494",
+    "object-identified-cyrnava.curl.private": "6abd0c653ffab20cd332cca94a62e8e3d598cc9b43900d367650e803d693f4a0",
+    "object-clean-env.body.private": "fb23e178d082b117df7924f9a84710992ec233ebc007385feb85d349c4c81415",
+    "object-identified-cyrnava.headers.private": "5e783785b888cfd0c81587469684a2e3648aab674dcdbe110ac30795487cb0cb",
+    "descriptor.curl.private": "aae4165d1fc595e78db3524792d897dbffdf583aa22bf3beec1e42cd641ef47c",
+    "object-libostree-UA.body.private": "367a78224de90bc2518abb57a61818b0c495749f4b1671852e7b345c66118f1a",
+    "object-libostree-UA.headers.private": "c511084a9ebe3e28dbc3f2df5dce20cbfe05972b65d99245a1b353aa33e19707",
+    "exact-parent-metadata.private.log": "38c6bebe78041f15980edefd757397feedb761e9a5a2aeaf41d6c758a5b4882f",
+    "runtime-commitmeta.curl.private": "c11e3f4837efde2441e23a7b9da02131f53bf59fddeb7147c4ab81afe400460f",
+    "runtime-commit.headers.private": "7873414fc926d96ed5399f1b66d9beafbf0f3ee381ba4f88e3511f910822622f",
+    "descriptor.body.private": "3371dd250e61d9e1633630073fefda153cd4426f72f4afa0c3373ae2e8fea03a",
+    "descriptor.headers.private": "ff05b76c4be2081a6996c39639fc1c1e77faea12b2de9bf693bd1cc8538205af",
+    "live-advertised-ref.private.log": "2653556ffc1809ac4b67d8f5dc084e2ecfee3333704574e11cc3227ba553cc72",
+    "commit-signature.private.log": "4ac1c4ceecb2ae36de4856c6cc7d89cf0ad335d49fab9e2576314e152c49fc30",
+    "runtime-commit.body.private": "fb23e178d082b117df7924f9a84710992ec233ebc007385feb85d349c4c81415",
+    "object-flatpak-UA.curl.private": "6abd0c653ffab20cd332cca94a62e8e3d598cc9b43900d367650e803d693f4a0",
+    "object-clean-env.curl.private": "5470b17c2fea98bd88ed4560f6446fe95261cdbe614f019b31626a52f9640066",
+    "runtime-commit.curl.private": "9a4d97cf97cb54934bc62becd1ca42bb26606579016b80f13b393e33c58f151b",
+    "object-identified-cyrnava.body.private": "96a04e781f716f9f7ecaa5d1743a9ee6de4c66ebe7f0aa25139ce5e0fda5f06b",
+    "object-libostree-UA.curl.private": "6abd0c653ffab20cd332cca94a62e8e3d598cc9b43900d367650e803d693f4a0"
+  },
+  "recorded_at_utc": "2026-11-02T10:07:17.371567+00:00"
+}

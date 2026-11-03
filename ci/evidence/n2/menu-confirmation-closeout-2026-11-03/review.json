@@ -1,0 +1,99 @@
+{
+  "N3_N4": "NOT AUTHORIZED / NOT STARTED",
+  "actual_live_checks": {
+    "apparmor": "PASS",
+    "backend": "PASS",
+    "exit_code": "NOT AVAILABLE for external GNOME child",
+    "owned_process_cleanup": "PASS",
+    "qt_providers": "PASS",
+    "renderer": "PASS",
+    "unauthenticated_backend_rejected": "PASS"
+  },
+  "actual_renderer_checks": {
+    "NoNewPrivs": true,
+    "Seccomp": true,
+    "all_checks_same_renderer": true,
+    "namespace_separation": {
+      "net": true,
+      "pid": true,
+      "user": true
+    },
+    "stable_identity": true
+  },
+  "before_and_after_state_sha256": "0feb528634201a68d00568fdfea73f34b279fae9cc5fe69bc1e474c34869a710",
+  "build_download_signing_git_publication": "NOT PERFORMED",
+  "candidate": {
+    "archive_sha256": "02f6594eb0011a90fe70de90c7bd382725be4c88bb0fabb73fd43e6f6d5061cf",
+    "manifest_sha256": "d7d0f2bbc58c17aef58fff83c4e2e805875f013df8aa061830a687e07d3c688f",
+    "payload_files_verified": 94,
+    "provider_files_verified": 4414,
+    "receipt_sha256": "c4a9d2ef3cebebe6e3fc2c3c202d88d18431f1b77771fc3a4076a943b433678a",
+    "source_files_match_candidate_manifest": true
+  },
+  "code_files_sha256": {
+    "packaging/native/test_menu_observation.py": "ca78abe102d545d66366937c5c0875110e53a2be921ed024e7311a3b60bf0157",
+    "packaging/native/verify_menu.py": "1456d268cda4654eacd1ba4f330116db5570a23a0a4ef4302ea60721c84920f2"
+  },
+  "documentation_files_sha256": {
+    "ci/N2_OWNER_CHECKS.md": "4b9de2a88773435f48c947cc52ec9f611b36512d657e47b790a13c2820480865",
+    "ci/N2_REPORT.md": "b97ee75ccbd468d3084309f3ad9e61ac693c9925a4ee44730ecf1dc545097525",
+    "ci/P6_NATIVE_DISTRIBUTION_ROADMAP.md": "af17c6192da06e84b4b3943c80bf6838e173356a09b6435aa015c7491f30c8ad",
+    "ci/P6_OWNER_CHECKS.md": "f2cd90f0f94dfe1bb90fc2a3bef79d3902eab49e709a8e6cb8f87077fe123a4d",
+    "ci/P6_REPORT.md": "3f47c5f34e14e8133315cbe4e4ba0d1fb86ecbc36fbaae6b47659938064998d2",
+    "packaging/native/README.md": "f441456a9cce0f83ff6c607904449c650fb4c21ad7fc9fa2272c371c6908243d"
+  },
+  "failure": {
+    "category": "missing/nonmatching original terminal confirmation",
+    "exact_original_keystrokes": "NOT RECORDED",
+    "operation": "owner visual confirmation after successful post-close snapshot comparison",
+    "private_exception_sha256": "56c0c857e779ceb5f00373078b6be02e4c1147b3dbb20f94e633e4c410798d7b",
+    "safe_exception": "ValueError: Menu visual confirmation missing"
+  },
+  "formal_N2_acceptance": "PENDING",
+  "format": 1,
+  "global_namespace_settings": {
+    "apparmor_restrict_unprivileged_userns": "1",
+    "unprivileged_userns_clone": "1"
+  },
+  "historical_evidence_hashes_unchanged": true,
+  "limitations": [
+    "Numeric exit code unavailable for externally launched GNOME child; cleanup is directly observed",
+    "Original terminal FAIL remains FAIL; combined review records actual component passes and later owner confirmation separately",
+    "No production signing or public-release acceptance",
+    "Formal owner acceptance still required"
+  ],
+  "lint": "Ruff --no-cache and format --check PASS",
+  "new_GUI_execution": "NOT EXECUTED / NOT REQUIRED for missing confirmation",
+  "new_regressions": 7,
+  "normal_installation_host_policy_change": "NOT PERFORMED",
+  "observation_sha256": "81a29e0e9305f69309f515c99f02062e575aa3146022ec6401300eeae314b80b",
+  "original_attempt_status": "FAIL / complete; preserved unchanged",
+  "original_native_result_sha256": "f7bcb8ee8d283f8fb8bb393137f60eb5fdb03f53dfc963db36c1c97a5e543151",
+  "owner_visual_confirmation_file": "owner-visual-confirmation.json",
+  "owner_visual_confirmation_sha256": "f227de0ca029582bec7942b81a4c1d2e63ef339e27852506873c9309720e97ef",
+  "policy_readback": "Exact source hash unchanged; kernel enforce mode",
+  "reviewed_at_utc": "2026-11-03T03:55:14.094582+00:00",
+  "scope": "N2 versioned per-user native installation and desktop integration; completed native attempt 6 plus separately supplied owner visual confirmation",
+  "security_predicate_functions_AST_unchanged": [
+    "renderer_failure",
+    "register",
+    "unregister",
+    "gio_discovery",
+    "find_gui",
+    "sample_menu_tree",
+    "unauthenticated"
+  ],
+  "status": "VERIFIED PASS / RECOMMENDED FOR OWNER ACCEPTANCE",
+  "tests": {
+    "GUI": "NOT EXECUTED",
+    "errors": 0,
+    "failures": 0,
+    "host_policy_operation": "NOT EXECUTED",
+    "selection": "N2 install/export/desktop/state/policy/menu regressions; RealSignatureTests excluded (retained existing result)",
+    "signing": "NOT EXECUTED",
+    "skipped": 0,
+    "status": "PASS",
+    "tests": 153
+  },
+  "wait_explanation": "Single close instruction followed by repetitive verbose success diagnostics; incomplete-evidence deadline no longer applies once checks pass; owner-close deadline remains ten minutes. No application hang inferred."
+}

@@ -1,0 +1,13 @@
+{
+  "HEAD": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "logical_staging_index_sha256": "87223663fe0905b675555ebe973e33de0ab124c7a3c7296e84ba419f9b143cca",
+  "unchanged_preservation_guards": 297,
+  "intentionally_updated_guards": [
+    "ci/test_cleanup_p6.py",
+    "cleanup_cyrnava.sh"
+  ],
+  "target_fingerprints_refreshed": [],
+  "phase_report_checklist_contents": "byte-for-byte initial guard hashes",
+  "keep_and_review_promotions": "NONE",
+  "normal_host_changes": "NONE"
+}

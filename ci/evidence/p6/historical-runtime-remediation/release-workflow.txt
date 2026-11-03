@@ -1,0 +1,9 @@
+........................................................................................................................................................................................... [ 80%]
+............................................                                              [100%]
+=============================== warnings summary ===============================
+ci-output/p6-historical-clean/checkout/ci/release/test_policy.py::ArchiveTests::test_unsafe_or_extra_zip_entries_rejected
+  /usr/lib/python3.12/zipfile/__init__.py:1650: UserWarning: Duplicate name: 'io.github._74Cerillion.CyrNava.flatpak'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+231 passed, 1 warning, 228 subtests passed in 8.48s

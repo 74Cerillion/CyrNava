@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-01",
+  "method": "Read-only official upstream documentation and manifest review plus retained-deployment static ELF inspection",
+  "sources": [
+    "https://github.com/flathub/io.qt.PySide.BaseApp",
+    "https://raw.githubusercontent.com/flathub/io.qt.PySide.BaseApp/branch/6.11/io.qt.PySide.BaseApp.yaml",
+    "https://github.com/flathub/io.qt.qtwebengine.BaseApp",
+    "https://doc.qt.io/qtforpython-6/package_details.html",
+    "https://doc.qt.io/qtforpython-6/gettingstarted.html",
+    "https://doc.qt.io/qt-6/deployment-plugins.html",
+    "https://docs.flatpak.org/en/latest/dependencies.html"
+  ],
+  "verified_remedy": false,
+  "production_compatibility": "OPEN public-release blocker",
+  "recommendation": "Coherent upstream-maintained application-local Qt closure; separate sandbox, license, size and maintenance assessment before packaging changes"
+}

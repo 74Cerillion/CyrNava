@@ -1,0 +1,172 @@
+{
+  "N1": "BLOCKED \u2014 required namespace renderer sandbox failed in confined offscreen test; ordinary Wayland host pending",
+  "P6": "CONDITIONAL",
+  "owner_approved_native_process_privileges": true,
+  "experiment": "ci-output/p6-native-n1-1",
+  "source_head": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "application_patch_sha256": "a5e88d7f4102aed8f44f2f54b7991638dee8e5f7df605dbbf4c941a3bde8c43c",
+  "artifact_receipt_sha256": "7f713ed31e2ce7d63a1a67e806d671b38ff2f7bafd2d66592f68ff70d575c41e",
+  "launch_sha256": "433928adca59ca511b8b4c189dff51472197573d7267f8ddb8268b1c82cd94d1",
+  "dependencies_sha256": "621c640f428886a7944b654fe6726f2b3ab82644e4911a051f8281ab392eb8a3",
+  "requirements_sha256": "24876b72281d5427fc9c5c41cdb19a918815e9547e74c5eb4d2c93ac22e4a576",
+  "provider_result_sha256": "3ce1fdf85520d1b844c318f36bd10dd529b8f7aaa46e3ff790241adb9f428319",
+  "checks": {
+    "assembly": "PASS",
+    "imports_and_provider_closure": "PASS",
+    "private_abi_pair": "PASS",
+    "target_python_backend_auth_persistence": "PASS",
+    "minimal_offscreen_HTML_JS": "PASS",
+    "renderer_namespaces_in_Codex": "FAIL",
+    "normal_CyrNava_window": "NOT EXECUTED",
+    "GNOME_Wayland": "NOT EXECUTED",
+    "GUI_clipboard_and_save_reopen": "NOT EXECUTED"
+  },
+  "versions": {
+    "python": [
+      3,
+      14
+    ],
+    "pyside": "6.11.3",
+    "shiboken": "6.11.3",
+    "qt": "6.11.3",
+    "webengine": "6.11.3"
+  },
+  "wheel_files_verified": 3920,
+  "missing_libraries": [],
+  "private_abi": {
+    ".venv/lib/python3.14/site-packages/PySide6/QtCore.abi3.so": [
+      "QtPrivate_6_11_3"
+    ],
+    ".venv/lib/python3.14/site-packages/PySide6/Qt/lib/libQt6Core.so.6": [
+      "QtPrivate_6_11_3"
+    ]
+  },
+  "backend_check": {
+    "status": "PASS",
+    "complete": true,
+    "python": [
+      3,
+      14
+    ],
+    "checks": {
+      "unauthenticated": "PASS",
+      "wrong_origin": "PASS",
+      "folder_note_rich_text_image_saved": "PASS",
+      "owned_backend_reaped": "PASS",
+      "restart_and_data_integrity": "PASS",
+      "stable_origin_and_token_revocation": "PASS"
+    }
+  },
+  "sandbox_diagnostic": {
+    "status": "DIAGNOSTIC_COLLECTED",
+    "complete": true,
+    "scope": "offscreen diagnostics, not GNOME Wayland/normal launcher",
+    "Wayland": "NOT EXECUTED",
+    "normal_launcher": "NOT EXECUTED",
+    "renderer_sandbox": "NOT VERIFIED",
+    "sandbox_diagnostic": [
+      "Sandbox Status",
+      "Layer 1 Sandbox\tNone",
+      "PID namespaces\tNo",
+      "Network namespaces\tNo",
+      "Seccomp-BPF sandbox\tYes",
+      "Seccomp-BPF sandbox supports TSYNC\tYes",
+      "You are NOT adequately sandboxed."
+    ],
+    "renderer_pid": 104,
+    "renderer_helper_matches": true,
+    "process_status": {
+      "Name": "QtWebEngineProc",
+      "NSpid": "104",
+      "NoNewPrivs": "1",
+      "Seccomp": "2",
+      "Seccomp_filters": "2"
+    },
+    "namespace_separation": {
+      "user": false,
+      "pid": false,
+      "net": false,
+      "mnt": false
+    },
+    "uid_map": "1000          0          1"
+  },
+  "confined_parent": "bwrap//&unpriv_bwrap",
+  "cause": "Namespace isolation absent. Whether ordinary Ubuntu reproduces it, and exact AppArmor/kernel/Qt responsibility, remain unproven. DRM permission errors are not proof of namespace cause.",
+  "resources": {
+    "assembly_seconds": 43.274,
+    "wheel_download_bytes": 267053918,
+    "installed_venv_allocated_bytes": 728997888,
+    "assembly_allocated_bytes": 1010987008,
+    "current_candidate_allocated_bytes": 1013592064,
+    "maximum_assembly_child_RSS_KiB": 565076,
+    "memory_metric_limit": "Maximum waited-for child RSS, not aggregate GUI/host peak",
+    "initial_available_RAM_KiB": 3158820,
+    "initial_swap_free_KiB": 180,
+    "current_filesystem_available_bytes": 21724606464,
+    "added_allocation_cap_bytes": 3221225472
+  },
+  "tests": {
+    "N1_offline_fixtures": 17,
+    "existing_application_regressions_Python312": 147,
+    "existing_production_packaging_regressions_Python312": 36,
+    "Ruff_new_files": "PASS"
+  },
+  "next": "One owner-executed Wayland sandbox diagnostic; no automatic GUI/native retry or security change",
+  "unchanged_boundaries": [
+    "no N2 work",
+    "no normal installation",
+    "no owner data",
+    "no Flatpak acquisition",
+    "no production permission/signature changes",
+    "no Git/CI/publication",
+    "no Qt source build"
+  ],
+  "implementation_sha256": {
+    "packaging/native/feasibility/README.md": "802924ff0ba67c166ed2a30953ec9997710559d8efebbc4542b85de0997e0a15",
+    "packaging/native/feasibility/backend_check.py": "739707827e5f5086481b1ce29d88c56ec0f98e9813980596876867885ae78b48",
+    "packaging/native/feasibility/dependencies.json": "621c640f428886a7944b654fe6726f2b3ab82644e4911a051f8281ab392eb8a3",
+    "packaging/native/feasibility/n1_configuration.py": "97641dc479f6ed9b57fb5f9262d9a3909cbbe3a316e83fadb951fa3fc0354f55",
+    "packaging/native/feasibility/prepare.py": "f94bd30979550925e2b5e24ef6ac939189b2c08c9785fe2e953add45104205bc",
+    "packaging/native/feasibility/providers.py": "5052859d533e1b2ebce38470aa004eb2e57fe8a3ea15a87fb2334a44934cba7d",
+    "packaging/native/feasibility/requirements.lock": "24876b72281d5427fc9c5c41cdb19a918815e9547e74c5eb4d2c93ac22e4a576",
+    "packaging/native/feasibility/run_probe.py": "1e310e5d6d2a715c1120b85318205ee40933b92889f3f469c13b92cf3d820d59",
+    "packaging/native/feasibility/sandbox_probe.py": "70ad934d0bb9fe4c09e5978526969c63c6ba71b660335619da896fe1bd4844b3",
+    "packaging/native/feasibility/smoke.py": "52882a16c7b598ed63930698ce8b1ef2611e00fe6d8f4dc8232c0bebcfbc4551",
+    "packaging/native/feasibility/test_n1.py": "22058b91f38a0bfce6b479edd7840369629c44c036ed11b02d8a4ff9a31742fe"
+  },
+  "private_evidence_sha256": {
+    "backend-check.json": "35a402b4d22d771063086c00883c23ce6ec3ea06c37613ea0d6662d4272e947c",
+    "configuration-finalization.json": "f34f5044e3e90c10d7a8d39cc8cd38c6f9b82ceb5f77959ebd4ba99b3a7a5a8f",
+    "headless-render.json": "02f28b28e4ea3515885c711f381221a6c4d20da9cb9610221380900fea2b756b",
+    "headless-supervisor.json": "8ec204dd2c2b0548379a7dce37e0a1f63a48817931a1a9475fc457f436236a4e",
+    "n1.json": "7f713ed31e2ce7d63a1a67e806d671b38ff2f7bafd2d66592f68ff70d575c41e",
+    "providers-final.json": "3ce1fdf85520d1b844c318f36bd10dd529b8f7aaa46e3ff790241adb9f428319",
+    "providers.json": "d2bfbd6aa736cfbfacf0a390b53fa4e2ec3a840468dc99a9ee52a614cd7c83c7",
+    "result.json": "14a11e3a453781602bd229ccc1570a85ea4fb334e4737b0d7e3aa4e971f9efb1",
+    "sandbox-probe.json": "6644a4589cd46d9bf70532ca1bee56138d9cbdef8e0febce6fe50b711652ffff",
+    "sandbox-supervisor.json": "3472b6ea47839f6733e1eada7d4adc11116ffe3729bfd87d431a3a605af5d1d4"
+  },
+  "private_logs_sha256": {
+    "backend-check.private.log": "35a402b4d22d771063086c00883c23ce6ec3ea06c37613ea0d6662d4272e947c",
+    "providers.private.log": "cccc62d50053a6668984d05448fce6114cd1b3376f46906ef1f6eb126355a5f8",
+    "headless-render.private.log": "207fbecb49bf2026fd8d61d4258643de132dfcf954ee8a90dac295d34d5d582e",
+    "providers-final.private.log": "cccc62d50053a6668984d05448fce6114cd1b3376f46906ef1f6eb126355a5f8",
+    "venv.private.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "frontend-build.private.log": "94f06ecbfa4d8ee0fd4a87a16df9359a03b27d0fc1bd1a629df5cc9b2dc0fd59",
+    "install-locked.private.log": "8035910b5bb919a3f79e10086751dd312d099a03d47846debda1268163557e1b",
+    "sandbox-probe.private.log": "383b30aabe10e1bd65ee0a97f964c0471a77299a23dd715624b0bbafea7dd2b6",
+    "pip-check.private.log": "ab78561b4565de77ea621b9b8231d44bcb94f01b73c22298e4c421539a17f87f"
+  },
+  "preservation": {
+    "preexisting_files_checked": 1406,
+    "intentional_changes": [
+      "ci/P6_NATIVE_DISTRIBUTION_ROADMAP.md",
+      "ci/P6_OWNER_CHECKS.md",
+      "ci/P6_REPORT.md",
+      "desktop/native/application.py"
+    ],
+    "all_other_preexisting_files_unchanged": true,
+    "HEAD": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+    "index_staged_paths": []
+  }
+}

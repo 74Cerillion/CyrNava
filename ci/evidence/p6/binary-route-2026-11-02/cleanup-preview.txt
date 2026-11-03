@@ -1,0 +1,43 @@
+Exact audited deletion preview (repository-relative paths):
+   365522944 allocated bytes  ci-output/p5b-clean/checkout/frontend/node_modules
+  Obsolete P5B test checkout dependencies; recreate from retained checkout lockfile; current frontend/node_modules kept
+   365531136 allocated bytes  ci-output/p5b-appearance-clean/checkout/frontend/node_modules
+  Obsolete appearance-investigation dependencies; recreate from retained lockfile; all source/Git and evidence kept
+    73252864 allocated bytes  ci-output/p6-npm-cache
+  Regenerable npm HTTP/content cache; installed working dependencies kept
+    29450240 allocated bytes  ci-output/p6-pip-cache
+  Regenerable pip download cache; installed Python environments kept
+   210239488 allocated bytes  ci-output/p5b-hosted-41205351385/package.zip
+  Superseded ordinary-CI bundle output; exact result/build-input/provenance JSON retained and verified; not approved A/B or current release input
+   210247680 allocated bytes  ci-output/p5b-hosted-41207770532/package.zip
+  Superseded ordinary-CI bundle output; exact result/build-input/provenance JSON retained and verified; not approved A/B or current release input
+   210247680 allocated bytes  ci-output/p5b-hosted-ci-41258927530/package.zip
+  Superseded ordinary-CI bundle output; exact result/build-input/provenance JSON retained and verified; not approved A/B or current release input
+   210239488 allocated bytes  ci-output/p5b-hosted-ci-41264318875/package.zip
+  Superseded ordinary-CI bundle output; exact result/build-input/provenance JSON retained and verified; not approved A/B or current release input
+       49152 allocated bytes  .pytest_cache
+  Regenerable test/lint/bytecode cache; source files verified present; no source or environment deletion
+      131072 allocated bytes  .ruff_cache
+  Regenerable test/lint/bytecode cache; source files verified present; no source or environment deletion
+       86016 allocated bytes  backend/.pytest_cache
+  Regenerable test/lint/bytecode cache; source files verified present; no source or environment deletion
+       53248 allocated bytes  backend/.ruff_cache
+  Regenerable test/lint/bytecode cache; source files verified present; no source or environment deletion
+      512000 allocated bytes  backend/app/__pycache__
+  Regenerable test/lint/bytecode cache; source files verified present; no source or environment deletion
+      933888 allocated bytes  backend/tests/__pycache__
+  Regenerable test/lint/bytecode cache; source files verified present; no source or environment deletion
+      303104 allocated bytes  desktop/native/__pycache__
+  Regenerable test/lint/bytecode cache; source files verified present; no source or environment deletion
+       49152 allocated bytes  desktop/__pycache__
+  Regenerable test/lint/bytecode cache; source files verified present; no source or environment deletion
+      200704 allocated bytes  ci/__pycache__
+  Regenerable test/lint/bytecode cache; source files verified present; no source or environment deletion
+      679936 allocated bytes  ci/release/__pycache__
+  Regenerable bytecode; four recent cp312 files explicitly verified equal to compilation of current source and timestamp/size headers after guard detected change; later changes still abort
+      290816 allocated bytes  packaging/flatpak/production/__pycache__
+  Regenerable test/lint/bytecode cache; source files verified present; no source or environment deletion
+   997265408 allocated bytes  .p4-cache/cyrnava-builds/p4/local-A-6m4ne70o/build/files
+  Regenerable extracted P4 app payload; all 5320 inventory entries match retained acceptance inventory; exact bundle/hash and source/staged inputs remain; native checker consumes bundle, not this tree; do-not-repeat finish history retired
+Estimated reclaim: 2,675,286,016 bytes (2.492 GiB); shared blocks may reduce this.
+Target and dependency validation PASS. No files deleted.

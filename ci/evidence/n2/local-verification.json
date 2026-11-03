@@ -1,0 +1,108 @@
+{
+  "date": "2026-11-03",
+  "N1": "OWNER ACCEPTED / COMPLETE",
+  "N2": "CONDITIONAL / LOCAL IMPLEMENTATION VERIFIED",
+  "native_GUI": "NOT EXECUTED / OWNER HANDOFF",
+  "normal_menu_listing": "NOT VERIFIED",
+  "authentic_signed_install": "NOT EXECUTED / SIGNING NOT AUTHORIZED",
+  "archive": "ci-output/native-n2-candidate-3/CyrNava-0.1.0-n2.1-ubuntu-x86_64.zip",
+  "archive_sha256": "9d92a4f5d925e42f1cb8c9abdc84d913a3c111a5a52f4ed88b2d30840d36c0be",
+  "archive_bytes": 271531611,
+  "manifest_sha256": "a1e066a3d769319a761b8643469f055201ef04b2b80ff92c0ac9604e1a4f8d82",
+  "installed_receipt_sha256": "454fd5fcccae82c017f093d0c09f1be86fb3dcc8dc5413b57905b8111ea24286",
+  "installed_client": "ci-output/native-n2-client-3",
+  "source_baseline": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "source_files_sha256": {
+    "desktop/install_engine.py": "6ab9667c0af9bf5babe377b200d5283a00464720f55a040ea5c7e1444710d824",
+    "desktop/native/application.py": "98810679510961c9b63634094d359e6cd2dbbdcd67a6c5778c8cacd3226d279c",
+    "desktop/native/installed_configuration.py": "9ab964ce98883a29c9868fb33fbcd3e23e1a8a844865ad316470917135f62ad8",
+    "install_cyrnava.sh": "082f3eb51a9005a7843c784a3f9dd0f9f30ab1c6cf4547a5beb43ae6fe1bca53",
+    "packaging/native/provider_check.py": "3314dd445de5066fb78e4580bf4367736641272f0ed792d1237f6939be8f4eb9",
+    "packaging/native/verify_desktop.py": "f6215c8444863d48fcd4d7185ceb92bebe9db02fff8b9d1b1da166b2028351a2",
+    "packaging/native/build_candidate.py": "2f83b67c5c66e7b38513fb4fe3d9ae19eb905cf7a0526ab0a095c344e1fa00df",
+    "packaging/native/test_install_engine.py": "4ab2ca41f98a713b5022ed42574a7374c721fff4d6961f56ef4aba44bf7622aa",
+    "packaging/native/test_desktop_process.py": "84d94d1589ccbde6945373c56bda95bba3416f08f98529650d4f5f6080a8a1b7",
+    "packaging/native/desktop_process.py": "5e294291f897505423c49a8608283b96456c060a467d559456338f1a01561d03",
+    "packaging/native/test_candidate_export.py": "6d88e73a66e39bd0f3d4c0ea2ab2a433465ec749bb2fc441aec324d064ce5cf1",
+    "packaging/native/launch.py": "b04f692ef5f153a4358c6cbaa79a953162766b9b1e7b9d1ffb56af7ce97e22b6",
+    "packaging/native/install.sh": "3fe2c57cf547066809556f06b40ae3622a3536b8ad54dc6aad2b9e2c36660f64"
+  },
+  "n1_evidence_unchanged": {
+    "ci-output/p6-native-n1-1/n1.json": "7f713ed31e2ce7d63a1a67e806d671b38ff2f7bafd2d66592f68ff70d575c41e",
+    "ci-output/p6-native-n1-1/owner-system-schemas-role-result.json": "554d5f2254443467ff485aaea844b5ac81af16a07ef1b7df72e99efd38b27639",
+    "ci-output/p6-native-n1-application-1/result.json": "12d10e51bc94b0339dad5dfcff5d0eada91238c310692775423a733ea698db10"
+  },
+  "verification": {
+    "N2_tests": 40,
+    "N1_tests": 54,
+    "backend_regressions_Python312": 128,
+    "target_Python314_backend": {
+      "status": "PASS",
+      "complete": true,
+      "python": [
+        3,
+        14
+      ],
+      "checks": {
+        "unauthenticated": "PASS",
+        "wrong_origin": "PASS",
+        "folder_note_rich_text_image_saved": "PASS",
+        "owned_backend_reaped": "PASS",
+        "restart_and_data_integrity": "PASS",
+        "stable_origin_and_token_revocation": "PASS"
+      }
+    },
+    "installed_provider_files": 4414,
+    "bootstrap": {
+      "status": "PASS",
+      "scope": "installed-bootstrap-without-GUI",
+      "app_id": "org.cyrnava.CyrNava.Devel",
+      "manifest_sha256": "a1e066a3d769319a761b8643469f055201ef04b2b80ff92c0ac9604e1a4f8d82",
+      "schema": {
+        "mode": "explicit-Ubuntu-system-schemas",
+        "inherited_schema_override_was_set": false,
+        "compiled_schema_sha256": "21865d7b212dfafb37dbc3394cf386b9d1a4fdfcb4f61192f286bffb2b0d61a6",
+        "required_font_keys_present": [
+          "font-antialiasing",
+          "font-hinting",
+          "font-rgba-order"
+        ]
+      },
+      "normal_window": "NOT EXECUTED",
+      "renderer": "NOT EXECUTED"
+    },
+    "installation": {
+      "exit_code": 0,
+      "elapsed_seconds": 12.389
+    }
+  },
+  "retained_attempts": [
+    "ci-output/native-n2-candidate-1",
+    "ci-output/native-n2-candidate-2",
+    "ci-output/native-n2-client-1",
+    "ci-output/native-n2-client-2"
+  ],
+  "initial_free_bytes": 21601550336,
+  "current_free_bytes": 17749987328,
+  "preservation": {
+    "preexisting_files_checked": 1434,
+    "intentional_changes": [
+      "ci/N1_REPORT.md",
+      "ci/P6_NATIVE_DISTRIBUTION_ROADMAP.md",
+      "ci/P6_OWNER_CHECKS.md",
+      "ci/P6_REPORT.md",
+      "packaging/native/feasibility/README.md",
+      "desktop/native/application.py"
+    ],
+    "unrelated_changes": [],
+    "original_application_bytes_preserved_except_N2_dispatch": true
+  },
+  "private_evidence_sha256": {
+    "ci-output/native-n2-review-1/n2-tests-final.log": "f20da2e28a41d99eec1df2e4b945b78992b4c25cf811c319a5a07bc27e63bcca",
+    "ci-output/native-n2-review-1/n1-regressions.log": "76aea3b7a3b6a568699eeb604b12a6ce2d536d15cd72f7f978f3d1b8fe67f8b2",
+    "ci-output/native-n2-review-1/backend-regressions-3.log": "051d39c22293d0bfab70dfcbe0cd6f9f2cb982558fa14cbcea1bf2cdffc64c0f",
+    "ci-output/native-n2-review-1/install-3.log": "fc690249dfbf235f92de1178d980d096a205122c710982796e1b0fa9b9756c19",
+    "ci-output/native-n2-client-3/releases/0.1.0-n2.1-9d92a4f5d925e42f/providers.json": "6210200fa82b74db1c0b67bdc984411d328002e0ece75ea309d621738e07f71c",
+    "ci-output/native-n2-client-3/releases/0.1.0-n2.1-9d92a4f5d925e42f/backend-check.json": "35a402b4d22d771063086c00883c23ce6ec3ea06c37613ea0d6662d4272e947c"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "scope": "Production Qt compatibility investigation, R12 readback, documentation/evidence only",
+  "files_outside_evidence_directory": [
+    "ci/P6_QT_COMPATIBILITY.md",
+    "ci/P6_REPORT.md",
+    "ci/P6_OWNER_CHECKS.md",
+    "ci/P6_RELEASE_RUNBOOK.md",
+    "ci/P6_RUNTIME_REMEDIATION.md",
+    "ci/P6_LICENSE_REVIEW.md",
+    "ci/P6_TARGETED_B_CHECKS.md",
+    "packaging/flatpak/production/README.md",
+    "ci/evidence/p6/proposed-files.json",
+    "ci/evidence/p6/SHA256SUMS.json"
+  ],
+  "directory": "ci/evidence/p6/production-qt-compatibility",
+  "production_dependency_changes": [],
+  "accepted_artifacts_changed": false,
+  "implementation_proposal": "ci/P6_QT_COMPATIBILITY.md"
+}

@@ -1,0 +1,2399 @@
+.....EEEEEEEEEEEEEEEEE............................. [ 28%]
+....................................................................EEEEEEEEEEEEEEE [ 75%]
+EEE..................... [ 89%]
+.................FF                                                      [100%]
+==================================== ERRORS ====================================
+_ ERROR at setup of PublicationTests.test_client_disconnect_does_not_modify_active_generation _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_compare_and_swap_under_lock_rejects_stale_publisher _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+____ ERROR at setup of PublicationTests.test_concurrent_publisher_rejected _____
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_destination_seal_and_hash_verified_after_activation _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_dry_run_verifies_without_activation_or_upload _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_expired_key_and_wrong_identity_fail_closed _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_get_head_hash_mime_and_cache_contract _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_historical_objects_cannot_be_pruned __
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_http_detects_corruption_and_stale_summary _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_interrupted_activation_preserves_previous_and_retains_objects _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_missing_response_not_cached_and_new_object_becomes_available _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_old_expected_http_snapshot_is_rejected_after_update _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+__ ERROR at setup of PublicationTests.test_public_https_not_silently_enabled ___
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_source_changed_after_review_rejected_without_activation _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+___________ ERROR at setup of PublicationTests.test_symlink_refused ____________
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_tamper_missing_and_unexpected_files_fail_closed _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of PublicationTests.test_unlisted_private_traversal_and_query_routes_refused _
+
+cls = <class 'test_distribution.PublicationTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p6-")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_distribution.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p6-s4zk2m21/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+____ ERROR at setup of SigningTests.test_concurrent_publication_is_rejected ____
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+______ ERROR at setup of SigningTests.test_correct_key_signature_verified ______
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of SigningTests.test_failed_publication_keeps_previous_active_generation _
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+___ ERROR at setup of SigningTests.test_invalid_detached_signature_rejected ____
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of SigningTests.test_local_publication_and_idempotent_repeat __
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of SigningTests.test_manifest_detects_missing_unlisted_or_modified_objects _
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of SigningTests.test_missing_or_unmarked_credentials_fail_closed _
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+______ ERROR at setup of SigningTests.test_partial_copy_does_not_activate ______
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+___ ERROR at setup of SigningTests.test_pruning_or_unsafe_rollback_rejected ____
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of SigningTests.test_public_export_contains_no_secret_packets _
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of SigningTests.test_recovery_does_not_touch_database_or_remove_client_objects _
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+__ ERROR at setup of SigningTests.test_release_plan_creates_no_remote_or_tag ___
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of SigningTests.test_signer_directory_permissions_and_identity_enforced _
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+__ ERROR at setup of SigningTests.test_symlinks_and_private_material_excluded __
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+________ ERROR at setup of SigningTests.test_tampered_content_rejected _________
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+___ ERROR at setup of SigningTests.test_unmarked_or_unsafe_store_is_rejected ___
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+__ ERROR at setup of SigningTests.test_valid_descriptors_and_no_permanent_url __
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+_ ERROR at setup of SigningTests.test_wrong_key_or_unexpected_fingerprint_rejected _
+
+cls = <class 'test_signing.SigningTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary = tempfile.TemporaryDirectory(prefix="p5b-real-gpg-", dir="/tmp")
+        cls.root = Path(cls.temporary.name)
+        cls.home = cls.root / "key"
+>       cls.fingerprint = core.make_key(cls.home)
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+
+ci/release/test_signing.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ci/release/core.py:368: in make_key
+    gpg(
+ci/release/core.py:354: in gpg
+    return call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+timeout = 300, env = None, operation = None
+args = ('gpg', '--no-options', '--homedir', PosixPath('/tmp/p5b-real-gpg-4zhpn4uo/key'), '--batch', '--no-auto-key-retrieve', ...)
+
+    def call(*args, timeout=300, env=None, operation=None):
+        # Only fixed, reviewed labels may enter public diagnostics. Never use argv,
+        # paths, URLs or subprocess output as an operation label.
+        require(
+            operation is None
+            or (
+                str(args[0]) == "git"
+                and operation
+                in {
+                    "accepted-source-clone",
+                    "accepted-source-checkout",
+                    "accepted-source-verify",
+                }
+            ),
+            "Unreviewed operation label",
+        )
+        try:
+            return subprocess.run(
+                [str(a) for a in args],
+                check=True,
+                capture_output=True,
+                timeout=timeout,
+                env=env,
+            ).stdout
+        except (OSError, subprocess.SubprocessError) as error:
+            # Commands may receive signing paths; never print argv, stderr or environment.
+            if operation is not None:
+                category = (
+                    f"exit-{error.returncode}"
+                    if isinstance(error, subprocess.CalledProcessError)
+                    else "timeout"
+                    if isinstance(error, subprocess.TimeoutExpired)
+                    else "unavailable"
+                )
+                raise Rejected(f"Git operation failed: {operation} ({category})") from None
+>           raise Rejected(
+                f"Operation failed: {Path(str(args[0])).name} ({type(error).__name__})"
+            ) from None
+E           core.Rejected: Operation failed: gpg (CalledProcessError)
+
+ci/release/core.py:126: Rejected
+=================================== FAILURES ===================================
+_ BuildDirectoryTests.test_explicit_output_is_new_and_cannot_overlay_existing_files _
+
+self = <test_ci.BuildDirectoryTests testMethod=test_explicit_output_is_new_and_cannot_overlay_existing_files>
+
+    def test_explicit_output_is_new_and_cannot_overlay_existing_files(self):
+        builder = flatpak.module("build")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            destination = root / "output"
+            with (
+                patch.dict(os.environ, {"XDG_CACHE_HOME": str(root / "cache")}),
+                patch.object(
+                    sys,
+                    "argv",
+                    [
+                        "build.py",
+                        "--stage-only",
+                        "--output-directory",
+                        str(destination),
+                    ],
+                ),
+                patch.object(builder, "stage"),
+            ):
+>               self.assertEqual(builder.main(), 0)
+                                 ^^^^^^^^^^^^^^
+
+ci/test_ci.py:578: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def main():
+        parser = argparse.ArgumentParser(description=__doc__)
+        parser.add_argument("--build-id", default="local-A")
+        parser.add_argument("--stage-only", action="store_true")
+        parser.add_argument(
+            "--output-directory",
+            type=Path,
+            help="New empty build directory (optional; default remains a private cache directory)",
+        )
+        parser.add_argument(
+            "--finish",
+            type=Path,
+            help="Validate/export an assembled build, without rebuilding inputs",
+        )
+        args = parser.parse_args()
+        if args.output_directory and args.finish:
+            parser.error("--output-directory and --finish are mutually exclusive")
+        os.umask(0o077)
+        if args.finish:
+            directory = args.finish.resolve()
+            prior = directory / "result.json"
+            if prior.exists():
+                import time
+    
+                shutil.copyfile(
+                    prior,
+                    directory / ("result-before-finish-" + str(time.time_ns()) + ".json"),
+                )
+            result = {"status": "FAIL", "directory": str(directory), "app_id": APP_ID}
+            try:
+                result.update(finish(directory))
+            except (OSError, ValueError, subprocess.CalledProcessError) as error:
+                result.update(error_type=type(error).__name__, error=str(error))
+            (directory / "result.json").write_text(json.dumps(result, indent=2) + "\n")
+            print(json.dumps(result, indent=2), flush=True)
+            return 0 if result["status"] == "PASS" else 1
+        cache = Path(os.environ.get("XDG_CACHE_HOME", str(Path.home() / ".cache")))
+        if not cache.is_absolute():
+            raise SystemExit("XDG_CACHE_HOME must be absolute")
+        root = cache / "cyrnava-builds/p4"
+        if any(p.is_symlink() for p in (root, *root.parents)):
+            raise SystemExit("Symlink build root refused")
+        root.mkdir(parents=True, exist_ok=True, mode=0o700)
+        if shutil.disk_usage(root).free < 5 * 1024**3:
+>           raise SystemExit("At least 5 GiB free required on build volume")
+E           SystemExit: At least 5 GiB free required on build volume
+
+packaging/flatpak/production/build.py:355: SystemExit
+____________ BuildDirectoryTests.test_output_refuses_symlink_parent ____________
+SystemExit: At least 5 GiB free required on build volume
+
+During handling of the above exception, another exception occurred:
+
+self = <test_ci.BuildDirectoryTests testMethod=test_output_refuses_symlink_parent>
+
+    def test_output_refuses_symlink_parent(self):
+        builder = flatpak.module("build")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            link = root / "link"
+            link.symlink_to(root, target_is_directory=True)
+            with (
+                patch.dict(os.environ, {"XDG_CACHE_HOME": str(root / "cache")}),
+                patch.object(
+                    sys,
+                    "argv",
+                    [
+                        "build.py",
+                        "--stage-only",
+                        "--output-directory",
+                        str(link / "output"),
+                    ],
+                ),
+            ):
+>               with self.assertRaisesRegex(SystemExit, "Symlink"):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: "Symlink" does not match "At least 5 GiB free required on build volume"
+
+ci/test_ci.py:608: AssertionError
+=============================== warnings summary ===============================
+ci/release/test_policy.py::ArchiveTests::test_unsafe_or_extra_zip_entries_rejected
+  /usr/lib/python3.12/zipfile/__init__.py:1650: UserWarning: Duplicate name: 'io.github._74Cerillion.CyrNava.flatpak'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ci/test_ci.py::BuildDirectoryTests::test_explicit_output_is_new_and_cannot_overlay_existing_files
+FAILED ci/test_ci.py::BuildDirectoryTests::test_output_refuses_symlink_parent
+ERROR ci/release/test_distribution.py::PublicationTests::test_client_disconnect_does_not_modify_active_generation
+ERROR ci/release/test_distribution.py::PublicationTests::test_compare_and_swap_under_lock_rejects_stale_publisher
+ERROR ci/release/test_distribution.py::PublicationTests::test_concurrent_publisher_rejected
+ERROR ci/release/test_distribution.py::PublicationTests::test_destination_seal_and_hash_verified_after_activation
+ERROR ci/release/test_distribution.py::PublicationTests::test_dry_run_verifies_without_activation_or_upload
+ERROR ci/release/test_distribution.py::PublicationTests::test_expired_key_and_wrong_identity_fail_closed
+ERROR ci/release/test_distribution.py::PublicationTests::test_get_head_hash_mime_and_cache_contract
+ERROR ci/release/test_distribution.py::PublicationTests::test_historical_objects_cannot_be_pruned
+ERROR ci/release/test_distribution.py::PublicationTests::test_http_detects_corruption_and_stale_summary
+ERROR ci/release/test_distribution.py::PublicationTests::test_interrupted_activation_preserves_previous_and_retains_objects
+ERROR ci/release/test_distribution.py::PublicationTests::test_missing_response_not_cached_and_new_object_becomes_available
+ERROR ci/release/test_distribution.py::PublicationTests::test_old_expected_http_snapshot_is_rejected_after_update
+ERROR ci/release/test_distribution.py::PublicationTests::test_public_https_not_silently_enabled
+ERROR ci/release/test_distribution.py::PublicationTests::test_source_changed_after_review_rejected_without_activation
+ERROR ci/release/test_distribution.py::PublicationTests::test_symlink_refused
+ERROR ci/release/test_distribution.py::PublicationTests::test_tamper_missing_and_unexpected_files_fail_closed
+ERROR ci/release/test_distribution.py::PublicationTests::test_unlisted_private_traversal_and_query_routes_refused
+ERROR ci/release/test_signing.py::SigningTests::test_concurrent_publication_is_rejected
+ERROR ci/release/test_signing.py::SigningTests::test_correct_key_signature_verified
+ERROR ci/release/test_signing.py::SigningTests::test_failed_publication_keeps_previous_active_generation
+ERROR ci/release/test_signing.py::SigningTests::test_invalid_detached_signature_rejected
+ERROR ci/release/test_signing.py::SigningTests::test_local_publication_and_idempotent_repeat
+ERROR ci/release/test_signing.py::SigningTests::test_manifest_detects_missing_unlisted_or_modified_objects
+ERROR ci/release/test_signing.py::SigningTests::test_missing_or_unmarked_credentials_fail_closed
+ERROR ci/release/test_signing.py::SigningTests::test_partial_copy_does_not_activate
+ERROR ci/release/test_signing.py::SigningTests::test_pruning_or_unsafe_rollback_rejected
+ERROR ci/release/test_signing.py::SigningTests::test_public_export_contains_no_secret_packets
+ERROR ci/release/test_signing.py::SigningTests::test_recovery_does_not_touch_database_or_remove_client_objects
+ERROR ci/release/test_signing.py::SigningTests::test_release_plan_creates_no_remote_or_tag
+ERROR ci/release/test_signing.py::SigningTests::test_signer_directory_permissions_and_identity_enforced
+ERROR ci/release/test_signing.py::SigningTests::test_symlinks_and_private_material_excluded
+ERROR ci/release/test_signing.py::SigningTests::test_tampered_content_rejected
+ERROR ci/release/test_signing.py::SigningTests::test_unmarked_or_unsafe_store_is_rejected
+ERROR ci/release/test_signing.py::SigningTests::test_valid_descriptors_and_no_permanent_url
+ERROR ci/release/test_signing.py::SigningTests::test_wrong_key_or_unexpected_fingerprint_rejected
+2 failed, 140 passed, 1 warning, 35 errors, 202 subtests passed in 2.02s

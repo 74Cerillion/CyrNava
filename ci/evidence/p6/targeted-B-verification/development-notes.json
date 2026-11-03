@@ -1,0 +1,8 @@
+{
+  "scope": "Local prototype readback, not a native attempt",
+  "observation": "An initial retained-profile comparison rejected unchanged R11 due to raw-string versus component-wise pathlib ordering",
+  "correction": "Match the original retained inventory ordering; add Qt profile prefix ordering regression",
+  "R11_data_changed": false,
+  "original_R11_profile_sha256": "d73d1aa3253db0719ff74b874e60af768a13fb57eeb8725eb75f2c4b5035dbf8",
+  "native_attempt_created": false
+}

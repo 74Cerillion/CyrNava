@@ -1,0 +1,57 @@
+{
+  "status": "BLOCKED",
+  "P6": "CONDITIONAL",
+  "candidate": null,
+  "native_acquisition_build": "NOT EXECUTED: retained Codex namespace restriction; owner entry point prepared",
+  "no_namespace_or_object_retry": true,
+  "public_release": false,
+  "tests": {
+    "candidate_unit": {
+      "passed": 14,
+      "native": false
+    },
+    "ruff": "PASS",
+    "bash_syntax": "PASS",
+    "entry_help": "PASS",
+    "shellcheck": "UNAVAILABLE",
+    "frontend_lint": "PASS",
+    "frontend_unit": 273,
+    "typescript": "PASS",
+    "browser": {
+      "passed": 21,
+      "retries": 0,
+      "scope": "current source and existing production frontend build; not a new Flatpak"
+    },
+    "combined_backend": {
+      "passed": 587,
+      "subtests_passed": 45,
+      "setup_errors": 1,
+      "status": "INCOMPLETE",
+      "failed_operation": "test-only disposable gpg key initialization; exact child cause not retained",
+      "remaining_tests": "NOT EXECUTED"
+    },
+    "earlier_attempts": [
+      "wrong in-repository fixture location safely rejected; stopped",
+      "outside fixture unavailable -> /tmp fallback; 5 GiB precondition failed after 580 tests +31 subtests; original failure retained"
+    ]
+  },
+  "head": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "index_unchanged": true,
+  "protected_packaging_and_auditor_unchanged": true,
+  "preexisting_work_changed_only_by_authorized_release_note_addition": [
+    "docs/release-notes-v0.1.0.md"
+  ],
+  "script_and_recipe_sha256": {
+    "p6_binary_candidate.sh": "25730295015d7f7a9c495e5359d1b4e541c4e7070b76e4a6a65c7cd759c0385a",
+    "packaging/flatpak/compatibility/binary-6.11.3/README.md": "e15876776f55327cbb501a8e1f29723d62fd46918be71f53c76819a1f8c61519",
+    "packaging/flatpak/compatibility/binary-6.11.3/build_candidate.py": "707e727d476520f991767351a096fc44673b5d14d8672a0468b6d4f071d6ebb7",
+    "packaging/flatpak/compatibility/binary-6.11.3/candidate.lock.json": "b2434a315d57ec0691f14bc0d416283349a97c0f773f63632a8503a413ea9d23",
+    "packaging/flatpak/compatibility/binary-6.11.3/provider_probe.py": "d3225bb40116b3063f347bfa7672c3439d0453b6144a398fcbd09f7cb65b8fd0",
+    "packaging/flatpak/compatibility/binary-6.11.3/test_candidate.py": "27f4e2bce2aeedaa8a2ef905a1b4c03b094144cf18ec692cba644efc01d421e8"
+  },
+  "filesystem_available_final": 22872272896,
+  "normal_installations_changed": false,
+  "actual_cleanup_this_task": false,
+  "disposable_keys_generated_by_candidate_driver": false,
+  "commits_pushes_workflows_signing_publication": false
+}

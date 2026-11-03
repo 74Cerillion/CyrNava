@@ -1,0 +1,9 @@
+{
+  "driver_code_sha256": {
+    "native_distribution.py": "5f0fc7f667b4db2da0b77dabbd3d2c423839eb479ccc8230cf42a3d43c4e1766",
+    "progress.py": "85385b67ea41868456a927f0a7841df1f42e76dc7005ac5c9ba45110afb4e567",
+    "real_update.py": "68ed94d2245733f9d0321086e9fc6f25e0177ce48fd753fa4e1d6a2a6283b7d3"
+  },
+  "prepared_sha256": "0740b8d035d7db2904ca45d1f7bdd7265fba9157f1313d2440a83e1f2b8d5099",
+  "purpose": "P6 disposable GUI attempt"
+}
