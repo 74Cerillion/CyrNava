@@ -165,7 +165,7 @@
     "packaging/native/test_native_release.py": "57514c664ff371a30f6a7cc2d0c985f9027c4b2f98fa1dea8982aff18028323d",
     "packaging/native/test_source_engine.py": "b4e38f6bbdb6e584ce2e142b156ff212f82cb48604b290507d02a0bba72aea49",
     "packaging/native/test_source_install.py": "0f9653f2ac7095630bda5fb7fdbfb626689d953bb18f4b393f09cdec90c16667",
-    "packaging/native/test_source_snapshot.py": "c0896d947dfbfc816b801eab5818a58ad0b5641b48e9b46a8932b9a77957b03b",
+    "packaging/native/test_source_snapshot.py": "132d4546dda946d3a31a2c0f3187cd0361972ebc2a46c696efe7c6c14fc1661d",
     "packaging/native/test_state_continuation.py": "e16eef3cbd6b3b07fe02d85ace65d31271adb5742be9c7bd00844ec2ecbd6592",
     "packaging/native/test_verify_desktop.py": "8769a748cb698254e30ad7d34819ec115bd75e090f3251ce511b02a9dc955f28",
     "packaging/native/test_verify_update.py": "89b41c59d384f436b15a14e87c72e78a485d3de39859360d30955f8691601330",
