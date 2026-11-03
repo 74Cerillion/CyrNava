@@ -7,6 +7,7 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -147,6 +148,140 @@ class SourceSnapshotTests(unittest.TestCase):
             self.assertNotIn("--wheelhouse", command)
             self.assertNotIn("--prepare-only", command)
             self.assertNotIn("--reinstall", command)
+
+        output = self.root / "ci-output/attempt"
+        verify_source = driver.verify_source
+
+        def verify_clean(snapshot, record):
+            self.assertFalse((snapshot / "ci-output").exists())
+            verify_source(snapshot, record)
+
+        def fail_child(command, log):
+            work = command[command.index("--work-dir") + 1]
+            client = command[command.index("--root") + 1]
+            self.assertEqual(work.parent.stat().st_mode & 0o777, 0o700)
+            self.assertEqual(work, output / "source/ci-output/install-work")
+            self.assertFalse(work.exists())
+            self.assertFalse(client.exists())
+            log.write_text(
+                "private token /private/path\n"
+                + json.dumps(
+                    {
+                        "status": "FAIL",
+                        "mode": "source-online",
+                        "error_type": "ValueError",
+                        "error": "Required node major version 24",
+                    },
+                    indent=2,
+                )
+            )
+            raise subprocess.CalledProcessError(17, command)
+
+        with (
+            patch.object(driver, "ROOT", self.root),
+            patch.object(
+                driver,
+                "module",
+                side_effect=[
+                    SimpleNamespace(source_files=lambda root: self.sources),
+                    SimpleNamespace(host_supported=lambda: None),
+                ],
+            ),
+            patch.object(
+                driver.shutil, "disk_usage", return_value=Mock(free=20 * 1024**3)
+            ),
+            patch.object(
+                driver.subprocess, "check_output", side_effect=["a" * 40, b""]
+            ),
+            patch.object(driver, "verify_source", side_effect=verify_clean),
+            patch.object(driver, "run_operation", side_effect=fail_child) as execute,
+            patch("builtins.print"),
+        ):
+            self.assertEqual(driver.run(SimpleNamespace(output=output)), 1)
+        execute.assert_called_once()
+        result = json.loads((output / "artifacts/result.json").read_text())
+        self.assertEqual(result["failed_operation"], "online-source-install")
+        self.assertEqual(result["exit_code"], 17)
+        self.assertEqual(result["error_type"], "CalledProcessError")
+        self.assertEqual(result["child_error_type"], "ValueError")
+        self.assertEqual(result["failure_category"], "prerequisite-version")
+        self.assertEqual(result["diagnostic_reason"], "Node 24 required")
+        self.assertNotIn("private token", json.dumps(result))
+        self.assertNotIn("/private/path", json.dumps(result))
+        self.assertTrue((output / "install.private.log").is_file())
+
+    def test_existing_or_escaping_output_paths_remain_refused(self):
+        existing = self.root / "ci-output/retained"
+        existing.mkdir(parents=True)
+        evidence = existing / "retained.txt"
+        evidence.write_text("preserve")
+        link = self.root / "ci-output/linked"
+        link.symlink_to(self.base, target_is_directory=True)
+        for output in (existing, link / "attempt", self.base / "outside"):
+            with (
+                self.subTest(output=output),
+                patch.object(driver, "ROOT", self.root),
+                patch.object(driver, "module") as load,
+                self.assertRaisesRegex(ValueError, "Fresh direct repository output"),
+            ):
+                driver.run(SimpleNamespace(output=output))
+            load.assert_not_called()
+        self.assertEqual(evidence.read_text(), "preserve")
+
+    def test_child_diagnostics_never_publish_unrecognized_private_content(self):
+        log = self.base / "child.private.log"
+        default = driver.child_diagnostic(log)
+        self.assertEqual(default["failure_category"], "child-process-failed")
+        for content in (
+            "secret not JSON",
+            "[]",
+            json.dumps(
+                {
+                    "status": "FAIL",
+                    "mode": "source-online",
+                    "error_type": "secret",
+                    "error": "/private/token",
+                }
+            ),
+            json.dumps(
+                {
+                    "status": "FAIL",
+                    "mode": "source-online",
+                    "error_type": [],
+                    "error": {"secret": True},
+                }
+            ),
+            json.dumps(
+                {
+                    "status": "FAIL",
+                    "mode": "other",
+                    "error_type": "ValueError",
+                    "error": "Required node major version 24",
+                }
+            ),
+            "x" * 65537,
+        ):
+            log.write_text(content)
+            self.assertEqual(driver.child_diagnostic(log), default)
+        log.write_text(
+            "private prefix" * 10000
+            + "\n"
+            + json.dumps(
+                {
+                    "status": "FAIL",
+                    "mode": "source-online",
+                    "error_type": "ValueError",
+                    "error": (
+                        "Fresh work directory with existing parent required; "
+                        "prior attempts preserved"
+                    ),
+                },
+                indent=2,
+            )
+        )
+        result = driver.child_diagnostic(log)
+        self.assertEqual(result["failure_category"], "fresh-work-path-refused")
+        self.assertNotIn("private prefix", json.dumps(result))
 
     def test_failure_and_interruption_are_not_silently_retried(self):
         child = Mock(pid=1234)

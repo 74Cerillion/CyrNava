@@ -156,6 +156,77 @@ def run_operation(command, log, timeout=900):
             raise
 
 
+def child_diagnostic(log):
+    """Translate terminal installer JSON into fixed public text, never raw output."""
+    result = {
+        "failure_category": "child-process-failed",
+        "diagnostic_reason": (
+            "Private child output retained; reason not safely classified"
+        ),
+    }
+    try:
+        with log.open("rb") as stream:
+            stream.seek(0, os.SEEK_END)
+            stream.seek(max(0, stream.tell() - 65536))
+            tail = stream.read(65536).decode("utf-8", errors="replace")
+        child = json.loads(tail[tail.rfind("\n{") + 1 :])
+    except (OSError, ValueError):
+        return result
+    if not isinstance(child, dict) or (
+        child.get("status") != "FAIL" or child.get("mode") != "source-online"
+    ):
+        return result
+    if child.get("error_type") in (
+        "ValueError",
+        "FileNotFoundError",
+        "PermissionError",
+        "CalledProcessError",
+        "TimeoutExpired",
+        "KeyboardInterrupt",
+    ):
+        result["child_error_type"] = child["error_type"]
+    reasons = {
+        (
+            "Fresh work directory with existing parent required; "
+            "prior attempts preserved"
+        ): (
+            "fresh-work-path-refused",
+            "Fresh work directory or existing parent required",
+        ),
+        "Install Ubuntu python3.14-venv prerequisite explicitly": (
+            "missing-prerequisite",
+            "Ubuntu python3.14-venv prerequisite missing",
+        ),
+        "Required node major version 24": ("prerequisite-version", "Node 24 required"),
+        "Required npm major version 11": ("prerequisite-version", "npm 11 required"),
+    }
+    for name in (
+        "node",
+        "npm",
+        "cc",
+        "ldd",
+        "readelf",
+        "gsettings",
+        "apparmor_parser",
+        "gio",
+        "desktop-file-validate",
+    ):
+        reasons[
+            f"Missing prerequisite: {name}; "
+            "review Ubuntu prerequisite instructions; no sudo executed"
+        ] = ("missing-prerequisite", f"Required Ubuntu executable missing: {name}")
+    for name in ("npm-ci", "frontend-build"):
+        reasons[f"Operation failed: {name}; preserve private log"] = (
+            "installer-operation-failed",
+            f"Installer operation failed: {name}",
+        )
+    message = child.get("error")
+    if child.get("error_type") == "ValueError" and isinstance(message, str):
+        if message in reasons:
+            result["failure_category"], result["diagnostic_reason"] = reasons[message]
+    return result
+
+
 SEED = r"""
 import io, json, os, sys
 from pathlib import Path
@@ -297,6 +368,7 @@ def run(args):
         )
         client = snapshot / "ci-output/client"
         stage = "online-source-install"
+        (snapshot / "ci-output").mkdir(mode=0o700)
         print("CI: " + stage, flush=True)
         run_operation(
             install_command(snapshot, client, snapshot / "ci-output/install-work"),
@@ -393,6 +465,13 @@ def run(args):
         record.update(failed_operation=stage, error_type=type(error).__name__)
         if isinstance(error, subprocess.CalledProcessError):
             record["exit_code"] = error.returncode
+            if stage in ("online-source-install", "online-source-update"):
+                log = (
+                    "install.private.log"
+                    if stage.endswith("install")
+                    else "update.private.log"
+                )
+                record.update(child_diagnostic(output / log))
     finally:
         record.update(complete=True, seconds=round(time.monotonic() - started, 3))
         write_json(public / "result.json", record)

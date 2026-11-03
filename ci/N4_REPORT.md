@@ -1,5 +1,113 @@
 # N4 — Native CI and public-release preparation
 
+## Minimal CI correction — locally verified / owner checkpoint
+
+N1–N3 remain **ACCEPTED**; N4 remains **CONDITIONAL**. HEAD remains
+`9218f7a22e5ebec7ab7482f8611e7aaa3212ddae`. This authorized local correction
+changes only `ci/native_source.py`, its existing focused fixture file
+`packaging/native/test_source_snapshot.py`, and this report.
+
+**Setup correction: PASS in focused fixtures.** After validating the clean source
+snapshot, the driver creates only its missing `ci-output` parent with mode
+`0700`, without `exist_ok`. The installer still receives an absent `install-work`
+path. Production installer code and its fresh-directory, path and security
+checks are unchanged.
+
+**Sanitized diagnostic regression: PASS.** On installation/update child failure,
+the existing public `result.json` retains the stage and outer child exit status,
+and adds a fixed failure category/reason and an allowlisted child exception type
+when available. A bounded 64 KiB tail of the existing private log supplies only
+the terminal installer failure JSON. Recognized prerequisite/work-path/frontend
+operation messages map to fixed public text; absent, malformed or unrecognized
+content produces a generic reason. Raw child output, arbitrary exception text,
+commands, environment and private paths are not copied into the diagnostic.
+Inner operation exit statuses are not inferred.
+
+Directly relevant verification only:
+
+- `test_source_snapshot.py`: **12 tests PASS**, including the clean snapshot
+  initially lacking `ci-output`, parent mode `0700`, absent work/target at the
+  simulated child call, sanitized stage/exit/type/reason, unknown/private content
+  exclusion, existing path/snapshot refusals and single-attempt interruption
+  handling. The child is mocked; this does not establish online installation PASS.
+- Existing `test_existing_attempt_is_never_overwritten`: **1 test PASS**.
+- Ruff lint/format checks for the two Python files and `git diff --check`: **PASS**.
+
+No new files, installation, dependency acquisition, frontend build, GUI test,
+host-policy change, commit, push or workflow retry occurred. Accepted artifacts
+and the source-first owner desktop evidence remain unchanged. Hosted run
+**41640878968 remains FAIL**; its original artifact is preserved. The first
+actual child rejection in that run remains unknown. Hosted installation,
+distinct-version update and update data preservation still require a separately
+authorized commit/push and CI execution. Stop here for owner review.
+
+The sections below retain their original historical checkpoint scopes; proposed
+corrections marked not applied describe the earlier failed-run review.
+
+## Hosted source-first CI 41640878968 — FAIL / owner checkpoint
+
+The approved proposal SHA-256
+`7376b7db5e97af4e789113e031a3cdb5ab7fd0eb5373d0e89a4d0bb83f54475f`
+matched exactly. All 47 paths and staged/committed bytes were verified; 47
+protected N1–N3 artifact/control hashes remained unchanged. One commit,
+**`9218f7a22e5ebec7ab7482f8611e7aaa3212ddae`**, parent
+`b7ab94265270866911311b4ca818071868f58361`, tree
+`9a7211bc747393c5600749fd7a93f60e72e7267c`, contains exactly that set.
+One normal fast-forward push to `origin/desktop/p2-production-integration`
+succeeded. Independent GitHub commit/ref readback matched the parent, tree,
+47 paths and every blob. Default `main` remains unchanged at
+`4021bc292267c19b7ebebf219b4f682f8f99bf4c`.
+
+[CyrNava CI 41640878968](https://github.com/74Cerillion/CyrNava/actions/runs/41640878968),
+attempt 1, event push, exact new commit: **completed FAILURE**.
+
+| Actual hosted requirement | Result |
+| --- | --- |
+| Workflow validation | PASS |
+| Backend/security | PASS: 575 current + 41 subtests; 351 historical + 198 subtests |
+| Frontend/browser | PASS: lint, units, TypeScript/production build and all 21 browser tests |
+| Native installer/security/transactions and feasibility regressions | PASS: 238 + 63 tests |
+| Clean source snapshot | PASS: 167 files / 3,543,993 bytes, no Git/wheelhouse/built frontend; all uploaded source hashes independently match the committed inputs |
+| Actual online source installation | FAIL: child exit 1 / CalledProcessError; failed operation `online-source-install`; driver elapsed 0.275 seconds |
+| Distinct-version source-online update | NOT REACHED |
+| Profile/data preservation through that update | NOT EXECUTED; no inherited reinstall result substituted |
+| Required CI completion gate | FAIL, correctly reflecting the native installation failure |
+
+Original diagnostic artifact **13232443088**, 9,392 bytes, SHA-256
+`5aa2f0293805143fb97ebb81aa2423b5ae7208fce44e0da36b542215bba1e977`,
+was independently downloaded/verified and retained unchanged at
+`ci-output/native-n4-hosted-41640878968/source-install-diagnostics.zip`.
+It contains only the original `result.json` and `source-snapshot.json`.
+The child output is redirected to runner-local `install.private.log` and was
+not uploaded. Consequently the first actual child rejection/message cannot be
+independently established from the retained artifact or job log. It is not
+inferred merely from CalledProcessError.
+
+Read-only control-flow review did confirm a deterministic **CI setup defect**:
+`ci/native_source.py` copies a source-only snapshot without `ci-output`, then
+passes `source/ci-output/install-work` to the installer without creating its
+parent. `source_install.py:557–558` deliberately requires that parent to exist
+before creating the fresh work directory. That invocation must reject at that
+guard if its earlier source/npm/prerequisite checks succeed. The available
+evidence does not prove which of those checks was the first actual rejection.
+
+Smallest proposed correction, **not applied**: create only the fresh snapshot's
+`ci-output` parent with mode `0700` before the first installer call, leaving
+installation/work directories fresh and all refusal/security checks unchanged.
+Retain an allowlisted sanitized child-failure detail in the existing diagnostic
+result on a subsequent authorized execution so earlier prerequisite rejection
+can be distinguished from this proven missing-parent defect. No raw environment
+or private child-output publication is proposed.
+
+N4 remains **CONDITIONAL**. The one commit/push authorization is consumed.
+No retry, second commit/push, correction, additional test, GUI rehearsal or
+publication occurred. This report update remains local/uncommitted. Next owner
+decision: authorize the bounded CI setup/diagnostic correction and review it
+before any separately authorized new commit/push/ordinary CI run. The successful
+local source install/owner desktop evidence and N1–N3 acceptance remain intact.
+
+The following source review and desktop sections preserve their earlier scopes.
+
 ## Final source review — READY FOR COMMIT AND CI
 
 The exact existing change set is ready for owner review: **47 paths**, including
