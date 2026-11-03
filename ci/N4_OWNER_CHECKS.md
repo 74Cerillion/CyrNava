@@ -1,5 +1,94 @@
 # N4 owner checkpoint
 
+## Current source-first owner review
+
+N1–N3 remain ACCEPTED. **N4 CONDITIONAL — source-first installation and public
+repository readiness.** CI 41621033436 remains PASS only for the prior inputs.
+
+- [x] Actual local and remote integration baseline b7ab94265270866911311b4ca818071868f58361; main unchanged; prior uncommitted work preserved.
+- [x] Root source install/update entry points implemented with exact source inventory and no Git requirement.
+- [x] Exact 19 official upstream wheel downloads, hashes, versions, private venv/providers/ELF and authenticated synthetic backend PASS.
+- [x] Clean source-ZIP fixture frontend acquisition/build PASS; no wheelhouse, existing node_modules/dist or development environment used.
+- [x] Existing core application and Qt stack unchanged; expanded third-party notice is the only differing compared application material.
+- [x] Actual schema-5 synthetic folder/note/image audit and exact-artifact reinstall preserve every profile byte.
+- [x] 238 native + 39 workflow tests PASS; configured lint/format/shell/workflow contract PASS.
+- [x] Exact enforce policy generation/parser and owner-host load/readback PASS; focused owner GNOME menu launch, renderer/authentication, data/origin, System appearance and process/menu cleanup independently VERIFIED PASS.
+- [x] CI prepared for no-Git online install and distinct-version source update; action pins/required gate preserved; JSON-only uploads.
+- [x] Source-first licensing scope replaces the public bundled-wheel requirement; MIT/branding settled; historical binary gaps preserved.
+- [x] Owner completed the exact policy load and one focused new-client desktop/renderer check; original evidence retained.
+- [ ] Distinct-version online update execution and revised hosted CI (not certified by 41621033436).
+- [x] Bounded current public-source tree and all nine trace ZIPs reviewed; synthetic data, applicable notices/source links and no identified credential/privacy blocker. Traces retained unchanged; no history rewrite or universal history clearance claimed.
+- [x] Exact 47-path source-first commit proposal reconciled, all consumed inputs present, 47 protected hashes unchanged; READY FOR COMMIT AND CI. No new code, files or tests needed for final review.
+- [ ] Separate commit/push/Actions/publication authorization as needed.
+
+See [actual results, source identities, reuse table and exact proposed owner command](N4_REPORT.md).
+The normal public procedure is [bash install.sh / bash update.sh](../docs/native-installation.md)
+from a reviewed immutable source. New scripts are currently local/uncommitted,
+not yet available in a published version. Source inventories are integrity checks,
+not independent signatures. No production key or bundled-binary signature is
+required merely to satisfy the superseded offline target.
+
+Actual new allocation was about 1.35 GiB; another two-environment CI run needs its
+explicit 11 GiB precondition. No accepted output or cache was deleted to make room.
+No normal user installation, commit, push, Actions, production signing, vendor
+contact or publication occurred. The owner completed the exact approved policy
+load and focused disposable GUI check; the agent reviewed their saved results.
+
+## Historical offline-package owner checklist — preserved
+
+These earlier checks describe their original artifact and distribution scope.
+
+3 November 2026. **CONDITIONAL — SPECIFIC REDISTRIBUTION OBLIGATIONS REMAIN.
+Hosted CI / independent artifact verification PASS. N1–N3 ACCEPTED / COMPLETE.**
+
+- [x] Existing 19-wheel / 498-ELF / 18-notice inventory reconciled with locks and hosted artifact; no dependency change.
+- [x] Retained Qt/PySide archive hashes reverified; exact BlockNote source archives and installed inputs compared without extraction/build/download.
+- [x] MIT attribution `Copyright (c) 2026 74Cerillion` and owner name/logo rights already settled.
+- [ ] Exact Qt/PySide/WebEngine/Chromium build/source and full native credit correspondence, including FFmpeg/ICU.
+- [ ] Actual shipped GPL/LGPL2.1/LGPL3/Qt-exception obligations and practical recipient replacement/rebuild route.
+- [ ] use-composed-ref applicable copyright/full-notice clarification; MIT declaration confirmed.
+- [ ] pydantic-core actual bundled Rust component attribution mapping; 99-component upstream SBOM is retained, not full notice clearance.
+- [ ] Integrate finalized notices and reliable corresponding-source assets/index with actual public package before publication.
+
+See [specific obligations and unsent upstream drafts](../docs/native-source-obligations.md).
+Prepared [catalog](../docs/native-redistribution.json), [22 exact license-text sections](../docs/native-third-party-notices.txt)
+and [review proposal](evidence/n4/redistribution-2026-11-03-commit-proposal.json) are local future inputs.
+The 18 inventoried documents comprise 15 prepared licenses and three original
+upstream SBOM members retained in the unchanged wheels. Owner review/authorization
+of drafted inquiries (or equivalent supplied authoritative material) is the
+smallest next action; no contact, signing or publication has occurred.
+This pass changes local documentation/material only; accepted binary and historical
+records remain unchanged. No Qt compilation/reproducibility certification or
+custom infrastructure is required by this checkpoint. No commit/push authority.
+
+- [x] Exact approved 17 paths/hashes; 45 protected inputs and four additional accepted N2 identities verified.
+- [x] One commit `b7ab94265270866911311b4ca818071868f58361`; one normal integration push; independent source/parent/tree/blob readback; main unchanged.
+- [x] Ordinary CI `41621033436`, attempt 1: all five jobs and required gate PASS.
+- [x] Hosted 198 native + 63 feasibility + 38 workflow tests PASS; zero skips; backend/frontend/browser PASS.
+- [x] Native archive assembly/audit and fresh isolated headless installation PASS.
+- [x] Four actual artifact digests/CRCs; package/source/lock/wheel/installer/bootstrap correspondence independently verified.
+- [x] Actual runner schema trust **BLOCKED** preserved: compiled schemas UID 0 / mode `0777`; no normal-launch/renderer PASS inferred.
+- [x] Initial bounded artifact-read timeout preserved; official connector retrieval succeeded; no CI/build retry.
+- [x] Historical FAILs and N1–N3 evidence retained; no old artifact result repurposed for this package.
+- [ ] Third-party notices/licensing/corresponding-source closure for actual final inputs.
+- [ ] Genuine owner-controlled signing identity and authentic release signature/trust.
+- [ ] Exact final public-identity package normal native installation/GUI/security verification.
+- [ ] Manual update verification for final release inputs.
+- [ ] Separate owner approval to publish.
+
+The hosted artifact is development candidate `org.cyrnava.CyrNava.Devel` /
+`0.1.0-n4.1`, archive SHA-256
+`1e49348570e7f779a352cb0a2d623a6f3973f828628b9ea60bb6e4fc6f2a3897`.
+No native GUI, host-policy change, production signing or publication was performed.
+The one commit/push authorization is consumed; new closeout files remain local
+and uncommitted. Stop for owner review. Next proposed authorization: outstanding
+third-party/source-delivery closure, not another CI correction.
+
+[N4 report](N4_REPORT.md), [hosted result](evidence/n4/hosted-41621033436/result.json),
+[exact committed paths](evidence/n4/hosted-41621033436/remote-readback.json).
+
+## Historical checkpoint — local schema fixtures and earlier hosted failures
+
 3 November 2026. **N1–N3 ACCEPTED / COMPLETE; N4 authorized, release CONDITIONAL.**
 
 **Latest: schema fixtures and safe diagnostics LOCALLY VERIFIED / READY FOR REVIEW.**

@@ -132,7 +132,7 @@ jobs:
           if-no-files-found: error
 
   native:
-    name: Native Ubuntu package and exported-archive audit
+    name: Native Ubuntu source installation and update
     needs: [backend, frontend]
     runs-on: ubuntu-26.04
     timeout-minutes: 30
@@ -150,39 +150,27 @@ jobs:
             frontend/package-lock.json
             frontend/package.json
             .nvmrc
-      - name: Verify immutable source and install native build prerequisites
+      - name: Verify immutable source and install native source prerequisites
         env:
           EXPECTED_SOURCE: ${{ github.sha }}
         run: |
           test "$(git rev-parse HEAD)" = "$EXPECTED_SOURCE"
           test -z "$(git status --porcelain)"
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends python3.14-venv build-essential desktop-file-utils libnss3 libnspr4 libasound2t64 libegl1 libopengl0 libxkbcommon-x11-0 libxcb-cursor0 libxcomposite1 libxdamage1 libxrandr2 libxtst6 libfontconfig1
+          sudo apt-get install -y --no-install-recommends python3.14-venv build-essential desktop-file-utils apparmor libglib2.0-bin libnss3 libnspr4 libasound2t64 libegl1 libopengl0 libxkbcommon-x11-0 libxcb-cursor0 libxcomposite1 libxdamage1 libxrandr2 libxtst6 libfontconfig1
           npm install --global npm@11.6.2 --ignore-scripts --no-audit --no-fund
-          npm --prefix frontend ci --ignore-scripts --no-audit --no-fund
       - name: Native installer, security and transaction regressions
         run: |
           /usr/bin/python3.14 -B -m unittest discover -s packaging/native -p 'test_*.py' -v
           /usr/bin/python3.14 -B -m unittest discover -s packaging/native/feasibility -p 'test_*.py' -v
-      - name: Assemble, audit and install exact source without GUI or signing
-        run: /usr/bin/python3.14 -B ci/native.py --output ci-output/native --version 0.1.0-n4.1
-      - name: Upload audited unsigned native verification artifacts
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: CyrNava-native-ubuntu-x86_64-${{ github.sha }}-${{ github.run_attempt }}
-          path: ci-output/native/artifacts/
-          retention-days: 7
-          if-no-files-found: error
-          compression-level: 0
-      - name: Preserve safe native stage results
+      - name: Verify clean no-Git source installation and data-preserving online update
+        run: /usr/bin/python3.14 -B ci/native_source.py --output ci-output/native-source
+      - name: Preserve safe source-install diagnostics without binary payloads
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: native-diagnostics-${{ github.sha }}-${{ github.run_attempt }}
-          path: |
-            ci-output/native/result.json
-            ci-output/native/audit.json
-            ci-output/native/install.json
+          name: source-install-diagnostics-${{ github.sha }}-${{ github.run_attempt }}
+          path: ci-output/native-source/artifacts/*.json
           retention-days: 7
           if-no-files-found: error
 

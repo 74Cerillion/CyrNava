@@ -1,5 +1,19 @@
 # Native Ubuntu installation and manual maintenance
 
+**Current public target: source-first GitHub repository with an online installer.**
+Use repository-root `bash install.sh` and `bash update.sh` from a reviewed versioned
+source snapshot. The source adapter reuses the N2/N3 engine; dependencies are
+recipient-acquired, frontend is built locally, and no bundled-wheel public ZIP is
+required. See the [current installation guide](../../docs/native-installation.md)
+and [N4 report](../../ci/N4_REPORT.md). No public release has been published.
+
+## Historical offline installer and acceptance records
+
+The instructions below apply to the retained offline exported kits and original
+accepted N2/N3 packages. Their `install.sh` is the exported kit entry point, not
+the new repository-root source installer. They remain available through the
+existing `install_cyrnava.sh` / `update_cyrnava.sh` archive interfaces.
+
 3 November 2026. **N1–N3 owner-accepted; N4 local implementation verified,
 public release CONDITIONAL.**
 Accepted N3 artifact/source/native evidence is preserved in

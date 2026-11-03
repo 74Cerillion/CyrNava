@@ -19,6 +19,7 @@ import time
 import uuid
 import zipfile
 from pathlib import Path, PurePosixPath
+from urllib.parse import urlsplit
 
 APP_ID = "io.github._74Cerillion.CyrNava"
 CANDIDATE_ID = "org.cyrnava.CyrNava.Devel"
@@ -281,6 +282,363 @@ def validate_manifest(manifest):
         for name in ("native_operations.py", "native_profile_check.py"):
             require(name in files, "Maintenance component missing")
     return manifest
+
+
+def source_contract(files):
+    """Compatibility inputs, independent of local frontend output filenames."""
+    groups = {
+        "application": [
+            n for n in files if n.startswith(("backend/app/", "desktop/native/"))
+        ],
+        "frontend": [n for n in files if n.startswith("frontend/")],
+        "runtime": [
+            n
+            for n in files
+            if n
+            in {
+                "packaging/native/feasibility/dependencies.json",
+                "packaging/native/feasibility/requirements.lock",
+            }
+        ],
+        "bootstrap": [n for n in files if n == "packaging/native/bootstrap.c"],
+    }
+    result = {"format": 1}
+    for group, names in groups.items():
+        require(
+            names and (group != "runtime" or len(names) == 2),
+            "Source compatibility inputs missing",
+        )
+        result[group + "_sha256"] = hashlib.sha256(
+            json.dumps(
+                {n: files[n] for n in sorted(names)},
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode()
+        ).hexdigest()
+    return result
+
+
+_SOURCE_CONTEXT_TOKEN = object()
+
+
+class SourceInstallContext:
+    """In-process explicit user trust in source, never a signature substitute."""
+
+    def __init__(self, token, source_root, inventory_path, archive, manifest_path):
+        require(token is _SOURCE_CONTEXT_TOKEN, "Use explicit reviewed source context")
+        self.source_root = checked_path(source_root)
+        self.inventory_path = regular(inventory_path, 8 * 1024**2)
+        self.archive = regular(archive, MAX_ARCHIVE)
+        self.manifest_path = regular(manifest_path)
+        self.inventory_sha256 = digest(self.inventory_path)
+        self.archive_sha256 = digest(self.archive)
+        self.manifest_sha256 = digest(self.manifest_path)
+
+
+def source_context(source_root, inventory_path, archive, manifest_path):
+    context = SourceInstallContext(
+        _SOURCE_CONTEXT_TOKEN, source_root, inventory_path, archive, manifest_path
+    )
+    validate_source_context(context, archive, manifest_path)
+    return context
+
+
+def validate_source_context(context, archive, manifest_path):
+    require(
+        type(context) is SourceInstallContext,
+        "Explicit reviewed source context required",
+    )
+    require(
+        checked_path(archive) == context.archive
+        and checked_path(manifest_path) == context.manifest_path
+        and digest(regular(archive, MAX_ARCHIVE)) == context.archive_sha256
+        and digest(regular(manifest_path)) == context.manifest_sha256
+        and digest(context.inventory_path) == context.inventory_sha256,
+        "Source preparation changed; preserve it and prepare a fresh attempt",
+    )
+    inventory = load(context.inventory_path, 8 * 1024**2)
+    require(
+        inventory.get("format") == 1 and isinstance(inventory.get("files"), dict),
+        "Invalid source inventory",
+    )
+    files = inventory["files"]
+    require(1 <= len(files) <= 20000, "Invalid source inventory size")
+    source_bytes = 0
+    for name, info in files.items():
+        member_name(name)
+        require(
+            isinstance(info, dict)
+            and type(info.get("bytes")) is int
+            and 0 <= info["bytes"] <= 16 * 1024**2
+            and hash_string(info.get("sha256")),
+            "Invalid source input declaration",
+        )
+        source_bytes += info["bytes"]
+        require(
+            source_bytes <= 128 * 1024**2,
+            "Source inventory exceeds bounded input capacity",
+        )
+        path = regular(context.source_root / name, 16 * 1024**2)
+        require(
+            path.stat().st_size == info["bytes"] and digest(path) == info["sha256"],
+            "Source input changed",
+        )
+    for name in (
+        "desktop/install_engine.py",
+        "desktop/native_operations.py",
+        "packaging/native/feasibility/dependencies.json",
+        "packaging/native/feasibility/requirements.lock",
+    ):
+        require(name in files, "Required source trust input missing")
+    require(
+        digest(context.source_root / "desktop/install_engine.py")
+        == digest(Path(__file__)),
+        "Source engine differs from executing reviewed code",
+    )
+    manifest = validate_manifest(load(manifest_path))
+    require(
+        manifest.get("installation_mode") == "source-online"
+        and manifest.get("source_snapshot_sha256") == context.inventory_sha256
+        and manifest.get("source_contract") == source_contract(files)
+        and manifest.get("apparmor") == APPARMOR_CONTRACT
+        and manifest.get("maintenance")
+        == support(Path(__file__).parent, "native_operations").CONTRACT,
+        "Source preparation or security contract mismatch",
+    )
+    require(
+        not any(n.startswith("wheels/") for n in manifest["files"]),
+        "Source payload must not redistribute a wheelhouse",
+    )
+    for target, original in (
+        ("dependencies.json", "packaging/native/feasibility/dependencies.json"),
+        ("requirements.lock", "packaging/native/feasibility/requirements.lock"),
+    ):
+        require(
+            manifest["files"][target]["sha256"] == files[original]["sha256"],
+            "Source runtime lock correspondence failed",
+        )
+    source_names = {
+        "install_engine.py": "desktop/install_engine.py",
+        "native_operations.py": "desktop/native_operations.py",
+        "native_profile_check.py": "desktop/native_profile_check.py",
+        "launch.py": "packaging/native/launch.py",
+        "apparmor_support.py": "packaging/native/apparmor_support.py",
+        "provider_check.py": "packaging/native/provider_check.py",
+        "bootstrap.c": "packaging/native/bootstrap.c",
+        "backend_check.py": "packaging/native/feasibility/backend_check.py",
+        "system_schemas.py": "packaging/native/feasibility/run_probe.py",
+    }
+    for target, info in manifest["files"].items():
+        original = source_names.get(target)
+        if (
+            target.startswith(
+                ("application/backend/app/", "application/desktop/native/")
+            )
+            and target != "application/desktop/native/build_identity.py"
+        ):
+            original = target.removeprefix("application/")
+        if original:
+            require(
+                original in files
+                and info["sha256"] == files[original]["sha256"]
+                and info["bytes"] == files[original]["bytes"],
+                "Prepared application differs from reviewed source inventory",
+            )
+    return {
+        "mode": "source-online-reviewed-code",
+        "initial_trust": (
+            "User-selected source checkout or source ZIP; same-source hashes "
+            "are integrity checks, not independent authentication"
+        ),
+        "source_snapshot_sha256": context.inventory_sha256,
+        "production_signature": "NOT CLAIMED",
+    }
+
+
+def install_from_source(archive, manifest_path, root, *, context, disposable=False):
+    validate_source_context(context, archive, manifest_path)
+    return install(
+        archive, manifest_path, root, disposable=disposable, _source_context=context
+    )
+
+
+def update_from_source(
+    archive, manifest_path, root, *, context, disposable=False, reinstall=False
+):
+    validate_source_context(context, archive, manifest_path)
+    return support(Path(__file__).parent, "native_operations").update(
+        maintenance_api(),
+        archive,
+        manifest_path,
+        root,
+        disposable=disposable,
+        reinstall=reinstall,
+        _source_context=context,
+    )
+
+
+def source_online_requirements(release):
+    """Exactly the reviewed closure from official PyPI file URLs; no resolver."""
+    dependencies = load(release / "dependencies.json")
+    files = dependencies.get("files")
+    require(
+        isinstance(files, list) and len(files) == 19,
+        "Exact nineteen-wheel dependency closure required",
+    )
+    expected, lines, seen = {}, [], set()
+    for entry in files:
+        name = entry.get("name", "")
+        normalized = re.sub(r"[-_.]+", "-", name).lower()
+        filename = entry.get("filename", "")
+        url = urlsplit(entry.get("url", ""))
+        require(
+            re.fullmatch(r"[A-Za-z0-9_.-]+", name)
+            and normalized not in seen
+            and re.fullmatch(r"[A-Za-z0-9_.+-]+", entry.get("version", ""))
+            and re.fullmatch(r"[A-Za-z0-9_.-]+\.whl", filename)
+            and hash_string(entry.get("sha256"))
+            and type(entry.get("bytes")) is int
+            and 0 < entry["bytes"] <= MAX_ARCHIVE
+            and url.scheme == "https"
+            and url.netloc == "files.pythonhosted.org"
+            and url.path.startswith("/packages/")
+            and url.path.endswith("/" + filename)
+            and not url.query
+            and not url.fragment,
+            "Only exact approved official PyPI wheel URLs are supported",
+        )
+        seen.add(normalized)
+        require(filename not in expected, "Duplicate dependency wheel")
+        expected[filename] = entry
+        lines.append(entry["url"] + " --hash=sha256:" + entry["sha256"])
+    declared = {}
+    for line in regular(release / "requirements.lock").read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        match = re.fullmatch(
+            r"([A-Za-z0-9_.-]+)==([A-Za-z0-9_.+-]+) --hash=sha256:([0-9a-f]{64})", line
+        )
+        require(match is not None, "Exact hash-locked requirements required")
+        normalized = re.sub(r"[-_.]+", "-", match[1]).lower()
+        require(normalized not in declared, "Duplicate locked requirement")
+        declared[normalized] = (match[2], match[3])
+    require(
+        declared
+        == {
+            re.sub(r"[-_.]+", "-", e["name"]).lower(): (e["version"], e["sha256"])
+            for e in files
+        },
+        "Wheel closure differs from requirements lock",
+    )
+    return expected, "\n".join(lines) + "\n"
+
+
+def setup_source_environment(release):
+    expected, requirements = source_online_requirements(release)
+    run_operation(
+        release, "venv", [sys.executable, "-B", "-I", "-m", "venv", release / ".venv"]
+    )
+    python = release / ".venv/bin/python"
+    acquired = private_directory(release / "upstream-wheels")
+    require(not any(acquired.iterdir()), "Existing acquisition output preserved")
+    request = release / "upstream-requirements.lock"
+    atomic(request, requirements.encode())
+    run_operation(
+        release,
+        "acquire-exact-official-wheels",
+        [
+            python,
+            "-B",
+            "-I",
+            "-m",
+            "pip",
+            "--isolated",
+            "download",
+            "--no-index",
+            "--no-deps",
+            "--no-cache-dir",
+            "--require-hashes",
+            "--only-binary=:all:",
+            "--retries",
+            "0",
+            "--timeout",
+            "30",
+            "--dest",
+            acquired,
+            "-r",
+            request,
+        ],
+        timeout=600,
+    )
+    require(
+        {p.name for p in acquired.iterdir()} == set(expected),
+        "Acquired wheel closure differs",
+    )
+    records = []
+    for filename, entry in expected.items():
+        path = regular(acquired / filename, entry["bytes"])
+        require(
+            path.stat().st_size == entry["bytes"] and digest(path) == entry["sha256"],
+            "Official wheel size/checksum mismatch",
+        )
+        records.append(
+            {
+                k: entry[k]
+                for k in ("name", "version", "filename", "bytes", "sha256", "url")
+            }
+        )
+    durable(
+        release / "dependency-acquisition.json",
+        {
+            "format": 1,
+            "mode": "source-online",
+            "status": "PASS",
+            "complete": True,
+            "source": (
+                "official PyPI files over verified HTTPS; "
+                "no index/dependency resolution"
+            ),
+            "dependencies_sha256": digest(release / "dependencies.json"),
+            "requirements_sha256": digest(release / "requirements.lock"),
+            "files": records,
+        },
+    )
+    run_operation(
+        release,
+        "install-locked",
+        [
+            python,
+            "-B",
+            "-I",
+            "-m",
+            "pip",
+            "--isolated",
+            "install",
+            "--no-index",
+            "--no-deps",
+            "--no-cache-dir",
+            "--no-compile",
+            "--require-hashes",
+            "--only-binary=:all:",
+            "--find-links",
+            acquired,
+            "-r",
+            release / "requirements.lock",
+        ],
+    )
+    run_operation(
+        release, "pip-check", [python, "-B", "-I", "-m", "pip", "--isolated", "check"]
+    )
+    run_operation(
+        release,
+        "providers",
+        [python, "-B", "-I", release / "provider_check.py"],
+        timeout=120,
+    )
+    record = load(release / "providers.json")
+    require(record.get("status") == "PASS", "Native provider prerequisites failed")
+    return record
 
 
 def verify_signature(manifest_path, signature, key, fingerprint, parent):
@@ -579,11 +937,19 @@ def install(
     signature=None,
     key=None,
     fingerprint=None,
+    _source_context=None,
 ):
     host_supported()
     root = checked_path(root)
     profile, applications = deployment_paths(root, disposable)
     manifest = validate_manifest(load(manifest_path))
+    require(
+        (manifest.get("installation_mode") == "source-online")
+        == (_source_context is not None),
+        "Source-online installation requires the explicit source entry point",
+    )
+    if _source_context is not None:
+        validate_source_context(_source_context, archive, manifest_path)
     require(
         not root.exists() or not (root / "current.json").exists(),
         "Existing installation preserved; N2 does not implement updates",
@@ -611,7 +977,9 @@ def install(
             not (root / "transaction.json").exists(),
             "Interrupted transaction retained; run recover first",
         )
-        if disposable:
+        if _source_context is not None:
+            trust = validate_source_context(_source_context, archive, manifest_path)
+        elif disposable:
             require(
                 hash_string(candidate_sha256)
                 and digest(manifest_path) == candidate_sha256,
@@ -703,7 +1071,11 @@ def install(
                 (label + "\n").encode()
             ).hexdigest()
         (release / "tmp").mkdir(mode=0o700)
-        providers = setup_environment(release)
+        providers = (
+            setup_source_environment(release)
+            if _source_context is not None
+            else setup_environment(release)
+        )
         run_operation(
             release,
             "synthetic-backend",

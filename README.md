@@ -1,6 +1,11 @@
-> **Native Ubuntu release track:** N1–N3 are owner-accepted. N4 native CI and
-> public-release preparation are in progress; no public native package is published
-> yet. Target: Ubuntu 26.04 x86_64 / GNOME Wayland. See the
+> **Current release model: source-first GitHub repository with an online dependency installer.**
+> N1–N3 are owner-accepted; N4 source-first installation and public-repository
+> readiness remain CONDITIONAL. Target: Ubuntu 26.04 x86_64 / GNOME Wayland,
+> system CPython 3.14 and the pinned Qt/PySide/WebEngine 6.11.3 stack. From a
+> reviewed versioned source snapshot, the public entry points are `bash install.sh`
+> and, after saving and closing CyrNava, `bash update.sh`. No public release is
+> published yet. Dependencies come directly from official upstream services and
+> the frontend is built locally; no bundled-wheel archive is required. See the
 > [native installation/manual-update guide](docs/native-installation.md),
 > [release preparation notes](docs/native-release-notes-v0.1.0.md) and
 > [dependency/source obligations](docs/native-source-obligations.md).
@@ -12,7 +17,7 @@
 
 CyrNava organizes cybersecurity learning and documentation into folders and rich-text notes on your computer. SQLite stores native documents and templates; local files store note images. There are no runtime accounts, cloud services or external API calls. Engagement, host and vulnerability management are future work, not current features.
 
-**Release approval and the original-code license are pending.** This checkout is a review candidate, not an announced public release. See [release checklist](docs/release-checklist.md).
+**Public release approval is pending.** Original code is MIT licensed, Copyright (c) 2026 74Cerillion. This checkout is a review candidate, not an announced public release. The native source-first checkpoint is in [N4_REPORT.md](ci/N4_REPORT.md).
 
 ## Rebranding and existing installations
 
@@ -80,7 +85,12 @@ React and TypeScript implement selection, dialogs and save state. A dedicated ad
 
 Read [architecture and three execution flows](docs/architecture.md), [ADRs](docs/adr/README.md), and [dependency/license review](docs/dependencies-and-licenses.md).
 
-## Prerequisites
+## Historical browser/developer prerequisites
+
+The Ubuntu 24.04 / Python 3.12 browser workflow below is retained for development
+and historical support. It is not the current native desktop installation path.
+Use [native installation and manual updates](docs/native-installation.md) for
+Ubuntu 26.04 / Python 3.14 and GNOME menu launch.
 
 Target setup: Ubuntu 24.04, Python **3.12**, Node **24.19.0** (`.nvmrc`), npm **11.6.2**, Git. Verification used Linux with Python 3.12.14 and Node 24.19.0; it did not use a fresh Ubuntu VM. Other OSes are unverified; profile locking uses Linux `fcntl`.
 
@@ -91,7 +101,7 @@ sudo apt install -y git curl ca-certificates python3.12 python3.12-venv
 
 Install Node separately. If using **nvm** (a shell-based Node version manager, not an apt package), follow its [official installation instructions](https://github.com/nvm-sh/nvm#installing-and-updating), then reopen your terminal. An existing matching Node/npm installation also works.
 
-## Installation
+## Historical browser/developer installation
 
 From a fresh terminal:
 
@@ -111,7 +121,7 @@ cd ..
 
 Skip the three nvm/npm setup commands if those versions are already installed. Dependencies are isolated in `backend/.venv` and `frontend/node_modules`. Installation/browser setup downloads packages; normal operation needs no internet. Python dependencies are fully pinned in `requirements.txt`; npm uses `package-lock.json`. The final M6 commit must be published by the owner before a public clone contains these M6 changes. [Verification](M6_VERIFICATION.md) distinguishes the public M5 clone from the clean M6 candidate export.
 
-## Install a desktop launcher (Ubuntu)
+## Historical browser desktop launcher (Ubuntu)
 
 For everyday use, prepare a launcher once from the source checkout. This builds the frontend and installs a private Python environment. Node/npm are needed only for this installation and later source rebuilds; the desktop launch does not use npm, nvm or Vite.
 
@@ -230,7 +240,12 @@ Unsaved title/document edits have browser-local recovery snapshots when storage 
 
 ## License
 
-The owner has explicitly left the original-code license **pending**. No open-source permission grant is implied; package metadata says `UNLICENSED` while that decision is pending. MIT is recommended for owner review. BlockNote core uses MPL-2.0; its obligations remain separate. [Third-party notices](frontend/public/third-party-notices.txt), [Python notices](docs/python-third-party-notices.txt), and the [license review](docs/dependencies-and-licenses.md) describe dependencies, fonts and unresolved attribution verification. No BlockNote XL package is used.
+CyrNava's original code is [MIT licensed](LICENSE), Copyright (c) 2026 74Cerillion.
+Third-party code retains its own terms, including BlockNote MPL-2.0 and the Inter
+font OFL. See [frontend notices](frontend/public/third-party-notices.txt) and the
+current [source-first dependency assessment](docs/native-source-obligations.md).
+Downloading dependencies directly from upstream does not relicense them as MIT.
+No BlockNote XL package is used.
 
 ## Development roadmap
 

@@ -1,0 +1,815 @@
+{
+  "format": "cyrnava-native-redistribution-1",
+  "date": "2026-11-03",
+  "status": "CONDITIONAL: source-first native verification and public-repository readiness; historical binary assessment retained",
+  "scope": "Historical offline-wheel inventory retained; current source-first distribution is assessed separately in source_first",
+  "source_first": {
+    "owner_decision": "Source-first GitHub repository with online official-upstream dependency installation",
+    "status": "CONDITIONAL: see ci/N4_REPORT.md for actual current source-first verification",
+    "repository_payload": "Original source, installer/updater, locks, notices, branding and tracked historical records; no wheelhouse, venv or prebuilt application bundle",
+    "upstream_downloads": "Exact pinned PyPI wheels and locked npm packages fetched by recipient; not CyrNava release payloads",
+    "local_builds": "Frontend and small native bootstrap built on recipient host; no Qt/Chromium compilation",
+    "historical_offline_target": "Preserved, no longer the public release gate",
+    "classifications": [
+      {
+        "issue": "Original code MIT/name/logo",
+        "classification": "SATISFIED",
+        "evidence": "LICENSE Copyright (c) 2026 74Cerillion and recorded owner rights",
+        "action": "Retain MIT; do not relicense dependencies"
+      },
+      {
+        "issue": "Qt/PySide/Chromium/FFmpeg/ICU and Rust wheel correspondence/notices",
+        "classification": "NOT APPLICABLE to active payload if dependency binaries remain absent",
+        "evidence": "Tracked tree has no dependency wheels/native libraries; recipients acquire directly upstream",
+        "action": "Never publish downloaded wheelhouses, virtual environments or installed trees as source release assets. Historical binary findings remain unresolved for that target"
+      },
+      {
+        "issue": "GPL-only module usage",
+        "classification": "CONDITIONAL; no incompatible direct application use identified",
+        "evidence": "Actual direct imports Core/Gui/Widgets/WebEngineCore/WebEngineWidgets, not listed GPL-only families",
+        "action": "Respect upstream licenses and LGPL replacement rights; no claim all indirect linking is classified. MIT source may be published without conveying a combined binary"
+      },
+      {
+        "issue": "use-composed-ref1.4.0",
+        "classification": "SATISFIED for MIT declaration and supplied notices; holder clarification OPTIONAL",
+        "evidence": "Exact upstream commit ea2c9d969f2f90a349f4c99338b806423824cea2 declares MIT; full terms/component identity retained",
+        "action": "Do not invent holder/year or treat absence of a separate LICENSE as absence of permission"
+      },
+      {
+        "issue": "BlockNote MPL and font/asset notices",
+        "classification": "CONDITIONAL on actual public payload integration",
+        "evidence": "Exact0.56.0 source packages/full MPL text and Inter3.019 OFL/copyright retained; frontend built locally",
+        "action": "Retain notices/versioned upstream source links; provide covered source for any actually redistributed covered code"
+      },
+      {
+        "issue": "Historical tracked traces",
+        "classification": "CONDITIONAL: public tree/history review pending",
+        "evidence": "Nine Playwright ZIPs contain captured HTML/CSS and Inter fonts matching existing catalog",
+        "action": "Preserve records; do not confuse excluded installation inputs with excluded GitHub ZIP/clone content"
+      },
+      {
+        "issue": "Source trust",
+        "classification": "REQUIRED for release instructions",
+        "evidence": "ZIP lacks Git metadata; co-located hash inventory detects changes, not malicious installer authorship",
+        "action": "Use reviewed immutable tag/commit source and explicit initial repository trust. No invented production signing key"
+      }
+    ],
+    "upstream_contact": "NOT SENT; prior two drafts retained historical/optional, no automatic active binary-clearance gate",
+    "primary_references": [
+      "https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#license",
+      "https://opensource.org/license/mit",
+      "https://doc.qt.io/qt-6.11/gpl.html",
+      "https://doc.qt.io/qt-6.11/lgpl.html",
+      "https://www.mozilla.org/en-US/MPL/2.0/",
+      "https://openfontlicense.org/open-font-license-official-text/"
+    ]
+  },
+  "reviewed_source": "b7ab94265270866911311b4ca818071868f58361",
+  "hosted_CI_run": 41621033436,
+  "reviewed_binary": {
+    "asset": "CyrNava-0.1.0-n4.1-ubuntu-x86_64.zip",
+    "sha256": "1e49348570e7f779a352cb0a2d623a6f3973f828628b9ea60bb6e4fc6f2a3897",
+    "unchanged": true,
+    "contains_new_notices": false
+  },
+  "original_code": {
+    "license": "MIT",
+    "attribution": "Copyright (c) 2026 74Cerillion",
+    "name_logo_rights": "OWNER CONFIRMED"
+  },
+  "counts": {
+    "python_distributions": 19,
+    "ELF_files": 498,
+    "Qt_PySide_Shiboken_ELFs": 471,
+    "upstream_license_notice_SBOM_documents": 18,
+    "prepared_exact_wheel_license_texts": 15
+  },
+  "hosted_inventory_sha256": "19d911578ef6073dc478c7f939e4b393f7e23c0f6b14314f6d4e3cddc169a289",
+  "complete_SBOM": false,
+  "python_distributions": [
+    {
+      "name": "annotated-doc",
+      "version": "0.0.5",
+      "wheel": "annotated_doc-0.0.5-py3-none-any.whl",
+      "bytes": 5302,
+      "sha256": "117bac03a25ede5df5440e855b32d556049ca169ead221505badf432fed4b101",
+      "official_binary_url": "https://files.pythonhosted.org/packages/3e/30/e900b21425a860e195f32e37657aa1f7c7f2b1bfb26f03ca209b90933c06/annotated_doc-0.0.5-py3-none-any.whl",
+      "declared_license": "MIT",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 1086,
+          "sha256": "fff170779a6acbf65abdb405c087f1cee1786691e4a96a4034517e4a504a0cdf",
+          "wheel_member": "annotated_doc-0.0.5.dist-info/licenses/LICENSE",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/annotated-doc-0.0.5/LICENSE"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "wheel": "annotated_types-0.8.0-py3-none-any.whl",
+      "bytes": 13427,
+      "sha256": "f072f4d804ea359e4eaf198b1af7a8b0943881a87f31bb764f8bf219bb9419e0",
+      "official_binary_url": "https://files.pythonhosted.org/packages/99/91/8acff4f5e50511b911bbccb72b8628a49c68ce14148cd9f6431094859a90/annotated_types-0.8.0-py3-none-any.whl",
+      "declared_license": "MIT",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 1083,
+          "sha256": "fe1049884b1a0d9342901e88e07f32925d24b3121d9972b6a6805fb9824b095d",
+          "wheel_member": "annotated_types-0.8.0.dist-info/licenses/LICENSE",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/annotated-types-0.8.0/LICENSE"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1",
+      "wheel": "anyio-4.15.1-py3-none-any.whl",
+      "bytes": 132079,
+      "sha256": "6152fdbbf9a77fdec97731721bebf7c4c44f7c29b424b0065826173efc7ed101",
+      "official_binary_url": "https://files.pythonhosted.org/packages/12/b8/4bd346e22b28902df4d651910f5242c28d84e4a5c2435ca5c3f797ed7e2e/anyio-4.15.1-py3-none-any.whl",
+      "declared_license": "MIT",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 1081,
+          "sha256": "5361ac9dc58f2ef5fd2e9b09c68297c17f04950909bbc8023bdb82eacf22c2b0",
+          "wheel_member": "anyio-4.15.1.dist-info/licenses/LICENSE",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/anyio-4.15.1/LICENSE"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    },
+    {
+      "name": "click",
+      "version": "8.5.0",
+      "wheel": "click-8.5.0-py3-none-any.whl",
+      "bytes": 125251,
+      "sha256": "255bc9599cf7748b4b1a446ccc735421bd08a2ae529a8b88597d3de5664ee360",
+      "official_binary_url": "https://files.pythonhosted.org/packages/58/50/6c0d534c5f134586a8e1ba4e330569e32f057e33372ae556463212fb4cd3/click-8.5.0-py3-none-any.whl",
+      "declared_license": "BSD-3-Clause",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 1475,
+          "sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d",
+          "wheel_member": "click-8.5.0.dist-info/licenses/LICENSE.txt",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/click-8.5.0/LICENSE.txt"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    },
+    {
+      "name": "fastapi",
+      "version": "0.156.3",
+      "wheel": "fastapi-0.156.3-py3-none-any.whl",
+      "bytes": 147094,
+      "sha256": "d70cc7c6b34c75f26c9312bf84cc696dac19b8858cb460d29f7b1a21d9594ad9",
+      "official_binary_url": "https://files.pythonhosted.org/packages/3b/c7/fb3b280264d53128fdd7f3dc499bcb47740e6edc7233e265e30fbec06d5b/fastapi-0.156.3-py3-none-any.whl",
+      "declared_license": "MIT",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 1086,
+          "sha256": "4ec89ffc81485b97fec584b2d4a961032eeffe834453894fd9c1274906cc744e",
+          "wheel_member": "fastapi-0.156.3.dist-info/licenses/LICENSE",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/fastapi-0.156.3/LICENSE"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "wheel": "h11-0.16.0-py3-none-any.whl",
+      "bytes": 37515,
+      "sha256": "63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86",
+      "official_binary_url": "https://files.pythonhosted.org/packages/04/4b/29cac41a4d98d144bf5f6d33995617b185d14b22401f75ca86f384e87ff1/h11-0.16.0-py3-none-any.whl",
+      "declared_license": "MIT",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 1124,
+          "sha256": "37db5bb85926db28a427a25867f10b1232003aea1be69ccb851138adb8e6f361",
+          "wheel_member": "h11-0.16.0.dist-info/licenses/LICENSE.txt",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/h11-0.16.0/LICENSE.txt"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "wheel": "idna-3.20-py3-none-any.whl",
+      "bytes": 69583,
+      "sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c",
+      "official_binary_url": "https://files.pythonhosted.org/packages/58/a2/bb081bab032533a855d44de1d56f8e8426114ff1ba5d1f07a438a0a654f8/idna-3.20-py3-none-any.whl",
+      "declared_license": "BSD-3-Clause",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 1541,
+          "sha256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04",
+          "wheel_member": "idna-3.20.dist-info/licenses/LICENSE.md",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/idna-3.20/LICENSE.md"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    },
+    {
+      "name": "opentelemetry-api",
+      "version": "1.45.1",
+      "wheel": "opentelemetry_api-1.45.1-py3-none-any.whl",
+      "bytes": 60256,
+      "sha256": "b31553efa588ae44bc306f863c785c5333a9ecc091248c6ee68b4b6c87fdedfb",
+      "official_binary_url": "https://files.pythonhosted.org/packages/1e/41/f7dcf80b81ee8e71c1a2b59f14208bc723edbd89ed027a73b175abf6348e/opentelemetry_api-1.45.1-py3-none-any.whl",
+      "declared_license": "Apache-2.0",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 11357,
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "wheel_member": "opentelemetry_api-1.45.1.dist-info/licenses/LICENSE",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/opentelemetry-api-1.45.1/LICENSE"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    },
+    {
+      "name": "pillow",
+      "version": "13.0.0",
+      "wheel": "pillow-13.0.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "bytes": 7142574,
+      "sha256": "e91c2b1cbeae768c98752e67e717e283d68dae45717b41f2d91eaee648e37b7d",
+      "official_binary_url": "https://files.pythonhosted.org/packages/1d/f2/1371707ce438ba9a43f9d24089828494ec6f9396e28cd7903aa704dd6306/pillow-13.0.0-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+      "declared_license": "MIT-CMU",
+      "ELF_count": 26,
+      "notice_documents": [
+        {
+          "bytes": 70307,
+          "sha256": "dda12a98c1979cf3d94df1cff45d27a4cb3f04a60c76f76902ac54cac03ec0ce",
+          "wheel_member": "pillow-13.0.0.dist-info/licenses/LICENSE",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/pillow-13.0.0/LICENSE"
+        },
+        {
+          "bytes": 1358,
+          "sha256": "583049cf7ad8d9fa9c949695ec46bcf5c5ee12b5097527b1ba297757fecbd987",
+          "wheel_member": "pillow-13.0.0.dist-info/sboms/auditwheel.cdx.json",
+          "prepared_notice": null,
+          "preservation": "Original upstream SBOM retained in unchanged distributed wheel; no claim of complete notice clearance"
+        },
+        {
+          "bytes": 21892,
+          "sha256": "fe1ca6e3a4f73e7018a3805a75a19377453f342d203712f37387ad6ee853fd44",
+          "wheel_member": "pillow-13.0.0.dist-info/sboms/pillow-13.0.0.cdx.json",
+          "prepared_notice": null,
+          "preservation": "Original upstream SBOM retained in unchanged distributed wheel; no claim of complete notice clearance"
+        }
+      ],
+      "status": "Exact 70307-byte multi-component license prepared; original two SBOMs and 26 ELF identities retained; not MIT-only"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.14.1",
+      "wheel": "pydantic-2.14.1-py3-none-any.whl",
+      "bytes": 488106,
+      "sha256": "9195d967ec791692a04438115466764fb8b9a27b31f14a760437694f40d6b454",
+      "official_binary_url": "https://files.pythonhosted.org/packages/35/ea/a56b9fe5066f3537b7882f77e9c5dfb26d8c2eefdaed9b5fc73d57b4dc22/pydantic-2.14.1-py3-none-any.whl",
+      "declared_license": "MIT",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 1129,
+          "sha256": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3",
+          "wheel_member": "pydantic-2.14.1.dist-info/licenses/LICENSE",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/pydantic-2.14.1/LICENSE"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.50.1",
+      "wheel": "pydantic_core-2.50.1-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "bytes": 2159857,
+      "sha256": "42b54c2c90ad348b5e3a85e03e715d572c1fde357ef104cdfe3b03b697a404ea",
+      "official_binary_url": "https://files.pythonhosted.org/packages/45/35/38f6d6564fae57d9b12e5676dfa947e0e7d5c46dbeaa7eb3352261d6d299/pydantic_core-2.50.1-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "declared_license": "MIT",
+      "ELF_count": 1,
+      "notice_documents": [
+        {
+          "bytes": 1080,
+          "sha256": "2afdd30d54b4d62b6f488a6bcc1546e84ec5061f13f4209c03d012348783795a",
+          "wheel_member": "pydantic_core-2.50.1.dist-info/licenses/LICENSE",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/pydantic_core-2.50.1/LICENSE"
+        },
+        {
+          "bytes": 121146,
+          "sha256": "0f4cf513efa194d1fed0f1c1116db94f22a661f5953ccee29b85c26a44ff99bb",
+          "wheel_member": "pydantic_core-2.50.1.dist-info/sboms/pydantic-core.cyclonedx.json",
+          "prepared_notice": null,
+          "preservation": "Original upstream SBOM retained in unchanged distributed wheel; no claim of complete notice clearance"
+        }
+      ],
+      "status": "MIT license prepared; original Rust-dependency SBOM retained in wheel; no inferred complete bundled-attribution clearance"
+    },
+    {
+      "name": "PySide6",
+      "version": "6.11.3",
+      "wheel": "pyside6-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+      "bytes": 572119,
+      "sha256": "ef2bdb61b1ad7e5e8db8ca7fb1a60d8b7960dfd490c582d005d8903044ab44f1",
+      "official_binary_url": "https://files.pythonhosted.org/packages/5a/87/1de807123dd5edbc09d9b645a635ff308696e9d1f302c7201b4d821c8860/pyside6-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+      "declared_license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "ELF_count": 0,
+      "notice_documents": [],
+      "status": "CONDITIONAL: exact source/build/module-license and bundled native credit correspondence remains incomplete"
+    },
+    {
+      "name": "PySide6_Addons",
+      "version": "6.11.3",
+      "wheel": "pyside6_addons-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+      "bytes": 175307424,
+      "sha256": "5cab663fbff1b7a1fa7e641754de3ca1ea410407fc70bd4e240144b42d09a69c",
+      "official_binary_url": "https://files.pythonhosted.org/packages/00/f1/d1313576cb6ee71d02d4d5762401f70310319ffe3b2a650b8d3101e4b07f/pyside6_addons-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+      "declared_license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "ELF_count": 191,
+      "notice_documents": [],
+      "status": "CONDITIONAL: exact source/build/module-license and bundled native credit correspondence remains incomplete"
+    },
+    {
+      "name": "PySide6_Essentials",
+      "version": "6.11.3",
+      "wheel": "pyside6_essentials-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+      "bytes": 80292754,
+      "sha256": "c6a5c3b58bf55aef6e09a7de690ff6133335014ab81a7f22f56363ea08e8f6a3",
+      "official_binary_url": "https://files.pythonhosted.org/packages/91/23/9692f9b9a7cf89c0e8b99da228a728064aa827dc115b5dc974156bcf14fc/pyside6_essentials-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+      "declared_license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "ELF_count": 278,
+      "notice_documents": [],
+      "status": "CONDITIONAL: exact source/build/module-license and bundled native credit correspondence remains incomplete"
+    },
+    {
+      "name": "shiboken6",
+      "version": "6.11.3",
+      "wheel": "shiboken6-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+      "bytes": 272494,
+      "sha256": "e601c957011345c741b88f661a12486f478db881d6777bdf37e3dc7a8d3387c6",
+      "official_binary_url": "https://files.pythonhosted.org/packages/7c/4a/696e3a9ed26436b1b41ca22dd21e7bce214ba1a1e1dea5c84b5627444c65/shiboken6-6.11.3-cp310-abi3-manylinux_2_34_x86_64.whl",
+      "declared_license": "LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only",
+      "ELF_count": 2,
+      "notice_documents": [],
+      "status": "CONDITIONAL: exact source/build/module-license and bundled native credit correspondence remains incomplete"
+    },
+    {
+      "name": "starlette",
+      "version": "1.9.0",
+      "wheel": "starlette-1.9.0-py3-none-any.whl",
+      "bytes": 80335,
+      "sha256": "fd3f159936e882d06c1108f84688f7cda2cf85fc6a592a50edbd175e882c2ddc",
+      "official_binary_url": "https://files.pythonhosted.org/packages/f3/93/181df62699d9b5aca1d87e5cfda131dac87e3cdaebf668662f7206ca3470/starlette-1.9.0-py3-none-any.whl",
+      "declared_license": "BSD-3-Clause",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 1518,
+          "sha256": "dcb95677a02240243187e964f941847d19b17821cf99e5afae684fab328c19bf",
+          "wheel_member": "starlette-1.9.0.dist-info/licenses/LICENSE.md",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/starlette-1.9.0/LICENSE.md"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0",
+      "wheel": "typing_extensions-4.16.0-py3-none-any.whl",
+      "bytes": 45571,
+      "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+      "official_binary_url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+      "declared_license": "PSF-2.0",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 13936,
+          "sha256": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf",
+          "wheel_member": "typing_extensions-4.16.0.dist-info/licenses/LICENSE",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/typing_extensions-4.16.0/LICENSE"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4",
+      "wheel": "typing_inspection-0.4.4-py3-none-any.whl",
+      "bytes": 14750,
+      "sha256": "65b8397ba37ccbce054456aaccddfc91e6e3083c92824df348d96ca832f3f147",
+      "official_binary_url": "https://files.pythonhosted.org/packages/67/81/4add07e5172b7ac40d8ed5ff580409a7801a4fe26d529bdd915401dabfbe/typing_inspection-0.4.4-py3-none-any.whl",
+      "declared_license": "MIT",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 1090,
+          "sha256": "804b59b25f2c31bd278f9202a19ae49a3945aa2664387e2d0a128c7cacc61ec3",
+          "wheel_member": "typing_inspection-0.4.4.dist-info/licenses/LICENSE",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/typing-inspection-0.4.4/LICENSE"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.54.0",
+      "wheel": "uvicorn-0.54.0-py3-none-any.whl",
+      "bytes": 87427,
+      "sha256": "505bdb0f318731d45f1f712071fc781a8981f6847a31c902c9f5e652d4f67faf",
+      "official_binary_url": "https://files.pythonhosted.org/packages/38/0c/b54a4fdd7f90a3af8b02ebc9ce6712c2c208b7926a2f7bad95c33ebbe943/uvicorn-0.54.0-py3-none-any.whl",
+      "declared_license": "BSD-3-Clause",
+      "ELF_count": 0,
+      "notice_documents": [
+        {
+          "bytes": 1526,
+          "sha256": "efe1acf3e62fb99c288b0ec73e5a773b7268ef4320fe757ea994214e4b63c371",
+          "wheel_member": "uvicorn-0.54.0.dist-info/licenses/LICENSE.md",
+          "prepared_notice": "native-third-party-notices.txt",
+          "prepared_section": "python/uvicorn-0.54.0/LICENSE.md"
+        }
+      ],
+      "status": "UPSTREAM LICENSE TEXT PREPARED; retain its conditions"
+    }
+  ],
+  "standard_license_materials": [
+    {
+      "path": "native-third-party-notices.txt",
+      "sha256": "e3ba223bb1423f0aad8c3dfce0fe3148db48926d41e6fbc3afbbf5ff9e1c89cb",
+      "bytes": 10398,
+      "source_asset": "pyside-setup-everywhere-src-6.11.3.tar.xz",
+      "source_member": "pyside-setup-everywhere-src-6.11.3/LICENSES/Apache-2.0.txt",
+      "section": "licenses/Apache-2.0.txt"
+    },
+    {
+      "path": "native-third-party-notices.txt",
+      "sha256": "62803a6fcceef9091a129d7293d2469ea332b35d30f5e1bc4c628a9f35f3d29c",
+      "bytes": 1478,
+      "source_asset": "pyside-setup-everywhere-src-6.11.3.tar.xz",
+      "source_member": "pyside-setup-everywhere-src-6.11.3/LICENSES/BSD-3-Clause.txt",
+      "section": "licenses/BSD-3-Clause.txt"
+    },
+    {
+      "path": "native-third-party-notices.txt",
+      "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
+      "bytes": 18092,
+      "source_asset": "pyside-setup-everywhere-src-6.11.3.tar.xz",
+      "source_member": "pyside-setup-everywhere-src-6.11.3/LICENSES/GPL-2.0-only.txt",
+      "section": "licenses/GPL-2.0-only.txt"
+    },
+    {
+      "path": "native-third-party-notices.txt",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "bytes": 35147,
+      "source_asset": "pyside-setup-everywhere-src-6.11.3.tar.xz",
+      "source_member": "pyside-setup-everywhere-src-6.11.3/LICENSES/GPL-3.0-only.txt",
+      "section": "licenses/GPL-3.0-only.txt"
+    },
+    {
+      "path": "native-third-party-notices.txt",
+      "sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768",
+      "bytes": 7651,
+      "source_asset": "pyside-setup-everywhere-src-6.11.3.tar.xz",
+      "source_member": "pyside-setup-everywhere-src-6.11.3/LICENSES/LGPL-3.0-only.txt",
+      "section": "licenses/LGPL-3.0-only.txt"
+    },
+    {
+      "path": "native-third-party-notices.txt",
+      "sha256": "40678d338ce53cd93f8b22b281a2ecbcaa3ee65ce60b25ffb0c462b0530846b2",
+      "bytes": 965,
+      "source_asset": "pyside-setup-everywhere-src-6.11.3.tar.xz",
+      "source_member": "pyside-setup-everywhere-src-6.11.3/LICENSES/Qt-GPL-exception-1.0.txt",
+      "section": "licenses/Qt-GPL-exception-1.0.txt"
+    },
+    {
+      "path": "native-third-party-notices.txt",
+      "sha256": "1ccf09bf2f598308df4bed9cd8e9657dc5cd0973d2800318f2e241486e2edf3f",
+      "bytes": 25906,
+      "source_asset": "qt-everywhere-src-6.11.3.tar.xz",
+      "source_member": "qt-everywhere-src-6.11.3/qtmultimedia/src/3rdparty/ffmpeg/LICENSE.LGPL-2.1-or-later.txt",
+      "scope": "Existing selected LGPL2.1 notice; not wheel build correspondence",
+      "section": "licenses/LGPL-2.1-or-later.txt"
+    }
+  ],
+  "Qt_PySide_source_assets": [
+    {
+      "asset": "qt-everywhere-src-6.11.3.tar.xz",
+      "bytes": 1020081224,
+      "sha256": "ad0112f2aef1b94b42a7ab653cebda2f7fc9ba88ef509ec456b17be80b0bfdab",
+      "official_source_url": "https://download.qt.io/official_releases/qt/6.11/6.11.3/single/qt-everywhere-src-6.11.3.tar.xz",
+      "official_checksum_metadata": "https://download.qt.io/official_releases/qt/6.11/6.11.3/single/qt-everywhere-src-6.11.3.tar.xz.mirrorlist",
+      "status": "Retained archive hash reverified; exact wheel correspondence NOT established"
+    },
+    {
+      "asset": "pyside-setup-everywhere-src-6.11.3.tar.xz",
+      "bytes": 18063176,
+      "sha256": "050819cb05e14d6689f42b56e4fa9c8ff63be2bb339e0c094c45b990b7cabde1",
+      "official_source_url": "https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.11.3-src/pyside-setup-everywhere-src-6.11.3.tar.xz",
+      "official_checksum_metadata": "https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.11.3-src/pyside-setup-everywhere-src-6.11.3.tar.xz.mirrorlist",
+      "status": "Retained archive hash reverified; exact wheel correspondence NOT established"
+    }
+  ],
+  "BlockNote_source_assets": [
+    {
+      "package": "@blocknote/core",
+      "version": "0.56.0",
+      "asset": "blocknote-core-0.56.0.tgz",
+      "bytes": 2543314,
+      "sha256": "3c66e020c8c1430cb0158dcff83716db25122a983a5bba63a88b79e08fb8f009",
+      "npm_integrity": "sha512-6h8CNv1RSgQM5q/fU2zvidrd3BdvNO+KzlAXazLGM69m5Ii1Ix8iUI2pMKFt+sNKz87s8a8iWyxHZozaIOTHnw==",
+      "official_source_url": "https://registry.npmjs.org/@blocknote/core/-/core-0.56.0.tgz",
+      "published_files_matched": 943,
+      "source_files": 483,
+      "modifications": "NONE OBSERVED in exact published files compared with installed build inputs",
+      "gitHead": "37614ab348dcc7faa830a9a88437b37197a2162d",
+      "license": "MPL-2.0; full license already preserved in each intact source archive and frontend notice"
+    },
+    {
+      "package": "@blocknote/react",
+      "version": "0.56.0",
+      "asset": "blocknote-react-0.56.0.tgz",
+      "bytes": 4379283,
+      "sha256": "e1746fa2ea8b92ababbeff03008ea6d1769577c5e9d922c91cd0fec11eca3d9b",
+      "npm_integrity": "sha512-Y2C1h5yAAXjQS3layapu+tZjYVZj57l/sMWGEnOCa8P1O3J2mprT6C6xHkDs9VmfZNQBOpnaCsvEQZ4bNxfl/Q==",
+      "official_source_url": "https://registry.npmjs.org/@blocknote/react/-/react-0.56.0.tgz",
+      "published_files_matched": 422,
+      "source_files": 203,
+      "modifications": "NONE OBSERVED in exact published files compared with installed build inputs",
+      "gitHead": "d5e8c96e2ad5f6832da60bc3c9acd3f6c16c25c5",
+      "license": "MPL-2.0; full license already preserved in each intact source archive and frontend notice"
+    },
+    {
+      "package": "@blocknote/mantine",
+      "version": "0.56.0",
+      "asset": "blocknote-mantine-0.56.0.tgz",
+      "bytes": 146660,
+      "sha256": "ec62c0b512fe81665471ed38228df726f69ed2a2e998e54205ea0561c81112c8",
+      "npm_integrity": "sha512-tiYdFIDaitJmp2OvQgg57IS0cc4jmNGBfKm8u7gIF5iM2DC8AOw6FPOClVi6L+6pJzyD+e0v4RjFIY1AwSANaw==",
+      "official_source_url": "https://registry.npmjs.org/@blocknote/mantine/-/mantine-0.56.0.tgz",
+      "published_files_matched": 89,
+      "source_files": 43,
+      "modifications": "NONE OBSERVED in exact published files compared with installed build inputs",
+      "gitHead": null,
+      "license": "MPL-2.0; full license already preserved in each intact source archive and frontend notice"
+    }
+  ],
+  "frontend": {
+    "runtime_lock_entries_noticed": 75,
+    "accepted_notice_sha256": "537b1c55708dfe45c0a8af76b4c86252fee70f4f0eccfd55d61d52b7f1be8be5",
+    "prepared_notice_sha256": "d781390a1c65d262d20880764b3b0aa34376ae19a06b1bd5e73ff978c5f9ea61",
+    "lock_sha256": "e042666c21379d991e8034f01cc7bfa8ee7fcd566ed41eaf820aba82d0ca7165",
+    "generated_runtime_notices": [
+      {
+        "source_member": "vite/LICENSE.md",
+        "bytes": 108786,
+        "sha256": "a47172e44a86a7e2cd1c16282341f7726ec60caafe3a6166fe3e0602005b6fa6",
+        "prepared_in": "../frontend/public/third-party-notices.txt"
+      },
+      {
+        "source_member": "rolldown/LICENSE",
+        "bytes": 1302,
+        "sha256": "23ecfff35a5a2e80d92142f75228912c3b1abc4b5a8337a821ff4397e2f9f734",
+        "prepared_in": "../frontend/public/third-party-notices.txt"
+      },
+      {
+        "source_member": "rolldown/THIRD-PARTY-LICENSE",
+        "bytes": 2209,
+        "sha256": "a877291d800ed43692f3f9ae09d8e01cc6f7293ad39d43896059c188ffbb8b7c",
+        "prepared_in": "../frontend/public/third-party-notices.txt"
+      }
+    ],
+    "use_composed_ref": {
+      "version": "1.4.0",
+      "declared_license": "MIT — CONFIRMED",
+      "npm_integrity": "sha512-djviaxuOOh7wkj0paeO1Q/4wMZ8Zrnag5H6yBvzN7AKKe8beOaED9SF5/ByLqsku8NP4zQqsvM2u3ew/tJK8/w==",
+      "upstream_commit": "ea2c9d969f2f90a349f4c99338b806423824cea2",
+      "metadata_url": "https://raw.githubusercontent.com/Andarist/use-composed-ref/ea2c9d969f2f90a349f4c99338b806423824cea2/package.json",
+      "remaining": "Applicable copyright attribution/full notice clarification; no holder invented or assertion that MIT grant is absent"
+    },
+    "Inter": {
+      "license": "OFL-1.1",
+      "regular_WOFF_metadata": "Inter3.019;git-0a5106e0b;Copyright2020 TheInterProjectAuthors",
+      "upstream_license": "https://raw.githubusercontent.com/rsms/inter/v3.19/LICENSE.txt",
+      "files": [
+        {
+          "shipped_filename": "inter-v12-latin-100-46Mq0mOp.woff",
+          "bytes": 21240,
+          "sha256": "8b9e4e8a55235e3991cbbb0723f3c719d725f83c79170130037b9f281128e8dd",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-100.woff"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-100-BQDzDElq.woff2",
+          "bytes": 16548,
+          "sha256": "61cac1099eb50786ab30a512e757dc443c52737a358d37b4ec9cd95d56294b72",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-100.woff2"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-200-BxfrU12A.woff2",
+          "bytes": 17344,
+          "sha256": "74885a0c915831b00a0d579d721a569b12d38b8506ca26e1a2134821c2ddeed7",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-200.woff2"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-200-DXfqWPZg.woff",
+          "bytes": 22236,
+          "sha256": "3df10d85cb63d2e1e16e13fc7ef5640abf7197638903108cda68d2b3d97a0b85",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-200.woff"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-300-DEbyFmpd.woff2",
+          "bytes": 17328,
+          "sha256": "6b2cee468448705a862f7c05364350cda3d1bf6fecab0aa67690c5b0a391a1b4",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-300.woff2"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-300-f7r92Nkj.woff",
+          "bytes": 22156,
+          "sha256": "48602fcdec8ca13910e18055e84e368965203fb2a3bbc21126c967c24c27b718",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-300.woff"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-500-BQ2gQN_M.woff",
+          "bytes": 22516,
+          "sha256": "2514f3dfbfcbcfa6e0515edbcaceb65a682c7d6062e1a6b2d438917cc75382e9",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-500.woff"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-500-DfX5FI9E.woff2",
+          "bytes": 17552,
+          "sha256": "d53336707c39d1ec20a2b1f7399ca9f183c45592e215a42fd596dfa2dbb8ad7a",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-500.woff2"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-600-BvOeHRLc.woff2",
+          "bytes": 17660,
+          "sha256": "048d136d592e66896cccc1fe4fada4feb16b7f6af671cd49a2fe6ed6b2276c6c",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-600.woff2"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-600-D01NXWOK.woff",
+          "bytes": 22636,
+          "sha256": "22b2f9fbbe8a76005ec2f4ef38f2a412267a00578c838e01233711f22d329004",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-600.woff"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-700-B5TOIllR.woff",
+          "bytes": 22684,
+          "sha256": "51df444d3a9a5b5368402f46d7ec6145d78a8e55d184c12bf431c72a3c982da6",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-700.woff"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-700-Bj1B9WKG.woff2",
+          "bytes": 17784,
+          "sha256": "ced2d8e02e2fbf08d2edec9b5f13648ed8348588a05f7181632f3c1dd6e1f5c3",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-700.woff2"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-800-Bdy4lAMa.woff2",
+          "bytes": 17764,
+          "sha256": "a51ac27d8b29011f6774908f6a51a53b1ac07a009ba73928dc459ca34670f5ae",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-800.woff2"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-800-DFVvDWwT.woff",
+          "bytes": 22712,
+          "sha256": "d08d7178a90124adda38fe3b842949026483424ab021c2d3a6563868255dbeca",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-800.woff"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-900-CMga-52B.woff2",
+          "bytes": 17176,
+          "sha256": "f2db7f826ddf0c079c59c2cd8515bcb1e55e190871b6b4ad7c19445f79d68573",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-900.woff2"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-900-ORHAl5ZU.woff",
+          "bytes": 21980,
+          "sha256": "c38e95e0fea0113aeb45d3002cfe9b6b75f42695c79bced6157d09e122837564",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-900.woff"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-regular-CahmJf_6.woff",
+          "bytes": 21420,
+          "sha256": "3ea830d422488e32c1394d4db011a7761ba94ed5e8ee150a3b3ca5139ac86017",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-regular.woff"
+        },
+        {
+          "shipped_filename": "inter-v12-latin-regular-YtgfLPRn.woff2",
+          "bytes": 16708,
+          "sha256": "0364d368abf457d4e70dbc7a7a360f3486eaea2837b194915b23d4398bee91ac",
+          "source_member": "src/fonts/inter-v12-latin/inter-v12-latin-regular.woff2"
+        }
+      ],
+      "file_count": 18,
+      "bytes": 355444
+    }
+  },
+  "actual_shipped_GPL_or_commercial_families": [
+    "CanvasPainter",
+    "Charts",
+    "DataVisualization",
+    "Graphs",
+    "HttpServer",
+    "NetworkAuth",
+    "Quick3D",
+    "VirtualKeyboard",
+    "Lottie",
+    "QuickTimeline",
+    "WaylandCompositor"
+  ],
+  "shipped_GPL_Qt_exception_tools": "QML compiler/tools require their applicable terms; aggregate LGPL/GPL wheel alternatives do not classify every module",
+  "direct_app_imports": [
+    "QtCore",
+    "QtGui",
+    "QtWidgets",
+    "QtWebEngineCore",
+    "QtWebEngineWidgets"
+  ],
+  "license_classification_limit": "Module presence or this import list alone does not classify all linking relationships or change original MIT licensing; Wayland client is separately LGPL-capable",
+  "unmapped_native_examples": {
+    "FFmpeg": {
+      "avcodec": "61.19.101",
+      "avformat": "61.7.103",
+      "avutil": "59.39.100",
+      "swresample": "5.3.100",
+      "swscale": "8.3.100"
+    },
+    "ICU": "73",
+    "QtWebEngine": "Exact Chromium revision, patches, sources and complete credits remain unmapped"
+  },
+  "source_provenance_limits": {
+    "Qt_source_tag_revision": "3bc7aa8942d31739ac6ef48c460ad9d4f66153ec",
+    "wheel_mapping": "NOT established by version-only _git_version modules, GCC11.5RedHat strings or build timestamps",
+    "selected_source_notice_documents": 2519,
+    "selected_source_notice_bytes": 11126280,
+    "selected_notices_complete": false
+  },
+  "delivery_proposal": {
+    "channel": "Intact source archives plus source/checksum index alongside binary in same eventual GitHub Release",
+    "published": false,
+    "duplicate_archives_required": false,
+    "Qt_source_build_required_for_this_closeout": false,
+    "reproducible_build_certification_required": false,
+    "recipient_rebuild_route": "UNVALIDATED: supply exact build inputs and practical recipient-owned locks/repackage/trust instructions; current installed-file integrity checks reject modified libraries, no license rights restricted"
+  },
+  "pydantic_core_SBOM_scope_review": {
+    "component_count": 99,
+    "declared_Unicode_3_0_entries": 19,
+    "concrete_non_MIT_examples": ["foldhash 0.2.0: Zlib", "target-lexicon 0.13.4: Apache-2.0 WITH LLVM-exception", "Unicode-3.0 and Unicode-DFS-2016 terms"],
+    "copyright_fields_in_components": 0,
+    "scope_limit": "The retained upstream SBOM is build/dependency metadata; it does not prove every entry ships in the extension or supply complete component attribution notices.",
+    "remaining": "Identify actual bundled components and applicable attribution/notice material; sole pydantic-core MIT license is not inferred to clear them. No new download, build or broad compliance machinery is required."
+  },
+  "historical_bundled_binary_remaining_obligations": [
+    "pydantic-core actual bundled Rust-component attribution mapping and notices; original 99-component SBOM retained, complete notice coverage not established",
+    "Exact four-wheel Qt/PySide/Shiboken/WebEngine/Chromium revision/patch/configuration/source correspondence",
+    "Complete actual shipped module and third-party credits, including FFmpeg/ICU and GPL/LGPL2.1/LGPL3/Qt-exception terms",
+    "Practical recipient replacement/rebuild route using adequate exact inputs, preserving security checks",
+    "use-composed-ref applicable copyright attribution clarification",
+    "Integrate prepared notices and corresponding-source assets/index into actual release before publication"
+  ],
+  "primary_references": [
+    "https://www.qt.io/development/open-source-lgpl-obligations",
+    "https://doc.qt.io/qt-6.11/qtwebengine-licensing.html",
+    "https://www.mozilla.org/en-US/MPL/2.0/",
+    "https://www.mozilla.org/en-US/MPL/2.0/FAQ/",
+    "https://opensource.org/license/mit",
+    "https://openfontlicense.org/open-font-license-official-text/",
+    "https://raw.githubusercontent.com/vitejs/vite/v8.3.4/packages/vite/LICENSE.md",
+    "https://raw.githubusercontent.com/rolldown/rolldown/v1.2.14/LICENSE",
+    "https://raw.githubusercontent.com/rolldown/rolldown/v1.2.14/THIRD-PARTY-LICENSE"
+  ],
+  "notice_preparation": {
+    "consolidated_file": "native-third-party-notices.txt",
+    "exact_license_body_sections": 22,
+    "python_license_sections": 15,
+    "standard_text_sections": 7,
+    "upstream_SBOM_members_retained_in_wheels": 3,
+    "complete_redistribution_clearance": false
+  }
+}

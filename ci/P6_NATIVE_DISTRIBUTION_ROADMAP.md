@@ -1,4 +1,92 @@
-# Current native roadmap — N1–N3 accepted; N4 hosted CI incomplete
+# Current native roadmap — source-first GitHub distribution
+
+3 November 2026. **N1–N3 ACCEPTED / COMPLETE. N4 CONDITIONAL — source-first installation, revised CI and public-repository readiness.**
+
+The owner selected a **source-first GitHub repository with an online dependency
+installer**. From reviewed immutable versioned source (Git checkout or GitHub ZIP),
+users run `bash install.sh`; required exact Python dependencies come directly from
+official upstream, and the locked frontend is built locally. Saved-data-preserving
+manual updates use `bash update.sh`. Ubuntu 26.04 x86_64 / GNOME Wayland, ordinary
+CPython 3.14 and the verified Qt/PySide/Shiboken/WebEngine 6.11.3 stack stay fixed.
+
+N1 native feasibility, N2 versioned installation and N3 manual maintenance remain
+accepted only in their actual verified scopes. CI **41621033436** remains PASS for
+`b7ab94265270866911311b4ca818071868f58361`; it does not certify the changed online
+installer. The previous offline bundled-wheel package is historical/tested, not a
+required public release target. Flatpak remains paused historical/fallback, with
+no duplicate old P6 acceptance requirement.
+
+MIT / Copyright (c) 2026 74Cerillion, name/logo rights and the ordinary-user
+filesystem/network tradeoff remain settled. Renderer sandboxing, AppArmor,
+authenticated backend and data protections are required and unchanged.
+
+Current implementation/evidence checkpoint: [N4 report](N4_REPORT.md).
+User procedure: [native source installation](../docs/native-installation.md).
+The [redistribution assessment](../docs/native-source-obligations.md) distinguishes
+our actual source/assets from recipient-acquired dependencies. No commit, push,
+normal installation, host policy loading, signing or publication is authorized by
+this local implementation. Stop at the N4 owner checkpoint.
+
+## Historical status before the source-first distribution decision
+
+The records below retain their original artifact, environment and distribution scope.
+
+# Current native roadmap — N1–N3 accepted; N4 hosted CI verified
+
+3 November 2026. **N1/N2/N3 ACCEPTED / COMPLETE. N4 hosted CI and independent
+artifact verification PASS; N4 / public release CONDITIONAL.**
+
+Current local checkpoint: **CONDITIONAL — SPECIFIC REDISTRIBUTION OBLIGATIONS
+REMAIN.** [N4 report](N4_REPORT.md), [native source/notice catalog](../docs/native-redistribution.json)
+and [specific obligations / unsent inquiries](../docs/native-source-obligations.md)
+record bounded material preparation. Exact Qt/PySide/WebEngine/Chromium and
+bundled native source/build/credit correspondence, applicable module terms,
+recipient replacement/rebuild instructions, use-composed-ref attribution, and
+pydantic-core bundled-component notice mapping remain unresolved. MIT attribution
+and owner name/logo rights are settled. No package was rebuilt; accepted source/
+artifacts and security controls remain unchanged. The smallest next action is
+owner review of drafted targeted clarification requests or provision of equivalent
+authoritative materials. This does not authorize contact, signing or publication.
+
+## Accepted hosted checkpoint — preserved evidence
+
+Exactly one reviewed 17-file commit `b7ab94265270866911311b4ca818071868f58361`
+and one normal integration push completed; independent parent/tree/blob/remote
+readback PASS and main unchanged. Ordinary CI **41621033436**, attempt 1, passed
+all five jobs: workflow, backend/security, frontend/browser, native assembly/audit/
+headless installation and required gate. Four actual artifact hashes/provenance,
+source/lock/wheel/installer/bootstrap correspondence and native diagnostic records
+were independently verified. Development archive `0.1.0-n4.1`, SHA-256
+`1e49348570e7f779a352cb0a2d623a6f3973f828628b9ea60bb6e4fc6f2a3897`.
+This does not certify the final public-identity package or native GUI.
+
+The actual CI runner schema observation stays **BLOCKED**: compiled schemas UID 0,
+mode `0777`; the production trust guard refuses them. Current headless installation
+does not execute that preflight, normal launcher or renderer. Initial bounded
+artifact-read timeout is preserved; official connector retrieval subsequently
+passed, without CI/build retry. Original hosted failures and accepted N1–N3 evidence
+remain unchanged. No further implementation or commit/push is authorized by this
+completed checkpoint; status/evidence closeout is local and uncommitted.
+
+Active target: **native Ubuntu 26.04 x86_64 / GNOME Wayland installation via
+versioned GitHub Releases archives**, with manual full-package updates. N1 is
+native Qt feasibility/security; N2 installer/desktop integration; N3 data-safe
+manual updater/uninstaller; N4 native CI/public-release preparation. Flatpak is
+paused historical/fallback, with no old Flatpak P6 completion gate. Legacy P6
+filenames remain documentation containers.
+
+Remaining separate checkpoints: actual third-party notices/licensing/source
+closure, genuine signing trust, exact final public-identity native GUI/security
+and manual-update verification, and owner publication approval. MIT attribution
+**Copyright (c) 2026 74Cerillion**, name/logo rights and the ordinary-user tradeoff
+are settled. Renderer sandboxing, authentication and data protections remain
+required. No production signing, host-policy change, GUI run or publication occurred.
+Stop for owner review; next proposed step is third-party/source-delivery closure.
+Current evidence: [N4_REPORT.md](N4_REPORT.md),
+[N4_OWNER_CHECKS.md](N4_OWNER_CHECKS.md),
+[hosted result](evidence/n4/hosted-41621033436/result.json).
+
+## Historical checkpoint — local schema correction and previous hosted status
 
 3 November 2026. **N1/N2/N3 ACCEPTED / COMPLETE. N4 local implementation VERIFIED;
 public release CONDITIONAL.**

@@ -97,14 +97,31 @@ class WorkflowTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     validator.validate(value, self.pins)
 
-    def test_package_upload_cannot_run_after_failed_audit(self):
+    def test_source_diagnostics_cannot_upload_binaries_or_installed_data(self):
+        for path in (
+            "ci-output/native/artifacts/",
+            "ci-output/native-source/",
+            "ci-output/native-source/source/ci-output/client/",
+            "ci-output/native-source/artifacts/*",
+        ):
+            value = copy.deepcopy(self.value)
+            step = next(
+                s
+                for s in value["jobs"]["native"]["steps"]
+                if s.get("uses", "").startswith("actions/upload-artifact@")
+            )
+            step["with"]["path"] = path
+            with self.subTest(path=path), self.assertRaises(ValueError):
+                validator.validate(value, self.pins)
+
+    def test_native_source_online_check_cannot_be_replaced_by_offline_assembly(self):
         value = copy.deepcopy(self.value)
         step = next(
             s
             for s in value["jobs"]["native"]["steps"]
-            if s.get("with", {}).get("path") == "ci-output/native/artifacts/"
+            if "ci/native_source.py" in s.get("run", "")
         )
-        step["if"] = "always()"
+        step["run"] = "/usr/bin/python3.14 -B ci/native.py --output ci-output/native"
         with self.assertRaises(ValueError):
             validator.validate(value, self.pins)
 
@@ -144,7 +161,7 @@ class WorkflowTests(unittest.TestCase):
             elif change == "extra-command":
                 job["steps"][-3]["run"] += "\necho unreviewed"
             else:
-                job["steps"][-2]["with"]["path"] = "ci-output/native/client/"
+                job["steps"][-1]["with"]["path"] = "ci-output/native/client/"
             with self.subTest(change=change), self.assertRaises(ValueError):
                 validator.validate(value, self.pins)
 
@@ -154,7 +171,15 @@ class ExecutionTests(unittest.TestCase):
         command = verification.steps_for("backend", Path("/tmp/synthetic-report"))[0][1]
         self.assertIn("--extend-exclude", command)
         self.assertIn("ci/evidence/**", command)
-        for name in ("release.py", "policy_setup.py", "test_native_release.py"):
+        for name in (
+            "release.py",
+            "policy_setup.py",
+            "test_native_release.py",
+            "source_install.py",
+            "test_source_install.py",
+            "test_source_engine.py",
+            "test_source_snapshot.py",
+        ):
             self.assertIn("packaging/native/" + name, command)
 
     def test_real_deliberate_failure_blocks_later_artifact_step(self):

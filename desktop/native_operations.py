@@ -150,7 +150,26 @@ def compatible(engine, old, new):
         and old.get("n1_receipt_sha256") == new.get("n1_receipt_sha256"),
         "Update changed deployment or security identity",
     )
+    source_mode = old.get("installation_mode") == "source-online"
+    engine.require(
+        source_mode == (new.get("installation_mode") == "source-online"),
+        "Installation trust-mode transition requires separate review",
+    )
+    if source_mode:
+        engine.require(
+            old.get("source_contract", {}).get("format") == 1
+            and old.get("source_contract") == new.get("source_contract")
+            and all(
+                engine.hash_string(old["source_contract"].get(k + "_sha256"))
+                for k in ("application", "frontend", "runtime", "bootstrap")
+            ),
+            "Source update changed application, frontend, runtime or bootstrap inputs",
+        )
     for name, info in old["files"].items():
+        if source_mode and name.startswith("application/frontend/dist/"):
+            # Only locally generated output may vary. Reviewed source/lock inputs
+            # must match above; backend/storage/bootstrap equality stays strict.
+            continue
         if name.startswith("application/") or name in {
             "requirements.lock",
             "dependencies.json",
@@ -252,12 +271,20 @@ def update(
     key=None,
     fingerprint=None,
     reinstall=False,
+    _source_context=None,
 ):
     engine.host_supported()
     root = engine.checked_path(root)
     profile, applications = engine.deployment_paths(root, disposable)
     manifest_pin = engine.digest(engine.regular(manifest_path))
     new = engine.validate_manifest(engine.load(manifest_path))
+    engine.require(
+        (new.get("installation_mode") == "source-online")
+        == (_source_context is not None),
+        "Source-online update requires the explicit source entry point",
+    )
+    if _source_context is not None:
+        engine.validate_source_context(_source_context, archive, manifest_path)
     with engine.installation_lock(root), stopped(engine, profile):
         engine.require(
             not (root / "transaction.json").exists(),
@@ -281,7 +308,15 @@ def update(
             new["kind"] == ("candidate" if disposable else "release"),
             "Deployment kind mismatch",
         )
-        if disposable:
+        if _source_context is not None:
+            engine.require(
+                old_receipt["trust"].get("mode") == "source-online-reviewed-code",
+                "Source updates cannot silently replace signed/archive trust",
+            )
+            trust = engine.validate_source_context(
+                _source_context, archive, manifest_path
+            )
+        elif disposable:
             engine.require(
                 engine.hash_string(candidate_sha256)
                 and engine.digest(manifest_path) == candidate_sha256,
@@ -386,7 +421,11 @@ def update(
                 "Manifest changed during staging",
             )
             (release / "tmp").mkdir(mode=0o700)
-            providers = engine.setup_environment(release)
+            providers = (
+                engine.setup_source_environment(release)
+                if _source_context is not None
+                else engine.setup_environment(release)
+            )
             engine.run_operation(
                 release,
                 "synthetic-backend",

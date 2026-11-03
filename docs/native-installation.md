@@ -1,5 +1,156 @@
 # Native Ubuntu installation and manual maintenance
 
+## Current source-first native installation
+
+The intended public delivery is a reviewed versioned GitHub source checkout or
+GitHub source ZIP, followed by `bash install.sh`. This implementation is local
+and uncommitted; the new entry points are not yet in a published tag or remote
+checkpoint. N4 remains CONDITIONAL. Do not treat the older offline artifact or
+CI 41621033436 as verification of this new procedure.
+
+Supported target: Ubuntu 26.04 x86_64 / GNOME Wayland, ordinary system
+`/usr/bin/python3.14`, Node 24.x and npm 11.x for installation/build only,
+and the unchanged pinned Qt/PySide/Shiboken/WebEngine 6.11.3 family.
+The reviewed development tools are Node 24.19.0 and npm 11.6.2.
+No Node/npm server or external browser is needed after installation.
+
+### Obtain and review an immutable source version
+
+Use the owner's eventual version tag or exact reviewed commit. A source ZIP has
+no Git history; installation does not require `.git`. A Git clone can be checked
+out detached at the selected commit. Do not install from an automatically moving
+branch, fetch changes during installation, or copy in an old built frontend.
+
+Initial trust is in the repository/source you chose to execute. The included
+per-file inventory detects changed/missing build inputs and binds the locks; a
+hash stored beside an untrusted installer does not independently authenticate
+that installer. A signed tag can add authenticity when an owner-approved key
+and verification procedure actually exist; no such identity is invented here.
+Do not refresh the source inventory merely to bypass an unexpected mismatch.
+
+From that source directory:
+
+```bash
+bash install.sh --check-prerequisites
+bash install.sh
+```
+
+The first command checks source/locks, platform/interpreter and required tools.
+Neither command silently uses sudo or installs host packages. Missing prerequisites
+are reported before preparation. Node/npm, compiler, readelf/ldd, GSettings/GIO,
+desktop-file-utils, AppArmor/parser and Python venv/ensurepip must be available.
+The installed Qt provider check also refuses missing native graphics/font/NSS/
+sound libraries and conflicting Qt providers before activation.
+
+If Ubuntu prerequisites are missing, review this proposed administrative action
+and explicitly approve/execute it yourself; the installer does not run it:
+
+```text
+sudo apt-get update
+sudo apt-get install --no-install-recommends python3.14-venv build-essential desktop-file-utils apparmor-utils libglib2.0-bin libnss3 libnspr4 libasound2t64 libegl1 libopengl0 libxkbcommon-x11-0 libxcb-cursor0 libxcomposite1 libxdamage1 libxrandr2 libxtst6 libfontconfig1
+```
+
+Obtain supported Node/npm versions through a reviewed official installation
+method if the existing Ubuntu-provided versions do not meet the check. Do not
+automatically upgrade global npm/Python or disable host security to proceed.
+
+### What installation does
+
+The adapter verifies its source inventory and unchanged dependency locks, copies
+only consumed sources into a new private working directory, runs locked
+`npm ci` with dependency lifecycle scripts disabled, then explicitly builds the
+existing frontend with pre/post build hooks disabled. npm package URLs must be
+official HTTPS registry URLs with SHA-512 integrity.
+
+The shared native engine creates the final version's private venv. Pip acquires
+the exact 19 approved wheels from their pinned official PyPI file URLs over TLS,
+using isolated/hash-required/binary-only acquisition without dependency resolution,
+mirrors or caches. Every filename, byte count and SHA-256 is checked. Local
+installation of that verified closure is followed by pip check, installed-file/
+Qt-provider/ELF validation and real authenticated synthetic backend persistence
+checks. A small existing native C bootstrap is compiled; Qt/Chromium is not built.
+
+The wheel-free intermediate ZIP is an internal local staging format reused by
+the accepted engine. It is not the public release asset. Downloaded wheels,
+node_modules, generated frontend, private venv and logs must stay out of the
+public source payload. See [dependency scope](native-source-obligations.md).
+
+Default program root is `$XDG_DATA_HOME/cyrnava-application` (normally
+`~/.local/share/cyrnava-application`); data stays separately at
+`$XDG_DATA_HOME/cyrnava/native`. First install refuses existing profiles or
+colliding desktop identities rather than adopting personal data. Previous
+source/browser/Flatpak profiles require a separately reviewed migration or
+explicit backup import. No data migration is performed by installation.
+
+Preparation has bounded time/storage checks and preserves failed attempts.
+The source path uses a separate measured budget; the historical offline package's
+5 GiB build floor and its recorded failures are unchanged. Retain sufficient
+space for a private environment, build dependencies and a full stopped-profile
+checkpoint. Do not delete personal backups to pass a precondition.
+
+### AppArmor and first desktop launch
+
+A successful headless installation is not a renderer or GNOME-launch PASS.
+The exact application-specific enforce policy must be reviewed and explicitly
+loaded from a normal owner terminal before the native entry can launch. The
+installer never loads it or changes Ubuntu's global namespace restrictions.
+
+`packaging/native/policy_setup.py prepare` uses the actual installed manifest
+SHA-256 and a fresh output directory to render/check the exact policy without
+loading it. Review the generated bytes/profile/digest. A later `load --owner-host`
+requires the matching reviewed manifest/policy hashes, another fresh output and
+explicit administrator approval. The N4 owner report supplies concrete commands
+only for the installation actually prepared. Do not reuse accepted N2/N3 policy
+hashes for a different installation root.
+
+After the required policy is confirmed, open **CyrNava** in GNOME Applications.
+Renderer sandboxing, authenticated local backend, private data and ordinary-user
+access remain the established design. No sandbox-disable flags or blanket host
+permission changes are supported.
+
+### Manual source updates, recovery and uninstall
+
+Download/review the newer immutable source version. Save uploads/notes and close
+all CyrNava GUI/backend processes, then from the newer source directory:
+
+```bash
+bash update.sh --check-prerequisites
+bash update.sh
+```
+
+The updater prepares the new source, frontend and pinned environment separately,
+then uses the accepted N3 stopped-client audit/checkpoint/journal/activation engine.
+It refuses active locks, changed installed code/providers, incompatible schema or
+consumer inputs, trust-mode transitions, changed same-version updates and
+insufficient space. The current source-update boundary keeps application,
+frontend, dependency and bootstrap source contracts identical; arbitrary new
+application/schema/Qt versions require reviewed compatibility support.
+Different locally generated frontend output bytes are accepted only within that
+unchanged input contract. No automatic update service is installed.
+
+An offline signed-archive installation is not silently switched to source trust.
+Use its retained installer or a separately reviewed transition. Same-version
+reinstallation is explicit and must retain exact artifact identity; it is not an
+integrity-repair bypass.
+
+For interruption, preserve private logs and use the shared engine's explicit
+`bash ./install_cyrnava.sh recover --root ABSOLUTE-ROOT` after review. Existing
+`bash ./uninstall_cyrnava.sh --root ABSOLUTE-ROOT` removes managed activation only;
+data, checkpoints and version payloads remain. Explicit retained reinstall uses
+`bash ./install_cyrnava.sh reinstall --root ABSOLUTE-ROOT --reuse-preserved-data`.
+Rollback is an explicit compatible-code operation, not database rollback.
+
+Use [Backup and recovery](../BACKUP_RESTORE.md) for portable copies. Imports create
+new workspaces and intentionally exclude browser appearance/drafts. Normal updates
+and reinstall preserve the selected workspace, origin and existing Qt profile.
+The app works offline after dependencies and installation are complete.
+
+## Historical offline signed-package guide
+
+The retained guide below describes the tested offline exported kit, not the
+current repository-root `install.sh` / `update.sh`. Its signatures, wheelhouse
+and source-delivery requirements do not become extra source-first release gates.
+
 Release preparation, 3 November 2026. No public native release is published yet.
 These instructions describe the signed **release** kit, not the unsigned development
 candidates. Do not install a candidate into your normal profile.

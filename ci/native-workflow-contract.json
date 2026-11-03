@@ -113,7 +113,7 @@
       "timeout-minutes": 20
     },
     "native": {
-      "name": "Native Ubuntu package and exported-archive audit",
+      "name": "Native Ubuntu source installation and update",
       "needs": [
         "backend",
         "frontend"
@@ -140,36 +140,25 @@
           "env": {
             "EXPECTED_SOURCE": "${{ github.sha }}"
           },
-          "name": "Verify immutable source and install native build prerequisites",
-          "run": "test \"$(git rev-parse HEAD)\" = \"$EXPECTED_SOURCE\"\ntest -z \"$(git status --porcelain)\"\nsudo apt-get update -qq\nsudo apt-get install -y --no-install-recommends python3.14-venv build-essential desktop-file-utils libnss3 libnspr4 libasound2t64 libegl1 libopengl0 libxkbcommon-x11-0 libxcb-cursor0 libxcomposite1 libxdamage1 libxrandr2 libxtst6 libfontconfig1\nnpm install --global npm@11.6.2 --ignore-scripts --no-audit --no-fund\nnpm --prefix frontend ci --ignore-scripts --no-audit --no-fund\n"
+          "name": "Verify immutable source and install native source prerequisites",
+          "run": "test \"$(git rev-parse HEAD)\" = \"$EXPECTED_SOURCE\"\ntest -z \"$(git status --porcelain)\"\nsudo apt-get update -qq\nsudo apt-get install -y --no-install-recommends python3.14-venv build-essential desktop-file-utils apparmor libglib2.0-bin libnss3 libnspr4 libasound2t64 libegl1 libopengl0 libxkbcommon-x11-0 libxcb-cursor0 libxcomposite1 libxdamage1 libxrandr2 libxtst6 libfontconfig1\nnpm install --global npm@11.6.2 --ignore-scripts --no-audit --no-fund\n"
         },
         {
           "name": "Native installer, security and transaction regressions",
           "run": "/usr/bin/python3.14 -B -m unittest discover -s packaging/native -p 'test_*.py' -v\n/usr/bin/python3.14 -B -m unittest discover -s packaging/native/feasibility -p 'test_*.py' -v\n"
         },
         {
-          "name": "Assemble, audit and install exact source without GUI or signing",
-          "run": "/usr/bin/python3.14 -B ci/native.py --output ci-output/native --version 0.1.0-n4.1"
-        },
-        {
-          "name": "Upload audited unsigned native verification artifacts",
-          "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
-          "with": {
-            "compression-level": 0,
-            "if-no-files-found": "error",
-            "name": "CyrNava-native-ubuntu-x86_64-${{ github.sha }}-${{ github.run_attempt }}",
-            "path": "ci-output/native/artifacts/",
-            "retention-days": 7
-          }
+          "name": "Verify clean no-Git source installation and data-preserving online update",
+          "run": "/usr/bin/python3.14 -B ci/native_source.py --output ci-output/native-source"
         },
         {
           "if": "always()",
-          "name": "Preserve safe native stage results",
+          "name": "Preserve safe source-install diagnostics without binary payloads",
           "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
           "with": {
             "if-no-files-found": "error",
-            "name": "native-diagnostics-${{ github.sha }}-${{ github.run_attempt }}",
-            "path": "ci-output/native/result.json\nci-output/native/audit.json\nci-output/native/install.json\n",
+            "name": "source-install-diagnostics-${{ github.sha }}-${{ github.run_attempt }}",
+            "path": "ci-output/native-source/artifacts/*.json",
             "retention-days": 7
           }
         }

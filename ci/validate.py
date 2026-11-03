@@ -126,20 +126,38 @@ def validate(value, pins):
     }:
         raise ValueError("Final required check must cover all jobs, including failures")
     steps = jobs["native"]["steps"]
-    audit = next(
-        (i for i, s in enumerate(steps) if "ci/native.py --output" in s.get("run", "")),
-        None,
-    )
-    package = next(
+    source_check = next(
         (
             i
-            for i, s in enumerate(steps)
-            if s.get("with", {}).get("path") == "ci-output/native/artifacts/"
+            for i, step in enumerate(steps)
+            if step.get("run", "").strip()
+            == (
+                "/usr/bin/python3.14 -B ci/native_source.py "
+                "--output ci-output/native-source"
+            )
         ),
         None,
     )
-    if audit is None or package is None or package <= audit or "if" in steps[package]:
-        raise ValueError("Package upload must be gated by successful audit")
+    uploads = [
+        (i, step)
+        for i, step in enumerate(steps)
+        if step.get("uses", "").startswith("actions/upload-artifact@")
+    ]
+    if source_check is None or len(uploads) != 1:
+        raise ValueError("Required source-online verification and diagnostics missing")
+    index, upload = uploads[0]
+    if (
+        index <= source_check
+        or upload.get("if") != "always()"
+        or upload.get("with", {}).get("path")
+        != "ci-output/native-source/artifacts/*.json"
+        or not upload.get("with", {})
+        .get("name", "")
+        .startswith("source-install-diagnostics-")
+    ):
+        raise ValueError("Source CI may upload safe JSON diagnostics only")
+    if any("ci/native.py" in step.get("run", "") for step in steps):
+        raise ValueError("Bundled-wheel assembly is not the active source release gate")
     if steps[0].get("with", {}).get("fetch-depth") != 0:
         raise ValueError("Native immutable source audit requires full history")
     contract = json.loads((ROOT / "ci/native-workflow-contract.json").read_text())
