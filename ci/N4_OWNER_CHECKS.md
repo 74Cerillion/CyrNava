@@ -2,7 +2,49 @@
 
 3 November 2026. **N1–N3 ACCEPTED / COMPLETE; N4 authorized, release CONDITIONAL.**
 
-**Latest: fixture-parent correction LOCALLY VERIFIED / READY FOR REVIEW.** Five
+**Latest: schema fixtures and safe diagnostics LOCALLY VERIFIED / READY FOR REVIEW.**
+Two files change: deterministic test trust metadata and fixed-category/UID/mode
+diagnostics. Production trust predicates/order stay intact. A controlled unsafe
+profile reproduces the old failures; corrected tests pass while the separate host
+trust observation remains **BLOCKED**. Actual GitHub metadata is still unknown.
+Fresh-source verification: **198 native + 63 feasibility + 38 workflow = 299 PASS**,
+zero skips, plus lint/format/workflow contract. No new package, native launch,
+host-policy change, commit/push or GitHub execution.
+
+- [x] Wrong-owner/write/symlink and missing/type/query/read/content refusals covered.
+- [x] Real GLib synthetic-schema regression separated from actual host trust observation.
+- [x] No BLOCKED observation promoted to host/application/renderer PASS.
+- [x] Original hosted failures, accepted artifacts and uncommitted work preserved.
+- [ ] Owner reviews exact corrective batch and separately authorizes any commit/push.
+- [ ] Hosted native feasibility/assembly/audit/install and final package verification pending.
+
+Details: [N4_REPORT.md](N4_REPORT.md),
+[local evidence](evidence/n4/schema-fixtures-2026-11-03/result.json).
+The repository's packaging floor was unmet; only bounded tests on temporary
+storage ran. No local build/download or retained-output deletion.
+
+The following hosted checkpoint is historical.
+
+**Historical: fixture-parent correction HOSTED PASS; feasibility CI FAIL.** The exact
+14-file commit `2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8` was pushed normally once
+to integration; independent readback passed and main is unchanged.
+[CI 41616088358](https://github.com/74Cerillion/CyrNava/actions/runs/41616088358),
+attempt 1: workflow, backend, frontend/browser and all **198 native tests PASS**.
+The following feasibility suite has 51 passes, 2 errors and 1 failure at the
+unchanged OS schema ownership/write-permission guard. The exact rejected object
+and metadata were not recorded. No native package was produced; required CI FAIL.
+Diagnostic integrity/provenance passed. See [N4_REPORT.md](N4_REPORT.md) and
+[hosted evidence](evidence/n4/hosted-41616088358/result.json).
+
+- [x] Exact reviewed fixture-parent batch committed/pushed once; hosted correction verified.
+- [x] Actual failure and uncertainty preserved; production schema guard unchanged.
+- [x] Earlier artifacts/results preserved; no automatic correction/retry/additional commit/push.
+- [ ] Review proposed deterministic schema fixtures, real GLib coverage and safe path/UID/mode diagnostics.
+- [ ] Hosted native feasibility/assembly/audit/install PASS; separate corrective commit/push authority.
+
+The following local correction checkpoint is historical.
+
+**Historical: fixture-parent correction LOCALLY VERIFIED / READY FOR REVIEW.** Five
 test-fixture `mkdir` calls now create missing parents. The new independent
 five-case regression reproduces the original failure before the fix. A fresh
 full committed-source snapshot plus only this test-file patch passes 198 native,

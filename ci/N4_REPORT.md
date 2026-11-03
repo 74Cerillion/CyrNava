@@ -1,9 +1,174 @@
 # N4 — Native CI and public-release preparation
 
-3 November 2026. **CLEAN-CHECKOUT FIX LOCALLY VERIFIED / READY FOR REVIEW.
-Last hosted ordinary CI remains FAIL; N4 / public release CONDITIONAL.**
+3 November 2026. **SCHEMA FIXTURES/DIAGNOSTICS LOCALLY VERIFIED / READY FOR REVIEW.
+Latest hosted CI remains FAIL; N4 / public release CONDITIONAL.**
 
-## Latest checkpoint — authorized fixture-parent correction
+## Latest checkpoint — authorized schema fixtures and safe diagnostics
+
+The owner authorized isolating the host-dependent schema tests and adding safe
+metadata diagnostics. Only `packaging/native/feasibility/run_probe.py` and
+`test_system_schemas.py` change implementation. No workflow, installer, dependency
+lock, renderer configuration, application data/schema or host-policy changes.
+
+The existing trust checks retain their acceptance conditions and order. A
+`SchemaTrustError(ValueError)` now identifies a rejection using only a fixed
+system-object category, fixed reason, UID, expected OS UID, octal permission mode
+and errno. Unknown paths become `unreviewed-path`; raw paths, environment and
+filesystem error text are excluded, including chained OSError output. Original
+ownership/write-error prefixes remain compatible. The two original owner/write
+predicates were also compared as syntax trees and are unchanged. Independent
+read-only review found no blocker.
+
+Unit query/environment/content-change tests now use deterministic synthetic trust
+metadata. Negative coverage independently exercises wrong ownership, group/world
+writes and symlinks at the fixed system objects, plus missing/nonregular compiled
+schemas, metadata/read failures, query errors and content changes. Query/content
+tests must reach their intended operation rather than pass at an unrelated early
+host-metadata rejection. The real GLib test compiles two isolated synthetic schema
+sets and uses real compiler/query/compiled bytes with explicitly synthetic trust
+metadata. This is GLib selection coverage, not certification of actual host trust.
+
+A separate unmocked observation records actual system-schema preflight status in
+the unit job log. **A rejected host remains `BLOCKED` in that observation**, even
+when the observation test itself completes successfully. Unknown exceptions still
+fail the test. Future CI green cannot turn that observation into bootstrap,
+application-launch, renderer or host-trust PASS. The normal launcher continues to
+reject the same unsafe metadata. Printed observations will be in the job log;
+they are not automatically an uploaded native diagnostic JSON artifact.
+
+A controlled test-only `/usr` group-write profile reproduced the old three-case
+result (2 errors, 1 failure). All 19 corrected focused schema tests pass under that
+profile, while its trust observation remains **BLOCKED**, with category
+`usr-directory`, UID/expected UID `0`, mode `0775`. These are synthetic profile
+values, **not discovered values from GitHub**. The actual rejected object/UID/mode
+in run 41616088358 remains unknown until a separately approved hosted execution
+records it. The actual confined local schema-only observation passes; it does not
+establish owner-host application or renderer behavior.
+
+| Fresh committed-source snapshot plus two-file patch | Actual result |
+| --- | --- |
+| Exact native CI regression command, `ci-output` initially absent | 198 PASS, zero skips |
+| Native feasibility | 63 PASS, zero skips; includes 19 focused schema tests |
+| Workflow/negative-contract regressions | 38 PASS, zero skips |
+| Workflow security/dependency contract, Ruff and formatting | PASS |
+
+Unique local total: **299 passing tests**. Six actual disposable-signature tests
+are included in the native total; their fresh synthetic one-day key fixture was
+cleaned up. The snapshot contained 1,612 committed files / 48,073,056 source bytes;
+all source bytes were unchanged after testing apart from the explicit overlays.
+Observed temporary allocation peaked at 52,432,896 bytes within a 128 MiB bound;
+verification took 3.975 seconds. Snapshot/test scratch was removed by normal test
+cleanup. Early local fixture/wrapper iterations remain preserved privately.
+
+The repository was below the 5 GiB packaging preparation floor. Tests used the
+separate temporary filesystem and existing tools; no package preparation/build,
+dependency download or retained-output cleanup was performed. Both resource
+observations remain recorded. All ten pre-existing uncommitted files were
+unchanged before these report updates; 45 protected files, including N1/N3
+receipts/results and accepted package/security inputs, retain their hashes.
+
+Source remains `2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8` plus the explicit patch:
+
+- Diagnostic helper SHA-256: `81a4f6c6c3cad96fc6b6d4efba32c1511886d5cd341fbe8abe5dd8b1fde6d0b3`.
+- Schema tests SHA-256: `995ae8eed99e17ed2aac7ce56403bf3a5b2522164e593c2c7f10d68ae5773cf8`.
+- Two-file patch SHA-256: `555327bbc552fd4f3ca9a6825adbd45763fd51b451b0341bafba50cc106441e7`.
+
+[Verification evidence](evidence/n4/schema-fixtures-2026-11-03/result.json).
+[Exact uncommitted batch proposal](evidence/n4/schema-fixtures-2026-11-03/commit-proposal.json).
+The helper is shipped as `system_schemas.py`; this diagnostic change is a future
+package input. No candidate was rebuilt, and older artifacts are not represented
+as testing these new bytes. CI's current headless install checks imports,
+providers, ELF, installed identities and backend/data; it does **not** execute
+system-schema preflight, bootstrap or the normal desktop launcher.
+
+**Owner checkpoint:** review the uncommitted corrective batch. Any new commit,
+normal integration push and hosted verification require separate authorization.
+No staging, commit, push, GitHub execution, GUI/native rehearsal, production
+signing or host security change occurred. All three original hosted FAIL records remain unchanged.
+N1–N3 remain accepted; N4 and public release remain CONDITIONAL, pending hosted
+native assembly/audit/install, final package verification and source/notice/signing
+and publication requirements.
+
+## Historical checkpoint — fixture-parent push and hosted verification
+
+The owner authorized the reviewed corrective course: one commit and one normal
+integration push, followed by ordinary CI and independent artifact verification.
+Commit **`2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8`**, parent
+`b5ad466b5c5694900e4463ffdef10f0b7c84a732`, tree
+`1e97bd6898f1b075a457c14a0c4876eb73d91add`, contains exactly the 14 reviewed paths
+and approved bytes. Staged review, independent read-only review, normal
+fast-forward push and independent GitHub API/remote Git readback passed. `main`
+remains default and unchanged at `4021bc292267c19b7ebebf219b4f682f8f99bf4c`.
+
+[Ordinary CI 41616088358](https://github.com/74Cerillion/CyrNava/actions/runs/41616088358),
+attempt 1, push event, completed **FAIL** (3 November, 19:03:46–19:08:43 Korea time).
+
+| Hosted scope | Actual result |
+| --- | --- |
+| Workflow validation | PASS; 38 tests |
+| Backend and security | PASS; 574 current tests plus 37 subtests; 351 historical tests plus 198 subtests |
+| Frontend and browser | PASS; 277 units, lint, TypeScript/production build and 21 Chromium tests |
+| Native regression command | **198 PASS**, including the five-case fresh-fixture regression and six disposable-signature tests |
+| Following native feasibility command | **FAIL**; 54 tests ran: 51 passed, 2 errors, 1 failure |
+| Native assembly/audit/isolated headless installation | NOT EXECUTED after feasibility failure; no package produced |
+| CI required | FAIL; no bypass |
+
+**The fixture-parent correction passed on the actual hosted runner.** The next
+failure is the unchanged schema trust guard in
+`packaging/native/feasibility/run_probe.py:31`. All three failed feasibility tests
+hit `info.st_uid != Path("/").stat().st_uid or info.st_mode & 0o022` before the
+font-key/query/content-change checks they intended to exercise. The error is
+`ValueError: System schemas must be protected by the OS owner`.
+
+The checked objects, in order, are `gschemas.compiled`, its system schema
+directory, `/usr/share/glib-2.0`, `/usr/share`, `/usr`, and `/`. At least one has an
+owner mismatch or group/world write bit under this runner's view. **The retained
+logs do not identify which object, UID or mode.** Do not infer that the compiled
+file itself is runner-owned or writable. No application or renderer failure has
+been established; neither was executed.
+
+The failed tests are `test_only_schema_search_override_changes` and
+`test_real_glib_overlay_reproduces_missing_keys_and_system_selection_restores_visibility`
+(errors), plus `test_schema_change_during_preflight_refused` (its expected later
+changed-content error was preempted by the ownership/write-bit rejection).
+Two unit tests mock query/contents while retaining dependence on actual host
+trust metadata. The real GLib overlay test also stops before its system-selection
+query. The earlier local clean source snapshot reused local OS metadata, so its
+54 feasibility passes did not reproduce this hosted environment difference.
+
+The smallest justified follow-up scope is deterministic trust-metadata fixtures
+with explicit wrong-owner, writable and symlink negatives; separate real GLib
+visibility coverage; and safe fixed-system-path category/UID/mode diagnostics to
+identify the actual runner rejection. **Preserve the production trust guard.**
+No host permission/security change or relaxation is justified by this result.
+This is a proposed follow-up only: no implementation correction, test rerun,
+second commit/push or workflow retry occurred after the hosted failure.
+
+The always-run native diagnostic upload also failed because unstarted assembly
+had produced no result/audit/install JSON. Both successful diagnostic artifacts
+were independently downloaded into bounded RAM and verified against GitHub API
+digests, sizes, CRCs and exact run/commit provenance:
+
+- Backend artifact `13221780782`, 24,292 bytes, SHA-256
+  `a4d0d0f1e8f07b497a25afcd689576b9bf648c4f66a11b2d80d67fc1615196f0`.
+- Frontend artifact `13221128077`, 4,892,624 bytes, SHA-256
+  `e4878bdc41ec81937eddb6f1b927a24b4f02503fee625c045d76a6792b27df58`.
+
+Successful JUnit records are retained privately; diagnostic screenshot ZIPs were
+not duplicated on disk. JUnit totals include subtests: 611 current backend, 549
+historical and 21 browser, all without failures/errors/skips. No native artifact
+exists to verify. Raw job logs remain private in `ci-output/native-n4-fixture-push-1/`.
+[Hosted result](evidence/n4/hosted-41616088358/result.json),
+[diagnostic integrity](evidence/n4/hosted-41616088358/artifact-integrity.json),
+[remote readback](evidence/n4/hosted-41616088358/remote-readback.json).
+
+Post-run documentation/evidence stays local and uncommitted. Earlier hosted FAIL
+records and accepted artifacts remain unchanged. Owner review of the proposed
+schema-test investigation/correction scope is next. Any later commit/push needs
+separate authority. Native package verification, vendor source/notice closure,
+genuine signing and separately authorized publication remain pending.
+
+## Historical checkpoint — authorized fixture-parent correction
 
 After reviewing run 41612661098, the owner authorized the small fixture-parent
 correction and local clean-checkout regression verification. Only

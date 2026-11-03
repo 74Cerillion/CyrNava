@@ -7,12 +7,75 @@ import os
 import resource
 import shutil
 import signal
+import stat
 import subprocess
 import time
 from pathlib import Path
 
 SYSTEM_SCHEMAS = Path("/usr/share/glib-2.0/schemas")
 FONT_KEYS = {"font-antialiasing", "font-hinting", "font-rgba-order"}
+SCHEMA_PATH_CATEGORIES = {
+    Path("/usr/share/glib-2.0/schemas/gschemas.compiled"): "compiled-schemas",
+    Path("/usr/share/glib-2.0/schemas"): "schema-directory",
+    Path("/usr/share/glib-2.0"): "glib-data-directory",
+    Path("/usr/share"): "shared-data-directory",
+    Path("/usr"): "usr-directory",
+    Path("/"): "filesystem-root",
+}
+SCHEMA_REJECTIONS = {
+    "separate-os-owner-required": "System schemas require a separate OS owner",
+    "symlink-refused": "System schema symlink refused",
+    "metadata-unavailable": "System schema ownership metadata unavailable",
+    "os-owner-mismatch": "System schemas must be protected by the OS owner",
+    "group-or-world-writable": "System schemas must be protected by the OS owner",
+    "compiled-file-unavailable": "Ubuntu system compiled schemas unavailable",
+    "compiled-read-unavailable": "Ubuntu system compiled schemas unavailable",
+}
+
+
+def _diagnostic_integer(value):
+    return value if type(value) is int else None
+
+
+class SchemaTrustError(ValueError):
+    """Fail closed with only fixed categories and numeric system metadata."""
+
+    def __init__(self, *, path, reason, info=None, os_owner=None, error=None):
+        if reason not in SCHEMA_REJECTIONS:
+            raise ValueError("Unreviewed schema diagnostic reason")
+        mode = _diagnostic_integer(info.st_mode) if info is not None else None
+        self.diagnostic = {
+            "path_category": SCHEMA_PATH_CATEGORIES.get(path, "unreviewed-path"),
+            "reason": reason,
+            "uid": _diagnostic_integer(info.st_uid) if info is not None else None,
+            "expected_os_uid": _diagnostic_integer(os_owner),
+            "mode": f"{stat.S_IMODE(mode):04o}" if mode is not None else None,
+            "errno": _diagnostic_integer(error.errno) if error is not None else None,
+        }
+        super().__init__(
+            f"{SCHEMA_REJECTIONS[reason]}: {json.dumps(self.diagnostic, sort_keys=True)}"
+        )
+
+
+def _schema_stat(path, os_owner=None):
+    try:
+        return path.stat()
+    except OSError as error:
+        raise SchemaTrustError(
+            path=path, reason="metadata-unavailable", os_owner=os_owner, error=error
+        ) from None
+
+
+def _schema_bytes(path, os_owner):
+    try:
+        return path.read_bytes()
+    except OSError as error:
+        raise SchemaTrustError(
+            path=path,
+            reason="compiled-read-unavailable",
+            os_owner=os_owner,
+            error=error,
+        ) from None
 
 
 def ubuntu_system_schema_environment(inherited):
@@ -20,18 +83,52 @@ def ubuntu_system_schema_environment(inherited):
     compiled = SYSTEM_SCHEMAS / "gschemas.compiled"
     # A confined read-only view can map host root to the overflow UID. Compare
     # against the filesystem root's owner, never accept the invoking user as OS owner.
-    os_owner = Path("/").stat().st_uid
+    root_info = _schema_stat(Path("/"))
+    os_owner = root_info.st_uid
     if os_owner == os.getuid():
-        raise ValueError("System schemas require a separate OS owner")
+        raise SchemaTrustError(
+            path=Path("/"),
+            reason="separate-os-owner-required",
+            info=root_info,
+            os_owner=os_owner,
+        )
     for path in (compiled, SYSTEM_SCHEMAS, *SYSTEM_SCHEMAS.parents):
-        if path.is_symlink():
-            raise ValueError("System schema symlink refused")
-        info = path.stat()
+        try:
+            symlink = path.is_symlink()
+        except OSError as error:
+            raise SchemaTrustError(
+                path=path, reason="metadata-unavailable", os_owner=os_owner, error=error
+            ) from None
+        if symlink:
+            raise SchemaTrustError(
+                path=path, reason="symlink-refused", os_owner=os_owner
+            )
+        info = _schema_stat(path, os_owner)
         if info.st_uid != os_owner or info.st_mode & 0o022:
-            raise ValueError("System schemas must be protected by the OS owner")
-    if not compiled.is_file():
-        raise ValueError("Ubuntu system compiled schemas unavailable")
-    digest = hashlib.sha256(compiled.read_bytes()).hexdigest()
+            raise SchemaTrustError(
+                path=path,
+                reason=(
+                    "os-owner-mismatch"
+                    if info.st_uid != os_owner
+                    else "group-or-world-writable"
+                ),
+                info=info,
+                os_owner=os_owner,
+            )
+    try:
+        compiled_available = compiled.is_file()
+    except OSError as error:
+        raise SchemaTrustError(
+            path=compiled,
+            reason="compiled-file-unavailable",
+            os_owner=os_owner,
+            error=error,
+        ) from None
+    if not compiled_available:
+        raise SchemaTrustError(
+            path=compiled, reason="compiled-file-unavailable", os_owner=os_owner
+        )
+    digest = hashlib.sha256(_schema_bytes(compiled, os_owner)).hexdigest()
     environment = dict(inherited)
     environment["GSETTINGS_SCHEMA_DIR"] = str(SYSTEM_SCHEMAS)
     try:
@@ -47,7 +144,7 @@ def ubuntu_system_schema_environment(inherited):
         raise ValueError("System font-schema query unavailable") from error
     if query.returncode != 0 or not FONT_KEYS.issubset(query.stdout.splitlines()):
         raise ValueError("Required Ubuntu font-schema keys unavailable")
-    if hashlib.sha256(compiled.read_bytes()).hexdigest() != digest:
+    if hashlib.sha256(_schema_bytes(compiled, os_owner)).hexdigest() != digest:
         raise ValueError("System compiled schemas changed during preflight")
     return environment, {
         "mode": "explicit-Ubuntu-system-schemas",

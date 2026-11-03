@@ -2,18 +2,26 @@
 
 3 November 2026. **N1/N2/N3 ACCEPTED / COMPLETE. N4 local implementation VERIFIED;
 public release CONDITIONAL.**
-Latest authorized local correction: test-only fixture-parent fix VERIFIED.
-A new independent five-case regression reproduces the missing-parent failures
-before the fix. A fresh full committed-source snapshot plus only that test patch,
-starting with no `ci-output`, passes 198 native, 54 feasibility and 38 workflow
-tests (**290 total, zero skips**), workflow contract and lint. No application,
-installer, dependency, workflow or security-policy changes. No new build, GUI,
-host-policy load, commit, push or GitHub execution. Source remains at
-`b5ad466b5c5694900e4463ffdef10f0b7c84a732`; main is untouched. Hosted runs
-`41607482461` and `41612661098` remain **FAIL**, with no native package produced.
-Review of the local correction and separate commit/push authority are next;
-hosted native verification is still pending. [N4_REPORT.md](N4_REPORT.md) retains
-exact evidence identities and remaining release requirements.
+Latest local checkpoint: **schema fixtures and safe metadata diagnostics VERIFIED /
+READY FOR REVIEW**. Fresh committed-source verification plus exactly two source-file
+overlays passes **198 native + 63 feasibility + 38 workflow = 299 tests**, zero skips,
+plus lint/format/workflow contract. Deterministic test trust metadata is separated
+from actual host observation; unsafe metadata remains BLOCKED. Production trust
+predicates/order remain intact. The diagnostic helper is a future package input;
+no candidate was rebuilt and no desktop/renderer result is inferred.
+
+Latest authorized commit/push remains `2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8`.
+Ordinary CI `41616088358`, attempt 1, remains **FAIL**: workflow, backend,
+frontend/browser and 198 native tests passed; feasibility had 51 passes, 2 errors
+and 1 failure at the system-schema trust guard. The exact rejected GitHub
+object/UID/mode remains unknown. No native package was produced. Original hosted
+failure and diagnostic integrity/provenance records are preserved. No further
+staging, commit/push, GitHub execution, build, native rehearsal or host-policy
+change occurred. The repository was below its packaging disk floor; bounded tests
+used temporary storage. Review the exact corrective batch before separately
+authorizing any commit/normal integration push. [N4_REPORT.md](N4_REPORT.md) and
+[local evidence](evidence/n4/schema-fixtures-2026-11-03/result.json) record the
+scope and remaining requirements. Earlier hosted failures remain unchanged.
 The owner formally accepted N3's independently reviewed native GUI/reinstall,
 security, update/recovery and data-preservation scope. Exact artifact/result and
 owner decision: [N3_REPORT.md](N3_REPORT.md),
