@@ -1,4 +1,4 @@
-# Native source and redistribution checkpoint
+# Native source and redistribution obligations
 
 ## Current model — source-first repository and online dependency installer
 
@@ -8,12 +8,12 @@ exact approved Python wheels from official PyPI distribution services, uses the
 reviewed npm lock to build the frontend locally, and creates the native private
 environment. Manual updates use `bash update.sh`. The offline implementation and
 its unresolved findings remain historical, not additional native-release gates.
-N1–N4 are owner-ACCEPTED. Source-first CI
+Source-first CI
 [41648248846](https://github.com/74Cerillion/CyrNava/actions/runs/41648248846)
 passed clean installation, a distinct compatible online update and profile-byte
 preservation for commit `383970f4af683aad154eb1bccaafdd5a932d8b76`.
-The [N4 report](../ci/N4_REPORT.md) records that exact scope and final publication
-checkpoint. CI 41621033436 passed only its original offline-package inputs.
+These results apply to that exact source and compatibility scope. CI 41621033436
+passed only its original offline-package inputs.
 
 | Actual material or issue | Classification for source-first v0.1 | Evidence and required action |
 | --- | --- | --- |
@@ -22,7 +22,7 @@ checkpoint. CI 41621033436 passed only its original offline-package inputs.
 | Qt GPL-only families | No incompatible direct application use identified; scope limited | Direct application imports are Core/Gui/Widgets/WebEngineCore/WebEngineWidgets. Unused GPL-only libraries in an upstream wheel do not establish MIT-source relicensing. This is not a classification of every indirect native link or permission to convey a combined binary without applicable terms. |
 | use-composed-ref 1.4.0 | MIT declaration and available notices satisfied; holder clarification optional | Immutable upstream metadata declares MIT; full MIT text/component identity retained. No holder/year supplied. Absence of a separate LICENSE is not evidence of no permission, and no fresh maintainer grant is established as required. Do not invent attribution. |
 | BlockNote MPL, Inter fonts and copied frontend notices | Required for material actually distributed; retained in the reviewed source | Preserve existing full notices and exact version/source links. New frontend bundles are local build outputs. Any covered source/executable material actually conveyed still needs its applicable source availability and notice conditions. |
-| Historical Playwright traces | Existing nine ZIPs reviewed and owner-approved to remain | Their captured HTML/CSS and Inter font copies were reviewed against the retained OFL/MPL notices and source references. They are included in an ordinary source ZIP and Git clone even though installation excludes them. Preserve the accepted evidence; `.gitignore` does not remove tracked content. New traces are not covered by that approval. |
+| Historical Playwright traces | Excluded from the current public tree after preservation | Retained privately as development evidence. Earlier Git snapshots can still contain captured HTML/CSS and Inter fonts; retain applicable notices and source references. `.gitignore` neither removes tracked files nor erases history. |
 | Source/version authenticity | Explicit repository trust required | A co-located source inventory detects changed inputs but does not independently authenticate the installer. Use reviewed immutable version/commit instructions; a GitHub ZIP requires no `.git`. No production signing identity is invented. |
 
 GPLv3 section 0 permits running/private modification; its sections 5–6 concern
@@ -37,9 +37,8 @@ For source publication, retain MIT plus notices for actual copied material and
 the versioned upstream source references. Do not attach the 1 GB Qt source archive
 merely to satisfy a binary distribution that is no longer being offered. Do not
 delete that archive or earlier evidence. No vendor contact, publication, signing
-or history rewrite is authorized. The two earlier inquiry drafts below are
-preserved for the historical offline target or optional attribution clarification;
-they are not automatic prerequisites for the new public source model.
+or history rewrite is authorized. Historical binary-source correspondence remains outside the active source-only
+payload; it would require review before any future binary distribution.
 
 Primary provisions: [GPLv3 §§0, 5–6](https://doc.qt.io/qt-6.11/gpl.html),
 [LGPLv3 §4](https://doc.qt.io/qt-6.11/lgpl.html),
@@ -151,31 +150,6 @@ recipient's own package/key. The project does not promise to sign modified
 packages. This route remains UNVALIDATED until exact build inputs and a practical
 replacement/rebuild procedure are established. No security check is weakened to
 make that claim.
-
-## Draft upstream clarification requests — not sent
-
-Qt/PySide: For the four exact 6.11.3 wheel filenames and SHA-256 values in the
-catalog, please identify the Qt, Qt WebEngine/Chromium, PySide and Shiboken source
-revisions, downstream patches, compiler/build configuration, bundled dependency
-versions and source/notices/credits (including FFmpeg and ICU). Do the official
-`qt-everywhere-src-6.11.3.tar.xz` and
-`pyside-setup-everywhere-src-6.11.3.tar.xz` archives fully correspond to these
-wheels? If additional sources or patches are required, please identify their
-immutable locations and applicable notices. Please provide existing build
-provenance/SBOM/credit records where available; no new infrastructure is requested.
-Version-only metadata, the Qt source `.tag` revision
-`3bc7aa8942d31739ac6ef48c460ad9d4f66153ec`, compiler strings and build timestamps
-do not themselves map these particular wheels to a complete source/build set.
-
-use-composed-ref: Your exact 1.4.0 package and upstream commit
-`ea2c9d969f2f90a349f4c99338b806423824cea2` declare MIT, which is confirmed.
-Neither the inspected package nor that source tree supplies a separate
-copyright/license document. Please identify the applicable copyright attribution
-and full notice to preserve for redistribution of 1.4.0, or confirm the intended
-notice. No holder/year has been invented; missing attribution is not evidence
-that an MIT license declaration is absent or permission was refused.
-
-These drafts are for owner review. No upstream contact is authorized or performed.
 
 Primary references checked 3 November 2026:
 

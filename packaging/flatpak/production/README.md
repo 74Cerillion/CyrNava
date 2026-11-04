@@ -6,12 +6,11 @@ historical replay PASS does not close this production blocker. Keep these files
 unchanged as accepted provenance; do not use runtime pinning as a public-release
 solution. No replacement manifest/lock is installed by this assessment.
 
-See [P6 Qt compatibility assessment](../../../ci/P6_QT_COMPATIBILITY.md) for
-source/ELF evidence, official-wheel measurements and the concrete separate
-app-owned Qt build proposal. The existing package auditor, permissions, identity,
-launcher and source/signing requirements remain mandatory. Candidate builds must
-also reject mixed Qt private providers and independently verify Flatpak renderer
-sandboxing and ordinary dependency updates.
+This historical Flatpak route is paused. The current supported distribution is
+[source-first native Ubuntu installation](../../../docs/native-installation.md).
+The existing package auditor, permissions, identity and renderer sandbox
+requirements remain; never bypass the compatibility failure with sandbox flags
+or runtime pinning.
 
 
 This builds **io.github._74Cerillion.CyrNava**, branch **stable**, from the existing
@@ -129,12 +128,6 @@ licenses/notices remain in the package. Public redistribution clearance, includi
 previously documented attribution provenance, remains outside this local test.
 No Flathub submission, signing, public repository or P5/P6 work is included.
 
-## P4 closeout
+## Historical chooser compatibility
 
-P4 was closed on 30 October 2026 by explicit owner acceptance. Direct backup/import
-PASS is owner-attested; recorded machine checks and outstanding verification
-limits are separated in `desktop/native/P4_REPORT.md` and
-`desktop/native/evidence/p4/closeout-2026-10-30/owner-acceptance.json`.
-The A/B artifacts predate the chooser source correction; enter the full
-`.cyrnava` filename when using those builds. Closure does not authorize a release,
-publication, real-data migration, or P5/P6.
+The retained A/B artifacts predate the chooser source correction; enter the full `.cyrnava` filename when using those builds.

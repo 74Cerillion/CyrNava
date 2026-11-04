@@ -1,6 +1,6 @@
 # Dependencies and licensing review
 
-Recorded against the M6 candidate on 2026-10-23. No dependency version was upgraded or added in M6. Package root version changed to 0.1.0; `UNLICENSED` marks the owner's pending original-code decision, not dependency licensing.
+Historical dependency inspection recorded against the M6 candidate on 2026-10-23. No dependency version was upgraded or added in M6. CyrNava original code is now MIT licensed, Copyright (c) 2026 74Cerillion; see [LICENSE](../LICENSE). For the current native dependency closure and distribution scope, see [native dependencies](native-dependencies.md) and [source obligations](native-source-obligations.md).
 
 ## Inventory and compatibility
 
@@ -29,14 +29,6 @@ MIT/BSD/0BSD/CC0 and OFL notices remain independent of the owner's license choic
 
 Installed Mantine and react-remove-scroll-bar packages omit standalone license files; upstream license text was retrieved and retained with source/version information. **use-composed-ref 1.4.0 declares MIT but its package and inspected upstream repository omit a copyright/license file.** The notice states that omission rather than inventing an owner. Resolve its attribution provenance or obtain legal approval before binary/bundle distribution; the audit cannot certify complete legal clearance. No dependency code was modified to work around licensing.
 
-## Original-code license — owner decision pending
+## Original-code license
 
-The owner explicitly chose “Leave the license decision pending.” No LICENSE file or original-code permission grant has been added. Public v0.1.0 release approval remains blocked.
-
-| Option | Practical benefit | Obligations / tradeoff |
-| --- | --- | --- |
-| MIT (recommended for review) | Short permissive grant; easy adoption | Preserve original notices; no explicit patent grant. It does not waive MPL/other dependency duties. |
-| Apache-2.0 | Permissive with explicit patent terms | More terms, change notices and applicable NOTICE handling; dependency obligations still apply. |
-| MPL-2.0 | Reciprocity for modified covered files | Source availability for covered files; proprietary larger works possible, but more file-boundary compliance work. |
-
-MIT is a recommendation, not a selection. See [MIT terms](https://opensource.org/license/mit), [Apache-2.0 terms](https://www.apache.org/licenses/LICENSE-2.0), and the Mozilla FAQ above. Before public release the owner must choose a license, add the correct copyright/holder and LICENSE, update package metadata/README, and review third-party distribution obligations. Do not claim CyrNava is already open-source merely because its repository is publicly visible.
+CyrNava original code is [MIT licensed](../LICENSE), Copyright (c) 2026 74Cerillion. Preserve the MIT notice. Third-party code, fonts and assets retain their own licenses and applicable notice/source-availability conditions; the project license does not replace them.

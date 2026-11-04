@@ -5,8 +5,8 @@
   "scope": "Historical offline-wheel inventory retained; current source-first distribution is assessed separately in source_first",
   "source_first": {
     "owner_decision": "Source-first GitHub repository with online official-upstream dependency installation",
-    "status": "CONDITIONAL: see ci/N4_REPORT.md for actual current source-first verification",
-    "repository_payload": "Original source, installer/updater, locks, notices, branding and tracked historical records; no wheelhouse, venv or prebuilt application bundle",
+    "status": "Source-first distribution scope; see docs/native-installation.md and docs/native-source-obligations.md",
+    "repository_payload": "Original source, installer/updater, locks, notices and branding; no wheelhouse, venv, prebuilt application bundle or internal acceptance records",
     "upstream_downloads": "Exact pinned PyPI wheels and locked npm packages fetched by recipient; not CyrNava release payloads",
     "local_builds": "Frontend and small native bootstrap built on recipient host; no Qt/Chromium compilation",
     "historical_offline_target": "Preserved, no longer the public release gate",
@@ -43,9 +43,9 @@
       },
       {
         "issue": "Historical tracked traces",
-        "classification": "CONDITIONAL: public tree/history review pending",
-        "evidence": "Nine Playwright ZIPs contain captured HTML/CSS and Inter fonts matching existing catalog",
-        "action": "Preserve records; do not confuse excluded installation inputs with excluded GitHub ZIP/clone content"
+        "classification": "EXCLUDED from current public tree after local preservation",
+        "evidence": "Historical synthetic captures retained locally; earlier Git snapshots remain accessible",
+        "action": "Retain relevant notices/source references; do not publish new diagnostic captures automatically"
       },
       {
         "issue": "Source trust",
@@ -780,7 +780,11 @@
   "pydantic_core_SBOM_scope_review": {
     "component_count": 99,
     "declared_Unicode_3_0_entries": 19,
-    "concrete_non_MIT_examples": ["foldhash 0.2.0: Zlib", "target-lexicon 0.13.4: Apache-2.0 WITH LLVM-exception", "Unicode-3.0 and Unicode-DFS-2016 terms"],
+    "concrete_non_MIT_examples": [
+      "foldhash 0.2.0: Zlib",
+      "target-lexicon 0.13.4: Apache-2.0 WITH LLVM-exception",
+      "Unicode-3.0 and Unicode-DFS-2016 terms"
+    ],
     "copyright_fields_in_components": 0,
     "scope_limit": "The retained upstream SBOM is build/dependency metadata; it does not prove every entry ships in the extension or supply complete component attribution notices.",
     "remaining": "Identify actual bundled components and applicable attribution/notice material; sole pydantic-core MIT license is not inferred to clear them. No new download, build or broad compliance machinery is required."

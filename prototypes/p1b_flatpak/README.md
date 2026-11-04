@@ -1,6 +1,6 @@
 # P1B: disposable Flatpak feasibility run
 
-This is a test application, **org.cyrnava.P1B**, branch **p1b**. It does not replace the installed CyrNava, register a production launcher, import notes or modify the production installer. Use synthetic data only. The host build, observed renderer sandbox/private networking and owner-run native acceptance checks have passed. P1B is complete for architectural review; [the assessment](REPORT.md) distinguishes automated, independently inspected and owner-confirmed evidence from untested supplemental behavior. Do not begin production integration without explicit approval.
+This is a test application, **org.cyrnava.P1B**, branch **p1b**. It does not replace the installed CyrNava, register a production launcher, import notes or modify the production installer. Use synthetic data only. The host build, observed renderer sandbox/private networking and owner-run native acceptance checks have passed. This historical prototype is not the current release target; use the [native installation guide](../../docs/native-installation.md) for supported installation.
 
 ## Build in your ordinary Ubuntu terminal
 

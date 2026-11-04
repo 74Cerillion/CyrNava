@@ -1,9 +1,0 @@
-{
-  "checked_at_utc": "2026-11-01T09:00:23.111205+00:00",
-  "refs": {
-    "refs/heads/desktop/p2-production-integration": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
-    "refs/heads/main": "4021bc292267c19b7ebebf219b4f682f8f99bf4c"
-  },
-  "expected_integration": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
-  "expected_main": "4021bc292267c19b7ebebf219b4f682f8f99bf4c"
-}

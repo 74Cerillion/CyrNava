@@ -1,6 +1,6 @@
 # Architecture of CyrNava v0.1.0
 
-CyrNava is a local cybersecurity knowledge workspace. It does not yet implement engagement/host/vulnerability entities, integrations, tags or cloud services. Search is implemented through backend/frontend M3, with M4 validation and [synthetic benchmarks](search-benchmark.md). Owner commit/publication remains pending. The code is a React/TypeScript UI plus a local Python/FastAPI application, with SQLite and raster image files outside the checkout.
+CyrNava is a local cybersecurity knowledge workspace. It does not yet implement engagement/host/vulnerability entities, integrations, tags or cloud services. Search uses SQLite FTS5 and safe result navigation. The code is a React/TypeScript UI plus a local Python/FastAPI application, with SQLite and raster image files outside the checkout.
 
 ```mermaid
 flowchart TD
@@ -29,7 +29,7 @@ Development uses Vite on `127.0.0.1:5173` and FastAPI on `127.0.0.1:8000`. Vite 
 
 Local release mode uses `backend/app/__main__.py` (`python -m app`). It fixes Uvicorn's host to `127.0.0.1`, builds the existing FastAPI app with a `frontend_path`, and `app/release.py` serves `frontend/dist/index.html`, hashed `/assets/*`, local third-party notices and the `/api/health` alias. Unknown paths/API routes remain 404. No Vite process, reverse proxy, cloud service or packaging daemon is needed. Its CSP permits same-origin scripts/requests/fonts and the inline styles required by the editor; there are no remote runtime assets.
 
-Desktop launches extend the existing `desktop/launcher.py` with an owning supervisor and opt-in `app/lifecycle.py` leases. Each page registers an unpredictable ID; heartbeats renew it, pagehide offers a close hint, and expiration provides the fallback. The supervisor alone holds termination authority. Direct development/release entrypoints do not opt in and have no automatic shutdown. See [desktop operation and recovery](desktop-launcher.md) and the [lifecycle report](../LIFECYCLE_REPORT.md).
+Desktop launches extend the existing `desktop/launcher.py` with an owning supervisor and opt-in `app/lifecycle.py` leases. Each page registers an unpredictable ID; heartbeats renew it, pagehide offers a close hint, and expiration provides the fallback. The supervisor alone holds termination authority. Direct development/release entrypoints do not opt in and have no automatic shutdown. See [desktop operation and recovery](desktop-launcher.md).
 
 ## Frontend boundaries
 
@@ -85,4 +85,4 @@ Typing in `GlobalSearch` → cancel/invalidate old query state → 300 ms timer 
 
 Backup validation accepts schema 3, 4 and 5. For schema 4 and 5 it additionally validates template JSON, image membership, MIME, size and raster decoding. Template image snapshots are already in the SQLite file, so the manifest format and filesystem asset layout stay unchanged. Restoring a schema-3 backup preserves that copy verbatim; the new backend migrates only the restored runtime copy on startup. Old application versions reject schema 5; downgrade requires the retained pre-upgrade backup.
 
-Runtime frontend dependencies are the three non-XL BlockNote packages, React/React DOM and Mantine. Runtime backend dependencies are FastAPI/Pydantic/Uvicorn/Pillow and their pinned resolution. Vitest/Testing Library and Playwright cover different testing layers; they are not production services. Versions and obligations are in [dependency review](dependencies-and-licenses.md). ADRs record observed decisions, not invented historical discussions.
+Runtime frontend dependencies are the three non-XL BlockNote packages, React/React DOM and Mantine. Runtime backend dependencies are FastAPI/Pydantic/Uvicorn/Pillow and their pinned resolution. Vitest/Testing Library and Playwright cover different testing layers; they are not production services. Versions and obligations are in [dependency review](dependencies-and-licenses.md).

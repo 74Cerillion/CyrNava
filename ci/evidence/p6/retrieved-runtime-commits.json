@@ -1,8 +1,0 @@
-{
-  "org.freedesktop.Platform.GL.default/x86_64/25.08": "c8dc1156588776045866acd53f9090c90fa84fdff0e74ee4e859ebfc80fb671d",
-  "org.freedesktop.Platform.GL.default/x86_64/25.08-extra": "4a2f702604835090c94ae8806aa9d91ab03cd294aedb3e0e24fc49d492d781eb",
-  "org.freedesktop.Platform.VAAPI.Intel/x86_64/25.08": "8983ce4b3afd9da43c9ad7486eb732bb1b2ff64ec6f7171b2aade5a6fe899832",
-  "org.freedesktop.Platform.codecs-extra/x86_64/25.08-extra": "4ac6fc6727e278ddff768b8996a9240ef3f40becead3b70289faa43314934c5b",
-  "org.kde.KStyle.Adwaita/x86_64/6.11": "bcdc2b041b36c8d3215ba9577175a4804ea5a6d0f90ee07a3b0878792db1d4c1",
-  "org.kde.Platform/x86_64/6.11": "fb23e178d082b117df7924f9a84710992ec233ebc007385feb85d349c4c81415"
-}
