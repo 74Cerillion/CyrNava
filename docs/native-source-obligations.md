@@ -8,8 +8,12 @@ exact approved Python wheels from official PyPI distribution services, uses the
 reviewed npm lock to build the frontend locally, and creates the native private
 environment. Manual updates use `bash update.sh`. The offline implementation and
 its unresolved findings remain historical, not additional native-release gates.
-N1–N3 stay ACCEPTED; N4 remains CONDITIONAL on the changed installation boundaries
-and public-repository readiness. CI 41621033436 passed only its recorded inputs.
+N1–N4 are owner-ACCEPTED. Source-first CI
+[41648248846](https://github.com/74Cerillion/CyrNava/actions/runs/41648248846)
+passed clean installation, a distinct compatible online update and profile-byte
+preservation for commit `383970f4af683aad154eb1bccaafdd5a932d8b76`.
+The [N4 report](../ci/N4_REPORT.md) records that exact scope and final publication
+checkpoint. CI 41621033436 passed only its original offline-package inputs.
 
 | Actual material or issue | Classification for source-first v0.1 | Evidence and required action |
 | --- | --- | --- |
@@ -17,8 +21,8 @@ and public-repository readiness. CI 41621033436 passed only its recorded inputs.
 | Qt/PySide/Shiboken, Chromium, FFmpeg, ICU and pydantic-core wheel binaries | Outside our active distributed payload, conditional on exclusion | No tracked wheels/venvs/native libraries. Recipient downloads directly upstream. Do not publish caches, installed trees or the old dependency bundle as source-release assets. Previous binary/source and Rust notice gaps remain unresolved for actual binary redistribution. |
 | Qt GPL-only families | No incompatible direct application use identified; scope limited | Direct application imports are Core/Gui/Widgets/WebEngineCore/WebEngineWidgets. Unused GPL-only libraries in an upstream wheel do not establish MIT-source relicensing. This is not a classification of every indirect native link or permission to convey a combined binary without applicable terms. |
 | use-composed-ref 1.4.0 | MIT declaration and available notices satisfied; holder clarification optional | Immutable upstream metadata declares MIT; full MIT text/component identity retained. No holder/year supplied. Absence of a separate LICENSE is not evidence of no permission, and no fresh maintainer grant is established as required. Do not invent attribution. |
-| BlockNote MPL, Inter fonts and copied frontend notices | Required for material actually distributed; prepared locally, integration pending | Preserve existing full notices and exact version/source links. New frontend bundles are local build outputs. Any covered source/executable material actually conveyed still needs its applicable source availability and notice conditions. |
-| Historical Playwright traces | Public-payload review remains | Nine tracked ZIPs contain captured HTML/CSS and three/four Inter font files; hashes match the existing Inter catalog/OFL notice. These are included in an ordinary source ZIP and Git clone even though installation excludes them. Preserve evidence; do not claim `.gitignore` removes tracked content. |
+| BlockNote MPL, Inter fonts and copied frontend notices | Required for material actually distributed; retained in the reviewed source | Preserve existing full notices and exact version/source links. New frontend bundles are local build outputs. Any covered source/executable material actually conveyed still needs its applicable source availability and notice conditions. |
+| Historical Playwright traces | Existing nine ZIPs reviewed and owner-approved to remain | Their captured HTML/CSS and Inter font copies were reviewed against the retained OFL/MPL notices and source references. They are included in an ordinary source ZIP and Git clone even though installation excludes them. Preserve the accepted evidence; `.gitignore` does not remove tracked content. New traces are not covered by that approval. |
 | Source/version authenticity | Explicit repository trust required | A co-located source inventory detects changed inputs but does not independently authenticate the installer. Use reviewed immutable version/commit instructions; a GitHub ZIP requires no `.git`. No production signing identity is invented. |
 
 GPLv3 section 0 permits running/private modification; its sections 5–6 concern

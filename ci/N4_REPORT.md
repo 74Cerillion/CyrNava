@@ -1,5 +1,108 @@
 # N4 — Native CI and public-release preparation
 
+## Final v0.1.0 release preparation — READY FOR OWNER REVIEW (4 November 2026)
+
+N1–N4 remain **OWNER-ACCEPTED**. Local release preparation is complete; no
+commit, push, PR, merge, tag, signing or publication was performed for this
+batch. HEAD remains `383970f4af683aad154eb1bccaafdd5a932d8b76` on
+`desktop/p2-production-integration`; nothing is staged. The owner's approval
+checkpoint for the final change set and subsequent external actions remains.
+
+The exact proposed batch is eight files:
+
+- `README.md`
+- `CHANGELOG.md`
+- `docs/native-installation.md`
+- `docs/native-release-notes-v0.1.0.md`
+- `docs/native-source-obligations.md`
+- `packaging/native/source-release.json`
+- `ci/N4_REPORT.md`
+- `ci/CyrNava v0.1.0 MVP release instructions.md`
+
+Current release wording and changelog now identify the approved v0.1.0 native
+source-first target and accepted evidence. The source-obligations changes only
+reconcile completed acceptance/trace-review wording; notices, license terms and
+historical binary-distribution findings are unchanged. The installation guide
+now supplies normal-install AppArmor prepare/review/load commands, deriving the
+actual installed manifest and retaining explicit reviewed policy-hash approval.
+They were reviewed and syntax-checked, not executed. No host policy was touched.
+
+The preexisting local edit setting installer release ID to `0.1.0` was preserved.
+Only four intended documentation inventory entries were updated: README,
+native installation, native release notes and native source obligations.
+All other entries and locked inputs are unchanged. Final metadata SHA-256:
+`28a5a0b9baffad9f0a474854093684ec6a9cef6b1da8f854ea8bfd0c4f58840c`.
+
+Local verification: existing `verified_source` **PASS**, all 166 declared hashes
+and 167 snapshot files; three existing focused integrity checks **PASS** (valid
+source, changed-source rejection and unexpected-source rejection). Documentation
+syntax **PASS**, 18 Bash blocks and five embedded Python snippets parsed only;
+`git diff --check` **PASS**. No application/installer/updater, dependency, lock,
+renderer or AppArmor implementation changes, downloads, builds or GUI operations
+were required. Accepted owner-host evidence and original hosted failures remain
+preserved. Hosted CI 41648248846 below still certifies its exact committed inputs,
+not this pending documentation/release-ID batch. The final preparation commit
+and main merge commit must complete their ordinary CI before publication.
+
+The updated release guide resumes at section 4 (review/commit/push), with an
+eight-file guard, then gives CI, PR/merge, exact tag, release and public-download
+verification steps. Do not repeat the completed preparation or refresh the
+inventory to bypass an unexpected mismatch. No additional engineering milestone
+or repeat GUI rehearsal is introduced.
+
+## Hosted source-first CI 41648248846 — VERIFIED PASS / N4 OWNER-ACCEPTED
+
+N1–N4 are **OWNER-ACCEPTED**. The owner formally accepted N4 on 3 November 2026
+after the independently verified hosted PASS below. Final public-source wording
+review and publication authorization remain separate; no release has been
+published. The active target remains native Ubuntu installation from GitHub
+source; the paused historical Flatpak track is not an additional release gate.
+
+One authorized commit, **`383970f4af683aad154eb1bccaafdd5a932d8b76`**, parent
+`9c36f427ffe0473cf7e37fad459d43f797f1116d`, changes only
+`packaging/native/source-release.json`: one approved source hash replacement.
+Its SHA-256 is
+`8b5ed21d97b8b44d57e2eb1039053f10bb4f96b1da4b7660662c900b6e519631`.
+One normal push to `origin/desktop/p2-production-integration` succeeded;
+independent GitHub readback confirmed the exact commit, parent and one-file set.
+
+[CyrNava CI 41648248846](https://github.com/74Cerillion/CyrNava/actions/runs/41648248846),
+push event, attempt 1, exact commit above: **completed SUCCESS**,
+2026-11-03T13:58:06Z. All five required jobs passed: workflow validation,
+backend/security, frontend/browser, native source installation/update, and
+`CI required`. Native regressions: **240 + 63 tests PASS**.
+
+The uploaded source-install artifact **13236332558**, 9,595 bytes, SHA-256
+`05b9df66700536f236c690dfeac79a2679fec3c6e3afd732df21793ffbc73477`,
+was independently downloaded and verified in memory, without creating files.
+It contains only `result.json` and `source-snapshot.json`. All 167 uploaded
+source files match the exact committed bytes; all 166 declared integrity hashes
+match. The saved result is **PASS / complete**, elapsed 42.958 seconds:
+
+- Clean no-Git source snapshot: **PASS**, without wheelhouse or built frontend.
+- Actual online installation through the unchanged pinned official dependency
+  acquisition/verification path: **PASS**; installed receipt verifies 4,414
+  provider files. Generated installation archive SHA-256:
+  `691b3137f76cbb24dc05f04b8cc1156c131f1f9e53e6303592898d77bbb9e3f9`.
+- Actual distinct-version online update: **PASS**, synthetic packaging release
+  `0.1.0-n4.2` to `0.1.0-n4.3`, using `update_from_source` and the existing N3
+  `native_operations.update` transaction engine; no reinstall substitution.
+- All seeded profile bytes, including workspace folder/note/image content,
+  persisted origin and Qt settings sentinel: **UNCHANGED**. Old release retained,
+  new release distinct, transaction completed, and 4,414 provider files verified.
+
+This verifies the existing compatible source-update contract, not arbitrary
+future application/schema/dependency changes. CI did not execute a native GUI
+or renderer, load host policy, or create a production signature. The accepted
+owner-host GUI/AppArmor evidence and N1–N3 results remain unchanged and were not
+rerun. Historical runs **41640878968** and **41645910416** remain **FAIL**; their
+original retained artifacts are unchanged. No workflow retry, second commit or
+push, signing, merge, tag or publication occurred. This outcome update is local
+and uncommitted. Next: minimum final public-source wording review, followed by
+separately authorized publication actions.
+
+All sections below retain their original historical checkpoint scopes.
+
 ## Minimal CI correction — locally verified / owner checkpoint
 
 N1–N3 remain **ACCEPTED**; N4 remains **CONDITIONAL**. HEAD remains

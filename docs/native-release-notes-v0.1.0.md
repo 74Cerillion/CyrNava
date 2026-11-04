@@ -1,23 +1,42 @@
-# CyrNava v0.1.0 — native release preparation
+# CyrNava v0.1.0 — native source-first release
 
 ## Active source-first release
 
-N1–N3 remain ACCEPTED. N4 is CONDITIONAL: source-first installation, revised CI
-and public-repository readiness. Users obtain a reviewed versioned GitHub source
-snapshot, run `bash install.sh`, and later run `bash update.sh` from a newer
+N1–N4 are owner-ACCEPTED. The approved release is v0.1.0, targeting Ubuntu 26.04
+x86_64 / GNOME Wayland, system Python 3.14 and the pinned Qt/PySide/WebEngine
+6.11.3 family. Users obtain the reviewed v0.1.0 GitHub source snapshot, run
+`bash install.sh`, and later run `bash update.sh` from a newer
 reviewed source. The exact dependency closure is downloaded directly from official
 upstream services and the locked frontend is built locally. Node/npm are build
 prerequisites, not running application services. The existing native Qt interface,
 authenticated backend, AppArmor attachment, renderer sandbox and data/recovery
-contracts remain. See [the current installation guide](native-installation.md).
+contracts remain. First installation requires network access, Ubuntu prerequisites,
+Node 24/npm 11 for building, and explicit review/loading of the exact installed
+AppArmor policy before desktop launch. The application works offline afterward.
+See [the installation guide](native-installation.md) and
+[backup/recovery procedure](../BACKUP_RESTORE.md).
+
+The accepted integration checkpoint is
+`383970f4af683aad154eb1bccaafdd5a932d8b76`,
+[CI 41648248846](https://github.com/74Cerillion/CyrNava/actions/runs/41648248846):
+all required jobs, clean source installation, a distinct compatible source-based
+update and byte-for-byte profile preservation PASS. The accepted owner-host
+GUI/AppArmor evidence retains its actual application/dependency scope; CI does
+not claim a headless GUI PASS. The final publication commit must pass ordinary
+required CI before its tag is published. This does not establish arbitrary
+future schema, application or dependency upgrade compatibility.
+
+Original code is MIT, Copyright (c) 2026 74Cerillion. The owner confirms rights
+to the existing CyrNava name and logo.
 
 The source-first repository does not ship a Qt/PySide wheelhouse, virtual
 environment or prebuilt frontend/application archive. Corresponding-source gaps
 for the historical bundled-wheel distribution are preserved under that scope,
 not treated as requirements to publish binaries that are no longer offered.
-Notices for actually copied source/assets remain required. No tag, public release,
-normal installation, host-policy load or signing has been performed by this work.
-CI 41621033436 remains PASS only for its previous tested offline-package inputs.
+Notices for actually copied source/assets are retained; see
+[the source/dependency scope](native-source-obligations.md) and
+[third-party notices](native-third-party-notices.txt). Historical CI 41621033436
+remains PASS only for its original offline-package inputs.
 
 ## Historical offline-package release preparation
 
