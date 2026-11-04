@@ -1,9 +1,0 @@
-{
-  "GUI": "NOT EXECUTED",
-  "archive_sha256": "b59a3bd4a3178d704d0dfab736f6e6d546578cf5744a6dcda1264b83e3c9736d",
-  "installed_release": "0.1.0-n4.1-b59a3bd4a3178d70",
-  "provider_files": 4414,
-  "renderer": "NOT EXECUTED",
-  "scope": "fresh isolated installed imports/ELF/hash-locked providers/backend/data; no GUI/policy load",
-  "status": "PASS"
-}

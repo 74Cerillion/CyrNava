@@ -1,8 +1,0 @@
-{
-  "accepted_source": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
-  "candidate_lock_sha256": "15ea009817e106931e02f72be1b72c261e83c9eedff153ba03da10540946e421",
-  "production_frontend_bytes_identical": true,
-  "old_file_count": 33,
-  "new_file_count": 33,
-  "changed_paths": []
-}

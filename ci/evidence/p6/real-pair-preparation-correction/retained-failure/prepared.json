@@ -1,8 +1,0 @@
-{
-  "checks": {
-    "disposable_signing_key_removed": "PASS"
-  },
-  "complete": true,
-  "error": "Operation failed: python (CalledProcessError)",
-  "status": "FAIL"
-}

@@ -1,4 +1,0 @@
-2026-10-31T13:55:57.0874660Z [36;1m"$RUNNER_TEMP/ci-tools/actionlint" -color .github/workflows/ci.yml[0m
-2026-10-31T13:55:57.1477140Z Workflow security/dependency contract: PASS
-2026-10-31T13:55:57.6475821Z Ran 31 tests in 0.208s
-2026-10-31T13:55:58.1061008Z /home/runner/work/_temp/ci-tools/actionlint

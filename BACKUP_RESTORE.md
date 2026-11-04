@@ -100,7 +100,7 @@ Open `http://127.0.0.1:5173`. Confirm the folders, notes, formatting, image posi
 
 For a schema-4 or schema-5 backup, also open **Manage templates** and create a test note from a restored custom template. Check its formatting and images; the restored template can remain usable even if its original source note was deleted before backup.
 
-**A backup is verified for recovery only after a restore/open drill.** M5's automated drill performs that sequence in isolated temporary profiles and checks rendered BlockNote formatting plus image decoding. See `M5_VERIFICATION.md` and the restored-workspace preview.
+**A backup is verified for recovery only after a restore/open drill.** M5's automated drill performs that sequence in isolated temporary profiles and checks rendered BlockNote formatting plus image decoding.
 
 ## Failures and limits
 

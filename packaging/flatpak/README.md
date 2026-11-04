@@ -3,9 +3,10 @@
 For the final P2 real Save portal check, use the host supervisor from the repository
 root: `python3 packaging/flatpak/run_portal_verification.py`. It streams the current
 test helper to the installed candidate and preserves final failure evidence even
-if Qt/Python crashes. No rebuild or Flatpak permission override is required. See
-`P2_NATIVE_CHECKS.md` for expected output and acceptance criteria. Earlier direct
-stdin-only portal commands do not provide this independent crash reporting.
+if Qt/Python crashes. No rebuild or Flatpak permission override is required.
+Inspect the phase JSON, exact installed artifact identity and actual renderer
+namespace/seccomp evidence; a functional PASS alone is not full sandbox proof.
+Earlier direct stdin-only commands do not provide independent crash reporting.
 
 This is an unpublished, local review build. It does not replace the Firefox
 installer, import its profile, configure an update remote, sign or publish a
@@ -97,13 +98,9 @@ Neither command stops a normal Firefox or CyrNava installation.
 
 ## Manual production-shell checks
 
-For the four outstanding final-candidate checks, use
-[P2_NATIVE_CHECKS.md](P2_NATIVE_CHECKS.md). It provides the exact ordered commands,
-real screenshot/notice/link steps, a real export-portal mode and a deterministic
-native held-upload/layout/restart helper. The helpers stream into the installed
-candidate without additional host permissions. The owner has rebuilt and verified
-the popup correction; the checklist now tracks the sole remaining portal retest.
-The latest driver-only correction needs no package rebuild.
+The following checks use synthetic data in the isolated development identity.
+Use the host supervisor above for real export-portal diagnostics; no additional
+host permissions or sandbox overrides are needed.
 
 ```bash
 flatpak run --branch=p2 org.cyrnava.CyrNava.Devel

@@ -1,6 +1,6 @@
 # P1: disposable PySide6 desktop experiment
 
-This is a feasibility prototype on branch `prototype/p1-pyside6-feasibility`, based on `cbf7ccc`. It does not replace the installed Firefox launcher. **Use synthetic notes only.** The API is unauthenticated and this environment's Qt sandbox diagnostic reports incomplete namespace isolation. Read [the assessment](REPORT.md) before deciding on production adoption.
+This is a feasibility prototype on branch `prototype/p1-pyside6-feasibility`, based on `cbf7ccc`. It does not replace the installed Firefox launcher. **Use synthetic notes only.** The API is unauthenticated and this environment's Qt sandbox diagnostic reports incomplete namespace isolation. This historical experiment is not a supported production deployment.
 
 ## Setup and launch on Ubuntu
 
@@ -68,5 +68,3 @@ node prototypes/p1_desktop/verify.mjs
 Verification writes `/tmp/cyrnava-p1/verification.json`. Exit **0** means functional checks and the sandbox diagnostic passed; **1** means a functional failure; **2** means functional checks passed but the renderer sandbox acceptance gate did not. The recorded result is **2**, not an overall security pass.
 
 The environment script reads installed package sizes and the existing wheel cache; it does not download or install tooling. Its optional Firefox check opens only a blank dedicated temporary profile, never your normal browser profile. The bubblewrap probe is a private-network capability probe, not Flatpak packaging. Both probes were blocked by this execution environment; see the report. No Flatpak manifest or install/update script is included.
-
-The retained [evidence](evidence/verification.json) and [native screenshot](evidence/desktop.png) contain synthetic test content only. Databases, Qt profiles, notes and credentials are not copied into this repository.

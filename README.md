@@ -1,5 +1,5 @@
 > **Current release model: source-first GitHub repository with an online dependency installer.**
-> N1–N4 are owner-accepted. Target: Ubuntu 26.04 x86_64 / GNOME Wayland,
+> Target: Ubuntu 26.04 x86_64 / GNOME Wayland,
 > system CPython 3.14 and the pinned Qt/PySide/WebEngine 6.11.3 stack. From a
 > reviewed versioned source snapshot, the public entry points are `bash install.sh`
 > and, after saving and closing CyrNava, `bash update.sh`. Dependencies come
@@ -16,11 +16,11 @@
 
 CyrNava organizes cybersecurity learning and documentation into folders and rich-text notes on your computer. SQLite stores native documents and templates; local files store note images. There are no runtime accounts, cloud services or external API calls. Engagement, host and vulnerability management are future work, not current features.
 
-Original code is MIT licensed, Copyright (c) 2026 74Cerillion. Use a reviewed versioned source from [GitHub Releases](https://github.com/74Cerillion/CyrNava/releases) and follow the [native installation guide](docs/native-installation.md), including prerequisites and installation-specific AppArmor setup before first desktop launch. The accepted source-first verification and publication checkpoint is in [N4_REPORT.md](ci/N4_REPORT.md).
+Original code is MIT licensed, Copyright (c) 2026 74Cerillion. Use a reviewed versioned source from [GitHub Releases](https://github.com/74Cerillion/CyrNava/releases) and follow the [native installation guide](docs/native-installation.md), including prerequisites and installation-specific AppArmor setup before first desktop launch.
 
 ## Rebranding and existing installations
 
-The application is now **CyrNava**, formerly ENGAGE. The repository is [74Cerillion/CyrNava](https://github.com/74Cerillion/CyrNava); recommended local folder: `CyrNava`. See [the local migration guide](docs/migrate-to-cyrnava.md) and [rebranding report](REBRANDING_REPORT.md) before moving an existing checkout. `migrate_to_cyrnava.sh` supports dry run, verified backups, HTTPS/SSH remote preservation and safe re-execution. It refuses uncommitted changes and never pushes.
+The application is now **CyrNava**, formerly ENGAGE. The repository is [74Cerillion/CyrNava](https://github.com/74Cerillion/CyrNava); recommended local folder: `CyrNava`. See [the local migration guide](docs/migrate-to-cyrnava.md) before moving an existing checkout. `migrate_to_cyrnava.sh` supports dry run, verified backups, HTTPS/SSH remote preservation and safe re-execution. It refuses uncommitted changes and never pushes.
 
 Existing `engage/engage.sqlite3`, image files, browser keys (`engage.*`), program/state directories and `org.engage.*.desktop` filenames deliberately remain stable compatibility identifiers. This preserves notes, templates, drafts, appearance and existing icons without copying or deleting a live profile. Desktop/menu **display names** become CyrNava when reinstalled. New environment variables use `CYRNAVA_API_PORT`, `CYRNAVA_E2E_RELEASE` and `CYRNAVA_SUPERVISOR_SECRET`; their `ENGAGE_*` counterparts remain compatibility aliases. No schema or document migration is required for rebranding.
 
@@ -38,11 +38,11 @@ Existing `engage/engage.sqlite3`, image files, browser keys (`engage.*`), progra
 
 ## Appearance
 
-Use **Appearance** in the toolbar above the note to choose **Light**, **Dark**, **System**, or **CyrNava**. CyrNava uses the supplied original emblem, near-black writing surfaces, metallic lettering and blue/violet controls. The control stays available with navigation collapsed. System remains the default and follows live OS color-scheme changes; an explicit choice overrides the OS. Switching does not reload the note, alter document formatting, or trigger autosave. See [the visual implementation report](CYRNAVA_VISUAL_REPORT.md) for reference comparison, palette and verification.
+Use **Appearance** in the toolbar above the note to choose **Light**, **Dark**, **System**, or **CyrNava**. CyrNava uses the supplied original emblem, near-black writing surfaces, metallic lettering and blue/violet controls. The control stays available with navigation collapsed. System remains the default and follows live OS color-scheme changes; an explicit choice overrides the OS. Switching does not reload the note, alter document formatting, or trigger autosave.
 
 The standard preference is browser-local under `engage.appearance.v1` (`light`, `dark`, or Mantine's `auto` for System). The additional `cyrnava.theme.v1` key records the branded skin without replacing the previous standard preference. It survives reload/restart at the same browser profile and origin, including port. Invalid/missing values fall back to System. If localStorage is blocked, changing appearance still works for the current page, but persistence is unavailable. It is a browser preference, so it is not part of a SQLite backup. User-applied document colors remain intentional formatting; appearance does not rewrite them.
 
-The release includes a small local startup script to reduce initial light flashes. No backend, data migration, external service or additional package is required. See the [FF-007 implementation and verification report](FF007_REPORT.md). Update an installed desktop copy using the existing installer after review; editing this checkout does not update the installed application automatically.
+The release includes a small local startup script to reduce initial light flashes. No backend, data migration, external service or additional package is required. Update an installed desktop copy using the existing installer after review; editing this checkout does not update the installed application automatically.
 
 ## Navigation and templates
 
@@ -54,7 +54,7 @@ To reuse your own structure, open the source note, choose **Save as template**, 
 
 **Manage templates** lists all templates and allows custom rename/delete with deletion confirmation. Built-ins cannot be renamed or deleted. To change a custom template's content, create a new template from an edited note, then optionally delete the old one. Names need not be unique. A custom template supports up to **50 MiB total copied images**; existing per-image and document limits still apply. Failures stay visible and do not create partial notes/templates.
 
-Custom templates are private application data in the existing external SQLite database, included in offline backup/restore. Templates were introduced in schema 4; current startup adds the schema-5 search index without rewriting existing notes or assets. Before upgrading an everyday profile, stop CyrNava and take a backup using [BACKUP_RESTORE.md](BACKUP_RESTORE.md). Older application code cannot open schema 5: keep a pre-upgrade backup if rollback may be needed. See the [FF-006 / FF-018 engineering report](FEATURES_FF006_FF018_REPORT.md) for implementation and verification details.
+Custom templates are private application data in the existing external SQLite database, included in offline backup/restore. Templates were introduced in schema 4; current startup adds the schema-5 search index without rewriting existing notes or assets. Before upgrading an everyday profile, stop CyrNava and take a backup using [BACKUP_RESTORE.md](BACKUP_RESTORE.md). Older application code cannot open schema 5: keep a pre-upgrade backup if rollback may be needed.
 
 ## Full-text search
 
@@ -62,7 +62,7 @@ Use **Search all notes...** near the top of the navigation pane. Results update 
 
 Opening another result waits for pending uploads and saves. A failed save or unresolved draft recovery keeps the current note open. Selecting the already-open result preserves its live editor. Search failures have their own **Retry search** control. Successful saves and library changes refresh the active query; unconfirmed typing is not searchable yet. Queries are held only in page memory and clear on reload.
 
-The M2 local `GET /api/search` API and SQLite FTS5 remain unchanged. See the [user/API, upgrade and offline rebuild guide](docs/search.md), [M2 backend report](F09_M2_REPORT.md) and [M3 UI report](F09_M3_REPORT.md). M4 validation and reproducible scale measurements are recorded in the [M4 report](F09_M4_REPORT.md), [benchmark method/results](docs/search-benchmark.md) and [search release checklist](docs/search-release-checklist.md). These development records retain their original scope; the current native-release acceptance is recorded in [N4_REPORT.md](ci/N4_REPORT.md).
+The local `GET /api/search` API uses SQLite FTS5. See the [user/API, upgrade and offline rebuild guide](docs/search.md).
 
 Stop every backend and retain a verified pre-upgrade backup before first startup: this code upgrades the external database to **schema 5**. Previous application code refuses that schema. No new packages or remote services are required; Python’s SQLite runtime must include FTS5.
 
@@ -82,7 +82,7 @@ These are real browser captures of an isolated synthetic workspace; no personal 
 
 React and TypeScript implement selection, dialogs and save state. A dedicated adapter isolates BlockNote APIs. Vite builds the frontend; FastAPI validates local HTTP requests. SQLite owns durable documents, relationships and revisions; an application-owned asset directory stores validated raster images. The supported release launcher serves the built frontend and API from one loopback origin.
 
-Read [architecture and three execution flows](docs/architecture.md), [ADRs](docs/adr/README.md), and [dependency/license review](docs/dependencies-and-licenses.md).
+Read [architecture and execution flows](docs/architecture.md) and [dependency/license review](docs/dependencies-and-licenses.md).
 
 ## Historical browser/developer prerequisites
 
@@ -118,7 +118,7 @@ npm run build
 cd ..
 ```
 
-Skip the three nvm/npm setup commands if those versions are already installed. Dependencies are isolated in `backend/.venv` and `frontend/node_modules`. Installation/browser setup downloads packages; normal operation needs no internet. Python dependencies are fully pinned in `requirements.txt`; npm uses `package-lock.json`. The final M6 commit must be published by the owner before a public clone contains these M6 changes. [Verification](M6_VERIFICATION.md) distinguishes the public M5 clone from the clean M6 candidate export.
+Skip the three nvm/npm setup commands if those versions are already installed. Dependencies are isolated in `backend/.venv` and `frontend/node_modules`. Installation/browser setup downloads packages; normal operation needs no internet. Python dependencies are fully pinned in `requirements.txt`; npm uses `package-lock.json`.
 
 ## Historical browser desktop launcher (Ubuntu)
 
@@ -231,11 +231,11 @@ npm run test:e2e
 npm run test:release
 ```
 
-On minimal Ubuntu, `npx playwright install --with-deps chromium` also installs browser system libraries. Browser installation is development tooling, not an application runtime dependency. Tests create temporary profiles, launch their own loopback servers and clean up. They never target your personal profile. Build before browser tests. F-09 scale checks use `.venv/bin/python -m benchmarks.search` from `backend/`; see [the benchmark guide](docs/search-benchmark.md). See [M6 verification and T-01–T-12 matrix](M6_VERIFICATION.md).
+On minimal Ubuntu, `npx playwright install --with-deps chromium` also installs browser system libraries. Browser installation is development tooling, not an application runtime dependency. Tests create temporary profiles, launch their own loopback servers and clean up. They never target your personal profile. Build before browser tests. Synthetic scale checks use `.venv/bin/python -m benchmarks.search` from `backend/`; run `--help` for its bounded workload options.
 
 ## Known limitations
 
-Unsaved title/document edits have browser-local recovery snapshots when storage is available; failures are reported. Reopening offers recovery with the original base revision, preserving conflict checks. Browser storage deletion/private browsing/storage failure can still lose drafts, and in-flight image files must be reselected if closed before upload completes. There is no automatic merge, authentication, encryption, live backup or multi-user support. Removed image blocks retain owned files until note deletion. Image normalization removes metadata and recompresses JPEG: CyrNava is not forensic-original evidence storage. Cross-note image blocks must be re-uploaded. Screen readers and full WCAG conformance are unverified. See the [lifecycle report](LIFECYCLE_REPORT.md) for browser verification; existing large-bundle and Starlette/HTTPX deprecation warnings remain documented.
+Unsaved title/document edits have browser-local recovery snapshots when storage is available; failures are reported. Reopening offers recovery with the original base revision, preserving conflict checks. Browser storage deletion/private browsing/storage failure can still lose drafts, and in-flight image files must be reselected if closed before upload completes. There is no automatic merge, authentication, encryption, live backup or multi-user support. Removed image blocks retain owned files until note deletion. Image normalization removes metadata and recompresses JPEG: CyrNava is not forensic-original evidence storage. Cross-note image blocks must be re-uploaded. Screen readers and full WCAG conformance are unverified. Existing large-bundle and Starlette/HTTPX deprecation warnings remain.
 
 ## License
 
@@ -246,6 +246,6 @@ current [source-first dependency assessment](docs/native-source-obligations.md).
 Downloading dependencies directly from upstream does not relicense them as MIT.
 No BlockNote XL package is used.
 
-## Development roadmap
+## Development
 
-Phase 1 implements the local knowledge workspace described above. M6 prepares its release candidate. F-09 search has passed M4 engineering validation; owner commit/publication and existing release/license gates remain pending. Broader engagement management, tags, integrations and other Phase 2 work require separate owner authorization. No future release dates are promised. See [changelog](CHANGELOG.md), [release draft](docs/release-notes-v0.1.0.md), and [M6 engineering report](M6_REPORT.md).
+See [testing](#testing), [architecture](docs/architecture.md) and the [changelog](CHANGELOG.md). The current native source-first release is described in the [release notes](docs/native-release-notes-v0.1.0.md).

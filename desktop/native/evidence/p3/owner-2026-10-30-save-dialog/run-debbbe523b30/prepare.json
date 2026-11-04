@@ -1,7 +1,0 @@
-{
-  "phase": "prepare",
-  "status": "FAIL",
-  "complete": true,
-  "checks": {},
-  "error": "Verification failed or was cancelled; preserve this synthetic run for diagnosis."
-}

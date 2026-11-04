@@ -1,7 +1,0 @@
-{
-  "status": "PASS",
-  "tests": 92,
-  "warnings": 2,
-  "scope": "existing backup/migration/native desktop/navigation/dialog regressions under development CPython 3.12; actual package operations separately use installed CPython 3.14",
-  "GUI": "NOT EXECUTED"
-}

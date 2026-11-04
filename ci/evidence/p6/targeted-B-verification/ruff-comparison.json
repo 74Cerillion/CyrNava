@@ -1,8 +1,0 @@
-{
-  "driver_and_tests": "PASS",
-  "format": "Ten changed/new Python files PASS",
-  "baseline_helper_findings": 14,
-  "current_helper_findings": 14,
-  "new_or_worsened_helper_findings": 0,
-  "comparison": "code/message/source line; no global lint suppression"
-}

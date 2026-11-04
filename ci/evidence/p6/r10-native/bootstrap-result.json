@@ -1,6 +1,0 @@
-{
-  "complete": true,
-  "error": "OSError",
-  "evidence": "stdout; output root not assumed safe",
-  "status": "FAIL"
-}

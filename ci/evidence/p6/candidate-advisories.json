@@ -1,9 +1,0 @@
-{
-  "status": "COMPLETE NO MATCHES",
-  "source": "OSV querybatch",
-  "queried": 341,
-  "total": 341,
-  "findings": [],
-  "checked_at_utc": "2026-11-01T08:40:25.110780+00:00",
-  "meaning": "Advisory matching only, not vulnerability clearance; unenumerated runtime/native components remain outside scope"
-}

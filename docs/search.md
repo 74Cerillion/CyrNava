@@ -1,11 +1,6 @@
 # F-09 — local full-text search
 
-M2 provides the search API and persistence machinery; M3 adds the navigation-pane
-interface and safe result navigation. M4 engineering validation covers integration,
-migration/rebuild, offline checks and a reproducible synthetic benchmark. See the
-[M4 report](../F09_M4_REPORT.md), [benchmark results](search-benchmark.md) and
-[release checklist](search-release-checklist.md). No new dependencies are installed.
-Owner commit/publication and existing license gates remain pending.
+Search provides a local API, SQLite FTS5 indexing and navigation-pane result selection. Opening a result preserves pending uploads, saves and unresolved drafts.
 
 ## Using global search
 

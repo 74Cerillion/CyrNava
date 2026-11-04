@@ -1,36 +1,22 @@
-# CyrNava P5A continuous integration
+# CyrNava continuous integration
 
-One verification-only workflow: `.github/workflows/ci.yml`. No signing, release,
-publication, deployment or update endpoint is configured. Production remains
-`io.github._74Cerillion.CyrNava`; development identity/storage is unchanged.
+`.github/workflows/ci.yml` verifies pushes to `main` and `desktop/p2-production-integration`, pull requests targeting `main`, and manual dispatches. It does not publish releases, sign packages, or change repository settings.
 
-## Jobs and trust boundary
+## Required jobs
 
-Pushes to `desktop/p2-production-integration` and `main`, PRs targeting `main`,
-and manual dispatch run:
+`validate` checks the workflow contract and negative policy tests with the hash-locked parser and pinned actionlint. `backend` builds the real frontend before backend, security, lifecycle, migration and packaging regressions. It also runs the historical release-security regressions in a disposable source fixture. `frontend` runs lint, component tests, TypeScript/Vite production build and Chromium integration tests. `native` runs native installer/security/transaction and feasibility regressions on Ubuntu 26.04, then checks a clean no-Git source installation and a distinct-version compatible online update through the existing transaction engine. It verifies preserved profile/data bytes. `CI required` succeeds only when every required job succeeds.
 
-```text
-validate -> backend  --+
-         -> frontend --+-> flatpak build -> exported-bundle audit -> artifact
-all four jobs ---------------------------------------------------> CI required
-```
+The compatible test version does not establish support for arbitrary future application or database changes. Native GUI, GNOME menu and renderer sandbox operation require native host verification; headless CI does not establish those results.
 
-`CI required` runs even after failure and accepts only `success` from every job.
-It is the suggested stable branch-protection check; no repository settings are
-changed by these files. There are no path filters, tag triggers, privileged PR
-triggers, production secrets, persisted checkout credentials or write-scoped
-repository tokens. All four official actions are pinned to reviewed commit SHAs
-in `tools.json`. Run steps never interpolate GitHub expressions as shell code.
+## Trust and diagnostics
 
-Untrusted PRs run only on disposable GitHub-hosted runners with read-only repository
-permissions. They receive no owner credentials. Do not change this to a self-hosted
-runner, `pull_request_target`, or a privileged publishing context. A malicious PR
-can change its own test code: workflow policy tests are maintenance safeguards,
-not a substitute for review or branch protection.
+Actions are pinned in `tools.json`. Workflows use disposable GitHub-hosted runners, read-only repository permissions and checkout without persisted credentials. No production signing material is required. Preserve these boundaries: do not replace them with privileged PR triggers or owner machines.
+
+Only the selected synthetic diagnostics are uploaded. Do not place personal data, credentials, raw environment dumps or private logs in upload paths. Public repository readers may be able to download workflow artifacts. Source-install CI uploads safe JSON diagnostics rather than a bundled-wheel application archive.
 
 ## Local verification
 
-From the repository root, using Python 3.12 and Node from `.nvmrc`:
+Use the Python and Node versions and host packages specified in the workflow. Backend checks require a dedicated `backend/.venv`, local loopback/socket access, Node/npm and Flatpak/OSTree for existing historical tests. Frontend browser checks require the lockfile's Chromium installation. Run from the repository root after creating that environment:
 
 ```bash
 backend/.venv/bin/python -m pip install --only-binary=:all: -r backend/requirements.txt
@@ -40,126 +26,15 @@ backend/.venv/bin/python -m unittest discover -s ci -p test_ci.py -v
 backend/.venv/bin/python ci/bootstrap.py /tmp/cyrnava-ci-tools
 /tmp/cyrnava-ci-tools/actionlint .github/workflows/ci.yml
 backend/.venv/bin/python ci/verify.py backend
-```
-
-Flatpak and OSTree must be installed for the existing real timestamp-export test.
-Backend tests also require local socket access. The backend verifier now independently
-runs locked `npm ci` and the real TypeScript/Vite production build before pytest;
-Node/npm are prerequisites for this command. GitHub invokes it with
-`--require-clean-frontend`, which fails without deleting anything if `frontend/dist`
-already exists. This turns every fresh backend job into the missing-assets
-regression: begin without generated assets, build them, then run the unchanged
-full test suite. Normal local use without the flag permits rebuilding existing
-assets. The frontend job stays independent; no cross-job asset transfer is added.
-Python verification dependencies
-use the existing exact pins in `backend/requirements.txt`; this file predates P5A
-and has no hashes. The workflow parser has its own wheel/hash lock. Application
-runtime wheels retain P4's hash-locked production requirements.
-
-Frontend setup (backend venv is also required by browser integration tests):
-
-```bash
 npm --prefix frontend ci --ignore-scripts --no-audit --no-fund
-cd frontend
-npx --no-install playwright install --with-deps chromium
-cd ..
+(cd frontend && npx --no-install playwright install --with-deps chromium)
 backend/.venv/bin/python ci/verify.py frontend
 ```
 
-This runs ESLint, 273 existing component/unit tests, TypeScript plus Vite production
-build, and the existing production-mode Chromium integration suite. It does not
-exercise Qt WebEngine renderer sandboxing, the desktop launcher or real native
-file portals. The browser tests use synthetic temporary profiles and bind loopback.
-The runner installs only the browser required by the lockfile's Playwright version.
+In a fresh disposable Ubuntu 26.04 checkout with the workflow prerequisites, `/usr/bin/python3.14 -B -m unittest discover -s packaging/native -p 'test_*.py' -v` and the equivalent discovery under `packaging/native/feasibility` exercise the native fixtures. `/usr/bin/python3.14 -B ci/native_source.py --output ci-output/native-source` performs actual online acquisition/install/update checks, consumes disk and network, and requires a fresh output path and at least 11 GiB free. Use disposable profiles and installation roots; never substitute real notes or a normal installation.
 
-## Production build and audit
+## Historical tooling
 
-`ci/flatpak.py prepare --output ci-output/flatpak` is restricted to disposable
-GitHub-hosted runners. It adds the official upstream runtime supplier, installs
-KDE/PySide refs, then selects **the exact P4 commits** and calls P4's verifier.
-GPG verification stays enabled. A missing pinned object or required namespace
-causes failure: there is no new-version or sandbox-disabling fallback. Upstream
-Flathub is only a runtime supplier; CyrNava is not submitted or published there.
-Do not spoof runner variables to provision an owner's machine.
+The manually dispatched `release.yml` and `p5c.yml` workflows and `ci/release` helpers preserve historical Flatpak security regressions. They are not prerequisites for publishing the current source-first native release and do not publish automatically. Existing contracts, accepted-CI fixtures and security assertions remain tracked.
 
-The workflow installs Flatpak, OSTree, desktop-file-utils and AppStream via the
-runner's Ubuntu package manager. It then runs:
-
-```bash
-python ci/flatpak.py build --output ci-output/flatpak
-python ci/flatpak.py audit --output ci-output/flatpak
-```
-
-Build reuses `packaging/flatpak/production/build.py`. Its optional
-`--output-directory NEW_PATH` avoids parsing console output; existing local cache
-behavior is preserved. It refuses an existing output directory/symlink. Clean
-tracked source is required by the CI wrapper. P4 still installs binary-only,
-hash-locked CPython 3.13 wheels as data, uses the locked Qt/PySide BaseApp, builds
-frontend production assets and retains desktop/icon/AppStream validators.
-
-Audit imports the produced `.flatpak` into a new local OSTree repository, checks
-out the exported commit, reruns P4's payload audit, checks required runtime files,
-production native identity, metadata and least-privilege permissions, and compares
-the actual exported inventory/provenance with the build records. Commit, bundle
-size and hash must match. An old P4 artifact cannot stand in for a new CI build.
-No application code or desktop window is executed by this audit.
-
-Only after audit PASS is `artifacts/` populated with the unsigned Flatpak,
-`SHA256SUMS`, build inputs, payload inventory, result and provenance. Normal
-workflow success then uploads it with a seven-day retention and no recompression.
-Missing files/upload errors fail the job. Failure diagnostics are separate JSON
-and synthetic test reports; unvalidated bundles, full build trees, personal data,
-environment dumps and secrets are never selected for upload.
-
-GitHub workflow artifacts are not GitHub Releases. This repository is public;
-authenticated users with repository read access may download workflow artifacts.
-Do not upload anything private to these paths. P5A does not establish a production
-update channel or public release entitlement.
-
-## Caches and measured limits
-
-Only npm's download cache is enabled, through the pinned official setup-node
-Action. Keys include OS/architecture and the combined frontend lock/package and
-Node version files. `npm ci` still verifies lockfile integrity; node_modules and
-finished packages are not cached. GitHub cache ref scoping keeps PR cache writes
-from replacing integration/main cache entries. Never consume these caches as a
-trusted release artifact.
-
-Local cold/warm download-cache measurements were 8.578/2.963 seconds at roughly
-67 MB. Hosted cache transfer cost/hit rate still needs measurement. No complete
-Qt runtime/build-tree cache or Python cache is added without evidence that its
-size/restore overhead is worthwhile. See `evidence/p5a/npm-cache-measurements.json`.
-
-The hosted OS/apt packages and Python 3.12 patch may evolve; runtime commits,
-Python runtime wheels, Node, npm, frontend packages, actions and actionlint are
-controlled. Record runner image/build tool versions; this is not a claim of
-byte-for-byte reproducibility or hermetic builds.
-
-## Evidence and authorization
-
-See `P5A_REPORT.md`, `P5A_OWNER_CHECKS.md`, and `evidence/p5a/validation.json`.
-Hosted PASS requires an actual GitHub run ID, source commit, job conclusions,
-package/provenance/checksum and successful upload. Local policy/negative tests do
-not establish hosted PASS or native portal coverage.
-
-Do not push, change GitHub settings or manually dispatch this workflow without
-owner authorization. Stop at P5A; no P5B/P5C work is included.
-
-## Clean-checkout prerequisite correction (31 October 2026)
-
-The first hosted run failed because native worker/staging tests need real
-`frontend/dist`, which the backend job did not create. The fix adds the same
-pinned setup-node/npm to that job and puts npm dependency installation plus the
-production frontend build inside `ci/verify.py backend` before pytest. A failed
-frontend install/build fails the backend job without running pytest. Existing
-backend/frontend/security/migration/packaging tests remain required.
-
-Policy regressions reject removal of the backend Node/clean-start prerequisite.
-The clean-start guard is non-destructive; it rejects a warm directory instead of
-removing it. Independent local validation uses a new disposable Git clone of
-commit 329020b plus the four uncommitted candidate source files, fresh Python/npm
-dependencies and isolated XDG data/config/cache paths. No generated assets,
-node_modules, venv or application profile is copied from the working checkout.
-See `evidence/p5a/frontend-prerequisite-correction-2026-10-31/` for setup hashes,
-commands/results, timings, retained failing-run history and current limitations.
-The candidate is not a new hosted PASS and must not be pushed before owner approval.
+Current end-user installation and update instructions are in [native installation](../docs/native-installation.md).
