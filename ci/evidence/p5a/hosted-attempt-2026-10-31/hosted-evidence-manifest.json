@@ -1,0 +1,28 @@
+{
+  "run_id": 41157614256,
+  "source_commit": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+  "note": "Post-push local reporting evidence; no additional commit/push",
+  "sha256": {
+    "ci/evidence/p5a/validation.json": "0c9b28628fe4d158cfa66e99dbfba871f6bc4261423fade90436b47de6dca09d",
+    "ci/P5A_REPORT.md": "fe23c7e12f6cd0ce799f38174abd499707a1fa8857f4d216510e81d30910a73d",
+    "ci/P5A_OWNER_CHECKS.md": "b662811185419a133dbaa2fa01babc08cc898fcf7924c80ac8c417ed54af2c59",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/browser-hosted-junit.xml": "b29130a2a867440fb39dee73b901ebed055a13e4f76cdf0ef2f909a93a12244a",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/run-41157614256-observation.json": "b89eacc907deb1969ecbc05b756f0c99d23be7a01e2a45599bbe4f411a5dd894",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/run-41157614256-final.json": "0107fb4b33d1dbf8333581cf78f640ebfc64ffc8363e785505b01622726e8999",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/backend-hosted-junit.xml": "5cbb19087c2748020ef4ce41af625d9d7eb16125b60d28ef528dd5eb2bedf5e7",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/frontend-job.log": "ee7477392d769cd9b56ff5a1fee958d38a5f4c4285cacbae7f0248c63a5b33d6",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/backend-hosted-result.json": "bccebecbcbf90d4013b8f31dfc73d7480db338d8aeedfd6e45067b57afab69af",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/local-report-manifest.json": "cd889eb8c127d9f6ea3b12f8850c6879512237a01af179c12bbf5c671b00f9b2",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/frontend-diagnostic-verification.json": "dbc638163a40513a4614225e7f94817670057f760a7d63c599f3233672cfbb56",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/missing-frontend-reproduction.json": "3deb43f977ff53c22dc79b38c497a89a0698601d8666874b7c176301e8f77416",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/gate-job.log": "955525abd9e3c6807c7c81cf6a32b94f447891620a51bfd06a563545f442dc0f",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/before-hosted-P5A_REPORT.md": "b79689292b65a368406d40fe9dbc1c287d45b45efad5273ddf05da7d020fe753",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/push-and-hosted-status.json": "41efca4c7d472ebb8a1ce309daa99e2f26793c9a4627cf62ddc76a12ab4fee3f",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/before-hosted-P5A_OWNER_CHECKS.md": "d7dce8fefc92b2f414c28657c5863d3186236ea737187bfe706938de2daff584",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/backend-job-124407811240.log": "1c3e9760d28e8894deb4b90d2d2e9288316348d0d5b31d171cbc5577ef653601",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/diagnostic-download-verification.json": "18e653413cf88b2848b6d8d17d34d74e6aa15bc15f00632e73f4d34cda7f371d",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/before-hosted-validation.json": "c0f43da40810bf8fdb8380d414e9603ea8676392668ac6df1da1fde8868cc2b1",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/frontend-hosted-result.json": "8a354fc59a4e4ef9462c8f952167475791e5c3338d97b4eb05d191d70854a63e",
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/validation-job.log": "ef74c2e252135e2c7fb912cd1126925b26bc1308d252c591a8a175eaf9603b50"
+  }
+}

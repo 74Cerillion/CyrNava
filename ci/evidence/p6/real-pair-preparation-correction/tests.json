@@ -1,0 +1,23 @@
+[
+  {
+    "exit_code": 0,
+    "name": "focused",
+    "seconds": 0.586,
+    "status": "PASS",
+    "summary": "20 passed, 12 subtests passed in 0.35s",
+    "test_targets": [
+      "ci/release/test_real_update_audit.py"
+    ]
+  },
+  {
+    "exit_code": 1,
+    "name": "release-and-workflow",
+    "seconds": 2.241,
+    "status": "FAIL",
+    "summary": "2 failed, 140 passed, 1 warning, 35 errors, 202 subtests passed in 2.02s",
+    "test_targets": [
+      "ci/release",
+      "ci/test_ci.py"
+    ]
+  }
+]

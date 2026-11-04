@@ -1,0 +1,8 @@
+{
+  "status": "FAIL",
+  "findings": 98,
+  "scope": "Exploratory expansion of Ruff to desktop and packaging sources",
+  "canonical_ci_lint": "PASS (backend/app, backend/tests, ci)",
+  "unchanged_directories": true,
+  "action": "No unrelated formatting changes; existing CI lint scope and tests retained"
+}

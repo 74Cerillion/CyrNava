@@ -5,7 +5,6 @@ import sys
 from pathlib import Path
 
 import pytest
-
 from benchmarks.search import distribution, measure_size
 
 

@@ -1,0 +1,8 @@
+2026-10-31T06:30:22.8657649Z CI: python-lint
+2026-10-31T06:30:22.9032522Z All checks passed!
+2026-10-31T06:30:22.9040051Z CI: frontend-install-for-backend
+2026-10-31T06:30:28.6372195Z CI: frontend-production-build-for-backend
+2026-10-31T06:30:34.2266351Z CI: backend-security-lifecycle-migration-packaging
+2026-10-31T06:31:22.5038155Z =============================== warnings summary ===============================
+2026-10-31T06:31:22.5050165Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2026-10-31T06:31:22.5051313Z 559 passed, 2 warnings, 31 subtests passed in 47.14s

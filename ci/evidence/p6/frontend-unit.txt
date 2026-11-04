@@ -1,0 +1,18 @@
+
+> cyrnava@0.1.0 test
+> node scripts/check-minimatch.mjs && vitest run
+
+PASS: fixed resolution for all three consumers; normal and adversarial glob compilation
+
+ RUN  v5.0.5 /home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p6-clean/checkout/frontend
+
+
+ Test Files  22 passed (22)
+      Tests  273 passed (273)
+   Start at  17:47:43
+   Duration  13.96s (environment 43%, tests 39%, import 10%, setup 6%, transform 2%)
+
+Environment  jsdom was created 22 times · 19.11s total, 43% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+

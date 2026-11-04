@@ -1,0 +1,86 @@
+{
+  "scope": "Read-only retained source; SQLite/P3 validation only on disposable copied workspaces",
+  "profile_before": {
+    "files": 96,
+    "bytes": 8660684,
+    "tree_sha256": "d0075ad8a19e36b198d6820435683306bb755f1f90406f2a25978d495d9a077a"
+  },
+  "profile_after": {
+    "files": 96,
+    "bytes": 8660684,
+    "tree_sha256": "d0075ad8a19e36b198d6820435683306bb755f1f90406f2a25978d495d9a077a"
+  },
+  "source_unchanged": true,
+  "pointer_valid": true,
+  "selected_database_exists": true,
+  "workspace_generations": [
+    {
+      "role": "original",
+      "active": false,
+      "schema": 5,
+      "integrity_check": "PASS",
+      "foreign_key_check": "PASS",
+      "counts": {
+        "notes": 1,
+        "folders": 1,
+        "assets": 1
+      },
+      "synthetic_owner_title_present": true,
+      "referenced_assets_size_and_presence": "PASS",
+      "P3_workspace_validation": "PASS",
+      "content_fingerprint": "b5f5ecde1ae53ec07ebedaa725b0feb520a7d22ab1302f1bad3531176c8017a6",
+      "database_sha256": "c230749c8feb2fcd2f1ee087150bed9161f0cbef69d76e4a09b76beb02ceccc9",
+      "asset_tree": {
+        "files": 1,
+        "bytes": 373311,
+        "tree_sha256": "ff309b1656afa509efd8b5f0e252df93c86caa3615f33c73d22e611384e614ef"
+      }
+    },
+    {
+      "role": "active-imported-workspace",
+      "active": true,
+      "schema": 5,
+      "integrity_check": "PASS",
+      "foreign_key_check": "PASS",
+      "counts": {
+        "notes": 1,
+        "folders": 1,
+        "assets": 1
+      },
+      "synthetic_owner_title_present": true,
+      "referenced_assets_size_and_presence": "PASS",
+      "P3_workspace_validation": "PASS",
+      "content_fingerprint": "b5f5ecde1ae53ec07ebedaa725b0feb520a7d22ab1302f1bad3531176c8017a6",
+      "database_sha256": "c230749c8feb2fcd2f1ee087150bed9161f0cbef69d76e4a09b76beb02ceccc9",
+      "asset_tree": {
+        "files": 1,
+        "bytes": 373311,
+        "tree_sha256": "ff309b1656afa509efd8b5f0e252df93c86caa3615f33c73d22e611384e614ef"
+      }
+    },
+    {
+      "role": "recovery-future-schema-fixture",
+      "active": false,
+      "schema": 6,
+      "integrity_check": "PASS",
+      "foreign_key_check": "PASS",
+      "counts": {
+        "notes": 1,
+        "folders": 1,
+        "assets": 1
+      },
+      "synthetic_owner_title_present": true,
+      "referenced_assets_size_and_presence": "PASS",
+      "P3_workspace_validation": "INTENTIONAL_FUTURE_SCHEMA",
+      "content_fingerprint": "b5f5ecde1ae53ec07ebedaa725b0feb520a7d22ab1302f1bad3531176c8017a6",
+      "database_sha256": "62cf3679c6bda31b4a432134bcfc2d6e4340abf7b8129da4e509a32ff28b148f",
+      "asset_tree": {
+        "files": 1,
+        "bytes": 373311,
+        "tree_sha256": "ff309b1656afa509efd8b5f0e252df93c86caa3615f33c73d22e611384e614ef"
+      }
+    }
+  ],
+  "exact_missing_object": "NOT RETAINED; cannot identify from existing exception record",
+  "raw_stderr": "Known Chromium system D-Bus socket warning only; no Python traceback"
+}

@@ -1,0 +1,109 @@
+{
+  "status": "PASS",
+  "classification": "P5C STATUS: PASS \u2014 READY FOR FORMAL OWNER ACCEPTANCE.",
+  "formal_owner_acceptance": "PENDING",
+  "run_id": 41287523702,
+  "run_attempt": 1,
+  "workflow_id": 403379040,
+  "tooling_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "main_registration_commit": "4021bc292267c19b7ebebf219b4f682f8f99bf4c",
+  "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+  "source_CI_run": 41181510439,
+  "accepted_artifact_id": 13035607417,
+  "jobs": [
+    {
+      "id": 124791747445,
+      "name": "eligibility",
+      "conclusion": "success"
+    },
+    {
+      "id": 124791783403,
+      "name": "staging",
+      "conclusion": "success"
+    }
+  ],
+  "native_client": {
+    "commit": "da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac",
+    "operations": [
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "remote"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "install"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "commit"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "remote"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "location"
+      }
+    ],
+    "public_key_fingerprint_verified": "D4525F36925F5347BD2CF807C9A1218FD4870ED9",
+    "runtime_fetch": "DISABLED; application launch not tested",
+    "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+    "status": "PASS"
+  },
+  "synthetic_checks": {
+    "historical_objects_retained": "PASS",
+    "independent_fingerprint_rejects_wrong_key": "PASS",
+    "install_A_via_loopback_flatpakref": "PASS",
+    "interruption_keeps_A_installable": "PASS",
+    "missing-object_native_rejected": "PASS",
+    "native_wrong_key_rejected": "PASS",
+    "publisher_rejects_dropped_object": "PASS",
+    "recovery_cannot_discard_B_objects": "PASS",
+    "retained_B_usable": "PASS",
+    "stale_expected_commit_rejected": "PASS",
+    "tampered-summary_native_rejected": "PASS",
+    "unsigned-summary_native_rejected": "PASS",
+    "update_existing_client_A_to_B": "PASS"
+  },
+  "signing_fingerprint": "D4525F36925F5347BD2CF807C9A1218FD4870ED9",
+  "repository_metrics": {
+    "refs": [
+      "app/io.github._74Cerillion.CyrNava/x86_64/stable",
+      "appstream/x86_64",
+      "appstream2/x86_64"
+    ],
+    "static_deltas": false,
+    "generation_seconds": 134.263,
+    "sign_and_summary_seconds": 0.223,
+    "total_integration_seconds": 166.158,
+    "free_bytes_before_native": 91248566272,
+    "required_free_bytes": 8268348064,
+    "repository_byte_and_file_counts": "NOT REPORTED by the approved four-file diagnostic format; local rehearsal values are not substituted for hosted measurements"
+  },
+  "private_key_cleanup": "PASS",
+  "diagnostic_artifact_id": 13074794320,
+  "diagnostic_ZIP_sha256": "9c4f87fdc682ee12747b5dacab7da8f915eae73a13741995cebf6a21989bdbc1",
+  "independent_verification": "PASS",
+  "dispatch_count": 1,
+  "reruns": 0,
+  "commits_or_pushes_this_authorization": 0,
+  "known_unresolved_advisory": "minimatch@10.2.6 / GHSA-g3hv-75wg-m249",
+  "production_publication": "DISABLED",
+  "limitations": [
+    "partial SBOM",
+    "redistribution licensing pending",
+    "hosted optional advisory lookup not executed; existing finding unresolved",
+    "runtime download disabled",
+    "application launch not tested",
+    "synthetic update only, no real application upgrade",
+    "byte-for-byte reproducibility not verified",
+    "hosted repository byte/file totals not reported by approved diagnostics",
+    "no second local GPG replay; native signature checks executed in verified hosted code"
+  ]
+}

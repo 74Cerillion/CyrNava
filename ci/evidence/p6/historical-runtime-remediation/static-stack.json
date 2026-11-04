@@ -1,0 +1,382 @@
+{
+  "app/lib/python3.13/site-packages/PySide6/QtCore.abi3.so": {
+    "provider_basename": "QtCore.abi3.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libpyside6.abi3.so.6.11]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libshiboken6.abi3.so.6.11]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]",
+      "0x000000000000000f (RPATH)              Library rpath: [$ORIGIN/:/usr/lib/x86_64-linux-gnu:$ORIGIN/../shiboken6/]"
+    ]
+  },
+  "app/lib/python3.13/site-packages/PySide6/QtGui.abi3.so": {
+    "provider_basename": "QtGui.abi3.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libpyside6.abi3.so.6.11]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libshiboken6.abi3.so.6.11]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libGL.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]",
+      "0x000000000000000f (RPATH)              Library rpath: [$ORIGIN/:/usr/lib/x86_64-linux-gnu:$ORIGIN/../shiboken6/]"
+    ]
+  },
+  "app/lib/python3.13/site-packages/PySide6/QtWidgets.abi3.so": {
+    "provider_basename": "QtWidgets.abi3.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libpyside6.abi3.so.6.11]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Widgets.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libshiboken6.abi3.so.6.11]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libGL.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]",
+      "0x000000000000000f (RPATH)              Library rpath: [$ORIGIN/:/usr/lib/x86_64-linux-gnu:$ORIGIN/../shiboken6/]"
+    ]
+  },
+  "app/lib/python3.13/site-packages/PySide6/QtWebEngineCore.abi3.so": {
+    "provider_basename": "QtWebEngineCore.abi3.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libpyside6.abi3.so.6.11]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6WebEngineCore.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libshiboken6.abi3.so.6.11]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libGL.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Network.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]",
+      "0x000000000000000f (RPATH)              Library rpath: [$ORIGIN/:/usr/lib/x86_64-linux-gnu:$ORIGIN/../shiboken6/]"
+    ]
+  },
+  "app/lib/libQt6WebEngineCore.so": {
+    "provider_basename": "libQt6WebEngineCore.so.6.11.1",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6WebChannel.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Positioning.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxcb-dri3.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libicui18n.so.77]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libicuuc.so.77]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libnspr4.so]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libnss3.so]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libnssutil3.so]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libsmime3.so]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgio-2.0.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libglib-2.0.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgobject-2.0.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libdbus-1.so.3]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libz.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libsnappy.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libjpeg.so.62]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libopus.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libX11.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXcomposite.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXdamage.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXext.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXfixes.so.3]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXrandr.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXtst.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgbm.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libfontconfig.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libexpat.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libpng16.so.16]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libwebp.so.7]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libwebpdemux.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libwebpmux.so.3]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libfreetype.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libharfbuzz.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libharfbuzz-subset.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxkbcommon.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxcb.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libasound.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libudev.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxml2.so.16]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libminizip.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxslt.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [liblcms2.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libopenjp2.so.7]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libtiff.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxkbfile.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Quick.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libGLX.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Qml.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Network.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [ld-linux-x86-64.so.2]"
+    ]
+  },
+  "app/lib/libQt6WebEngineCore.so.6.11.1": {
+    "provider_basename": "libQt6WebEngineCore.so.6.11.1",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6WebChannel.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Positioning.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxcb-dri3.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libicui18n.so.77]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libicuuc.so.77]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libnspr4.so]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libnss3.so]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libnssutil3.so]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libsmime3.so]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgio-2.0.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libglib-2.0.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgobject-2.0.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libdbus-1.so.3]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libz.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libsnappy.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libjpeg.so.62]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libopus.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libX11.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXcomposite.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXdamage.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXext.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXfixes.so.3]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXrandr.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXtst.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgbm.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libfontconfig.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libexpat.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libpng16.so.16]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libwebp.so.7]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libwebpdemux.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libwebpmux.so.3]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libfreetype.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libharfbuzz.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libharfbuzz-subset.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxkbcommon.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxcb.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libasound.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libudev.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxml2.so.16]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libminizip.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxslt.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [liblcms2.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libopenjp2.so.7]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libtiff.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxkbfile.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Quick.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libGLX.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Qml.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Network.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [ld-linux-x86-64.so.2]"
+    ]
+  },
+  "app/lib/libQt6WebEngineCore.so.6": {
+    "provider_basename": "libQt6WebEngineCore.so.6.11.1",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6WebChannel.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Positioning.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxcb-dri3.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libicui18n.so.77]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libicuuc.so.77]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libnspr4.so]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libnss3.so]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libnssutil3.so]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libsmime3.so]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgio-2.0.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libglib-2.0.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgobject-2.0.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libdbus-1.so.3]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libz.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libsnappy.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libjpeg.so.62]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libopus.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libX11.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXcomposite.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXdamage.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXext.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXfixes.so.3]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXrandr.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libXtst.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgbm.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libfontconfig.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libexpat.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libpng16.so.16]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libwebp.so.7]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libwebpdemux.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libwebpmux.so.3]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libfreetype.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libharfbuzz.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libharfbuzz-subset.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxkbcommon.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxcb.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libasound.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libudev.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxml2.so.16]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libminizip.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxslt.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [liblcms2.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libopenjp2.so.7]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libtiff.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxkbfile.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Quick.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libGLX.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Qml.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Network.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [ld-linux-x86-64.so.2]"
+    ]
+  },
+  "runtime/lib/x86_64-linux-gnu/libQt6Core.so.6": {
+    "provider_basename": "libQt6Core.so.6.11.3",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libicui18n.so.77]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libicuuc.so.77]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libzstd.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libglib-2.0.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libz.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libpcre2-16.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [ld-linux-x86-64.so.2]"
+    ]
+  },
+  "runtime/lib/x86_64-linux-gnu/libQt6Gui.so.6": {
+    "provider_basename": "libQt6Gui.so.6.11.3",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libEGL.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libfontconfig.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libX11.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libglib-2.0.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6DBus.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libxkbcommon.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libGLX.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libOpenGL.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libpng16.so.16]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libharfbuzz.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libfreetype.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libz.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]"
+    ]
+  },
+  "runtime/lib/x86_64-linux-gnu/libQt6Widgets.so.6": {
+    "provider_basename": "libQt6Widgets.so.6.11.3",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]"
+    ]
+  },
+  "runtime/lib/plugins/platforms/libqwayland.so": {
+    "provider_basename": "libqwayland.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6WaylandClient.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]"
+    ]
+  },
+  "runtime/lib/plugins/platforms/libqoffscreen.so": {
+    "provider_basename": "libqoffscreen.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libX11.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libGLX.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libOpenGL.so.0]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]"
+    ]
+  },
+  "runtime/lib/plugins/platforms/libqvkkhrdisplay.so": {
+    "provider_basename": "libqvkkhrdisplay.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libudev.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]"
+    ]
+  },
+  "runtime/lib/plugins/platforms/libqeglfs.so": {
+    "provider_basename": "libqeglfs.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6EglFSDeviceIntegration.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]"
+    ]
+  },
+  "runtime/lib/plugins/platforms/libqminimalegl.so": {
+    "provider_basename": "libqminimalegl.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libEGL.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6OpenGL.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]"
+    ]
+  },
+  "runtime/lib/plugins/platforms/libqminimal.so": {
+    "provider_basename": "libqminimal.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]"
+    ]
+  },
+  "runtime/lib/plugins/platforms/libqvnc.so": {
+    "provider_basename": "libqvnc.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Network.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]"
+    ]
+  },
+  "runtime/lib/plugins/platforms/libqlinuxfb.so": {
+    "provider_basename": "libqlinuxfb.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libudev.so.1]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libdrm.so.2]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]"
+    ]
+  },
+  "runtime/lib/plugins/platforms/libqxcb.so": {
+    "provider_basename": "libqxcb.so",
+    "dynamic": [
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6XcbQpa.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Gui.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libQt6Core.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libstdc++.so.6]",
+      "0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]"
+    ]
+  }
+}

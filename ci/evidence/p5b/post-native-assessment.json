@@ -1,0 +1,34 @@
+{
+  "application_or_release_script_changes": false,
+  "assessment": "CONDITIONAL; native PASS reviewed, protected hosted workflow and owner acceptance outstanding",
+  "commit_push_environment_key_hosting_publication_P5C_P6_actions": false,
+  "date_utc": "2026-10-31T11:19:18.768704+00:00",
+  "document_checks": "PASS; JSON parse, evidence-copy hashes, historical-document hashes, tested implementation hashes and git diff --check",
+  "full_regression_rerun": "Not needed for documentation/evidence-only update; prior executed checks preserved",
+  "historical_failures_preserved": true,
+  "native_evidence_sha256": {
+    "eligibility.json": "a5f8e8322b17837cbd9271c2a824024a7b044468f98364e1678d07269dcf3116",
+    "hosting-model.json": "763772e636ba41a054b1462d5166b6021a714891ad5d720761e9a38f15606979",
+    "result.json": "02e82002fbbc407636379839a96ec9fe45257c9b4e0ce200b8f48ab245c37367",
+    "review.json": "0397da6977e2b72ee786827076f82813f704435fdd97a65c24c9bedbd9811b7e"
+  },
+  "original_native_files_modified": false,
+  "production_operations_not_required_for_staging_acceptance": [
+    "Permanent production signing key",
+    "Paid/public hosting or domain",
+    "Public release/deployment",
+    "P5C/P6 install/update lifecycle"
+  ],
+  "remaining_hard_gaps": [
+    "Protected P5B hosted staging workflow has not been registered/configured/authorized/executed",
+    "Immutable committed P5B release-tooling run provenance and live download/integrated workflow evidence absent",
+    "Formal owner P5B acceptance pending"
+  ],
+  "tested_candidate_hashes_unchanged": true,
+  "updated_documents_sha256": {
+    "ci/P5B_HOSTING_DECISION.md": "5f76544c420b10b8d6c6a4f9de1cdb71fa5c83cd2f2f6b7252cfb702ed856a2f",
+    "ci/P5B_OWNER_CHECKS.md": "4ad24d7b0b898e10303155bb2ab08686e4351d52a634d01681807e32a9e1916c",
+    "ci/P5B_REPORT.md": "d3206e43ed8aee9c6057144c65531179303326219df3860c23febc2b2f066174",
+    "ci/P5B_SIGNING_DESIGN.md": "f60d03188cfc5cff309b2da8897fd709fe32e1f2a00c8581cc2def0f3f77b2af"
+  }
+}

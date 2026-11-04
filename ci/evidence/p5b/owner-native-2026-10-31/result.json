@@ -1,0 +1,90 @@
+{
+  "complete": true,
+  "metrics": {
+    "repo_bytes": 301341805,
+    "repo_files": 5554,
+    "signed_metadata_bytes": 2016,
+    "static_delta_bytes": 0
+  },
+  "publication": {
+    "generation": "aaf43d3afb4a01c7624736fb5c1c058e893022ccf28c196b8e025af9e4efd4e4",
+    "previous_generation": null,
+    "status": "PASS",
+    "target": "LOCAL STAGING ONLY"
+  },
+  "purpose": "P5B disposable staging",
+  "release": {
+    "application_id": "io.github._74Cerillion.CyrNava",
+    "architecture": "x86_64",
+    "authorization_ref": "P5B-owner-authorized-disposable-staging-only",
+    "bundle_sha256": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db",
+    "ci_artifact_id": 13035607417,
+    "ci_run_id": 41181510439,
+    "flatpakrepo_native_validation": "Post-publication check recorded separately in result.json",
+    "format": 1,
+    "generation_seconds": 102.06,
+    "ostree_commit": "da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac",
+    "publication_result": "NOT PUBLISHED",
+    "publication_target": "file:///home/cerillion/.cache/cyrnava-p5b.bUyzq5/run/local-store/current/repo",
+    "purpose": "p5b-staging",
+    "refs": [
+      "app/io.github._74Cerillion.CyrNava/x86_64/stable",
+      "appstream/x86_64",
+      "appstream2/x86_64"
+    ],
+    "release_tooling_commit": "1a28f68c5732ccc1275403060e89ff168a846655",
+    "release_workflow_definition_sha256": "5398142a4e623f069d27f878d0cd60e7303688620754e6160ec02062c9414163",
+    "release_workflow_run_id": null,
+    "repository": "74Cerillion/CyrNava",
+    "runtime_lock": {
+      "application_version": "0.1.0",
+      "architecture": "x86_64",
+      "python": "3.13",
+      "qt_series": "6.11",
+      "refs": {
+        "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+        "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+        "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86"
+      },
+      "schema": 5
+    },
+    "sign_and_summary_seconds": 0.13,
+    "signing_fingerprint": "AA0C7FC4CB50DB434E13A80A34FA331D0C7DED0E",
+    "source_ci_workflow_id": 402398273,
+    "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+    "static_deltas": false,
+    "version": "0.1.0"
+  },
+  "seconds": 161.167,
+  "stage": "local-publication",
+  "status": "PASS",
+  "steps": [
+    {
+      "eligibility": "PINNED REPLAY"
+    },
+    {
+      "candidate": "PASS"
+    },
+    {
+      "signed_repository": "PASS"
+    },
+    {
+      "wrong_repository_key_rejected": "PASS"
+    },
+    {
+      "tampered_repository_rejected": "PASS"
+    },
+    {
+      "missing_required_object_rejected": "PASS"
+    },
+    {
+      "unexpected_ref_rejected": "PASS"
+    },
+    {
+      "native_flatpakrepo_descriptor_remote": "PASS"
+    },
+    {
+      "interrupted_publication_preserves_previous": "PASS"
+    }
+  ]
+}

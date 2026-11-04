@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "scope": "Local synthetic I/O in a clean detached checkout; no native verification",
+  "new_regressions": 11,
+  "focused": {
+    "tests_passed": 85,
+    "subtests_passed": 24,
+    "seconds": 0.78,
+    "output": "focused.txt"
+  },
+  "release_workflow": {
+    "tests_passed": 242,
+    "subtests_passed": 228,
+    "seconds": 9.25,
+    "warnings": 1,
+    "warning": "Existing deliberate duplicate-ZIP negative fixture",
+    "output": "release-workflow.txt"
+  },
+  "ruff_check": "PASS",
+  "ruff_format": "PASS",
+  "native_execution": "NOT EXECUTED; separate authorization required",
+  "full_backend_frontend": "Not rerun; production source unchanged",
+  "commands": [
+    "TMPDIR=/var/tmp PYTHONDONTWRITEBYTECODE=1 ci-output/p6-clean/checkout/backend/.venv/bin/python -m pytest -q -p no:cacheprovider ci-output/p6-r6-clean/checkout/ci/release/test_historical_install.py ci-output/p6-r6-clean/checkout/ci/release/test_historical_runtime.py ci-output/p6-r6-clean/checkout/ci/release/test_runtime_identity.py ci-output/p6-r6-clean/checkout/ci/release/test_native_diagnostics.py ci-output/p6-r6-clean/checkout/ci/release/test_progress.py ci-output/p6-r6-clean/checkout/ci/release/test_real_update_audit.py",
+    "TMPDIR=/var/tmp PYTHONDONTWRITEBYTECODE=1 ci-output/p6-clean/checkout/backend/.venv/bin/python -m pytest -q -p no:cacheprovider ci-output/p6-r6-clean/checkout/ci/release ci-output/p6-r6-clean/checkout/ci/test_ci.py"
+  ]
+}

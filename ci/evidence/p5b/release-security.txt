@@ -1,0 +1,71 @@
+test_archive_hash_mismatch_rejected (test_policy.ArchiveTests.test_archive_hash_mismatch_rejected) ... ok
+test_bounded_extraction_and_metadata_validation (test_policy.ArchiveTests.test_bounded_extraction_and_metadata_validation) ... ok
+test_candidate_symlink_and_duplicate_json_rejected (test_policy.ArchiveTests.test_candidate_symlink_and_duplicate_json_rejected) ... ok
+test_compressed_oversized_metadata_rejected_before_extraction (test_policy.ArchiveTests.test_compressed_oversized_metadata_rejected_before_extraction) ... ok
+test_metadata_resource_bound (test_policy.ArchiveTests.test_metadata_resource_bound) ... ok
+test_payload_metadata_fails_closed (test_policy.ArchiveTests.test_payload_metadata_fails_closed) ... ok
+test_unsafe_or_extra_zip_entries_rejected (test_policy.ArchiveTests.test_unsafe_or_extra_zip_entries_rejected) ... /usr/lib/python3.12/zipfile/__init__.py:1650: UserWarning: Duplicate name: 'io.github._74Cerillion.CyrNava.flatpak'
+  return self._open_to_write(zinfo, force_zip64=force_zip64)
+ok
+test_zip_symlink_rejected (test_policy.ArchiveTests.test_zip_symlink_rejected) ... ok
+test_failed_or_missing_ci_jobs_rejected (test_policy.EligibilityTests.test_failed_or_missing_ci_jobs_rejected) ... ok
+test_no_manual_override_of_approval_version_or_channel (test_policy.EligibilityTests.test_no_manual_override_of_approval_version_or_channel) ... ok
+test_reviewed_source_and_successful_ci (test_policy.EligibilityTests.test_reviewed_source_and_successful_ci) ... ok
+test_unreviewed_ci_content_rejected (test_policy.EligibilityTests.test_unreviewed_ci_content_rejected) ... ok
+test_wrong_expired_or_replaced_artifact_rejected (test_policy.EligibilityTests.test_wrong_expired_or_replaced_artifact_rejected) ... ok
+test_wrong_source_run_workflow_or_repository_rejected (test_policy.EligibilityTests.test_wrong_source_run_workflow_or_repository_rejected) ... ok
+test_download_redirect_never_forwards_api_credentials (test_policy.TransportTests.test_download_redirect_never_forwards_api_credentials) ... ok
+test_subprocess_diagnostics_never_echo_arguments_or_output (test_policy.TransportTests.test_subprocess_diagnostics_never_echo_arguments_or_output) ... ok
+test_untrusted_download_redirect_is_rejected_before_following (test_policy.TransportTests.test_untrusted_download_redirect_is_rejected_before_following) ... ok
+test_environment_missing_reviewers_self_review_or_bypass_rejected (test_policy.WorkflowTests.test_environment_missing_reviewers_self_review_or_bypass_rejected) ... ok
+test_existing_output_is_not_overwritten_on_cli_failure (test_policy.WorkflowTests.test_existing_output_is_not_overwritten_on_cli_failure) ... {
+  "status": "FAIL",
+  "complete": true,
+  "purpose": "P5B disposable staging",
+  "stage": "eligibility",
+  "steps": [],
+  "error_type": "FileExistsError",
+  "error": "Staging failed; no publication claimed",
+  "seconds": 0.0
+}
+ok
+test_hosted_offline_replay_forbidden (test_policy.WorkflowTests.test_hosted_offline_replay_forbidden) ... {
+  "status": "FAIL",
+  "complete": true,
+  "purpose": "P5B disposable staging",
+  "stage": "eligibility",
+  "steps": [],
+  "error_type": "Rejected",
+  "error": "Hosted workflow requires live CI evidence",
+  "seconds": 0.001
+}
+ok
+test_no_source_tree_outputs (test_policy.WorkflowTests.test_no_source_tree_outputs) ... ok
+test_parent_traversal_cannot_evade_source_boundary (test_policy.WorkflowTests.test_parent_traversal_cannot_evade_source_boundary) ... ok
+test_preflight_ref_and_inputs_are_not_shell_code (test_policy.WorkflowTests.test_preflight_ref_and_inputs_are_not_shell_code) ... ok
+test_protection_read_error_never_claims_approval (test_policy.WorkflowTests.test_protection_read_error_never_claims_approval) ... ok
+test_reviewed_workflow (test_policy.WorkflowTests.test_reviewed_workflow) ... ok
+test_unsafe_workflow_capabilities_rejected (test_policy.WorkflowTests.test_unsafe_workflow_capabilities_rejected) ... ok
+test_concurrent_publication_is_rejected (test_signing.SigningTests.test_concurrent_publication_is_rejected) ... ok
+test_correct_key_signature_verified (test_signing.SigningTests.test_correct_key_signature_verified) ... ok
+test_failed_publication_keeps_previous_active_generation (test_signing.SigningTests.test_failed_publication_keeps_previous_active_generation) ... ok
+test_invalid_detached_signature_rejected (test_signing.SigningTests.test_invalid_detached_signature_rejected) ... ok
+test_local_publication_and_idempotent_repeat (test_signing.SigningTests.test_local_publication_and_idempotent_repeat) ... ok
+test_manifest_detects_missing_unlisted_or_modified_objects (test_signing.SigningTests.test_manifest_detects_missing_unlisted_or_modified_objects) ... ok
+test_missing_or_unmarked_credentials_fail_closed (test_signing.SigningTests.test_missing_or_unmarked_credentials_fail_closed) ... ok
+test_partial_copy_does_not_activate (test_signing.SigningTests.test_partial_copy_does_not_activate) ... ok
+test_pruning_or_unsafe_rollback_rejected (test_signing.SigningTests.test_pruning_or_unsafe_rollback_rejected) ... ok
+test_public_export_contains_no_secret_packets (test_signing.SigningTests.test_public_export_contains_no_secret_packets) ... ok
+test_recovery_does_not_touch_database_or_remove_client_objects (test_signing.SigningTests.test_recovery_does_not_touch_database_or_remove_client_objects) ... ok
+test_release_plan_creates_no_remote_or_tag (test_signing.SigningTests.test_release_plan_creates_no_remote_or_tag) ... ok
+test_signer_directory_permissions_and_identity_enforced (test_signing.SigningTests.test_signer_directory_permissions_and_identity_enforced) ... ok
+test_symlinks_and_private_material_excluded (test_signing.SigningTests.test_symlinks_and_private_material_excluded) ... ok
+test_tampered_content_rejected (test_signing.SigningTests.test_tampered_content_rejected) ... ok
+test_unmarked_or_unsafe_store_is_rejected (test_signing.SigningTests.test_unmarked_or_unsafe_store_is_rejected) ... ok
+test_valid_descriptors_and_no_permanent_url (test_signing.SigningTests.test_valid_descriptors_and_no_permanent_url) ... ok
+test_wrong_key_or_unexpected_fingerprint_rejected (test_signing.SigningTests.test_wrong_key_or_unexpected_fingerprint_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 0.958s
+
+OK

@@ -1,0 +1,46 @@
+{
+  "disposable_copy_removed_on_exit": true,
+  "result": {
+    "complete_source_tree_before_after": {
+      "bytes": 8563881,
+      "directories": 36,
+      "directory_tree_sha256": "81854d5f079cbe304f2dc4ee2f6c2e2ce9714c438839a0a8554bdf6894441088",
+      "files": 95,
+      "tree_sha256": "d73d1aa3253db0719ff74b874e60af768a13fb57eeb8725eb75f2c4b5035dbf8"
+    },
+    "copied_workspace": {
+      "asset_tree": {
+        "bytes": 354837,
+        "files": 1,
+        "tree_sha256": "d79b5409baedcfda688a50a09752f7412b2c70c1cb59c11beac6f47910b90f01"
+      },
+      "content_fingerprint": "651629ca97568aac20ec56ceaf045ff96de01f5075d30ccf4a3a54517292e9e2",
+      "counts": {
+        "assets": 1,
+        "folders": 1,
+        "notes": 1
+      },
+      "database_integrity_and_references": "PASS",
+      "database_sha256": "870c040e49135e8ab1e78ddc836b31b5771aab7f65ee199a0e6148646dde61fb",
+      "schema": 5,
+      "status": "PASS"
+    },
+    "fresh_Qt_storage": true,
+    "source_after": {
+      "bytes": 8563881,
+      "files": 95,
+      "tree_sha256": "d73d1aa3253db0719ff74b874e60af768a13fb57eeb8725eb75f2c4b5035dbf8"
+    },
+    "source_before": {
+      "bytes": 8563881,
+      "files": 95,
+      "tree_sha256": "d73d1aa3253db0719ff74b874e60af768a13fb57eeb8725eb75f2c4b5035dbf8"
+    },
+    "status": "PASS",
+    "workspace_identity": {
+      "qt_profile": "01c32990747c474c7551f8db2a5ac220f84a80009b91cf46c3159f36cc4430b0",
+      "workspace": "d1820ad37f570ef9fb1f36a45c96583472bae8997c17b8ab2ccdc0de5853ecc1"
+    }
+  },
+  "scope": "Actual retained synthetic data copy/validation only; no Profile construction, Qt, Flatpak install or runtime operation"
+}

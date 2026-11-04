@@ -27,12 +27,76 @@ on:
 
 permissions:
   contents: read
+  actions: read
+
+concurrency:
+  group: cyrnava-p5b-staging
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -eo pipefail {0}
+
+env:
+  RELEASE_SOURCE: ${{ inputs.source_commit }}
+  RELEASE_CI_RUN: ${{ inputs.ci_run_id }}
+  RELEASE_VERSION: ${{ inputs.version }}
+  RELEASE_CHANNEL: ${{ inputs.channel }}
+  RELEASE_AUTHORIZATION: ${{ inputs.authorization_ref }}
 
 jobs:
-  registration:
-    if: ${{ false }}
+  eligibility:
     runs-on: ubuntu-24.04
-    timeout-minutes: 1
+    timeout-minutes: 10
     steps:
-      - name: Inert registration marker
-        run: ':'
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - name: Verify owner-dispatched policy and exact staging branch protection
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock
+          python ci/release/workflow_policy.py
+          python ci/release/preflight.py
+  staging:
+    needs: eligibility
+    environment: p5b-staging
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - name: Install public verification tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends flatpak ostree gnupg
+      - name: Recheck eligibility, create disposable key and verify signed staging repository
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python -m pip install --require-hashes --only-binary=:all: -r ci/requirements.lock || {
+            python ci/release/stage.py --setup-failed --live --source-commit "$RELEASE_SOURCE" --ci-run-id "$RELEASE_CI_RUN" --version "$RELEASE_VERSION" --channel "$RELEASE_CHANNEL" --authorization-ref "$RELEASE_AUTHORIZATION" --output "$RUNNER_TEMP/cyrnava-p5b"
+            exit 1
+          }
+          python ci/release/stage.py --live --source-commit "$RELEASE_SOURCE" --ci-run-id "$RELEASE_CI_RUN" --version "$RELEASE_VERSION" --channel "$RELEASE_CHANNEL" --authorization-ref "$RELEASE_AUTHORIZATION" --output "$RUNNER_TEMP/cyrnava-p5b"
+      - name: Retain safe status only; no key homes, repositories or packages
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: p5b-staging-diagnostics-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/cyrnava-p5b/result.json
+            ${{ runner.temp }}/cyrnava-p5b/eligibility.json
+          retention-days: 7
+          if-no-files-found: error

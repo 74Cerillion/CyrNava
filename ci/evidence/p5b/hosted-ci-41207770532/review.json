@@ -1,0 +1,138 @@
+{
+  "reviewed_utc": "2026-10-31T14:12:52.429526+00:00",
+  "status": "PASS",
+  "commit": "abbb1b7a723d0b42dae1fa2b3312cb7667299e96",
+  "run_id": 41207770532,
+  "files": [
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/appearance-state-verification.json",
+      "bytes": 19908,
+      "sha256": "f2395f9448c88b063ffdf9a038b71db3818d534190ac4cb0c9132eb394e1596b"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/artifact-verification.json",
+      "bytes": 1030,
+      "sha256": "0d3aa71fdbfd0aa1bd0d236ac2c5989c3379e61102035a2c6ef271f07bad6a55"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/artifacts.json",
+      "bytes": 3499,
+      "sha256": "f042e9ed504519c916424a7ce8c24f58e875a5ebf796245b195ee50481c07fae"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/backend-excerpt.txt",
+      "bytes": 559,
+      "sha256": "ec27a1a9863faba81d0c6ad16b0e89d6e71cb7b81280514f387f64881f9e8b16"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/backend-junit.xml",
+      "bytes": 77404,
+      "sha256": "c2d3000e36689ea948dc53fc515c2d651ed2da6176c80b72015a6c67bf7ca7c5"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/backend.json",
+      "bytes": 622,
+      "sha256": "4dcb4ac2809928f66b88f7ebdc50b98f344797ea211c1e693f77fb5d176dde4b"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/browser-junit.xml",
+      "bytes": 5892,
+      "sha256": "96ac8d31ca841219d8f4b3b52c2a05faac0df9e5455e9ce98d25fd89172dbafd"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/flatpak-audit.json",
+      "bytes": 1237,
+      "sha256": "bf0a109d999d8e5ff2fda0e437f12c49ed2a49ad33c29e96300182dc93afa927"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/flatpak-build.json",
+      "bytes": 89,
+      "sha256": "ee126fb8d1dff9a470f8dcea9dd3401acefa9987e22b09ba700bfe8e73e4a949"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/flatpak-excerpt.txt",
+      "bytes": 1588,
+      "sha256": "d54ebf3ff9301f60ad26050796a876cfc6cace4d8afb3485671b3581cf2cea77"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/flatpak-prepare.json",
+      "bytes": 1407,
+      "sha256": "90e22637a820d54860668890ccc12de561fafba1c8560fc8029384739f87979c"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/flatpak-result.json",
+      "bytes": 508,
+      "sha256": "20079659ce858133a790707166dbec1ce206d21172af0c5cdf3c0dc82d8bac22"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/frontend-excerpt.txt",
+      "bytes": 1790,
+      "sha256": "4d4f0ebd051158809054fb16292d4cf1f97b906e10f2bc306a178b109207cb37"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/frontend.json",
+      "bytes": 481,
+      "sha256": "bf5f6cbeb30ba0b11348a49fb26ad9f96516810b54d2e8e5ffaea8ff9b1268f7"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/jobs.json",
+      "bytes": 9586,
+      "sha256": "d3923ef8dd127e4be237ea5bd32b056f38c700ce75550506b61e0eccf9989f6e"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/package-build-inputs.json",
+      "bytes": 12564,
+      "sha256": "9ea47be3999fb616754e796ffb89df8c3d85db7bac611f7f24add9aa9b42a256"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/package-provenance.json",
+      "bytes": 1172,
+      "sha256": "361d449a19dbc45ce3f0586658c7e4885a2a53c2564c93922490e8063cfd9262"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/package-result.json",
+      "bytes": 508,
+      "sha256": "20079659ce858133a790707166dbec1ce206d21172af0c5cdf3c0dc82d8bac22"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/package-verification.json",
+      "bytes": 1132,
+      "sha256": "8e711d919d3c7c28e40941ec8ad2bffed783be37ff99cce80a0d7600efdb14fd"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/required-excerpt.txt",
+      "bytes": 222,
+      "sha256": "d21468bc750536034ec3d039b338ba99349e028b71679808b6c492dc546acde3"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/run.json",
+      "bytes": 454,
+      "sha256": "b363674f9481fe37e55da0f3b3d95fb6ff51794ab1d64d794c62653837fb1294"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/staging-policy-test-verification.json",
+      "bytes": 2951,
+      "sha256": "5b590d920d01221efbefc9ac9eba9953a96e5d6dbccb4e21f1a51cd8dfd629aa"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/staging-readiness-read-only.json",
+      "bytes": 861,
+      "sha256": "2e1a5d39c242bd1fc4c41a9b61eb5e79854f3dde040a500664eae2efcd971592"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/summary.json",
+      "bytes": 805,
+      "sha256": "ddaee95c1fc78d930d4d2a96348d46631be1aa618173fd8ae9c2fa0c5857ba9b"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41207770532/validation-excerpt.txt",
+      "bytes": 305,
+      "sha256": "1e1d9f8ac57aec67f63699afae748af49e19f9ee8c074cc3bf0a27d3a6ed51e6"
+    }
+  ],
+  "sensitive_material_findings": [],
+  "production_source_changes": false,
+  "additional_commit_push_rerun_dispatch_or_external_configuration": false,
+  "report_updates": "Local, uncommitted P5B report/owner checks/staging-plan updates only",
+  "P5B_status": "CONDITIONAL; exact-branch environment, inert main registration, owner-authorized manual staging and acceptance still pending"
+}

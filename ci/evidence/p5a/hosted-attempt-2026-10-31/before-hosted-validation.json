@@ -1,0 +1,114 @@
+{
+  "phase": "P5A",
+  "date": "2026-10-31",
+  "timezone": "Asia/Seoul",
+  "status": "CONDITIONAL \u2014 GITHUB-HOSTED VERIFICATION REQUIRED",
+  "branch": "desktop/p2-production-integration",
+  "base_commit": "8418339cf3c9ff7ae26f792ed8697b7c16d7450a",
+  "local_tests": {
+    "backend": {
+      "status": "PASS",
+      "passed": 546,
+      "subtests_passed": 28,
+      "warnings": 2,
+      "pytest_seconds": 31.64,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "python-lint",
+            "status": "PASS",
+            "seconds": 0.022
+          },
+          {
+            "name": "backend-security-lifecycle-migration-packaging",
+            "status": "PASS",
+            "seconds": 32.296
+          }
+        ],
+        "seconds": 32.318
+      }
+    },
+    "frontend": {
+      "status": "PASS",
+      "unit_passed": 273,
+      "browser_passed": 16,
+      "orchestration": {
+        "status": "PASS",
+        "complete": true,
+        "steps": [
+          {
+            "name": "frontend-lint",
+            "status": "PASS",
+            "seconds": 2.699
+          },
+          {
+            "name": "frontend-unit",
+            "status": "PASS",
+            "seconds": 14.584
+          },
+          {
+            "name": "typescript-production-build",
+            "status": "PASS",
+            "seconds": 3.828
+          },
+          {
+            "name": "chromium-production-integration",
+            "status": "PASS",
+            "seconds": 103.621
+          }
+        ],
+        "seconds": 124.732
+      }
+    },
+    "workflow_contracts": {
+      "status": "PASS",
+      "test_methods": 19,
+      "negative_subtests": 28
+    },
+    "actionlint": {
+      "status": "PASS",
+      "version": "1.7.7",
+      "shellcheck": "Not installed locally; actionlint shellcheck integration not exercised locally"
+    },
+    "ruff": "PASS",
+    "compileall": "PASS",
+    "diff_check": "PASS"
+  },
+  "dependency_installation": {
+    "npm_cold_and_warm_ci": "PASS",
+    "backend_pinned_clean_resolution": "PASS",
+    "pip_check": "PASS",
+    "workflow_parser_hash_verified_install": "PASS",
+    "actionlint_download_hash_verification": "PASS"
+  },
+  "negative_verification": {
+    "real_subprocess_exit": 17,
+    "downstream_upload_prevented": true,
+    "gate_rejects_failed_skipped_cancelled": true,
+    "actual_old_p4_bundle_rejected": "Build source commit mismatch",
+    "no_old_bundle_uploaded": true
+  },
+  "runtime_availability": "Locked commit objects publicly reachable; hosted GPG installation NOT TESTED",
+  "hosted": {
+    "status": "NOT TESTED",
+    "run_id": null,
+    "source_commit": null,
+    "runner_image": null,
+    "build_status": "NOT TESTED",
+    "upload_status": "NOT TESTED",
+    "artifact_sha256": null,
+    "blocker": "Authorized git push failed: HTTPS credentials unavailable in terminal"
+  },
+  "native_qt_portals": "NOT TESTED by this CI; historical P4 limits preserved",
+  "p4_artifacts": "Historical A/B untouched; old A used only for expected-negative audit",
+  "publication": false,
+  "push": false,
+  "commit_created": true,
+  "repository_settings_changed": false,
+  "P5B_started": false,
+  "P5C_started": false,
+  "commit_sha": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+  "authorized_push_attempt": "hosted-attempt-2026-10-31/push-and-hosted-status.json"
+}

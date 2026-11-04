@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "operation": "prepare",
+  "runtime_lock": {
+    "architecture": "x86_64",
+    "python": "3.13",
+    "qt_series": "6.11",
+    "application_version": "0.1.0",
+    "schema": 5,
+    "refs": {
+      "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+      "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+      "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e"
+    },
+    "verification": [
+      {
+        "ref": "org.kde.Platform//6.11",
+        "expected_commit": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+        "actual_commit": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+        "outcome": "PASS"
+      },
+      {
+        "ref": "org.kde.Sdk//6.11",
+        "expected_commit": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+        "actual_commit": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+        "outcome": "PASS"
+      },
+      {
+        "ref": "io.qt.PySide.BaseApp//6.11",
+        "expected_commit": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+        "actual_commit": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+        "outcome": "PASS"
+      }
+    ]
+  },
+  "complete": true,
+  "seconds": 107.064
+}

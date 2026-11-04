@@ -1,0 +1,7 @@
+{
+  "free_bytes": 1161900032,
+  "required_minimum_bytes": 5368709120,
+  "capacity_gate_passes": false,
+  "gate_scope": "Conservative preflight floor for isolated runtime/client, based on retained client measured at 3.4 GiB plus candidate/store/verification temporary copies; not a maximum disk-use guarantee",
+  "owner_action": "Provide sufficient free capacity without deleting retained evidence or personal data under this authorization"
+}

@@ -1,0 +1,117 @@
+
+Running 3 tests using 1 worker
+
+(node:30) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✘  1 e2e/workspace.spec.ts:619:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (9.8s)
+(node:128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✘  2 e2e/workspace.spec.ts:619:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (9.9s)
+(node:227) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✘  3 e2e/workspace.spec.ts:619:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (9.8s)
+
+
+  1) e2e/workspace.spec.ts:619:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation 
+
+    Error: {"width":390,"scroll":405,"overflowing":[{"tag":"DIV","class":"","right":405},{"tag":"DIV","class":"bn-side-menu m_4081bf90 mantine-Group-root","right":405},{"tag":"BUTTON","class":"mantine-focus-auto mantine-active bn-button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root","right":405},{"tag":"SPAN","class":"m_8d3afb97 mantine-ActionIcon-icon","right":404},{"tag":"svg","class":{},"right":404},{"tag":"path","class":{},"right":404},{"tag":"path","class":{},"right":397.5833435058594}]}
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 391
+    Received:    405
+
+      717 |     await page.getByRole('textbox', { name: 'Note title', exact: true }).click();
+      718 |     const layout = await page.evaluate(() => ({ width: window.innerWidth, scroll: document.documentElement.scrollWidth, overflowing: Array.from(document.querySelectorAll('*')).filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 12).map((element) => ({ tag: element.tagName, class: element.className, right: element.getBoundingClientRect().right })) }));
+    > 719 |     expect(layout.scroll, JSON.stringify(layout)).toBeLessThanOrEqual(layout.width + 1);
+          |                                                   ^
+      720 |     await page.setViewportSize({ width: 1280, height: 1000 });
+      721 |
+      722 |     await page.getByRole('button', { name: 'Workspace root', exact: true }).click();
+        at /tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts:719:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../model-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../model-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../model-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../model-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) e2e/workspace.spec.ts:619:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation 
+
+    Error: {"width":390,"scroll":405,"overflowing":[{"tag":"DIV","class":"","right":405},{"tag":"DIV","class":"bn-side-menu m_4081bf90 mantine-Group-root","right":405},{"tag":"BUTTON","class":"mantine-focus-auto mantine-active bn-button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root","right":405},{"tag":"SPAN","class":"m_8d3afb97 mantine-ActionIcon-icon","right":404},{"tag":"svg","class":{},"right":404},{"tag":"path","class":{},"right":404},{"tag":"path","class":{},"right":397.5833435058594}]}
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 391
+    Received:    405
+
+      717 |     await page.getByRole('textbox', { name: 'Note title', exact: true }).click();
+      718 |     const layout = await page.evaluate(() => ({ width: window.innerWidth, scroll: document.documentElement.scrollWidth, overflowing: Array.from(document.querySelectorAll('*')).filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 12).map((element) => ({ tag: element.tagName, class: element.className, right: element.getBoundingClientRect().right })) }));
+    > 719 |     expect(layout.scroll, JSON.stringify(layout)).toBeLessThanOrEqual(layout.width + 1);
+          |                                                   ^
+      720 |     await page.setViewportSize({ width: 1280, height: 1000 });
+      721 |
+      722 |     await page.getByRole('button', { name: 'Workspace root', exact: true }).click();
+        at /tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts:719:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../model-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat1/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../model-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat1/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../model-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../model-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) e2e/workspace.spec.ts:619:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation 
+
+    Error: {"width":390,"scroll":405,"overflowing":[{"tag":"DIV","class":"","right":405},{"tag":"DIV","class":"bn-side-menu m_4081bf90 mantine-Group-root","right":405},{"tag":"BUTTON","class":"mantine-focus-auto mantine-active bn-button m_8d3f4000 mantine-ActionIcon-root m_87cf2631 mantine-UnstyledButton-root","right":405},{"tag":"SPAN","class":"m_8d3afb97 mantine-ActionIcon-icon","right":404},{"tag":"svg","class":{},"right":404},{"tag":"path","class":{},"right":404},{"tag":"path","class":{},"right":397.5833435058594}]}
+
+    expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 391
+    Received:    405
+
+      717 |     await page.getByRole('textbox', { name: 'Note title', exact: true }).click();
+      718 |     const layout = await page.evaluate(() => ({ width: window.innerWidth, scroll: document.documentElement.scrollWidth, overflowing: Array.from(document.querySelectorAll('*')).filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 12).map((element) => ({ tag: element.tagName, class: element.className, right: element.getBoundingClientRect().right })) }));
+    > 719 |     expect(layout.scroll, JSON.stringify(layout)).toBeLessThanOrEqual(layout.width + 1);
+          |                                                   ^
+      720 |     await page.setViewportSize({ width: 1280, height: 1000 });
+      721 |
+      722 |     await page.getByRole('button', { name: 'Workspace root', exact: true }).click();
+        at /tmp/cyrnava-p5a-image-ywq4ttao/checkout/frontend/e2e/workspace.spec.ts:719:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../model-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat2/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../model-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat2/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../model-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat2/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../model-baseline-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation-repeat2/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    e2e/workspace.spec.ts:619:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation 
+    e2e/workspace.spec.ts:619:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation 
+    e2e/workspace.spec.ts:619:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation 

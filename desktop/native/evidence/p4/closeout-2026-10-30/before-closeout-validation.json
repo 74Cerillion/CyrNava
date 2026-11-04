@@ -1,0 +1,232 @@
+{
+  "phase": "P4",
+  "status": "CONDITIONAL",
+  "date": "2026-10-30",
+  "timezone": "Asia/Seoul",
+  "branch": "desktop/p2-production-integration",
+  "base_commit": "eb65fc152181f77b3fa131f79aa417a03d84a1ac",
+  "p3_acceptance_reconciliation": "PASS",
+  "metadata_only_CC0_owner_approved": true,
+  "tests": [
+    {
+      "name": "baseline native/migration/packaging",
+      "status": "PASS",
+      "passed": 67
+    },
+    {
+      "name": "comprehensive backend/P2/P3/P4",
+      "status": "PASS",
+      "passed": 501,
+      "seconds": 32.4,
+      "command": "cd backend && .venv/bin/python -m pytest -q tests ../packaging/flatpak/test_verify_outage.py ../packaging/flatpak/test_run_portal_verification.py ../packaging/flatpak/test_run_migration_verification.py ../packaging/flatpak/production/test_packaging.py",
+      "note": "Before later host-verifier contract/permission/tamper tests; those passed in the final focused suite."
+    },
+    {
+      "name": "final P4 packaging/host-supervisor contracts",
+      "status": "PASS",
+      "passed": 21,
+      "command": "backend/.venv/bin/python -m pytest -q packaging/flatpak/production/test_packaging.py"
+    },
+    {
+      "name": "post-hardening native/packaging focus",
+      "status": "PASS",
+      "passed": 52,
+      "note": "Before four additional mocked supervisor cases, which then passed."
+    },
+    {
+      "name": "frontend",
+      "status": "PASS",
+      "passed": 273,
+      "command": "npm --prefix frontend test"
+    },
+    {
+      "name": "release browser",
+      "status": "PASS",
+      "passed": 16,
+      "duration": "1.8m",
+      "command": "npm --prefix frontend run test:release"
+    },
+    {
+      "name": "Qt migration workflow",
+      "status": "PASS",
+      "boundary": "Actual offscreen QtWidgets, mocked chooser selections; not native portal evidence"
+    },
+    {
+      "name": "Qt portal readiness and edit prereqs",
+      "status": "PASS",
+      "boundary": "Actual Qt event delivery, simulated DBus; not native portal evidence"
+    },
+    {
+      "name": "desktop-file-validate",
+      "status": "PASS"
+    },
+    {
+      "name": "AppStream validation",
+      "status": "PASS",
+      "informational": [
+        "content-rating-missing",
+        "developer-info-missing"
+      ]
+    },
+    {
+      "name": "Ruff, Python compilation, git diff --check",
+      "status": "PASS"
+    },
+    {
+      "name": "final packaging/permission/tamper/host-contract tests",
+      "status": "PASS",
+      "passed": 21,
+      "command": "backend/.venv/bin/python -m pytest -q packaging/flatpak/production/test_packaging.py"
+    },
+    {
+      "name": "timestamp correction and real Flatpak/OSTree parser regression",
+      "status": "PASS",
+      "passed": 22,
+      "evidence": "timestamp-correction-2026-10-30/regression.log",
+      "boundary": "Synthetic icon-free fixture, no production or icon-validator PASS claimed"
+    },
+    {
+      "name": "P4 resume and explicit edit/preference diagnostics",
+      "status": "PASS",
+      "passed": 27,
+      "evidence": "owner-run-83587bd18651/regression.log",
+      "boundary": "Contract and synthetic data tests; corrected native workflow NOT TESTED"
+    },
+    {
+      "name": "Maintenance continuation and incomplete-import diagnostics",
+      "status": "PASS",
+      "passed": 36,
+      "command": "backend/.venv/bin/python -m pytest -q packaging/flatpak/production/test_packaging.py"
+    }
+  ],
+  "package_audit": {
+    "status": "PASS",
+    "files": 5320,
+    "logical_bytes": 980983648,
+    "audit_file": "package-inventory.json"
+  },
+  "permission_comparison": {
+    "Context": true,
+    "Session Bus Policy": true,
+    "System Bus Policy": true
+  },
+  "build": {
+    "payload_assembly": "PASS",
+    "final_export": "PASS (owner host)",
+    "bundle": "PASS (independent SHA-256/size/OSTree verification)",
+    "reason": "Prior Codex namespace and timestamp failures preserved; final owner-host export passed",
+    "staged_directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/.p4-cache/cyrnava-builds/p4/local-A-6m4ne70o",
+    "artifact_sha256": "856cc0ccd82bca263320e2d692a5b3d316543ae320cd76d9cd42bf42e54a3170",
+    "build_B": {
+      "status": "PASS",
+      "sha256": "96f17ff6a7e46763c846a223d27029f96071b421e167f27263672b6f45e25d8e",
+      "bundle_bytes": 209186816,
+      "ostree_commit": "b49969699b4e52df078193713a1aca9a1e8def70f608ba46d700e48d0be5d5c5",
+      "evidence": "build-B-final-2026-10-30/verification.json"
+    },
+    "distinct_A_B_commits": true
+  },
+  "native_install_launch_update_rollback_uninstall": "PARTIAL: fresh install and production native security PASS; EDIT incomplete; update/rollback/uninstall NOT TESTED",
+  "production_renderer_runtime": "PASS in owner run-83587bd18651",
+  "performance": {
+    "payload_logical_bytes": 980983648,
+    "bundle_bytes": 209183720,
+    "actual_installed_bytes": null,
+    "cold_start_ms": null,
+    "warm_start_ms": null,
+    "idle_rss_kib": null,
+    "backend_readiness_ms": 840.0,
+    "shutdown_ms": 163.9,
+    "frontend_load_sample_ms": 2372.0
+  },
+  "historical_failures": [
+    "Initial write to uncreated external cache was denied; switched to repository-local ignored .p4-cache.",
+    "First stage allowlist omitted .woff fonts; corrected after inspecting actual build output.",
+    "Initial payload audit found upstream FastAPI wheel .agents tooling; removed from dependency payload.",
+    "Ruff removed a required public APP_ID re-export; collection exposed it and it was restored explicitly.",
+    "An all-backend invocation from repo root caused eight CLI-context failures; documented backend working directory rerun passed all 501.",
+    "Final export repeatedly stopped at sandboxed icon validation; no security bypass used.",
+    "Owner host export failed parsing numeric epoch timestamp; corrected to ISO 8601 and tested with real Flatpak/OSTree.",
+    "First P4 host EDIT closed manually with saved folder/screenshot but required title missing; partial security passes retained, driver diagnostics/resume improved."
+  ],
+  "real_data_migrated": false,
+  "production_installed": true,
+  "committed": false,
+  "pushed": false,
+  "p5_started": false,
+  "host_procedure": "packaging/flatpak/production/P4_NATIVE_CHECKS.md",
+  "host_native_helper_sha256": "cf02b6441103fec072a1ed8a548bf91d644479fa285d0ae9a955d7ca7e00986e",
+  "latest_native_checkpoint": {
+    "status": "CONDITIONAL",
+    "date": "2026-10-30",
+    "run_id": "run-83587bd18651",
+    "recorded_pass_checkpoint": {
+      "fresh_install_permissions": "PASS",
+      "updated": "PASS",
+      "restart": "PASS",
+      "rollback": "PASS",
+      "local_update": "PASS",
+      "compatible_binary_rollback": "PASS",
+      "edit": "PASS"
+    },
+    "maintenance": "FAIL: manager closed without importing; owner confirmed; no active-workspace pointer or imported generation exists",
+    "recovery": "NOT TESTED",
+    "uninstall_reinstall": "NOT TESTED",
+    "production_defect_confirmed": false,
+    "video_paths": [
+      "/home/cerillion/Videos/Screencasts/Screencast From 2026-10-30 21-18-29.webm",
+      "/home/cerillion/Videos/Screencasts/Screencast From 2026-10-30 21-19-50.webm"
+    ],
+    "changes": "Host tooling only: explicit import diagnostics and guarded continuation at maintenance with recorded prior-phase validation",
+    "regression_tests": {
+      "status": "PASS",
+      "passed": 36
+    },
+    "source_sha256": {
+      "packaging/flatpak/production/install_payload.py": "446d1fe3adf69d3c892c1d75c36ffeb2eb08beb63f50bf77da65096f09eee622",
+      "packaging/flatpak/production/build.py": "6c81256762e82be61bba092d038731675d1b8c8b811e06b96099887707e6486d",
+      "packaging/flatpak/production/host_verify.py": "ea6819264e8fecd7d252463a12fb96cdcfcbfe7635b377c12de7d980480babc0",
+      "packaging/flatpak/production/native_check.py": "8cec1f8e659063a05c9279aa5d89127a0325b5c7e8c138bdb48d0853d00bd248",
+      "packaging/flatpak/production/test_packaging.py": "cbc74ffcb8e2c0d7c38d95ceb4280f4c7b5c22157d3988517292d2c0b9034bc0",
+      "packaging/flatpak/production/build_identity.py": "7c4ce5e9f4f89d71b4916cbc4753c9770b945b1836297f8cd41b564598156974"
+    },
+    "record_sha256": {
+      "updated.json": "8bd034aafc564f8184f141160cde84ee25bd834af4dc1cbeee4479e87c1eef9d",
+      "source-manifest-before-continuation.json": "b2955ad2d5ab3bc7e5f628ff0a2c5a6704955098c24ac1d3b03cfd1d5379e338",
+      "edit.json": "22b393394f6c7b07db765c4929cf7257ad45fa0747462f227d390b540ae35fb6",
+      "rollback.json": "9e13cfd763d3fb047a3f60e257a7f4c3212781f0cc36d7e8038a8fd13813eda3",
+      "maintenance.json": "d19c69b91d5928e3bdb090af091b753cc5241ec080b7436997cac6464d63696e",
+      "restart.json": "3a175c53e4190e0fafd844d9352ced3be07e19e23878a5b96946e6233f1d13b2",
+      "host-result.json": "759d106db5d98b134dd8364e7cdb23717f196f4a755330da345e3c833fc5add1"
+    }
+  },
+  "backup_filename_correction": {
+    "date": "2026-10-30",
+    "status": "CONDITIONAL",
+    "cause": "Save chooser allowed an extensionless name; import chooser filter only *.cyrnava hid the file",
+    "provided_archive": {
+      "path": "/home/cerillion/test",
+      "sha256": "22710e4978c446204b71d3a7e888a049ff0e77236881565e92616f7e159eca73",
+      "bytes": 822547,
+      "validation": "PASS",
+      "schema": 5,
+      "counts": {
+        "notes": 1,
+        "folders": 2,
+        "assets": 2
+      },
+      "source_unchanged": true
+    },
+    "native_import": "NOT VERIFIED: latest phase still reports import_activated_new_workspace FAIL",
+    "correction": "Suggest cyrnava-backup.cyrnava on save; import filter includes ZIP and All files. Preserve portal-selected paths exactly and retain full archive validation.",
+    "installed_artifacts": "Existing A/B do not include source correction. Current build workaround: explicitly enter .cyrnava extension in Save portal; import archive directly, without extraction.",
+    "scope": "No supplied backup alteration, production-data migration, security weakening or publication",
+    "automated_tests": {
+      "status": "PASS",
+      "passed": 76,
+      "seconds": 0.82,
+      "command": "cd backend && .venv/bin/python -m pytest -q tests/test_native_dialogs.py tests/test_migration.py ../packaging/flatpak/production/test_packaging.py",
+      "note": "Initial restricted-network run stalled at local API regression and was interrupted; rerun with local socket access completed. Warnings: existing Starlette deprecation and intentional duplicate-archive fixture."
+    }
+  }
+}

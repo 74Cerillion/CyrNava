@@ -1,0 +1,78 @@
+{
+  "observations": [
+    {
+      "event": "browser_context_api",
+      "method": "newPage",
+      "trace_monotonic_ms": 2191.378
+    },
+    {
+      "event": "browser_context_api",
+      "method": "newPage",
+      "trace_monotonic_ms": 4050.902
+    },
+    {
+      "event": "browser_context_api",
+      "method": "setNetworkInterceptionPatterns",
+      "trace_monotonic_ms": 6047.582
+    },
+    {
+      "event": "browser_context_api",
+      "method": "newPage",
+      "trace_monotonic_ms": 6802.323
+    },
+    {
+      "event": "old recovery page close requested",
+      "utc": "2026-10-31T05:22:24.640895+00:00",
+      "trace_monotonic_ms": 7284.009
+    },
+    {
+      "event": "browser_context_api",
+      "method": "newPage",
+      "trace_monotonic_ms": 8908.678
+    },
+    {
+      "event": "note_http_response",
+      "method": "PATCH",
+      "utc": "2026-10-31T05:22:20.798Z",
+      "revision": 2,
+      "updated_at": "2026-10-31T05:22:20.801973+00:00"
+    },
+    {
+      "event": "note_http_response",
+      "method": "GET",
+      "utc": "2026-10-31T05:22:21.611Z",
+      "revision": 2,
+      "updated_at": "2026-10-31T05:22:20.801973+00:00"
+    },
+    {
+      "event": "note_http_response",
+      "method": "PATCH",
+      "utc": "2026-10-31T05:22:22.414Z",
+      "revision": 3,
+      "updated_at": "2026-10-31T05:22:22.416674+00:00"
+    },
+    {
+      "event": "note_http_response",
+      "method": "GET",
+      "utc": "2026-10-31T05:22:24.369Z",
+      "revision": 3,
+      "updated_at": "2026-10-31T05:22:22.416674+00:00"
+    },
+    {
+      "event": "note_http_response",
+      "method": "GET",
+      "utc": "2026-10-31T05:22:26.490Z",
+      "revision": 4,
+      "updated_at": "2026-10-31T05:22:24.650597+00:00"
+    }
+  ],
+  "revision_at_outage_baseline": 3,
+  "revision_after_restart": 4,
+  "newer_note_updated_at": "2026-10-31T05:22:24.650597+00:00",
+  "write_update_ms_after_page_close_requested": 9.702,
+  "new_note_matches_unconfirmed_title": true,
+  "bold_unconfirmed_content_present": true,
+  "driver_saw_intervening_patch": false,
+  "inference": "Unexpected write closely correlates with old page teardown/visibility flush; browser-context routing did not establish an effective no-write boundary. Exact interception bypass remains unproven without server-side request evidence.",
+  "supersedes": "Late route installation alone cannot explain this run: the route was installed before recovery page startup and retained through restart."
+}

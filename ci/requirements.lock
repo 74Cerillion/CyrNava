@@ -1,0 +1,2 @@
+# Workflow parsing only; Linux x86_64 CPython 3.12 wheel. No runtime change.
+PyYAML==6.0.3 --hash=sha256:ba1cc08a7ccde2d2ec775841541641e4548226580ab850948cbfda66a1befcdc

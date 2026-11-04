@@ -400,14 +400,32 @@ it('keeps a stale deletion confirmation open without silently refreshing its int
   expect(tree.folders).toHaveLength(1);
 });
 
-it('does not steal editor focus when autosave refreshes the directory titles', async () => {
-  seed(original); render(<App />);
-  const title = await screen.findByLabelText('Note title');
-  act(() => title.focus());
-  fireEvent.change(title, { target: { value: 'Focused title' } });
-  await screen.findByRole('treeitem', { name: 'Note Focused title' });
-  expect(title).toHaveFocus();
-  expect(screen.getByText('Saved')).toBeInTheDocument();
+it.each(['immediate', 'deferred'])('does not steal editor focus when autosave refreshes the directory titles (%s initial focus)', async (mode) => {
+  const focus = HTMLElement.prototype.focus;
+  let pending = mode === 'deferred';
+  let timer: number | undefined;
+  const spy = vi.spyOn(HTMLElement.prototype, 'focus').mockImplementation(function (this: HTMLElement, options?: FocusOptions) {
+    // Control the initial selection handoff independently of editor/autosave.
+    if (pending && this.getAttribute('role') === 'treeitem') {
+      timer ??= window.setTimeout(() => { pending = false; focus.call(this, options); }, 100);
+      return;
+    }
+    focus.call(this, options);
+  });
+  try {
+    seed(original); render(<App />);
+    const title = await screen.findByLabelText('Note title');
+    // Initial note selection deliberately focuses its tree row. Its handoff
+    // must finish before this test starts measuring editor/autosave focus.
+    await waitFor(() => expect(screen.getByRole('treeitem', { name: 'Note Persistent title' })).toHaveFocus());
+    act(() => title.focus());
+    fireEvent.change(title, { target: { value: 'Focused title' } });
+    await screen.findByRole('treeitem', { name: 'Note Focused title' });
+    expect(title).toHaveFocus();
+    expect(screen.getByText('Saved')).toBeInTheDocument();
+  } finally {
+    window.clearTimeout(timer); spy.mockRestore();
+  }
 });
 
 it('autosaves native image blocks in order and reloads them from the note API', async () => {

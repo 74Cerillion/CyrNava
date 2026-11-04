@@ -9,12 +9,11 @@ from pathlib import Path
 from uuid import uuid4
 
 import pytest
-from fastapi.testclient import TestClient
-from search_helpers import canonical_snapshot
-
 from app.database import Database, RevisionConflict
 from app.main import create_app
 from app.search import extract_text, index_note, prepare_query, verify_index
+from fastapi.testclient import TestClient
+from search_helpers import canonical_snapshot
 
 FIXTURES = json.loads(
     (Path(__file__).parent / "fixtures/blocknote_v1.json").read_text()

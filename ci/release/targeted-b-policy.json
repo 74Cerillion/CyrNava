@@ -1,0 +1,46 @@
+{
+  "format": 1,
+  "scope": "R11 synthetic imported workspace and existing approved B only; no native execution authorization implied",
+  "prepared_sha256": "0740b8d035d7db2904ca45d1f7bdd7265fba9157f1313d2440a83e1f2b8d5099",
+  "B_approval_sha256": "53aa5025f977629cf6ba3920b390493b6da257987663279d7e1e85c28f231a22",
+  "B_entry": {
+    "source_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+    "ci_run_id": 41285343063,
+    "ci_run_attempt": 1,
+    "artifact_id": 13075346402,
+    "artifact_zip_sha256": "2d11ce5057ae66cd4dc526dac607a2344b89dbc1fcef5e62038ad59583c93fbe",
+    "bundle_sha256": "ef732c240d8a01e33a638cd10e83fb985c7ba9e678b573ba508cd48c3934f47c",
+    "inputs_sha256": "42281a23d1b80aae748c3956c48bbf6da220bf609079d69fbef1ef26d40cf64f",
+    "inventory_sha256": "898ec911e021da89cc3dcb0451830490e916aad560ad9535cb7a558058b245cd",
+    "ostree_commit": "f759380dca9aa36e4674ad6dffb24d3e2340342da5fe04537ac17031a3bada15",
+    "authorization_ref": "P6-disposable-real-update-B-pending-owner-approval"
+  },
+  "signing_fingerprint": "B8882601428AC0F08E9209FC353B6BEE05E7D9FC",
+  "public_key_sha256": "26760a8972ac9ea2eedc63830fb0abf8b0f918e9c06808c81a0c884abc3311d4",
+  "R11_marker_sha256": "a0d6c2de8e64d3a1c7813889ae60fa94c3e509ed2b7b1aabc0481aa1eb516f3d",
+  "R11_result_sha256": "00ccc666fcec13f18bd55b2c8c080bc89dffc32e213a73e595f973ee7e7ab9f1",
+  "R11_profile": {
+    "files": 95,
+    "bytes": 8563881,
+    "tree_sha256": "d73d1aa3253db0719ff74b874e60af768a13fb57eeb8725eb75f2c4b5035dbf8"
+  },
+  "workspace": {
+    "schema": 5,
+    "counts": {
+      "notes": 1,
+      "folders": 1,
+      "assets": 1
+    },
+    "database_sha256": "870c040e49135e8ab1e78ddc836b31b5771aab7f65ee199a0e6148646dde61fb",
+    "content_fingerprint": "651629ca97568aac20ec56ceaf045ff96de01f5075d30ccf4a3a54517292e9e2",
+    "asset_tree": {
+      "files": 1,
+      "bytes": 354837,
+      "tree_sha256": "d79b5409baedcfda688a50a09752f7412b2c70c1cb59c11beac6f47910b90f01"
+    }
+  },
+  "app_id": "io.github._74Cerillion.CyrNava",
+  "version": "0.1.0",
+  "schema": 5,
+  "historical_runtime": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473"
+}

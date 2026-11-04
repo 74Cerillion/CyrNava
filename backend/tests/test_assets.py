@@ -3,13 +3,12 @@ from pathlib import Path
 from uuid import uuid4
 
 import pytest
-from fastapi.testclient import TestClient
-from PIL import Image
-from search_helpers import remove_search_schema
-
 from app.assets import MAX_BYTES, AssetStore
 from app.database import Database
 from app.main import create_app
+from fastapi.testclient import TestClient
+from PIL import Image
+from search_helpers import remove_search_schema
 
 
 def raster(fmt="PNG", size=(16, 12)):

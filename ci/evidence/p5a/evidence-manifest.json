@@ -1,0 +1,24 @@
+{
+  "sha256": {
+    "actionlint-final.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "backend-dependency-resolution.txt": "12a5e380cca50abf69d0fca542dc27a22dd347e8d279c61e73c5487d8c53c37a",
+    "backend-final.txt": "ed5ea89c64a2bbc73fd0dfa6d4c48c3c24f1783ee671dcf76a219bc2d4e669e2",
+    "backend-junit.xml": "633f2cd37119529953fddaabd390e4a5d2b4b8cc4d3963aae1138c9530a96402",
+    "backend.json": "351f753fbf762c90ba4131dcde14b82135580b4f9dbc3075dd612c0479c9ec0c",
+    "baseline.json": "f77aa948f790b8931a841706040912c24940bc4a0daebddc3e80fb94325f0805",
+    "browser-junit.xml": "534e8393f353a24a76fcf1fc757def85c1921dddf0f190949fbd8466de09488b",
+    "ci-contract-tests.txt": "7f1bb96f793163018c3baf5b45353cf7e4fbd6b07f7441dd3d18c1b1a00a2e48",
+    "environment-limitations.json": "420d701ec9d9dedeb8dfa3ffb1316286b31add67c77e66d7f7dc288cf1d2c48c",
+    "frontend-final.txt": "825e82088034e2d03b2dec2573252037cba03fe1bf08faa5ada0115cbb43bd08",
+    "frontend.json": "fd129fca72dab3f33d000ce70405ea6a009f050e74bd944d2fe4184f8369dfe9",
+    "github-before-push.json": "f7aee86538c2ef19e1e880d2af380e7d31df937b1ce403e9a813f992f0855091",
+    "npm-cache-measurements.json": "5c249c9f8de93e4500887000c3e7dd4e97022813674e1df4bdec7c5e7234e643",
+    "old-bundle-provenance-negative.json": "94b0312b23783fbe0128165d17fdbd556fb7048cbe7ff0b92bd0560d48cba6b6",
+    "old-bundle-provenance-negative.txt": "5b3e2c07136dbd34e4eb9534d6b7bdb4d9da3a84c9fb10f062ccf394f0ce2e7a",
+    "precommit-review.json": "9173c8934b950fe6db84d9e7787ef26e5961400ac1424f818b42b25552b14114",
+    "runtime-availability.json": "c00b3f69a8e09130b5c827e0f40db2b93b0e6310260e748c369262005face727",
+    "source-manifest.json": "74ac8cc0d3c1125d21914042e08be8491343bb20a6f97444954062ff57cece37",
+    "validation.json": "7da8d05bb30b574a94ae5ed563f58a93fe8f3e3bc239aa3b72846303410acad0",
+    "workflow-contract-final.txt": "6929f9534e22bc6fa880e0273e930cbca7230a10ad605b44103eec52e5d3f6a6"
+  }
+}

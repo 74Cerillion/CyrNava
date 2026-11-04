@@ -1,0 +1,1034 @@
+{
+  "config": {
+    "argv": [
+      "/home/cerillion/.nvm/versions/node/v24.19.0/bin/node",
+      "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/frontend/node_modules/.bin/playwright",
+      "test",
+      "e2e/lifecycle.spec.ts",
+      "--grep",
+      "managed tabs close|visibility flush",
+      "--repeat-each=5",
+      "--trace=on",
+      "--reporter=list,json",
+      "--output=/tmp/p5a-final-review-results/focused-results"
+    ],
+    "configFile": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/frontend/playwright.config.ts",
+    "rootDir": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/p5a-final-review-results/focused-results",
+        "repeatEach": 5,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/p5a-final-review-results/focused-results",
+        "repeatEach": 5,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/frontend/e2e",
+        "snapshotDir": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 120000,
+        "use": {
+          "browserName": "chromium",
+          "headless": true,
+          "viewport": {
+            "width": 1280,
+            "height": 1000
+          },
+          "screenshot": "only-on-failure",
+          "trace": "on"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "lifecycle.spec.ts",
+      "file": "lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8717,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:59:46.750Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/attachments/revision-timeline-7bb7317e7bcf4022ee5715e070786afd61abe905.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/attachments/backend-persistence-3b5832d3333d5c89aa978210926382a4ff7b117a.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-3e2e3ddc6c38e163e0ce",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8461,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:59:55.607Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing/attachments/revision-timeline-2f4d9e64d804b498ae961d7f94e34a002c21946d.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing/attachments/backend-persistence-653a6f9aa54adbfd7d518e4ca52f80827303db98.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-9af98dfb823aa839bea1",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2658,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:00:04.146Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it/attachments/revision-timeline-ae0a69cae84838ec8115c340786b5bad533fcf37.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it/attachments/backend-persistence-6c716b03e9122d6ce5e7abd4951f753c8c8f27b7.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-47fbcc0b18533c0f2959",
+          "file": "lifecycle.spec.ts",
+          "line": 295,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8326,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:00:07.179Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/attachments/revision-timeline-bfc05a68135fcee8c709994a9791f4d3c054cc68.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/attachments/backend-persistence-637af917684420982fb1c8c4c2c25eda96f6d1b5.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-b3a309a0e1e7397d3a35",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8270,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:00:15.658Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat1/attachments/revision-timeline-5c266606afb7ab8d6988b918c628b68a1f1255f3.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat1/attachments/backend-persistence-1837d135f4f5db1991b5026f528ac05422cf69ad.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-25d69ace63cc8df32472",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2795,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:00:24.001Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat1/attachments/revision-timeline-d5190942f38105a92d2dd8455f92e0f28e82d6de.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat1/attachments/backend-persistence-6f28bbceb0212f28a285f87cc42c7c4c6d487e5e.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-c3137cf9ef33d43df8d4",
+          "file": "lifecycle.spec.ts",
+          "line": 295,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8315,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:00:27.173Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat2/attachments/revision-timeline-fd4615e844e91fa8b8a3058c79de8d54d79e0abb.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat2/attachments/backend-persistence-4d14a6e6fb0d52edd7f99a77523a459fbcb6cfe9.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-d9ca87b87f3ad7f7892f",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8265,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:00:35.640Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat2/attachments/revision-timeline-a5eb96b7cc9d06d1165e17437981f385f6142849.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat2/attachments/backend-persistence-0479db68406cccf774c43fbc8377b33bb67513c4.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-d66e00f9d0e4aa4c65e6",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2665,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:00:43.975Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat2/attachments/revision-timeline-59a978607e88cc1871746b63cee4a45c8c198f90.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat2/attachments/backend-persistence-c176749ad9141a53d48ef99428f231082a01d3f0.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-90b6ed1063d39608e7eb",
+          "file": "lifecycle.spec.ts",
+          "line": 295,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8305,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:00:47.020Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat3/attachments/revision-timeline-a4f2948b7f47cb8dddcb235b25d4bcfa8d179aa2.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat3/attachments/backend-persistence-fec49f7654efb2de3801fbe52fe3fc9f62645bb4.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-7ccc29914405b7d3cf59",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8047,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:00:55.465Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat3/attachments/revision-timeline-28dfa64041cc83e2e0cf1ce768297253e64667fe.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat3/attachments/backend-persistence-7af165e5618a33e2cd95e9bf3de27ec0aea832c0.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-2c0eb73928c0805cd6a0",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2812,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:01:03.596Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat3/attachments/revision-timeline-6355f6d82248f84b4e7768b7bd96bc2554b2afd1.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat3/attachments/backend-persistence-c19f23de132b6d828d2b5b305ae5b54a722b527e.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-31dfafa2dbdd62ec155a",
+          "file": "lifecycle.spec.ts",
+          "line": 295,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8198,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:01:06.771Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat4/attachments/revision-timeline-c92f858b9556dfc62e5bf6b225ef9ce18bd080c7.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat4/attachments/backend-persistence-7bbf72722b46c8b54b4f25c5d3e8711f2c20006c.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-836d8e108a8bb4ceb01a",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8087,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:01:15.114Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat4/attachments/revision-timeline-0adac30070d32d92b1218e29de42e02e8b556e8c.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat4/attachments/backend-persistence-3fdb8e177225b45bc4f065c0ac8defa9463ea80d.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-7e7e93ea2d5dd9efd43f",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2685,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T06:01:23.276Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat4/attachments/revision-timeline-eca6724267e233038320eb32c3fb0dabf0a18aa0.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat4/attachments/backend-persistence-0b6c52ef2ae4589093559b6afc0b2c62131d5158.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/p5a-final-review-results/focused-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-c0b58f167adf53d71eab",
+          "file": "lifecycle.spec.ts",
+          "line": 295,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T05:59:46.421Z",
+    "duration": 99625.278,
+    "expected": 15,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

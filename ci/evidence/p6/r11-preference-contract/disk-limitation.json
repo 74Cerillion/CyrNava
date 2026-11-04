@@ -1,0 +1,7 @@
+{
+  "initial_storage_suite": "108 PASS / 1 FAIL",
+  "initial_release_suite": "277 PASS / 2 FAIL; 228 subtests PASS",
+  "cause": "Host disk free space below unchanged 5 GiB build prerequisite and OSTree 3% minimum",
+  "actual_flatpak_error": "Writing content object: min-free-space-percent '3%' would be exceeded, at least 4.1 kB requested",
+  "correction": "Run unchanged tests using disposable /dev/shm directory with sufficient space; do not lower checks"
+}

@@ -1,0 +1,16 @@
+{
+  "limit": "Observed filesystem free-space changes include unrelated host activity; allocated bytes are not guaranteed reclaimed space",
+  "owned_retained_allocated_bytes": 3215421440,
+  "owned_retained_cap_bytes": 3221225472,
+  "recorded_at_utc": "2026-11-03T09:59:21Z",
+  "repository_floor_bytes": 5368709120,
+  "repository_free_bytes_after": 5393661952,
+  "repository_free_bytes_before": 5396959232,
+  "retained_evidence_deleted": false,
+  "signature_fixture_removed": true,
+  "temporary_budget_bytes": 134217728,
+  "temporary_filesystem_free_bytes_after": 3608096768,
+  "temporary_peak_allocated_bytes": 53477376,
+  "temporary_source_and_scratch_removed": true,
+  "this_pass_retained_allocated_bytes": 135168
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "command": [
+      "flatpak",
+      "build-sign",
+      "--help"
+    ],
+    "returncode": 0,
+    "required_flags": {
+      "--arch": true,
+      "--gpg-sign": true,
+      "--gpg-homedir": true
+    }
+  },
+  {
+    "command": [
+      "flatpak",
+      "build-update-repo",
+      "--help"
+    ],
+    "returncode": 0,
+    "required_flags": {
+      "--gpg-sign": true,
+      "--gpg-homedir": true,
+      "--generate-static-deltas": true,
+      "--default-branch": true
+    }
+  },
+  {
+    "command": [
+      "ostree",
+      "pull",
+      "--help"
+    ],
+    "returncode": 0,
+    "required_flags": {
+      "--untrusted": true,
+      "--disable-static-deltas": true
+    }
+  },
+  {
+    "command": [
+      "ostree",
+      "remote",
+      "add",
+      "--help"
+    ],
+    "returncode": 0,
+    "required_flags": {
+      "--gpg-import": true,
+      "--set": true
+    }
+  },
+  {
+    "command": [
+      "flatpak",
+      "remote-info",
+      "--help"
+    ],
+    "returncode": 0,
+    "required_flags": {
+      "--show-commit": true,
+      "--arch": true
+    }
+  }
+]

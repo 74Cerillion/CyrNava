@@ -1,0 +1,138 @@
+{
+  "restored_tree": {
+    "folders": [
+      {
+        "id": "2187ca84-21db-4fe9-b93f-af009adc3587",
+        "parent_id": null,
+        "name": "M5 Training",
+        "sort_order": 0,
+        "created_at": "2026-10-31T03:20:37.716802+00:00",
+        "updated_at": "2026-10-31T03:20:37.716802+00:00"
+      },
+      {
+        "id": "86d508dd-e529-4370-a12e-29b6ce859243",
+        "parent_id": "2187ca84-21db-4fe9-b93f-af009adc3587",
+        "name": "Verified folder",
+        "sort_order": 0,
+        "created_at": "2026-10-31T03:20:37.833318+00:00",
+        "updated_at": "2026-10-31T03:20:43.146461+00:00"
+      }
+    ],
+    "notes": [
+      {
+        "id": "456c9422-906a-4f3f-91d3-8e698fab9c43",
+        "folder_id": "86d508dd-e529-4370-a12e-29b6ce859243",
+        "title": "Companion",
+        "revision": 1,
+        "created_at": "2026-10-31T03:20:39.612509+00:00",
+        "updated_at": "2026-10-31T03:20:39.612509+00:00"
+      },
+      {
+        "id": "650f1f9c-b950-40ef-b95b-6e8315e57086",
+        "folder_id": "86d508dd-e529-4370-a12e-29b6ce859243",
+        "title": "Evidence",
+        "revision": 5,
+        "created_at": "2026-10-31T03:20:37.949749+00:00",
+        "updated_at": "2026-10-31T03:20:42.904994+00:00"
+      }
+    ]
+  },
+  "restored_note": {
+    "id": "650f1f9c-b950-40ef-b95b-6e8315e57086",
+    "folder_id": "86d508dd-e529-4370-a12e-29b6ce859243",
+    "title": "Evidence",
+    "document_json": [
+      {
+        "id": "19f9f158-2703-4063-a6b3-a1edb3e89d4a",
+        "type": "heading",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left",
+          "level": 1,
+          "isToggleable": false
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Recovery evidence",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "11392425-6fed-49f8-88ea-0c6507823e0c",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Formatted note before outage.",
+            "styles": {}
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "4943728a-78c1-4f0a-8c18-a96ae993020f",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Bold evidence",
+            "styles": {
+              "bold": true
+            }
+          }
+        ],
+        "children": []
+      },
+      {
+        "id": "141295fc-05f3-4f6d-956e-3c2df3050a5e",
+        "type": "image",
+        "props": {
+          "textAlignment": "left",
+          "backgroundColor": "default",
+          "name": "screenshot.png",
+          "url": "/api/assets/46a0c0cc-893c-4b0c-ab00-663ba91ca40b",
+          "caption": "",
+          "showPreview": true
+        },
+        "children": []
+      },
+      {
+        "id": "216e82e4-a5b9-40be-b752-e0640d20d43e",
+        "type": "paragraph",
+        "props": {
+          "backgroundColor": "default",
+          "textColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": " Draft retained during backend outage. Paragraph A. Paragraph B.",
+            "styles": {}
+          }
+        ],
+        "children": []
+      }
+    ],
+    "format_version": 1,
+    "revision": 5,
+    "created_at": "2026-10-31T03:20:37.949749+00:00",
+    "updated_at": "2026-10-31T03:20:42.904994+00:00"
+  },
+  "image_bytes": 5439,
+  "external_requests": []
+}

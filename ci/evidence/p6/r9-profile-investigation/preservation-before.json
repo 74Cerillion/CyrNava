@@ -1,0 +1,23 @@
+{
+  "r9_records": {
+    ".p6-gui-attempt": "24ea5889f31f0983e8e5b9ad88eb4f0fe0d0330bc92d3e3632e9536807f26202",
+    "owner-result.json": "e31a60086f8a80acd3d9769944235b794f17db1a497f5ffbb8494695741425bb",
+    "operations.jsonl": "29d611cedc2686a7aa80652ee7d5969655f9e78b8c8fb24986f3531dd3071922",
+    "progress.json": "8a8f470ea3a266472db3c02e205afa397a85a760a39c312960b4992115111f05",
+    "runtime-transactions.json": "36260455898df84baedc3fa8ed29f9fa21bd90abae1abaab9be7cad7f5a52f19",
+    "phase-edit.json": "77be5caae2da12ae9e77381cc281b74535dbbf61613502213aab76c754a0f710",
+    "phase-restart.json": "4fb30f84ebd902256d560718e0552d5d56f2ddc9818ea61c52b3326031cb6a93",
+    "phase-updated.json": "8467af160d7f36f65e737d792e616b5136988b0394476aa03bdfd121066b2db0",
+    "phase-rollback.json": "98fbb6f4af1e1292462aa89e3271d555609e740c584f91cbde9e8c4d13aab44a",
+    "phase-maintenance.json": "b6ee133a586189dc1bdc616b46d835d0f91ac7eae64464ab3172af25f0e0194b",
+    "phase-recovery.json": "de046bf996bfcc03431a9eab5c7d527d5b9e16a061cac9e2c6e2deb02317c104",
+    "failed-post-reinstall-updated.json": "673b41a8836739bb3651566b17f299772d7df7053bbd368dfc7b220b94be74e9",
+    "private-stderr": "0f13dcd98973d378384e5ab5de2c016eb11063f0a3bcce9f05df1ef240f4956b",
+    "private-stdout": "8978b9b944dcda1dc68930b5069fc94710806091115b1774f1f45750b4e42a6b"
+  },
+  "r9_profile": {
+    "files": 96,
+    "bytes": 8660684,
+    "tree_sha256": "d0075ad8a19e36b198d6820435683306bb755f1f90406f2a25978d495d9a077a"
+  }
+}

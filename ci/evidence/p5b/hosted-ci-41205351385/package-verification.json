@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "artifact_id": 13044630984,
+  "bundle_sha256": "01e13b55a60100e6573de8bfbfc87f1b16373c4d7b8ca05047e35c4e27263153",
+  "bundle_bytes": 209189544,
+  "source_commit": "7aaefd0f60a735637ee603ac380587a25b73f6cb",
+  "workflow_run_id": 41205351385,
+  "workflow_run_attempt": 1,
+  "ostree_commit": "049e3ffc86aa1b6060c17db4baf7a5b7bde37e0562f6870a06c3ab62322f6971",
+  "checksums_and_provenance_crosschecked": true,
+  "runtime_lock_matches": true,
+  "inventory_sha256": "5f9d33ff8d33c218a60f3da8fc746178daa070a949576f23f4995e60f15ea49d",
+  "inventory_status": "PASS",
+  "inventory_keys": [
+    "status",
+    "files",
+    "logical_bytes"
+  ],
+  "member_sizes": {
+    "SHA256SUMS": 105,
+    "build-inputs.json": 12564,
+    "io.github._74Cerillion.CyrNava.flatpak": 209189544,
+    "package-inventory.json": 1033311,
+    "provenance.json": 1172,
+    "result.json": 508
+  },
+  "limits": "Actual hosted exported-bundle audit PASS; local review hashes bytes and crosschecks downloaded records. No repeat local native import/renderer/portal test claimed. This new CI artifact does not replace the accepted P5A artifact pinned by release policy."
+}

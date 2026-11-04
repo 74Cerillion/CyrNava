@@ -1,0 +1,1034 @@
+{
+  "config": {
+    "argv": [
+      "/home/cerillion/.nvm/versions/node/v24.19.0/bin/node",
+      "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/frontend/node_modules/.bin/playwright",
+      "test",
+      "e2e/lifecycle.spec.ts",
+      "--grep",
+      "managed tabs close|visibility flush",
+      "--repeat-each=5",
+      "--trace=on",
+      "--reporter=list,json",
+      "--output=/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results"
+    ],
+    "configFile": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/frontend/playwright.config.ts",
+    "rootDir": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results",
+        "repeatEach": 5,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results",
+        "repeatEach": 5,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/frontend/e2e",
+        "snapshotDir": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 120000,
+        "use": {
+          "browserName": "chromium",
+          "headless": true,
+          "viewport": {
+            "width": 1280,
+            "height": 1000
+          },
+          "screenshot": "only-on-failure",
+          "trace": "on"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "lifecycle.spec.ts",
+      "file": "lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8164,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:39:41.430Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/attachments/revision-timeline-a790c1a31a1961c0470f93d658878b859c321490.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/attachments/backend-persistence-e4fb45fabfc6c9152fb0aea3fa19e5104bcb1918.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-3e2e3ddc6c38e163e0ce",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8255,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:39:49.742Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing/attachments/revision-timeline-a15c595558f5fa8fbecfb531d043578e44cd8224.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing/attachments/backend-persistence-80777f7c68cc3fe9feaf143b54271e49db468467.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-9af98dfb823aa839bea1",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2945,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:39:58.075Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it/attachments/revision-timeline-81133646111fbaf7d44711460299618b2d8398e9.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it/attachments/backend-persistence-a3cd3a68e66e739c359f2046fa6db43629a199df.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-47fbcc0b18533c0f2959",
+          "file": "lifecycle.spec.ts",
+          "line": 295,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8344,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:40:01.454Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/attachments/revision-timeline-a93d03ca995476592f0a9eca5dfaa290a98c37f8.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/attachments/backend-persistence-fb58fc757d92c0b45dafabb95fc25e2853e4c479.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-b3a309a0e1e7397d3a35",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8474,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:40:09.941Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat1/attachments/revision-timeline-cfd6618ab0746b1b86b9e7eca5e995e427b34632.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat1/attachments/backend-persistence-bb9813865fc9ee9f2f4b94b574f81f7e83547859.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-25d69ace63cc8df32472",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2736,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:40:18.500Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat1/attachments/revision-timeline-7cd6e3c0d48f9cf39aa8ea8c503d11c9b3f9f5e4.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat1/attachments/backend-persistence-8b4b6c84907ba60338e347e8890015f7fab7d1bc.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-c3137cf9ef33d43df8d4",
+          "file": "lifecycle.spec.ts",
+          "line": 295,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8330,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:40:21.630Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat2/attachments/revision-timeline-89d7287fb52585946dbb81ba544c0588c37be0ec.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat2/attachments/backend-persistence-69b8cddf440db91a8d59ac9f70ffb792d32f780d.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-d9ca87b87f3ad7f7892f",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8050,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:40:30.099Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat2/attachments/revision-timeline-6d976a05661cdebce4b283724f8a2a62bd76c32c.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat2/attachments/backend-persistence-4114dae4dbab0a2691fa857306ffc9c72b0887c5.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-d66e00f9d0e4aa4c65e6",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2812,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:40:38.226Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat2/attachments/revision-timeline-90c69c4be0c22f01bd9318cad41df4e50283d709.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat2/attachments/backend-persistence-59600890a1ca55bba534c7e6b7bf04e6f16c0120.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-90b6ed1063d39608e7eb",
+          "file": "lifecycle.spec.ts",
+          "line": 295,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8169,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:40:41.419Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat3/attachments/revision-timeline-8fe84ceb42a29600fd8897c5034b3d50ab1f2010.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat3/attachments/backend-persistence-ffa66beaef885a2e2ed6faa4bd41b54845f408e5.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-7ccc29914405b7d3cf59",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7912,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:40:49.736Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat3/attachments/revision-timeline-69216dc5f3fa2798770034685a193ceb71fdbfde.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat3/attachments/backend-persistence-0f498e034cc117d2a788c366a1c0efa3ab29e678.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-2c0eb73928c0805cd6a0",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2942,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:40:57.724Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat3/attachments/revision-timeline-a1ac6e98fe2da056969f7fc77ab93e9774a9ea55.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat3/attachments/backend-persistence-27ffb34e1ced3fc3d9a67158c0d6b02686bd6cb1.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-31dfafa2dbdd62ec155a",
+          "file": "lifecycle.spec.ts",
+          "line": 295,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8190,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:41:01.040Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat4/attachments/revision-timeline-6beecf4fc99668c6129b4bf95aae7e1a1536dfe7.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat4/attachments/backend-persistence-553d11034b878ff2c724aad5ceae2ccbc20d1f0e.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-836d8e108a8bb4ceb01a",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8252,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:41:09.378Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat4/attachments/revision-timeline-b56a25575313f516cf25ba3dabe28e9d5735bf58.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat4/attachments/backend-persistence-4605e3badab46f772ba7be9395ae98c72b4a7208.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-7e7e93ea2d5dd9efd43f",
+          "file": "lifecycle.spec.ts",
+          "line": 139,
+          "column": 1
+        },
+        {
+          "title": "visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2803,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T05:41:17.706Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat4/attachments/revision-timeline-0dfbb75dde9d92ea347c97c9a5ac82c97a3dbdbe.json"
+                    },
+                    {
+                      "name": "backend-persistence",
+                      "contentType": "application/x-ndjson",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat4/attachments/backend-persistence-21cb3b599246a560aa025ab2945a47b3a7ea7b7d.jsonl"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-boundary-r8jvmtth/focused-boundary-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-c0b58f167adf53d71eab",
+          "file": "lifecycle.spec.ts",
+          "line": 295,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T05:39:40.974Z",
+    "duration": 99613.463,
+    "expected": 15,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "root": "/tmp/cyrnava-p5a-lifecycle-28g_ju36",
+  "checkout": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout",
+  "initial_generated_paths": {
+    "frontend/dist": false,
+    "frontend/node_modules": false,
+    "backend/.venv": false
+  },
+  "head": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+  "env": {
+    "PIP_CACHE_DIR": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/pip-cache",
+    "npm_config_cache": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/npm-cache",
+    "XDG_DATA_HOME": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/xdg-data",
+    "XDG_CONFIG_HOME": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/xdg-config",
+    "XDG_CACHE_HOME": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/xdg-cache",
+    "PLAYWRIGHT_BROWSERS_PATH": "/tmp/cyrnava-p5a-prerequisite-e5fgarzw/xdg-cache/ms-playwright"
+  }
+}

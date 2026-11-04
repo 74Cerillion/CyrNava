@@ -1,0 +1,15 @@
+{
+  "/tmp": {
+    "free_bytes": 4604776448
+  },
+  "/var/tmp": {
+    "free_bytes": 41432436736
+  },
+  "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava": {
+    "free_bytes": 41432436736
+  },
+  "disposable_gpg_probe": {
+    "returncode": 2,
+    "stderr": "gpg: keybox '<disposable-home>/pubring.kbx' created\ngpg: error running '/usr/bin/gpg-agent': exit status 2\ngpg: failed to start gpg-agent '/usr/bin/gpg-agent': General error\ngpg: can't connect to the gpg-agent: General error\ngpg: agent_genkey failed: No agent running\ngpg: key generation failed: No agent running\n"
+  }
+}

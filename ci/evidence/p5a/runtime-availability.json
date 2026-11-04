@@ -1,0 +1,38 @@
+[
+  {
+    "ref": "org.kde.Platform//6.11",
+    "url": "https://dl.flathub.org/repo/refs/heads/runtime/org.kde.Platform/x86_64/6.11",
+    "status": 200,
+    "current_head": "fb23e178d082b117df7924f9a84710992ec233ebc007385feb85d349c4c81415"
+  },
+  {
+    "ref": "org.kde.Platform//6.11",
+    "url": "https://dl.flathub.org/repo/objects/76/fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473.commit",
+    "status": 200,
+    "current_head": null
+  },
+  {
+    "ref": "org.kde.Sdk//6.11",
+    "url": "https://dl.flathub.org/repo/refs/heads/runtime/org.kde.Sdk/x86_64/6.11",
+    "status": 200,
+    "current_head": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86"
+  },
+  {
+    "ref": "org.kde.Sdk//6.11",
+    "url": "https://dl.flathub.org/repo/objects/df/314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86.commit",
+    "status": 200,
+    "current_head": null
+  },
+  {
+    "ref": "io.qt.PySide.BaseApp//6.11",
+    "url": "https://dl.flathub.org/repo/refs/heads/app/io.qt.PySide.BaseApp/x86_64/6.11",
+    "status": 200,
+    "current_head": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e"
+  },
+  {
+    "ref": "io.qt.PySide.BaseApp//6.11",
+    "url": "https://dl.flathub.org/repo/objects/a6/cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e.commit",
+    "status": 200,
+    "current_head": null
+  }
+]

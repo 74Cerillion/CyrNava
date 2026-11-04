@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "seconds": 41.497,
+  "frontend_index_created": true,
+  "assets_directory_created": true,
+  "node": "v24.19.0",
+  "npm": "11.6.2"
+}

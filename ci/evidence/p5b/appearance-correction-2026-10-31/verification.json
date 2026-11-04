@@ -1,0 +1,131 @@
+{
+  "date_utc": "2026-10-31T12:02:22.967958+00:00",
+  "base_commit": "3027231c390b1814a98a567e5f30afb4ebff0dab",
+  "clean_setup": {
+    "base": "3027231c390b1814a98a567e5f30afb4ebff0dab",
+    "initial_git_status": "",
+    "initial_frontend_dist_absent": true,
+    "initial_node_modules_absent": true,
+    "commands": [
+      {
+        "command": [
+          "npm",
+          "ci",
+          "--ignore-scripts",
+          "--no-audit",
+          "--no-fund"
+        ],
+        "cwd": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-appearance-clean/checkout/frontend",
+        "exit_code": 0,
+        "seconds": 3.241
+      },
+      {
+        "command": [
+          "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+          "-m",
+          "venv",
+          "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-appearance-clean/checkout/backend/.venv"
+        ],
+        "cwd": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-appearance-clean/checkout",
+        "exit_code": 0,
+        "seconds": 1.667
+      },
+      {
+        "command": [
+          "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-appearance-clean/checkout/backend/.venv/bin/python",
+          "-m",
+          "pip",
+          "install",
+          "--only-binary=:all:",
+          "-r",
+          "backend/requirements.txt"
+        ],
+        "cwd": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-appearance-clean/checkout",
+        "exit_code": 0,
+        "seconds": 6.363
+      },
+      {
+        "command": [
+          "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-appearance-clean/checkout/backend/.venv/bin/python",
+          "-m",
+          "pip",
+          "check"
+        ],
+        "cwd": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-appearance-clean/checkout",
+        "exit_code": 0,
+        "seconds": 0.213
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "build"
+        ],
+        "cwd": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-appearance-clean/checkout/frontend",
+        "exit_code": 0,
+        "seconds": 4.121
+      }
+    ]
+  },
+  "candidate_hashes": {
+    "workspace_sha256": "0d530d1a82c521079cf829b442c619ecc405319fd71bb24bb34f74af8a9fa993",
+    "clone_sha256": "0d530d1a82c521079cf829b442c619ecc405319fd71bb24bb34f74af8a9fa993",
+    "source_base": "3027231c390b1814a98a567e5f30afb4ebff0dab",
+    "application_sources_changed": false
+  },
+  "instrumented_baseline": {
+    "runs": 3,
+    "passed": 3,
+    "full_hosted_assertion_reproduced_locally": false,
+    "DOM_only_model_mismatch_reproduced": true
+  },
+  "focused_final_source": {
+    "appearance_runs": 10,
+    "regression_runs": 10,
+    "passed": 20,
+    "failed": 0,
+    "retries": 0,
+    "seconds": 138.331108,
+    "command": "npm run test:release -- --grep \"appearance follows system and explicit|placeholder rendering requires\" --repeat-each=10 --workers=1 --reporter=line,json --output=../../focused-repeat"
+  },
+  "full_frontend": {
+    "status": "PASS",
+    "complete": true,
+    "command": "backend/.venv/bin/python ci/verify.py frontend --output ../full-frontend",
+    "cwd": "disposable clone root at 3027231 plus exact workspace.spec.ts candidate",
+    "exit_code": 0,
+    "lint": "PASS",
+    "unit_test_files": 22,
+    "unit_tests": 273,
+    "typescript_production_build": "PASS",
+    "browser_tests": 21,
+    "browser_failures": 0,
+    "browser_skipped": 0,
+    "browser_retries": 0,
+    "lifecycle_tests": 5,
+    "search_tests": 4,
+    "workspace_tests": 12,
+    "seconds": 152.714,
+    "result_file": "full-frontend-result.json",
+    "browser_results": "browser-junit.xml"
+  },
+  "backend_rerun": "Not performed; production application and backend sources unchanged. Preserve hosted 611 tests/83 subtests PASS.",
+  "harness_setup_errors_preserved": [
+    "Initial command output path outside root grant; no test executed",
+    "Initial anchored grep found no tests; discovery corrected",
+    "Initial full-suite launcher relative path wrong; no test executed"
+  ],
+  "raw_log_hashes": {
+    "baseline.log": "ef5b781b166b7fcdb6726a377728088e70d943e3362f7853ee9da9ade0294011",
+    "focused-repeat.log": "56a18597629075979a21594f03b4f7f0a71c34487fad3b69c16ed633c4384d2c",
+    "baseline-discovery-error.log": "6520a21a40f51370982fcb88b3d0461f307777572cf154e0d79a7a4f1ae0e384",
+    "full-frontend-command-error.log": "6fbf5286dabb0a84900c7b270caa4ff052766a1b0e8ecd3be353ae31fa5fda56",
+    "full-frontend.log": "d529d96bcef89afbb38ac56e7f1556b1b62d48dbf29360c2a27bc5b2256564e4"
+  },
+  "completed_utc": "2026-10-31T12:06:23.530002+00:00",
+  "status": "PASS \u2014 local correction verification; hosted CI remains historical FAIL",
+  "retained_results_sha256": {
+    "full-frontend-result.json": "91c5407a052ae6b83bdd2fc142e85227b704153b8221174eedc249d97168fe36",
+    "browser-junit.xml": "49eb083d8a3f0bee5ca579a19491fa492cefe2827e7bf1d83c323f423a75ddbf"
+  }
+}

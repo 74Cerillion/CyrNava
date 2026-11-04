@@ -1,0 +1,688 @@
+{
+  "status": "PASS",
+  "checks": {
+    "appearance_checkpoints": 20,
+    "empty_focused_hints": 20,
+    "DOM_only_negative_controls": 20
+  },
+  "counts": "10 appearance runs + 10 regression runs; both light and dark",
+  "representative_runs": [
+    {
+      "run": "workspace-appearance-follo-a34bf-notes-templates-or-autosave",
+      "diagnostic_file": "appearance-selection-states.json",
+      "states": [
+        {
+          "stage": "light:after-Escape",
+          "activeElement": {
+            "tag": "DIV",
+            "role": "textbox",
+            "editor": true
+          },
+          "dom": {
+            "anchor": {
+              "node": "P",
+              "offset": 1,
+              "position": 376,
+              "blockType": "paragraph",
+              "blockId": "9349c7ef-34b0-4bd4-b26a-973941b61f08"
+            },
+            "focus": {
+              "node": "P",
+              "offset": 1,
+              "position": 376,
+              "blockType": "paragraph",
+              "blockId": "9349c7ef-34b0-4bd4-b26a-973941b61f08"
+            },
+            "collapsed": true
+          },
+          "model": {
+            "type": "e",
+            "from": 376,
+            "to": 376,
+            "parent": "paragraph",
+            "parentOffset": 1,
+            "contentSize": 1,
+            "blockId": "9349c7ef-34b0-4bd4-b26a-973941b61f08",
+            "ancestors": [
+              {
+                "type": "doc",
+                "id": null
+              },
+              {
+                "type": "blockGroup",
+                "id": null
+              },
+              {
+                "type": "blockContainer",
+                "id": "9349c7ef-34b0-4bd4-b26a-973941b61f08"
+              },
+              {
+                "type": "paragraph",
+                "id": null
+              }
+            ]
+          },
+          "synchronized": true,
+          "placeholder": {
+            "blockId": "9349c7ef-34b0-4bd4-b26a-973941b61f08",
+            "editable": true,
+            "textLength": 1,
+            "trailingBreakOnlyChild": false,
+            "decorated": false,
+            "onlyEmptyBlock": false,
+            "caretInside": true,
+            "content": "none",
+            "color": "rgb(63, 63, 63)",
+            "opacity": "1"
+          }
+        },
+        {
+          "stage": "light:after-Backspace",
+          "activeElement": {
+            "tag": "DIV",
+            "role": "textbox",
+            "editor": true
+          },
+          "dom": {
+            "anchor": {
+              "node": "P",
+              "offset": 0,
+              "position": 375,
+              "blockType": "paragraph",
+              "blockId": "9349c7ef-34b0-4bd4-b26a-973941b61f08"
+            },
+            "focus": {
+              "node": "P",
+              "offset": 0,
+              "position": 375,
+              "blockType": "paragraph",
+              "blockId": "9349c7ef-34b0-4bd4-b26a-973941b61f08"
+            },
+            "collapsed": true
+          },
+          "model": {
+            "type": "e",
+            "from": 375,
+            "to": 375,
+            "parent": "paragraph",
+            "parentOffset": 0,
+            "contentSize": 0,
+            "blockId": "9349c7ef-34b0-4bd4-b26a-973941b61f08",
+            "ancestors": [
+              {
+                "type": "doc",
+                "id": null
+              },
+              {
+                "type": "blockGroup",
+                "id": null
+              },
+              {
+                "type": "blockContainer",
+                "id": "9349c7ef-34b0-4bd4-b26a-973941b61f08"
+              },
+              {
+                "type": "paragraph",
+                "id": null
+              }
+            ]
+          },
+          "synchronized": true,
+          "placeholder": {
+            "blockId": "9349c7ef-34b0-4bd4-b26a-973941b61f08",
+            "editable": true,
+            "textLength": 0,
+            "trailingBreakOnlyChild": true,
+            "decorated": true,
+            "onlyEmptyBlock": false,
+            "caretInside": true,
+            "content": "\"Enter text or type '/' for commands\"",
+            "color": "rgb(82, 97, 116)",
+            "opacity": "1"
+          }
+        },
+        {
+          "stage": "light:after-Saved",
+          "activeElement": {
+            "tag": "DIV",
+            "role": "textbox",
+            "editor": true
+          },
+          "dom": {
+            "anchor": {
+              "node": "P",
+              "offset": 0,
+              "position": 375,
+              "blockType": "paragraph",
+              "blockId": "9349c7ef-34b0-4bd4-b26a-973941b61f08"
+            },
+            "focus": {
+              "node": "P",
+              "offset": 0,
+              "position": 375,
+              "blockType": "paragraph",
+              "blockId": "9349c7ef-34b0-4bd4-b26a-973941b61f08"
+            },
+            "collapsed": true
+          },
+          "model": {
+            "type": "e",
+            "from": 375,
+            "to": 375,
+            "parent": "paragraph",
+            "parentOffset": 0,
+            "contentSize": 0,
+            "blockId": "9349c7ef-34b0-4bd4-b26a-973941b61f08",
+            "ancestors": [
+              {
+                "type": "doc",
+                "id": null
+              },
+              {
+                "type": "blockGroup",
+                "id": null
+              },
+              {
+                "type": "blockContainer",
+                "id": "9349c7ef-34b0-4bd4-b26a-973941b61f08"
+              },
+              {
+                "type": "paragraph",
+                "id": null
+              }
+            ]
+          },
+          "synchronized": true,
+          "placeholder": {
+            "blockId": "9349c7ef-34b0-4bd4-b26a-973941b61f08",
+            "editable": true,
+            "textLength": 0,
+            "trailingBreakOnlyChild": true,
+            "decorated": true,
+            "onlyEmptyBlock": false,
+            "caretInside": true,
+            "content": "\"Enter text or type '/' for commands\"",
+            "color": "rgb(82, 97, 116)",
+            "opacity": "1"
+          }
+        },
+        {
+          "stage": "dark:after-Escape",
+          "activeElement": {
+            "tag": "DIV",
+            "role": "textbox",
+            "editor": true
+          },
+          "dom": {
+            "anchor": {
+              "node": "P",
+              "offset": 1,
+              "position": 380,
+              "blockType": "paragraph",
+              "blockId": "ccf857ff-4bcb-4252-9a4d-226ef814dcea"
+            },
+            "focus": {
+              "node": "P",
+              "offset": 1,
+              "position": 380,
+              "blockType": "paragraph",
+              "blockId": "ccf857ff-4bcb-4252-9a4d-226ef814dcea"
+            },
+            "collapsed": true
+          },
+          "model": {
+            "type": "e",
+            "from": 380,
+            "to": 380,
+            "parent": "paragraph",
+            "parentOffset": 1,
+            "contentSize": 1,
+            "blockId": "ccf857ff-4bcb-4252-9a4d-226ef814dcea",
+            "ancestors": [
+              {
+                "type": "doc",
+                "id": null
+              },
+              {
+                "type": "blockGroup",
+                "id": null
+              },
+              {
+                "type": "blockContainer",
+                "id": "ccf857ff-4bcb-4252-9a4d-226ef814dcea"
+              },
+              {
+                "type": "paragraph",
+                "id": null
+              }
+            ]
+          },
+          "synchronized": true,
+          "placeholder": {
+            "blockId": "ccf857ff-4bcb-4252-9a4d-226ef814dcea",
+            "editable": true,
+            "textLength": 1,
+            "trailingBreakOnlyChild": false,
+            "decorated": false,
+            "onlyEmptyBlock": false,
+            "caretInside": true,
+            "content": "none",
+            "color": "rgb(207, 207, 207)",
+            "opacity": "1"
+          }
+        },
+        {
+          "stage": "dark:after-Backspace",
+          "activeElement": {
+            "tag": "DIV",
+            "role": "textbox",
+            "editor": true
+          },
+          "dom": {
+            "anchor": {
+              "node": "P",
+              "offset": 0,
+              "position": 379,
+              "blockType": "paragraph",
+              "blockId": "ccf857ff-4bcb-4252-9a4d-226ef814dcea"
+            },
+            "focus": {
+              "node": "P",
+              "offset": 0,
+              "position": 379,
+              "blockType": "paragraph",
+              "blockId": "ccf857ff-4bcb-4252-9a4d-226ef814dcea"
+            },
+            "collapsed": true
+          },
+          "model": {
+            "type": "e",
+            "from": 379,
+            "to": 379,
+            "parent": "paragraph",
+            "parentOffset": 0,
+            "contentSize": 0,
+            "blockId": "ccf857ff-4bcb-4252-9a4d-226ef814dcea",
+            "ancestors": [
+              {
+                "type": "doc",
+                "id": null
+              },
+              {
+                "type": "blockGroup",
+                "id": null
+              },
+              {
+                "type": "blockContainer",
+                "id": "ccf857ff-4bcb-4252-9a4d-226ef814dcea"
+              },
+              {
+                "type": "paragraph",
+                "id": null
+              }
+            ]
+          },
+          "synchronized": true,
+          "placeholder": {
+            "blockId": "ccf857ff-4bcb-4252-9a4d-226ef814dcea",
+            "editable": true,
+            "textLength": 0,
+            "trailingBreakOnlyChild": true,
+            "decorated": true,
+            "onlyEmptyBlock": false,
+            "caretInside": true,
+            "content": "\"Enter text or type '/' for commands\"",
+            "color": "rgb(175, 190, 208)",
+            "opacity": "1"
+          }
+        },
+        {
+          "stage": "dark:after-Saved",
+          "activeElement": {
+            "tag": "DIV",
+            "role": "textbox",
+            "editor": true
+          },
+          "dom": {
+            "anchor": {
+              "node": "P",
+              "offset": 0,
+              "position": 379,
+              "blockType": "paragraph",
+              "blockId": "ccf857ff-4bcb-4252-9a4d-226ef814dcea"
+            },
+            "focus": {
+              "node": "P",
+              "offset": 0,
+              "position": 379,
+              "blockType": "paragraph",
+              "blockId": "ccf857ff-4bcb-4252-9a4d-226ef814dcea"
+            },
+            "collapsed": true
+          },
+          "model": {
+            "type": "e",
+            "from": 379,
+            "to": 379,
+            "parent": "paragraph",
+            "parentOffset": 0,
+            "contentSize": 0,
+            "blockId": "ccf857ff-4bcb-4252-9a4d-226ef814dcea",
+            "ancestors": [
+              {
+                "type": "doc",
+                "id": null
+              },
+              {
+                "type": "blockGroup",
+                "id": null
+              },
+              {
+                "type": "blockContainer",
+                "id": "ccf857ff-4bcb-4252-9a4d-226ef814dcea"
+              },
+              {
+                "type": "paragraph",
+                "id": null
+              }
+            ]
+          },
+          "synchronized": true,
+          "placeholder": {
+            "blockId": "ccf857ff-4bcb-4252-9a4d-226ef814dcea",
+            "editable": true,
+            "textLength": 0,
+            "trailingBreakOnlyChild": true,
+            "decorated": true,
+            "onlyEmptyBlock": false,
+            "caretInside": true,
+            "content": "\"Enter text or type '/' for commands\"",
+            "color": "rgb(175, 190, 208)",
+            "opacity": "1"
+          }
+        }
+      ]
+    },
+    {
+      "run": "workspace-placeholder-rend-52116-ot-the-last-paragraph-alone",
+      "diagnostic_file": "placeholder-selection-states.json",
+      "states": [
+        {
+          "stage": "light:empty-but-not-selected",
+          "activeElement": {
+            "tag": "DIV",
+            "role": "textbox",
+            "editor": true
+          },
+          "dom": {
+            "anchor": {
+              "node": "#text",
+              "offset": 12,
+              "position": 15,
+              "blockType": "paragraph",
+              "blockId": "16fed830-d50b-43bb-bb08-8011a1afe8e4"
+            },
+            "focus": {
+              "node": "#text",
+              "offset": 12,
+              "position": 15,
+              "blockType": "paragraph",
+              "blockId": "16fed830-d50b-43bb-bb08-8011a1afe8e4"
+            },
+            "collapsed": true
+          },
+          "model": {
+            "type": "e",
+            "from": 15,
+            "to": 15,
+            "parent": "paragraph",
+            "parentOffset": 12,
+            "contentSize": 25,
+            "blockId": "16fed830-d50b-43bb-bb08-8011a1afe8e4",
+            "ancestors": [
+              {
+                "type": "doc",
+                "id": null
+              },
+              {
+                "type": "blockGroup",
+                "id": null
+              },
+              {
+                "type": "blockContainer",
+                "id": "16fed830-d50b-43bb-bb08-8011a1afe8e4"
+              },
+              {
+                "type": "paragraph",
+                "id": null
+              }
+            ]
+          },
+          "synchronized": true,
+          "placeholder": {
+            "blockId": "594563dd-d32d-4474-ac2c-474ef5579ef0",
+            "editable": true,
+            "textLength": 0,
+            "trailingBreakOnlyChild": true,
+            "decorated": false,
+            "onlyEmptyBlock": false,
+            "caretInside": false,
+            "content": "none",
+            "color": "rgb(82, 97, 116)",
+            "opacity": "1"
+          }
+        },
+        {
+          "stage": "light:DOM-only-shortcut-negative-control",
+          "domPosition": 39,
+          "modelFrom": 15,
+          "modelTo": 15,
+          "synchronized": false
+        },
+        {
+          "stage": "light:selected-empty",
+          "activeElement": {
+            "tag": "DIV",
+            "role": "textbox",
+            "editor": true
+          },
+          "dom": {
+            "anchor": {
+              "node": "P",
+              "offset": 0,
+              "position": 36,
+              "blockType": "paragraph",
+              "blockId": "594563dd-d32d-4474-ac2c-474ef5579ef0"
+            },
+            "focus": {
+              "node": "P",
+              "offset": 0,
+              "position": 36,
+              "blockType": "paragraph",
+              "blockId": "594563dd-d32d-4474-ac2c-474ef5579ef0"
+            },
+            "collapsed": true
+          },
+          "model": {
+            "type": "e",
+            "from": 36,
+            "to": 36,
+            "parent": "paragraph",
+            "parentOffset": 0,
+            "contentSize": 0,
+            "blockId": "594563dd-d32d-4474-ac2c-474ef5579ef0",
+            "ancestors": [
+              {
+                "type": "doc",
+                "id": null
+              },
+              {
+                "type": "blockGroup",
+                "id": null
+              },
+              {
+                "type": "blockContainer",
+                "id": "594563dd-d32d-4474-ac2c-474ef5579ef0"
+              },
+              {
+                "type": "paragraph",
+                "id": null
+              }
+            ]
+          },
+          "synchronized": true,
+          "placeholder": {
+            "blockId": "594563dd-d32d-4474-ac2c-474ef5579ef0",
+            "editable": true,
+            "textLength": 0,
+            "trailingBreakOnlyChild": true,
+            "decorated": true,
+            "onlyEmptyBlock": false,
+            "caretInside": true,
+            "content": "\"Enter text or type '/' for commands\"",
+            "color": "rgb(82, 97, 116)",
+            "opacity": "1"
+          }
+        },
+        {
+          "stage": "dark:empty-but-not-selected",
+          "activeElement": {
+            "tag": "DIV",
+            "role": "textbox",
+            "editor": true
+          },
+          "dom": {
+            "anchor": {
+              "node": "#text",
+              "offset": 12,
+              "position": 15,
+              "blockType": "paragraph",
+              "blockId": "16fed830-d50b-43bb-bb08-8011a1afe8e4"
+            },
+            "focus": {
+              "node": "#text",
+              "offset": 12,
+              "position": 15,
+              "blockType": "paragraph",
+              "blockId": "16fed830-d50b-43bb-bb08-8011a1afe8e4"
+            },
+            "collapsed": true
+          },
+          "model": {
+            "type": "e",
+            "from": 15,
+            "to": 15,
+            "parent": "paragraph",
+            "parentOffset": 12,
+            "contentSize": 25,
+            "blockId": "16fed830-d50b-43bb-bb08-8011a1afe8e4",
+            "ancestors": [
+              {
+                "type": "doc",
+                "id": null
+              },
+              {
+                "type": "blockGroup",
+                "id": null
+              },
+              {
+                "type": "blockContainer",
+                "id": "16fed830-d50b-43bb-bb08-8011a1afe8e4"
+              },
+              {
+                "type": "paragraph",
+                "id": null
+              }
+            ]
+          },
+          "synchronized": true,
+          "placeholder": {
+            "blockId": "594563dd-d32d-4474-ac2c-474ef5579ef0",
+            "editable": true,
+            "textLength": 0,
+            "trailingBreakOnlyChild": true,
+            "decorated": false,
+            "onlyEmptyBlock": false,
+            "caretInside": false,
+            "content": "none",
+            "color": "rgb(175, 190, 208)",
+            "opacity": "1"
+          }
+        },
+        {
+          "stage": "dark:DOM-only-shortcut-negative-control",
+          "domPosition": 39,
+          "modelFrom": 15,
+          "modelTo": 15,
+          "synchronized": false
+        },
+        {
+          "stage": "dark:selected-empty",
+          "activeElement": {
+            "tag": "DIV",
+            "role": "textbox",
+            "editor": true
+          },
+          "dom": {
+            "anchor": {
+              "node": "P",
+              "offset": 0,
+              "position": 36,
+              "blockType": "paragraph",
+              "blockId": "594563dd-d32d-4474-ac2c-474ef5579ef0"
+            },
+            "focus": {
+              "node": "P",
+              "offset": 0,
+              "position": 36,
+              "blockType": "paragraph",
+              "blockId": "594563dd-d32d-4474-ac2c-474ef5579ef0"
+            },
+            "collapsed": true
+          },
+          "model": {
+            "type": "e",
+            "from": 36,
+            "to": 36,
+            "parent": "paragraph",
+            "parentOffset": 0,
+            "contentSize": 0,
+            "blockId": "594563dd-d32d-4474-ac2c-474ef5579ef0",
+            "ancestors": [
+              {
+                "type": "doc",
+                "id": null
+              },
+              {
+                "type": "blockGroup",
+                "id": null
+              },
+              {
+                "type": "blockContainer",
+                "id": "594563dd-d32d-4474-ac2c-474ef5579ef0"
+              },
+              {
+                "type": "paragraph",
+                "id": null
+              }
+            ]
+          },
+          "synchronized": true,
+          "placeholder": {
+            "blockId": "594563dd-d32d-4474-ac2c-474ef5579ef0",
+            "editable": true,
+            "textLength": 0,
+            "trailingBreakOnlyChild": true,
+            "decorated": true,
+            "onlyEmptyBlock": false,
+            "caretInside": true,
+            "content": "\"Enter text or type '/' for commands\"",
+            "color": "rgb(175, 190, 208)",
+            "opacity": "1"
+          }
+        }
+      ]
+    }
+  ],
+  "all_raw_runs_retained_locally": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-appearance-clean/focused-repeat"
+}

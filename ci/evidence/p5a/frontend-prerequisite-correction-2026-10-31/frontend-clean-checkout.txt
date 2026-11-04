@@ -1,0 +1,100 @@
+CI: frontend-lint
+
+> cyrnava@0.1.0 lint
+> eslint . --max-warnings 0
+
+CI: frontend-unit
+
+> cyrnava@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.5 /tmp/cyrnava-p5a-prerequisite-e5fgarzw/checkout/frontend
+
+
+ Test Files  22 passed (22)
+      Tests  273 passed (273)
+   Start at  11:11:17
+   Duration  13.83s (tests 40%, environment 39%, import 8%, transform 7%, setup 6%)
+
+Environment  jsdom was created 22 times · 15.95s total, 39% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+CI: typescript-production-build
+
+> cyrnava@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 833 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                         1.15 kB │ gzip:   0.56 kB
+dist/assets/inter-v12-latin-100-BQDzDElq.woff2         16.54 kB
+dist/assets/inter-v12-latin-regular-YtgfLPRn.woff2     16.70 kB
+dist/assets/inter-v12-latin-900-CMga-52B.woff2         17.17 kB
+dist/assets/inter-v12-latin-300-DEbyFmpd.woff2         17.32 kB
+dist/assets/inter-v12-latin-200-BxfrU12A.woff2         17.34 kB
+dist/assets/inter-v12-latin-500-DfX5FI9E.woff2         17.55 kB
+dist/assets/inter-v12-latin-600-BvOeHRLc.woff2         17.66 kB
+dist/assets/inter-v12-latin-800-Bdy4lAMa.woff2         17.76 kB
+dist/assets/inter-v12-latin-700-Bj1B9WKG.woff2         17.78 kB
+dist/assets/inter-v12-latin-100-46Mq0mOp.woff          21.24 kB
+dist/assets/inter-v12-latin-regular-CahmJf_6.woff      21.42 kB
+dist/assets/inter-v12-latin-900-ORHAl5ZU.woff          21.98 kB
+dist/assets/inter-v12-latin-300-f7r92Nkj.woff          22.15 kB
+dist/assets/inter-v12-latin-200-DXfqWPZg.woff          22.23 kB
+dist/assets/inter-v12-latin-500-BQ2gQN_M.woff          22.51 kB
+dist/assets/inter-v12-latin-600-D01NXWOK.woff          22.63 kB
+dist/assets/inter-v12-latin-700-B5TOIllR.woff          22.68 kB
+dist/assets/inter-v12-latin-800-DFVvDWwT.woff          22.71 kB
+dist/assets/index-B4IDcU2d.css                        249.46 kB │ gzip:  40.51 kB
+dist/assets/module-mVd_cwoa.js                         76.72 kB │ gzip:  27.52 kB
+dist/assets/native-Cqs-2kTC.js                        429.05 kB │ gzip:  82.21 kB
+dist/assets/index-DB4gpyab.js                       1,208.41 kB │ gzip: 366.37 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 607ms
+CI: chromium-production-integration
+
+> cyrnava@0.1.0 test:release
+> CYRNAVA_E2E_RELEASE=1 playwright test --reporter=list,junit
+
+
+Running 16 tests using 1 worker
+
+(node:383) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   1 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (7.5s)
+
+  ✓   2 e2e/lifecycle.spec.ts:115:1 › killed isolated browser leaves no managed backend after lease expiry (3.0s)
+  ✓   3 e2e/search.spec.ts:128:1 › global search opens native rich notes by code prefix, supports keyboard selection and reveals ancestors (3.4s)
+  ✓   4 e2e/search.spec.ts:190:1 › opening a search result waits for pending saves and a failed save keeps the draft open (7.0s)
+  ✓   5 e2e/search.spec.ts:252:1 › an unchanged search reflects UI renames, folder moves and deletion, and retries a failed query (6.5s)
+
+  ✓   6 e2e/search.spec.ts:318:1 › a schema4 profile migrates, opens rich search results and rebuilds offline without changing canonical data (7.0s)
+  ✓   7 e2e/workspace.spec.ts:111:1 › appearance follows system and explicit preferences without changing notes, templates or autosave (9.1s)
+
+  ✓   8 e2e/workspace.spec.ts:271:1 › CyrNava reference appearance preserves the live editor, local images and saved content (3.6s)
+
+  ✓   9 e2e/workspace.spec.ts:360:1 › navigation preference and reusable templates preserve independent rich notes and screenshots (6.9s)
+
+  ✓  10 e2e/workspace.spec.ts:475:1 › real editing, outage recovery, safe navigation, image lifecycle and offline restoration drill (7.6s)
+  ✓  11 e2e/workspace.spec.ts:580:1 › revision conflict retains the draft and exports both versions before explicit reload (2.6s)
+
+  ✓  12 e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (8.9s)
+
+  ✓  13 e2e/workspace.spec.ts:714:1 › all exposed editor actions persist; mixed content reconstructs after restart and rapid edits (23.7s)
+  ✓  14 e2e/workspace.spec.ts:836:1 › desktop close protocol drains real autosave and retains an interrupted draft (2.0s)
+
+  ✓  15 e2e/workspace.spec.ts:873:1 › desktop close waits for an image upload and its subsequent document save (1.2s)
+  ✓  16 e2e/workspace.spec.ts:912:1 › desktop close does not silently discard an unsubmitted management form (720ms)
+
+  16 passed (1.7m)

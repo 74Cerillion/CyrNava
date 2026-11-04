@@ -1,0 +1,25 @@
+{
+  "checked_at_utc": "2026-11-01T09:03:10.750480+00:00",
+  "P6_files": 54,
+  "preserved_P5C_files": 55,
+  "P5C_hashes_unchanged": true,
+  "accepted_application_packaging_workflows_and_guards_unchanged": true,
+  "staged_files": [],
+  "secret_marker_scan": "no private-key armor or token/access-key patterns found in proposed P6 text",
+  "manual_scope_review": "source/docs/synthetic test records and public dependency metadata only; no binaries, secrets, keys or personal workspace data",
+  "limitations": "pattern scan does not prove absence of every possible secret; source and evidence were also reviewed by scope",
+  "approvals_pending": [
+    "commit and push",
+    "exact real-B native exercise",
+    "permanent signing/trust and license resolution",
+    "hosting/HTTPS/independent client and publication"
+  ],
+  "final_test_counts": {
+    "backend": 693,
+    "subtests": 204,
+    "frontend_unit": 273,
+    "browser": 21,
+    "workflow_contracts": 31,
+    "P6_focused": 30
+  }
+}

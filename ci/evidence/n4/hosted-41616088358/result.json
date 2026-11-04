@@ -1,0 +1,131 @@
+{
+  "N4_acceptance": "CONDITIONAL; native feasibility CI failed",
+  "attempt": 1,
+  "branch": "desktop/p2-production-integration",
+  "commit": "2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8",
+  "commit_count_this_authorization": 1,
+  "complete": true,
+  "created_at_utc": "2026-11-03T10:03:46Z",
+  "event": "push",
+  "feasibility": {
+    "application_or_renderer_failure": "NOT ESTABLISHED; no package/GUI execution reached",
+    "checked_paths_in_order": [
+      "/usr/share/glib-2.0/schemas/gschemas.compiled",
+      "/usr/share/glib-2.0/schemas",
+      "/usr/share/glib-2.0",
+      "/usr/share",
+      "/usr",
+      "/"
+    ],
+    "confirmed_predicate": "info.st_uid != Path(\"/\").stat().st_uid OR info.st_mode & 0o022",
+    "confirmed_test_coupling": "Two unit tests mock query/contents but still depend on actual host ownership/mode; actual GLib overlay coverage also stops at this guard",
+    "errors": 2,
+    "exact_rejected_object_UID_mode": "NOT RECORDED; remaining uncertainty",
+    "exception": "ValueError",
+    "failed_tests": [
+      {
+        "name": "test_only_schema_search_override_changes",
+        "result": "ERROR"
+      },
+      {
+        "name": "test_real_glib_overlay_reproduces_missing_keys_and_system_selection_restores_visibility",
+        "result": "ERROR"
+      },
+      {
+        "name": "test_schema_change_during_preflight_refused",
+        "result": "FAIL; expected later changed-content guard, hit ownership/write-permission guard first"
+      }
+    ],
+    "failures": 1,
+    "file": "packaging/native/feasibility/run_probe.py",
+    "line": 31,
+    "message": "System schemas must be protected by the OS owner",
+    "passed": 51,
+    "tests_run": 54
+  },
+  "fixture_parent_correction": "HOSTED PASS; all 198 native tests succeeded",
+  "further_commit_push": false,
+  "implementation_correction_after_failure": false,
+  "jobs": [
+    {
+      "conclusion": "success",
+      "failed_steps": [],
+      "id": 125849775359,
+      "name": "Workflow validation"
+    },
+    {
+      "conclusion": "success",
+      "failed_steps": [],
+      "id": 125849866470,
+      "name": "Frontend and browser"
+    },
+    {
+      "conclusion": "success",
+      "failed_steps": [],
+      "id": 125849866545,
+      "name": "Backend and security"
+    },
+    {
+      "conclusion": "failure",
+      "failed_steps": [
+        "Native installer, security and transaction regressions",
+        "Preserve safe native stage results"
+      ],
+      "id": 125851793665,
+      "name": "Native Ubuntu package and exported-archive audit"
+    },
+    {
+      "conclusion": "failure",
+      "failed_steps": [
+        "Require every verification and artifact job to succeed"
+      ],
+      "id": 125852052785,
+      "name": "CI required"
+    }
+  ],
+  "native_package": "NOT PRODUCED; source assembly/audit/installed headless stage skipped",
+  "next_proposed_scope": "Deterministic trust-metadata fixtures with wrong-owner/write-bit/symlink negative cases; retain separate real GLib coverage; safe fixed-system-path category/UID/mode diagnostics to identify actual runner preflight rejection. Preserve production guard, no host permission/security change",
+  "normal_push_count_this_authorization": 1,
+  "parent": "b5ad466b5c5694900e4463ffdef10f0b7c84a732",
+  "phase": "N4",
+  "remaining_release_requirements": [
+    "hosted native feasibility/assembly/audit/install PASS",
+    "third-party notices and corresponding-source delivery closure",
+    "final public-identity native package verification",
+    "genuine owner-controlled signing and separately authorized publication"
+  ],
+  "retained_prior_runs": [
+    {
+      "id": 41607482461,
+      "status": "FAIL"
+    },
+    {
+      "id": 41612661098,
+      "status": "FAIL"
+    }
+  ],
+  "reviewed_source_sha256": {
+    "packaging/native/feasibility/run_probe.py": "36ac17bf50f9fb780f952b06e7b326f6c8ff7e37b61e0e7f558898218835f530",
+    "packaging/native/feasibility/test_system_schemas.py": "939acbc10092cb212ceb9d3bdfe14b7ba444eb16724ed0c3e4b68c0db96ff9a5"
+  },
+  "run_id": 41616088358,
+  "secondary_diagnostic_failure": "Native result/audit/install JSON upload failed because assembly was not started",
+  "status": "FAIL",
+  "tree": "1e97bd6898f1b075a457c14a0c4876eb73d91add",
+  "updated_at_utc": "2026-11-03T10:08:43Z",
+  "url": "https://github.com/74Cerillion/CyrNava/actions/runs/41616088358",
+  "verified_hosted_passes": {
+    "active_backend_subtests_separate": 37,
+    "active_backend_tests": 574,
+    "browser_tests": 21,
+    "five_case_clean_checkout_regression_included_in_native": true,
+    "frontend_units": 277,
+    "historical_subtests_separate": 198,
+    "historical_tests": 351,
+    "native_regressions": 198,
+    "six_disposable_signature_tests_included_in_native": true,
+    "workflow_tests": 38
+  },
+  "workflow_path": ".github/workflows/ci.yml",
+  "workflow_retry_or_rerun": false
+}

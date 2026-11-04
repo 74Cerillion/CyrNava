@@ -1,0 +1,172 @@
+{
+  "phase": "P5A",
+  "status": "FAIL",
+  "acceptance_recommendation": "DO NOT ACCEPT; unresolved hosted browser lifecycle failure and unexecuted required production build/audit/upload",
+  "run_id": 41163754626,
+  "attempt": 1,
+  "run_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41163754626",
+  "source_commit": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+  "event": "push",
+  "created_at_utc": "2026-10-31T03:17:51Z",
+  "completed_at_utc": "2026-10-31T03:21:35Z",
+  "workflow_seconds": 224,
+  "jobs": [
+    {
+      "id": 124426749355,
+      "name": "Workflow validation",
+      "conclusion": "success",
+      "started_at": "2026-10-31T03:18:02Z",
+      "completed_at": "2026-10-31T03:18:21Z"
+    },
+    {
+      "id": 124426855701,
+      "name": "Backend and security",
+      "conclusion": "success",
+      "started_at": "2026-10-31T03:18:22Z",
+      "completed_at": "2026-10-31T03:20:16Z"
+    },
+    {
+      "id": 124426855775,
+      "name": "Frontend and browser",
+      "conclusion": "failure",
+      "started_at": "2026-10-31T03:18:23Z",
+      "completed_at": "2026-10-31T03:21:30Z"
+    },
+    {
+      "id": 124427576107,
+      "name": "CI required",
+      "conclusion": "failure",
+      "started_at": "2026-10-31T03:21:32Z",
+      "completed_at": "2026-10-31T03:21:34Z"
+    },
+    {
+      "id": 124427577386,
+      "name": "Production Flatpak and bundle audit",
+      "conclusion": "skipped",
+      "started_at": "2026-10-31T03:21:31Z",
+      "completed_at": "2026-10-31T03:21:31Z"
+    }
+  ],
+  "backend": {
+    "status": "PASS",
+    "passed": 550,
+    "subtests_passed": 31,
+    "warnings": 2,
+    "pytest_seconds": 46.78,
+    "orchestration": {
+      "status": "PASS",
+      "complete": true,
+      "steps": [
+        {
+          "name": "python-lint",
+          "status": "PASS",
+          "seconds": 0.037
+        },
+        {
+          "name": "frontend-install-for-backend",
+          "status": "PASS",
+          "seconds": 5.358
+        },
+        {
+          "name": "frontend-production-build-for-backend",
+          "status": "PASS",
+          "seconds": 5.716
+        },
+        {
+          "name": "backend-security-lifecycle-migration-packaging",
+          "status": "PASS",
+          "seconds": 48.756
+        }
+      ],
+      "preconditions": {
+        "frontend_dist_initially_absent": true,
+        "clean_frontend_required": true
+      },
+      "seconds": 59.868
+    },
+    "previous_missing_assets_defect": "Resolved and verified on hosted runner"
+  },
+  "frontend": {
+    "lint": "PASS",
+    "unit_passed": 273,
+    "typescript_production_build": "PASS",
+    "browser_passed": 15,
+    "browser_failed": 1,
+    "browser_seconds": 120.51,
+    "failure": [
+      {
+        "name": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+        "message": "expect(locator).toBeVisible() failed"
+      }
+    ],
+    "source_location": "frontend/e2e/lifecycle.spec.ts:103",
+    "observed_page": "Save Error; recovered draft based on an older revision; Review conflict and recover",
+    "root_cause": "UNDETERMINED; captured evidence establishes revision conflict after Recover draft, not whether application defect or test synchronization race",
+    "orchestration": {
+      "status": "FAIL",
+      "complete": true,
+      "steps": [
+        {
+          "name": "frontend-lint",
+          "status": "PASS",
+          "seconds": 3.244
+        },
+        {
+          "name": "frontend-unit",
+          "status": "PASS",
+          "seconds": 14.064
+        },
+        {
+          "name": "typescript-production-build",
+          "status": "PASS",
+          "seconds": 4.091
+        },
+        {
+          "name": "chromium-production-integration",
+          "status": "FAIL",
+          "seconds": 120.51
+        }
+      ],
+      "error_type": "CalledProcessError",
+      "exit_code": 1,
+      "seconds": 141.91
+    }
+  },
+  "workflow_validation": {
+    "status": "PASS",
+    "contract_methods": 23,
+    "seconds": 0.192
+  },
+  "production_flatpak": {
+    "build": "SKIPPED",
+    "package_content_audit": "NOT EXECUTED",
+    "validated_unsigned_artifact_upload": "NOT EXECUTED",
+    "package_sha256": null
+  },
+  "diagnostic_artifacts": [
+    {
+      "artifact_id": 13027759948,
+      "kind": "diagnostics only",
+      "sha256": "b799b5eb3739ec8ad4645fc35b9aba4e7cfcd7856324a494ed97917d2fb4af67",
+      "bytes": 10406,
+      "independently_verified": true
+    },
+    {
+      "artifact_id": 13028024573,
+      "kind": "diagnostics only",
+      "sha256": "1a34eed295eb5e989025f8ea53b88276941fca508c0cdc67bed412faa1e44fd2",
+      "bytes": 4971285,
+      "independently_verified": true
+    }
+  ],
+  "scope": {
+    "new_commit": false,
+    "push": false,
+    "workflow_rerun": false,
+    "manual_dispatch": false,
+    "production_application_modified": false,
+    "P5B_started": false,
+    "P5C_started": false
+  },
+  "next_action": "Owner review of hosted failure; no rerun, commit or push without explicit authorization"
+}

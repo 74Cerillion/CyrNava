@@ -1,0 +1,36 @@
+{
+  "diagnostics_retained_locally": "ci-output/p5b-hosted-41197927704/frontend.zip",
+  "failure_members": [
+    {
+      "path": "frontend/test-results/workspace-appearance-follo-a34bf-notes-templates-or-autosave/appearance-dark-collapsed.png",
+      "bytes": 93609,
+      "sha256": "de8a54f125cdd7c09a4cd405ecec0fb1ad7dabcee5d3a06fe0fb068e2409569c"
+    },
+    {
+      "path": "frontend/test-results/workspace-appearance-follo-a34bf-notes-templates-or-autosave/appearance-light-collapsed.png",
+      "bytes": 89214,
+      "sha256": "ec02366fcabad4bacad358300fac94f8dc1b59f7d0a5e24d36263ecfe7b928cb"
+    },
+    {
+      "path": "frontend/test-results/workspace-appearance-follo-a34bf-notes-templates-or-autosave/appearance-light-formatting.png",
+      "bytes": 159037,
+      "sha256": "416ef98c76cf3b5e5ab1589b70217971fd140904948357f993a4d9bb7c2e41bd"
+    },
+    {
+      "path": "frontend/test-results/workspace-appearance-follo-a34bf-notes-templates-or-autosave/appearance-light-slash-menu.png",
+      "bytes": 146844,
+      "sha256": "ed09131e2396f0e211c9c58561ca95e3860527e31d5894d25eb8a27c705b35e2"
+    },
+    {
+      "path": "frontend/test-results/workspace-appearance-follo-a34bf-notes-templates-or-autosave/test-failed-1.png",
+      "bytes": 62176,
+      "sha256": "da13045ed27606afcab7eb45428037b1cf4dd770351c6c71958102ea502030f3"
+    },
+    {
+      "path": "frontend/test-results/workspace-appearance-follo-a34bf-notes-templates-or-autosave/trace.zip",
+      "bytes": 4152417,
+      "sha256": "1b1b30dcba1feeabb1ce0f20b9bbeeccaa6833f9c2786eaed074b2189bde1515"
+    }
+  ],
+  "data_scope": "Synthetic CI browser fixture; no production user workspace"
+}

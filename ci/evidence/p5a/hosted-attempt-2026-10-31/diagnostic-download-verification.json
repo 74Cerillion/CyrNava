@@ -1,0 +1,7 @@
+{
+  "artifact_id": 13026131792,
+  "bytes": 12225,
+  "sha256": "30adeec94e96176f536790a7ddfc654f6d5002fb9bdd428eb9e1c2f90407f283",
+  "github_digest_verified": true,
+  "kind": "backend diagnostics, not production Flatpak"
+}

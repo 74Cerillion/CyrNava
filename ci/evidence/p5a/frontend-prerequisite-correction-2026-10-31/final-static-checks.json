@@ -1,0 +1,42 @@
+[
+  {
+    "name": "workflow-policy",
+    "chunk_id": "84fdb2",
+    "wall_time_seconds": 1.0326e-05,
+    "exit_code": 0,
+    "original_token_count": 11,
+    "output": "Workflow security/dependency contract: PASS\n"
+  },
+  {
+    "name": "canonical-ruff",
+    "chunk_id": "aa71f7",
+    "wall_time_seconds": 1.0669e-05,
+    "exit_code": 0,
+    "original_token_count": 5,
+    "output": "All checks passed!\n"
+  },
+  {
+    "name": "actionlint",
+    "chunk_id": "9c6f05",
+    "wall_time_seconds": 1.3334e-05,
+    "exit_code": 0,
+    "original_token_count": 0,
+    "output": ""
+  },
+  {
+    "name": "compile",
+    "chunk_id": "0b81b1",
+    "wall_time_seconds": 9.848e-06,
+    "exit_code": 0,
+    "original_token_count": 0,
+    "output": ""
+  },
+  {
+    "name": "diff-check",
+    "chunk_id": "c69895",
+    "wall_time_seconds": 1.2925e-05,
+    "exit_code": 0,
+    "original_token_count": 0,
+    "output": ""
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "independent_git_objects": true,
+  "overlay_matches": true,
+  "overlay_sha256": {
+    "ci/release/distribution.py": "391a01d03643f3f305e0d99c9794de554e696c1efb68750ff8fce000a23a2ad3",
+    "ci/release/key_ceremony.py": "86810d3e17e318185a332785ac5381111ad3f7c5f270668ba995c4c767373dd1",
+    "ci/release/native_distribution.py": "a29799741225a811b52ef51259368468e4067664093dc755b1e43dd2cc9a9e9b",
+    "ci/release/product_inventory.py": "630d1aa7117d37de6ff4b9a2055cbdba100ae8d4773695415a1bba27777bf0ad",
+    "ci/release/real_update.py": "b7ef78b0dd22bc4285ecfe8be791be6067de7668e89a9ac759d5658778428050",
+    "ci/release/real_update_audit.py": "7b907ea52634bdb02b2b57b702a42dac1f2787774cbafe6dabe6ce80f738fbd5",
+    "ci/release/test_distribution.py": "9fc439a7c46625caa6f7e32a48819343abd061b869913b2eefc6fb2b8aee34c4",
+    "ci/release/test_real_update_audit.py": "57e652809b5556c4532cfde51f95b5bae4e3319aa0d10b3e39a11a178da85787",
+    "ci/release/trust.py": "5b302aa94c1295f5cb5f5f962585890e43b33d936c8667881548d4f47f3d371c"
+  },
+  "source_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "status": "PASS",
+  "test_environment": "existing independently installed clean Python 3.12.15 environment; disposable fresh source checkout; no application build"
+}

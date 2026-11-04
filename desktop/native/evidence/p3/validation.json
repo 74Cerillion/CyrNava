@@ -1,0 +1,117 @@
+{
+  "phase": "P3",
+  "date": "2026-10-30",
+  "timezone": "Asia/Seoul",
+  "recommendation": "PASS",
+  "production_id": "io.github._74Cerillion.CyrNava",
+  "production_id_owner_approved": true,
+  "tests": [
+    {
+      "name": "backend and P2/P3 verification regressions",
+      "command": "cd backend && .venv/bin/python -m pytest -q tests ../packaging/flatpak/test_verify_outage.py ../packaging/flatpak/test_run_portal_verification.py ../packaging/flatpak/test_run_migration_verification.py",
+      "status": "PASS",
+      "passed": 478,
+      "seconds": 33.56,
+      "note": "Full run before final narrow metadata and supervisor checks; those changes were revalidated by focused suites."
+    },
+    {
+      "name": "final migration tests including API autosave/upload/restart",
+      "command": "cd backend && .venv/bin/python -m pytest -q tests/test_migration.py",
+      "status": "PASS",
+      "passed": 32,
+      "seconds": 0.55
+    },
+    {
+      "name": "post-hardening migration/legacy backup/supervisor",
+      "status": "PASS",
+      "passed": 53,
+      "note": "Before the final additional API test; final migration suite then passed all 32."
+    },
+    {
+      "name": "final host supervisor and snapshot contracts",
+      "command": "backend/.venv/bin/python -m pytest -q packaging/flatpak/test_run_migration_verification.py",
+      "status": "PASS",
+      "passed": 6
+    },
+    {
+      "name": "frontend unit suite",
+      "command": "npm --prefix frontend test",
+      "status": "PASS",
+      "passed": 273,
+      "files": 22
+    },
+    {
+      "name": "final release browser suite",
+      "command": "npm --prefix frontend run test:release",
+      "status": "PASS",
+      "passed": 16,
+      "duration": "1.8m"
+    },
+    {
+      "name": "appearance isolated repeat after transient full-suite failure",
+      "command": "npm --prefix frontend run test:release -- --grep 'appearance follows system' --repeat-each=3",
+      "status": "PASS",
+      "passed": 3,
+      "seconds": 30.4
+    },
+    {
+      "name": "production frontend build",
+      "command": "npm --prefix frontend run build",
+      "status": "PASS",
+      "warning": "Existing bundle-size warning"
+    },
+    {
+      "name": "P3 QtWidgets workflow",
+      "command": "python3.13 /tmp/cyrnava-p3-qt-bootstrap.py packaging/flatpak/qt_migration_check.py",
+      "status": "PASS",
+      "boundary": "Existing matched Qt 6.11 components, offscreen; import, export/readback, rollback, Escape guard, application event loops before and after maintenance. Chooser selections mocked. No WebEngine or actual portal."
+    },
+    {
+      "name": "P2 QtWidgets probes",
+      "status": "PASS",
+      "modes": [
+        "normal",
+        "unexpected-typed",
+        "early-exit",
+        "main-early-exit",
+        "filter-scope"
+      ],
+      "boundary": "QtWidgets, not native WebEngine/portals"
+    },
+    {
+      "name": "Ruff changed Python files and git diff --check",
+      "status": "PASS"
+    },
+    {
+      "name": "real P3 Flatpak native owner verification",
+      "status": "PASS",
+      "run_id": "run-a2e0fcaea12a",
+      "evidence": "final-native-2026-10-30/acceptance.json",
+      "owner_visual_confirmation": true,
+      "note": "Codex namespace restrictions retained; owner-host recorded results independently verified."
+    },
+    {
+      "name": "P3 portal startup and destination regression",
+      "command": "python3.13 /tmp/cyrnava-p3-qt-bootstrap.py packaging/flatpak/qt_migration_portal_check.py",
+      "status": "PASS",
+      "boundary": "Actual Qt pending-event delivery, simulated DBus replies; no real portal PASS."
+    }
+  ],
+  "historical_failures": [
+    {
+      "status": "BLOCKED",
+      "detail": "Initial browser launch: socket shutdown Operation not permitted. Local test network permission granted, suite rerun."
+    },
+    {
+      "status": "FAIL",
+      "detail": "One initial appearance-placeholder assertion failed with 15 browser tests passing; three isolated retries and final 16-test suite passed. No frontend code was altered."
+    },
+    {
+      "status": "BLOCKED",
+      "detail": "First pre-network-permission legacy-backup pytest invocation stalled; explicitly interrupted. Complete suites subsequently ran successfully."
+    }
+  ],
+  "owner_data_accessed": false,
+  "p4_started": false,
+  "owner_phase_acceptance": "AWAITING REVIEW"
+}

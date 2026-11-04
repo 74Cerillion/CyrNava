@@ -1,0 +1,28 @@
+{
+  "date_utc": "2026-10-31T06:01:40.847300+00:00",
+  "branch": "desktop/p2-production-integration",
+  "parent": "129700175cf4716446647572979771d27422fc3f",
+  "scope": "P5A test boundary, correlation, regressions, reports and synthetic evidence only",
+  "existing_workspace_protection": "Fixture initialize refuses existing unmarked SQLite database before production initialization; hash unchanged regression passes. CLI arm requires fixture marker and triggers. No production activation path.",
+  "production_changes": false,
+  "production_staging_exclusion": "Explicit allowlists exclude ci, tests, fixture SQL and X-P5A instrumentation; production migration rejects fixture schema. Automated tests pass.",
+  "preserved_tests": "Original close/recovery, lost acknowledgement conflict, autosave and killed browser cases retained. SQL boundary also runs with browser routing absent.",
+  "workflow": "Unchanged; contents:read, no secrets reference or release/signing/deploy step; pinned actions and fail-closed required gate.",
+  "tests": {
+    "backend": 559,
+    "subtests": 31,
+    "frontend_units": 273,
+    "browser": 19,
+    "focused": 15,
+    "ci_contracts": 23
+  },
+  "historical_uncertainty_preserved": true,
+  "diagnostics_review": {
+    "credential_pattern_hits": 0,
+    "sensitive_request_headers": 0,
+    "trace_origins": "loopback only; synthetic fixtures",
+    "entries_reviewed": 319
+  },
+  "hosted": "PENDING authorized push; latest actual run 41172242175 remains FAIL",
+  "authorization": "One commit and one push; no rerun/dispatch/additional commit/push"
+}

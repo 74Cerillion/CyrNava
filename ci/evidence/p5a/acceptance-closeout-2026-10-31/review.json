@@ -1,0 +1,180 @@
+{
+  "scope": "One documentation-only P5A formal acceptance commit",
+  "parent_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+  "branch": "desktop/p2-production-integration",
+  "reviewed_files": {
+    "ci/P5A_OWNER_CHECKS.md": {
+      "bytes": 5054,
+      "sha256": "382cdfa93288515caec7cd4f00b0c74248cd22543acae64461c5efe29e69e9f3"
+    },
+    "ci/P5A_PROVISIONING_CORRECTION.md": {
+      "bytes": 8389,
+      "sha256": "0d60d77295573a5528398d5b82f6c58c53a01badab910d6bf418e688f606979c"
+    },
+    "ci/P5A_REPORT.md": {
+      "bytes": 47264,
+      "sha256": "83758c9219dd705706cc27c5e1f3e077ca20236113e6d90e5bf731e5076db906"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/artifact-verification.json": {
+      "bytes": 809,
+      "sha256": "e76c9ac44ef8cb156c3f2a8383faf2dd42c70e7fd714707771b9f7e190b782a7"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/artifacts.json": {
+      "bytes": 3731,
+      "sha256": "f391aa0fee4b97bcdc9a8cdb1c1e16497aca691c8a83878d80cb9d1084c470cc"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/audit.json": {
+      "bytes": 1237,
+      "sha256": "0e3f7f8ca412fc3ab1471d3b462c22933da992097cbf372d59fc143bd7b5c013"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/backend-junit.xml": {
+      "bytes": 70319,
+      "sha256": "117d7508de90db9650f178653d8fb298e7010076e958a118864fa5bc7ac5b535"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/backend-summary.txt": {
+      "bytes": 130,
+      "sha256": "2c07f94eb8fa83824b19335160efc38c83b291e56d7309ec83ae7729af58ab57"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/backend.json": {
+      "bytes": 622,
+      "sha256": "9899854429a84574db0ddccecbf88f442b210476d04b341a790ccf6f4f18845b"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/before-hosted-P5A_OWNER_CHECKS.md": {
+      "bytes": 2953,
+      "sha256": "17517852be21cede15e58826d273b9ab7d2f789d3d1b16fe29f5c23e7d090989"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/before-hosted-P5A_REPORT.md": {
+      "bytes": 42088,
+      "sha256": "2985a1fcdab0ecccb3e9986fff476b1023ecfdb0773c073f0ea2f1b869233fb9"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/before-hosted-validation.json": {
+      "bytes": 68907,
+      "sha256": "321a326f820c980747e31bef35e31b1995bac0ae8808c4bcfeecde4e6a364d99"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/browser-junit.xml": {
+      "bytes": 5732,
+      "sha256": "329980ab93c9fefdff1e6cd1eac55e621cea319130dac284c1cfa9ba1473ed88"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/build-result.json": {
+      "bytes": 508,
+      "sha256": "55912d32144032c9c6e6504c418ab9b7b1450a44961cc1d2731f8335f80ca4b2"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/build.json": {
+      "bytes": 89,
+      "sha256": "24e9e6478a21347d5740e46f29a37b98c8b71d31ccbcb8ef87e30c7ad065f62f"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/final-result.json": {
+      "bytes": 6707,
+      "sha256": "a9ff7622d7cea61755f013a0a48cc0af9ea6490a29a0fa6bd41a0aa46bd44f36"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/flatpak-provisioning-log.txt": {
+      "bytes": 4075,
+      "sha256": "bae2e792d7a9e61fb73d209c5f76f579cae43821e0a766c63e44d354c8ee5d91"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/frontend-summary.txt": {
+      "bytes": 1276,
+      "sha256": "5d17cac4725750689f03563c01ed8739a39994c25fa0bbdfe40e7431c3a690e7"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/frontend.json": {
+      "bytes": 481,
+      "sha256": "77003e845f0a4ebe20530f11ab23fead4f5ef69f550d245982b73a5e58043a21"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/independent-audit-attempt.json": {
+      "bytes": 424,
+      "sha256": "19b350fa58d0d092b8a0ff95dfbd6c69bd4c189c15460176bc7c3b16eba0dd4b"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/independent-audit-invocation-error.json": {
+      "bytes": 550,
+      "sha256": "7f5870ef489f2977cc3be07667f53941073eda5d5d0647ad7cb759e717efcd5a"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/independent-audit.json": {
+      "bytes": 635,
+      "sha256": "3c3596d99ceea8e4be72cfc1044be0b569d6141573763bbf1b911fb91b656a47"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/inventory-review.json": {
+      "bytes": 343,
+      "sha256": "26d7352de687d762069c27d103e468c4d08f1bef9f12057a8105c61ec88c3d97"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/jobs-initial.json": {
+      "bytes": 10813,
+      "sha256": "0dcbf88c0494889714e0e523a7f5f1d19ed89b653f40693b1dcd1986e3356740"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/jobs.json": {
+      "bytes": 18847,
+      "sha256": "9f14d584417ceff0aa81da86b0b6924a7d9df3bdd3e33606c38edcb7b7d78a14"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/manifest.json": {
+      "bytes": 4016,
+      "sha256": "8813c10d9908005da2b60d13fc7a00e0489c13384717f85f0ec67513cee865a1"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/owner-acceptance.json": {
+      "bytes": 1142,
+      "sha256": "642a7ddc301c6eda51b5b77f38de81c0399af0a9da275222d23792d599abf589"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/package-SHA256SUMS": {
+      "bytes": 105,
+      "sha256": "bddb1909550da73435dc2b48b6f7b184a9f8a19707239838f2698630bef2296a"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/package-build-inputs.json": {
+      "bytes": 12564,
+      "sha256": "bd156019a2aa68ab2e7beb2c0758f5c741c231e3bca45614201070366e0e97ac"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/package-job-summary.txt": {
+      "bytes": 1545,
+      "sha256": "487c9e399ebe29114b541b6ab38ab21afc9648fddf1c1f9bc2cb6f483bc56cbe"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/package-package-inventory.json": {
+      "bytes": 1033311,
+      "sha256": "826def102fefcd12c9a00bb10f1d2d1ba3dea970c6a6ea373ad5e158b6843197"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/package-provenance.json": {
+      "bytes": 1172,
+      "sha256": "c11093cc4b8c89490d2e8587a7668ff3345aa6aa0eda7b8a1f8847a5241491b0"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/package-result.json": {
+      "bytes": 508,
+      "sha256": "55912d32144032c9c6e6504c418ab9b7b1450a44961cc1d2731f8335f80ca4b2"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/prepare.json": {
+      "bytes": 1407,
+      "sha256": "34921774ed645c155d637b8781e679f0902e6f2427c0ed8e8f3390aff910b856"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/remote.json": {
+      "bytes": 474,
+      "sha256": "290d387062f01da84359806028c72b93a070948d30fa4a6e5371e96400cd6207"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/required-job-summary.txt": {
+      "bytes": 299,
+      "sha256": "df9c343e6b92b5867ab237e0e0b97971ae84ccf3d651d7e52467696c17f6eddc"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/run-initial.json": {
+      "bytes": 1154,
+      "sha256": "4f6fe884352bb383e9e2c6f355c7e9282a0e2b67e329404a5e5cc9c3d6f08a97"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/run.json": {
+      "bytes": 1162,
+      "sha256": "d6745fc9bad3f3052124117bd2a5c2d21e9af9263647bb568f5c72d0b1da20dd"
+    },
+    "ci/evidence/p5a/hosted-provisioning-2026-10-31/workflow-summary.txt": {
+      "bytes": 157,
+      "sha256": "052e7b8647c699725751ef7883d6c65165691827d01752d72d1d5af7e96cedff"
+    },
+    "ci/evidence/p5a/provisioning-commit-review-2026-10-31/push-status.json": {
+      "bytes": 582,
+      "sha256": "953823ffb8b0b8de8e4bee6c10e498ff674a15e1c52b31321f676dbbd68015b8"
+    },
+    "ci/evidence/p5a/validation.json": {
+      "bytes": 77169,
+      "sha256": "7a77d42e00bb580f4a51cac28bb6a5104b37418d6cf07f661788cff4b966bc7d"
+    }
+  },
+  "credential_pattern_hits": [],
+  "privacy_review": "Actor/profile/commit-author personal fields omitted from run metadata. Email-like strings in JUnit are synthetic denied-URL fixtures and public git transport URLs, not personal addresses.",
+  "build_artifacts": "No ZIP, Flatpak, image, screencast, trace or workspace database included. Inventory/checksums/provenance retained as necessary text evidence.",
+  "evidence_integrity": "All 35 evidence file hashes and four report hashes verified from staged index",
+  "unchanged": "Application, tests, workflow, locks, production security and permissions",
+  "historical_evidence": "Prior failures retained; raw provisioning log timestamp whitespace preserved byte-for-byte",
+  "tag": "p5a-accepted absent; defer until documentation commit synchronized",
+  "push": "Separate authorization pending; no push attempted",
+  "tests": "Documentation-only; structured JSON and staged hash validation performed, no application tests rerun"
+}

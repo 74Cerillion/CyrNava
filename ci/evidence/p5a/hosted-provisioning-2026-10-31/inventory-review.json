@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "scope": "Independent review of downloaded hosted inventory and source hashes; actual exported files hashed by hosted audit, not locally re-extracted",
+  "entries": 5320,
+  "logical_bytes": 980984007,
+  "application_source_hash_matches": 28,
+  "prohibited_paths_and_unsafe_links": "none",
+  "duplicate_paths": "none"
+}

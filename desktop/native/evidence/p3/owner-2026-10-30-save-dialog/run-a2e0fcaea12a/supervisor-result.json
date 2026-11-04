@@ -1,0 +1,14 @@
+{
+  "run_id": "run-a2e0fcaea12a",
+  "status": "FAIL",
+  "complete": true,
+  "phases": {
+    "prepare": "PASS",
+    "import": "PASS",
+    "edit": "PASS",
+    "restart": "PASS",
+    "verify": "FAIL"
+  },
+  "helper_sha256": "c181353fdb05058ed8cc028f2a176b8c459a8f7d1e1dcb278b1baf584046dc8e",
+  "child_still_running": false
+}

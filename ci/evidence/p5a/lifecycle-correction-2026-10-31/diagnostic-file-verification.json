@@ -1,0 +1,7 @@
+{
+  "focused_executions": 10,
+  "all_have_persistent_timeline_attachment_files": true,
+  "upload_path_already_in_workflow": "frontend/test-results/",
+  "earlier_complete_run": "PASS, repeated after observing body-only attachments were absent from JUnit; changed to explicit attachment files and cleanup finally",
+  "application_or_assertion_changes_for_repeat": false
+}

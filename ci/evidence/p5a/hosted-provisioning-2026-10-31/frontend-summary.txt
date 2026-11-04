@@ -1,0 +1,9 @@
+2026-10-31T07:41:32.5290312Z [2m      Tests [22m [1m[32m273 passed[39m[22m[90m (273)[39m
+2026-10-31T07:41:50.1895393Z   ✓   1 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (10.7s)
+2026-10-31T07:42:00.0932095Z   ✓   2 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing (9.9s)
+2026-10-31T07:42:05.6792919Z   ✓   3 e2e/lifecycle.spec.ts:232:1 › a committed write with a lost acknowledgement retains its draft and requires conflict review (5.6s)
+2026-10-31T07:42:08.9958696Z   ✓   4 e2e/lifecycle.spec.ts:295:1 › visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it (3.3s)
+2026-10-31T07:42:13.3487637Z   ✓   5 e2e/lifecycle.spec.ts:349:1 › killed isolated browser leaves no managed backend after lease expiry (4.3s)
+2026-10-31T07:43:37.0047353Z   ✓  15 e2e/workspace.spec.ts:605:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (12.6s)
+2026-10-31T07:43:40.5743938Z   ✓  16 e2e/workspace.spec.ts:755:1 › image command requires a synchronized paragraph after code-block focus (3.6s)
+2026-10-31T07:44:16.8415518Z   20 passed (2.6m)

@@ -1,0 +1,9 @@
+{
+  "flatpak": "Flatpak 1.16.6",
+  "gpg": "gpg (GnuPG) 2.4.8",
+  "node": "v24.19.0",
+  "npm": "11.6.2",
+  "ostree": "libostree:\n Version: '2025.7'\n Features:\n  - inode64\n  - initial-var\n  - libcurl\n  - libsoup3\n  - gpgme\n  - composefs\n  - ex-fsverity\n  - libarchive\n  - selinux\n  - avahi\n  - libmount\n  - systemd\n  - release\n  - p2p",
+  "python_clean_test_environment": "Python 3.12.15",
+  "python_host_command": "Python 3.14.4"
+}

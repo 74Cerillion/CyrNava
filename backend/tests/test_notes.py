@@ -3,10 +3,9 @@ from concurrent.futures import ThreadPoolExecutor
 from uuid import UUID, uuid4
 
 import pytest
-from fastapi.testclient import TestClient
-
 from app.database import Database, RevisionConflict, default_database_path
 from app.main import create_app
+from fastapi.testclient import TestClient
 
 
 def create(client, document):

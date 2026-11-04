@@ -1,0 +1,25 @@
+{
+  "B_audit_directory_empty": true,
+  "B_public_directory_absent": true,
+  "files_sha256": {
+    "a/manifest.json": "77b221b403220b0b6de98bf724565faae8ba97703b1ca90b94b643e09a863ccb",
+    "a/manifest.json.sig": "801adf46061198ccf1ba09a23c7cadf6d542718e5ebbde2b24f8a0cf15f465ca",
+    "a/p6-provenance.json": "491eb8dd0e0cb5d70c075c0e5c8d933134ba63b1a99f54d6be00c18d6c917cff",
+    "a/release.json": "d2c2c7324f32a5c8aa38960d023e316a1d51de780c5c454c18b0ad591ea5d01b",
+    "p/a/SHA256SUMS": "bddb1909550da73435dc2b48b6f7b184a9f8a19707239838f2698630bef2296a",
+    "p/a/build-inputs.json": "bd156019a2aa68ab2e7beb2c0758f5c741c231e3bca45614201070366e0e97ac",
+    "p/a/io.github._74Cerillion.CyrNava.flatpak": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db",
+    "p/a/package-inventory.json": "826def102fefcd12c9a00bb10f1d2d1ba3dea970c6a6ea373ad5e158b6843197",
+    "p/a/provenance.json": "c11093cc4b8c89490d2e8587a7668ff3345aa6aa0eda7b8a1f8847a5241491b0",
+    "p/a/result.json": "55912d32144032c9c6e6504c418ab9b7b1450a44961cc1d2731f8335f80ca4b2",
+    "p/b/SHA256SUMS": "2690b0cbbc5622bb32ec57d01969eeb64dcd2d1c1bc93c0ca5e7f77b526d443e",
+    "p/b/build-inputs.json": "42281a23d1b80aae748c3956c48bbf6da220bf609079d69fbef1ef26d40cf64f",
+    "p/b/io.github._74Cerillion.CyrNava.flatpak": "ef732c240d8a01e33a638cd10e83fb985c7ba9e678b573ba508cd48c3934f47c",
+    "p/b/package-inventory.json": "898ec911e021da89cc3dcb0451830490e916aad560ad9535cb7a558058b245cd",
+    "p/b/provenance.json": "7a43b364ca1a6c3e53e9adcda452b3ce04f601b67ae70d4fa8013e0e0caddaea",
+    "p/b/result.json": "0d590fd53e275daa1f0733abc4360c4b024d71fcd2a373608b812feee2e739db",
+    "p/payload-audit/audit-result.json": "e2644c71f89c8bdd810d7926440bf081556460977f572a1f17501702604271c6",
+    "prepared.json": "6d96611d1b3c75a1a7f1151568705aa5575c3aaddd01908119c6e056708460d3"
+  },
+  "key_home_absent": true
+}

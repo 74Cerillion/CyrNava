@@ -1,0 +1,3 @@
+P5B staging workflow security contract: PASS
+P5B local registration/readback checks: PASS (no external action)
+Workflow security/dependency contract: PASS

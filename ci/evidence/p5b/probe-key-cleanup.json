@@ -1,0 +1,14 @@
+[
+  {
+    "purpose": "disposable P5B capability probe",
+    "agent_stop_exit": 0,
+    "key_home": "/tmp/cyrnava-p5b-2otwcegm/test-key",
+    "key_home_removed": true
+  },
+  {
+    "purpose": "disposable P5B capability probe",
+    "agent_stop_exit": 0,
+    "key_home": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/gpg-socket-probe/key",
+    "key_home_removed": true
+  }
+]

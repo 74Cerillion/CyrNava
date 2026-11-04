@@ -1,0 +1,26 @@
+{
+  "date_utc": "2026-10-31T07:12:13.500463+00:00",
+  "branch": "desktop/p2-production-integration",
+  "created_commit": "6743d1d5c76f2db87c2debb6f687a6e57a6826b6",
+  "parent_commit": "047a99b1473304cc73518dff6427bf7937c542a2",
+  "commit_count_this_authorization": 1,
+  "push_attempt_count_this_authorization": 1,
+  "push_exit_code": 128,
+  "push_status": "BLOCKED: terminal has no Git HTTPS credentials",
+  "remote_branch_sha_verified_with_read_only_ls_remote": "047a99b1473304cc73518dff6427bf7937c542a2",
+  "remote_updated": false,
+  "new_hosted_run": "NOT STARTED",
+  "production_build_audit_upload_checksum_provenance": "NOT EXECUTED for this commit",
+  "P5A": "FAIL / NOT ACCEPTED; latest actual hosted run remains 41176826666 FAIL",
+  "staged_review": {
+    "P5A_files": 86,
+    "text_and_zip_entries": 608,
+    "secret_pattern_hits": 0,
+    "sensitive_request_headers": 0,
+    "trace_origins": "loopback only",
+    "production_guard_workflow_unchanged": true
+  },
+  "next_action": "Owner completes this already-authorized push in authenticated Ubuntu terminal; then inspect automatically triggered CI",
+  "command": "git push origin 6743d1d5c76f2db87c2debb6f687a6e57a6826b6:refs/heads/desktop/p2-production-integration",
+  "no_additional_commit_push_rerun_dispatch": true
+}

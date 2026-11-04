@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "date": "2026-10-30",
+  "timezone": "Asia/Seoul",
+  "run_id": "run-a2e0fcaea12a",
+  "helper_sha256": "2695e2495ea5f056475bce86483b5ea76cd1bcc074b1c79cb672cec4852dc56b",
+  "source_hash_matches": true,
+  "evidence_origin": "/home/cerillion/.var/app/org.cyrnava.CyrNava.Devel/data/p3-verification/run-a2e0fcaea12a",
+  "execution": "prepare/import from original run; edit/restart/verify from supervised resume; historical failure archived before resume",
+  "owner_visual_confirmation": true,
+  "videos": [
+    "/home/cerillion/Videos/Screencasts/Screencast From 2026-10-30 16-07-47.webm",
+    "/home/cerillion/Videos/Screencasts/Screencast From 2026-10-30 16-08-40.webm"
+  ],
+  "scope": "Synthetic data only; native verification complete; P4 not authorized",
+  "evidence_sha256": {
+    "import.json": "2b9e48232ef756b6c11f3f60dd6ae3397e3a1feb4afe8b013397ecb5060e10eb",
+    "edit.json": "c2cc1dbd992d9ca95c595a606a84e7ee3b323722c23d20cb38ce4cd86f66cd74",
+    "prepare.json": "4261f455cddb0395fab4fd8f59575d43b775245087dc554647b9161410e24731",
+    "restart.json": "f610f70e349a174fe160d638a68898e1deecff7babe0219aacb521b0270c2b87",
+    "verify.json": "4acbdbd8a07c8590ec371488e4fa7d03f0dcec368c921e7ce1e47b57c6f4523c",
+    "supervisor-result.json": "3614a21cd58b30645ad13392c1939b045f1d6d0876c12820a2346f5f351ecf28"
+  }
+}

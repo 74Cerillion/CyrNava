@@ -1,0 +1,18 @@
+{
+  "phase": "maintenance",
+  "status": "FAIL",
+  "complete": true,
+  "checks": {
+    "production_identity_private_network_and_filesystem": "PASS",
+    "import_activated_new_workspace": "FAIL",
+    "import_preserved_records": "PASS",
+    "import_preserved_owner_edits": "PASS"
+  },
+  "timings_ms": {},
+  "stage": "validating_imported_workspace",
+  "missing_checks": [
+    "import_activated_new_workspace"
+  ],
+  "error_type": "AssertionError",
+  "error": "P4 synthetic check failed; preserve the run and phase for diagnosis."
+}

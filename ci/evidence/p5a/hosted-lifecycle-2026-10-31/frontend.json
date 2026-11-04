@@ -1,0 +1,29 @@
+{
+  "status": "FAIL",
+  "complete": true,
+  "steps": [
+    {
+      "name": "frontend-lint",
+      "status": "PASS",
+      "seconds": 3.05
+    },
+    {
+      "name": "frontend-unit",
+      "status": "PASS",
+      "seconds": 13.975
+    },
+    {
+      "name": "typescript-production-build",
+      "status": "PASS",
+      "seconds": 3.879
+    },
+    {
+      "name": "chromium-production-integration",
+      "status": "FAIL",
+      "seconds": 119.193
+    }
+  ],
+  "error_type": "CalledProcessError",
+  "exit_code": 1,
+  "seconds": 140.097
+}

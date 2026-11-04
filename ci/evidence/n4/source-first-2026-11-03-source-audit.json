@@ -1,0 +1,220 @@
+{
+  "GitClone": "Same tracked tree plus reachable .git/history; .gitignore and installer input allowlist do not remove tracked content or history",
+  "current_tree": {
+    "gitattributes": null,
+    "symlinks_or_submodules": [],
+    "top_level_ELF_or_PE_magic_paths": [],
+    "tracked_application_bundles": 0,
+    "tracked_frontend_dist": 0,
+    "tracked_node_modules": 0,
+    "tracked_venvs": 0,
+    "vendored_wheels": 0
+  },
+  "excluded_install_inputs": "Wheels, venvs, node_modules, dist, accepted artifacts, ci-output, personal profiles, signing material and historical evidence excluded from source installer staging",
+  "final_source_review": {
+    "public_binary_payload": "No wheels, development environments, generated application installations or unintended build outputs in the intended current tree. Historical browser screenshots/fonts/CSS are retained evidence and are classified separately.",
+    "review_scope": "Current tracked tree plus exact existing proposed additions; no new research, extraction, build or GUI",
+    "status": "READY FOR COMMIT AND CI",
+    "targeted_credential_scan": "No actual credentials identified. Sole private-key-pattern hit is the header-only rejection-test literal at ci/release/test_signing.py:179, not private key material. No claim of exhaustive secret/history clearance.",
+    "third_party_material": "Existing full OFL/Inter copyright and MPL notices and exact official BlockNote source URLs retained; trace CSS matches accepted frontend CSS. No new binary-redistribution clearance claimed.",
+    "traces": [
+      {
+        "CSS_sha256": "0a59b4fd7b470050a3f679c0db6314a7e5ca3c895aa8946db9d56fc2178c5f40",
+        "authentication_or_token_headers": 0,
+        "bytes": 1932579,
+        "contexts_without_stored_cookie_state_or_extra_headers": 3,
+        "cookie_headers": 0,
+        "decision": "KEEP unchanged",
+        "font_copies": 3,
+        "fonts_match_existing_notice_inventory": true,
+        "path": "ci/evidence/p5a/hosted-lifecycle-2026-10-31/lifecycle-trace.zip",
+        "reason": "Synthetic loopback Playwright test evidence; no identified credential/privacy issue; applicable font/CSS notices and exact source links retained",
+        "request_origin": "http://127.0.0.1 (test ports omitted)",
+        "sha256": "12ebc5603da2832ccb53660c7c8ec242239371db55316cc3aafce3a43a3fe24c",
+        "stored_JavaScript_response_bodies": 0
+      },
+      {
+        "CSS_sha256": "0a59b4fd7b470050a3f679c0db6314a7e5ca3c895aa8946db9d56fc2178c5f40",
+        "authentication_or_token_headers": 0,
+        "bytes": 9185369,
+        "contexts_without_stored_cookie_state_or_extra_headers": 3,
+        "cookie_headers": 0,
+        "decision": "KEEP unchanged",
+        "font_copies": 4,
+        "fonts_match_existing_notice_inventory": true,
+        "path": "ci/evidence/p5a/hosted-sql-boundary-2026-10-31/workspace-filechooser-trace.zip",
+        "reason": "Synthetic loopback Playwright test evidence; no identified credential/privacy issue; applicable font/CSS notices and exact source links retained",
+        "request_origin": "http://127.0.0.1 (test ports omitted)",
+        "sha256": "f665590747afef72222c9c49b4696cdc7d82bee7925bc744f524316b014fcce4",
+        "stored_JavaScript_response_bodies": 0
+      },
+      {
+        "CSS_sha256": "0a59b4fd7b470050a3f679c0db6314a7e5ca3c895aa8946db9d56fc2178c5f40",
+        "authentication_or_token_headers": 0,
+        "bytes": 404308,
+        "contexts_without_stored_cookie_state_or_extra_headers": 3,
+        "cookie_headers": 0,
+        "decision": "KEEP unchanged",
+        "font_copies": 4,
+        "fonts_match_existing_notice_inventory": true,
+        "path": "ci/evidence/p5a/image-selection-correction-2026-10-31/corrected-trace-without-filmstrip.zip",
+        "reason": "Synthetic loopback Playwright test evidence; no identified credential/privacy issue; applicable font/CSS notices and exact source links retained",
+        "request_origin": "http://127.0.0.1 (test ports omitted)",
+        "sha256": "53abf0b263c8cfbfee492fd35dfe1a2c625580c7df8b3c9bb0a2b78c0297a163",
+        "stored_JavaScript_response_bodies": 0
+      },
+      {
+        "CSS_sha256": "0a59b4fd7b470050a3f679c0db6314a7e5ca3c895aa8946db9d56fc2178c5f40",
+        "authentication_or_token_headers": 0,
+        "bytes": 7549141,
+        "contexts_without_stored_cookie_state_or_extra_headers": 3,
+        "cookie_headers": 0,
+        "decision": "KEEP unchanged",
+        "font_copies": 4,
+        "fonts_match_existing_notice_inventory": true,
+        "path": "ci/evidence/p5a/image-selection-correction-2026-10-31/keydown-model-failure-trace.zip",
+        "reason": "Synthetic loopback Playwright test evidence; no identified credential/privacy issue; applicable font/CSS notices and exact source links retained",
+        "request_origin": "http://127.0.0.1 (test ports omitted)",
+        "sha256": "5cbe770c70fef65d14cb0763a34cde43102aa85fa6e2b658bfd8324d86737548",
+        "stored_JavaScript_response_bodies": 0
+      },
+      {
+        "CSS_sha256": "0a59b4fd7b470050a3f679c0db6314a7e5ca3c895aa8946db9d56fc2178c5f40",
+        "authentication_or_token_headers": 0,
+        "bytes": 1696034,
+        "contexts_without_stored_cookie_state_or_extra_headers": 3,
+        "cookie_headers": 0,
+        "decision": "KEEP unchanged",
+        "font_copies": 3,
+        "fonts_match_existing_notice_inventory": true,
+        "path": "ci/evidence/p5a/lifecycle-causality-2026-10-31/no-browser-routing-trace.zip",
+        "reason": "Synthetic loopback Playwright test evidence; no identified credential/privacy issue; applicable font/CSS notices and exact source links retained",
+        "request_origin": "http://127.0.0.1 (test ports omitted)",
+        "sha256": "005a86cd6d3f7315b9e999064bcfef62707de8a6d769e12e300377a188e7075f",
+        "stored_JavaScript_response_bodies": 0
+      },
+      {
+        "CSS_sha256": "0a59b4fd7b470050a3f679c0db6314a7e5ca3c895aa8946db9d56fc2178c5f40",
+        "authentication_or_token_headers": 0,
+        "bytes": 615870,
+        "contexts_without_stored_cookie_state_or_extra_headers": 3,
+        "cookie_headers": 0,
+        "decision": "KEEP unchanged",
+        "font_copies": 3,
+        "fonts_match_existing_notice_inventory": true,
+        "path": "ci/evidence/p5a/lifecycle-causality-2026-10-31/visibility-trace.zip",
+        "reason": "Synthetic loopback Playwright test evidence; no identified credential/privacy issue; applicable font/CSS notices and exact source links retained",
+        "request_origin": "http://127.0.0.1 (test ports omitted)",
+        "sha256": "804952aab677a09096ab582dd8d5f2a32b6e6a13effd607f4db8d0a483c60c5a",
+        "stored_JavaScript_response_bodies": 0
+      },
+      {
+        "CSS_sha256": "0a59b4fd7b470050a3f679c0db6314a7e5ca3c895aa8946db9d56fc2178c5f40",
+        "authentication_or_token_headers": 0,
+        "bytes": 1839019,
+        "contexts_without_stored_cookie_state_or_extra_headers": 3,
+        "cookie_headers": 0,
+        "decision": "KEEP unchanged",
+        "font_copies": 3,
+        "fonts_match_existing_notice_inventory": true,
+        "path": "ci/evidence/p5a/lifecycle-correction-2026-10-31/controlled-race-1-trace.zip",
+        "reason": "Synthetic loopback Playwright test evidence; no identified credential/privacy issue; applicable font/CSS notices and exact source links retained",
+        "request_origin": "http://127.0.0.1 (test ports omitted)",
+        "sha256": "12cd98c8cff03f34577d7229cf0c94fcaa252da20ecc00d9eb8d91278472aa24",
+        "stored_JavaScript_response_bodies": 0
+      },
+      {
+        "CSS_sha256": "0a59b4fd7b470050a3f679c0db6314a7e5ca3c895aa8946db9d56fc2178c5f40",
+        "authentication_or_token_headers": 0,
+        "bytes": 1906674,
+        "contexts_without_stored_cookie_state_or_extra_headers": 3,
+        "cookie_headers": 0,
+        "decision": "KEEP unchanged",
+        "font_copies": 3,
+        "fonts_match_existing_notice_inventory": true,
+        "path": "ci/evidence/p5a/lifecycle-correction-2026-10-31/corrected-1-trace.zip",
+        "reason": "Synthetic loopback Playwright test evidence; no identified credential/privacy issue; applicable font/CSS notices and exact source links retained",
+        "request_origin": "http://127.0.0.1 (test ports omitted)",
+        "sha256": "2ea51a9615c4625cdd88497d3cb0c90cd1e2678bdfd4464b038210007271f9f7",
+        "stored_JavaScript_response_bodies": 0
+      },
+      {
+        "CSS_sha256": "0a59b4fd7b470050a3f679c0db6314a7e5ca3c895aa8946db9d56fc2178c5f40",
+        "authentication_or_token_headers": 0,
+        "bytes": 796796,
+        "contexts_without_stored_cookie_state_or_extra_headers": 3,
+        "cookie_headers": 0,
+        "decision": "KEEP unchanged",
+        "font_copies": 3,
+        "fonts_match_existing_notice_inventory": true,
+        "path": "ci/evidence/p5a/lifecycle-correction-2026-10-31/corrected-2-trace.zip",
+        "reason": "Synthetic loopback Playwright test evidence; no identified credential/privacy issue; applicable font/CSS notices and exact source links retained",
+        "request_origin": "http://127.0.0.1 (test ports omitted)",
+        "sha256": "495376dd9e1013ae21f08d07eb7a154b6e0e8b4e6a0ccda3c4df40ebbd69ec01",
+        "stored_JavaScript_response_bodies": 0
+      }
+    ]
+  },
+  "format": 1,
+  "head": "b7ab94265270866911311b4ca818071868f58361",
+  "historical_trace_ZIPs": [
+    {
+      "bytes": 1932579,
+      "path": "ci/evidence/p5a/hosted-lifecycle-2026-10-31/lifecycle-trace.zip"
+    },
+    {
+      "bytes": 9185369,
+      "path": "ci/evidence/p5a/hosted-sql-boundary-2026-10-31/workspace-filechooser-trace.zip"
+    },
+    {
+      "bytes": 404308,
+      "path": "ci/evidence/p5a/image-selection-correction-2026-10-31/corrected-trace-without-filmstrip.zip"
+    },
+    {
+      "bytes": 7549141,
+      "path": "ci/evidence/p5a/image-selection-correction-2026-10-31/keydown-model-failure-trace.zip"
+    },
+    {
+      "bytes": 1696034,
+      "path": "ci/evidence/p5a/lifecycle-causality-2026-10-31/no-browser-routing-trace.zip"
+    },
+    {
+      "bytes": 615870,
+      "path": "ci/evidence/p5a/lifecycle-causality-2026-10-31/visibility-trace.zip"
+    },
+    {
+      "bytes": 1839019,
+      "path": "ci/evidence/p5a/lifecycle-correction-2026-10-31/controlled-race-1-trace.zip"
+    },
+    {
+      "bytes": 1906674,
+      "path": "ci/evidence/p5a/lifecycle-correction-2026-10-31/corrected-1-trace.zip"
+    },
+    {
+      "bytes": 796796,
+      "path": "ci/evidence/p5a/lifecycle-correction-2026-10-31/corrected-2-trace.zip"
+    }
+  ],
+  "historical_trace_total_bytes": 25925790,
+  "new_source_entrypoints": "Local uncommitted additions not yet present in remote HEAD or a published version tag",
+  "preservation": "All historical records retained; no git history rewriting, broad cleanup or deletion",
+  "public_review": "Final bounded current-tree/trace review complete: no identified public-source blocker. Keep all nine trace ZIPs unchanged with existing notices/exact source links. No history rewrite or universal secret/history clearance claimed.",
+  "scope": "Read-only source distribution audit, no publication or deletion",
+  "sourceZIP": "Tracked tree for selected tag/commit, no .git/history; absent export-ignore means tracked evidence remains included",
+  "trace_content": {
+    "CSS": 1,
+    "HTML": 1,
+    "Inter_fonts": "All9 include regular,600,700; three also500; bytes match existing native-redistribution.json font hashes",
+    "font_SHA256": [
+      "0364d368abf457d4e70dbc7a7a360f3486eaea2837b194915b23d4398bee91ac",
+      "048d136d592e66896cccc1fe4fada4feb16b7f6af671cd49a2fe6ed6b2276c6c",
+      "ced2d8e02e2fbf08d2edec9b5f13648ed8348588a05f7181632f3c1dd6e1f5c3",
+      "d53336707c39d1ec20a2b1f7399ca9f183c45592e215a42fd596dfa2dbb8ad7a"
+    ],
+    "notices": "Version-appropriate Inter copyright/trademark and full OFL retained in frontend/public/third-party-notices.txt",
+    "scope": "One HTML and CSS entry per ZIP; no .js named entries, no stronger general no-JavaScript-content claim"
+  },
+  "tracked_HEAD_logical_bytes": 48140360,
+  "tracked_HEAD_paths": 1622,
+  "working_tracked_logical_bytes_at_agent_audit": 48287003
+}

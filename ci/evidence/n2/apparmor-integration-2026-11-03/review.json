@@ -1,0 +1,135 @@
+{
+  "N2_status": "CONDITIONAL",
+  "archived_source_match": true,
+  "authorization": "local implementation and exact application host-policy loading approved",
+  "candidate_allocated_bytes": 271663104,
+  "client_allocated_bytes": 1006055424,
+  "copied_state": {
+    "exact_prior_state_match": true,
+    "prior_result": "ci-output/native-n2-owner-3/result.json",
+    "scope": "read-only copied synthetic state; NO GUI",
+    "state_sha256": "0feb528634201a68d00568fdfea73f34b279fae9cc5fe69bc1e474c34869a710",
+    "status": "PASS"
+  },
+  "date": "2026-11-03",
+  "final_test_log_sha256": "ea40d695c69af81b703366021c2fb4fed0c1d751d38326f71ff1472cc0be47e5",
+  "installation": {
+    "archive_sha256": "4e66cbb270d050f9d1a954c0060c3fd0fcdbcd8bf7971d4afd3ba407e48d9c39",
+    "backend": {
+      "checks": {
+        "folder_note_rich_text_image_saved": "PASS",
+        "owned_backend_reaped": "PASS",
+        "restart_and_data_integrity": "PASS",
+        "stable_origin_and_token_revocation": "PASS",
+        "unauthenticated": "PASS",
+        "wrong_origin": "PASS"
+      },
+      "complete": true,
+      "python": [
+        3,
+        14
+      ],
+      "status": "PASS"
+    },
+    "bootstrap": {
+      "address_space_limit_bytes": 134217728,
+      "compiler": "cc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+      "cpu_limit_seconds": 60,
+      "executable_sha256": "353298fb2dfc87718f6f98e2ad3d291e20ffc6059a14bbce40f0bc2307a6ae5c",
+      "options": [
+        "-std=c11",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fPIE",
+        "-pie",
+        "-fstack-protector-strong",
+        "-D_FORTIFY_SOURCE=2",
+        "-Wl,-z,relro,-z,now,-z,noexecstack"
+      ],
+      "seconds": 0.079,
+      "source_sha256": "26615cc16d4e7bb1d6545c04e019600bfae10c39a51a02d0e0acded08e2c49e1"
+    },
+    "desktop_sha256": "64b11b55dac3bf7664e6ebc0724a0298b005fc4a572da752b158c35e5143fdab",
+    "manifest_sha256": "c9744e49abd66698107408b4a502b3cce46816e116a036c2fe20fd51ca9496db",
+    "provider_files": 4414,
+    "receipt_sha256": "b3f56b57115bc22df4bc6c086014fb05837cb24d7f70889c39f1d36eabd2ae97",
+    "scope": "actual offline N2 candidate installation; no GUI",
+    "status": "PASS"
+  },
+  "local_tests": {
+    "errors": 0,
+    "failures": 0,
+    "no_GUI": true,
+    "no_signing_or_key_creation": true,
+    "skipped": 0,
+    "status": "PASS",
+    "tests": 140
+  },
+  "native_GUI": "NOT EXECUTED",
+  "owner_handoff_sha256": "3f63ddb0ad05b38a738a853e22000a2fb2bd801b0a7c2c966faba4a810859709",
+  "policy": {
+    "complete": true,
+    "host_policy": "NOT MODIFIED",
+    "manifest_sha256": "c9744e49abd66698107408b4a502b3cce46816e116a036c2fe20fd51ca9496db",
+    "native_launch": "NOT EXECUTED",
+    "operation": "prepare",
+    "parser": "PASS",
+    "policy_sha256": "4ca488c1d40b5b82dbd18369e698c8a8ec69ad965e74fe27b974a1ee0de30d7b",
+    "profile": "cyrnava-native-u1000-7433bedfe88bfbd3a297b6304c49b7f6",
+    "status": "PREPARED"
+  },
+  "policy_load": {
+    "NoNewPrivs": "1",
+    "attempt_result_sha256": "639a21c86312bc61840978657bfa360240f46a5cbc2a420e1253b58810318060",
+    "cause": "sudo refused elevation because NoNewPrivs is set",
+    "effective_capabilities": "0",
+    "host_policy_file_created": false,
+    "kernel_profile_registry": "READ BLOCKED by confinement; not claimed independently inspected",
+    "policy_loaded": false,
+    "private_log_sha256": "d6f52ee0a598ed69e751482abd1cabce3f0139ba1b2ed66ec487455ff0106015",
+    "root_helper_executed": false,
+    "status": "BLOCKED"
+  },
+  "pre_task_installer_sha256": "718f7284bd140f9b88265c420344b1b08b4dc7515255872e9508f739a6781acf",
+  "preserved_identities": {
+    "ci-output/native-n2-owner-3/result.json": "cfb76d3616e0c98e307653397d45bee96b8b1f8165e4de5124d828c8ce3ecdde",
+    "ci-output/native-n2-owner-4/result.json": "8cde89422e14ccf60060ff2153b75d5f97985aa94e5a9a540467a9a6afc0b3a5",
+    "ci-output/native-n2-owner-5/observation.json": "d562a691156526eb8a7beb1e2beff4d078ca8edb3cfd96c2c1785cd3fd5c590f",
+    "ci-output/native-n2-owner-5/result.json": "fbe46c10616d87477d04c137b880bb4219a34426636bd37b3096382bacc0a8aa",
+    "ci-output/p6-native-n1-1/n1.json": "7f713ed31e2ce7d63a1a67e806d671b38ff2f7bafd2d66592f68ff70d575c41e",
+    "desktop/native/application.py": "98810679510961c9b63634094d359e6cd2dbbdcd67a6c5778c8cacd3226d279c",
+    "desktop/native/installed_configuration.py": "9ab964ce98883a29c9868fb33fbcd3e23e1a8a844865ad316470917135f62ad8",
+    "packaging/native/feasibility/dependencies.json": "621c640f428886a7944b654fe6726f2b3ab82644e4911a051f8281ab392eb8a3",
+    "packaging/native/feasibility/requirements.lock": "24876b72281d5427fc9c5c41cdb19a918815e9547e74c5eb4d2c93ac22e4a576",
+    "packaging/native/launch.py": "b04f692ef5f153a4358c6cbaa79a953162766b9b1e7b9d1ffb56af7ce97e22b6"
+  },
+  "prior_candidate": {
+    "CyrNava-0.1.0-n2.1-ubuntu-x86_64.zip": "9d92a4f5d925e42f1cb8c9abdc84d913a3c111a5a52f4ed88b2d30840d36c0be",
+    "manifest.json": "a1e066a3d769319a761b8643469f055201ef04b2b80ff92c0ac9604e1a4f8d82"
+  },
+  "signing_or_publication": "NOT EXECUTED",
+  "source_checks": {
+    "desktop/install_engine.py": "c9afd470d5620a56abb98b1ebf91ce76f29447b3959a6c29d8eb887838008a02",
+    "packaging/native/apparmor_support.py": "0d79b40225f48058a60c45ed18334307d3e0b74bc06e5bbde12cfdd9c9d5e7f4",
+    "packaging/native/bootstrap.c": "26615cc16d4e7bb1d6545c04e019600bfae10c39a51a02d0e0acded08e2c49e1",
+    "packaging/native/build_candidate.py": "49e36c26a4c6a6c3f199f6bd7702642c43826f92764f494d78a496f7b07b4bed",
+    "packaging/native/test_apparmor.py": "e1fe4f22b40372fbcc537dc4b511a010d347844b630f8cad8282c0a861445835",
+    "packaging/native/test_menu_observation.py": "3aa3cf363e30e9e668ddafd34f635740ea3452afabd0a4890ce91900cf4dfe9b",
+    "packaging/native/verify_menu.py": "2d7b76dc9c3a6070145b05d64d8feb7910b91497d10be4005074897f9720fe3a"
+  },
+  "sysctls_unchanged": true,
+  "unchanged_security_functions": [
+    "verify_signature",
+    "signature_status",
+    "extract",
+    "host_supported",
+    "checked_path",
+    "member_name",
+    "load",
+    "regular",
+    "deployment_paths",
+    "setup_environment"
+  ]
+}

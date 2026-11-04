@@ -1,0 +1,29 @@
+{
+  "observed_at_utc": "2026-10-31T11:33:22.487261+00:00",
+  "operations": "Public GET only; no credentials or settings changes",
+  "environments": {
+    "http_status": 200,
+    "total_count": 0,
+    "environments": []
+  },
+  "workflows": {
+    "http_status": 200,
+    "total_count": 1,
+    "workflows": [
+      {
+        "id": 402398273,
+        "name": "CyrNava CI",
+        "path": ".github/workflows/ci.yml",
+        "state": "active"
+      }
+    ]
+  },
+  "main_release": {
+    "http_status": 404,
+    "blob_sha": null
+  },
+  "integration_release": {
+    "http_status": 200,
+    "blob_sha": "c6401109292aca1ebb83a1fecbf4ebca1ba2f3d6"
+  }
+}

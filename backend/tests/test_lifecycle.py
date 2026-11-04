@@ -1,11 +1,10 @@
 from uuid import uuid4
 
 import pytest
-from fastapi import HTTPException
-from fastapi.testclient import TestClient
-
 from app.lifecycle import Sessions, Timing
 from app.main import create_app
+from fastapi import HTTPException
+from fastapi.testclient import TestClient
 
 
 @pytest.fixture

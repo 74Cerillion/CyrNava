@@ -1,0 +1,35 @@
+
+Running 10 tests using 1 worker
+
+(node:30) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   1 e2e/lifecycle.spec.ts:87:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.3s)
+
+  ✓   2 e2e/lifecycle.spec.ts:166:1 › a committed write with a lost acknowledgement retains its draft and requires conflict review (4.7s)
+(node:234) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   3 e2e/lifecycle.spec.ts:87:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.5s)
+
+  ✓   4 e2e/lifecycle.spec.ts:166:1 › a committed write with a lost acknowledgement retains its draft and requires conflict review (4.7s)
+(node:442) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   5 e2e/lifecycle.spec.ts:87:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.1s)
+
+  ✓   6 e2e/lifecycle.spec.ts:166:1 › a committed write with a lost acknowledgement retains its draft and requires conflict review (4.7s)
+(node:648) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   7 e2e/lifecycle.spec.ts:87:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.3s)
+
+  ✓   8 e2e/lifecycle.spec.ts:166:1 › a committed write with a lost acknowledgement retains its draft and requires conflict review (4.7s)
+(node:849) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   9 e2e/lifecycle.spec.ts:87:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.0s)
+
+  ✓  10 e2e/lifecycle.spec.ts:166:1 › a committed write with a lost acknowledgement retains its draft and requires conflict review (4.6s)
+
+  10 passed (1.1m)

@@ -5,10 +5,9 @@ from concurrent.futures import ThreadPoolExecutor
 from uuid import uuid4
 
 import pytest
-from fastapi.testclient import TestClient
-
 from app.database import Database, InvalidRelationship
 from app.main import create_app
+from fastapi.testclient import TestClient
 
 
 def folder(client, name="Folder", parent=None):

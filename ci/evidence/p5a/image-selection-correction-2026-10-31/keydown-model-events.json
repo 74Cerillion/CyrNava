@@ -1,0 +1,359 @@
+[
+  {
+    "test": "workspace-Phase-1-formatti-37300-and-sanitized-documentation",
+    "events": [
+      {
+        "extension": "jpg",
+        "edge": "before-handler",
+        "key": "End",
+        "time": 4716.69999999553,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "paragraph",
+          "offset": 15,
+          "position": 239,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "heading",
+          "position": 3,
+          "offset": 0,
+          "to": 3
+        }
+      },
+      {
+        "extension": "jpg",
+        "edge": "after-handler",
+        "key": "End",
+        "time": 4717.0999999940395,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "paragraph",
+          "offset": 15,
+          "position": 239,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "heading",
+          "position": 3,
+          "offset": 0,
+          "to": 3
+        }
+      },
+      {
+        "extension": "jpg",
+        "edge": "before-handler",
+        "key": "Enter",
+        "time": 4722.5999999940395,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "paragraph",
+          "offset": 30,
+          "position": 254,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "paragraph",
+          "position": 254,
+          "offset": 30,
+          "to": 254
+        }
+      },
+      {
+        "extension": "jpg",
+        "edge": "after-handler",
+        "key": "Enter",
+        "time": 4722.5999999940395,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "paragraph",
+          "offset": 30,
+          "position": 254,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "paragraph",
+          "position": 254,
+          "offset": 30,
+          "to": 254
+        }
+      },
+      {
+        "extension": "jpg",
+        "edge": "before-handler",
+        "key": "/",
+        "time": 4728.69999999553,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "paragraph",
+          "offset": 0,
+          "position": 258,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "paragraph",
+          "position": 258,
+          "offset": 0,
+          "to": 258
+        }
+      },
+      {
+        "extension": "jpg",
+        "edge": "after-handler",
+        "key": "/",
+        "time": 4728.69999999553,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "paragraph",
+          "offset": 0,
+          "position": 258,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "paragraph",
+          "position": 258,
+          "offset": 0,
+          "to": 258
+        }
+      },
+      {
+        "extension": "jpg",
+        "edge": "before-handler",
+        "key": "Enter",
+        "time": 4787.39999999851,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "paragraph",
+          "offset": 5,
+          "position": 264,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "paragraph",
+          "position": 264,
+          "offset": 6,
+          "to": 264
+        }
+      },
+      {
+        "extension": "jpg",
+        "edge": "after-handler",
+        "key": "Enter",
+        "time": 4787.5,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "paragraph",
+          "offset": 5,
+          "position": 264,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "paragraph",
+          "position": 264,
+          "offset": 6,
+          "to": 264
+        }
+      },
+      {
+        "extension": "webp",
+        "edge": "before-handler",
+        "key": "End",
+        "time": 5731.39999999851,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "paragraph",
+          "offset": 15,
+          "position": 239,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "codeBlock",
+          "position": 330,
+          "offset": 69,
+          "to": 330
+        }
+      },
+      {
+        "extension": "webp",
+        "edge": "after-handler",
+        "key": "End",
+        "time": 5731.69999999553,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "paragraph",
+          "offset": 15,
+          "position": 239,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "codeBlock",
+          "position": 330,
+          "offset": 69,
+          "to": 330
+        }
+      },
+      {
+        "extension": "webp",
+        "edge": "before-handler",
+        "key": "Enter",
+        "time": 5735.79999999702,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "paragraph",
+          "offset": 30,
+          "position": 254,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "codeBlock",
+          "position": 330,
+          "offset": 69,
+          "to": 330
+        }
+      },
+      {
+        "extension": "webp",
+        "edge": "after-handler",
+        "key": "Enter",
+        "time": 5735.89999999851,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "paragraph",
+          "offset": 30,
+          "position": 254,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "codeBlock",
+          "position": 330,
+          "offset": 69,
+          "to": 330
+        }
+      },
+      {
+        "extension": "webp",
+        "edge": "before-handler",
+        "key": "/",
+        "time": 5742.0999999940395,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "codeBlock",
+          "offset": 70,
+          "position": 331,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "codeBlock",
+          "position": 331,
+          "offset": 70,
+          "to": 331
+        }
+      },
+      {
+        "extension": "webp",
+        "edge": "after-handler",
+        "key": "/",
+        "time": 5742.0999999940395,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "codeBlock",
+          "offset": 70,
+          "position": 331,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "codeBlock",
+          "position": 331,
+          "offset": 70,
+          "to": 331
+        }
+      },
+      {
+        "extension": "webp",
+        "edge": "before-handler",
+        "key": "Enter",
+        "time": 5762.0999999940395,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "codeBlock",
+          "offset": 76,
+          "position": 337,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "codeBlock",
+          "position": 337,
+          "offset": 76,
+          "to": 337
+        }
+      },
+      {
+        "extension": "webp",
+        "edge": "after-handler",
+        "key": "Enter",
+        "time": 5762.0999999940395,
+        "active": {
+          "tag": "DIV",
+          "editor": true
+        },
+        "dom": {
+          "parent": "codeBlock",
+          "offset": 76,
+          "position": 337,
+          "collapsed": true
+        },
+        "model": {
+          "parent": "codeBlock",
+          "position": 337,
+          "offset": 76,
+          "to": 337
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "status": "FAIL",
+  "operation": "stopped-profile-audit bootstrap",
+  "root_cause": "New auditor omitted application/backend from its isolated Python module search path; ModuleNotFoundError for app",
+  "private_log_sha256": "6236a86c860a2333a883b5a84a495f2ba11428396f46cefe9ddbacf6462618e7",
+  "selected_release_unchanged": "0.1.0-n2.3-02f6594eb0011a90",
+  "live_transaction_created": false,
+  "candidate": "native-n3-candidate-1; retained",
+  "correction": "Explicit packaged backend module root; isolated subprocess regression",
+  "GUI": "NOT EXECUTED"
+}

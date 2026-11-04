@@ -1,0 +1,684 @@
+{
+  "config": {
+    "argv": [
+      "/home/cerillion/.nvm/versions/node/v24.19.0/bin/node",
+      "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/node_modules/.bin/playwright",
+      "test",
+      "e2e/lifecycle.spec.ts",
+      "--grep",
+      "managed tabs close|committed write",
+      "--repeat-each=5",
+      "--trace=on",
+      "--output=/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results",
+      "--reporter=list,json"
+    ],
+    "configFile": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/playwright.config.ts",
+    "rootDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results",
+        "repeatEach": 5,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results",
+        "repeatEach": 5,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "snapshotDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 120000,
+        "use": {
+          "browserName": "chromium",
+          "headless": true,
+          "viewport": {
+            "width": 1280,
+            "height": 1000
+          },
+          "screenshot": "only-on-failure",
+          "trace": "on"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "lifecycle.spec.ts",
+      "file": "lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8314,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:52:20.478Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/attachments/revision-timeline-46a184ddcd37a11ea5f28a125f580130b5cfe89e.json"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-3e2e3ddc6c38e163e0ce",
+          "file": "lifecycle.spec.ts",
+          "line": 87,
+          "column": 1
+        },
+        {
+          "title": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4726,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:52:28.939Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review/attachments/revision-timeline-46f703b99f298e877acd7059b5bfc18619f67308.json"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-13c0337fb91573bdcf62",
+          "file": "lifecycle.spec.ts",
+          "line": 166,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8540,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:52:34.042Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/attachments/revision-timeline-243fc46581a7d420109af11b72f5e42e487a3fe1.json"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-b3a309a0e1e7397d3a35",
+          "file": "lifecycle.spec.ts",
+          "line": 87,
+          "column": 1
+        },
+        {
+          "title": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4713,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:52:42.733Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review-repeat1/attachments/revision-timeline-9502072fc3b993b33856b040ca6c0bb1f50e4e8f.json"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-9327763f00de5e6d4b96",
+          "file": "lifecycle.spec.ts",
+          "line": 166,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8050,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:52:47.833Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat2/attachments/revision-timeline-472ada902c24668b50409a6c4d99d33835f9877d.json"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-d9ca87b87f3ad7f7892f",
+          "file": "lifecycle.spec.ts",
+          "line": 87,
+          "column": 1
+        },
+        {
+          "title": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4658,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:52:56.024Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review-repeat2/attachments/revision-timeline-1c7feec8824d1cd101f82affe31bc7040ab8af1f.json"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-e6b57dcddcf31a4f868a",
+          "file": "lifecycle.spec.ts",
+          "line": 166,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8312,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:53:01.056Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat3/attachments/revision-timeline-c76313fc6c13ea5cf08beaa8b7a4b3a9d17844f8.json"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-7ccc29914405b7d3cf59",
+          "file": "lifecycle.spec.ts",
+          "line": 87,
+          "column": 1
+        },
+        {
+          "title": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4716,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:53:09.515Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review-repeat3/attachments/revision-timeline-1f647c259cc24796b668b06174f354fbebeca378.json"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-be09aa6051c8b4b4a580",
+          "file": "lifecycle.spec.ts",
+          "line": 166,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8032,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:53:14.610Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat4/attachments/revision-timeline-e58a7064a2b3faac7103b0cd8c83b02f3436c2e1.json"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-836d8e108a8bb4ceb01a",
+          "file": "lifecycle.spec.ts",
+          "line": 87,
+          "column": 1
+        },
+        {
+          "title": "a committed write with a lost acknowledgement retains its draft and requires conflict review",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4625,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:53:22.799Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review-repeat4/attachments/revision-timeline-66c644813b069285d1774d40d8ac8e181311b270.json"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/corrected-focused-final-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-5ede804fb12a51240c67",
+          "file": "lifecycle.spec.ts",
+          "line": 166,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T03:52:20.027Z",
+    "duration": 67463.484,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

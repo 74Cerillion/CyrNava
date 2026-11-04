@@ -1,0 +1,10 @@
+usage: build_candidate.py [-h] [--output OUTPUT]
+
+Bounded owner-host binary acquisition and thin P6 build, never a Qt build.
+Uses the unchanged P4 stage/assemble/finish and P5A exported-payload auditors.
+All Flatpak state/cache/tmp/build/export directories are under ONE fresh root.
+No normal installation, desktop launch, signing key or publication is touched.
+
+options:
+  -h, --help       show this help message and exit
+  --output OUTPUT

@@ -1,0 +1,74 @@
+[
+  {
+    "ms": 2149,
+    "event": "request",
+    "method": "PATCH",
+    "revision": 1
+  },
+  {
+    "ms": 2431,
+    "event": "response",
+    "method": "PATCH",
+    "status": 200,
+    "revision": 2
+  },
+  {
+    "ms": 2962,
+    "event": "request",
+    "method": "GET"
+  },
+  {
+    "ms": 3014,
+    "event": "response",
+    "method": "GET",
+    "status": 200,
+    "revision": 2
+  },
+  {
+    "ms": 3765,
+    "event": "request",
+    "method": "PATCH",
+    "revision": 2
+  },
+  {
+    "ms": 3774,
+    "event": "response",
+    "method": "PATCH",
+    "status": 200,
+    "revision": 3
+  },
+  {
+    "ms": 5725,
+    "event": "request",
+    "method": "GET"
+  },
+  {
+    "ms": 5769,
+    "event": "response",
+    "method": "GET",
+    "status": 200,
+    "revision": 3
+  },
+  {
+    "ms": 5771,
+    "event": "outage-baseline",
+    "canonical_revision": 3
+  },
+  {
+    "ms": 5986,
+    "event": "retained-draft",
+    "base_revision": 3
+  },
+  {
+    "ms": 7844,
+    "event": "request",
+    "method": "GET"
+  },
+  {
+    "ms": 7856,
+    "event": "response",
+    "method": "GET",
+    "status": 200,
+    "revision": 4
+  }
+]

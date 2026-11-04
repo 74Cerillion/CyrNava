@@ -1,0 +1,12 @@
+{
+  "phase": "N2",
+  "status": "ACCEPTED / COMPLETE",
+  "owner_statement": "I formally accept N2! Go ahead and begin on N3.",
+  "date": "2026-11-03",
+  "accepted_candidate_archive_sha256": "02f6594eb0011a90fe70de90c7bd382725be4c88bb0fabb73fd43e6f6d5061cf",
+  "accepted_manifest_sha256": "d7d0f2bbc58c17aef58fff83c4e2e805875f013df8aa061830a687e07d3c688f",
+  "technical_review_sha256": "5b5c35d7b8b965a55af01caf7e57ef269145a833d991d501e9f601dd2dce4ebe",
+  "native_attempt_6_original_status": "FAIL; component passes plus separately recorded owner visual confirmation reviewed",
+  "N3": "AUTHORIZED",
+  "N4": "NOT AUTHORIZED"
+}

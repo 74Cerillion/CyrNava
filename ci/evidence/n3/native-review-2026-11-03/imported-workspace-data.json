@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "scope": "all-stopped-workspaces-read-only-domain-validation",
+  "workspaces": [
+    {
+      "schema": 5,
+      "counts": {
+        "notes": 1,
+        "folders": 1,
+        "assets": 1
+      }
+    },
+    {
+      "schema": 5,
+      "counts": {
+        "notes": 1,
+        "folders": 1,
+        "assets": 1
+      }
+    }
+  ],
+  "workspace_selection_sha256": "3f3648c670f386fbcf6fc30271af344885bc6f8815ba161d7e9d4921d630cd9b",
+  "origin_sha256": "bf216f39e07106df7b1195cc4e8c953728a487c48b6e7aa086ad5eecea0df1d7",
+  "data_migrated": false,
+  "GUI": "NOT EXECUTED"
+}

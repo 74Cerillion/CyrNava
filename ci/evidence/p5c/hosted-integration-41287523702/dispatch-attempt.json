@@ -1,0 +1,13 @@
+{
+  "status": "SUBMITTED",
+  "owner": "74Cerillion",
+  "workflow_id": 403379040,
+  "branch": "desktop/p2-production-integration",
+  "tooling_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "authorization_ref": "P5C-owner-authorized-disposable-integration-only",
+  "started_at_utc": "2026-11-01T08:07:41.207571+00:00",
+  "attempt_count": 1,
+  "retry_authorized": false,
+  "exit_code": 0,
+  "completed_at_utc": "2026-11-01T08:07:42.910940+00:00"
+}

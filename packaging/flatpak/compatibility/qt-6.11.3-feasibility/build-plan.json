@@ -1,0 +1,68 @@
+{
+  "status": "RESOURCE-GATED PLAN ONLY; NO MANIFEST, BUILD ENTRY POINT OR APPLICATION ARTIFACT CREATED",
+  "scope": "Experimental app-owned 6.11.3 Qt/PySide/shiboken/WebEngine; no production adoption",
+  "source_identity_record": "source-identities.json",
+  "source_modules": [
+    "qtbase",
+    "qtshadertools",
+    "qtdeclarative",
+    "qtpositioning",
+    "qtwebchannel",
+    "qtwebengine",
+    "pyside-setup"
+  ],
+  "binding_modules": [
+    "QtCore",
+    "QtGui",
+    "QtWidgets",
+    "QtNetwork",
+    "QtWebChannel",
+    "QtWebEngineCore",
+    "QtWebEngineWidgets"
+  ],
+  "supporting_Qt_libraries": [
+    "OpenGL",
+    "PrintSupport",
+    "Qml",
+    "Quick",
+    "QmlModels and other dependencies actually selected by configure"
+  ],
+  "application_owned": [
+    "Qt libraries and binding support libraries",
+    "Matching QtWebEngineProcess",
+    "Wayland, xdgdesktopportal, required image/TLS/integration plugins",
+    "WebEngine resources and required locales"
+  ],
+  "runtime_owned": [
+    "Python 3.13 interpreter/libpython",
+    "glibc, C++ runtime and required compatible non-Qt OS libraries",
+    "Graphics/driver interfaces supplied through existing runtime extensions"
+  ],
+  "helper_layout_requirement": {
+    "environment": "/app/bin/QtWebEngineProcess",
+    "resolved_path": "/app/lib/libexec/QtWebEngineProcess",
+    "reason": "Existing desktop/native/application.py requires this exact real path; do not relax it"
+  },
+  "loader_plan": "Candidate-built origin-relative RPATH/RUNPATH and app-only Qt plugin discovery; no LD_LIBRARY_PATH, no /usr overwrite or global environment changes",
+  "renderer_approach": "Reuse exact maintained 6.11.3 BaseApp source/patch recipe in source-identities.json, build against the app-owned Qt; no old helper or wheel import-only substitution",
+  "SDK_and_transitive_locks": "NOT FINALIZED; future metadata/configure verification required before executable recipe",
+  "future_tests": [
+    "Reject wrong source/hash/provider",
+    "Reject missing or mismatched helper/resources/plugins",
+    "Reject fallback to runtime Qt",
+    "Reject absent renderer integration and sandbox disabling flags/environment",
+    "Verify isolated output/client and accepted-artifact preservation",
+    "Never promote host import/static success to renderer or release success",
+    "Observe actual child process namespaces/security and cleanup",
+    "Ordinary runtime update with fixed app bytes, two actual runtime commits, unchanged signed trust checks"
+  ],
+  "future_test_status": "NOT EXECUTED; build stopped at required capacity gate",
+  "expected_future_changes": [
+    "Candidate-only manifest/source/toolchain lock/build wrapper and provider audits/tests in this directory",
+    "Safe candidate evidence and notices inventory",
+    "Current P6 assessment/report/checklist"
+  ],
+  "production_changes_authorized_for_candidate": "NONE; production sources/manifests/accepted locks/auditor/security remain unchanged",
+  "candidate_artifact_output": null,
+  "native_handoff_command": null
+}

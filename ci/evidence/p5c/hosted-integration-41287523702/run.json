@@ -1,0 +1,16 @@
+{
+  "id": 41287523702,
+  "workflow_id": 403379040,
+  "path": ".github/workflows/p5c.yml",
+  "head_sha": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "head_branch": "desktop/p2-production-integration",
+  "event": "workflow_dispatch",
+  "run_attempt": 1,
+  "status": "completed",
+  "conclusion": "success",
+  "html_url": "https://github.com/74Cerillion/CyrNava/actions/runs/41287523702",
+  "created_at": "2026-11-01T09:07:42Z",
+  "updated_at": "2026-11-01T09:11:06Z",
+  "actor": "74Cerillion",
+  "triggering_actor": "74Cerillion"
+}

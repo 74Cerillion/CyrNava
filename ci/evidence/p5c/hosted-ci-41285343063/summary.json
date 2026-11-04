@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "scope": "Ordinary CI only; P5C hosted integration remains unexecuted and unaccepted",
+  "commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "parent": "182d11dbcddc90670fc02e19e6156dc220074dd1",
+  "run_id": 41285343063,
+  "run_attempt": 1,
+  "jobs": [
+    {
+      "id": 124785394295,
+      "name": "Workflow validation",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124785425643,
+      "name": "Frontend and browser",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124785425715,
+      "name": "Backend and security",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124786218275,
+      "name": "Production Flatpak and bundle audit",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 124787744724,
+      "name": "CI required",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "workflow_contracts": 31,
+  "backend_tests": 663,
+  "backend_subtests": 197,
+  "P5C_regressions": 23,
+  "frontend_unit_tests": 273,
+  "browser_tests": 21,
+  "artifacts_independently_verified": 4,
+  "package": {
+    "status": "PASS",
+    "artifact_id": 13075346402,
+    "zip_sha256": "2d11ce5057ae66cd4dc526dac607a2344b89dbc1fcef5e62038ad59583c93fbe",
+    "bundle_bytes": 209190752,
+    "bundle_sha256": "ef732c240d8a01e33a638cd10e83fb985c7ba9e678b573ba508cd48c3934f47c",
+    "ostree_commit": "f759380dca9aa36e4674ad6dffb24d3e2340342da5fe04537ac17031a3bada15",
+    "source_commit": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+    "workflow_run_id": 41285343063,
+    "workflow_run_attempt": 1,
+    "runtime_lock_matches": true,
+    "packaging_tool_hashes_match": true,
+    "payload_entries": 5320,
+    "logical_installed_bytes": 980984007,
+    "inventory_sha256": "898ec911e021da89cc3dcb0451830490e916aad560ad9535cb7a558058b245cd",
+    "checksums_and_provenance_crosschecked": true,
+    "ci_release_harness_not_packaged": true,
+    "limits": "Independent downloaded byte/metadata verification plus actual hosted exported-bundle audit PASS. No repeated local native import, renderer, portal or signing test. This ordinary-CI package does not replace the pinned P5A staging artifact."
+  },
+  "P5C_execution_count": 0,
+  "next_required_authorizations": [
+    "inert P5C registration on main",
+    "one manual P5C verification dispatch after registration readback"
+  ],
+  "production_publication": "DISABLED",
+  "unresolved_advisory": "minimatch@10.2.6 / GHSA-g3hv-75wg-m249 remains unresolved",
+  "report_updates": "Local only; no second commit/push authorized or performed"
+}

@@ -1,0 +1,135 @@
+{
+  "reviewed_utc": "2026-10-31T12:15:14.473961+00:00",
+  "base_commit": "3027231c390b1814a98a567e5f30afb4ebff0dab",
+  "authorized_operations": "One P5B-only correction commit and one normal fast-forward push; automatic CI monitoring only",
+  "files_reviewed": [
+    {
+      "path": "ci/P5B_APPEARANCE_CORRECTION.md",
+      "bytes": 8013,
+      "sha256": "0eceae6feeb457e51420585b83abc03b7362e865f68ad8b867141f99e917e461"
+    },
+    {
+      "path": "ci/P5B_REPORT.md",
+      "bytes": 27564,
+      "sha256": "20c9127a6b6e0ec3ea207ae302c9f086a31d220c3e91cb059c7e078aab9efb52"
+    },
+    {
+      "path": "ci/evidence/p5b/appearance-correction-2026-10-31/browser-junit.xml",
+      "bytes": 5787,
+      "sha256": "49eb083d8a3f0bee5ca579a19491fa492cefe2827e7bf1d83c323f423a75ddbf"
+    },
+    {
+      "path": "ci/evidence/p5b/appearance-correction-2026-10-31/focused-state-verification.json",
+      "bytes": 20136,
+      "sha256": "1f1cce6e59930920e35fc8e6497b36329e073ef514050eb06f9636c57d61f4a5"
+    },
+    {
+      "path": "ci/evidence/p5b/appearance-correction-2026-10-31/full-frontend-result.json",
+      "bytes": 479,
+      "sha256": "91c5407a052ae6b83bdd2fc142e85227b704153b8221174eedc249d97168fe36"
+    },
+    {
+      "path": "ci/evidence/p5b/appearance-correction-2026-10-31/hosted-trace-analysis.json",
+      "bytes": 4624,
+      "sha256": "0d8f654514fbbc7fd795022967b804e23692f7d103533375af51cf5ccceddf93"
+    },
+    {
+      "path": "ci/evidence/p5b/appearance-correction-2026-10-31/instrumented-baseline.json",
+      "bytes": 33660,
+      "sha256": "3fa28a18e08d26be460617ab09ea384de5eceed32714d92623fecfa65f03be06"
+    },
+    {
+      "path": "ci/evidence/p5b/appearance-correction-2026-10-31/scope-review.json",
+      "bytes": 2048,
+      "sha256": "6d0fbeb32ecdcd9473f2cd363c6b1b01ddd4eb413c550f6034245ded5c58774d"
+    },
+    {
+      "path": "ci/evidence/p5b/appearance-correction-2026-10-31/verification.json",
+      "bytes": 5476,
+      "sha256": "016be075109b4460d361c6ec746aeae085c8bee3721e922091c82764e618f8cf"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/artifacts.json",
+      "bytes": 1166,
+      "sha256": "beaa9621415cbad21c71644f7e64a97d0fd2ccab76b256c319908ded9d5309e9"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/backend-excerpt.txt",
+      "bytes": 207,
+      "sha256": "cfc2930cb3a7c0894b47ce61d6bab57e871ad02b495fb015c568c542012a6e4f"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/backend-result.json",
+      "bytes": 622,
+      "sha256": "c6a092956642dd0e0146774c5eee8df073e6e53d376062ff5ec07c62df6e6f4b"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/browser-junit.xml",
+      "bytes": 8911,
+      "sha256": "6eb15f54bbcee4afb2f09f17cbb21823966737b5fab4eec5c057493a1ef38249"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/diagnostic-members.json",
+      "bytes": 1656,
+      "sha256": "dbbf36d9a6b1c1f92935e66ffafba5356cbe250a72fe39eb81ee39dd2cd45575"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/failure-context-1.md",
+      "bytes": 22946,
+      "sha256": "a2f7cd9cf45c22f812ed0cfceafa2b0c7be5b9712477d1b0a2e5c1a62963721e"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/frontend-excerpt.txt",
+      "bytes": 3119,
+      "sha256": "a628003af001821c426fb8eea23605fe55a0f01c350dde7402f1d3fe9ad8a078"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/frontend.json",
+      "bytes": 537,
+      "sha256": "690743695137392710987b524ce406b70304d48cde4ce48a50aec03dd73c654c"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/jobs.json",
+      "bytes": 10097,
+      "sha256": "a00c4758473b2c1779116a69039e8ddd6859a26f4814bd1023dd01d3c7c0dcbe"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/monitor-events.json",
+      "bytes": 3644,
+      "sha256": "7c5411b35112936f9fe3055f33f90933a6a370b14e62b7c5e1bcef35b29010d5"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/required-gate-excerpt.txt",
+      "bytes": 365,
+      "sha256": "f6dd3b8726777b55486b662f5779c0e78bd2ea7e4e0f17da87224656b18c6ced"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/run.json",
+      "bytes": 522,
+      "sha256": "d0ca00adbbf62537afa7768e2e0cd5ab20ef89f3dbc0e1a45b556f21797b09d2"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/summary.json",
+      "bytes": 3525,
+      "sha256": "75cddcc924771452700e7ae5f1ddd46911e54a9bb7ba5e3d2c86d070ef85b872"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41197927704/validation-excerpt.txt",
+      "bytes": 246,
+      "sha256": "0e3ae5d171129fd07659beaef3b06c7f8b376b871f47b2be5485c80390662b75"
+    },
+    {
+      "path": "frontend/e2e/workspace.spec.ts",
+      "bytes": 82507,
+      "sha256": "0d530d1a82c521079cf829b442c619ecc405319fd71bb24bb34f74af8a9fa993"
+    }
+  ],
+  "sensitive_material_pattern_findings": [],
+  "human_review": "Complete staged source/documentation diff and synthetic evidence reviewed. Raw hosted failure records retained. No screenshot/trace ZIPs, binaries, signing material or owner workspace data staged. Historical event timing remains explicitly unproven.",
+  "production_sources_CSS_packaging_signing_auth_security_workflows_unchanged": true,
+  "SQLite_lifecycle_guard_and_existing_tests_preserved": true,
+  "candidate_matches_clean_checkout_verification": true,
+  "diff_check": "PASS for source/docs/derived evidence; original hosted diagnostic whitespace intentionally preserved byte-for-byte",
+  "remote_before_push": "3027231c390b1814a98a567e5f30afb4ebff0dab",
+  "fast_forward_basis": "Remote equals current HEAD; correction will be a direct child. No force push."
+}

@@ -1,0 +1,252 @@
+{
+  "accepted_client": {
+    "commit": "da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac",
+    "operations": [
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "remote"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": true,
+        "operation": "install"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "commit"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "remote"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "location"
+      }
+    ],
+    "public_key_fingerprint_verified": "EF0051362978E5032D912C311BC0EFA9A99067F6",
+    "runtime_fetch": "DISABLED; application launch not tested",
+    "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+    "status": "PASS"
+  },
+  "application_launch": "NOT TESTED",
+  "candidate_code_sha256": {
+    "audit_candidate.py": "061d3b80ddf313c9dcfecd1a4077c84ac3f29662de2004c8cec5d3f5fc521490",
+    "client.py": "a1060610b8d6d54a69ba8f78cf4716baf6723d7379655cfacd97a6a79380d4be",
+    "core.py": "02e759307a20514c77b01fda817b776a14b40722981fa666e2dacbc3451f6fde",
+    "github.py": "466ebcdf38e3fa404a628131a9804449f62faedb4ad0d52b029025e532453efc",
+    "integration.py": "8378c53e964d7df2636a192d2750ee4c5fa619a77d1a72233a4c2b7a49bee285",
+    "integration_policy.py": "944cf4eee9dabefd82f351b6cb17f3895632946a2a432ab31d588104738ba9bf",
+    "plan.py": "f7e672e3a77efbb883a413570e782356c2fa4d0a73f9a5f51fb39592562f5202",
+    "preflight.py": "290de0f9081a1704cab03a6d1e7dab02385b3a29c14d2472b1d95e87a6f14bef",
+    "readiness.py": "fd0d2f7c0157e45a1e160af574ba0f2d0697dc589f8f4928a8af7444359b3bca",
+    "recovery.py": "87c030904d71c921b5d1942de236d7cc6fe565b64017d2529b3aa797218c567c",
+    "registration_policy.py": "8af292b7989f7796a93e64cc13fb98915422b287f3c1f73aa7aa03ccde18b32f",
+    "stage.py": "ea05f4833be8cf77adcb5270c6ad2445aa4dfcf2a977ea3d5dc830ad753944ba",
+    "test_dependencies.py": "16d57c728fe942a8de62b1acda8808881b3c6f509d36c0d9b986c7f6df372f03",
+    "test_integration.py": "8dc96fac9ac92409897a4068913fe6319a358a74b58143802cabcbab24d660d3",
+    "test_policy.py": "cba293d0709aea98bd5d99fc40b008270b2b2f8d00d72bc55fc3d31d6899b661",
+    "test_registration.py": "f14382887e51c0bff00e9da54dd1cc25c8b28a465429b97062ec11b2697897cc",
+    "test_signing.py": "3f01576d068c43d007b09c08faaa3e64693ca8c7e73d46369bbe81c68412387a",
+    "test_source_checkout.py": "19abbcd1d7aafa6046c6247d0ca6207eb4c6c35aa35c3f23213344dfc9d836b5",
+    "update_fixture.py": "eb3d2384746129f9a6757783857be3baee5c3fde32de04f40017148d908868aa",
+    "workflow_policy.py": "43b2e3412c08c203175ba2ead95c62faa8f862daf2fdf474ae5b4b33f662a4a6"
+  },
+  "complete": true,
+  "integration_provenance": {
+    "artifact_id": 13035607417,
+    "bundle_sha256": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db",
+    "candidate_code_sha256": {
+      "audit_candidate.py": "061d3b80ddf313c9dcfecd1a4077c84ac3f29662de2004c8cec5d3f5fc521490",
+      "client.py": "a1060610b8d6d54a69ba8f78cf4716baf6723d7379655cfacd97a6a79380d4be",
+      "core.py": "02e759307a20514c77b01fda817b776a14b40722981fa666e2dacbc3451f6fde",
+      "github.py": "466ebcdf38e3fa404a628131a9804449f62faedb4ad0d52b029025e532453efc",
+      "integration.py": "8378c53e964d7df2636a192d2750ee4c5fa619a77d1a72233a4c2b7a49bee285",
+      "integration_policy.py": "944cf4eee9dabefd82f351b6cb17f3895632946a2a432ab31d588104738ba9bf",
+      "plan.py": "f7e672e3a77efbb883a413570e782356c2fa4d0a73f9a5f51fb39592562f5202",
+      "preflight.py": "290de0f9081a1704cab03a6d1e7dab02385b3a29c14d2472b1d95e87a6f14bef",
+      "readiness.py": "fd0d2f7c0157e45a1e160af574ba0f2d0697dc589f8f4928a8af7444359b3bca",
+      "recovery.py": "87c030904d71c921b5d1942de236d7cc6fe565b64017d2529b3aa797218c567c",
+      "registration_policy.py": "8af292b7989f7796a93e64cc13fb98915422b287f3c1f73aa7aa03ccde18b32f",
+      "stage.py": "ea05f4833be8cf77adcb5270c6ad2445aa4dfcf2a977ea3d5dc830ad753944ba",
+      "test_dependencies.py": "16d57c728fe942a8de62b1acda8808881b3c6f509d36c0d9b986c7f6df372f03",
+      "test_integration.py": "8dc96fac9ac92409897a4068913fe6319a358a74b58143802cabcbab24d660d3",
+      "test_policy.py": "cba293d0709aea98bd5d99fc40b008270b2b2f8d00d72bc55fc3d31d6899b661",
+      "test_registration.py": "f14382887e51c0bff00e9da54dd1cc25c8b28a465429b97062ec11b2697897cc",
+      "test_signing.py": "3f01576d068c43d007b09c08faaa3e64693ca8c7e73d46369bbe81c68412387a",
+      "test_source_checkout.py": "19abbcd1d7aafa6046c6247d0ca6207eb4c6c35aa35c3f23213344dfc9d836b5",
+      "update_fixture.py": "eb3d2384746129f9a6757783857be3baee5c3fde32de04f40017148d908868aa",
+      "workflow_policy.py": "43b2e3412c08c203175ba2ead95c62faa8f862daf2fdf474ae5b4b33f662a4a6"
+    },
+    "p5b_reference_workflow_sha256": "5aa32ef85715323490a9375336c245b6dbc1911d480fb4aafc4bc3ba7f8bfb1c",
+    "purpose": "P5C disposable integration provenance",
+    "source_ci_run_id": 41181510439,
+    "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+    "tooling_base_commit": "182d11dbcddc90670fc02e19e6156dc220074dd1",
+    "workflow_definition_sha256": "62d81a27185e329a0aca14a10e1a1441f6f91572b3f9e61cbd293e0bb8f9e576",
+    "workflow_path": ".github/workflows/p5c.yml",
+    "workflow_run_attempt": null,
+    "workflow_run_id": null,
+    "workflow_state": "LOCAL PROPOSAL; uncommitted candidate code"
+  },
+  "integration_provenance_sha256": "ffbff20229cea6ee1857154db3850e73e7555556560122e90b4755b0e96bb1d2",
+  "native_tools": {
+    "flatpak": "Flatpak 1.16.6",
+    "gpg": "gpg (GnuPG) 2.4.8",
+    "ostree": "libostree:"
+  },
+  "private_key_cleanup": "PASS",
+  "production_publication": "DISABLED",
+  "purpose": "P5C disposable integration",
+  "release": {
+    "application_id": "io.github._74Cerillion.CyrNava",
+    "architecture": "x86_64",
+    "authorization_ref": "P5B-owner-authorized-disposable-staging-only",
+    "bundle_sha256": "93957ce5590818e016c5b9e86ed9c6c1d32a684f6c644af44531c316020b26db",
+    "ci_artifact_id": 13035607417,
+    "ci_run_id": 41181510439,
+    "flatpakrepo_native_validation": "Post-publication check recorded separately in result.json",
+    "format": 1,
+    "generation_seconds": 104.869,
+    "ostree_commit": "da1bf73e3169096522f82249b39f9c9c8546b0317ee6461905bbc6952d6de1ac",
+    "publication_result": "NOT PUBLISHED",
+    "publication_target": "file:///home/cerillion/.cache/p5c/n2/s/current/repo",
+    "purpose": "p5b-staging",
+    "refs": [
+      "app/io.github._74Cerillion.CyrNava/x86_64/stable",
+      "appstream/x86_64",
+      "appstream2/x86_64"
+    ],
+    "release_tooling_commit": "182d11dbcddc90670fc02e19e6156dc220074dd1",
+    "release_workflow_definition_sha256": "5aa32ef85715323490a9375336c245b6dbc1911d480fb4aafc4bc3ba7f8bfb1c",
+    "release_workflow_run_id": null,
+    "repository": "74Cerillion/CyrNava",
+    "runtime_lock": {
+      "application_version": "0.1.0",
+      "architecture": "x86_64",
+      "python": "3.13",
+      "qt_series": "6.11",
+      "refs": {
+        "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+        "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+        "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86"
+      },
+      "schema": 5
+    },
+    "sign_and_summary_seconds": 0.137,
+    "signing_fingerprint": "EF0051362978E5032D912C311BC0EFA9A99067F6",
+    "source_ci_workflow_id": 402398273,
+    "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+    "static_deltas": false,
+    "version": "0.1.0"
+  },
+  "resource_budget": {
+    "basis": "8x logical installed bytes plus 2x ZIP bytes",
+    "free_bytes_before_native": 51879219200,
+    "required_free_bytes": 8268348064
+  },
+  "seconds": 144.79,
+  "stage": "release-readiness",
+  "started_at_utc": "2026-11-01T07:09:37.614763+00:00",
+  "status": "PASS",
+  "tooling_base_commit": "182d11dbcddc90670fc02e19e6156dc220074dd1",
+  "updates": {
+    "application_id": "io.github._74Cerillion.CyrNava.P5CFixture",
+    "checks": {
+      "historical_objects_retained": "PASS",
+      "independent_fingerprint_rejects_wrong_key": "PASS",
+      "install_A_via_loopback_flatpakref": "PASS",
+      "interruption_keeps_A_installable": "PASS",
+      "missing-object_native_rejected": "PASS",
+      "native_wrong_key_rejected": "PASS",
+      "publisher_rejects_dropped_object": "PASS",
+      "recovery_cannot_discard_B_objects": "PASS",
+      "retained_B_usable": "PASS",
+      "stale_expected_commit_rejected": "PASS",
+      "tampered-summary_native_rejected": "PASS",
+      "unsigned-summary_native_rejected": "PASS",
+      "update_existing_client_A_to_B": "PASS"
+    },
+    "client_operations": [
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "remote"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": true,
+        "operation": "install"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "commit"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "remote"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "commit"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "remote"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": true,
+        "operation": "update"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "commit"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "remote"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "update"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "commit"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "commit"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "commit"
+      },
+      {
+        "exit_code": 0,
+        "namespace_warning": false,
+        "operation": "commit"
+      }
+    ],
+    "commit_A": "0ab6b1642973ee07ee6ace530df5da7edd715da6efdfbb596163880d639d1d00",
+    "commit_B": "efb7657d26a6ee62f31c454f2f7b58a5791cad8bd3d732ccba178d853504871f",
+    "scope": "SYNTHETIC UPDATE; no production app/schema upgrade",
+    "status": "PASS",
+    "transport": "127.0.0.1 HTTP only"
+  }
+}

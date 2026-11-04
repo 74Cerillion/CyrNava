@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "passed": 527,
+  "warnings": 2,
+  "seconds": 31.71,
+  "command": "cd backend && .venv/bin/python -m pytest -q tests ../packaging/flatpak/test_verify_outage.py ../packaging/flatpak/test_run_portal_verification.py ../packaging/flatpak/test_run_migration_verification.py ../packaging/flatpak/production/test_packaging.py",
+  "warning_notes": [
+    "Existing Starlette/httpx deprecation",
+    "Intentional duplicate-manifest archive fixture"
+  ],
+  "ruff": "PASS",
+  "compileall": "PASS",
+  "git_diff_check": "PASS",
+  "frontend": "Previously recorded 273 unit and 16 browser PASS; frontend source unchanged, no unnecessary rerun"
+}

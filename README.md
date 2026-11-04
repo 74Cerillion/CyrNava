@@ -1,10 +1,22 @@
+> **Current release model: source-first GitHub repository with an online dependency installer.**
+> N1–N4 are owner-accepted. Target: Ubuntu 26.04 x86_64 / GNOME Wayland,
+> system CPython 3.14 and the pinned Qt/PySide/WebEngine 6.11.3 stack. From a
+> reviewed versioned source snapshot, the public entry points are `bash install.sh`
+> and, after saving and closing CyrNava, `bash update.sh`. Dependencies come
+> directly from official upstream services and
+> the frontend is built locally; no bundled-wheel archive is required. See the
+> [native installation/manual-update guide](docs/native-installation.md),
+> [release preparation notes](docs/native-release-notes-v0.1.0.md) and
+> [dependency/source obligations](docs/native-source-obligations.md).
+> Original code is MIT, Copyright (c) 2026 74Cerillion. Flatpak is paused historical/fallback.
+
 # CyrNava
 
-**v0.1.0 release candidate · Phase 1 local knowledge workspace · Linux**
+**v0.1.0 MVP · local knowledge workspace · native Ubuntu desktop**
 
 CyrNava organizes cybersecurity learning and documentation into folders and rich-text notes on your computer. SQLite stores native documents and templates; local files store note images. There are no runtime accounts, cloud services or external API calls. Engagement, host and vulnerability management are future work, not current features.
 
-**Release approval and the original-code license are pending.** This checkout is a review candidate, not an announced public release. See [release checklist](docs/release-checklist.md).
+Original code is MIT licensed, Copyright (c) 2026 74Cerillion. Use a reviewed versioned source from [GitHub Releases](https://github.com/74Cerillion/CyrNava/releases) and follow the [native installation guide](docs/native-installation.md), including prerequisites and installation-specific AppArmor setup before first desktop launch. The accepted source-first verification and publication checkpoint is in [N4_REPORT.md](ci/N4_REPORT.md).
 
 ## Rebranding and existing installations
 
@@ -44,13 +56,13 @@ To reuse your own structure, open the source note, choose **Save as template**, 
 
 Custom templates are private application data in the existing external SQLite database, included in offline backup/restore. Templates were introduced in schema 4; current startup adds the schema-5 search index without rewriting existing notes or assets. Before upgrading an everyday profile, stop CyrNava and take a backup using [BACKUP_RESTORE.md](BACKUP_RESTORE.md). Older application code cannot open schema 5: keep a pre-upgrade backup if rollback may be needed. See the [FF-006 / FF-018 engineering report](FEATURES_FF006_FF018_REPORT.md) for implementation and verification details.
 
-## Full-text search — F-09 candidate
+## Full-text search
 
 Use **Search all notes...** near the top of the navigation pane. Results update after a 300 ms pause and show ranked titles, folder paths and text previews. Use ↑/↓ and Enter to open a result, or click it; Escape or **Clear search** resets the query. Search covers saved titles, headings, code and rich-text content across every folder. Results retain the backend relevance order and highlight matching text safely.
 
 Opening another result waits for pending uploads and saves. A failed save or unresolved draft recovery keeps the current note open. Selecting the already-open result preserves its live editor. Search failures have their own **Retry search** control. Successful saves and library changes refresh the active query; unconfirmed typing is not searchable yet. Queries are held only in page memory and clear on reload.
 
-The M2 local `GET /api/search` API and SQLite FTS5 remain unchanged. See the [user/API, upgrade and offline rebuild guide](docs/search.md), [M2 backend report](F09_M2_REPORT.md) and [M3 UI report](F09_M3_REPORT.md). M4 validation and reproducible scale measurements are recorded in the [M4 report](F09_M4_REPORT.md), [benchmark method/results](docs/search-benchmark.md) and [search release checklist](docs/search-release-checklist.md). Owner commit/publication and the existing license decision remain pending.
+The M2 local `GET /api/search` API and SQLite FTS5 remain unchanged. See the [user/API, upgrade and offline rebuild guide](docs/search.md), [M2 backend report](F09_M2_REPORT.md) and [M3 UI report](F09_M3_REPORT.md). M4 validation and reproducible scale measurements are recorded in the [M4 report](F09_M4_REPORT.md), [benchmark method/results](docs/search-benchmark.md) and [search release checklist](docs/search-release-checklist.md). These development records retain their original scope; the current native-release acceptance is recorded in [N4_REPORT.md](ci/N4_REPORT.md).
 
 Stop every backend and retain a verified pre-upgrade backup before first startup: this code upgrades the external database to **schema 5**. Previous application code refuses that schema. No new packages or remote services are required; Python’s SQLite runtime must include FTS5.
 
@@ -72,7 +84,12 @@ React and TypeScript implement selection, dialogs and save state. A dedicated ad
 
 Read [architecture and three execution flows](docs/architecture.md), [ADRs](docs/adr/README.md), and [dependency/license review](docs/dependencies-and-licenses.md).
 
-## Prerequisites
+## Historical browser/developer prerequisites
+
+The Ubuntu 24.04 / Python 3.12 browser workflow below is retained for development
+and historical support. It is not the current native desktop installation path.
+Use [native installation and manual updates](docs/native-installation.md) for
+Ubuntu 26.04 / Python 3.14 and GNOME menu launch.
 
 Target setup: Ubuntu 24.04, Python **3.12**, Node **24.19.0** (`.nvmrc`), npm **11.6.2**, Git. Verification used Linux with Python 3.12.14 and Node 24.19.0; it did not use a fresh Ubuntu VM. Other OSes are unverified; profile locking uses Linux `fcntl`.
 
@@ -83,7 +100,7 @@ sudo apt install -y git curl ca-certificates python3.12 python3.12-venv
 
 Install Node separately. If using **nvm** (a shell-based Node version manager, not an apt package), follow its [official installation instructions](https://github.com/nvm-sh/nvm#installing-and-updating), then reopen your terminal. An existing matching Node/npm installation also works.
 
-## Installation
+## Historical browser/developer installation
 
 From a fresh terminal:
 
@@ -103,7 +120,7 @@ cd ..
 
 Skip the three nvm/npm setup commands if those versions are already installed. Dependencies are isolated in `backend/.venv` and `frontend/node_modules`. Installation/browser setup downloads packages; normal operation needs no internet. Python dependencies are fully pinned in `requirements.txt`; npm uses `package-lock.json`. The final M6 commit must be published by the owner before a public clone contains these M6 changes. [Verification](M6_VERIFICATION.md) distinguishes the public M5 clone from the clean M6 candidate export.
 
-## Install a desktop launcher (Ubuntu)
+## Historical browser desktop launcher (Ubuntu)
 
 For everyday use, prepare a launcher once from the source checkout. This builds the frontend and installs a private Python environment. Node/npm are needed only for this installation and later source rebuilds; the desktop launch does not use npm, nvm or Vite.
 
@@ -222,7 +239,12 @@ Unsaved title/document edits have browser-local recovery snapshots when storage 
 
 ## License
 
-The owner has explicitly left the original-code license **pending**. No open-source permission grant is implied; package metadata says `UNLICENSED` while that decision is pending. MIT is recommended for owner review. BlockNote core uses MPL-2.0; its obligations remain separate. [Third-party notices](frontend/public/third-party-notices.txt), [Python notices](docs/python-third-party-notices.txt), and the [license review](docs/dependencies-and-licenses.md) describe dependencies, fonts and unresolved attribution verification. No BlockNote XL package is used.
+CyrNava's original code is [MIT licensed](LICENSE), Copyright (c) 2026 74Cerillion.
+Third-party code retains its own terms, including BlockNote MPL-2.0 and the Inter
+font OFL. See [frontend notices](frontend/public/third-party-notices.txt) and the
+current [source-first dependency assessment](docs/native-source-obligations.md).
+Downloading dependencies directly from upstream does not relicense them as MIT.
+No BlockNote XL package is used.
 
 ## Development roadmap
 

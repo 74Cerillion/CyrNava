@@ -1,0 +1,29 @@
+[
+  {
+    "command": [
+      "flatpak",
+      "remote-add",
+      "--user",
+      "--if-not-exists",
+      "flathub",
+      "https://dl.flathub.org/repo/flathub.flatpakrepo"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "flatpak",
+      "install",
+      "--user",
+      "--noninteractive",
+      "--no-related",
+      "flathub",
+      "org.kde.Platform//6.11"
+    ],
+    "returncode": 1,
+    "stdout": "Installing runtime/org.kde.Platform/x86_64/6.11\n",
+    "stderr": "Error: Failed to install org.kde.Platform: While pulling runtime/org.kde.Platform/x86_64/6.11 from remote flathub: open(O_TMPFILE): Read-only file system\n"
+  }
+]

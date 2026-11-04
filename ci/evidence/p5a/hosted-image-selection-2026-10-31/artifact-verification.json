@@ -1,0 +1,23 @@
+[
+  {
+    "artifact_id": 13034521220,
+    "kind": "backend diagnostics only",
+    "sha256": "383ed57301740f9e0d191e80beb2c0cf2a132bd269e34371afd0747f8c57bce6",
+    "bytes": 10658,
+    "independently_matches_GitHub_digest": true
+  },
+  {
+    "artifact_id": 13034393043,
+    "kind": "frontend diagnostics only",
+    "sha256": "fdacf1ad449f916240ac4dc8af56df90303845beec050697a5a12226a35f6902",
+    "bytes": 4889311,
+    "independently_matches_GitHub_digest": true
+  },
+  {
+    "artifact_id": 13034288533,
+    "kind": "flatpak diagnostics only",
+    "sha256": "038b0ec9fb3699a1747de0e16e66e7687fc55cd5caf3238698e1c3c669483adb",
+    "bytes": 237,
+    "independently_matches_GitHub_digest": true
+  }
+]

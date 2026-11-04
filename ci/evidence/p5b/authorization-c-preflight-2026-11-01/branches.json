@@ -1,0 +1,11 @@
+{
+  "branch_policies": [
+    {
+      "id": 65069457,
+      "name": "desktop/p2-production-integration",
+      "node_id": "MDE2OkdhdGVCcmFuY2hQb2xpY3k2NTA2OTQ1Nw==",
+      "type": "branch"
+    }
+  ],
+  "total_count": 1
+}

@@ -1,0 +1,11 @@
+{
+  "phase": "restart",
+  "status": "PASS",
+  "complete": true,
+  "checks": {
+    "native_application_closed": "PASS",
+    "owner_title_saved": "PASS",
+    "additional_image_saved": "PASS"
+  },
+  "stage": "checking_saved_owner_edits"
+}

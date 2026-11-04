@@ -1,0 +1,104 @@
+{
+  "test": "managed tabs close/recover without browser routing",
+  "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+  "after_close_intent_marker_ms": 16.850991,
+  "expected_revision": 3,
+  "frontend": {
+    "perf_ms": 623.6000000000058,
+    "time_origin_ms": 1793428298046.1,
+    "sequence": 1,
+    "close_intent": true,
+    "keepalive": false,
+    "service_worker": false,
+    "visibility": "hidden"
+  },
+  "result": "SQLite guard rejected UPDATE, ROLLBACK, HTTP 503; canonical unchanged through restart and recovery passed",
+  "historical_limit": "Direct evidence for this current teardown operation only. Does not identify previous escaped operation or prove Playwright interception behavior in prior run.",
+  "close_intent_chain": [
+    {
+      "event": "fastapi_request_enter",
+      "mono_ns": 131465544333,
+      "pid": 3687,
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+      "method": "PATCH",
+      "frontend": {
+        "perf_ms": 623.6000000000058,
+        "time_origin_ms": 1793428298046.1,
+        "sequence": 1,
+        "close_intent": true,
+        "keepalive": false,
+        "service_worker": false,
+        "visibility": "hidden"
+      }
+    },
+    {
+      "event": "database_update_enter",
+      "mono_ns": 131467647735,
+      "pid": 3687,
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+      "expected_revision": 3
+    },
+    {
+      "event": "sqlite_statement",
+      "mono_ns": 131468444421,
+      "pid": 3687,
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+      "kind": "BEGIN"
+    },
+    {
+      "event": "sqlite_statement",
+      "mono_ns": 131469420221,
+      "pid": 3687,
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+      "kind": "UPDATE"
+    },
+    {
+      "event": "sqlite_statement",
+      "mono_ns": 131469507504,
+      "pid": 3687,
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+      "kind": "UPDATE"
+    },
+    {
+      "event": "sqlite_statement",
+      "mono_ns": 131469563078,
+      "pid": 3687,
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+      "kind": "UPDATE"
+    },
+    {
+      "event": "sqlite_statement",
+      "mono_ns": 131469605246,
+      "pid": 3687,
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+      "kind": "ROLLBACK"
+    },
+    {
+      "event": "sqlite_transaction_failed",
+      "mono_ns": 131469716163,
+      "pid": 3687,
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+      "error_type": "IntegrityError"
+    },
+    {
+      "event": "database_update_failed",
+      "mono_ns": 131469758602,
+      "pid": 3687,
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+      "error_type": "IntegrityError"
+    },
+    {
+      "event": "fastapi_response",
+      "mono_ns": 131470085775,
+      "pid": 3687,
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730",
+      "status": 503
+    },
+    {
+      "event": "fastapi_request_exit",
+      "mono_ns": 131470598531,
+      "pid": 3687,
+      "operation": "ec45fb66-e57c-43a1-a035-14ea716e0730"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+
+Running 1 test using 1 worker
+
+(node:29) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":1954,"event":"request","method":"PATCH","revision":1}
+{"ms":1960,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2231,"event":"request","method":"GET"}
+{"ms":2272,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3018,"event":"request","method":"PATCH","revision":2}
+{"ms":3024,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":4996,"event":"request","method":"GET"}
+{"ms":5040,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":5068,"event":"before-blocking","state":"Saved","drafts":[]}
+{"ms":5254,"event":"draft-captured","state":"Unsaved Changes","drafts":[{"note_id":"070f4a0b-e44c-4be1-b128-e38e2da32887","base_revision":3}]}
+{"ms":7033,"event":"request","method":"GET"}
+{"ms":7048,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":7072,"event":"before-recover-choice","state":null,"drafts":[{"note_id":"070f4a0b-e44c-4be1-b128-e38e2da32887","base_revision":3}]}
+{"ms":7137,"event":"request","method":"PATCH","revision":3}
+{"ms":7147,"event":"response","method":"PATCH","status":200,"revision":4}
+{"ms":7151,"event":"after-recover-choice","state":"Saved","drafts":[]}
+{"ms":7214,"event":"request","method":"GET"}
+{"ms":7225,"event":"response","method":"GET","status":200,"revision":4}
+
+  ✓  1 e2e/lifecycle.spec.ts:55:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.4s)
+
+  1 passed (9.0s)

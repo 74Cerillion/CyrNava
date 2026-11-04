@@ -1,0 +1,16 @@
+{
+  "phase": "verify",
+  "status": "PASS",
+  "complete": true,
+  "checks": {
+    "owner_title_saved": "PASS",
+    "additional_image_saved": "PASS",
+    "invalid_backup_rejected": "PASS",
+    "saved_edit_and_screenshot_after_restart": "PASS",
+    "source_unchanged": "PASS",
+    "backend_restart_and_reaping": "PASS",
+    "invalid_restore_preserves_active": "PASS",
+    "verified_restore_and_rollback": "PASS"
+  },
+  "stage": "checking_saved_owner_edits"
+}

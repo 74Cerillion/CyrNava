@@ -1,0 +1,28 @@
+{
+  "initial_backend": {
+    "passed": 684,
+    "failed": 2,
+    "subtests_passed": 204,
+    "cause": "existing packaging tests require >=5 GiB; /tmp had 4.3 GiB free",
+    "correction": "use isolated home-volume TMPDIR, no tests/thresholds changed",
+    "raw_log": "ci-output/p6-clean/backend-all.log"
+  },
+  "initial_native_root": {
+    "cause": "new child-directory permission did not permit creating the cache parent",
+    "correction": "directory-level cache permission granted; first empty run produced no app activity"
+  },
+  "initial_lint": {
+    "cause": "new Node security script needed explicit node: imports; new Python files needed formatting",
+    "correction": "imports/format fixed; final checks pass"
+  },
+  "initial_http": {
+    "files": 5559,
+    "seconds": 101.35,
+    "correction": "cache only cryptographically verified immutable manifests; hash every response; final 9.441 seconds"
+  },
+  "CLI_regression_authoring_failure": {
+    "cause": "two new CLI tests initially lacked their json import",
+    "result": "caught by Ruff/focused tests; import corrected, final 30 focused and 693 complete tests PASS",
+    "raw_log": "ci-output/p6-clean/complete-closed.log"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "HEAD": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "branch": "desktop/p2-production-integration",
+  "candidate": null,
+  "candidate_bundle_sha256": null,
+  "candidate_installed_commit": null,
+  "production_signing_fingerprint": null,
+  "scope": "Hash of existing tracked working changes, including preserved P5C closeout; not a new package or commit identity. New P6 tools/docs are separately indexed in ci/evidence/p6/SHA256SUMS.json.",
+  "tracked_uncommitted_patch_sha256": "b42d95a9f30e6dfb014c270bdab4a7423220c1d15e9d8cda1617718e1c8e8860",
+  "tracked_uncommitted_paths": [
+    "ci/P5C_OWNER_CHECKS.md",
+    "ci/P5C_REPORT.md",
+    "ci/evidence/p5c/SHA256SUMS.json",
+    "docs/release-notes-v0.1.0.md",
+    "frontend/package-lock.json",
+    "frontend/package.json",
+    "packaging/flatpak/production/README.md",
+    "packaging/flatpak/production/native_check.py"
+  ]
+}

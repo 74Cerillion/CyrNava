@@ -1,0 +1,56 @@
+{
+  "artifacts": [
+    {
+      "CRC": "PASS",
+      "bytes": 24292,
+      "commit": "2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8",
+      "entry_count": 4,
+      "id": 13221780782,
+      "junit": [
+        {
+          "errors": 0,
+          "failures": 0,
+          "path": "backend-historical-junit.xml",
+          "skipped": 0,
+          "tests": 549
+        },
+        {
+          "errors": 0,
+          "failures": 0,
+          "path": "backend-junit.xml",
+          "skipped": 0,
+          "tests": 611
+        }
+      ],
+      "name": "backend-diagnostics-2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8-1",
+      "run_id": 41616088358,
+      "sha256": "a4d0d0f1e8f07b497a25afcd689576b9bf648c4f66a11b2d80d67fc1615196f0",
+      "status": "PASS"
+    },
+    {
+      "CRC": "PASS",
+      "bytes": 4892624,
+      "commit": "2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8",
+      "entry_count": 65,
+      "id": 13221128077,
+      "junit": [
+        {
+          "errors": 0,
+          "failures": 0,
+          "path": "ci-output/browser-junit.xml",
+          "skipped": 0,
+          "tests": 21
+        }
+      ],
+      "name": "frontend-diagnostics-2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8-1",
+      "run_id": 41616088358,
+      "sha256": "e4878bdc41ec81937eddb6f1b927a24b4f02503fee625c045d76a6792b27df58",
+      "status": "PASS"
+    }
+  ],
+  "commit": "2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8",
+  "native_package_produced": false,
+  "run_id": 41616088358,
+  "scope": "Actual diagnostic ZIP byte hashes, sizes, CRC and exact source/run identities; successful JUnit records retained, large/screenshot ZIPs not retained",
+  "status": "PASS"
+}

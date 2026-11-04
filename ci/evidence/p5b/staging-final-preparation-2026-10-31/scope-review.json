@@ -1,0 +1,122 @@
+{
+  "reviewed_utc": "2026-10-31T13:51:10.620934+00:00",
+  "status": "PASS \u2014 local source/authorization review",
+  "base_commit": "7aaefd0f60a735637ee603ac380587a25b73f6cb",
+  "p5a_accepted_target": "1a28f68c5732ccc1275403060e89ff168a846655",
+  "authorization_model": "Owner-approved single-maintainer manual staging; no independent deployment approval",
+  "proposal_sha256": "3a8c4ad86f958dc7d437c5ee4e5ad2ac57d8753cc4429252edc0005bf385c7c5",
+  "proposed_main_base": "cbf7cccc686080b2b4b07274a9f5a23fec52999f",
+  "proposed_main_change": [
+    ".github/workflows/release.yml only; inert definition"
+  ],
+  "changed_files": [
+    {
+      "path": ".github/workflows/release.yml",
+      "sha256": "3b2a08b287380693393ed2c5cffc22bd155f53efd42dc13be4ef351b55812922"
+    },
+    {
+      "path": "ci/P5B_APPEARANCE_CORRECTION.md",
+      "sha256": "7ed5b4e16fb0b8c8c6a98ebd4cbdc36474be88559212430842b82ca88a33c73e"
+    },
+    {
+      "path": "ci/P5B_GITHUB_STAGING_PLAN.md",
+      "sha256": "30f043bfd7a39bd43cc37fae4299b8d418509efb8a5716c524d40ea753633ea9"
+    },
+    {
+      "path": "ci/P5B_OWNER_CHECKS.md",
+      "sha256": "9131143f25aa483390f81cc03620f246658017320c7a598da8d1bc264e0d6b01"
+    },
+    {
+      "path": "ci/P5B_REPORT.md",
+      "sha256": "fed68ed1f521ccc1d34c90ff8a2a91e771ce9d86f4321f24768688737384f9fc"
+    },
+    {
+      "path": "ci/P5B_SIGNING_DESIGN.md",
+      "sha256": "14589b9ec6e94bb56b27fb1dbe69c0a43ade36362d77e5928956b38311c689dc"
+    },
+    {
+      "path": "ci/release/core.py",
+      "sha256": "ee56a92073cfd1795d90fd804dc1ee870c948d846973c4bfe0b6b75b63a70fd3"
+    },
+    {
+      "path": "ci/release/github.py",
+      "sha256": "466ebcdf38e3fa404a628131a9804449f62faedb4ad0d52b029025e532453efc"
+    },
+    {
+      "path": "ci/release/policy.json",
+      "sha256": "d66a7f3c4de34d259349f2e28f47b53ed240170b6643650b673e29aa7e2a43f4"
+    },
+    {
+      "path": "ci/release/preflight.py",
+      "sha256": "290de0f9081a1704cab03a6d1e7dab02385b3a29c14d2472b1d95e87a6f14bef"
+    },
+    {
+      "path": "ci/release/registration-only.yml",
+      "sha256": "3a8c4ad86f958dc7d437c5ee4e5ad2ac57d8753cc4429252edc0005bf385c7c5"
+    },
+    {
+      "path": "ci/release/registration_policy.py",
+      "sha256": "8af292b7989f7796a93e64cc13fb98915422b287f3c1f73aa7aa03ccde18b32f"
+    },
+    {
+      "path": "ci/release/stage.py",
+      "sha256": "9c6a536ea6710a7bf4ed9377f5955698e61896d4dbd50a51deea217189d2854b"
+    },
+    {
+      "path": "ci/release/test_policy.py",
+      "sha256": "cba293d0709aea98bd5d99fc40b008270b2b2f8d00d72bc55fc3d31d6899b661"
+    },
+    {
+      "path": "ci/release/test_registration.py",
+      "sha256": "f14382887e51c0bff00e9da54dd1cc25c8b28a465429b97062ec11b2697897cc"
+    },
+    {
+      "path": "ci/release/workflow-contract.json",
+      "sha256": "aedd68eb808cc963aebe744ad7d5ebc2f0f52e0bc72a575a18c9551b5c9d65ef"
+    },
+    {
+      "path": "ci/release/workflow_policy.py",
+      "sha256": "968929d29c95ce6b7c477031c3b4563cc0c5d90d9cdc6a20dca9187fd1e40304"
+    }
+  ],
+  "unchanged_security_controls": [
+    ".github/workflows/ci.yml",
+    "frontend/e2e/lifecycle.spec.ts",
+    "frontend/e2e/workspace.spec.ts",
+    "frontend/e2e/editorSelection.ts",
+    "production application/backend/CSS/packaging, dependency locks, artifact allowlist, real signing and publication algorithms"
+  ],
+  "permitted_changes": "P5B workflow label/contract and staging identity/environment policy, local registration proposal/readback checks/tests/docs/evidence only",
+  "no_external_mutations": true,
+  "no_commit_push_dispatch_environment_or_main_changes": true,
+  "history": "Prior two-person model and failed browser CI preserved in Git/evidence; superseded requirements are not claimed active. CI 41205351385 is PASS at 7aaefd0, not the new uncommitted policy.",
+  "sensitive_material_pattern_scan": {
+    "files": 49,
+    "unresolved_findings": [],
+    "recognized_existing_synthetic_fixtures": [
+      {
+        "file": "ci/release/test_signing.py",
+        "kind": "private_key_header",
+        "classification": "Existing public synthetic negative-test fixture; match identical in HEAD. Not a credential or key body."
+      },
+      {
+        "file": "ci/release/test_signing.py",
+        "kind": "signed_download",
+        "classification": "Existing public synthetic negative-test fixture; match identical in HEAD. Not a credential or key body."
+      },
+      {
+        "file": "ci/release/test_policy.py",
+        "kind": "signed_download",
+        "classification": "Existing public synthetic negative-test fixture; match identical in HEAD. Not a credential or key body."
+      },
+      {
+        "file": "ci/release/test_policy.py",
+        "kind": "bearer",
+        "classification": "Existing public synthetic negative-test fixture; match identical in HEAD. Not a credential or key body."
+      }
+    ],
+    "review_history": "Initial broad scan flagged these accepted fixture strings; comparison with HEAD and source review classified them without deleting tests."
+  },
+  "final_reviewed_utc": "2026-10-31T13:52:28.612590+00:00",
+  "disposable_GPG_test_homes_remaining": 0
+}

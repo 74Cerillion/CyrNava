@@ -1,0 +1,65 @@
+{
+  "total_count": 3,
+  "artifacts": [
+    {
+      "id": 13034521220,
+      "node_id": "MDg6QXJ0aWZhY3QxMzAzNDUyMTIyMA==",
+      "name": "backend-diagnostics-6743d1d5c76f2db87c2debb6f687a6e57a6826b6-1",
+      "size_in_bytes": 10658,
+      "url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/artifacts/13034521220",
+      "archive_download_url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/artifacts/13034521220/zip",
+      "expired": false,
+      "digest": "sha256:383ed57301740f9e0d191e80beb2c0cf2a132bd269e34371afd0747f8c57bce6",
+      "created_at": "2026-10-31T07:14:36Z",
+      "updated_at": "2026-10-31T07:14:36Z",
+      "expires_at": "2026-11-07T07:14:36Z",
+      "workflow_run": {
+        "id": 41179709348,
+        "repository_id": 1427661036,
+        "head_repository_id": 1427661036,
+        "head_branch": "desktop/p2-production-integration",
+        "head_sha": "6743d1d5c76f2db87c2debb6f687a6e57a6826b6"
+      }
+    },
+    {
+      "id": 13034393043,
+      "node_id": "MDg6QXJ0aWZhY3QxMzAzNDM5MzA0Mw==",
+      "name": "frontend-diagnostics-6743d1d5c76f2db87c2debb6f687a6e57a6826b6-1",
+      "size_in_bytes": 4889311,
+      "url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/artifacts/13034393043",
+      "archive_download_url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/artifacts/13034393043/zip",
+      "expired": false,
+      "digest": "sha256:fdacf1ad449f916240ac4dc8af56df90303845beec050697a5a12226a35f6902",
+      "created_at": "2026-10-31T07:16:59Z",
+      "updated_at": "2026-10-31T07:16:59Z",
+      "expires_at": "2026-11-07T07:16:58Z",
+      "workflow_run": {
+        "id": 41179709348,
+        "repository_id": 1427661036,
+        "head_repository_id": 1427661036,
+        "head_branch": "desktop/p2-production-integration",
+        "head_sha": "6743d1d5c76f2db87c2debb6f687a6e57a6826b6"
+      }
+    },
+    {
+      "id": 13034288533,
+      "node_id": "MDg6QXJ0aWZhY3QxMzAzNDI4ODUzMw==",
+      "name": "flatpak-diagnostics-6743d1d5c76f2db87c2debb6f687a6e57a6826b6-1",
+      "size_in_bytes": 237,
+      "url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/artifacts/13034288533",
+      "archive_download_url": "https://api.github.com/repos/74Cerillion/CyrNava/actions/artifacts/13034288533/zip",
+      "expired": false,
+      "digest": "sha256:038b0ec9fb3699a1747de0e16e66e7687fc55cd5caf3238698e1c3c669483adb",
+      "created_at": "2026-10-31T07:19:09Z",
+      "updated_at": "2026-10-31T07:19:09Z",
+      "expires_at": "2026-11-07T07:19:08Z",
+      "workflow_run": {
+        "id": 41179709348,
+        "repository_id": 1427661036,
+        "head_repository_id": 1427661036,
+        "head_branch": "desktop/p2-production-integration",
+        "head_sha": "6743d1d5c76f2db87c2debb6f687a6e57a6826b6"
+      }
+    }
+  ]
+}

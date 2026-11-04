@@ -1,0 +1,6 @@
+{
+  "home_path_bytes": 137,
+  "exit_code": 2,
+  "stderr": "gpg: keybox '/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/gpg-socket-probe/key/pubring.kbx' created\ngpg: error running '/usr/bin/gpg-agent': exit status 2\ngpg: failed to start gpg-agent '/usr/bin/gpg-agent': General error\ngpg: can't connect to the gpg-agent: General error\ngpg: agent_genkey failed: No agent running\ngpg: key generation failed: No agent running\n",
+  "correction": "Crypto unit fixtures use a short private /tmp root. Packaging tests keep their disk-backed TMPDIR and 5 GiB gate unchanged."
+}

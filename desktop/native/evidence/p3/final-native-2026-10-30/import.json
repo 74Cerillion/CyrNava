@@ -1,0 +1,11 @@
+{
+  "phase": "import",
+  "status": "PASS",
+  "complete": true,
+  "checks": {
+    "real_native_import": "PASS",
+    "schema_upgrade": "PASS",
+    "source_unchanged": "PASS",
+    "database_and_images_preserved": "PASS"
+  }
+}

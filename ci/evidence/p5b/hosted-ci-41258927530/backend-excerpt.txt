@@ -1,0 +1,7 @@
+2026-11-01T00:57:13.6148115Z ##[group]Run python ci/verify.py backend --require-clean-frontend
+2026-11-01T00:57:13.7650055Z CI: python-lint
+2026-11-01T00:57:13.7964473Z All checks passed!
+2026-11-01T00:57:13.7966759Z CI: frontend-install-for-backend
+2026-11-01T00:57:17.5547492Z CI: frontend-production-build-for-backend
+2026-11-01T00:57:21.6778577Z CI: backend-security-lifecycle-migration-packaging
+2026-11-01T00:58:03.5134386Z 631 passed, 3 warnings, 158 subtests passed in 41.08s

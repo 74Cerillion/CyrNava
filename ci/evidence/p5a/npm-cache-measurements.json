@@ -1,0 +1,14 @@
+[
+  {
+    "mode": "cold-download-cache",
+    "seconds": 8.578,
+    "exit_code": 0,
+    "cache_bytes": 63119184
+  },
+  {
+    "mode": "warm-download-cache",
+    "seconds": 2.963,
+    "exit_code": 0,
+    "cache_bytes": 67023855
+  }
+]

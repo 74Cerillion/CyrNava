@@ -1,0 +1,11 @@
+{
+  "run_id": "run-7b69a3f8e674",
+  "status": "FAIL",
+  "complete": true,
+  "phases": {
+    "prepare": "PASS",
+    "import": "FAIL"
+  },
+  "helper_sha256": "c42c5734d252c795ff2e8b7eb5bbd02106914e48ad990b06d78313521e775331",
+  "child_still_running": false
+}

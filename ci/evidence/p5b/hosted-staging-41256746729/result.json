@@ -1,0 +1,9 @@
+{
+  "authorization_model": "single-maintainer-manual-staging",
+  "complete": true,
+  "purpose": "P5B disposable staging",
+  "seconds": 0.007,
+  "stage": "eligibility",
+  "status": "FAIL",
+  "steps": []
+}

@@ -1,0 +1,139 @@
+{
+  "branch": "desktop/p2-production-integration",
+  "checks": {
+    "P5B_only_paths": true,
+    "P5C_P6_started": false,
+    "accepted_application_sources_untouched": true,
+    "actual_credentials_or_private_key_material_found": false,
+    "application_version_identity_permissions_changed": false,
+    "classified_pattern_findings": [
+      {
+        "classification": "Intentional header-only synthetic negative fixture; no key bytes",
+        "path": "ci/release/test_signing.py"
+      }
+    ],
+    "commits_pushes_tags_settings_hosting_releases_created": false,
+    "manual_review": "Only synthetic test data, public source/package identifiers and non-sensitive diagnostics; no owner workspace, screenshot, private key, passphrase or token copied.",
+    "private_key_homes_removed": true,
+    "production_enabled": false,
+    "read_only_workflow_permissions": {
+      "actions": "read",
+      "contents": "read"
+    }
+  },
+  "head": "1a28f68c5732ccc1275403060e89ff168a846655",
+  "local_accepted_tag_target": "1a28f68c5732ccc1275403060e89ff168a846655",
+  "modified_tracked_paths": [
+    ".gitignore",
+    "ci/verify.py"
+  ],
+  "new_paths": [
+    ".github/workflows/release.yml",
+    "ci/P5B_HOSTING_DECISION.md",
+    "ci/P5B_OWNER_CHECKS.md",
+    "ci/P5B_REPORT.md",
+    "ci/P5B_SIGNING_DESIGN.md",
+    "ci/evidence/p5b/actions-workflows.json",
+    "ci/evidence/p5b/backend-summary.txt",
+    "ci/evidence/p5b/baseline.json",
+    "ci/evidence/p5b/browser-junit.xml",
+    "ci/evidence/p5b/capability-probe.json",
+    "ci/evidence/p5b/crypto-smoke.json",
+    "ci/evidence/p5b/environments.json",
+    "ci/evidence/p5b/live-eligibility.json",
+    "ci/evidence/p5b/local-verification.json",
+    "ci/evidence/p5b/long-temp-path-diagnostic.json",
+    "ci/evidence/p5b/native-audit-diagnostic.json",
+    "ci/evidence/p5b/native-command-capabilities.json",
+    "ci/evidence/p5b/native-eligibility.json",
+    "ci/evidence/p5b/native-staging-attempt.json",
+    "ci/evidence/p5b/probe-key-cleanup.json",
+    "ci/evidence/p5b/release-security.txt",
+    "ci/evidence/p5b/runtime-versions.json",
+    "ci/evidence/p5b/verification-history.json",
+    "ci/release/audit_candidate.py",
+    "ci/release/core.py",
+    "ci/release/github.py",
+    "ci/release/plan.py",
+    "ci/release/policy.json",
+    "ci/release/preflight.py",
+    "ci/release/recovery.py",
+    "ci/release/stage.py",
+    "ci/release/test_policy.py",
+    "ci/release/test_signing.py",
+    "ci/release/workflow-contract.json",
+    "ci/release/workflow_policy.py"
+  ],
+  "preserved_files": {
+    ".github/workflows/ci.yml": {
+      "actual": "3f11c9ab58d2f7c8cebca0b153a09ccffae06e314545067ddd6b42f7b8e809f4",
+      "expected": "3f11c9ab58d2f7c8cebca0b153a09ccffae06e314545067ddd6b42f7b8e809f4"
+    },
+    "ci/flatpak.py": {
+      "actual": "74168678c6c3446a601f76bbec735dcfaed4f3b5ebeef5d3092c54d88464cb0f",
+      "expected": "74168678c6c3446a601f76bbec735dcfaed4f3b5ebeef5d3092c54d88464cb0f"
+    },
+    "ci/validate.py": {
+      "actual": "9371632e6c4c2f3b9a09ce67f8f7c4e04605f34c5b73df292bc84b87cf80bf2b",
+      "expected": "9371632e6c4c2f3b9a09ce67f8f7c4e04605f34c5b73df292bc84b87cf80bf2b"
+    },
+    "packaging/flatpak/production/build.py": {
+      "actual": "66f64360e3d18be3fbe2b1718e17a4da76e88c4ea2475d8fd8f97bdd2f9332f4",
+      "expected": "66f64360e3d18be3fbe2b1718e17a4da76e88c4ea2475d8fd8f97bdd2f9332f4"
+    },
+    "packaging/flatpak/production/install_payload.py": {
+      "actual": "b1fe69f2234fa3c5ef8082df20907741216908bf06fa45b0b365a5763f39bbbc",
+      "expected": "b1fe69f2234fa3c5ef8082df20907741216908bf06fa45b0b365a5763f39bbbc"
+    },
+    "packaging/flatpak/production/requirements.lock": {
+      "actual": "f5f0ae7c0576b45dee80b1a97bd4110064ce29e2a192f6adb027780c14cde742",
+      "expected": "f5f0ae7c0576b45dee80b1a97bd4110064ce29e2a192f6adb027780c14cde742"
+    },
+    "packaging/flatpak/production/toolchain.lock.json": {
+      "actual": "30ba11e377126073164dc13cc103c9873a405766840e8c3992d698bf7f18483e",
+      "expected": "30ba11e377126073164dc13cc103c9873a405766840e8c3992d698bf7f18483e"
+    }
+  },
+  "reviewed_sha256": {
+    ".github/workflows/release.yml": "5398142a4e623f069d27f878d0cd60e7303688620754e6160ec02062c9414163",
+    ".gitignore": "84441157a53577a1426b15e4ea0c1475fa9484b130131057dc61d7e21e0ac424",
+    "ci/P5B_HOSTING_DECISION.md": "24fe72149ee6a7aed805f5a1cbd8fcb8c48c96ff9fe15c63a891754957ff10c5",
+    "ci/P5B_OWNER_CHECKS.md": "bfe85c70070b0c9c5d06ea521654947a0fec54d0d4fbaa65b86833a18767c4b2",
+    "ci/P5B_REPORT.md": "5a37c176396a49afeee4e1234af72b2fa9ef25b309a0b685788a1e3cf8909cb1",
+    "ci/P5B_SIGNING_DESIGN.md": "49306712a4eb120250be8591e06c726b5039fcb378f5bdaf64e9c2e3517b142b",
+    "ci/evidence/p5b/actions-workflows.json": "4148d4b51186a7e5debadb7d7e87d533ec1869c8c1a3fbcc76ccef2e5d8321d5",
+    "ci/evidence/p5b/backend-summary.txt": "e409912f37e5c48a3472c4e30c3c6a7a801e03ebf6f798b4ccf4bae8194c6e9c",
+    "ci/evidence/p5b/baseline.json": "dc257c54429617a55f3b47f45663ebebb2d6b20188524bfa05e0241dc826e800",
+    "ci/evidence/p5b/browser-junit.xml": "4e6b6d6ee3928c9c24ed1658e6dbfa261a4738a5eecd108a8ccffe61b489b08a",
+    "ci/evidence/p5b/capability-probe.json": "ed7ed447127afaa56f55a93b5a42ebd29fc07fec62222edce188279c1909eae3",
+    "ci/evidence/p5b/crypto-smoke.json": "e58442526cddef6a4dc04a4733adadb8bdb15af5bd13cffc84f7966d609fc749",
+    "ci/evidence/p5b/environments.json": "6dfdc37ac0345d270fd580bc87534dbc35d53edb3d8b057c6d052d54817556d3",
+    "ci/evidence/p5b/live-eligibility.json": "e57f2690e4df420c57f5f46cea49c5367f7e95b142e213123f6fcab7ec782593",
+    "ci/evidence/p5b/local-verification.json": "c7ad98c33a89c14afad3cef91fe187216609883410d5353d086be4d8a6d1d90b",
+    "ci/evidence/p5b/long-temp-path-diagnostic.json": "9e1b71a9cd2cd6cf5440638e23c0d2bae8962c723b4e5f2b8ea599e64bd17296",
+    "ci/evidence/p5b/native-audit-diagnostic.json": "16bfdca62935e12cf2d07cc78cdd691da6ba7d70b1d755be509d012fb885797e",
+    "ci/evidence/p5b/native-command-capabilities.json": "1a57757c133c5f48a32c2ef2a7f0c1cab7d7306b5ea9434cbd01ea8299766718",
+    "ci/evidence/p5b/native-eligibility.json": "a5f8e8322b17837cbd9271c2a824024a7b044468f98364e1678d07269dcf3116",
+    "ci/evidence/p5b/native-staging-attempt.json": "68ed50233467a609d1da20c7c4ac59839788622f32fec5b6d37fe740eb4b078c",
+    "ci/evidence/p5b/probe-key-cleanup.json": "4e91f2ae94414f45ae013bdd75fa8285492af75ee7745dfa149cc7a2c7231beb",
+    "ci/evidence/p5b/release-security.txt": "f147d5d57221a9eb8441db84a953b4dc0b39f2833b8670b7ebd99cc074506dfc",
+    "ci/evidence/p5b/runtime-versions.json": "aad260f942b167a2ca7d4ea356e39f5e9a96a9e19b7471533de3696695cee2b9",
+    "ci/evidence/p5b/verification-history.json": "496bb3b33d897ba9251127d7460a7ca50dd671ff928228dca9251edc625e2b8c",
+    "ci/release/audit_candidate.py": "061d3b80ddf313c9dcfecd1a4077c84ac3f29662de2004c8cec5d3f5fc521490",
+    "ci/release/core.py": "72e481a234fdb6a9f0611956028dbafc82881a1e7206fbf663b22b4d204db338",
+    "ci/release/github.py": "5c42e80df122cbddc1dd7f1d0e938e3cc08cf9048a292dbc3d411fd8509a3d76",
+    "ci/release/plan.py": "f7e672e3a77efbb883a413570e782356c2fa4d0a73f9a5f51fb39592562f5202",
+    "ci/release/policy.json": "aa4109debb215014dee7121ff364e9b6756281b9e83922dddd2b7e571c51bf62",
+    "ci/release/preflight.py": "178d04f96ec0e16a0a23c97f2ab969e177b7a57e4a602f0349c71a65d6cc53fb",
+    "ci/release/recovery.py": "87c030904d71c921b5d1942de236d7cc6fe565b64017d2529b3aa797218c567c",
+    "ci/release/stage.py": "97427e749d08b6976ce6e58e378d43b9e64b2c1318816f1b3591ca64dccba3e1",
+    "ci/release/test_policy.py": "f4374f235cb427f9d86e73513a4173e28c6cff01223b71e2bd7fa33c48a713b4",
+    "ci/release/test_signing.py": "3f01576d068c43d007b09c08faaa3e64693ca8c7e73d46369bbe81c68412387a",
+    "ci/release/workflow-contract.json": "3e320d109753a13ee1666987357f300665273279f5c493aa0e8367548204479b",
+    "ci/release/workflow_policy.py": "57ff50181cc5923dd81730d39830d97726b7836d00879b59096de9fde20ff110",
+    "ci/verify.py": "5b97848f13e3d2be9ebcffc295ee1d60994e59794903d1cd0fa3ba4f06161b36"
+  },
+  "scope": "Local uncommitted P5B diff and evidence; not permission to commit/push",
+  "staged_paths": [],
+  "status": "PASS"
+}

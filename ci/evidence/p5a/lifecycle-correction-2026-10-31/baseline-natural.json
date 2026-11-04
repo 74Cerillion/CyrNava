@@ -1,0 +1,1129 @@
+{
+  "config": {
+    "argv": [
+      "/home/cerillion/.nvm/versions/node/v24.19.0/bin/node",
+      "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/node_modules/.bin/playwright",
+      "test",
+      "e2e/lifecycle.spec.ts",
+      "--grep",
+      "managed tabs close",
+      "--repeat-each=10",
+      "--trace=on",
+      "--output=/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results",
+      "--reporter=list,json"
+    ],
+    "configFile": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/playwright.config.ts",
+    "rootDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results",
+        "repeatEach": 10,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results",
+        "repeatEach": 10,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "snapshotDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 120000,
+        "use": {
+          "browserName": "chromium",
+          "headless": true,
+          "viewport": {
+            "width": 1280,
+            "height": 1000
+          },
+          "screenshot": "only-on-failure",
+          "trace": "on"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "lifecycle.spec.ts",
+      "file": "lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8399,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"ms\":1974,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":1}\n"
+                    },
+                    {
+                      "text": "{\"ms\":1979,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2268,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2313,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3067,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3074,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":4951,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":4996,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7089,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7110,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7197,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7207,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7270,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7281,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":4}\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:42:28.064Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5NzQsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE5NzksCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjI2OCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjMxMywKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA2NywKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA3NCwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA0OTUxLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA0OTk2LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MDg5LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA3MTEwLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MTk3LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MjA3LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9LAogIHsKICAgICJtcyI6IDcyNzAsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDcyODEsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9Cl0="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-3e2e3ddc6c38e163e0ce",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8434,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"ms\":2008,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":1}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2013,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2326,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2370,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3120,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3127,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5010,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5051,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7092,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7104,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7213,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7223,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7291,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7320,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":4}\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:42:36.994Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDIwMDgsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDIwMTMsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjMyNiwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjM3MCwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzEyMCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzEyNywKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDEwLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MDUxLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MDkyLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA3MTA0LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MjEzLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MjIzLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9LAogIHsKICAgICJtcyI6IDcyOTEsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDczMjAsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9Cl0="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-b3a309a0e1e7397d3a35",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8346,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"ms\":1962,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":1}\n"
+                    },
+                    {
+                      "text": "{\"ms\":1969,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2278,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2324,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3079,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3086,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":4979,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5024,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7015,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7031,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7124,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7134,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7197,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7238,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":4}\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:42:45.939Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5NjIsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE5NjksCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjI3OCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjMyNCwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA3OSwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA4NiwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA0OTc5LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MDI0LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MDE1LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA3MDMxLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MTI0LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MTM0LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9LAogIHsKICAgICJtcyI6IDcxOTcsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDcyMzgsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9Cl0="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-d9ca87b87f3ad7f7892f",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8532,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"ms\":1987,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":1}\n"
+                    },
+                    {
+                      "text": "{\"ms\":1995,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2276,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2321,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3067,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3074,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5074,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5121,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7113,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7130,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7219,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7229,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7296,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7308,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":4}\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:42:54.812Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5ODcsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE5OTUsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjI3NiwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjMyMSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA2NywKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA3NCwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDc0LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MTIxLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MTEzLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA3MTMwLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MjE5LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MjI5LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9LAogIHsKICAgICJtcyI6IDcyOTYsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDczMDgsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9Cl0="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat3/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-7ccc29914405b7d3cf59",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8520,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"ms\":1989,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":1}\n"
+                    },
+                    {
+                      "text": "{\"ms\":1995,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2284,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2329,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3077,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3084,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":4994,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5040,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7109,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7124,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7218,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7228,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7290,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7316,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":4}\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:43:03.850Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5ODksCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE5OTUsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjI4NCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjMyOSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA3NywKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA4NCwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA0OTk0LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MDQwLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MTA5LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA3MTI0LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MjE4LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MjI4LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9LAogIHsKICAgICJtcyI6IDcyOTAsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDczMTYsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9Cl0="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat4/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-836d8e108a8bb4ceb01a",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8509,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"ms\":1949,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":1}\n"
+                    },
+                    {
+                      "text": "{\"ms\":1955,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2229,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2273,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3020,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3029,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5012,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5052,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7180,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7199,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7305,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7317,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7379,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7407,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":4}\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:43:12.871Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5NDksCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE5NTUsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjIyOSwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjI3MywKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzAyMCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzAyOSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDEyLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MDUyLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MTgwLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA3MTk5LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MzA1LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MzE3LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9LAogIHsKICAgICJtcyI6IDczNzksCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDc0MDcsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9Cl0="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat5/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-df5f685b449fd0a62e7d",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8626,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"ms\":2010,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":1}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2020,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2323,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2373,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3115,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3120,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5004,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5052,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7186,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7198,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7297,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7311,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7373,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7384,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":4}\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:43:21.893Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDIwMTAsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDIwMjAsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjMyMywKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjM3MywKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzExNSwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzEyMCwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDA0LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MDUyLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MTg2LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA3MTk4LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3Mjk3LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MzExLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9LAogIHsKICAgICJtcyI6IDczNzMsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDczODQsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9Cl0="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat6/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-671366ae43d3677ab6b4",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8475,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"ms\":2011,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":1}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2016,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2344,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2400,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3142,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3151,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5055,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5104,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7138,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7162,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7247,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7258,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7327,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7345,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":4}\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:43:31.060Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDIwMTEsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDIwMTYsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjM0NCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjQwMCwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzE0MiwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzE1MSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDU1LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MTA0LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MTM4LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA3MTYyLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MjQ3LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MjU4LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9LAogIHsKICAgICJtcyI6IDczMjcsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDczNDUsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9Cl0="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat7/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-0761b579b920319ef298",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 8,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8480,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"ms\":1995,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":1}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2001,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2296,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2346,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3102,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3109,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5031,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5078,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7109,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7125,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7230,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7245,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7328,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7371,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":4}\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:43:40.064Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5OTUsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDIwMDEsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjI5NiwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjM0NiwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzEwMiwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzEwOSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDMxLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MDc4LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MTA5LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA3MTI1LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MjMwLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MjQ1LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9LAogIHsKICAgICJtcyI6IDczMjgsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDczNzEsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9Cl0="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat8/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-52af99fbb1a3b1a48767",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 9,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8690,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"ms\":2027,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":1}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2034,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2333,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2379,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3125,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3138,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5161,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5216,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7248,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7266,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7354,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7368,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7441,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7472,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":4}\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:43:49.101Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDIwMjcsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDIwMzQsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjMzMywKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjM3OSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzEyNSwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzEzOCwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MTYxLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MjE2LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MjQ4LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA3MjY2LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MzU0LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA3MzY4LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9LAogIHsKICAgICJtcyI6IDc0NDEsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDc0NzIsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9Cl0="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/baseline-natural-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat9/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-bcef08495068b85491d9",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T03:42:27.600Z",
+    "duration": 90421.65,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

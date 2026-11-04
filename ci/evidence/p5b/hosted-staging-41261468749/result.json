@@ -1,0 +1,18 @@
+{
+  "authorization_model": "single-maintainer-manual-staging",
+  "complete": true,
+  "error": "Operation failed: git (CalledProcessError)",
+  "error_type": "Rejected",
+  "purpose": "P5B disposable staging",
+  "seconds": 4.769,
+  "stage": "signed-repository",
+  "status": "FAIL",
+  "steps": [
+    {
+      "eligibility": "PASS"
+    },
+    {
+      "candidate": "PASS"
+    }
+  ]
+}

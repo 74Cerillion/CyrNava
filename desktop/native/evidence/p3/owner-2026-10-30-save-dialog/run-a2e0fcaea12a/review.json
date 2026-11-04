@@ -1,0 +1,14 @@
+{
+  "prepare": "PASS including document grant and readback",
+  "import": "PASS including schema upgrade, source hash and content preservation",
+  "historical_edit_and_restart": "Only normal window exit checked; not evidence of owner modifications",
+  "verify": "FAIL: required title missing and only 2 original assets",
+  "inspection": "Read-only immutable SQLite and bounded workspace inspection; no source edits",
+  "driver_correction": "Check required title and additional saved asset immediately after EDIT/RESTART. Resume from successful prepare/import, archiving all previous phase records.",
+  "tests": {
+    "supervisor_snapshot_and_resume": "12 PASS",
+    "Qt_event_delivery_grants_and_owner_edit_fixtures": "PASS (no real portal tested)",
+    "ruff_and_diff": "PASS"
+  },
+  "p3": "CONDITIONAL"
+}

@@ -3,14 +3,13 @@ import sqlite3
 from uuid import uuid4
 
 import pytest
-from fastapi.testclient import TestClient
-from PIL import Image
-from search_helpers import remove_search_schema
-
 from app.backup import BackupError, create_backup, restore_backup, validate_backup
 from app.database import Database
 from app.main import create_app
 from app.templates import STARTERS, builtin_templates
+from fastapi.testclient import TestClient
+from PIL import Image
+from search_helpers import remove_search_schema
 
 
 def source(client, document):

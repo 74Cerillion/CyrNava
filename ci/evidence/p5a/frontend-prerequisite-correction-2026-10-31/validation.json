@@ -1,0 +1,107 @@
+{
+  "phase": "P5A frontend prerequisite correction",
+  "date": "2026-10-31",
+  "timezone": "Asia/Seoul",
+  "local_correction": "PASS",
+  "overall_p5a": "CONDITIONAL \u2014 corrected hosted verification pending authorization",
+  "base_commit": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+  "checkout_method": "Disposable local clone with clean tracked baseline and explicit four-file uncommitted candidate overlay; no preexisting dist, node_modules or backend venv",
+  "backend": {
+    "passed": 550,
+    "subtests_passed": 31,
+    "warnings": 2,
+    "pytest_seconds": 30.65,
+    "orchestration": {
+      "status": "PASS",
+      "complete": true,
+      "steps": [
+        {
+          "name": "python-lint",
+          "status": "PASS",
+          "seconds": 0.022
+        },
+        {
+          "name": "frontend-install-for-backend",
+          "status": "PASS",
+          "seconds": 6.663
+        },
+        {
+          "name": "frontend-production-build-for-backend",
+          "status": "PASS",
+          "seconds": 3.479
+        },
+        {
+          "name": "backend-security-lifecycle-migration-packaging",
+          "status": "PASS",
+          "seconds": 31.307
+        }
+      ],
+      "preconditions": {
+        "frontend_dist_initially_absent": true,
+        "clean_frontend_required": true
+      },
+      "seconds": 41.472
+    }
+  },
+  "frontend": {
+    "unit_passed": 273,
+    "browser_passed": 16,
+    "orchestration": {
+      "status": "PASS",
+      "complete": true,
+      "steps": [
+        {
+          "name": "frontend-lint",
+          "status": "PASS",
+          "seconds": 2.697
+        },
+        {
+          "name": "frontend-unit",
+          "status": "PASS",
+          "seconds": 14.156
+        },
+        {
+          "name": "typescript-production-build",
+          "status": "PASS",
+          "seconds": 3.394
+        },
+        {
+          "name": "chromium-production-integration",
+          "status": "PASS",
+          "seconds": 102.63
+        }
+      ],
+      "seconds": 122.877
+    }
+  },
+  "workflow_contracts": {
+    "test_methods": 23,
+    "status": "PASS"
+  },
+  "backend_added_install_build_seconds": 10.142,
+  "browser_download_setup_seconds": 56.678,
+  "formerly_failing_tests": {
+    "test_real_backend_restart_revokes_token_preserves_content": "PASS",
+    "test_parent_death_pipe_stops_worker_and_lock_survives_gui_release": "PASS",
+    "test_stage_and_install_exclude_owner_data_and_development_tools": "PASS"
+  },
+  "remaining": {
+    "corrected_hosted_run": "NOT EXECUTED",
+    "hosted_production_build_audit_upload": "NOT VERIFIED",
+    "local_shellcheck": "NOT INSTALLED",
+    "native_portals": "NOT RERUN; historical limits preserved"
+  },
+  "new_commit": false,
+  "push": false,
+  "workflow_trigger": false,
+  "P5B_started": false,
+  "P5C_started": false,
+  "exploratory_out_of_scope_lint": {
+    "status": "FAIL",
+    "findings": 98,
+    "scope": "Exploratory expansion of Ruff to desktop and packaging sources",
+    "canonical_ci_lint": "PASS (backend/app, backend/tests, ci)",
+    "unchanged_directories": true,
+    "action": "No unrelated formatting changes; existing CI lint scope and tests retained"
+  }
+}

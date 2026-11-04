@@ -1,0 +1,20 @@
+[
+  {
+    "artifact_id": 13043983920,
+    "name": "backend-diagnostics-7aaefd0f60a735637ee603ac380587a25b73f6cb-1",
+    "bytes": 11655,
+    "sha256": "a08f466972bdcb4c0f2ea8a8ba95b4dae4172ace9485ef0ba1a911446d7240b6",
+    "GitHub_digest_matches": true,
+    "run_id": 41205351385,
+    "source_commit": "7aaefd0f60a735637ee603ac380587a25b73f6cb"
+  },
+  {
+    "artifact_id": 13044028910,
+    "name": "frontend-diagnostics-7aaefd0f60a735637ee603ac380587a25b73f6cb-1",
+    "bytes": 4894439,
+    "sha256": "55872cfdb823bc1bd3dc1cecf1b4a592e31f66cbc05ea2178815f91ca4f751a8",
+    "GitHub_digest_matches": true,
+    "run_id": 41205351385,
+    "source_commit": "7aaefd0f60a735637ee603ac380587a25b73f6cb"
+  }
+]

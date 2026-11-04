@@ -1,0 +1,9 @@
+{
+  "frontend_dist_absent": true,
+  "disposable_checkout": "/tmp/cyrnava-p5a-boundary-r8jvmtth/checkout",
+  "candidate_files": [
+    "ci/lifecycle_harness.py",
+    "backend/tests/test_lifecycle_harness.py",
+    "frontend/e2e/lifecycle.spec.ts"
+  ]
+}

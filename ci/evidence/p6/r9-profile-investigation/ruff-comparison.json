@@ -1,0 +1,7 @@
+{
+  "new_or_worsened_helper_findings": 0,
+  "baseline_findings": 14,
+  "current_findings": 14,
+  "limitation": "Existing host-streamed helper E402/E501 findings remain; compared by code/message/source line without suppressing checks.",
+  "other_changed_python_files": "Ruff PASS"
+}

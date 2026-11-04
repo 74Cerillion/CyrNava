@@ -1,0 +1,158 @@
+{
+  "experiment": "Read-only control-flow simulation of current provisioner; no Flatpak command executed or runtime installed/updated",
+  "purpose": "Check whether installing a dependent ref after pinning Platform can invalidate that pin before final verification",
+  "results": [
+    {
+      "dependency_update_simulated": false,
+      "result": {
+        "status": "PASS"
+      },
+      "commands": [
+        [
+          "flatpak",
+          "remote-add",
+          "--user",
+          "--if-not-exists",
+          "flathub",
+          "https://dl.flathub.org/repo/flathub.flatpakrepo"
+        ],
+        [
+          "flatpak",
+          "install",
+          "--user",
+          "--noninteractive",
+          "--no-related",
+          "flathub",
+          "org.kde.Platform//6.11"
+        ],
+        [
+          "flatpak",
+          "update",
+          "--user",
+          "--noninteractive",
+          "--no-related",
+          "--commit=76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+          "org.kde.Platform//6.11"
+        ],
+        [
+          "flatpak",
+          "install",
+          "--user",
+          "--noninteractive",
+          "--no-related",
+          "flathub",
+          "org.kde.Sdk//6.11"
+        ],
+        [
+          "flatpak",
+          "update",
+          "--user",
+          "--noninteractive",
+          "--no-related",
+          "--commit=df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+          "org.kde.Sdk//6.11"
+        ],
+        [
+          "flatpak",
+          "install",
+          "--user",
+          "--noninteractive",
+          "--no-related",
+          "flathub",
+          "io.qt.PySide.BaseApp//6.11"
+        ],
+        [
+          "flatpak",
+          "update",
+          "--user",
+          "--noninteractive",
+          "--no-related",
+          "--commit=a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+          "io.qt.PySide.BaseApp//6.11"
+        ]
+      ],
+      "observed_final_commits": {
+        "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+        "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+        "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e"
+      }
+    },
+    {
+      "dependency_update_simulated": true,
+      "result": {
+        "status": "FAIL",
+        "exception": "Pinned runtime mismatch for org.kde.Platform//6.11; expected 76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473. No automatic updates performed."
+      },
+      "commands": [
+        [
+          "flatpak",
+          "remote-add",
+          "--user",
+          "--if-not-exists",
+          "flathub",
+          "https://dl.flathub.org/repo/flathub.flatpakrepo"
+        ],
+        [
+          "flatpak",
+          "install",
+          "--user",
+          "--noninteractive",
+          "--no-related",
+          "flathub",
+          "org.kde.Platform//6.11"
+        ],
+        [
+          "flatpak",
+          "update",
+          "--user",
+          "--noninteractive",
+          "--no-related",
+          "--commit=76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+          "org.kde.Platform//6.11"
+        ],
+        [
+          "flatpak",
+          "install",
+          "--user",
+          "--noninteractive",
+          "--no-related",
+          "flathub",
+          "org.kde.Sdk//6.11"
+        ],
+        [
+          "flatpak",
+          "update",
+          "--user",
+          "--noninteractive",
+          "--no-related",
+          "--commit=df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+          "org.kde.Sdk//6.11"
+        ],
+        [
+          "flatpak",
+          "install",
+          "--user",
+          "--noninteractive",
+          "--no-related",
+          "flathub",
+          "io.qt.PySide.BaseApp//6.11"
+        ],
+        [
+          "flatpak",
+          "update",
+          "--user",
+          "--noninteractive",
+          "--no-related",
+          "--commit=a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+          "io.qt.PySide.BaseApp//6.11"
+        ]
+      ],
+      "observed_final_commits": {
+        "org.kde.Platform//6.11": "simulated-dependency-updated-platform",
+        "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+        "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e"
+      }
+    }
+  ],
+  "historical_limit": "Confirms provisioner sensitivity to dependency updates; does not recover actual final hosted SHA/ref, which the diagnostic omitted. Hosted log independently reports Platform updating during subsequent BaseApp install."
+}

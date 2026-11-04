@@ -1,0 +1,32 @@
+{
+  "branch": "desktop/p2-production-integration",
+  "base_commit": "eb65fc152181f77b3fa131f79aa417a03d84a1ac",
+  "note": "Uncommitted P4 source/doc change groups; generated evidence and ignored build cache excluded. Staged payload inputs have their own snapshot manifest.",
+  "sha256": {
+    ".gitignore": "c5c3f4694c157ca89fe60b7697919e1e632941b2ae321c804fffb80e4b73c636",
+    "desktop/native/P3_REPORT.md": "26737f04678c222c3ed4e81fbc4d76c4df04ea78cbc46dc2e9f58368208d0f03",
+    "desktop/native/P4_REPORT.md": "1ff86c4350a53f67c3b0a5447315a203e0b1516c7285ce3fef525d7369abd289",
+    "desktop/native/application.py": "bbcc38bf1974a8696a8fe1664bae3551f275eae7a71a7194d434d2d3e982f3ad",
+    "desktop/native/build_identity.py": "b8f3fa22d49486bc678d7614c839e932599be5197a5deffb10e6ec465591a918",
+    "desktop/native/identity.py": "40f473e91380e55c159ec14f1f166801191f3fde72101b270ee821d02d4d7c70",
+    "desktop/native/storage.py": "e70874a0f764fe1ce684b9975bffa2bd4dbd01f010e7d16e2748388a96f70030",
+    "packaging/flatpak/production/P4_NATIVE_CHECKS.md": "d3319701468df33d7670b9a0bb72ae3a990031529e59015adb718b27f14b3546",
+    "packaging/flatpak/production/README.md": "3dd46c10060be44c73d1bdcfba0e24541ba27173d621bed3bcd68cd86aad46c1",
+    "packaging/flatpak/production/build.py": "6c81256762e82be61bba092d038731675d1b8c8b811e06b96099887707e6486d",
+    "packaging/flatpak/production/build_identity.py": "7c4ce5e9f4f89d71b4916cbc4753c9770b945b1836297f8cd41b564598156974",
+    "packaging/flatpak/production/cyrnava": "4eda26922d1028ee20e9da58f98d8269358bdfb8e0b8de59e5f795b7855b1330",
+    "packaging/flatpak/production/host_verify.py": "adc03e27b1e8615df16cc52d707f990291890060ec83c0f0a5d04a6cc771f7e4",
+    "packaging/flatpak/production/install_payload.py": "446d1fe3adf69d3c892c1d75c36ffeb2eb08beb63f50bf77da65096f09eee622",
+    "packaging/flatpak/production/io.github._74Cerillion.CyrNava.desktop": "b4ac13d90ccc44761b1b7d29a3d6887d0fdb1382df5d9797b8581f1fc4d8b59e",
+    "packaging/flatpak/production/io.github._74Cerillion.CyrNava.json": "b659d34322837ad1639e214c8b8550057bb8fdb0ff4fbb18cbf892eb7bec6bc7",
+    "packaging/flatpak/production/io.github._74Cerillion.CyrNava.metainfo.xml": "66e487bb0655cf217748b1126cc05fdfcd6008bb483c250057edc632112a237d",
+    "packaging/flatpak/production/native_check.py": "8cec1f8e659063a05c9279aa5d89127a0325b5c7e8c138bdb48d0853d00bd248",
+    "packaging/flatpak/production/requirements.lock": "f5f0ae7c0576b45dee80b1a97bd4110064ce29e2a192f6adb027780c14cde742",
+    "packaging/flatpak/production/test_packaging.py": "cbc74ffcb8e2c0d7c38d95ceb4280f4c7b5c22157d3988517292d2c0b9034bc0",
+    "packaging/flatpak/production/toolchain.lock.json": "30ba11e377126073164dc13cc103c9873a405766840e8c3992d698bf7f18483e",
+    "desktop/native/dialogs.py": "d73a0622f5f481124ef6446b233827cb98d32d3695524523482ef9f5df2ee033",
+    "desktop/native/maintenance.py": "d8e1ff7f0a64b56654da1307382dd0225ab985552ede1fa7f35a7466a1c07a03",
+    "backend/tests/test_native_dialogs.py": "38270464f21e32c9481f282da9f02d23bf243ae64253edef359243ec351a43a4",
+    "backend/tests/test_migration.py": "93c5331eee08c0bb9241a5c7858acc4eda154b4989d2db37c52b3938e1f79175"
+  }
+}

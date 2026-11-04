@@ -1,0 +1,10 @@
+Sandbox Status
+Layer 1 Sandbox	None
+PID namespaces	No
+Network namespaces	No
+Seccomp-BPF sandbox	Yes
+Seccomp-BPF sandbox supports TSYNC	Yes
+Ptrace Protection with Yama LSM (Broker)	Yes
+Ptrace Protection with Yama LSM (Non-broker)	Yes
+
+You are NOT adequately sandboxed.

@@ -1,0 +1,43 @@
+{
+  "returncode": 0,
+  "stdout": {
+    "scope": "host import and QCoreApplication only; no GUI or Flatpak",
+    "status": "PASS",
+    "python": "3.14.4",
+    "glibc": [
+      "glibc",
+      "2.43"
+    ],
+    "PySide6": "6.11.3",
+    "shiboken6": "6.11.3",
+    "Qt": "6.11.3",
+    "imports": [
+      "QtCore",
+      "QtWidgets",
+      "QtWebEngineCore",
+      "QtWebEngineWidgets"
+    ],
+    "Qt_provider_scope": "disposable official wheel tree",
+    "Qt_library_basenames": [
+      "libQt6Core.so.6",
+      "libQt6DBus.so.6",
+      "libQt6Gui.so.6",
+      "libQt6Network.so.6",
+      "libQt6OpenGL.so.6",
+      "libQt6Positioning.so.6",
+      "libQt6PrintSupport.so.6",
+      "libQt6Qml.so.6",
+      "libQt6QmlMeta.so.6",
+      "libQt6QmlModels.so.6",
+      "libQt6QmlWorkerScript.so.6",
+      "libQt6Quick.so.6",
+      "libQt6QuickWidgets.so.6",
+      "libQt6WebChannel.so.6",
+      "libQt6WebEngineCore.so.6",
+      "libQt6WebEngineWidgets.so.6",
+      "libQt6Widgets.so.6"
+    ]
+  },
+  "stderr_bytes": 0,
+  "error_type": null
+}

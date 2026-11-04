@@ -1,0 +1,12 @@
+[
+  {
+    "mode": "check",
+    "output": "All checks passed!\n",
+    "status": "PASS"
+  },
+  {
+    "mode": "format --check",
+    "output": "3 files already formatted\n",
+    "status": "PASS"
+  }
+]

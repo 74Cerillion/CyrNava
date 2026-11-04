@@ -1,0 +1,55 @@
+{
+  "status": "MATCHES TRIAGED; PACKAGES NOT PATCHED",
+  "scope": "pinned Linux x86_64 KDE runtime, not Windows/macOS or arbitrary Python build use",
+  "candidate_source_import_scan": {
+    "command": [
+      "rg",
+      "-n",
+      "--glob",
+      "*.py",
+      "(^|\\s)(from|import)\\s+(mako|setuptools)|TemplateLookup|install_as_egg|setup\\.py|sdist",
+      "backend/app",
+      "desktop/native"
+    ],
+    "matches": 0
+  },
+  "findings": [
+    {
+      "id": "GHSA-5639-2j2p-m4mx",
+      "component": "Mako 1.4.1.dev0",
+      "location": "KDE runtime only",
+      "affected_path": "Windows TemplateLookup drive-letter URI confinement",
+      "assessment": "Windows path semantics absent from supported Linux runtime; CyrNava does not invoke Mako template lookup. No supported application attack path established.",
+      "patch": "1.4.2",
+      "state": "unpatched; bounded not-reachable assessment",
+      "primary": "https://github.com/advisories/GHSA-5639-2j2p-m4mx"
+    },
+    {
+      "id": "GHSA-h35f-9h28-mq5c",
+      "component": "setuptools 80.10.2",
+      "location": "KDE runtime only",
+      "affected_path": "macOS normalization-sensitive source distribution generation",
+      "assessment": "Application does not produce Python sdists; Linux Flatpak packaging uses exact prebuilt hash-locked wheels, not runtime sdist generation. No supported application attack path established.",
+      "patch": "83.0.0",
+      "state": "unpatched; bounded not-reachable assessment",
+      "primary": "https://github.com/advisories/GHSA-h35f-9h28-mq5c"
+    },
+    {
+      "id": "GHSA-xmj3-9gf7-h52w",
+      "component": "setuptools 80.10.2",
+      "location": "KDE runtime only",
+      "affected_path": "Windows legacy Wheel.install_as_egg namespace metadata handling",
+      "assessment": "Supported runtime is Linux and application never invokes legacy wheel installation. Host Flatpak runtime retrieval does not use setuptools installation APIs.",
+      "patch": "84.1.0",
+      "state": "unpatched; bounded not-reachable assessment",
+      "primary": "https://github.com/advisories/GHSA-xmj3-9gf7-h52w"
+    }
+  ],
+  "limitations": [
+    "Direct application import/source scan is not proof about every third-party caller",
+    "No runtime patch or upstream lock substitution performed",
+    "Reassess if supported platform, build mechanism or package use changes",
+    "Not a complete vulnerability-clearance or formal VEX certification"
+  ],
+  "product_inventory_sha256": "35acfd3adab8e0f8cca33b6183a874887a21614db28e14184f8306ef38cdf8d9"
+}

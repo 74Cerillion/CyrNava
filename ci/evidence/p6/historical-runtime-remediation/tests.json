@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "scope": "Local disposable clean-checkout regression only; no native runtime/import/GUI execution",
+  "focused": {
+    "tests_passed": 74,
+    "subtests_passed": 24,
+    "seconds": 0.62,
+    "output": "focused.txt"
+  },
+  "release_workflow": {
+    "tests_passed": 231,
+    "subtests_passed": 228,
+    "seconds": 8.48,
+    "warnings": 1,
+    "warning": "Existing deliberate duplicate-ZIP negative fixture",
+    "output": "release-workflow.txt"
+  },
+  "new_regressions": 24,
+  "ruff_check": "PASS",
+  "ruff_format_check": "PASS",
+  "production_backend_frontend": "Not rerun; no application code change",
+  "native_runtime_restoration": "NOT EXECUTED; separate authorization required",
+  "native_imports_A_B": "NOT EXECUTED",
+  "native_GUI": "NOT EXECUTED",
+  "production_runtime_update_compatibility": "OPEN",
+  "commands": [
+    "TMPDIR=/var/tmp PYTHONDONTWRITEBYTECODE=1 ci-output/p6-clean/checkout/backend/.venv/bin/python -m pytest -q -p no:cacheprovider ci-output/p6-historical-clean/checkout/ci/release/test_historical_runtime.py ci-output/p6-historical-clean/checkout/ci/release/test_runtime_identity.py ci-output/p6-historical-clean/checkout/ci/release/test_native_diagnostics.py ci-output/p6-historical-clean/checkout/ci/release/test_progress.py ci-output/p6-historical-clean/checkout/ci/release/test_real_update_audit.py",
+    "TMPDIR=/var/tmp PYTHONDONTWRITEBYTECODE=1 ci-output/p6-clean/checkout/backend/.venv/bin/python -m pytest -q -p no:cacheprovider ci-output/p6-historical-clean/checkout/ci/release ci-output/p6-historical-clean/checkout/ci/test_ci.py"
+  ]
+}

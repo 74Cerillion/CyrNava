@@ -1,0 +1,251 @@
+{
+  "reviewed_utc": "2026-10-31T13:54:59.972396+00:00",
+  "base_commit": "7aaefd0f60a735637ee603ac380587a25b73f6cb",
+  "owner_authorization": "One P5B-only integration commit/push; no main change, environment configuration or staging dispatch",
+  "staged_files_reviewed": [
+    {
+      "path": ".github/workflows/release.yml",
+      "bytes": 3294,
+      "sha256": "3b2a08b287380693393ed2c5cffc22bd155f53efd42dc13be4ef351b55812922"
+    },
+    {
+      "path": "ci/P5B_APPEARANCE_CORRECTION.md",
+      "bytes": 8408,
+      "sha256": "7ed5b4e16fb0b8c8c6a98ebd4cbdc36474be88559212430842b82ca88a33c73e"
+    },
+    {
+      "path": "ci/P5B_GITHUB_STAGING_PLAN.md",
+      "bytes": 16361,
+      "sha256": "9e6a147e2375515a54461d7f97d4a262146c482a0707141e64967e8b7eecf34c"
+    },
+    {
+      "path": "ci/P5B_OWNER_CHECKS.md",
+      "bytes": 10535,
+      "sha256": "d1597f92a5c3b38cbcca441950e4c852ceabdc97256ebaeb71b62a3733494774"
+    },
+    {
+      "path": "ci/P5B_REPORT.md",
+      "bytes": 31505,
+      "sha256": "95bd6fc05cfb179ef7e148d96ae5a94a7e0086aace92c5731694588757590ce8"
+    },
+    {
+      "path": "ci/P5B_SIGNING_DESIGN.md",
+      "bytes": 10770,
+      "sha256": "14589b9ec6e94bb56b27fb1dbe69c0a43ade36362d77e5928956b38311c689dc"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/appearance-state-verification.json",
+      "bytes": 19991,
+      "sha256": "0a50745ff2400587f22a8c763a0c6ebc1eecd13f2ccde9a4670d253b0ff574e1"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/artifact-verification.json",
+      "bytes": 1398,
+      "sha256": "572700ada1f47e41c47c8183f42c08dd4dff1c3f18a8af63b1de0ed9e2847032"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/artifacts.json",
+      "bytes": 3499,
+      "sha256": "55476989b5a78d137f54715b95731c0dbfbbeb51b60a8851f82ff8193a631501"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/backend-backend.json",
+      "bytes": 622,
+      "sha256": "3da4b6b2ef65752c9676b313175cd13e8096451dcf7b41c8a9ce3f7be0461fca"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/backend-excerpt.txt",
+      "bytes": 82,
+      "sha256": "3e02ba26c6c5ae3f44315120ba7c560f05b87108128729b1faaeab0133eaa6e0"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/diagnostic-verification.json",
+      "bytes": 700,
+      "sha256": "eb04f500d5e6d4b03d3dfb71aeb2763be3741b6b59c77377f400e1fc6cc8ee3a"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/flatpak-audit.json",
+      "bytes": 1237,
+      "sha256": "0651c376153e365fb8a914a3935ee2f876d5dc49d23ac8a35001833e957e787d"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/flatpak-build.json",
+      "bytes": 89,
+      "sha256": "740b41a29de3a8ce41dce35a3eb075a714fb3667f8044a1cb30ced10fc87384b"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/flatpak-excerpt.txt",
+      "bytes": 2674,
+      "sha256": "1edf130b0d2b72c3ff4d3f5aeb8994052d3b1c4747a0046cb43e9aa4775068ce"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/flatpak-prepare.json",
+      "bytes": 1406,
+      "sha256": "6ff95cde1532f9d5b159b8b278deccb26913a327aaf45d0ea55a4a2a94b4d43d"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/flatpak-result.json",
+      "bytes": 508,
+      "sha256": "18d5e1d5f3154142eb48d6251abe0cff9b41be07162055e4088b0a0b14c30525"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/frontend-browser-junit.xml",
+      "bytes": 5886,
+      "sha256": "00ad52606b70b37efb38fa3b8f59dd71e9b468b96156b7717d38474691667721"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/frontend-excerpt.txt",
+      "bytes": 1311,
+      "sha256": "e9001add93797f029567ed3e6116b9a46642124f0818a891a931fb7f9942e84f"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/frontend-frontend.json",
+      "bytes": 480,
+      "sha256": "8fc3df8d541f7188580867edc8d7ecda91d4c1ebdc4ac4e08fc0d46cbf959cda"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/jobs.json",
+      "bytes": 9586,
+      "sha256": "867105ac4dc4b20620e9b920054a504beb5b5aefa99618a8774833697fa07232"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/package-build-inputs.json",
+      "bytes": 12564,
+      "sha256": "815bc4abcd69354a7b1af5fd97a9ccf3efb401324b9a042462888b19f0e15537"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/package-provenance.json",
+      "bytes": 1172,
+      "sha256": "59582d214f9ce50b7b35847ad8058d48ab2a0a2e288292203455b21041fc0682"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/package-result.json",
+      "bytes": 508,
+      "sha256": "18d5e1d5f3154142eb48d6251abe0cff9b41be07162055e4088b0a0b14c30525"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/package-verification.json",
+      "bytes": 1154,
+      "sha256": "b5b4cadbb6fe77b6e166e7bd4244480bbfa148e4c69c88a0385b080e1ad964cf"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/required-excerpt.txt",
+      "bytes": 357,
+      "sha256": "e60744ab75dc87789640534dad33b6fe963fc31960422dfa31613a7645da8d89"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/run.json",
+      "bytes": 454,
+      "sha256": "d77ccf8c6ff5d3b250b9ed7685da9ff4471ed0d708f4d7c4953607ecf7d6599e"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/summary.json",
+      "bytes": 765,
+      "sha256": "694271e5d8248d73f42499102dba1f6c61d2df93cce814960a4dcacfda6eddb6"
+    },
+    {
+      "path": "ci/evidence/p5b/hosted-ci-41205351385/validation-excerpt.txt",
+      "bytes": 125,
+      "sha256": "40f48dcd69b1b0367aaf19977d977f636256d0ede8a5e1dba4e49fc8e27c728f"
+    },
+    {
+      "path": "ci/evidence/p5b/staging-final-preparation-2026-10-31/github-read-only.json",
+      "bytes": 1845,
+      "sha256": "94a1cba530c68b670399ee396d138a0a30e0338fbc0965462552dfe77417f5b2"
+    },
+    {
+      "path": "ci/evidence/p5b/staging-final-preparation-2026-10-31/local-verification.json",
+      "bytes": 4344,
+      "sha256": "d30aaa4ad86762ec044706184752227aaa5a4d3ab6b11961e1ac0b146975d1b5"
+    },
+    {
+      "path": "ci/evidence/p5b/staging-final-preparation-2026-10-31/scope-review.json",
+      "bytes": 5112,
+      "sha256": "1d84a3d3f9b3c1d986e8c101fdac0df55c3c13679126b174e514c48453635516"
+    },
+    {
+      "path": "ci/evidence/p5b/staging-final-preparation-2026-10-31/test-results.txt",
+      "bytes": 12502,
+      "sha256": "2541b0f328494ad59f52fb6f00c6e239b23bece124acb5218736529495038683"
+    },
+    {
+      "path": "ci/release/core.py",
+      "bytes": 29211,
+      "sha256": "ee56a92073cfd1795d90fd804dc1ee870c948d846973c4bfe0b6b75b63a70fd3"
+    },
+    {
+      "path": "ci/release/github.py",
+      "bytes": 7672,
+      "sha256": "466ebcdf38e3fa404a628131a9804449f62faedb4ad0d52b029025e532453efc"
+    },
+    {
+      "path": "ci/release/policy.json",
+      "bytes": 1910,
+      "sha256": "d66a7f3c4de34d259349f2e28f47b53ed240170b6643650b673e29aa7e2a43f4"
+    },
+    {
+      "path": "ci/release/preflight.py",
+      "bytes": 648,
+      "sha256": "290de0f9081a1704cab03a6d1e7dab02385b3a29c14d2472b1d95e87a6f14bef"
+    },
+    {
+      "path": "ci/release/registration-only.yml",
+      "bytes": 905,
+      "sha256": "3a8c4ad86f958dc7d437c5ee4e5ad2ac57d8753cc4429252edc0005bf385c7c5"
+    },
+    {
+      "path": "ci/release/registration_policy.py",
+      "bytes": 4633,
+      "sha256": "8af292b7989f7796a93e64cc13fb98915422b287f3c1f73aa7aa03ccde18b32f"
+    },
+    {
+      "path": "ci/release/stage.py",
+      "bytes": 10390,
+      "sha256": "9c6a536ea6710a7bf4ed9377f5955698e61896d4dbd50a51deea217189d2854b"
+    },
+    {
+      "path": "ci/release/test_policy.py",
+      "bytes": 23441,
+      "sha256": "cba293d0709aea98bd5d99fc40b008270b2b2f8d00d72bc55fc3d31d6899b661"
+    },
+    {
+      "path": "ci/release/test_registration.py",
+      "bytes": 7602,
+      "sha256": "f14382887e51c0bff00e9da54dd1cc25c8b28a465429b97062ec11b2697897cc"
+    },
+    {
+      "path": "ci/release/workflow-contract.json",
+      "bytes": 4143,
+      "sha256": "aedd68eb808cc963aebe744ad7d5ebc2f0f52e0bc72a575a18c9551b5c9d65ef"
+    },
+    {
+      "path": "ci/release/workflow_policy.py",
+      "bytes": 3382,
+      "sha256": "968929d29c95ce6b7c477031c3b4563cc0c5d90d9cdc6a20dca9187fd1e40304"
+    }
+  ],
+  "recognized_public_test_fixtures": [
+    {
+      "path": "ci/release/test_policy.py",
+      "kind": "signed_URL",
+      "classification": "Pre-existing public synthetic transport-test fixture"
+    },
+    {
+      "path": "ci/release/test_policy.py",
+      "kind": "bearer",
+      "classification": "Pre-existing public synthetic transport-test fixture"
+    }
+  ],
+  "unresolved_sensitive_material": [],
+  "candidate_executable_hashes_match_verified_source": true,
+  "local_tests": {
+    "release_registration_signing": 59,
+    "CI_contracts": 31,
+    "status": "PASS"
+  },
+  "preserved": "Production application/CSS/packaging/P5A CI/lifecycle unchanged; artifact source/hash pins and cryptographic/publication algorithms unchanged",
+  "allowed_policy_change": "Owner-approved single-maintainer manual staging replaces independent deployment approval",
+  "fast_forward_basis": "7aaefd0f60a735637ee603ac380587a25b73f6cb is the remote tip; new commit will be its direct child",
+  "historical_evidence": "Preserved; raw archives/logs and private material are not staged",
+  "main_p5a_tag_and_external_settings_unchanged": true
+}

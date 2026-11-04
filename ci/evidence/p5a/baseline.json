@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-31",
+  "branch": "desktop/p2-production-integration",
+  "commit": "8418339cf3c9ff7ae26f792ed8697b7c16d7450a",
+  "upstream": "origin/desktop/p2-production-integration",
+  "initial_worktree": "CLEAN",
+  "tags": [],
+  "existing_workflows": [],
+  "P4": "PASS / CLOSED BY OWNER ACCEPTANCE; native evidence limitations preserved",
+  "P4_record": "desktop/native/evidence/p4/closeout-2026-10-30/owner-acceptance.json",
+  "baseline_lint": "Frontend PASS; backend explicit committed Ruff config found 16 import-order issues in tests. External inherited host Ruff settings are not a portable CI configuration.",
+  "host_limits": [
+    "Codex cannot create sandbox namespaces; real native Save portals require owner desktop",
+    "x86_64/Wayland only",
+    "8 GiB free on host source volume; avoid unnecessary full local build"
+  ],
+  "github_repo": "74Cerillion/CyrNava",
+  "repository_visibility": "public"
+}

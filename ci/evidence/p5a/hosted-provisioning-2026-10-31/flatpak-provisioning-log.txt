@@ -1,0 +1,59 @@
+2026-10-31T07:44:47.2021209Z ##[group]Run python ci/flatpak.py prepare --output ci-output/flatpak
+2026-10-31T07:44:47.2021618Z [36;1mpython ci/flatpak.py prepare --output ci-output/flatpak[0m
+2026-10-31T07:44:47.2040064Z shell: /usr/bin/bash --noprofile --norc -eo pipefail {0}
+2026-10-31T07:44:47.2040331Z env:
+2026-10-31T07:44:47.2040513Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-31T07:44:47.2040735Z   PYTHONUNBUFFERED: 1
+2026-10-31T07:44:47.2041013Z   XDG_CACHE_HOME: /home/runner/work/CyrNava/CyrNava/ci-output/build-cache
+2026-10-31T07:44:47.2041365Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-31T07:44:47.2041705Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-31T07:44:47.2042048Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-31T07:44:47.2042359Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-31T07:44:47.2042670Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-31T07:44:47.2042995Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-31T07:44:47.2043257Z ##[endgroup]
+2026-10-31T07:44:47.9539782Z Installing runtime/org.kde.Platform/x86_64/6.11
+2026-10-31T07:45:08.8945530Z Installing runtime/org.kde.Sdk/x86_64/6.11
+2026-10-31T07:45:39.0369443Z Installing app/io.qt.PySide.BaseApp/x86_64/6.11
+2026-10-31T07:45:57.3092477Z Updating runtime/org.kde.Platform/x86_64/6.11
+2026-10-31T07:46:06.4493194Z Updating runtime/org.kde.Sdk/x86_64/6.11
+2026-10-31T07:46:34.2582924Z 
+2026-10-31T07:46:34.2583349Z Nothing to do.
+2026-10-31T07:46:34.3385353Z {
+2026-10-31T07:46:34.3385707Z   "status": "PASS",
+2026-10-31T07:46:34.3386059Z   "operation": "prepare",
+2026-10-31T07:46:34.3386767Z   "runtime_lock": {
+2026-10-31T07:46:34.3387068Z     "architecture": "x86_64",
+2026-10-31T07:46:34.3387373Z     "python": "3.13",
+2026-10-31T07:46:34.3387649Z     "qt_series": "6.11",
+2026-10-31T07:46:34.3388339Z     "application_version": "0.1.0",
+2026-10-31T07:46:34.3388663Z     "schema": 5,
+2026-10-31T07:46:34.3388936Z     "refs": {
+2026-10-31T07:46:34.3389528Z       "org.kde.Platform//6.11": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+2026-10-31T07:46:34.3390399Z       "org.kde.Sdk//6.11": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+2026-10-31T07:46:34.3391273Z       "io.qt.PySide.BaseApp//6.11": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e"
+2026-10-31T07:46:34.3391859Z     },
+2026-10-31T07:46:34.3392101Z     "verification": [
+2026-10-31T07:46:34.3392364Z       {
+2026-10-31T07:46:34.3392655Z         "ref": "org.kde.Platform//6.11",
+2026-10-31T07:46:34.3393288Z         "expected_commit": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+2026-10-31T07:46:34.3394116Z         "actual_commit": "76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+2026-10-31T07:46:34.3394584Z         "outcome": "PASS"
+2026-10-31T07:46:34.3394784Z       },
+2026-10-31T07:46:34.3394941Z       {
+2026-10-31T07:46:34.3395133Z         "ref": "org.kde.Sdk//6.11",
+2026-10-31T07:46:34.3395528Z         "expected_commit": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+2026-10-31T07:46:34.3396054Z         "actual_commit": "df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+2026-10-31T07:46:34.3396612Z         "outcome": "PASS"
+2026-10-31T07:46:34.3396815Z       },
+2026-10-31T07:46:34.3396972Z       {
+2026-10-31T07:46:34.3397180Z         "ref": "io.qt.PySide.BaseApp//6.11",
+2026-10-31T07:46:34.3397591Z         "expected_commit": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+2026-10-31T07:46:34.3398092Z         "actual_commit": "a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+2026-10-31T07:46:34.3398463Z         "outcome": "PASS"
+2026-10-31T07:46:34.3398659Z       }
+2026-10-31T07:46:34.3398822Z     ]
+2026-10-31T07:46:34.3398986Z   },
+2026-10-31T07:46:34.3399163Z   "complete": true,
+2026-10-31T07:46:34.3399350Z   "seconds": 107.064
+2026-10-31T07:46:34.3399547Z }

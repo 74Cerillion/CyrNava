@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "AST_unchanged_functions": [
+    "verify_signature",
+    "signature_status",
+    "extract",
+    "host_supported",
+    "checked_path",
+    "regular",
+    "installed",
+    "launch",
+    "setup_environment",
+    "installation_lock"
+  ]
+}

@@ -1,0 +1,177 @@
+2026-10-31T06:31:12.4794014Z [2m Test Files [22m [1m[32m22 passed[39m[22m[90m (22)[39m
+2026-10-31T06:31:12.4795586Z [2m      Tests [22m [1m[32m273 passed[39m[22m[90m (273)[39m
+2026-10-31T06:31:12.4796719Z [2m   Start at [22m 06:30:56
+2026-10-31T06:31:12.4801262Z [2m   Duration [22m 15.64s[2m (tests 42%, environment 39%, import 8%, setup 6%, transform 4%)[22m
+2026-10-31T06:31:12.4807634Z 
+2026-10-31T06:31:12.4809183Z [2mEnvironment [22m [33mjsdom was created 22 times[39m[2m · 16.69s total, 39% of tracked time[22m
+2026-10-31T06:31:12.4811413Z [2m            [22m [2mcreate it once per worker with [22m[33mpool: 'vmThreads'[39m[2m (keeps per-file isolation) or [22m[33misolate: false[39m[2m (shares it across files)[22m
+2026-10-31T06:31:12.4813964Z 
+2026-10-31T06:31:12.5592133Z CI: typescript-production-build
+2026-10-31T06:31:12.6653153Z 
+2026-10-31T06:31:12.6654344Z > cyrnava@0.1.0 build
+2026-10-31T06:31:12.6654975Z > tsc --noEmit && vite build
+2026-10-31T06:31:12.6655312Z 
+2026-10-31T06:31:17.0668884Z [36mvite v8.3.4 [32mbuilding client environment for production...[36m[39m
+2026-10-31T06:31:17.0777482Z transforming...
+2026-10-31T06:31:17.3948357Z ✓ 833 modules transformed.
+2026-10-31T06:31:17.4999198Z rendering chunks...
+2026-10-31T06:31:17.7854459Z computing gzip size...
+2026-10-31T06:31:17.8059822Z dist/index.html                                         1.15 kB │ gzip:   0.56 kB
+2026-10-31T06:31:17.8061098Z dist/assets/inter-v12-latin-100-BQDzDElq.woff2         16.54 kB
+2026-10-31T06:31:17.8062065Z dist/assets/inter-v12-latin-regular-YtgfLPRn.woff2     16.70 kB
+2026-10-31T06:31:17.8062970Z dist/assets/inter-v12-latin-900-CMga-52B.woff2         17.17 kB
+2026-10-31T06:31:17.8063522Z dist/assets/inter-v12-latin-300-DEbyFmpd.woff2         17.32 kB
+2026-10-31T06:31:17.8064054Z dist/assets/inter-v12-latin-200-BxfrU12A.woff2         17.34 kB
+2026-10-31T06:31:17.8064562Z dist/assets/inter-v12-latin-500-DfX5FI9E.woff2         17.55 kB
+2026-10-31T06:31:17.8065055Z dist/assets/inter-v12-latin-600-BvOeHRLc.woff2         17.66 kB
+2026-10-31T06:31:17.8065543Z dist/assets/inter-v12-latin-800-Bdy4lAMa.woff2         17.76 kB
+2026-10-31T06:31:17.8066034Z dist/assets/inter-v12-latin-700-Bj1B9WKG.woff2         17.78 kB
+2026-10-31T06:31:17.8066510Z dist/assets/inter-v12-latin-100-46Mq0mOp.woff          21.24 kB
+2026-10-31T06:31:17.8066987Z dist/assets/inter-v12-latin-regular-CahmJf_6.woff      21.42 kB
+2026-10-31T06:31:17.8067469Z dist/assets/inter-v12-latin-900-ORHAl5ZU.woff          21.98 kB
+2026-10-31T06:31:17.8067948Z dist/assets/inter-v12-latin-300-f7r92Nkj.woff          22.15 kB
+2026-10-31T06:31:17.8068417Z dist/assets/inter-v12-latin-200-DXfqWPZg.woff          22.23 kB
+2026-10-31T06:31:17.8068900Z dist/assets/inter-v12-latin-500-BQ2gQN_M.woff          22.51 kB
+2026-10-31T06:31:17.8069397Z dist/assets/inter-v12-latin-600-D01NXWOK.woff          22.63 kB
+2026-10-31T06:31:17.8069903Z dist/assets/inter-v12-latin-700-B5TOIllR.woff          22.68 kB
+2026-10-31T06:31:17.8070733Z dist/assets/inter-v12-latin-800-DFVvDWwT.woff          22.71 kB
+2026-10-31T06:31:17.8071428Z dist/assets/index-B4IDcU2d.css                        249.46 kB │ gzip:  40.51 kB
+2026-10-31T06:31:17.8072096Z dist/assets/module-mVd_cwoa.js                         76.72 kB │ gzip:  27.52 kB
+2026-10-31T06:31:17.8072748Z dist/assets/native-Cqs-2kTC.js                        429.05 kB │ gzip:  82.21 kB
+2026-10-31T06:31:17.8073380Z dist/assets/index-DB4gpyab.js                       1,208.41 kB │ gzip: 366.37 kB
+2026-10-31T06:31:17.8074102Z 
+2026-10-31T06:31:17.8156736Z [33m[plugin builtin:vite-reporter] 
+2026-10-31T06:31:17.8157771Z (!) Some chunks are larger than 500 kB after minification. Consider:
+2026-10-31T06:31:17.8158816Z - Using dynamic import() to code-split the application
+2026-10-31T06:31:17.8163135Z - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+2026-10-31T06:31:17.8512546Z [32m✓ built in 782ms[39m
+2026-10-31T06:31:17.8836679Z CI: chromium-production-integration
+2026-10-31T06:31:17.9762945Z 
+2026-10-31T06:31:17.9763548Z > cyrnava@0.1.0 test:release
+2026-10-31T06:31:17.9764414Z > CYRNAVA_E2E_RELEASE=1 playwright test --reporter=list,junit
+2026-10-31T06:31:17.9764918Z 
+2026-10-31T06:31:19.0134854Z 
+2026-10-31T06:31:19.0135595Z Running 19 tests using 1 worker
+2026-10-31T06:31:19.0136275Z 
+2026-10-31T06:31:32.2569797Z 
+2026-10-31T06:31:32.2571916Z   ✓   1 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (11.4s)
+2026-10-31T06:31:42.3618990Z 
+2026-10-31T06:31:42.3621230Z   ✓   2 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing (10.1s)
+2026-10-31T06:31:48.0167180Z 
+2026-10-31T06:31:48.0169187Z   ✓   3 e2e/lifecycle.spec.ts:232:1 › a committed write with a lost acknowledgement retains its draft and requires conflict review (5.6s)
+2026-10-31T06:31:51.3698999Z 
+2026-10-31T06:31:51.3701118Z   ✓   4 e2e/lifecycle.spec.ts:295:1 › visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it (3.3s)
+2026-10-31T06:31:54.6832879Z 
+2026-10-31T06:31:54.6834388Z   ✓   5 e2e/lifecycle.spec.ts:349:1 › killed isolated browser leaves no managed backend after lease expiry (3.3s)
+2026-10-31T06:31:59.2527563Z   ✓   6 e2e/search.spec.ts:128:1 › global search opens native rich notes by code prefix, supports keyboard selection and reveals ancestors (4.5s)
+2026-10-31T06:32:07.3051409Z   ✓   7 e2e/search.spec.ts:190:1 › opening a search result waits for pending saves and a failed save keeps the draft open (8.0s)
+2026-10-31T06:32:13.7532120Z   ✓   8 e2e/search.spec.ts:252:1 › an unchanged search reflects UI renames, folder moves and deletion, and retries a failed query (6.4s)
+2026-10-31T06:32:23.9011757Z 
+2026-10-31T06:32:23.9013559Z   ✓   9 e2e/search.spec.ts:318:1 › a schema4 profile migrates, opens rich search results and rebuilds offline without changing canonical data (10.1s)
+2026-10-31T06:32:36.5062791Z   ✓  10 e2e/workspace.spec.ts:111:1 › appearance follows system and explicit preferences without changing notes, templates or autosave (12.6s)
+2026-10-31T06:32:42.7918281Z 
+2026-10-31T06:32:42.7919722Z   ✓  11 e2e/workspace.spec.ts:271:1 › CyrNava reference appearance preserves the live editor, local images and saved content (6.3s)
+2026-10-31T06:32:52.0935607Z 
+2026-10-31T06:32:52.0937375Z   ✓  12 e2e/workspace.spec.ts:360:1 › navigation preference and reusable templates preserve independent rich notes and screenshots (9.3s)
+2026-10-31T06:33:03.1232792Z 
+2026-10-31T06:33:03.1234911Z   ✓  13 e2e/workspace.spec.ts:475:1 › real editing, outage recovery, safe navigation, image lifecycle and offline restoration drill (11.0s)
+2026-10-31T06:33:06.6309434Z   ✓  14 e2e/workspace.spec.ts:580:1 › revision conflict retains the draft and exports both versions before explicit reload (3.5s)
+2026-10-31T06:33:25.3719514Z 
+2026-10-31T06:33:25.3723630Z   ✘  15 e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (18.2s)
+2026-10-31T06:33:56.7985982Z 
+2026-10-31T06:33:56.7990456Z   ✓  16 e2e/workspace.spec.ts:714:1 › all exposed editor actions persist; mixed content reconstructs after restart and rapid edits (30.8s)
+2026-10-31T06:34:00.4532453Z   ✓  17 e2e/workspace.spec.ts:836:1 › desktop close protocol drains real autosave and retains an interrupted draft (3.6s)
+2026-10-31T06:34:02.6440396Z 
+2026-10-31T06:34:02.6442055Z   ✓  18 e2e/workspace.spec.ts:873:1 › desktop close waits for an image upload and its subsequent document save (2.2s)
+2026-10-31T06:34:04.1137790Z   ✓  19 e2e/workspace.spec.ts:912:1 › desktop close does not silently discard an unsubmitted management form (1.5s)
+2026-10-31T06:34:04.1916611Z 
+2026-10-31T06:34:04.1922185Z 
+2026-10-31T06:34:04.1933000Z   1) e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation 
+2026-10-31T06:34:04.1933989Z 
+2026-10-31T06:34:04.1934714Z     TimeoutError: page.waitForEvent: Timeout 10000ms exceeded while waiting for event "filechooser"
+2026-10-31T06:34:04.1935807Z     =========================== logs ===========================
+2026-10-31T06:34:04.1936466Z     waiting for event "filechooser"
+2026-10-31T06:34:04.1937108Z     ============================================================
+2026-10-31T06:34:04.1937523Z 
+2026-10-31T06:34:04.1938683Z       654 |       await editor().getByText('Synthetic learning notes only.', { exact: true }).click(); await page.keyboard.press('End'); await page.keyboard.press('Enter');
+2026-10-31T06:34:04.1942179Z       655 |       await page.keyboard.type('/image'); await page.keyboard.press('Enter');
+2026-10-31T06:34:04.1943521Z     > 656 |       const [chooser] = await Promise.all([page.waitForEvent('filechooser', { timeout: 10_000 }), page.getByRole('button', { name: 'Upload image', exact: true }).click({ timeout: 10_000 })]);
+2026-10-31T06:34:04.1944731Z           |                                                 ^
+2026-10-31T06:34:04.1945890Z       657 |       await chooser.setFiles(`${png}.${extension}`); await page.keyboard.press('Escape'); await saved(page);
+2026-10-31T06:34:04.1946871Z       658 |     }
+2026-10-31T06:34:04.1947493Z       659 |     await expect(editor().locator('img')).toHaveCount(3);
+2026-10-31T06:34:04.1948520Z         at /home/runner/work/CyrNava/CyrNava/frontend/e2e/workspace.spec.ts:656:49
+2026-10-31T06:34:04.1949213Z 
+2026-10-31T06:34:04.1950137Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-31T06:34:04.1951773Z     test-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/test-failed-1.png
+2026-10-31T06:34:04.1953310Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-31T06:34:04.1953872Z 
+2026-10-31T06:34:04.1954699Z     Error Context: test-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/error-context.md
+2026-10-31T06:34:04.1955621Z 
+2026-10-31T06:34:04.1956466Z     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+2026-10-31T06:34:04.1957802Z     test-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/trace.zip
+2026-10-31T06:34:04.1958699Z     Usage:
+2026-10-31T06:34:04.1958914Z 
+2026-10-31T06:34:04.1959750Z         npx playwright show-trace test-results/workspace-Phase-1-formatti-37300-and-sanitized-documentation/trace.zip
+2026-10-31T06:34:04.1961431Z 
+2026-10-31T06:34:04.1962212Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-31T06:34:04.1962792Z 
+2026-10-31T06:34:04.1962952Z   1 failed
+2026-10-31T06:34:04.1964173Z     e2e/workspace.spec.ts:604:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation 
+2026-10-31T06:34:04.1965205Z   18 passed (2.8m)
+2026-10-31T06:34:04.2361842Z ##[error]Process completed with exit code 1.
+2026-10-31T06:34:04.2471353Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+2026-10-31T06:34:04.2471807Z with:
+2026-10-31T06:34:04.2472139Z   name: frontend-diagnostics-047a99b1473304cc73518dff6427bf7937c542a2-1
+2026-10-31T06:34:04.2472692Z   path: ci-output/frontend.json
+ci-output/browser-junit.xml
+frontend/test-results/
+
+2026-10-31T06:34:04.2473126Z   retention-days: 7
+2026-10-31T06:34:04.2473347Z   if-no-files-found: error
+2026-10-31T06:34:04.2473606Z   compression-level: 6
+2026-10-31T06:34:04.2473824Z   overwrite: false
+2026-10-31T06:34:04.2474039Z   include-hidden-files: false
+2026-10-31T06:34:04.2474279Z env:
+2026-10-31T06:34:04.2474475Z   PIP_DISABLE_PIP_VERSION_CHECK: 1
+2026-10-31T06:34:04.2474732Z   PYTHONUNBUFFERED: 1
+2026-10-31T06:34:04.2475133Z   PLAYWRIGHT_JUNIT_OUTPUT_FILE: /home/runner/work/CyrNava/CyrNava/ci-output/browser-junit.xml
+2026-10-31T06:34:04.2475660Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-31T06:34:04.2476137Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+2026-10-31T06:34:04.2476573Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-31T06:34:04.2476958Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-31T06:34:04.2477346Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+2026-10-31T06:34:04.2477728Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+2026-10-31T06:34:04.2478056Z ##[endgroup]
+2026-10-31T06:34:04.4320416Z (node:4303) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-31T06:34:04.4322017Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-31T06:34:04.4573013Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-31T06:34:04.4575405Z The least common ancestor is /home/runner/work/CyrNava/CyrNava. This will be the root directory of the artifact
+2026-10-31T06:34:04.4576667Z With the provided path, there will be 61 files uploaded
+2026-10-31T06:34:04.4577945Z Artifact name is valid!
+2026-10-31T06:34:04.4578605Z Root directory input is valid!
+2026-10-31T06:34:04.7921351Z Beginning upload of artifact content to blob storage
+2026-10-31T06:34:05.1482845Z (node:4303) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-31T06:34:05.7181748Z Uploaded bytes 8388608
+2026-10-31T06:34:05.8979528Z Uploaded bytes 14017010
+2026-10-31T06:34:05.9451834Z Finished uploading artifact content to blob storage!
+2026-10-31T06:34:05.9453403Z SHA256 digest of uploaded artifact zip is 1c331a6d36df70821a896436999e1fbe59d32680dd07b0bc3614b9c9e796c4cb
+2026-10-31T06:34:05.9454563Z Finalizing artifact upload
+2026-10-31T06:34:06.3638679Z Artifact frontend-diagnostics-047a99b1473304cc73518dff6427bf7937c542a2-1.zip successfully finalized. Artifact ID 13033431818
+2026-10-31T06:34:06.3642038Z Artifact frontend-diagnostics-047a99b1473304cc73518dff6427bf7937c542a2-1 has been successfully uploaded! Final size is 14017010 bytes. Artifact ID is 13033431818
+2026-10-31T06:34:06.3936842Z Post job cleanup.
+2026-10-31T06:34:06.4936601Z [command]/usr/bin/git version
+2026-10-31T06:34:06.4987124Z git version 2.56.0
+2026-10-31T06:34:06.5033029Z Temporarily overriding HOME='/home/runner/work/_temp/a618cb66-b0de-4235-a9ac-6f5aafdc18ca' before making global git config changes
+2026-10-31T06:34:06.5034592Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-31T06:34:06.5040528Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/CyrNava/CyrNava
+2026-10-31T06:34:06.5082401Z Removing SSH command configuration
+2026-10-31T06:34:06.5091774Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-31T06:34:06.5137538Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-31T06:34:06.5413032Z Removing HTTP extra header
+2026-10-31T06:34:06.5419840Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-31T06:34:06.5765085Z Removing includeIf entries pointing to credentials config files
+2026-10-31T06:34:06.5775607Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-31T06:34:06.5839787Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-31T06:34:06.6335677Z Cleaning up orphan processes
+

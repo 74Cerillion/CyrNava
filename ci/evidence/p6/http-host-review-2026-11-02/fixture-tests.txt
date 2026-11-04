@@ -1,0 +1,23 @@
+test_capacity_boundaries (test_candidate.CandidateTests.test_capacity_boundaries) ... ok
+test_clean_environment_no_host_qt_python_or_signing_overrides (test_candidate.CandidateTests.test_clean_environment_no_host_qt_python_or_signing_overrides) ... ok
+test_exact_signed_binary_acquisition_not_duplicate_webengine (test_candidate.CandidateTests.test_exact_signed_binary_acquisition_not_duplicate_webengine) ... ok
+test_existing_or_outside_output_is_preserved (test_candidate.CandidateTests.test_existing_or_outside_output_is_preserved) ... ok
+test_failed_child_keeps_private_log_and_safe_operation_record (test_candidate.CandidateTests.test_failed_child_keeps_private_log_and_safe_operation_record) ... ok
+test_import_evidence_never_promoted_to_renderer_or_release (test_candidate.CandidateTests.test_import_evidence_never_promoted_to_renderer_or_release) ... ok
+test_namespace_or_signature_failure_stops_before_deploy (test_candidate.CandidateTests.test_namespace_or_signature_failure_stops_before_deploy) ... ok
+test_parent_side_resource_failure_cannot_report_candidate_built (test_candidate.CandidateTests.test_parent_side_resource_failure_cannot_report_candidate_built) ... ok
+test_ref_movement_stops_before_large_download (test_candidate.CandidateTests.test_ref_movement_stops_before_large_download) ... ok
+test_remote_key_url_and_signature_policy (test_candidate.CandidateTests.test_remote_key_url_and_signature_policy) ... ok
+test_symlink_attempt_refused (test_candidate.CandidateTests.test_symlink_attempt_refused) ... ok
+test_wrapper_is_bash_and_no_acquisition_for_help (test_candidate.CandidateTests.test_wrapper_is_bash_and_no_acquisition_for_help) ... ok
+test_wrong_abi_version_provider_and_security_inputs_rejected (test_candidate.CandidateTests.test_wrong_abi_version_provider_and_security_inputs_rejected) ... ok
+test_wrong_installed_commit_refused (test_candidate.CandidateTests.test_wrong_installed_commit_refused) ... ok
+test_fresh_diagnostic_cannot_target_the_failed_build (test_http_probe.HttpProbeTests.test_fresh_diagnostic_cannot_target_the_failed_build) ... ok
+test_requests_are_bounded_https_and_do_not_follow_redirects_or_disable_tls (test_http_probe.HttpProbeTests.test_requests_are_bounded_https_and_do_not_follow_redirects_or_disable_tls) ... ok
+test_unknown_or_incorrect_content_is_not_promoted_to_success (test_http_probe.HttpProbeTests.test_unknown_or_incorrect_content_is_not_promoted_to_success) ... ok
+test_untrusted_headers_and_error_body_are_not_published (test_http_probe.HttpProbeTests.test_untrusted_headers_and_error_body_are_not_published) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 1.023s
+
+OK

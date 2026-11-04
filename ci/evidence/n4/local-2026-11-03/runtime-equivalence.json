@@ -1,0 +1,13 @@
+{
+  "accepted_N3_runtime_files": 96,
+  "added": [
+    "notices/LICENSE",
+    "notices/dependency-inventory.json",
+    "notices/frontend-third-party-notices.txt"
+  ],
+  "changed": [],
+  "inherited_native_result": "ci-output/native-n3-owner-1/result.json",
+  "new_archive_sha256": "b59a3bd4a3178d704d0dfab736f6e6d546578cf5744a6dcda1264b83e3c9736d",
+  "scope": "byte/hash/mode equality, not a new native execution",
+  "unchanged": 96
+}

@@ -1,0 +1,9 @@
+{
+  "checked_UTC": "2026-11-02T03:14:08.713750+00:00",
+  "current_signing_trust": "PASS",
+  "expired_at_check": false,
+  "expires_UTC": "2026-11-02T09:32:43+00:00",
+  "fingerprint": "B8882601428AC0F08E9209FC353B6BEE05E7D9FC",
+  "public_key_sha256": "26760a8972ac9ea2eedc63830fb0abf8b0f918e9c06808c81a0c884abc3311d4",
+  "signed_manifest_and_payload_tree": "PASS"
+}

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=CyrNava
+Comment=Offline cybersecurity knowledge workspace
+Exec=cyrnava
+Icon=io.github._74Cerillion.CyrNava
+Terminal=false
+Categories=Office;
+StartupNotify=true
+StartupWMClass=io.github._74Cerillion.CyrNava

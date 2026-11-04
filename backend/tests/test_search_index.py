@@ -8,15 +8,14 @@ import sys
 from pathlib import Path
 
 import pytest
-from fastapi.testclient import TestClient
-from search_helpers import canonical_snapshot, remove_search_schema
-
 from app.backup import create_backup, restore_backup, validate_profile
 from app.database import Database
 from app.main import create_app
 from app.profile import ProfileBusy, profile_lock
 from app.search import SearchIndexError, verify_index
 from app.search_index import rebuild
+from fastapi.testclient import TestClient
+from search_helpers import canonical_snapshot, remove_search_schema
 
 BACKEND = Path(__file__).resolve().parents[1]
 

@@ -1,0 +1,46 @@
+{
+  "flatpak": {
+    "exit_code": 0,
+    "output": "Flatpak 1.16.6"
+  },
+  "gpg": {
+    "exit_code": 0,
+    "output": "gpg (GnuPG) 2.4.8\nlibgcrypt 1.12.0\nCopyright (C) 2025 g10 Code GmbH\nLicense GNU GPL-3.0-or-later <https://gnu.org/licenses/gpl.html>\nThis is free software: you are free to change and redistribute it.\nThere is NO WARRANTY, to the extent permitted by law.\n\nSupported algorithms:\nPubkey: RSA, ELG, DSA, ECDH, ECDSA, EDDSA\nCipher: IDEA, 3DES, CAST5, BLOWFISH, AES, AES192, AES256, TWOFISH,\n        CAMELLIA128, CAMELLIA192, CAMELLIA256\nHash: SHA1, RIPEMD160, SHA256, SHA384, SHA512, SHA224\nCompression: Uncompressed, ZIP, ZLIB, BZIP2"
+  },
+  "gui_environment_present": {
+    "DBUS_SESSION_BUS_ADDRESS": true,
+    "DISPLAY": true,
+    "WAYLAND_DISPLAY": true
+  },
+  "namespace": {
+    "exit_code": 1,
+    "output": "unshare: write failed /proc/self/uid_map: Operation not permitted"
+  },
+  "node": {
+    "exit_code": 0,
+    "output": "v24.19.0"
+  },
+  "npm": {
+    "exit_code": 0,
+    "output": "11.6.2"
+  },
+  "os": {
+    "exit_code": 0,
+    "output": "Linux 7.0.0-38-generic x86_64 GNU/Linux"
+  },
+  "ostree": {
+    "exit_code": 0,
+    "output": "libostree:\n Version: '2025.7'\n Features:\n  - inode64\n  - initial-var\n  - libcurl\n  - libsoup3\n  - gpgme\n  - composefs\n  - ex-fsverity\n  - libarchive\n  - selinux\n  - avahi\n  - libmount\n  - systemd\n  - release\n  - p2p"
+  },
+  "python": {
+    "exit_code": 0,
+    "output": "Python 3.14.4"
+  },
+  "distribution": {
+    "PRETTY_NAME": "Ubuntu 26.04.1 LTS",
+    "VERSION_ID": "26.04",
+    "ID": "ubuntu"
+  },
+  "verification_python": "Python 3.12.15",
+  "target_python": "3.13 (declared pinned application/runtime)"
+}

@@ -1,0 +1,100 @@
+{
+  "run_id": 41179709348,
+  "source_commit": "6743d1d5c76f2db87c2debb6f687a6e57a6826b6",
+  "files": {
+    "artifact-verification.json": {
+      "sha256": "be4ccffc852c9a119c1500c197d582af698bde3cd1c79768dc3c303ff6489154",
+      "bytes": 697
+    },
+    "frontend-job-summary.txt": {
+      "sha256": "5792a40deaab9e46b01bbf28002665d189a265f916e0db233e295968b6124546",
+      "bytes": 3466
+    },
+    "artifacts.json": {
+      "sha256": "55c7789e1ba0df34b99e5684a38aeddad3feabcaaa2323ef54c18b6bbb19566a",
+      "bytes": 2805
+    },
+    "jobs-initial.json": {
+      "sha256": "f162532fe608f2d742f167a060b3101c73694f67ebbd8e0c51809549cd892184",
+      "bytes": 10856
+    },
+    "flatpak-provisioning-log.txt": {
+      "sha256": "5d9f2616b1f6cac5619a694c6c4cb215a6c11f8ff9547ccc9e031a67a7c94f35",
+      "bytes": 2097
+    },
+    "backend.json": {
+      "sha256": "4155d2b1757494d8295b5f477c8367fcce4d6b8bc72d89513c97609ba7c6b44c",
+      "bytes": 622
+    },
+    "before-hosted-P5A_REPORT.md": {
+      "sha256": "18603cd78f2b189265747b24e5a2dc6214b9fe7f2188fd3f29aa2e91229fda19",
+      "bytes": 35648
+    },
+    "provisioner-control-flow-analysis.json": {
+      "sha256": "0bc503687e9c4d19fee54d6eda45f538e7c39a5624b55bcaa4806b37db067ffd",
+      "bytes": 4768
+    },
+    "prepare.json": {
+      "sha256": "153b0e4ee6f8dd05c06426997f6c2e191bc46886bf1f9cb568fbb54966144d8a",
+      "bytes": 121
+    },
+    "run.json": {
+      "sha256": "12152d957e7bf49bf7c115eeddbafb0b5a902d00783ef4f8f12495763f6480b7",
+      "bytes": 13502
+    },
+    "before-hosted-P5A_OWNER_CHECKS.md": {
+      "sha256": "f5b1d1ef3f5d6f08b88bb9c688a0571b10d5c532859c699cdf7a94767e4c263a",
+      "bytes": 2977
+    },
+    "backend-junit.xml": {
+      "sha256": "c8994db9af5c5a2aa2828f9c0df98d1436826494c92e09e84ed4a1eee15fc1dd",
+      "bytes": 69267
+    },
+    "run-initial.json": {
+      "sha256": "88c1916b13280c1b95a3523c329c80b85b9e4de7fe5fbf4651edd5a956e74ee8",
+      "bytes": 13499
+    },
+    "workflow-job-summary.txt": {
+      "sha256": "41a6c301a95b9f891eec1848120154e63423a5524fd459a3c572f40b29469c5c",
+      "bytes": 157
+    },
+    "jobs.json": {
+      "sha256": "fe356649f3aca5c09a88101edc8156509a4cae2dbe085861a2ccc8bb58e29928",
+      "bytes": 18847
+    },
+    "backend-job-summary.txt": {
+      "sha256": "deae287727cf6ed4cce465a3bc41e7dda6bb039b43b9b5b43623b92a853920a4",
+      "bytes": 240
+    },
+    "image-selection-states.json": {
+      "sha256": "f8bd2f7673075d9d5a0c854ffe93271a8c603cbf893cb6487b3a7db584256175",
+      "bytes": 30581
+    },
+    "final-result.json": {
+      "sha256": "841fa894e647d3cbeaecd76b058bc7146fc97af03b45caa5c88474e572df5ed9",
+      "bytes": 4759
+    },
+    "frontend.json": {
+      "sha256": "ca32d6a3e60b1163305c64b1653272d5a287fca16235139bf52b5eb819f8135c",
+      "bytes": 481
+    },
+    "before-hosted-validation.json": {
+      "sha256": "27519fb4ecf0d45568e7d9c3af7f59d380ced9d88435fe101690d7a27b8f1574",
+      "bytes": 61162
+    },
+    "browser-junit.xml": {
+      "sha256": "6ca486e331aab955334de34780010d3d66775a538fffb32f8d6b5dd55f689793",
+      "bytes": 5649
+    },
+    "backend-persistence-journals.json": {
+      "sha256": "49b8e70a3ebeb3e9be748658751466d5457487670aae41c8bd2182f2ae33f17a",
+      "bytes": 61256
+    }
+  },
+  "reports": {
+    "ci/P5A_REPORT.md": "9742083e6c96f1b5735250a3a401ccd494185b24d9d4f2b877e1d89169a960be",
+    "ci/P5A_OWNER_CHECKS.md": "329327525be329b50db5da01515b8bd57d7c293e76a2d93ce630bc6c857fef53",
+    "ci/P5A_IMAGE_SELECTION_CORRECTION.md": "21579619f075cdec8008b4d87a1f69543fcd90496063e6afb432d3751c47ed0b",
+    "ci/evidence/p5a/validation.json": "ff7de2b02ea97a69a589d546a4c0153319640a61952f85f9b4f866c064583ed5"
+  }
+}

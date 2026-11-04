@@ -1,0 +1,30 @@
+{
+  "status": "LOCAL PASS / NATIVE NOT EXECUTED",
+  "new_targeted_cases": 103,
+  "focused": {
+    "tests_passed": 202,
+    "subtests_passed": 10,
+    "seconds": 2.79,
+    "output": "focused.txt"
+  },
+  "storage_migration_packaging": {
+    "tests_passed": 109,
+    "seconds": 3.21,
+    "output": "storage-migration-packaging.txt"
+  },
+  "release_workflow": {
+    "tests_passed": 382,
+    "subtests_passed": 229,
+    "seconds": 10.68,
+    "output": "release-workflow.txt"
+  },
+  "clean_source": "clean-source.json; all overlay bytes match current reviewed source",
+  "Ruff": "Nine driver/test files PASS; helper 14 unchanged baseline findings",
+  "format": "Ten Python files PASS",
+  "commands": [
+    "TMPDIR=/dev/shm PYTHONDONTWRITEBYTECODE=1 <test-python> -m pytest -q -p no:cacheprovider <clean-checkout>/ci/release/test_targeted_b.py <clean-checkout>/ci/release/test_preference_contract.py <clean-checkout>/ci/release/test_native_phase_context.py <clean-checkout>/ci/release/test_historical_runtime.py <clean-checkout>/ci/release/test_historical_install.py <clean-checkout>/ci/release/test_progress.py <clean-checkout>/packaging/flatpak/production/test_profile_diagnostics.py",
+    "TMPDIR=/dev/shm PYTHONDONTWRITEBYTECODE=1 <test-python> -m pytest -q -p no:cacheprovider <clean-checkout>/backend/tests/test_native_desktop.py <clean-checkout>/backend/tests/test_migration.py <clean-checkout>/packaging/flatpak/production",
+    "TMPDIR=/dev/shm PYTHONDONTWRITEBYTECODE=1 <test-python> -m pytest -q -p no:cacheprovider <clean-checkout>/ci/release <clean-checkout>/ci/test_ci.py"
+  ],
+  "scope": "Synthetic native/signing/client effects only; no actual application/runtime installation or GUI; real retained synthetic data copy validated separately without Profile/Qt"
+}

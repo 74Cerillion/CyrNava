@@ -1,0 +1,32 @@
+2026-11-01T00:27:18.4502279Z Traceback (most recent call last):
+2026-11-01T00:27:18.4511474Z   File "/home/runner/work/CyrNava/CyrNava/ci/release/stage.py", line 252, in <module>
+2026-11-01T00:27:18.4512008Z {
+2026-11-01T00:27:18.4512329Z     sys.exit(main())
+2026-11-01T00:27:18.4512565Z              ^^^^^^
+2026-11-01T00:27:18.4513032Z   File "/home/runner/work/CyrNava/CyrNava/ci/release/stage.py", line 55, in main
+2026-11-01T00:27:18.4513509Z     github.check_execution()
+2026-11-01T00:27:18.4514033Z   File "/home/runner/work/CyrNava/CyrNava/ci/release/github.py", line 125, in check_execution
+2026-11-01T00:27:18.4514679Z     workflow_policy.read_workflow(ROOT / ".github/workflows/release.yml")
+2026-11-01T00:27:18.4515384Z   File "/home/runner/work/CyrNava/CyrNava/ci/release/workflow_policy.py", line 14, in read_workflow
+2026-11-01T00:27:18.4515949Z     spec.loader.exec_module(module)
+2026-11-01T00:27:18.4516410Z   File "<frozen importlib._bootstrap_external>", line 999, in exec_module
+2026-11-01T00:27:18.4517282Z   File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2026-11-01T00:27:18.4517835Z   File "/home/runner/work/CyrNava/CyrNava/ci/validate.py", line 7, in <module>
+2026-11-01T00:27:18.4518218Z     import yaml
+2026-11-01T00:27:18.4518451Z ModuleNotFoundError: No module named 'yaml'
+2026-11-01T00:27:18.4518737Z   "status": "FAIL",
+2026-11-01T00:27:18.4518943Z   "complete": true,
+2026-11-01T00:27:18.4519170Z   "purpose": "P5B disposable staging",
+2026-11-01T00:27:18.4519519Z   "authorization_model": "single-maintainer-manual-staging",
+2026-11-01T00:27:18.4519863Z   "stage": "eligibility",
+2026-11-01T00:27:18.4520081Z   "steps": [],
+2026-11-01T00:27:18.4520272Z   "seconds": 0.007
+2026-11-01T00:27:18.4520460Z }
+2026-11-01T00:27:18.4604649Z ##[error]Process completed with exit code 1.
+2026-11-01T00:27:18.4712263Z 2026-11-01T00:26:34.7338231Z Actions: read
+2026-11-01T00:26:34.7339392Z Contents: read
+2026-11-01T00:26:34.7340432Z Metadata: read
+2026-11-01T00:27:18.6524710Z With the provided path, there will be 1 file uploaded
+2026-11-01T00:27:19.1819753Z SHA256 digest of uploaded artifact zip is 46f94f80b8f098204c0bca8dce2b6df1d5809539686fdce10687708becbe60e3
+2026-11-01T00:27:19.6239876Z Artifact p5b-staging-diagnostics-abbb1b7a723d0b42dae1fa2b3312cb7667299e96-1.zip successfully finalized. Artifact ID 13063163006
+2026-11-01T00:27:19.6241558Z Artifact p5b-staging-diagnostics-abbb1b7a723d0b42dae1fa2b3312cb7667299e96-1 has been successfully uploaded! Final size is 283 bytes. Artifact ID is 13063163006

@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "complete": true,
+  "steps": [
+    {
+      "name": "frontend-lint",
+      "status": "PASS",
+      "seconds": 2.699
+    },
+    {
+      "name": "frontend-unit",
+      "status": "PASS",
+      "seconds": 14.584
+    },
+    {
+      "name": "typescript-production-build",
+      "status": "PASS",
+      "seconds": 3.828
+    },
+    {
+      "name": "chromium-production-integration",
+      "status": "PASS",
+      "seconds": 103.621
+    }
+  ],
+  "seconds": 124.732
+}

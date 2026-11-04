@@ -1,0 +1,16 @@
+[
+  {
+    "artifact_id": 13027759948,
+    "kind": "diagnostics only",
+    "sha256": "b799b5eb3739ec8ad4645fc35b9aba4e7cfcd7856324a494ed97917d2fb4af67",
+    "bytes": 10406,
+    "independently_verified": true
+  },
+  {
+    "artifact_id": 13028024573,
+    "kind": "diagnostics only",
+    "sha256": "1a34eed295eb5e989025f8ea53b88276941fca508c0cdc67bed412faa1e44fd2",
+    "bytes": 4971285,
+    "independently_verified": true
+  }
+]

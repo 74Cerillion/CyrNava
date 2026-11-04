@@ -1,0 +1,35 @@
+
+Running 10 tests using 1 worker
+
+(node:31) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   1 e2e/workspace.spec.ts:605:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (10.8s)
+
+  ✓   2 e2e/workspace.spec.ts:755:1 › image command requires a synchronized paragraph after code-block focus (2.6s)
+(node:151) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   3 e2e/workspace.spec.ts:605:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (11.2s)
+
+  ✓   4 e2e/workspace.spec.ts:755:1 › image command requires a synchronized paragraph after code-block focus (2.6s)
+(node:270) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   5 e2e/workspace.spec.ts:605:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (11.1s)
+
+  ✓   6 e2e/workspace.spec.ts:755:1 › image command requires a synchronized paragraph after code-block focus (2.6s)
+(node:392) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   7 e2e/workspace.spec.ts:605:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (10.9s)
+
+  ✓   8 e2e/workspace.spec.ts:755:1 › image command requires a synchronized paragraph after code-block focus (2.6s)
+(node:511) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+  ✓   9 e2e/workspace.spec.ts:605:1 › Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation (11.0s)
+
+  ✓  10 e2e/workspace.spec.ts:755:1 › image command requires a synchronized paragraph after code-block focus (2.7s)
+
+  10 passed (1.2m)

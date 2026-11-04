@@ -1,0 +1,23 @@
+
+Running 1 test using 1 worker
+
+(node:31) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"ms":1995,"event":"request","method":"PATCH","revision":1}
+{"ms":2002,"event":"response","method":"PATCH","status":200,"revision":2}
+{"ms":2288,"event":"request","method":"GET"}
+{"ms":2340,"event":"response","method":"GET","status":200,"revision":2}
+{"ms":3093,"event":"request","method":"PATCH","revision":2}
+{"ms":3100,"event":"response","method":"PATCH","status":200,"revision":3}
+{"ms":4995,"event":"request","method":"GET"}
+{"ms":5035,"event":"response","method":"GET","status":200,"revision":3}
+{"ms":5767,"event":"request","method":"PATCH","revision":3}
+{"ms":5779,"event":"committed-before-block-ack-held","revision":4}
+{"ms":5945,"event":"retained-draft","base_revision":3}
+{"ms":7859,"event":"request","method":"GET"}
+{"ms":7874,"event":"response","method":"GET","status":200,"revision":4}
+{"ms":7984,"event":"conflict-confirmed","base_revision":3,"canonical_revision":4}
+
+  ✓  1 e2e/lifecycle-gate-probe.spec.ts:55:1 › controlled late interception preserves a committed write and rejects its stale draft (9.0s)
+
+  1 passed (9.7s)

@@ -1,0 +1,9 @@
+{
+  "credential_pattern_hits": [],
+  "sensitive_request_header_counts": {},
+  "trace_origins": {
+    "http://127.0.0.1:45481": 75,
+    "http://127.0.0.1:43209": 37
+  },
+  "data": "Synthetic disposable notes/images only; no owner profile/data accessed."
+}

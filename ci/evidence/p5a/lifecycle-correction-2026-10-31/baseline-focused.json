@@ -1,0 +1,399 @@
+{
+  "config": {
+    "argv": [
+      "/home/cerillion/.nvm/versions/node/v24.19.0/bin/node",
+      "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/node_modules/.bin/playwright",
+      "test",
+      "e2e/lifecycle.spec.ts",
+      "--grep",
+      "managed tabs close",
+      "--repeat-each=3",
+      "--trace=on",
+      "--reporter=list,json"
+    ],
+    "configFile": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/playwright.config.ts",
+    "rootDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/test-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/test-results",
+        "repeatEach": 3,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "snapshotDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 120000,
+        "use": {
+          "browserName": "chromium",
+          "headless": true,
+          "viewport": {
+            "width": 1280,
+            "height": 1000
+          },
+          "screenshot": "only-on-failure",
+          "trace": "on"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "lifecycle.spec.ts",
+      "file": "lifecycle.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 120352,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e/lifecycle.spec.ts",
+                        "column": 80,
+                        "line": 122
+                      },
+                      "message": "Error: locator.click: Target page, context or browser has been closed\n\n  120 |     await expect(reopened.getByRole('heading', { name: 'Recover unsaved edits' })).toBeVisible();\n  121 |     await checkpoint('before-recover-choice', reopened);\n> 122 |     await reopened.getByRole('button', { name: 'Recover draft', exact: true }).click();\n      |                                                                                ^\n  123 |     await checkpoint('after-recover-choice', reopened);\n  124 |     await expect(reopened.getByText('Saved', { exact: true })).toBeVisible();\n  125 |     await reopened.reload();\n    at /tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e/lifecycle.spec.ts:122:80"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:38:08.767Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/test-failed-1.png"
+                    },
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5MjEsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE5MjYsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjE5NiwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjI0NSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjk5NCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzAwMCwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA0ODc2LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA0OTIyLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA0OTQyLAogICAgImV2ZW50IjogImJlZm9yZS1ibG9ja2luZyIsCiAgICAic3RhdGUiOiAiU2F2ZWQiLAogICAgImRyYWZ0cyI6IFtdCiAgfSwKICB7CiAgICAibXMiOiA1MTA4LAogICAgImV2ZW50IjogImRyYWZ0LWNhcHR1cmVkIiwKICAgICJzdGF0ZSI6ICJVbnNhdmVkIENoYW5nZXMiLAogICAgImRyYWZ0cyI6IFsKICAgICAgewogICAgICAgICJub3RlX2lkIjogImY5ZGJiM2E3LTJiZjItNDYzMS1iMTgzLWM1OGYwODM2OTJhNSIsCiAgICAgICAgImJhc2VfcmV2aXNpb24iOiAzCiAgICAgIH0KICAgIF0KICB9LAogIHsKICAgICJtcyI6IDY3MzYsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDY3NDksCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDEyMDMyOSwKICAgICJldmVudCI6ICJiZWZvcmUtcmVjb3Zlci1jaG9pY2UiLAogICAgInN0YXRlIjogbnVsbCwKICAgICJkcmFmdHMiOiBbCiAgICAgIHsKICAgICAgICAibm90ZV9pZCI6ICJmOWRiYjNhNy0yYmYyLTQ2MzEtYjE4My1jNThmMDgzNjkyYTUiLAogICAgICAgICJiYXNlX3JldmlzaW9uIjogMwogICAgICB9CiAgICBdCiAgfQpd"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1f1785dee40219527314-3e2e3ddc6c38e163e0ce",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "timedOut",
+                  "duration": 120375,
+                  "error": {
+                    "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m",
+                    "stack": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                  },
+                  "errors": [
+                    {
+                      "message": "\u001b[31mTest timeout of 120000ms exceeded.\u001b[39m"
+                    },
+                    {
+                      "location": {
+                        "file": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e/lifecycle.spec.ts",
+                        "column": 80,
+                        "line": 122
+                      },
+                      "message": "Error: locator.click: Target page, context or browser has been closed\n\n  120 |     await expect(reopened.getByRole('heading', { name: 'Recover unsaved edits' })).toBeVisible();\n  121 |     await checkpoint('before-recover-choice', reopened);\n> 122 |     await reopened.getByRole('button', { name: 'Recover draft', exact: true }).click();\n      |                                                                                ^\n  123 |     await checkpoint('after-recover-choice', reopened);\n  124 |     await expect(reopened.getByText('Saved', { exact: true })).toBeVisible();\n  125 |     await reopened.reload();\n    at /tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e/lifecycle.spec.ts:122:80"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:40:10.383Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/test-failed-1.png"
+                    },
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5NjIsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE5NjgsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjI1NiwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjMwMiwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA0OCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA1NSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDQwLAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MDg2LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MTE0LAogICAgImV2ZW50IjogImJlZm9yZS1ibG9ja2luZyIsCiAgICAic3RhdGUiOiAiU2F2ZWQiLAogICAgImRyYWZ0cyI6IFtdCiAgfSwKICB7CiAgICAibXMiOiA1MzAyLAogICAgImV2ZW50IjogImRyYWZ0LWNhcHR1cmVkIiwKICAgICJzdGF0ZSI6ICJVbnNhdmVkIENoYW5nZXMiLAogICAgImRyYWZ0cyI6IFsKICAgICAgewogICAgICAgICJub3RlX2lkIjogImFhMGI0ODVkLWZjNDItNDIzZS1hODgxLTU1MzhhNmY3Njk3ZiIsCiAgICAgICAgImJhc2VfcmV2aXNpb24iOiAzCiAgICAgIH0KICAgIF0KICB9LAogIHsKICAgICJtcyI6IDcxNDEsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDcxNzEsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDEyMDM0OSwKICAgICJldmVudCI6ICJiZWZvcmUtcmVjb3Zlci1jaG9pY2UiLAogICAgInN0YXRlIjogbnVsbCwKICAgICJkcmFmdHMiOiBbCiAgICAgIHsKICAgICAgICAibm90ZV9pZCI6ICJhYTBiNDg1ZC1mYzQyLTQyM2UtYTg4MS01NTM4YTZmNzY5N2YiLAogICAgICAgICJiYXNlX3JldmlzaW9uIjogMwogICAgICB9CiAgICBdCiAgfQpd"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat1/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1f1785dee40219527314-b3a309a0e1e7397d3a35",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "managed tabs close, restart and recover immediately closed unconfirmed edits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8462,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"ms\":1965,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":1}\n"
+                    },
+                    {
+                      "text": "{\"ms\":1970,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2288,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2343,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3092,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3097,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5085,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5130,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5158,\"event\":\"before-blocking\",\"state\":\"Saved\",\"drafts\":[]}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5338,\"event\":\"draft-captured\",\"state\":\"Unsaved Changes\",\"drafts\":[{\"note_id\":\"8a57b741-65f0-4417-a2d8-896b2e950a64\",\"base_revision\":3}]}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7127,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7137,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7167,\"event\":\"before-recover-choice\",\"state\":null,\"drafts\":[{\"note_id\":\"8a57b741-65f0-4417-a2d8-896b2e950a64\",\"base_revision\":3}]}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7245,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7255,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7260,\"event\":\"after-recover-choice\",\"state\":\"Saved\",\"drafts\":[]}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7326,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7339,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":4}\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:42:11.775Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5NjUsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDE5NzAsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjI4OCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjM0MywKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA5MiwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA5NywKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MDg1LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MTMwLAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1MTU4LAogICAgImV2ZW50IjogImJlZm9yZS1ibG9ja2luZyIsCiAgICAic3RhdGUiOiAiU2F2ZWQiLAogICAgImRyYWZ0cyI6IFtdCiAgfSwKICB7CiAgICAibXMiOiA1MzM4LAogICAgImV2ZW50IjogImRyYWZ0LWNhcHR1cmVkIiwKICAgICJzdGF0ZSI6ICJVbnNhdmVkIENoYW5nZXMiLAogICAgImRyYWZ0cyI6IFsKICAgICAgewogICAgICAgICJub3RlX2lkIjogIjhhNTdiNzQxLTY1ZjAtNDQxNy1hMmQ4LTg5NmIyZTk1MGE2NCIsCiAgICAgICAgImJhc2VfcmV2aXNpb24iOiAzCiAgICAgIH0KICAgIF0KICB9LAogIHsKICAgICJtcyI6IDcxMjcsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDcxMzcsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDcxNjcsCiAgICAiZXZlbnQiOiAiYmVmb3JlLXJlY292ZXItY2hvaWNlIiwKICAgICJzdGF0ZSI6IG51bGwsCiAgICAiZHJhZnRzIjogWwogICAgICB7CiAgICAgICAgIm5vdGVfaWQiOiAiOGE1N2I3NDEtNjVmMC00NDE3LWEyZDgtODk2YjJlOTUwYTY0IiwKICAgICAgICAiYmFzZV9yZXZpc2lvbiI6IDMKICAgICAgfQogICAgXQogIH0sCiAgewogICAgIm1zIjogNzI0NSwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMwogIH0sCiAgewogICAgIm1zIjogNzI1NSwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiA0CiAgfSwKICB7CiAgICAibXMiOiA3MjYwLAogICAgImV2ZW50IjogImFmdGVyLXJlY292ZXItY2hvaWNlIiwKICAgICJzdGF0ZSI6ICJTYXZlZCIsCiAgICAiZHJhZnRzIjogW10KICB9LAogIHsKICAgICJtcyI6IDczMjYsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDczMzksCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9Cl0="
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits-repeat2/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f1785dee40219527314-d9ca87b87f3ad7f7892f",
+          "file": "lifecycle.spec.ts",
+          "line": 55,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T03:38:08.367Z",
+    "duration": 252070.683,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

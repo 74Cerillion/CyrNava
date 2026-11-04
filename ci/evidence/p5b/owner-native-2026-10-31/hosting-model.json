@@ -1,0 +1,42 @@
+{
+  "measured_repo_bytes": 301341805,
+  "measured_repo_files": 5554,
+  "decimal_GB": 0.301341805,
+  "MiB": 287.3819398880005,
+  "signed_metadata_bytes": 2016,
+  "static_deltas": "disabled; delta cost not measured",
+  "four_full_snapshot_bytes": 1205367220,
+  "four_full_snapshot_files": 22216,
+  "assumptions": {
+    "fresh_download_proxy": "entire measured repo size; not observed client transfer",
+    "updates_per_client": 2,
+    "update_bytes_each": 10000000,
+    "read_requests_per_client": 6400,
+    "retained_storage_GB": 2,
+    "production_deploys": 4,
+    "write_allowance": 24000
+  },
+  "scenarios": [
+    {
+      "installations": 5,
+      "app_GB_per_month": 1.6067090250000002,
+      "reads": 32000,
+      "R2_core_USD_estimate": 0,
+      "netlify_credit_estimate": 98.5341805
+    },
+    {
+      "installations": 100,
+      "app_GB_per_month": 32.13418050000001,
+      "reads": 640000,
+      "R2_core_USD_estimate": 0,
+      "netlify_credit_estimate": 830.6836100000002
+    },
+    {
+      "installations": 1000,
+      "app_GB_per_month": 321.341805,
+      "reads": 6400000,
+      "R2_core_USD_estimate": 0,
+      "netlify_credit_estimate": 7766.8361
+    }
+  ]
+}

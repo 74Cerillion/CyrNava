@@ -1,0 +1,7 @@
+{
+  "status": "FAIL",
+  "directory": "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/.p4-cache/cyrnava-builds/p4/local-A-jykdssga",
+  "app_id": "io.github._74Cerillion.CyrNava",
+  "error_type": "CalledProcessError",
+  "error": "Command '['flatpak', 'build-export', '--timestamp=1793314800', '/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/.p4-cache/cyrnava-builds/p4/local-A-jykdssga/repo', '/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/.p4-cache/cyrnava-builds/p4/local-A-jykdssga/build', 'stable']' returned non-zero exit status 1."
+}

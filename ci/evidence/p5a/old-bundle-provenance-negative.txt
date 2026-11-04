@@ -1,0 +1,10 @@
+Importing app/io.github._74Cerillion.CyrNava/x86_64/stable (e0529b136effc347a5f7a32b52d95ddd5fead5230410e752ce8eb8f9a4c35e19)
+CI Flatpak operation failed: VerificationError
+{
+  "status": "FAIL",
+  "operation": "audit",
+  "error_type": "VerificationError",
+  "error": "Build source commit mismatch",
+  "complete": true,
+  "seconds": 40.415
+}

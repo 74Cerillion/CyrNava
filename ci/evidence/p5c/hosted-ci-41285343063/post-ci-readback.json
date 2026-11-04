@@ -1,0 +1,33 @@
+{
+  "recorded_at_utc": "2026-11-01T07:50:03.953353+00:00",
+  "status": "PASS",
+  "repository": {
+    "id": 1427661036,
+    "full_name": "74Cerillion/CyrNava",
+    "default_branch": "main"
+  },
+  "remote_integration": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "remote_main": "1e62cd5ef4d36d048a505e9e4a7029296edfd3da",
+  "main_inert_P5B_registration_sha256": "3a8c4ad86f958dc7d437c5ee4e5ad2ac57d8753cc4429252edc0005bf385c7c5",
+  "main_unchanged": true,
+  "accepted_P5B_controls_and_source_artifact_allowlist_unchanged": true,
+  "p5a_accepted_tag_target": "1a28f68c5732ccc1275403060e89ff168a846655",
+  "all_repository_workflow_runs_inspected": 18,
+  "P5C_execution_count": 0,
+  "target_commit_runs": [
+    {
+      "id": 41285343063,
+      "path": ".github/workflows/ci.yml",
+      "sha": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+      "event": "push",
+      "attempt": 1,
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "commit_count": 1,
+  "successful_push_count": 1,
+  "workflow_reruns_or_dispatches": 0,
+  "proposed_inert_P5C_registration_only": "ci-output/p5c-main-registration-proposal.yml",
+  "proposal_sha256": "a2bcc41f15785fe35c105b412ca694d8e8acad71933b168f47e9272ad6456bc9"
+}

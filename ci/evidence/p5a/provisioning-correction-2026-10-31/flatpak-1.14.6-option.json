@@ -1,0 +1,21 @@
+{
+  "url": "https://raw.githubusercontent.com/flatpak/flatpak/1.14.6/app/flatpak-builtins-update.c",
+  "matches": [
+    {
+      "line": 47,
+      "text": "static gboolean opt_no_deps;"
+    },
+    {
+      "line": 62,
+      "text": "{ \"no-deps\", 0, 0, G_OPTION_ARG_NONE, &opt_no_deps, N_(\"Don't verify/install runtime dependencies\"), NULL },"
+    },
+    {
+      "line": 148,
+      "text": "flatpak_transaction_set_disable_dependencies (transaction, opt_no_deps);"
+    },
+    {
+      "line": 241,
+      "text": "if ((kinds & FLATPAK_KINDS_RUNTIME) && n_prefs == 0 && !opt_no_deps)"
+    }
+  ]
+}

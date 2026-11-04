@@ -20,6 +20,7 @@ from app.database import (
     RevisionConflict,
     default_database_path,
 )
+from app.desktop_security import DesktopAuthorization, DesktopSession
 from app.lifecycle import Sessions, install_lifecycle
 from app.models import (
     CreateFolder,
@@ -49,22 +50,27 @@ def create_app(
     database_path: Path | None = None,
     frontend_path: Path | None = None,
     sessions: Sessions | None = None,
+    desktop_session: DesktopSession | None = None,
 ) -> FastAPI:
     @asynccontextmanager
     async def lifespan(application: FastAPI):
         # Resolve/create data only at startup, never at module import or in tests
         # that do not enter the application's lifespan.
-        database = Database(database_path or default_database_path())
-        database.initialize()
-        with profile_lock(database.path.parent):
-            application.state.database = database
-            application.state.assets = AssetStore(database)
-            application.state.templates = TemplateStore(
-                database, application.state.assets
-            )
-            application.state.assets.cleanup()
-            application.state.upload_slots = asyncio.Semaphore(2)
-            yield
+        try:
+            database = Database(database_path or default_database_path())
+            database.initialize()
+            with profile_lock(database.path.parent):
+                application.state.database = database
+                application.state.assets = AssetStore(database)
+                application.state.templates = TemplateStore(
+                    database, application.state.assets
+                )
+                application.state.assets.cleanup()
+                application.state.upload_slots = asyncio.Semaphore(2)
+                yield
+        finally:
+            if desktop_session is not None:
+                desktop_session.revoke()
 
     application = FastAPI(
         title="CyrNava",
@@ -323,6 +329,9 @@ def create_app(
 
     if frontend_path is not None:
         serve_frontend(application, frontend_path, health)
+    if desktop_session is not None:
+        # Last installed = outermost: no static/health/legacy alias bypass.
+        application.add_middleware(DesktopAuthorization, session=desktop_session)
     return application
 
 

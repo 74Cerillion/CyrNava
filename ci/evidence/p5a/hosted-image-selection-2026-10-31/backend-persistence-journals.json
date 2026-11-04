@@ -1,0 +1,2188 @@
+[
+  {
+    "name": "frontend/test-results/lifecycle-a-committed-writ-b6413-nd-requires-conflict-review/backend-persistence.jsonl",
+    "events": [
+      {
+        "event": "fixture_database_ready",
+        "mono_ns": 177362268447,
+        "pid": 3725
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 178084435131,
+        "pid": 3725,
+        "operation": "81480897-4595-4262-aa09-22392f434d52",
+        "method": "POST",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178085955513,
+        "pid": 3725,
+        "operation": "81480897-4595-4262-aa09-22392f434d52",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178086399853,
+        "pid": 3725,
+        "operation": "81480897-4595-4262-aa09-22392f434d52",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178086451199,
+        "pid": 3725,
+        "operation": "81480897-4595-4262-aa09-22392f434d52",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178086770846,
+        "pid": 3725,
+        "operation": "81480897-4595-4262-aa09-22392f434d52",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178086837400,
+        "pid": 3725,
+        "operation": "81480897-4595-4262-aa09-22392f434d52",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178086879289,
+        "pid": 3725,
+        "operation": "81480897-4595-4262-aa09-22392f434d52",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178086997550,
+        "pid": 3725,
+        "operation": "81480897-4595-4262-aa09-22392f434d52",
+        "kind": "COMMIT"
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 178088608088,
+        "pid": 3725,
+        "operation": "81480897-4595-4262-aa09-22392f434d52"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 178089282625,
+        "pid": 3725,
+        "operation": "81480897-4595-4262-aa09-22392f434d52",
+        "status": 201
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 178089934372,
+        "pid": 3725,
+        "operation": "81480897-4595-4262-aa09-22392f434d52"
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 178896469240,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "method": "PATCH",
+        "frontend": {
+          "perf_ms": 1173.6000000000058,
+          "time_origin_ms": 1793430881017.1,
+          "sequence": 1,
+          "close_intent": false,
+          "keepalive": false,
+          "service_worker": false,
+          "visibility": "visible"
+        }
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 178897976327,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "expected_revision": 1
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178898235391,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178898691964,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178898749812,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178899134130,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178899212296,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178899247432,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178899332941,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178899394286,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "kind": "COMMIT"
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 178900729420,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3"
+      },
+      {
+        "event": "database_update_return",
+        "mono_ns": 178900806253,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "revision": 2
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 178901387202,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 178901993795,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3"
+      },
+      {
+        "event": "driver_close_intent",
+        "mono_ns": 178973889553,
+        "pid": 3744
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 178989218087,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "method": "PATCH",
+        "frontend": {
+          "perf_ms": 1173.6000000000058,
+          "time_origin_ms": 1793430881017.1,
+          "sequence": 1,
+          "close_intent": false,
+          "keepalive": false,
+          "service_worker": false,
+          "visibility": "visible"
+        }
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 178992978160,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "expected_revision": 1
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178993596606,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178994641918,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 178994732978,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "kind": "ROLLBACK"
+      },
+      {
+        "event": "sqlite_transaction_failed",
+        "mono_ns": 178994826383,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "error_type": "RevisionConflict"
+      },
+      {
+        "event": "database_update_failed",
+        "mono_ns": 178994857571,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "error_type": "RevisionConflict"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 178995226437,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3",
+        "status": 409
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 178995967421,
+        "pid": 3725,
+        "operation": "c8134c5a-f488-4610-a1bd-9aa16c86c6a3"
+      },
+      {
+        "event": "fixture_database_ready",
+        "mono_ns": 180565847155,
+        "pid": 3747
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 181143563482,
+        "pid": 3747,
+        "operation": "802f26a7-ab67-41be-9996-bb19184aaa45",
+        "method": "GET",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 181145786036,
+        "pid": 3747,
+        "operation": "802f26a7-ab67-41be-9996-bb19184aaa45"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 181146461227,
+        "pid": 3747,
+        "operation": "802f26a7-ab67-41be-9996-bb19184aaa45",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 181147078160,
+        "pid": 3747,
+        "operation": "802f26a7-ab67-41be-9996-bb19184aaa45"
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 181295638622,
+        "pid": 3747,
+        "operation": "eddb949c-5629-4d6a-b85f-e11cf74afbb5",
+        "method": "GET",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 181296744629,
+        "pid": 3747,
+        "operation": "eddb949c-5629-4d6a-b85f-e11cf74afbb5"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 181297231873,
+        "pid": 3747,
+        "operation": "eddb949c-5629-4d6a-b85f-e11cf74afbb5",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 181297685910,
+        "pid": 3747,
+        "operation": "eddb949c-5629-4d6a-b85f-e11cf74afbb5"
+      },
+      {
+        "event": "driver_close_intent",
+        "mono_ns": 181350915289,
+        "pid": 3763
+      }
+    ]
+  },
+  {
+    "name": "frontend/test-results/lifecycle-managed-tabs-clo-1d83c-ly-closed-unconfirmed-edits/backend-persistence.jsonl",
+    "events": [
+      {
+        "event": "fixture_database_ready",
+        "mono_ns": 157333063747,
+        "pid": 3560
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 158002417072,
+        "pid": 3560,
+        "operation": "67723860-a6cb-45a3-8c2d-3d548236cfd9",
+        "method": "POST",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158004432436,
+        "pid": 3560,
+        "operation": "67723860-a6cb-45a3-8c2d-3d548236cfd9",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158004848143,
+        "pid": 3560,
+        "operation": "67723860-a6cb-45a3-8c2d-3d548236cfd9",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158004891383,
+        "pid": 3560,
+        "operation": "67723860-a6cb-45a3-8c2d-3d548236cfd9",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158005348878,
+        "pid": 3560,
+        "operation": "67723860-a6cb-45a3-8c2d-3d548236cfd9",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158005420692,
+        "pid": 3560,
+        "operation": "67723860-a6cb-45a3-8c2d-3d548236cfd9",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158005447141,
+        "pid": 3560,
+        "operation": "67723860-a6cb-45a3-8c2d-3d548236cfd9",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158005517793,
+        "pid": 3560,
+        "operation": "67723860-a6cb-45a3-8c2d-3d548236cfd9",
+        "kind": "COMMIT"
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 158007119222,
+        "pid": 3560,
+        "operation": "67723860-a6cb-45a3-8c2d-3d548236cfd9"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 158007687032,
+        "pid": 3560,
+        "operation": "67723860-a6cb-45a3-8c2d-3d548236cfd9",
+        "status": 201
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 158008344120,
+        "pid": 3560,
+        "operation": "67723860-a6cb-45a3-8c2d-3d548236cfd9"
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 158943400194,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985",
+        "method": "PATCH",
+        "frontend": {
+          "perf_ms": 1323,
+          "time_origin_ms": 1793430860924.8,
+          "sequence": 1,
+          "close_intent": false,
+          "keepalive": false,
+          "service_worker": false,
+          "visibility": "visible"
+        }
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 158945433469,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985",
+        "expected_revision": 1
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158945684968,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158946160597,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158946222723,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158946567296,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158946642266,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158946676991,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158946758804,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 158946825198,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985",
+        "kind": "COMMIT"
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 158948351953,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985"
+      },
+      {
+        "event": "database_update_return",
+        "mono_ns": 158948412867,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985",
+        "revision": 2
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 158948882737,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 158949506833,
+        "pid": 3560,
+        "operation": "0ad1f90a-a04f-4e0d-bef8-ebf48c0ef985"
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 159334456614,
+        "pid": 3560,
+        "operation": "2a008933-ec83-4eb5-9e9d-1c9d6baeb45a",
+        "method": "GET",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 159336452913,
+        "pid": 3560,
+        "operation": "2a008933-ec83-4eb5-9e9d-1c9d6baeb45a"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 159341083372,
+        "pid": 3560,
+        "operation": "2a008933-ec83-4eb5-9e9d-1c9d6baeb45a",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 159343054163,
+        "pid": 3560,
+        "operation": "2a008933-ec83-4eb5-9e9d-1c9d6baeb45a"
+      },
+      {
+        "event": "driver_close_intent",
+        "mono_ns": 159474250562,
+        "pid": 3592
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 160226177595,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf",
+        "method": "PATCH",
+        "frontend": {
+          "perf_ms": 1113.1000000000058,
+          "time_origin_ms": 1793430862417.4,
+          "sequence": 1,
+          "close_intent": false,
+          "keepalive": false,
+          "service_worker": false,
+          "visibility": "visible"
+        }
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 160228110411,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf",
+        "expected_revision": 2
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 160228315865,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 160228649337,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 160228717785,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 160228996315,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 160229095531,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 160229123593,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 160229187012,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 160229243096,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf",
+        "kind": "COMMIT"
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 160230620810,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf"
+      },
+      {
+        "event": "database_update_return",
+        "mono_ns": 160230678117,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf",
+        "revision": 3
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 160231167194,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 160231763378,
+        "pid": 3560,
+        "operation": "c4405abc-970b-41b4-95ed-c1c8bd5313cf"
+      },
+      {
+        "event": "driver_close_intent",
+        "mono_ns": 160403099546,
+        "pid": 3593
+      },
+      {
+        "event": "boundary_arm_committed",
+        "mono_ns": 161332605043,
+        "pid": 3594,
+        "armed": true,
+        "notes": [
+          {
+            "note_id": "922c00c4-161f-43e3-8a5a-82e785e68c74",
+            "revision": 3,
+            "digest": "c1a66fd8bb5f9b2724ea734c7a748bb1cf1e643809a7efe5dc308cfc8b0b5cc4"
+          }
+        ]
+      },
+      {
+        "event": "fixture_database_ready",
+        "mono_ns": 161916446125,
+        "pid": 3597
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 162585739797,
+        "pid": 3597,
+        "operation": "2f39825a-59b5-46d6-8e25-263f3880d8e9",
+        "method": "GET",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 162587688898,
+        "pid": 3597,
+        "operation": "2f39825a-59b5-46d6-8e25-263f3880d8e9"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 162588336427,
+        "pid": 3597,
+        "operation": "2f39825a-59b5-46d6-8e25-263f3880d8e9",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 162589228654,
+        "pid": 3597,
+        "operation": "2f39825a-59b5-46d6-8e25-263f3880d8e9"
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 162650157197,
+        "pid": 3597,
+        "operation": "2a4d0db4-5220-4081-8e8e-b7bd9a2a061f",
+        "method": "PATCH",
+        "frontend": {}
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 162652853182,
+        "pid": 3597,
+        "operation": "2a4d0db4-5220-4081-8e8e-b7bd9a2a061f",
+        "expected_revision": 3
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 162653113228,
+        "pid": 3597,
+        "operation": "2a4d0db4-5220-4081-8e8e-b7bd9a2a061f",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 162653562247,
+        "pid": 3597,
+        "operation": "2a4d0db4-5220-4081-8e8e-b7bd9a2a061f",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 162653628942,
+        "pid": 3597,
+        "operation": "2a4d0db4-5220-4081-8e8e-b7bd9a2a061f",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 162653666051,
+        "pid": 3597,
+        "operation": "2a4d0db4-5220-4081-8e8e-b7bd9a2a061f",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 162653725231,
+        "pid": 3597,
+        "operation": "2a4d0db4-5220-4081-8e8e-b7bd9a2a061f",
+        "kind": "ROLLBACK"
+      },
+      {
+        "event": "sqlite_transaction_failed",
+        "mono_ns": 162653857268,
+        "pid": 3597,
+        "operation": "2a4d0db4-5220-4081-8e8e-b7bd9a2a061f",
+        "error_type": "IntegrityError"
+      },
+      {
+        "event": "database_update_failed",
+        "mono_ns": 162653901601,
+        "pid": 3597,
+        "operation": "2a4d0db4-5220-4081-8e8e-b7bd9a2a061f",
+        "error_type": "IntegrityError"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 162654225419,
+        "pid": 3597,
+        "operation": "2a4d0db4-5220-4081-8e8e-b7bd9a2a061f",
+        "status": 503
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 162654800834,
+        "pid": 3597,
+        "operation": "2a4d0db4-5220-4081-8e8e-b7bd9a2a061f"
+      },
+      {
+        "event": "boundary_inspect_committed",
+        "mono_ns": 162702209900,
+        "pid": 3614,
+        "armed": true,
+        "notes": [
+          {
+            "note_id": "922c00c4-161f-43e3-8a5a-82e785e68c74",
+            "revision": 3,
+            "digest": "c1a66fd8bb5f9b2724ea734c7a748bb1cf1e643809a7efe5dc308cfc8b0b5cc4"
+          }
+        ]
+      },
+      {
+        "event": "boundary_verified",
+        "mono_ns": 162702283307,
+        "pid": 3614,
+        "notes": [
+          {
+            "note_id": "922c00c4-161f-43e3-8a5a-82e785e68c74",
+            "revision": 3,
+            "digest": "c1a66fd8bb5f9b2724ea734c7a748bb1cf1e643809a7efe5dc308cfc8b0b5cc4"
+          }
+        ]
+      },
+      {
+        "event": "driver_close_intent",
+        "mono_ns": 163011425055,
+        "pid": 3615
+      },
+      {
+        "event": "fixture_database_ready",
+        "mono_ns": 164472175408,
+        "pid": 3618
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 165114611573,
+        "pid": 3618,
+        "operation": "63b4e44b-8fdd-48c2-bd1d-54a8f0828f7f",
+        "method": "GET",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 165115866693,
+        "pid": 3618,
+        "operation": "63b4e44b-8fdd-48c2-bd1d-54a8f0828f7f"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 165116392158,
+        "pid": 3618,
+        "operation": "63b4e44b-8fdd-48c2-bd1d-54a8f0828f7f",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 165116965589,
+        "pid": 3618,
+        "operation": "63b4e44b-8fdd-48c2-bd1d-54a8f0828f7f"
+      },
+      {
+        "event": "boundary_inspect_committed",
+        "mono_ns": 165179694683,
+        "pid": 3637,
+        "armed": true,
+        "notes": [
+          {
+            "note_id": "922c00c4-161f-43e3-8a5a-82e785e68c74",
+            "revision": 3,
+            "digest": "c1a66fd8bb5f9b2724ea734c7a748bb1cf1e643809a7efe5dc308cfc8b0b5cc4"
+          }
+        ]
+      },
+      {
+        "event": "boundary_verified",
+        "mono_ns": 165179768711,
+        "pid": 3637,
+        "notes": [
+          {
+            "note_id": "922c00c4-161f-43e3-8a5a-82e785e68c74",
+            "revision": 3,
+            "digest": "c1a66fd8bb5f9b2724ea734c7a748bb1cf1e643809a7efe5dc308cfc8b0b5cc4"
+          }
+        ]
+      },
+      {
+        "event": "boundary_disarm_committed",
+        "mono_ns": 165229652466,
+        "pid": 3638,
+        "armed": false,
+        "notes": [
+          {
+            "note_id": "922c00c4-161f-43e3-8a5a-82e785e68c74",
+            "revision": 3,
+            "digest": "c1a66fd8bb5f9b2724ea734c7a748bb1cf1e643809a7efe5dc308cfc8b0b5cc4"
+          }
+        ]
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 165350220795,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b",
+        "method": "PATCH",
+        "frontend": {
+          "perf_ms": 491.69999999998254,
+          "time_origin_ms": 1793430868162.7,
+          "sequence": 1,
+          "close_intent": false,
+          "keepalive": false,
+          "service_worker": false,
+          "visibility": "visible"
+        }
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 165356111670,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b",
+        "expected_revision": 3
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 165356351227,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 165357004237,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 165357627892,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 165358496043,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 165358583456,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 165358622238,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 165358701667,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 165358765867,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b",
+        "kind": "COMMIT"
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 165360320530,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b"
+      },
+      {
+        "event": "database_update_return",
+        "mono_ns": 165360405769,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b",
+        "revision": 4
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 165360941583,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 165361552063,
+        "pid": 3618,
+        "operation": "8b94b6c6-a568-4f41-8a82-3de88eba9c6b"
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 165468578559,
+        "pid": 3618,
+        "operation": "5259e0f4-7545-4264-a3d1-a145f72b932b",
+        "method": "GET",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 165469869006,
+        "pid": 3618,
+        "operation": "5259e0f4-7545-4264-a3d1-a145f72b932b"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 165470549382,
+        "pid": 3618,
+        "operation": "5259e0f4-7545-4264-a3d1-a145f72b932b",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 165471189638,
+        "pid": 3618,
+        "operation": "5259e0f4-7545-4264-a3d1-a145f72b932b"
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 165542406468,
+        "pid": 3618,
+        "operation": "80748c51-5d30-453c-945a-512bd765d10c",
+        "method": "GET",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 165543653481,
+        "pid": 3618,
+        "operation": "80748c51-5d30-453c-945a-512bd765d10c"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 165544197352,
+        "pid": 3618,
+        "operation": "80748c51-5d30-453c-945a-512bd765d10c",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 165544800779,
+        "pid": 3618,
+        "operation": "80748c51-5d30-453c-945a-512bd765d10c"
+      },
+      {
+        "event": "driver_close_intent",
+        "mono_ns": 165600922236,
+        "pid": 3640
+      }
+    ]
+  },
+  {
+    "name": "frontend/test-results/lifecycle-managed-tabs-clo-f87f3-its-without-browser-routing/backend-persistence.jsonl",
+    "events": [
+      {
+        "event": "fixture_database_ready",
+        "mono_ns": 167309716655,
+        "pid": 3645
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 168051645465,
+        "pid": 3645,
+        "operation": "961ce888-c807-4b42-80c4-22ea1fd451df",
+        "method": "POST",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168053705055,
+        "pid": 3645,
+        "operation": "961ce888-c807-4b42-80c4-22ea1fd451df",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168054210068,
+        "pid": 3645,
+        "operation": "961ce888-c807-4b42-80c4-22ea1fd451df",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168054270211,
+        "pid": 3645,
+        "operation": "961ce888-c807-4b42-80c4-22ea1fd451df",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168054689935,
+        "pid": 3645,
+        "operation": "961ce888-c807-4b42-80c4-22ea1fd451df",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168054788809,
+        "pid": 3645,
+        "operation": "961ce888-c807-4b42-80c4-22ea1fd451df",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168054831609,
+        "pid": 3645,
+        "operation": "961ce888-c807-4b42-80c4-22ea1fd451df",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168054935824,
+        "pid": 3645,
+        "operation": "961ce888-c807-4b42-80c4-22ea1fd451df",
+        "kind": "COMMIT"
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 168056252308,
+        "pid": 3645,
+        "operation": "961ce888-c807-4b42-80c4-22ea1fd451df"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 168056787181,
+        "pid": 3645,
+        "operation": "961ce888-c807-4b42-80c4-22ea1fd451df",
+        "status": 201
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 168057510772,
+        "pid": 3645,
+        "operation": "961ce888-c807-4b42-80c4-22ea1fd451df"
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 168990180361,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf",
+        "method": "PATCH",
+        "frontend": {
+          "perf_ms": 1311.3999999999942,
+          "time_origin_ms": 1793430870983.1,
+          "sequence": 1,
+          "close_intent": false,
+          "keepalive": false,
+          "service_worker": false,
+          "visibility": "visible"
+        }
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 168991914272,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf",
+        "expected_revision": 1
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168992188284,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168992634627,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168992697054,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168993073166,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168993151132,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168993189363,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168993277839,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 168993334915,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf",
+        "kind": "COMMIT"
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 168994471996,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf"
+      },
+      {
+        "event": "database_update_return",
+        "mono_ns": 168994534563,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf",
+        "revision": 2
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 168995039338,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 168995655008,
+        "pid": 3645,
+        "operation": "dd83c7c4-e60e-4dfa-bfab-8b7f7f2fd6cf"
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 169376565950,
+        "pid": 3645,
+        "operation": "89b57477-278e-4d42-a7c9-cebd182a4496",
+        "method": "GET",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 169378417268,
+        "pid": 3645,
+        "operation": "89b57477-278e-4d42-a7c9-cebd182a4496"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 169379548400,
+        "pid": 3645,
+        "operation": "89b57477-278e-4d42-a7c9-cebd182a4496",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 169381120860,
+        "pid": 3645,
+        "operation": "89b57477-278e-4d42-a7c9-cebd182a4496"
+      },
+      {
+        "event": "driver_close_intent",
+        "mono_ns": 169515154390,
+        "pid": 3674
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 170258378244,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf",
+        "method": "PATCH",
+        "frontend": {
+          "perf_ms": 1114.7000000000116,
+          "time_origin_ms": 1793430872447.9,
+          "sequence": 1,
+          "close_intent": false,
+          "keepalive": false,
+          "service_worker": false,
+          "visibility": "visible"
+        }
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 170260043003,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf",
+        "expected_revision": 2
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 170260281548,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 170260737600,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 170260801149,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 170261236762,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 170261302735,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 170261354061,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 170261429973,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 170261491498,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf",
+        "kind": "COMMIT"
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 170263279076,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf"
+      },
+      {
+        "event": "database_update_return",
+        "mono_ns": 170263343827,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf",
+        "revision": 3
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 170263896565,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 170264532323,
+        "pid": 3645,
+        "operation": "0e76aaba-4355-45e3-9659-c4cb7c73dccf"
+      },
+      {
+        "event": "driver_close_intent",
+        "mono_ns": 170421821674,
+        "pid": 3675
+      },
+      {
+        "event": "boundary_arm_committed",
+        "mono_ns": 171445458396,
+        "pid": 3676,
+        "armed": true,
+        "notes": [
+          {
+            "note_id": "8412e697-1d3b-4ce1-8ea3-83aa0be5969a",
+            "revision": 3,
+            "digest": "47acda8e3eb3840b19c3b3794a747819f72de21b11005956808f011844ef40a1"
+          }
+        ]
+      },
+      {
+        "event": "fixture_database_ready",
+        "mono_ns": 172050330897,
+        "pid": 3679
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 172622988695,
+        "pid": 3679,
+        "operation": "374dcd65-e9c8-4aab-94cb-b46f7eb34e02",
+        "method": "GET",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 172627618792,
+        "pid": 3679,
+        "operation": "374dcd65-e9c8-4aab-94cb-b46f7eb34e02"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 172628900957,
+        "pid": 3679,
+        "operation": "374dcd65-e9c8-4aab-94cb-b46f7eb34e02",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 172629587730,
+        "pid": 3679,
+        "operation": "374dcd65-e9c8-4aab-94cb-b46f7eb34e02"
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 172689765347,
+        "pid": 3679,
+        "operation": "4c3f3da9-59e0-4489-b78c-2300de51a61b",
+        "method": "PATCH",
+        "frontend": {}
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 172692235371,
+        "pid": 3679,
+        "operation": "4c3f3da9-59e0-4489-b78c-2300de51a61b",
+        "expected_revision": 3
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 172692461023,
+        "pid": 3679,
+        "operation": "4c3f3da9-59e0-4489-b78c-2300de51a61b",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 172694708391,
+        "pid": 3679,
+        "operation": "4c3f3da9-59e0-4489-b78c-2300de51a61b",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 172694784594,
+        "pid": 3679,
+        "operation": "4c3f3da9-59e0-4489-b78c-2300de51a61b",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 172694824047,
+        "pid": 3679,
+        "operation": "4c3f3da9-59e0-4489-b78c-2300de51a61b",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 172694880483,
+        "pid": 3679,
+        "operation": "4c3f3da9-59e0-4489-b78c-2300de51a61b",
+        "kind": "ROLLBACK"
+      },
+      {
+        "event": "sqlite_transaction_failed",
+        "mono_ns": 172694975821,
+        "pid": 3679,
+        "operation": "4c3f3da9-59e0-4489-b78c-2300de51a61b",
+        "error_type": "IntegrityError"
+      },
+      {
+        "event": "database_update_failed",
+        "mono_ns": 172695031795,
+        "pid": 3679,
+        "operation": "4c3f3da9-59e0-4489-b78c-2300de51a61b",
+        "error_type": "IntegrityError"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 172695429909,
+        "pid": 3679,
+        "operation": "4c3f3da9-59e0-4489-b78c-2300de51a61b",
+        "status": 503
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 172696542752,
+        "pid": 3679,
+        "operation": "4c3f3da9-59e0-4489-b78c-2300de51a61b"
+      },
+      {
+        "event": "boundary_inspect_committed",
+        "mono_ns": 172745879446,
+        "pid": 3695,
+        "armed": true,
+        "notes": [
+          {
+            "note_id": "8412e697-1d3b-4ce1-8ea3-83aa0be5969a",
+            "revision": 3,
+            "digest": "47acda8e3eb3840b19c3b3794a747819f72de21b11005956808f011844ef40a1"
+          }
+        ]
+      },
+      {
+        "event": "boundary_verified",
+        "mono_ns": 172745955878,
+        "pid": 3695,
+        "notes": [
+          {
+            "note_id": "8412e697-1d3b-4ce1-8ea3-83aa0be5969a",
+            "revision": 3,
+            "digest": "47acda8e3eb3840b19c3b3794a747819f72de21b11005956808f011844ef40a1"
+          }
+        ]
+      },
+      {
+        "event": "driver_close_intent",
+        "mono_ns": 173055034544,
+        "pid": 3697
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 173067431476,
+        "pid": 3679,
+        "operation": "c9ad3746-ad3c-43ba-8796-c8f5bf1db962",
+        "method": "PATCH",
+        "frontend": {
+          "perf_ms": 657.1999999999825,
+          "time_origin_ms": 1793430875714.7,
+          "sequence": 1,
+          "close_intent": true,
+          "keepalive": false,
+          "service_worker": false,
+          "visibility": "hidden"
+        }
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 173071109039,
+        "pid": 3679,
+        "operation": "c9ad3746-ad3c-43ba-8796-c8f5bf1db962",
+        "expected_revision": 3
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 173071692886,
+        "pid": 3679,
+        "operation": "c9ad3746-ad3c-43ba-8796-c8f5bf1db962",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 173072120535,
+        "pid": 3679,
+        "operation": "c9ad3746-ad3c-43ba-8796-c8f5bf1db962",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 173072207388,
+        "pid": 3679,
+        "operation": "c9ad3746-ad3c-43ba-8796-c8f5bf1db962",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 173072256169,
+        "pid": 3679,
+        "operation": "c9ad3746-ad3c-43ba-8796-c8f5bf1db962",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 173072317253,
+        "pid": 3679,
+        "operation": "c9ad3746-ad3c-43ba-8796-c8f5bf1db962",
+        "kind": "ROLLBACK"
+      },
+      {
+        "event": "sqlite_transaction_failed",
+        "mono_ns": 173072850429,
+        "pid": 3679,
+        "operation": "c9ad3746-ad3c-43ba-8796-c8f5bf1db962",
+        "error_type": "IntegrityError"
+      },
+      {
+        "event": "database_update_failed",
+        "mono_ns": 173073114803,
+        "pid": 3679,
+        "operation": "c9ad3746-ad3c-43ba-8796-c8f5bf1db962",
+        "error_type": "IntegrityError"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 173073933595,
+        "pid": 3679,
+        "operation": "c9ad3746-ad3c-43ba-8796-c8f5bf1db962",
+        "status": 503
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 173074610890,
+        "pid": 3679,
+        "operation": "c9ad3746-ad3c-43ba-8796-c8f5bf1db962"
+      },
+      {
+        "event": "fixture_database_ready",
+        "mono_ns": 174538665942,
+        "pid": 3700
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 175106976292,
+        "pid": 3700,
+        "operation": "a3dbe884-5d53-4485-bab5-1e592b1013a6",
+        "method": "GET",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 175108455191,
+        "pid": 3700,
+        "operation": "a3dbe884-5d53-4485-bab5-1e592b1013a6"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 175109072502,
+        "pid": 3700,
+        "operation": "a3dbe884-5d53-4485-bab5-1e592b1013a6",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 175109661702,
+        "pid": 3700,
+        "operation": "a3dbe884-5d53-4485-bab5-1e592b1013a6"
+      },
+      {
+        "event": "boundary_inspect_committed",
+        "mono_ns": 175178541405,
+        "pid": 3718,
+        "armed": true,
+        "notes": [
+          {
+            "note_id": "8412e697-1d3b-4ce1-8ea3-83aa0be5969a",
+            "revision": 3,
+            "digest": "47acda8e3eb3840b19c3b3794a747819f72de21b11005956808f011844ef40a1"
+          }
+        ]
+      },
+      {
+        "event": "boundary_verified",
+        "mono_ns": 175178616204,
+        "pid": 3718,
+        "notes": [
+          {
+            "note_id": "8412e697-1d3b-4ce1-8ea3-83aa0be5969a",
+            "revision": 3,
+            "digest": "47acda8e3eb3840b19c3b3794a747819f72de21b11005956808f011844ef40a1"
+          }
+        ]
+      },
+      {
+        "event": "boundary_disarm_committed",
+        "mono_ns": 175229880508,
+        "pid": 3719,
+        "armed": false,
+        "notes": [
+          {
+            "note_id": "8412e697-1d3b-4ce1-8ea3-83aa0be5969a",
+            "revision": 3,
+            "digest": "47acda8e3eb3840b19c3b3794a747819f72de21b11005956808f011844ef40a1"
+          }
+        ]
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 175385488147,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd",
+        "method": "PATCH",
+        "frontend": {
+          "perf_ms": 490.29999999998836,
+          "time_origin_ms": 1793430878199.8,
+          "sequence": 1,
+          "close_intent": false,
+          "keepalive": false,
+          "service_worker": false,
+          "visibility": "visible"
+        }
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 175387445669,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd",
+        "expected_revision": 3
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 175387703490,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 175388200157,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 175388283793,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 175388691724,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 175388764510,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 175388812549,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 175388942071,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 175389044632,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd",
+        "kind": "COMMIT"
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 175390418055,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd"
+      },
+      {
+        "event": "database_update_return",
+        "mono_ns": 175390506109,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd",
+        "revision": 4
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 175391097620,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 175391741841,
+        "pid": 3700,
+        "operation": "62676d7a-cc1e-4b6c-a9b5-b2c94b4723cd"
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 175515811749,
+        "pid": 3700,
+        "operation": "fd276f94-793f-48ec-8691-7f20b4d23494",
+        "method": "GET",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 175517370417,
+        "pid": 3700,
+        "operation": "fd276f94-793f-48ec-8691-7f20b4d23494"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 175518224019,
+        "pid": 3700,
+        "operation": "fd276f94-793f-48ec-8691-7f20b4d23494",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 175518841230,
+        "pid": 3700,
+        "operation": "fd276f94-793f-48ec-8691-7f20b4d23494"
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 175579472062,
+        "pid": 3700,
+        "operation": "025df096-a830-4ac1-a87b-63279d147622",
+        "method": "GET",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 175580805444,
+        "pid": 3700,
+        "operation": "025df096-a830-4ac1-a87b-63279d147622"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 175582461463,
+        "pid": 3700,
+        "operation": "025df096-a830-4ac1-a87b-63279d147622",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 175583160497,
+        "pid": 3700,
+        "operation": "025df096-a830-4ac1-a87b-63279d147622"
+      },
+      {
+        "event": "driver_close_intent",
+        "mono_ns": 175639243745,
+        "pid": 3720
+      }
+    ]
+  },
+  {
+    "name": "frontend/test-results/lifecycle-visibility-flush-acc76-the-SQL-boundary-rejects-it/backend-persistence.jsonl",
+    "events": [
+      {
+        "event": "fixture_database_ready",
+        "mono_ns": 182947867258,
+        "pid": 3768
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 183701521467,
+        "pid": 3768,
+        "operation": "646bb67b-5f9a-4d96-a207-b110a4461b7a",
+        "method": "POST",
+        "frontend": {}
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 183703490666,
+        "pid": 3768,
+        "operation": "646bb67b-5f9a-4d96-a207-b110a4461b7a",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 183703985219,
+        "pid": 3768,
+        "operation": "646bb67b-5f9a-4d96-a207-b110a4461b7a",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 183704078903,
+        "pid": 3768,
+        "operation": "646bb67b-5f9a-4d96-a207-b110a4461b7a",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 183704536396,
+        "pid": 3768,
+        "operation": "646bb67b-5f9a-4d96-a207-b110a4461b7a",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 183704639569,
+        "pid": 3768,
+        "operation": "646bb67b-5f9a-4d96-a207-b110a4461b7a",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 183704684543,
+        "pid": 3768,
+        "operation": "646bb67b-5f9a-4d96-a207-b110a4461b7a",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 183704788667,
+        "pid": 3768,
+        "operation": "646bb67b-5f9a-4d96-a207-b110a4461b7a",
+        "kind": "COMMIT"
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 183706419330,
+        "pid": 3768,
+        "operation": "646bb67b-5f9a-4d96-a207-b110a4461b7a"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 183706926253,
+        "pid": 3768,
+        "operation": "646bb67b-5f9a-4d96-a207-b110a4461b7a",
+        "status": 201
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 183707585863,
+        "pid": 3768,
+        "operation": "646bb67b-5f9a-4d96-a207-b110a4461b7a"
+      },
+      {
+        "event": "boundary_arm_committed",
+        "mono_ns": 183780284018,
+        "pid": 3785,
+        "armed": true,
+        "notes": [
+          {
+            "note_id": "e3cb816d-77b1-402e-8c34-ebdfc08ea994",
+            "revision": 1,
+            "digest": "5c595e0da2bb54cbbf0501b55c5bb719a6dd80649135b485c449d6e4f2c356c4"
+          }
+        ]
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 183828515211,
+        "pid": 3768,
+        "operation": "3f567392-58c4-41dd-a7c2-b299f5d5f4fb",
+        "method": "PATCH",
+        "frontend": {
+          "perf_ms": 510.5,
+          "time_origin_ms": 1793430886620.9,
+          "sequence": 1,
+          "close_intent": false,
+          "keepalive": false,
+          "service_worker": false,
+          "visibility": "hidden"
+        }
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 183830491462,
+        "pid": 3768,
+        "operation": "3f567392-58c4-41dd-a7c2-b299f5d5f4fb",
+        "expected_revision": 1
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 183830695813,
+        "pid": 3768,
+        "operation": "3f567392-58c4-41dd-a7c2-b299f5d5f4fb",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 183831070311,
+        "pid": 3768,
+        "operation": "3f567392-58c4-41dd-a7c2-b299f5d5f4fb",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 183831137888,
+        "pid": 3768,
+        "operation": "3f567392-58c4-41dd-a7c2-b299f5d5f4fb",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 183831171640,
+        "pid": 3768,
+        "operation": "3f567392-58c4-41dd-a7c2-b299f5d5f4fb",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 183831210793,
+        "pid": 3768,
+        "operation": "3f567392-58c4-41dd-a7c2-b299f5d5f4fb",
+        "kind": "ROLLBACK"
+      },
+      {
+        "event": "sqlite_transaction_failed",
+        "mono_ns": 183831291824,
+        "pid": 3768,
+        "operation": "3f567392-58c4-41dd-a7c2-b299f5d5f4fb",
+        "error_type": "IntegrityError"
+      },
+      {
+        "event": "database_update_failed",
+        "mono_ns": 183831316360,
+        "pid": 3768,
+        "operation": "3f567392-58c4-41dd-a7c2-b299f5d5f4fb",
+        "error_type": "IntegrityError"
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 183831585516,
+        "pid": 3768,
+        "operation": "3f567392-58c4-41dd-a7c2-b299f5d5f4fb",
+        "status": 503
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 183832116757,
+        "pid": 3768,
+        "operation": "3f567392-58c4-41dd-a7c2-b299f5d5f4fb"
+      },
+      {
+        "event": "boundary_inspect_committed",
+        "mono_ns": 183893542887,
+        "pid": 3786,
+        "armed": true,
+        "notes": [
+          {
+            "note_id": "e3cb816d-77b1-402e-8c34-ebdfc08ea994",
+            "revision": 1,
+            "digest": "5c595e0da2bb54cbbf0501b55c5bb719a6dd80649135b485c449d6e4f2c356c4"
+          }
+        ]
+      },
+      {
+        "event": "boundary_verified",
+        "mono_ns": 183893619229,
+        "pid": 3786,
+        "notes": [
+          {
+            "note_id": "e3cb816d-77b1-402e-8c34-ebdfc08ea994",
+            "revision": 1,
+            "digest": "5c595e0da2bb54cbbf0501b55c5bb719a6dd80649135b485c449d6e4f2c356c4"
+          }
+        ]
+      },
+      {
+        "event": "boundary_disarm_committed",
+        "mono_ns": 183954269460,
+        "pid": 3787,
+        "armed": false,
+        "notes": [
+          {
+            "note_id": "e3cb816d-77b1-402e-8c34-ebdfc08ea994",
+            "revision": 1,
+            "digest": "5c595e0da2bb54cbbf0501b55c5bb719a6dd80649135b485c449d6e4f2c356c4"
+          }
+        ]
+      },
+      {
+        "event": "fastapi_request_enter",
+        "mono_ns": 184517349998,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032",
+        "method": "PATCH",
+        "frontend": {
+          "perf_ms": 1200.9000000000233,
+          "time_origin_ms": 1793430886620.9,
+          "sequence": 2,
+          "close_intent": false,
+          "keepalive": false,
+          "service_worker": false,
+          "visibility": "hidden"
+        }
+      },
+      {
+        "event": "database_update_enter",
+        "mono_ns": 184520591262,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032",
+        "expected_revision": 1
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 184521288929,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032",
+        "kind": "BEGIN"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 184521736113,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 184521793751,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032",
+        "kind": "UPDATE"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 184522157429,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 184522240544,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 184522272804,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 184522362962,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032",
+        "kind": "INSERT"
+      },
+      {
+        "event": "sqlite_statement",
+        "mono_ns": 184522431880,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032",
+        "kind": "COMMIT"
+      },
+      {
+        "event": "sqlite_commit_complete",
+        "mono_ns": 184523776147,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032"
+      },
+      {
+        "event": "database_update_return",
+        "mono_ns": 184523836770,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032",
+        "revision": 2
+      },
+      {
+        "event": "fastapi_response",
+        "mono_ns": 184524432922,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032",
+        "status": 200
+      },
+      {
+        "event": "fastapi_request_exit",
+        "mono_ns": 184525093383,
+        "pid": 3768,
+        "operation": "5c2c3244-6272-4a87-9285-88157cb83032"
+      },
+      {
+        "event": "driver_close_intent",
+        "mono_ns": 184601329120,
+        "pid": 3788
+      }
+    ]
+  }
+]

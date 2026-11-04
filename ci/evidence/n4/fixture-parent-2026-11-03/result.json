@@ -1,0 +1,148 @@
+{
+  "N4": "CONDITIONAL; hosted native CI still FAIL",
+  "binary_build_GUI_host_policy_commit_push_workflow_execution": "NOT EXECUTED",
+  "clean_checkout": {
+    "GUI_build_download_host_policy_commit_push": "NOT EXECUTED",
+    "all_five_setup_paths_independently_exercised": true,
+    "corrected_file_sha256": "3fc70892596a674d48d81eb3e7355b5d66d2021ffd3f003c7ea7cee6f6b48b37",
+    "elapsed_seconds": 3.996,
+    "native_started_without_ci_output": true,
+    "patch_paths": [
+      "packaging/native/test_apparmor.py"
+    ],
+    "patch_sha256": "1dcd33962a4cf375fe4aafd8a5bd687934cdcc4f76d719cdb72c6a1f238435aa",
+    "results": [
+      {
+        "ci_output_absent_before": true,
+        "command": [
+          "/usr/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "packaging/native",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "elapsed_seconds": 2.743,
+        "exit_code": 0,
+        "log_sha256": "19b56fafe92129814fb6b4b3b6a0addfbeaad096ea7c9bb93d351e19d08ba57f",
+        "name": "native",
+        "reported_tests": 198,
+        "skipped": false,
+        "status": "PASS"
+      },
+      {
+        "ci_output_absent_before": false,
+        "command": [
+          "/usr/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "packaging/native/feasibility",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "elapsed_seconds": 0.212,
+        "exit_code": 0,
+        "log_sha256": "6868b4c6a690631e82b9ba3269d174e68370b0fc1d6be38c01ba2d9389623b85",
+        "name": "feasibility",
+        "reported_tests": 54,
+        "skipped": false,
+        "status": "PASS"
+      },
+      {
+        "ci_output_absent_before": false,
+        "command": [
+          "<existing-backend-venv-python>",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "ci",
+          "-p",
+          "test_ci.py",
+          "-v"
+        ],
+        "elapsed_seconds": 0.422,
+        "exit_code": 0,
+        "log_sha256": "62e00a91c14d38f2026863283bd702dc73d7c0b575f2b65267a259045e557969",
+        "name": "workflow",
+        "reported_tests": 38,
+        "skipped": false,
+        "status": "PASS"
+      },
+      {
+        "ci_output_absent_before": false,
+        "command": [
+          "<existing-backend-venv-python>",
+          "-B",
+          "ci/validate.py"
+        ],
+        "elapsed_seconds": 0.211,
+        "exit_code": 0,
+        "log_sha256": "6929f9534e22bc6fa880e0273e930cbca7230a10ad605b44103eec52e5d3f6a6",
+        "name": "workflow-contract",
+        "reported_tests": null,
+        "skipped": false,
+        "status": "PASS"
+      }
+    ],
+    "scope": "fresh full git-archive HEAD snapshot plus one explicit test-only patch; exact native CI regression commands; no assembly or GUI",
+    "signature_fixture_directory_removed": true,
+    "snapshot_source_unchanged_after_tests": true,
+    "source_commit": "b5ad466b5c5694900e4463ffdef10f0b7c84a732",
+    "source_manifest_sha256": "60b57d28545ca580cb46f5006f674b357a89acafc220f701a8c365c64e7a1769",
+    "source_snapshot_bytes": 48039524,
+    "source_snapshot_files": 1604,
+    "status": "LOCAL PASS",
+    "temporary_budget_bytes": 134217728,
+    "temporary_peak_allocated_bytes": 53477376
+  },
+  "corrected_file_sha256": "3fc70892596a674d48d81eb3e7355b5d66d2021ffd3f003c7ea7cee6f6b48b37",
+  "disposable_signature_tests": {
+    "cleanup_verified": true,
+    "included_in_native_total": true,
+    "passed": 6,
+    "scope": "Fresh one-day synthetic unit fixture only; no production signing"
+  },
+  "existing_uncommitted_files_preserved_before_report_updates": 9,
+  "hosted_runs_preserved": [
+    {
+      "id": 41607482461,
+      "status": "FAIL"
+    },
+    {
+      "id": 41612661098,
+      "status": "FAIL"
+    }
+  ],
+  "implementation_change": "Only test fixtures: five mkdir calls now create missing parents; one regression independently runs each setup in a fresh minimal source fixture without ci-output",
+  "implementation_paths": [
+    "packaging/native/test_apparmor.py"
+  ],
+  "negative_reproduction": {
+    "elapsed_seconds": 0.575,
+    "exit_code": 1,
+    "independent_missing_parent_failures": 5,
+    "log_sha256": "2884525d6048f5d5e9970d75ba78ed268284967432fe73240c047a71508eda70",
+    "new_regression_fails_before_five_site_fix": true,
+    "status": "EXPECTED FAIL REPRODUCED",
+    "test_source_sha256": "9f5c1c587a7f61847a4ee55818dc0f45b2abf80cc43b4ffe3288a16614f69a05"
+  },
+  "next_checkpoint": "Owner reviews test-only fixture fix and preserved hosted failure evidence; any commit/push or hosted verification needs separate authorization",
+  "original_file_sha256": "7b937d41c4c2174032537d16137963c842d21c8262e08feaa769b4cc5d57a2d2",
+  "patch_sha256": "1dcd33962a4cf375fe4aafd8a5bd687934cdcc4f76d719cdb72c6a1f238435aa",
+  "positive_unique_test_total": 290,
+  "production_application_installer_dependency_workflow_policy_changes": false,
+  "protected_files_verified_unchanged": 43,
+  "source_commit": "b5ad466b5c5694900e4463ffdef10f0b7c84a732",
+  "status": "LOCAL FIX VERIFIED / READY FOR REVIEW",
+  "time_utc": "2026-11-03T09:58:14Z"
+}

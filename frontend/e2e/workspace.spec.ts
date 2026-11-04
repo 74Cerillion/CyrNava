@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { editorSelection, paragraphCursor } from './editorSelection';
 import type { Locator, Page } from '@playwright/test';
 import { spawn, execFileSync } from 'node:child_process';
 import type { ChildProcess } from 'node:child_process';
@@ -108,6 +109,29 @@ async function readable(locator: Locator, minimum = 4.5, pseudo?: string) {
   expect(ratio, `Text contrast for ${await locator.getAttribute('class')}`).toBeGreaterThanOrEqual(minimum);
 }
 
+async function lastParagraphEnd(page: Page, editor: Locator) {
+  const paragraph = editor.locator('[data-content-type="paragraph"]').last();
+  const blockId = await paragraph.evaluate((node) => node.closest('[data-id]')!.getAttribute('data-id')!);
+  // A DOM Range at the editor root is not a synchronized ProseMirror cursor.
+  // Navigate as a user, then verify both representations before typing.
+  await paragraph.click(); await paragraphCursor(editor, { blockId });
+  await page.keyboard.press('Control+End'); await paragraphCursor(editor, { blockId });
+  await expect.poll(async () => { const state = await editorSelection(editor); return state.model.parentOffset === state.model.contentSize; }).toBe(true);
+  return { paragraph, blockId };
+}
+
+async function placeholderState(paragraph: Locator) {
+  return paragraph.evaluate((element) => {
+    const inline = element.querySelector('.bn-inline-content')!;
+    const selection = window.getSelection();
+    const style = getComputedStyle(element, '::after');
+    return { blockId: element.closest('[data-id]')!.getAttribute('data-id'), editable: (element as HTMLElement).isContentEditable,
+      textLength: element.textContent!.length, trailingBreakOnlyChild: inline.matches(':has(> .ProseMirror-trailingBreak:only-child)'),
+      decorated: element.hasAttribute('data-is-empty-and-focused'), onlyEmptyBlock: element.hasAttribute('data-is-only-empty-block'),
+      caretInside: !!selection?.anchorNode && inline.contains(selection.anchorNode), content: style.content, color: style.color, opacity: style.opacity };
+  });
+}
+
 test('appearance follows system and explicit preferences without changing notes, templates or autosave', async ({ page }, info) => {
   const env = await environment();
   const external: string[] = []; const errors: string[] = []; const writes: string[] = [];
@@ -129,12 +153,9 @@ test('appearance follows system and explicit preferences without changing notes,
     await expect(page.getByRole('region', { name: 'Note editor' }).locator('.bn-container')).toHaveAttribute('data-color-scheme', value);
     await expect(page.getByRole('region', { name: 'Note editor' }).locator('.bn-mantine').first()).toHaveAttribute('data-mantine-color-scheme', value);
   }
-  async function atEnd() {
-    await editor().evaluate((element) => {
-      (element as HTMLElement).focus(); const range = document.createRange();
-      range.selectNodeContents(element); range.collapse(false);
-      const selection = window.getSelection()!; selection.removeAllRanges(); selection.addRange(range);
-    });
+  const states: unknown[] = [];
+  async function capture(stage: string) {
+    states.push({ stage, ...await editorSelection(editor()), placeholder: await placeholderState(editor().locator('[data-content-type="paragraph"]').last()) });
   }
   try {
     await env.start(); await page.emulateMedia({ colorScheme: 'light' });
@@ -153,7 +174,7 @@ test('appearance follows system and explicit preferences without changing notes,
     await createDialog.getByLabel('Note title', { exact: true }).fill('Appearance training');
     await createDialog.getByLabel('Starting content', { exact: true }).selectOption('builtin:enumeration');
     await createDialog.getByRole('button', { name: 'Create', exact: true }).click(); await saved(page);
-    await atEnd(); await page.keyboard.press('Control+b'); await page.keyboard.type('Theme-safe bold');
+    await lastParagraphEnd(page, editor()); await page.keyboard.press('Control+b'); await page.keyboard.type('Theme-safe bold');
     await page.keyboard.press('Control+b'); await page.keyboard.press('Enter'); await page.keyboard.type('Native document content.'); await saved(page);
     const owner = (await getJson(`${env.api}/api/tree`)).notes[0];
     const persisted = () => getJson(`${env.api}/api/notes/${owner.id}`);
@@ -210,8 +231,12 @@ test('appearance follows system and explicit preferences without changing notes,
       await readable(page.getByText('Text', { exact: true }).last());
       await readable(page.locator('.bn-color-picker-dropdown').getByRole('menuitem').first());
       await page.screenshot({ path: info.outputPath(`appearance-${mode}-formatting.png`), fullPage: true });
-      await page.keyboard.press('Escape'); await atEnd();
-      await page.keyboard.press('Enter'); await page.keyboard.type('/');
+      await page.keyboard.press('Escape'); await lastParagraphEnd(page, editor());
+      await page.keyboard.press('Enter');
+      const placeholder = editor().locator('[data-content-type="paragraph"]').last();
+      const blockId = await placeholder.evaluate((node) => node.closest('[data-id]')!.getAttribute('data-id')!);
+      await paragraphCursor(editor(), { blockId, empty: true });
+      await page.keyboard.type('/');
       const menu = page.locator('.bn-suggestion-menu'); await expect(menu).toBeVisible();
       await expect.poll(() => menu.evaluate((element) => {
         let node: Element | null = element;
@@ -222,8 +247,14 @@ test('appearance follows system and explicit preferences without changing notes,
       await readable(menu.locator('.bn-mt-suggestion-menu-item-subtitle').first());
       await expect(menu.locator('xpath=ancestor::*[@data-mantine-color-scheme][1]')).toHaveAttribute('data-mantine-color-scheme', mode);
       await page.screenshot({ path: info.outputPath(`appearance-${mode}-slash-menu.png`), fullPage: true });
-      await page.keyboard.press('Escape'); await page.keyboard.press('Backspace'); await saved(page);
-      const placeholder = editor().locator('[data-content-type="paragraph"]').last();
+      await page.keyboard.press('Escape'); await capture(`${mode}:after-Escape`);
+      await expect(menu).toBeHidden(); await paragraphCursor(editor(), { blockId });
+      await page.keyboard.press('Backspace'); await capture(`${mode}:after-Backspace`);
+      await saved(page); await capture(`${mode}:after-Saved`);
+      await paragraphCursor(editor(), { blockId, empty: true });
+      await expect(editor()).toHaveAttribute('contenteditable', 'true');
+      await expect(placeholder).toHaveAttribute('data-is-empty-and-focused', 'true');
+      await expect.poll(() => placeholderState(placeholder)).toMatchObject({ editable: true, textLength: 0, trailingBreakOnlyChild: true, caretInside: true });
       await expect.poll(() => placeholder.evaluate((element) => getComputedStyle(element, '::after').content)).toContain('Enter text');
       await readable(placeholder, 4.5, '::after');
       await page.getByRole('button', { name: 'New note', exact: true }).click();
@@ -265,7 +296,61 @@ test('appearance follows system and explicit preferences without changing notes,
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.screenshot({ path: info.outputPath('appearance-dark-mobile.png'), fullPage: true });
     expect(external).toEqual([]); expect(errors).toEqual([]);
-  } finally { release(); await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+  } finally {
+    try { await writeFile(info.outputPath('appearance-selection-states.json'), JSON.stringify(states, null, 2)); }
+    finally { release(); await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+  }
+});
+
+test('placeholder rendering requires the selected empty paragraph, not the last paragraph alone', async ({ page }, info) => {
+  const env = await environment();
+  const editor = page.getByRole('region', { name: 'Note editor' }).getByRole('textbox');
+  const states: unknown[] = [];
+  try {
+    await env.start(); await page.goto(env.url); await create(page, 'note', 'Synthetic placeholder selection');
+    await editor.click(); await page.keyboard.type('Nonempty selection anchor'); await page.keyboard.press('Enter');
+    await paragraphCursor(editor, { empty: true }); await page.keyboard.press('Enter');
+    await paragraphCursor(editor, { empty: true }); await saved(page);
+    const nonempty = editor.getByText('Nonempty selection anchor', { exact: true });
+    const anchorId = await nonempty.evaluate((node) => node.closest('[data-id]')!.getAttribute('data-id')!);
+    const last = editor.locator('[data-content-type="paragraph"]').last();
+    const lastId = await last.evaluate((node) => node.closest('[data-id]')!.getAttribute('data-id')!);
+    const tree = await getJson(`${env.api}/api/tree`);
+    const canonical = await getJson(`${env.api}/api/notes/${tree.notes[0].id}`);
+    for (const mode of ['light', 'dark'] as const) {
+      await page.getByRole('combobox', { name: 'Appearance', exact: true }).selectOption(mode);
+      await nonempty.click(); await paragraphCursor(editor, { blockId: anchorId });
+      const inactive = await placeholderState(last);
+      // BlockNote's default hint belongs to its selected empty block. An empty
+      // block elsewhere must not be mistaken for that selected block.
+      expect(inactive).toMatchObject({ editable: true, textLength: 0, trailingBreakOnlyChild: true, decorated: false, onlyEmptyBlock: false, caretInside: false, content: 'none' });
+      states.push({ stage: `${mode}:empty-but-not-selected`, ...await editorSelection(editor), placeholder: inactive });
+
+      // Recreate the removed test-only shortcut as a negative control. Read
+      // both positions in the same JS turn; never type from this invalid state.
+      const domOnly = await editor.evaluate((element) => {
+        const view = (element as HTMLElement & { editor: { view: import('@tiptap/pm/view').EditorView } }).editor.view;
+        const range = document.createRange(); range.selectNodeContents(element); range.collapse(false);
+        const selection = window.getSelection()!; selection.removeAllRanges(); selection.addRange(range);
+        const model = view.state.selection;
+        const position = view.posAtDOM(selection.anchorNode!, selection.anchorOffset);
+        return { domPosition: position, modelFrom: model.from, modelTo: model.to,
+          synchronized: model.anchor === position && model.head === position };
+      });
+      expect(domOnly.synchronized).toBe(false);
+      states.push({ stage: `${mode}:DOM-only-shortcut-negative-control`, ...domOnly });
+
+      await lastParagraphEnd(page, editor); await paragraphCursor(editor, { blockId: lastId, empty: true });
+      await expect(last).toHaveAttribute('data-is-empty-and-focused', 'true');
+      await expect.poll(() => placeholderState(last)).toMatchObject({ editable: true, textLength: 0, trailingBreakOnlyChild: true, caretInside: true, content: expect.stringContaining('Enter text') });
+      await readable(last, 4.5, '::after');
+      states.push({ stage: `${mode}:selected-empty`, ...await editorSelection(editor), placeholder: await placeholderState(last) });
+    }
+    expect(await getJson(`${env.api}/api/notes/${tree.notes[0].id}`)).toEqual(canonical);
+  } finally {
+    try { await writeFile(info.outputPath('placeholder-selection-states.json'), JSON.stringify(states, null, 2)); }
+    finally { await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+  }
 });
 
 test('CyrNava reference appearance preserves the live editor, local images and saved content', async ({ page }, info) => {
@@ -604,6 +689,8 @@ test('revision conflict retains the draft and exports both versions before expli
 test('Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documentation', async ({ page }, info) => {
   const env = await environment();
   const external: string[] = [];
+  const selectionStates: unknown[] = [];
+  const captureSelection = async (stage: string, extension: string) => { selectionStates.push({ stage, extension, ...await editorSelection(editor()) }); };
   await page.route('**/*', (route) => {
     if (new URL(route.request().url()).hostname !== '127.0.0.1') { external.push(route.request().url()); return route.abort(); }
     return route.continue();
@@ -649,16 +736,46 @@ test('Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documen
     }, (await readFile(`${png}.png`)).toString('base64'));
     await editor().getByText('Synthetic learning notes only.', { exact: true }).click(); await page.keyboard.press('End'); await page.keyboard.press('Control+v');
     await expect(editor().locator('img')).toHaveCount(1); await saved(page);
-    // Reuse the empty trailing paragraph for the installed native image selector.
-    for (const extension of ['jpg', 'webp']) {
-      await editor().getByText('Synthetic learning notes only.', { exact: true }).click(); await page.keyboard.press('End'); await page.keyboard.press('Enter');
-      await page.keyboard.type('/image'); await page.keyboard.press('Enter');
-      const [chooser] = await Promise.all([page.waitForEvent('filechooser', { timeout: 10_000 }), page.getByRole('button', { name: 'Upload image', exact: true }).click({ timeout: 10_000 })]);
-      await chooser.setFiles(`${png}.${extension}`); await page.keyboard.press('Escape'); await saved(page);
+    // A DOM click/End can precede the editor's selectionchange transaction.
+    // Establish each command's actual paragraph cursor, including after upload.
+    for (const [index, extension] of ['jpg', 'webp'].entries()) {
+      await captureSelection('before-paragraph-click', extension);
+      const paragraph = editor().getByText('Synthetic learning notes only.', { exact: true });
+      const blockId = await paragraph.evaluate((node) => node.closest('[data-id]')!.getAttribute('data-id')!);
+      await paragraph.click();
+      await captureSelection('after-click-before-synchronization', extension);
+      await paragraphCursor(editor(), { blockId });
+      await page.keyboard.press('End');
+      await paragraphCursor(editor(), { blockId });
+      await expect.poll(async () => { const state = await editorSelection(editor()); return state.model.parentOffset === state.model.contentSize; }).toBe(true);
+      await page.keyboard.press('Enter');
+      await paragraphCursor(editor(), { empty: true });
+      await captureSelection('ready-for-image-command', extension);
+      await page.keyboard.type('/image');
+      await paragraphCursor(editor());
+      const imageCommand = page.locator('.bn-suggestion-menu').getByRole('option').filter({ has: page.getByText('Image', { exact: true }) });
+      await expect(imageCommand).toBeVisible();
+      await expect(imageCommand).toHaveAttribute('aria-selected', 'true');
+      await page.keyboard.press('Enter');
+      const upload = page.getByRole('button', { name: 'Upload image', exact: true });
+      await expect(upload).toBeVisible();
+      const [chooser] = await Promise.all([page.waitForEvent('filechooser', { timeout: 10_000 }), upload.click({ timeout: 10_000 })]);
+      await chooser.setFiles(`${png}.${extension}`);
+      await expect(editor().locator('img')).toHaveCount(index + 2);
+      await expect.poll(() => editor().locator('img').evaluateAll((images) => images.every((image) => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth === 600))).toBe(true);
+      await expect(upload).toBeHidden();
+      await saved(page);
+      await expect.poll(async () => {
+        const note = await getJson(`${env.api}/api/notes/${owner.id}`);
+        return note.document_json.filter((block: AssetBlock) => block.type === 'image' && block.props?.url).length;
+      }).toBe(index + 2);
+      await captureSelection('upload-rendered-and-persisted', extension);
     }
     await expect(editor().locator('img')).toHaveCount(3);
     const imageNote = await getJson(`${env.api}/api/notes/${owner.id}`);
     expect(imageNote.document_json.filter((b: { type: string }) => b.type === 'image')).toHaveLength(3);
+    const originalBlocks = (blocks: { type: string; content?: unknown[] }[]) => blocks.filter((block) => block.type !== 'image' && !(block.type === 'paragraph' && !block.content?.length));
+    expect(originalBlocks(imageNote.document_json)).toEqual(originalBlocks(rich.document_json));
     await env.stopBackend(); await env.startBackend(); await page.reload(); await saved(page);
     expect((await getJson(`${env.api}/api/notes/${owner.id}`)).document_json).toEqual(imageNote.document_json);
     await expect.poll(() => editor().locator('img').evaluateAll((images) => images.every((image) => (image as HTMLImageElement).complete && (image as HTMLImageElement).naturalWidth === 600))).toBe(true);
@@ -695,6 +812,11 @@ test('Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documen
     await page.keyboard.press('Tab'); // Native focus remains keyboard operable.
     await page.setViewportSize({ width: 390, height: 844 });
     await page.getByRole('textbox', { name: 'Note title', exact: true }).click();
+    // Resizing retains the old hover target until the pointer moves. Measure
+    // the mobile workspace after the closing hover menu has unmounted. A
+    // visibility-hidden transition snapshot still contributes scroll width.
+    await page.mouse.move(0, 0);
+    await expect(page.locator('.bn-side-menu')).toHaveCount(0);
     const layout = await page.evaluate(() => ({ width: window.innerWidth, scroll: document.documentElement.scrollWidth, overflowing: Array.from(document.querySelectorAll('*')).filter((element) => element.getBoundingClientRect().right > window.innerWidth + 1).slice(0, 12).map((element) => ({ tag: element.tagName, class: element.className, right: element.getBoundingClientRect().right })) }));
     expect(layout.scroll, JSON.stringify(layout)).toBeLessThanOrEqual(layout.width + 1);
     await page.setViewportSize({ width: 1280, height: 1000 });
@@ -707,7 +829,58 @@ test('Phase 1 formatting, clipboard, CRUD, keyboard access and sanitized documen
     await page.getByRole('button', { name: 'Delete permanently', exact: true }).click(); await expect(page.getByRole('dialog')).toBeHidden();
     tree = await getJson(`${env.api}/api/tree`); expect(tree.notes).toHaveLength(2); expect(tree.folders).toHaveLength(2);
     expect(external).toEqual([]);
-  } finally { await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+  } finally {
+    try { await writeFile(info.outputPath('image-selection-states.json'), JSON.stringify(selectionStates, null, 2)); }
+    finally { await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+  }
+});
+
+
+test('image command requires a synchronized paragraph after code-block focus', async ({ page }, info) => {
+  const env = await environment();
+  const editor = page.getByRole('region', { name: 'Note editor' }).getByRole('textbox');
+  const states: unknown[] = [];
+  try {
+    await env.start(); await page.goto(env.url); await create(page, 'note', 'Synthetic image selection regression');
+    await editor.click(); await page.keyboard.type('Image insertion anchor'); await page.keyboard.press('Enter');
+    await page.keyboard.type('``` '); await page.keyboard.type('Synthetic code'); await page.keyboard.press('Enter');
+    await expect.poll(async () => { const state = await editorSelection(editor); return state.synchronized && state.model.parent === 'codeBlock'; }).toBe(true);
+    states.push({ stage: 'code-cursor', ...await editorSelection(editor) });
+    await page.keyboard.type('/image');
+    await expect(editor.locator('[data-content-type="codeBlock"]')).toContainText('/image');
+    await expect(page.locator('.bn-suggestion-menu')).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Upload image', exact: true })).toHaveCount(0);
+    states.push({ stage: 'literal-code-command', ...await editorSelection(editor) });
+
+    const anchor = editor.getByText('Image insertion anchor', { exact: true });
+    const blockId = await anchor.evaluate((node) => node.closest('[data-id]')!.getAttribute('data-id')!);
+    await anchor.click();
+    states.push({ stage: 'clicked-paragraph', ...await editorSelection(editor) });
+    await paragraphCursor(editor, { blockId });
+    await page.keyboard.press('End'); await paragraphCursor(editor, { blockId });
+    await expect.poll(async () => { const state = await editorSelection(editor); return state.model.parentOffset === state.model.contentSize; }).toBe(true);
+    await page.keyboard.press('Enter'); await paragraphCursor(editor, { empty: true });
+    states.push({ stage: 'synchronized-empty-paragraph', ...await editorSelection(editor) });
+    await page.keyboard.type('/image'); await paragraphCursor(editor);
+    const imageCommand = page.locator('.bn-suggestion-menu').getByRole('option').filter({ has: page.getByText('Image', { exact: true }) });
+    await expect(imageCommand).toBeVisible(); await expect(imageCommand).toHaveAttribute('aria-selected', 'true');
+    await page.keyboard.press('Enter');
+    const upload = page.getByRole('button', { name: 'Upload image', exact: true }); await expect(upload).toBeVisible();
+    const png = join(env.directory, 'synthetic-selection.png');
+    execFileSync(python, ['-c', "from PIL import Image; import sys; Image.new('RGB',(600,140),'#20324a').save(sys.argv[1])", png]);
+    const [chooser] = await Promise.all([page.waitForEvent('filechooser'), upload.click()]);
+    await chooser.setFiles(png);
+    await expect.poll(() => editor.locator('img').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth === 600)).toBe(true);
+    await expect(upload).toBeHidden(); await saved(page);
+    const tree = await getJson(`${env.api}/api/tree`);
+    const note = await getJson(`${env.api}/api/notes/${tree.notes[0].id}`);
+    expect(note.document_json.filter((block: AssetBlock) => block.type === 'image' && block.props?.url)).toHaveLength(1);
+    expect(JSON.stringify(note.document_json.filter((block: AssetBlock) => block.type === 'codeBlock'))).toContain('/image');
+    await expect(anchor).toHaveText('Image insertion anchor');
+  } finally {
+    try { await writeFile(info.outputPath('image-selection-states.json'), JSON.stringify(states, null, 2)); }
+    finally { await env.shutdown(); await writeFile(info.outputPath('local-server.log'), env.logs()); await rm(env.directory, { recursive: true, force: true }); }
+  }
 });
 
 
@@ -831,4 +1004,94 @@ test('all exposed editor actions persist; mixed content reconstructs after resta
     await expect(editor.getByRole('heading', { name: 'Rapid A + Rapid B 🚀', exact: true })).toBeVisible();
     expect(rejected).toEqual([]); expect(external).toEqual([]);
   } finally { releaseHeld?.(); await env.shutdown(); await rm(env.directory, { recursive: true, force: true }); }
+});
+
+test('desktop close protocol drains real autosave and retains an interrupted draft', async ({ page, context }) => {
+  const env = await environment();
+  try {
+    await env.start(); await page.goto(env.url);
+    await create(page, 'note', 'P2 close protocol');
+    const content = page.getByRole('textbox', { name: 'Note content' });
+    await content.click(); await page.keyboard.type('Paragraph saved by close handshake.');
+    const request = 'a'.repeat(32);
+    await page.evaluate((id) => window.__cyrnavaDesktop!.request(id), request);
+    await expect.poll(() => page.evaluate((id) => window.__cyrnavaDesktop!.state(id), request)).toBe('saved');
+    const tree = await getJson(env.api + '/api/tree');
+    const note = await getJson(env.api + '/api/notes/' + tree.notes[0].id);
+    expect(JSON.stringify(note.document_json)).toContain('Paragraph saved by close handshake.');
+    await page.evaluate((id) => window.__cyrnavaDesktop!.cancel(id), request);
+    await env.stopBackend();
+    await page.getByRole('textbox', { name: 'Note title' }).fill('P2 unconfirmed recovery draft');
+    const blocked = 'b'.repeat(32);
+    await page.evaluate((id) => window.__cyrnavaDesktop!.request(id), blocked);
+    await expect.poll(() => page.evaluate((id) => window.__cyrnavaDesktop!.state(id), blocked)).toBe('error');
+    await page.evaluate((id) => window.__cyrnavaDesktop!.cancel(id), blocked);
+    const exported = page.waitForEvent('download');
+    await page.getByRole('button', { name: 'Download pending draft', exact: true }).click();
+    const exportPath = await (await exported).path();
+    expect(exportPath).not.toBeNull();
+    expect(JSON.parse(await readFile(exportPath!, 'utf8')).title).toBe('P2 unconfirmed recovery draft');
+    // Closing without an acknowledgement is explicitly the recovery path.
+    // Context-level abort outlives the page and prevents a late close save.
+    await context.route('**/api/notes/*', (route) => route.request().method() === 'PATCH' ? route.abort() : route.continue());
+    await env.startBackend(); await page.reload();
+    await expect(page.getByRole('heading', { name: 'Recover unsaved edits' })).toBeVisible();
+    await context.unrouteAll({ behavior: 'wait' });
+    await page.getByRole('button', { name: 'Recover draft', exact: true }).click();
+    await saved(page); await page.reload();
+    await expect(page.getByRole('textbox', { name: 'Note title' })).toHaveValue('P2 unconfirmed recovery draft');
+  } finally { await env.shutdown(); await rm(env.directory, { recursive: true, force: true }); }
+});
+
+test('desktop close waits for an image upload and its subsequent document save', async ({ page, context }) => {
+  const env = await environment();
+  let release: (() => void) | undefined;
+  try {
+    await env.start(); await page.goto(env.url); await create(page, 'note', 'P2 pending image');
+    const png = join(env.directory, 'synthetic-close.png');
+    execFileSync(python, ['-c', 'from PIL import Image;import sys;Image.new("RGB",(8,8),"blue").save(sys.argv[1])', png]);
+    let started = false;
+    const held = new Promise<void>((done) => { release = done; });
+    await page.route('**/api/assets?*', async (route) => { started = true; await held; await route.continue(); });
+    await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: env.url });
+    await page.evaluate(async (data) => {
+      const bytes = Uint8Array.from(atob(data), (value) => value.charCodeAt(0));
+      await navigator.clipboard.write([new ClipboardItem({ 'image/png': new Blob([bytes], { type: 'image/png' }) })]);
+    }, (await readFile(png)).toString('base64'));
+    await page.getByRole('textbox', { name: 'Note content' }).click(); await page.keyboard.press('Control+v');
+    await expect.poll(() => started).toBe(true);
+    await expect(page.getByText('Saved', { exact: true })).toBeHidden();
+    const id = 'c'.repeat(32);
+    await page.evaluate((id) => window.__cyrnavaDesktop!.request(id), id);
+    await expect.poll(() => page.evaluate((id) => window.__cyrnavaDesktop!.state(id), id)).toBe('waiting');
+    // Closing must preserve the two-pane layout while the upload is held.
+    await expect.poll(() => page.evaluate(() => {
+      const sidebar = document.querySelector('.sidebar')!.getBoundingClientRect();
+      const main = document.querySelector('main')!.getBoundingClientRect();
+      return { sameRow: Math.abs(sidebar.y - main.y) < 1,
+        adjacent: Math.abs(sidebar.right - main.x) < 1 };
+    })).toEqual({ sameRow: true, adjacent: true });
+    release!();
+    await expect.poll(() => page.evaluate((id) => window.__cyrnavaDesktop!.state(id), id)).toBe('saved');
+    const tree = await getJson(env.api + '/api/tree');
+    const note = await getJson(env.api + '/api/notes/' + tree.notes[0].id);
+    expect(note.document_json.find((block: AssetBlock) => block.type === 'image')?.props?.url).toMatch(/^\/api\/assets\/[0-9a-f-]{36}$/);
+    await page.evaluate((id) => window.__cyrnavaDesktop!.cancel(id), id);
+    await page.reload(); await expect(page.locator('.editor img')).toBeVisible();
+    await expect.poll(() => page.locator('.editor img').evaluate((image) => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  } finally { release?.(); await env.shutdown(); await rm(env.directory, { recursive: true, force: true }); }
+});
+
+test('desktop close does not silently discard an unsubmitted management form', async ({ page }) => {
+  const env = await environment();
+  try {
+    await env.start(); await page.goto(env.url);
+    await page.getByRole('button', { name: 'New note', exact: true }).click();
+    await page.getByRole('dialog').getByLabel('Note title').fill('Unsubmitted title');
+    const id = 'd'.repeat(32);
+    await page.evaluate((id) => window.__cyrnavaDesktop!.request(id), id);
+    await expect.poll(() => page.evaluate((id) => window.__cyrnavaDesktop!.state(id), id)).toBe('error');
+    await page.evaluate((id) => window.__cyrnavaDesktop!.cancel(id), id);
+    await expect(page.getByRole('dialog').getByLabel('Note title')).toHaveValue('Unsubmitted title');
+  } finally { await env.shutdown(); await rm(env.directory, { recursive: true, force: true }); }
 });

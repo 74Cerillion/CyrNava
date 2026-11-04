@@ -1,0 +1,117 @@
+{
+  "status": "LOCAL MATERIAL PREPARATION PASS; REDISTRIBUTION REMAINS CONDITIONAL",
+  "complete": true,
+  "source": "b7ab94265270866911311b4ca818071868f58361",
+  "CI_checkpoint": {
+    "run": 41621033436,
+    "result": "PASS unchanged"
+  },
+  "counts": {
+    "python_distributions": 19,
+    "ELF_files": 498,
+    "Qt_PySide_Shiboken_ELFs": 471,
+    "upstream_license_notice_SBOM_documents": 18,
+    "prepared_exact_wheel_license_texts": 15
+  },
+  "checks": {
+    "22_exact_upstream_license_body_hashes": "PASS",
+    "19_distributions_498_ELFs_18_documents_15licenses_3SBOMs": "PASS",
+    "75_original_frontend_package_sections_and_font_license_preserved": "PASS",
+    "MIT_Inter_and_generated_runtime_notice_inputs": "PASS",
+    "public_catalog_no_private_workspace_paths": "PASS",
+    "9_preexisting_hosted_evidence_files_unchanged": "PASS",
+    "49_protected_inputs": "PASS independently stream-hashed by parent before final notice-only edits; final changed-path allowlist excludes all protected inputs",
+    "Git_HEAD_branch_index_and_exact_scope": "PASS",
+    "diff_whitespace": {
+      "documentation_edits": "PASS",
+      "exact_upstream_Vite_notice_trailing_whitespace_warnings": 326,
+      "full_diff_check_exit": 2,
+      "handling": "Recorded unchanged upstream formatting; exact body hashes PASS; no Git policy change"
+    },
+    "new_local_document_links_existing_before_proposal": "PASS",
+    "prepared_JSON_parse": "PASS",
+    "native_GUI_build_download_signing_Git_mutation_publication": "NOT EXECUTED",
+    "full_unit_regressions": "NOT RERUN; notice/documentation-only scope"
+  },
+  "source_checks": "Qt1,020,081,224B and PySide18,063,176B archives rehashed once; three BlockNote SHA512 lock/archive checks and1454 exactpublishedfiles/729srcfiles PASS;18Interfonthashes PASS",
+  "source_archives": [
+    {
+      "asset": "qt-everywhere-src-6.11.3.tar.xz",
+      "bytes": 1020081224,
+      "sha256": "ad0112f2aef1b94b42a7ab653cebda2f7fc9ba88ef509ec456b17be80b0bfdab",
+      "official_source_url": "https://download.qt.io/official_releases/qt/6.11/6.11.3/single/qt-everywhere-src-6.11.3.tar.xz",
+      "official_checksum_metadata": "https://download.qt.io/official_releases/qt/6.11/6.11.3/single/qt-everywhere-src-6.11.3.tar.xz.mirrorlist",
+      "status": "Retained archive hash reverified; exact wheel correspondence NOT established"
+    },
+    {
+      "asset": "pyside-setup-everywhere-src-6.11.3.tar.xz",
+      "bytes": 18063176,
+      "sha256": "050819cb05e14d6689f42b56e4fa9c8ff63be2bb339e0c094c45b990b7cabde1",
+      "official_source_url": "https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.11.3-src/pyside-setup-everywhere-src-6.11.3.tar.xz",
+      "official_checksum_metadata": "https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.11.3-src/pyside-setup-everywhere-src-6.11.3.tar.xz.mirrorlist",
+      "status": "Retained archive hash reverified; exact wheel correspondence NOT established"
+    },
+    {
+      "package": "@blocknote/core",
+      "version": "0.56.0",
+      "asset": "blocknote-core-0.56.0.tgz",
+      "bytes": 2543314,
+      "sha256": "3c66e020c8c1430cb0158dcff83716db25122a983a5bba63a88b79e08fb8f009",
+      "npm_integrity": "sha512-6h8CNv1RSgQM5q/fU2zvidrd3BdvNO+KzlAXazLGM69m5Ii1Ix8iUI2pMKFt+sNKz87s8a8iWyxHZozaIOTHnw==",
+      "official_source_url": "https://registry.npmjs.org/@blocknote/core/-/core-0.56.0.tgz",
+      "published_files_matched": 943,
+      "source_files": 483,
+      "modifications": "NONE OBSERVED in exact published files compared with installed build inputs",
+      "gitHead": "37614ab348dcc7faa830a9a88437b37197a2162d",
+      "license": "MPL-2.0; full license already preserved in each intact source archive and frontend notice"
+    },
+    {
+      "package": "@blocknote/react",
+      "version": "0.56.0",
+      "asset": "blocknote-react-0.56.0.tgz",
+      "bytes": 4379283,
+      "sha256": "e1746fa2ea8b92ababbeff03008ea6d1769577c5e9d922c91cd0fec11eca3d9b",
+      "npm_integrity": "sha512-Y2C1h5yAAXjQS3layapu+tZjYVZj57l/sMWGEnOCa8P1O3J2mprT6C6xHkDs9VmfZNQBOpnaCsvEQZ4bNxfl/Q==",
+      "official_source_url": "https://registry.npmjs.org/@blocknote/react/-/react-0.56.0.tgz",
+      "published_files_matched": 422,
+      "source_files": 203,
+      "modifications": "NONE OBSERVED in exact published files compared with installed build inputs",
+      "gitHead": "d5e8c96e2ad5f6832da60bc3c9acd3f6c16c25c5",
+      "license": "MPL-2.0; full license already preserved in each intact source archive and frontend notice"
+    },
+    {
+      "package": "@blocknote/mantine",
+      "version": "0.56.0",
+      "asset": "blocknote-mantine-0.56.0.tgz",
+      "bytes": 146660,
+      "sha256": "ec62c0b512fe81665471ed38228df726f69ed2a2e998e54205ea0561c81112c8",
+      "npm_integrity": "sha512-tiYdFIDaitJmp2OvQgg57IS0cc4jmNGBfKm8u7gIF5iM2DC8AOw6FPOClVi6L+6pJzyD+e0v4RjFIY1AwSANaw==",
+      "official_source_url": "https://registry.npmjs.org/@blocknote/mantine/-/mantine-0.56.0.tgz",
+      "published_files_matched": 89,
+      "source_files": 43,
+      "modifications": "NONE OBSERVED in exact published files compared with installed build inputs",
+      "gitHead": null,
+      "license": "MPL-2.0; full license already preserved in each intact source archive and frontend notice"
+    }
+  ],
+  "local_retained_sources": {
+    "Qt": "ci-output/native-n4-source-2/qt-everywhere-src-6.11.3.tar.xz",
+    "PySide": "ci-output/native-n4-source-2/pyside-setup-everywhere-src-6.11.3.tar.xz",
+    "BlockNote_core": "ci-output/native-n4-frontend-source-1/blocknote-core-0.56.0.tgz",
+    "BlockNote_react": "ci-output/native-n4-frontend-source-1/blocknote-react-0.56.0.tgz",
+    "BlockNote_mantine": "ci-output/native-n4-frontend-source-2/blocknote-mantine-0.56.0.tgz"
+  },
+  "remaining_obligations": [
+    "pydantic-core actual bundled Rust-component attribution mapping and notices; original 99-component SBOM retained, complete notice coverage not established",
+    "Exact four-wheel Qt/PySide/Shiboken/WebEngine/Chromium revision/patch/configuration/source correspondence",
+    "Complete actual shipped module and third-party credits, including FFmpeg/ICU and GPL/LGPL2.1/LGPL3/Qt-exception terms",
+    "Practical recipient replacement/rebuild route using adequate exact inputs, preserving security checks",
+    "use-composed-ref applicable copyright attribution clarification",
+    "Integrate prepared notices and corresponding-source assets/index into actual release before publication"
+  ],
+  "independent_review": "Parent verified all49protectedhashes,19wheel/hostedlockcorrespondences,22exactnoticebodies,originalMITlicenseandpublicpathscope; separate reviewer found nosemanticblocker",
+  "preservation": "AcceptedN1N2N3andP1P5/R11/R12bytes and previousFAIL/BLOCKEDrecords unchanged",
+  "environment_notes": "Directory-only access confirmed; shell write and new-directory editor creation unavailable. Used normalapply_patch only within existing authorizeddirectories. Failed pre-application preparation checks wrote no partialmaterial.",
+  "authorization": "No commit, push, workflow, signing, publication, GUI or host-policy execution authorized by this documentation pass",
+  "validation_record_scope": "Actual bounded source/notice/catalog/reference/preservation checks; original full git diff --check exit2 retained for326 exact upstream Vite trailing-space warnings. Documentation-only diffcheck PASS. No upstream bytes silently reformatted."
+}

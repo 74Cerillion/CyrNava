@@ -1,0 +1,148 @@
+[
+  {
+    "observed_at_utc": "2026-10-31T11:43:25.133518+00:00",
+    "run_status": "in_progress",
+    "conclusion": null,
+    "jobs": [
+      {
+        "id": 124527835762,
+        "name": "Workflow validation",
+        "status": "completed",
+        "conclusion": "success",
+        "active_steps": []
+      },
+      {
+        "id": 124527868993,
+        "name": "Frontend and browser",
+        "status": "in_progress",
+        "conclusion": null,
+        "active_steps": [
+          "Lint, unit tests, TypeScript, production build and Chromium tests"
+        ]
+      },
+      {
+        "id": 124527869026,
+        "name": "Backend and security",
+        "status": "in_progress",
+        "conclusion": null,
+        "active_steps": [
+          "Backend, security, lifecycle and migration regressions"
+        ]
+      }
+    ]
+  },
+  {
+    "observed_at_utc": "2026-10-31T11:44:25.390808+00:00",
+    "run_status": "in_progress",
+    "conclusion": null,
+    "jobs": [
+      {
+        "id": 124527835762,
+        "name": "Workflow validation",
+        "status": "completed",
+        "conclusion": "success",
+        "active_steps": []
+      },
+      {
+        "id": 124527868993,
+        "name": "Frontend and browser",
+        "status": "in_progress",
+        "conclusion": null,
+        "active_steps": [
+          "Lint, unit tests, TypeScript, production build and Chromium tests"
+        ]
+      },
+      {
+        "id": 124527869026,
+        "name": "Backend and security",
+        "status": "completed",
+        "conclusion": "success",
+        "active_steps": []
+      }
+    ]
+  },
+  {
+    "observed_at_utc": "2026-10-31T11:46:05.786603+00:00",
+    "run_status": "in_progress",
+    "conclusion": null,
+    "jobs": [
+      {
+        "id": 124527835762,
+        "name": "Workflow validation",
+        "status": "completed",
+        "conclusion": "success",
+        "active_steps": []
+      },
+      {
+        "id": 124527868993,
+        "name": "Frontend and browser",
+        "status": "completed",
+        "conclusion": "failure",
+        "active_steps": []
+      },
+      {
+        "id": 124527869026,
+        "name": "Backend and security",
+        "status": "completed",
+        "conclusion": "success",
+        "active_steps": []
+      },
+      {
+        "id": 124528510828,
+        "name": "CI required",
+        "status": "in_progress",
+        "conclusion": null,
+        "active_steps": []
+      },
+      {
+        "id": 124528511337,
+        "name": "Production Flatpak and bundle audit",
+        "status": "completed",
+        "conclusion": "skipped",
+        "active_steps": []
+      }
+    ]
+  },
+  {
+    "observed_at_utc": "2026-10-31T11:46:25.880463+00:00",
+    "run_status": "completed",
+    "conclusion": "failure",
+    "jobs": [
+      {
+        "id": 124527835762,
+        "name": "Workflow validation",
+        "status": "completed",
+        "conclusion": "success",
+        "active_steps": []
+      },
+      {
+        "id": 124527868993,
+        "name": "Frontend and browser",
+        "status": "completed",
+        "conclusion": "failure",
+        "active_steps": []
+      },
+      {
+        "id": 124527869026,
+        "name": "Backend and security",
+        "status": "completed",
+        "conclusion": "success",
+        "active_steps": []
+      },
+      {
+        "id": 124528510828,
+        "name": "CI required",
+        "status": "completed",
+        "conclusion": "failure",
+        "active_steps": []
+      },
+      {
+        "id": 124528511337,
+        "name": "Production Flatpak and bundle audit",
+        "status": "completed",
+        "conclusion": "skipped",
+        "active_steps": []
+      }
+    ]
+  }
+]

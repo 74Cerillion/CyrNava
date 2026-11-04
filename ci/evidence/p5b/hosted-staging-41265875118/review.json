@@ -1,0 +1,12 @@
+{
+  "diagnostic_members": [
+    "result.json",
+    "eligibility.json"
+  ],
+  "ephemeral_download_urls_retained": false,
+  "formal_owner_acceptance": "PENDING",
+  "private_material_uploaded": false,
+  "scope": "Third hosted staging execution, evidence-only local closeout",
+  "status": "PASS",
+  "verification_basis": "Actual hosted status, immutable workflow/source protocol, logs, downloaded ZIP/member hashes and provenance; no additional runner probe or local rehearsal"
+}

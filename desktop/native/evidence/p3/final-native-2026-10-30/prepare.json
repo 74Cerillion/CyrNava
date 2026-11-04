@@ -1,0 +1,11 @@
+{
+  "phase": "prepare",
+  "status": "PASS",
+  "complete": true,
+  "checks": {
+    "document_portal_destination": "PASS",
+    "real_backup_export_and_readback": "PASS"
+  },
+  "stage": "export_and_readback",
+  "file_portal_version": 4
+}

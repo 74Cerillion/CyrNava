@@ -1,0 +1,17 @@
+{
+  "date_utc": "2026-10-31T06:04:09.477741+00:00",
+  "commit": "047a99b1473304cc73518dff6427bf7937c542a2",
+  "parent": "129700175cf4716446647572979771d27422fc3f",
+  "branch": "desktop/p2-production-integration",
+  "commit_count": 1,
+  "push_attempt_count": 1,
+  "push_exit_code": 128,
+  "push_status": "BLOCKED: Git HTTPS credentials unavailable; terminal prompts disabled",
+  "remote_updated_by_attempt": false,
+  "new_hosted_run": "NOT STARTED by this failed push",
+  "production_build_audit_upload_checksum_provenance": "NOT EXECUTED for this commit",
+  "P5A": "FAIL / NOT ACCEPTED; hosted verification pending",
+  "next_command": "git push origin 047a99b1473304cc73518dff6427bf7937c542a2:refs/heads/desktop/p2-production-integration",
+  "staged_review": "63 P5A-only files, valid JSON, no credential-pattern hits; original raw evidence whitespace retained; authored source/docs diff check PASS",
+  "additional_commit_push_rerun_dispatch": false
+}

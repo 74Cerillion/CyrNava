@@ -1,0 +1,217 @@
+{
+  "config": {
+    "argv": [
+      "/home/cerillion/.nvm/versions/node/v24.19.0/bin/node",
+      "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/node_modules/.bin/playwright",
+      "test",
+      "e2e/lifecycle-gate-probe.spec.ts",
+      "--trace=on",
+      "--output=/tmp/cyrnava-p5a-lifecycle-28g_ju36/gate-probe-results",
+      "--reporter=list,json"
+    ],
+    "configFile": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/playwright.config.ts",
+    "rootDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/gate-probe-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/gate-probe-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "snapshotDir": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/e2e",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 120000,
+        "use": {
+          "browserName": "chromium",
+          "headless": true,
+          "viewport": {
+            "width": 1280,
+            "height": 1000
+          },
+          "screenshot": "only-on-failure",
+          "trace": "on"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "lifecycle-gate-probe.spec.ts",
+      "file": "lifecycle-gate-probe.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "controlled late interception preserves a committed write and rejects its stale draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9041,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\"ms\":1995,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":1}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2002,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2288,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":2340,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3093,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":2}\n"
+                    },
+                    {
+                      "text": "{\"ms\":3100,\"event\":\"response\",\"method\":\"PATCH\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":4995,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5035,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5767,\"event\":\"request\",\"method\":\"PATCH\",\"revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5779,\"event\":\"committed-before-block-ack-held\",\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":5945,\"event\":\"retained-draft\",\"base_revision\":3}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7859,\"event\":\"request\",\"method\":\"GET\"}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7874,\"event\":\"response\",\"method\":\"GET\",\"status\":200,\"revision\":4}\n"
+                    },
+                    {
+                      "text": "{\"ms\":7984,\"event\":\"conflict-confirmed\",\"base_revision\":3,\"canonical_revision\":4}\n"
+                    }
+                  ],
+                  "stderr": [
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    },
+                    {
+                      "buffer": ""
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:44:55.958Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "revision-timeline",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJtcyI6IDE5OTUsCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJyZXZpc2lvbiI6IDEKICB9LAogIHsKICAgICJtcyI6IDIwMDIsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMjI4OCwKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiR0VUIgogIH0sCiAgewogICAgIm1zIjogMjM0MCwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIkdFVCIsCiAgICAic3RhdHVzIjogMjAwLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzA5MywKICAgICJldmVudCI6ICJyZXF1ZXN0IiwKICAgICJtZXRob2QiOiAiUEFUQ0giLAogICAgInJldmlzaW9uIjogMgogIH0sCiAgewogICAgIm1zIjogMzEwMCwKICAgICJldmVudCI6ICJyZXNwb25zZSIsCiAgICAibWV0aG9kIjogIlBBVENIIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA0OTk1LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJHRVQiCiAgfSwKICB7CiAgICAibXMiOiA1MDM1LAogICAgImV2ZW50IjogInJlc3BvbnNlIiwKICAgICJtZXRob2QiOiAiR0VUIiwKICAgICJzdGF0dXMiOiAyMDAsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1NzY3LAogICAgImV2ZW50IjogInJlcXVlc3QiLAogICAgIm1ldGhvZCI6ICJQQVRDSCIsCiAgICAicmV2aXNpb24iOiAzCiAgfSwKICB7CiAgICAibXMiOiA1Nzc5LAogICAgImV2ZW50IjogImNvbW1pdHRlZC1iZWZvcmUtYmxvY2stYWNrLWhlbGQiLAogICAgInJldmlzaW9uIjogNAogIH0sCiAgewogICAgIm1zIjogNTk0NSwKICAgICJldmVudCI6ICJyZXRhaW5lZC1kcmFmdCIsCiAgICAiYmFzZV9yZXZpc2lvbiI6IDMKICB9LAogIHsKICAgICJtcyI6IDc4NTksCiAgICAiZXZlbnQiOiAicmVxdWVzdCIsCiAgICAibWV0aG9kIjogIkdFVCIKICB9LAogIHsKICAgICJtcyI6IDc4NzQsCiAgICAiZXZlbnQiOiAicmVzcG9uc2UiLAogICAgIm1ldGhvZCI6ICJHRVQiLAogICAgInN0YXR1cyI6IDIwMCwKICAgICJyZXZpc2lvbiI6IDQKICB9LAogIHsKICAgICJtcyI6IDc5ODQsCiAgICAiZXZlbnQiOiAiY29uZmxpY3QtY29uZmlybWVkIiwKICAgICJiYXNlX3JldmlzaW9uIjogMywKICAgICJjYW5vbmljYWxfcmV2aXNpb24iOiA0CiAgfQpd"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/tmp/cyrnava-p5a-lifecycle-28g_ju36/gate-probe-results/lifecycle-gate-probe-contr-5d685-and-rejects-its-stale-draft/trace.zip"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8653f9a2819cbca3dece-8d1949c1bede8f9820b9",
+          "file": "lifecycle-gate-probe.spec.ts",
+          "line": 55,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T03:44:55.494Z",
+    "duration": 9682.854,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

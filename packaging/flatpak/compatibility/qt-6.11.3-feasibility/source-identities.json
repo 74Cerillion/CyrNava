@@ -1,0 +1,201 @@
+{
+  "status": "PLANNING IDENTITIES ONLY; NOT AN EXECUTABLE DEPENDENCY LOCK",
+  "version": "6.11.3",
+  "archives": [
+    {
+      "module": "qtbase",
+      "version": "6.11.3",
+      "url": "https://download.qt.io/official_releases/qt/6.11/6.11.3/submodules/qtbase-everywhere-src-6.11.3.tar.xz",
+      "expected_sha256_from_publisher_sidecar": "46de0710b594945a5d446ae44354daa386141c6903c53781b2ca547bc62f8f8f",
+      "archive_downloaded": false,
+      "archive_bytes_measured": null
+    },
+    {
+      "module": "qtdeclarative",
+      "version": "6.11.3",
+      "url": "https://download.qt.io/official_releases/qt/6.11/6.11.3/submodules/qtdeclarative-everywhere-src-6.11.3.tar.xz",
+      "expected_sha256_from_publisher_sidecar": "6d6db328a02ae3bb0b1e6944aeef8dfe44cd6b55ab59b1708bbf0400f5759cb5",
+      "archive_downloaded": false,
+      "archive_bytes_measured": null
+    },
+    {
+      "module": "qtshadertools",
+      "version": "6.11.3",
+      "url": "https://download.qt.io/official_releases/qt/6.11/6.11.3/submodules/qtshadertools-everywhere-src-6.11.3.tar.xz",
+      "expected_sha256_from_publisher_sidecar": "d86079425ec71eecbb05f4d20623b0a403a7d21a5cfa7efb9734ea3d538d801b",
+      "archive_downloaded": false,
+      "archive_bytes_measured": null
+    },
+    {
+      "module": "qtpositioning",
+      "version": "6.11.3",
+      "url": "https://download.qt.io/official_releases/qt/6.11/6.11.3/submodules/qtpositioning-everywhere-src-6.11.3.tar.xz",
+      "expected_sha256_from_publisher_sidecar": "a38695bc412b7261476e8e96178460ec9319e61c34ecc6a14eb2e76e5c73eca1",
+      "archive_downloaded": false,
+      "archive_bytes_measured": null
+    },
+    {
+      "module": "qtwebchannel",
+      "version": "6.11.3",
+      "url": "https://download.qt.io/official_releases/qt/6.11/6.11.3/submodules/qtwebchannel-everywhere-src-6.11.3.tar.xz",
+      "expected_sha256_from_publisher_sidecar": "1df120c2904ca0a0dd4fd4fb5e9459fe15cbc50477c08c65d20070eafffaf01a",
+      "archive_downloaded": false,
+      "archive_bytes_measured": null
+    },
+    {
+      "module": "qtwebengine",
+      "version": "6.11.3",
+      "url": "https://download.qt.io/official_releases/qt/6.11/6.11.3/submodules/qtwebengine-everywhere-src-6.11.3.tar.xz",
+      "expected_sha256_from_publisher_sidecar": "4f4701b4976d90571e67557f2c12cbfee8c64ecc8295430236921cae2f9f43ca",
+      "archive_downloaded": false,
+      "archive_bytes_measured": null,
+      "publisher_HEAD_content_length_bytes": 580447120,
+      "HEAD_status": 200
+    },
+    {
+      "repository": "qt/qtbase",
+      "tag": "v6.11.3",
+      "tag_object": "6c7c6a1a05cf13ada0075179bf6c410f334df8d5",
+      "source_commit": "138f955f0b5e50e4a6c2ee1e78a2279db52ae9e3",
+      "metadata_url": "https://api.github.com/repos/qt/qtbase/git/tags/6c7c6a1a05cf13ada0075179bf6c410f334df8d5",
+      "metadata_sha256": "9e4a6dd3ae07fcc72a84e7521363341f3d19697901dcee9259573d76ec4137c4",
+      "source_downloaded": false
+    },
+    {
+      "repository": "qt/qtwebengine",
+      "tag": "v6.11.3",
+      "tag_object": "7d6711376b6ebbbb48ffa4aed1732eba892be01d",
+      "source_commit": "6de08a0e135c48890ba49f394d969ed5964c1cc5",
+      "metadata_url": "https://api.github.com/repos/qt/qtwebengine/git/tags/7d6711376b6ebbbb48ffa4aed1732eba892be01d",
+      "metadata_sha256": "d17fb152b0f22d765f6b10f83e1ade4ea2ae60a7fea7818d388cf56b999e1502",
+      "source_downloaded": false
+    },
+    {
+      "repository": "pyside/pyside-setup",
+      "tag": "v6.11.3",
+      "tag_object": "d03d006d7b1db58074ca9cae26356376788a769e",
+      "source_commit": "c76f06aa6ca36abbccdf211c6ea24c34d71ee43f",
+      "metadata_url": "https://api.github.com/repos/pyside/pyside-setup/git/tags/d03d006d7b1db58074ca9cae26356376788a769e",
+      "metadata_sha256": "f7599ec536a86ac32f3fc6d3a3a146b588a9a289b3948deff13185e9e7f91cb0",
+      "source_downloaded": false
+    }
+  ],
+  "renderer_recipe": {
+    "url": "https://raw.githubusercontent.com/flathub/io.qt.qtwebengine.BaseApp/1f4a783f05d97ecb7a887096c2cd933406c727f8/io.qt.qtwebengine.BaseApp.json",
+    "revision": "1f4a783f05d97ecb7a887096c2cd933406c727f8",
+    "sha256": "6b6663fd9d8ee02e5531cd71a8ca45d26776733920722d8e06f55efd5c5da2f7",
+    "recipe_source_version": "6.11.3; independently verified raw pinned recipe",
+    "patches": [
+      {
+        "path": "patches/qtwebengine-flatpak-paths.patch",
+        "url": "https://raw.githubusercontent.com/flathub/io.qt.qtwebengine.BaseApp/1f4a783f05d97ecb7a887096c2cd933406c727f8/patches/qtwebengine-flatpak-paths.patch",
+        "sha256": "c19c2f1c0cafcc291aaa22f5a8f9ea312b1daea8cf21a7354a25cb136ca7082a",
+        "bytes": 1633,
+        "apply_options": [],
+        "applies_to_candidate_6_11_3": "NOT TESTED"
+      },
+      {
+        "path": "patches/flatpak-includedir-dbus.patch",
+        "url": "https://raw.githubusercontent.com/flathub/io.qt.qtwebengine.BaseApp/1f4a783f05d97ecb7a887096c2cd933406c727f8/patches/flatpak-includedir-dbus.patch",
+        "sha256": "a274147b801cc8e7a817cee2e717e8fadbfea886cb9e811f1027fe4832534271",
+        "bytes": 507,
+        "apply_options": [],
+        "applies_to_candidate_6_11_3": "NOT TESTED"
+      },
+      {
+        "path": "patches/qtwebengine-Disbale-xnnpack-on-aarch64.patch",
+        "url": "https://raw.githubusercontent.com/flathub/io.qt.qtwebengine.BaseApp/1f4a783f05d97ecb7a887096c2cd933406c727f8/patches/qtwebengine-Disbale-xnnpack-on-aarch64.patch",
+        "sha256": "b64506da76db5b595a2bac3bbf10a3089bfc1aab08f44e4bbc776e59b7d9fbc6",
+        "bytes": 584,
+        "apply_options": [],
+        "applies_to_candidate_6_11_3": "NOT TESTED"
+      },
+      {
+        "path": "patches/qtwebengine-pipewire-screen.patch",
+        "url": "https://raw.githubusercontent.com/flathub/io.qt.qtwebengine.BaseApp/1f4a783f05d97ecb7a887096c2cd933406c727f8/patches/qtwebengine-pipewire-screen.patch",
+        "sha256": "dfd66346f1a4a549174507c1871ea521b43dffa15eb96311e8304f98c286288d",
+        "bytes": 1531,
+        "apply_options": [],
+        "applies_to_candidate_6_11_3": "NOT TESTED"
+      },
+      {
+        "path": "patches/qtwebengine-pipewire-camera.patch",
+        "url": "https://raw.githubusercontent.com/flathub/io.qt.qtwebengine.BaseApp/1f4a783f05d97ecb7a887096c2cd933406c727f8/patches/qtwebengine-pipewire-camera.patch",
+        "sha256": "8b842bca4c6066ea59d20b0bff96752147fdda94d10ba3f279bf35f04975fc2d",
+        "bytes": 7189,
+        "apply_options": [],
+        "applies_to_candidate_6_11_3": "NOT TESTED"
+      },
+      {
+        "path": "patches/chromium-add-app-libdir.patch",
+        "url": "https://raw.githubusercontent.com/flathub/io.qt.qtwebengine.BaseApp/1f4a783f05d97ecb7a887096c2cd933406c727f8/patches/chromium-add-app-libdir.patch",
+        "sha256": "085664e264a87e2ace3c316cccf1590a2e1a65febcd8f6b668f2f9f297b98c45",
+        "bytes": 759,
+        "apply_options": [
+          "--directory=src/3rdparty"
+        ],
+        "applies_to_candidate_6_11_3": "NOT TESTED"
+      },
+      {
+        "path": "patches/chromium-flatpak-add-initial-sandbox-support.patch",
+        "url": "https://raw.githubusercontent.com/flathub/io.qt.qtwebengine.BaseApp/1f4a783f05d97ecb7a887096c2cd933406c727f8/patches/chromium-flatpak-add-initial-sandbox-support.patch",
+        "sha256": "b086829daf0404b3ed89fb5b135aa0015fe4df00accff75a3d8b4b7ae23dcff3",
+        "bytes": 48109,
+        "apply_options": [
+          "--directory=src/3rdparty"
+        ],
+        "applies_to_candidate_6_11_3": "NOT TESTED"
+      },
+      {
+        "path": "patches/chromium-flatpak-adjust-paths-for-the-sandbox.patch",
+        "url": "https://raw.githubusercontent.com/flathub/io.qt.qtwebengine.BaseApp/1f4a783f05d97ecb7a887096c2cd933406c727f8/patches/chromium-flatpak-adjust-paths-for-the-sandbox.patch",
+        "sha256": "38304f564a8ca7894b9582b595937a05c80ed57ad8be6bc4e19b29246ca732c8",
+        "bytes": 2573,
+        "apply_options": [
+          "--directory=src/3rdparty"
+        ],
+        "applies_to_candidate_6_11_3": "NOT TESTED"
+      },
+      {
+        "path": "patches/chromium-flatpak-expose-widevine-into-the-sandbox.patch",
+        "url": "https://raw.githubusercontent.com/flathub/io.qt.qtwebengine.BaseApp/1f4a783f05d97ecb7a887096c2cd933406c727f8/patches/chromium-flatpak-expose-widevine-into-the-sandbox.patch",
+        "sha256": "80ae6748df310df5ce001bdd14eb691768429104035924ad1413ee3ffda91533",
+        "bytes": 13387,
+        "apply_options": [
+          "--directory=src/3rdparty"
+        ],
+        "applies_to_candidate_6_11_3": "NOT TESTED"
+      },
+      {
+        "path": "patches/chromium-fix-gpu-crash.patch",
+        "url": "https://raw.githubusercontent.com/flathub/io.qt.qtwebengine.BaseApp/1f4a783f05d97ecb7a887096c2cd933406c727f8/patches/chromium-fix-gpu-crash.patch",
+        "sha256": "b003020704c5d0ee538808ecbde8b0459681aece29ff567e29346e439dac211e",
+        "bytes": 629,
+        "apply_options": [
+          "--directory=src/3rdparty"
+        ],
+        "applies_to_candidate_6_11_3": "NOT TESTED"
+      }
+    ],
+    "source_entries": [
+      {
+        "url": "https://invent.kde.org/qt/qt/qtwebengine.git",
+        "tag": "v6.11.3",
+        "commit": "6de08a0e135c48890ba49f394d969ed5964c1cc5"
+      }
+    ],
+    "prior_assessment_label_correction": "Previous assessment incorrectly described the same pinned recipe hash as 6.11.2. Prior wording is archived; this raw readback proves 6.11.3."
+  },
+  "SDK_commit": "UNSELECTED; needs independent supported Python 3.13/toolchain verification",
+  "transitive_build_dependencies": "UNRESOLVED; build configuration has not run",
+  "limits": "Only small metadata/patch texts retrieved; no source archive, binary, SDK or runtime downloaded",
+  "PySide_BaseApp_readback": {
+    "url": "https://raw.githubusercontent.com/flathub/io.qt.PySide.BaseApp/732cd70984eab55693b55062026bd289ef98d974/io.qt.PySide.BaseApp.yaml",
+    "sha256": "37c854d009d542dcc4ec57bbe12b479f1dc4a4918332164932cf27fb8c5c8cbe",
+    "note": "Upstream recipe reference only; candidate uses explicit app-owned Qt prefix, not /usr Qt",
+    "source_tag": "v6.11.3",
+    "source_commit": "c76f06aa6ca36abbccdf211c6ea24c34d71ee43f",
+    "upstream_qtpaths": "/usr/bin/qtpaths; must be changed only in a separate candidate to the app-owned Qt tool",
+    "prior_assessment_label_correction": "Previously mislabeled 6.11.2; exact pinned raw recipe is 6.11.3."
+  }
+}

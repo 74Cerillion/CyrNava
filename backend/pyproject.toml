@@ -8,3 +8,7 @@ line-length = 88
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+# Preserve the hash-audited cleanup engine; this inherited diagnostic is cosmetic.
+"**/ci/cleanup_p6.py" = ["E501"]

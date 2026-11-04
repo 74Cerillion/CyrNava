@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-29",
+  "evidence_type": "Transcript-derived record of owner-executed manual host tests; not an automated log or independent screen capture",
+  "application": "org.cyrnava.P1B//p1b",
+  "configuration": "Ubuntu host, Wayland, x86_64; actual component and build identifiers in host-build.json and host-shutdown.json",
+  "results": {
+    "rich_text_and_restart": {"status": "PASS", "observation": "Owner confirmed heading/bold formatting survived Saved, window closure and relaunch."},
+    "clipboard_screenshot": {"status": "PASS", "observation": "Owner confirmed Ctrl+V screenshot paste, Saved and image visibility after relaunch."},
+    "native_file_chooser_and_upload": {"status": "PASS", "observation": "Owner selected a synthetic PNG through the native chooser and confirmed visibility after Saved/relaunch."},
+    "qt_preferences": {"status": "PASS", "observation": "Owner confirmed changed Appearance and hidden navigation were restored after relaunch."},
+    "recovery_detection": {"status": "PASS", "observation": "Owner stopped the synthetic backend, edited the title, saw Save Error, closed explicitly and confirmed Recover draft on relaunch."},
+    "portal_download": {"status": "PASS", "observation": "Owner confirmed the requested JSON save, expected P1B recovery check title, and member=SaveFile in the scoped portal monitor.", "raw_dbus_trace_attached": false},
+    "recover_save_restart": {"status": "PASS", "observation": "Owner confirmed explicit draft recovery, Saved, expected title/content/images and persistence after another relaunch."},
+    "sqlite_persistence": {"status": "PASS", "observation": "Owner's repeated restarts retained content and images; explicit SQLite profile path is established by the reviewed backend configuration. Database was not copied or directly inspected."},
+    "full_cleanup": {"status": "PASS", "observation": "Owner reported closing all windows, provided the host inspector result below and then reported no output from the separately run flatpak ps command.", "latency_measured": false}
+  },
+  "host_inspector_result_supplied_by_owner": {
+    "host_namespaces": {"user": "user:[4026531837]", "pid": "pid:[4026531836]", "net": "net:[4026531833]", "mnt": "mnt:[4026531832]"},
+    "processes": [],
+    "unreadable_process_count": 0
+  },
+  "supplemental_not_tested": ["Separate OpenFile D-Bus trace", "Live host renderer command-line role correlation", "X11 and other platforms", "Exhaustive editor actions", "Power-loss behavior", "Full-container shutdown latency", "Flatpak memory and compressed download size"]
+}

@@ -1,8 +1,15 @@
+import { beginMutation } from './pendingMutations';
 export class ApiError extends Error {
   constructor(message: string, public readonly status: number) { super(message); }
 }
 
 export async function request<T>(path: string, init: RequestInit, signal?: AbortSignal): Promise<T> {
+  const finish = !['GET', 'HEAD'].includes(init.method || 'GET') ? beginMutation() : undefined;
+  try { const value = await performRequest<T>(path, init, signal); finish?.(true); return value; }
+  catch (error) { finish?.(false); throw error; }
+}
+
+async function performRequest<T>(path: string, init: RequestInit, signal?: AbortSignal): Promise<T> {
   let response: Response;
   try {
     response = await fetch(path, {

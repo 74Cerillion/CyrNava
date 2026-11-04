@@ -1,0 +1,17 @@
+{
+  "checks": {
+    "encrypted_backup_restored_exact_primary_and_subkey": "PASS",
+    "expired_identity_rejected": "PASS",
+    "private_material_removed": "PASS",
+    "restored_subkey_signature_verified": "PASS",
+    "revoked_identity_rejected": "PASS",
+    "signer_has_primary_stub_only": "PASS"
+  },
+  "complete": true,
+  "primary_fingerprint": "AF0B82624D1C291E1A3E7704A4D19DA50EA028FE",
+  "production_key": false,
+  "seconds": 1.77,
+  "signing_fingerprint": "083E360D4117D45558DF0F7AB7085F5247D3AA53",
+  "status": "PASS"
+}
+

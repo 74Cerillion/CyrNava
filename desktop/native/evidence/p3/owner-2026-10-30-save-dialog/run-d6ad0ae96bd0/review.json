@@ -1,0 +1,13 @@
+{
+  "host_portal_delivery": "NOT VERIFIED",
+  "historical_prepare_readback": "PASS",
+  "import": "FAIL",
+  "identified_driver_risk": "First chooser constructed before asynchronous Qt portal-version initialization; fallback sandbox chooser.",
+  "correction": "Bounded portal readiness barrier and mandatory document-grant destination validation.",
+  "tests": {
+    "qt_event_delivery_and_grant_rejection": "PASS (simulated DBus)",
+    "qt_migration_workflow": "PASS (mocked chooser paths)",
+    "supervisor_contracts": "6 PASS"
+  },
+  "native_corrected_run": "NOT TESTED"
+}

@@ -1,0 +1,178 @@
+CI: python-lint
+All checks passed!
+CI: frontend-install-for-backend
+
+added 304 packages in 2s
+CI: frontend-production-build-for-backend
+
+> cyrnava@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.4 building client environment for production...
+transforming...
+✓ 833 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                         1.15 kB │ gzip:   0.56 kB
+dist/assets/inter-v12-latin-100-BQDzDElq.woff2         16.54 kB
+dist/assets/inter-v12-latin-regular-YtgfLPRn.woff2     16.70 kB
+dist/assets/inter-v12-latin-900-CMga-52B.woff2         17.17 kB
+dist/assets/inter-v12-latin-300-DEbyFmpd.woff2         17.32 kB
+dist/assets/inter-v12-latin-200-BxfrU12A.woff2         17.34 kB
+dist/assets/inter-v12-latin-500-DfX5FI9E.woff2         17.55 kB
+dist/assets/inter-v12-latin-600-BvOeHRLc.woff2         17.66 kB
+dist/assets/inter-v12-latin-800-Bdy4lAMa.woff2         17.76 kB
+dist/assets/inter-v12-latin-700-Bj1B9WKG.woff2         17.78 kB
+dist/assets/inter-v12-latin-100-46Mq0mOp.woff          21.24 kB
+dist/assets/inter-v12-latin-regular-CahmJf_6.woff      21.42 kB
+dist/assets/inter-v12-latin-900-ORHAl5ZU.woff          21.98 kB
+dist/assets/inter-v12-latin-300-f7r92Nkj.woff          22.15 kB
+dist/assets/inter-v12-latin-200-DXfqWPZg.woff          22.23 kB
+dist/assets/inter-v12-latin-500-BQ2gQN_M.woff          22.51 kB
+dist/assets/inter-v12-latin-600-D01NXWOK.woff          22.63 kB
+dist/assets/inter-v12-latin-700-B5TOIllR.woff          22.68 kB
+dist/assets/inter-v12-latin-800-DFVvDWwT.woff          22.71 kB
+dist/assets/index-B4IDcU2d.css                        249.46 kB │ gzip:  40.51 kB
+dist/assets/module-mVd_cwoa.js                         76.72 kB │ gzip:  27.52 kB
+dist/assets/native-Cqs-2kTC.js                        429.05 kB │ gzip:  82.21 kB
+dist/assets/index-DB4gpyab.js                       1,208.41 kB │ gzip: 366.37 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 625ms
+CI: backend-security-lifecycle-migration-packaging
+........................................................................ [ 12%]
+........................................................................ [ 25%]
+........................................................................ [ 38%]
+........................................................................ [ 51%]
+........................................................................ [ 64%]
+........................................................................ [ 77%]
+........................................................................ [ 90%]
+......................................... [ 97%]
+..........FF                                                             [100%]
+=================================== FAILURES ===================================
+_ BuildDirectoryTests.test_explicit_output_is_new_and_cannot_overlay_existing_files _
+
+self = <test_ci.BuildDirectoryTests testMethod=test_explicit_output_is_new_and_cannot_overlay_existing_files>
+
+    def test_explicit_output_is_new_and_cannot_overlay_existing_files(self):
+        builder = flatpak.module("build")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            destination = root / "output"
+            with (
+                patch.dict(os.environ, {"XDG_CACHE_HOME": str(root / "cache")}),
+                patch.object(
+                    sys,
+                    "argv",
+                    [
+                        "build.py",
+                        "--stage-only",
+                        "--output-directory",
+                        str(destination),
+                    ],
+                ),
+                patch.object(builder, "stage"),
+            ):
+>               self.assertEqual(builder.main(), 0)
+                                 ^^^^^^^^^^^^^^
+
+../ci/test_ci.py:438:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def main():
+        parser = argparse.ArgumentParser(description=__doc__)
+        parser.add_argument("--build-id", default="local-A")
+        parser.add_argument("--stage-only", action="store_true")
+        parser.add_argument(
+            "--output-directory",
+            type=Path,
+            help="New empty build directory (optional; default remains a private cache directory)",
+        )
+        parser.add_argument(
+            "--finish",
+            type=Path,
+            help="Validate/export an assembled build, without rebuilding inputs",
+        )
+        args = parser.parse_args()
+        if args.output_directory and args.finish:
+            parser.error("--output-directory and --finish are mutually exclusive")
+        os.umask(0o077)
+        if args.finish:
+            directory = args.finish.resolve()
+            prior = directory / "result.json"
+            if prior.exists():
+                import time
+
+                shutil.copyfile(
+                    prior,
+                    directory / ("result-before-finish-" + str(time.time_ns()) + ".json"),
+                )
+            result = {"status": "FAIL", "directory": str(directory), "app_id": APP_ID}
+            try:
+                result.update(finish(directory))
+            except (OSError, ValueError, subprocess.CalledProcessError) as error:
+                result.update(error_type=type(error).__name__, error=str(error))
+            (directory / "result.json").write_text(json.dumps(result, indent=2) + "\n")
+            print(json.dumps(result, indent=2), flush=True)
+            return 0 if result["status"] == "PASS" else 1
+        cache = Path(os.environ.get("XDG_CACHE_HOME", str(Path.home() / ".cache")))
+        if not cache.is_absolute():
+            raise SystemExit("XDG_CACHE_HOME must be absolute")
+        root = cache / "cyrnava-builds/p4"
+        if any(p.is_symlink() for p in (root, *root.parents)):
+            raise SystemExit("Symlink build root refused")
+        root.mkdir(parents=True, exist_ok=True, mode=0o700)
+        if shutil.disk_usage(root).free < 5 * 1024**3:
+>           raise SystemExit("At least 5 GiB free required on build volume")
+E           SystemExit: At least 5 GiB free required on build volume
+
+../packaging/flatpak/production/build.py:355: SystemExit
+____________ BuildDirectoryTests.test_output_refuses_symlink_parent ____________
+SystemExit: At least 5 GiB free required on build volume
+
+During handling of the above exception, another exception occurred:
+
+self = <test_ci.BuildDirectoryTests testMethod=test_output_refuses_symlink_parent>
+
+    def test_output_refuses_symlink_parent(self):
+        builder = flatpak.module("build")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            link = root / "link"
+            link.symlink_to(root, target_is_directory=True)
+            with (
+                patch.dict(os.environ, {"XDG_CACHE_HOME": str(root / "cache")}),
+                patch.object(
+                    sys,
+                    "argv",
+                    [
+                        "build.py",
+                        "--stage-only",
+                        "--output-directory",
+                        str(link / "output"),
+                    ],
+                ),
+            ):
+>               with self.assertRaisesRegex(SystemExit, "Symlink"):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: "Symlink" does not match "At least 5 GiB free required on build volume"
+
+../ci/test_ci.py:468: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /tmp/cyrnava-p5a-boundary-r8jvmtth/checkout/backend/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+tests/test_migration.py::test_untrusted_archives_fail_closed[duplicate]
+  /usr/lib/python3.12/zipfile/__init__.py:1650: UserWarning: Duplicate name: 'manifest.json'
+    return self._open_to_write(zinfo, force_zip64=force_zip64)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ::BuildDirectoryTests::test_explicit_output_is_new_and_cannot_overlay_existing_files
+FAILED ::BuildDirectoryTests::test_output_refuses_symlink_parent - AssertionE...
+2 failed, 555 passed, 2 warnings, 31 subtests passed in 31.36s

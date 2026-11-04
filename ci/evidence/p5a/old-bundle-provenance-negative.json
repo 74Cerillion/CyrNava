@@ -1,0 +1,22 @@
+{
+  "status": "FAIL",
+  "operation": "audit",
+  "error_type": "VerificationError",
+  "error": "Build source commit mismatch",
+  "complete": true,
+  "seconds": 40.415,
+  "expected_result": "FAIL",
+  "negative_assertion": "Old P4 bundle cannot prove current source commit",
+  "actual_source_commit": "eb65fc152181f77b3fa131f79aa417a03d84a1ac",
+  "current_checkout_commit": "8418339cf3c9ff7ae26f792ed8697b7c16d7450a",
+  "passed_before_rejection": [
+    "bundle hash and size",
+    "bundle imported through real Flatpak",
+    "real OSTree exported commit checkout",
+    "actual required files/identity/permissions",
+    "actual exported inventory equal to P4 audited build",
+    "packaged provenance equal to source build record"
+  ],
+  "upload_directory_created": false,
+  "native_app_executed": false
+}

@@ -1,0 +1,13 @@
+{
+  "status": "FAIL",
+  "complete": true,
+  "run_id": "run-83587bd18651",
+  "checks": {
+    "fresh_install_permissions": "PASS"
+  },
+  "build_A": "e0529b136effc347a5f7a32b52d95ddd5fead5230410e752ce8eb8f9a4c35e19",
+  "build_B": "b49969699b4e52df078193713a1aca9a1e8def70f608ba46d700e48d0be5d5c5",
+  "helper_sha256": "cf02b6441103fec072a1ed8a548bf91d644479fa285d0ae9a955d7ca7e00986e",
+  "error_type": "ValueError",
+  "error": "Host verification stopped; preserve run/phase evidence. Any timed-out window remains available for normal close."
+}

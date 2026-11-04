@@ -1,0 +1,9 @@
+{
+  "base_commit": "6743d1d5c76f2db87c2debb6f687a6e57a6826b6",
+  "overlaid_files": [
+    "ci/flatpak.py",
+    "ci/test_ci.py"
+  ],
+  "preexisting_frontend_dist": false,
+  "production_sources_unchanged": true
+}

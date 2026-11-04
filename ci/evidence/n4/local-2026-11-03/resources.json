@@ -1,0 +1,28 @@
+{
+  "Qt_source_build": "NOT EXECUTED",
+  "allocated_bytes_by_owned_path": {
+    "ci-output/native-n4-1": 55099392,
+    "ci-output/native-n4-build-1": 1282666496,
+    "ci-output/native-n4-frontend-source-1": 6934528,
+    "ci-output/native-n4-frontend-source-2": 155648,
+    "ci-output/native-n4-release-metadata-2": 3588096,
+    "ci-output/native-n4-release-metadata-3": 3588096,
+    "ci-output/native-n4-release-proposal-1": 275439616,
+    "ci-output/native-n4-source-1": 498610176,
+    "ci-output/native-n4-source-2": 1067618304,
+    "ci/evidence/n4": 176128
+  },
+  "allocation_cap_bytes": 3221225472,
+  "cleanup": "NONE",
+  "filesystem_free_before_bytes": 8734879744,
+  "filesystem_free_now_bytes": 5516926976,
+  "full_Qt_source_tree_extraction": false,
+  "measurement_note": "du allocated blocks; dedup/shared blocks and other filesystem activity may differ. Small report/script files outside these owned output/evidence directories are not separately metered. Resource JSON itself and final metadata writes add a few blocks.",
+  "minimum_free_bytes": 5368709120,
+  "no_external_cache_or_personal_data_deletion": true,
+  "original_Qt_partial_bytes_retained": 498597888,
+  "owned_allocated_bytes": 3193876480,
+  "peak_RAM_or_CPU_usage": "NOT MEASURED; no invented peak claim",
+  "recorded_at_utc": "2026-11-03T08:49:47.429943+00:00",
+  "thin_build_seconds": 21.661
+}

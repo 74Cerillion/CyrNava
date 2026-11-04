@@ -1,0 +1,16 @@
+{
+  "artifact_id": 13063163006,
+  "run_id": 41256746729,
+  "run_attempt": 1,
+  "tooling_commit": "abbb1b7a723d0b42dae1fa2b3312cb7667299e96",
+  "zip_bytes": 283,
+  "zip_sha256": "46f94f80b8f098204c0bca8dce2b6df1d5809539686fdce10687708becbe60e3",
+  "members": [
+    "result.json"
+  ],
+  "eligibility_json": "ABSENT: staging terminated before its write",
+  "unexpected_members": false,
+  "private_key_members": false,
+  "result_sha256": "7e1e1d1f114fbbe110cae2eb068e5995de1bc02e8b74057e02cc1228552bbdf3",
+  "provenance": "GitHub artifact metadata matches workflow run/tooling source; digest independently verified against downloaded ZIP and upload log"
+}

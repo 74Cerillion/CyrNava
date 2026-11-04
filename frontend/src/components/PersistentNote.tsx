@@ -2,10 +2,10 @@ import { useImperativeHandle, useRef, useState } from 'react';
 import type { Ref } from 'react';
 import { useAutosave } from '../hooks/useAutosave';
 import type { Note } from '../notes';
-import type { EditorHandle } from './KnowledgeEditor';
+import type { EditorHandle, UploadState } from './KnowledgeEditor';
 import { ConflictRecovery } from './ConflictRecovery';
 import { KnowledgeEditor } from './KnowledgeEditor';
-import { deferDraft, downloadDraft, findDrafts } from '../drafts';
+import { deferDraft, downloadDraft, findDrafts, PAGE_ID } from '../drafts';
 import type { RecoveryDraft } from '../drafts';
 import type { EditorAppearance } from '../appearanceContext';
 import { Icon } from './Icon';
@@ -43,6 +43,14 @@ export function PersistentNote({ ref, ...props }: Props) {
 
 function NoteEditor({ note, theme = 'light', locked = false, onSaved, onRecovered, ref, recovered }: Props) {
   const save = useAutosave(note, onSaved, recovered);
+  const [uploads, setUploads] = useState<UploadState>({ pending: false, incomplete: false });
+  const status = save.status === 'Save Error' || (!uploads.pending && uploads.incomplete) ? 'Save Error'
+    : uploads.pending ? 'Saving...' : save.status;
+  function exportPendingDraft() {
+    downloadDraft({ recovery_format: 1, note_id: note.id, writer: PAGE_ID,
+      token: crypto.randomUUID(), base_revision: save.getRevision(), format_version: note.format_version,
+      edited_at: new Date().toISOString(), title: save.title, document_json: save.document });
+  }
   const [recovering, setRecovering] = useState(false);
   const [preparingRecovery, setPreparingRecovery] = useState(false);
   async function beginRecovery() {
@@ -63,18 +71,18 @@ function NoteEditor({ note, theme = 'light', locked = false, onSaved, onRecovere
         <label htmlFor="note-title">Note title</label>
         <div className="title-row"><input id="note-title" value={save.title} maxLength={200} disabled={locked || recovering || preparingRecovery}
           onChange={(event) => save.changeTitle(event.target.value)} />
-        <p className="save-state" data-state={save.status} role="status" aria-live="polite" aria-atomic="true"><Icon name={save.status === 'Saved' ? 'check' : save.status === 'Save Error' ? 'warning' : save.status === 'Saving...' ? 'save' : 'note'} />{save.status}</p></div>
+        <p className="save-state" data-state={status} role="status" aria-live="polite" aria-atomic="true"><Icon name={status === 'Saved' ? 'check' : status === 'Save Error' ? 'warning' : status === 'Saving...' ? 'save' : 'note'} />{status}</p></div>
         {save.recoveryError && <p role="alert">{save.recoveryError}</p>}
         {save.error && <div role="alert">
           <p>{save.error.message}</p>
-          {!save.error.conflict ? <button onClick={save.retry}>Retry save</button>
+          {!save.error.conflict ? <><button onClick={save.retry}>Retry save</button><button disabled={locked} onClick={exportPendingDraft}>Download pending draft</button></>
             : <button disabled={locked || preparingRecovery} onClick={() => void beginRecovery()}>Review conflict and recover</button>}
         </div>}
         <p className="hint">Your note stays on this computer. Wait for uploads and Saved before closing.</p>
       </header>
       {recovering && <ConflictRecovery noteId={note.id} draft={{ title: save.title, document_json: save.document }}
         onClose={() => setRecovering(false)} onReload={(saved) => { setRecovering(false); onRecovered?.(saved); }} />}
-      <KnowledgeEditor ref={editor} noteId={note.id} theme={theme} initialDocument={recovered?.document_json || note.document_json} onDocumentChange={save.changeDocument} editable={!locked && !recovering && !preparingRecovery} />
+      <KnowledgeEditor ref={editor} noteId={note.id} theme={theme} onUploadStateChange={setUploads} initialDocument={recovered?.document_json || note.document_json} onDocumentChange={save.changeDocument} editable={!locked && !recovering && !preparingRecovery} />
     </>
   );
 }

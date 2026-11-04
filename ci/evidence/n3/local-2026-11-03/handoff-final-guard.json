@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "scope": "exact final handoff refuses confined parent without host operation",
+  "script_sha256": "ab27e2121c93ed43b8a9c3f1ed082b5e0a93299927a5af7f306fb16ac071f4fd",
+  "host_policy": "NOT MODIFIED",
+  "GUI": "NOT EXECUTED"
+}

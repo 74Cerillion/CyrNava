@@ -1,0 +1,123 @@
+{
+  "date_utc": "2026-10-31T13:49:03.083310+00:00",
+  "base_commit": "7aaefd0f60a735637ee603ac380587a25b73f6cb",
+  "authorization_model": "single-maintainer-manual-staging",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "ruff",
+      "command": [
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "--config",
+        "backend/pyproject.toml",
+        "ci/release"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "seconds": 0.019,
+      "tests": null,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "actionlint",
+      "command": [
+        "/tmp/cyrnava-p5a-tools/actionlint",
+        "ci/release/registration-only.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/ci.yml"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "seconds": 0.003,
+      "tests": null,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ci-workflow-policy",
+      "command": [
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+        "ci/validate.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "seconds": 0.035,
+      "tests": null,
+      "log_sha256": "6929f9534e22bc6fa880e0273e930cbca7230a10ad605b44103eec52e5d3f6a6"
+    },
+    {
+      "name": "release-workflow-policy",
+      "command": [
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+        "ci/release/workflow_policy.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "seconds": 0.045,
+      "tests": null,
+      "log_sha256": "b8b7672441766da832f1c3eae81dc3c2104fb60f34370a136abcec7488a7aab9"
+    },
+    {
+      "name": "registration-policy",
+      "command": [
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+        "ci/release/registration_policy.py"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "seconds": 0.064,
+      "tests": null,
+      "log_sha256": "236acab1878bd5eaeb95bfa33f4b157ad71ca87b7567ceff45fc75f951a977f2"
+    },
+    {
+      "name": "release-regressions",
+      "command": [
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "ci/release",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "seconds": 1.129,
+      "tests": 59,
+      "log_sha256": "9655297d677dfb307f6f3b857b0cfe440fbfebddc3bedf512f31866e3e1f68a2"
+    },
+    {
+      "name": "ci-contract-regressions",
+      "command": [
+        "/home/cerillion/Documents/Codex/2026-10-21/role-act-as-an-implementation-partner/outputs/CyrNava/ci-output/p5b-clean/checkout/backend/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "ci",
+        "-p",
+        "test_ci.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "PASS",
+      "seconds": 0.225,
+      "tests": 31,
+      "log_sha256": "c6a5f630e08a35b2f42be208884608e35a5430c3ac1ccdda2a855e9fe4291f14"
+    }
+  ],
+  "temporary_volume": "/dev/shm/cyrnava-p5b-tests; small synthetic CI fixtures only, >5 GiB available; original disk-space guard unchanged",
+  "signing_tests": "Real one-day disposable GPG unit-test keys; not permanent/production keys or a repeated native OSTree rehearsal. Test harness kills agents and removes homes.",
+  "not_repeated": "Native OSTree owner rehearsal and application build; accepted native/hosted evidence preserved",
+  "historical_local_failure": {
+    "suite": "31 CI contracts",
+    "failed": 1,
+    "errors": 1,
+    "passed": 29,
+    "cause": "/tmp had 4.4 GiB free, below unchanged production builder 5 GiB guard. Test execution moved to spacious disposable volume; no test or guard weakened."
+  }
+}

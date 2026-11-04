@@ -1,0 +1,13 @@
+{
+  "failure": "Two unchanged packaging tests hit existing 5 GiB free-space guard",
+  "free_before": 5179645952,
+  "free_after": 6079025152,
+  "removed_generated_dependency_directories": [
+    "/tmp/cyrnava-p5a-prerequisite-e5fgarzw/checkout/frontend/node_modules",
+    "/tmp/cyrnava-p5a-prerequisite-e5fgarzw/checkout/backend/.venv",
+    "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/frontend/node_modules",
+    "/tmp/cyrnava-p5a-lifecycle-28g_ju36/checkout/backend/.venv"
+  ],
+  "evidence_source_profiles_and_browser_binary_preserved": true,
+  "system_security_or_disk_threshold_changed": false
+}

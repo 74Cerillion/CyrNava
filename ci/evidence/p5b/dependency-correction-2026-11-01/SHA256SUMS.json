@@ -1,0 +1,14 @@
+{
+  "accepted-artifact.json": "5122c6459d0213a23d6c684dd13e181f045d0f615e292cc5deeca627273ce2f6",
+  "actionlint.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "ci-contract-tests-final.log": "6cbc2b282ab52ea656ae7fa299a66e36d0a922732f190230f0947bcbb03b2548",
+  "ci-contract-tests-initial-space-guard.log": "31cb5a45d4298d28853777958cd5580e53b172e65a3e528e96c7e0960d6c08b7",
+  "independent-job-bootstrap.json": "054ea73eadd046be5c51b9cdbab23cfcc082391c0df611a33b48d522ded1d64d",
+  "live-eligibility.json": "b0601e26b6aa45db86c24eca906dd7159ed82842c37d647adc2f8a4c018936fa",
+  "policy-checks.log": "c3598fc8ad9e183187fb5c836d048a38b5b3715c49e19b8b626cd2a32b72bc08",
+  "precommit-readback.json": "b93f5accb8614e23ac05e4de6bb7a332130d0adb519ed0aab6af5d7e0884c988",
+  "preinstall-regression.log": "92668e19dd334cee064c20f457affefce590c6b54b19ad37f8b29636753a5ba6",
+  "release-tests.log": "c38deec4fb2cb66fb5d55ae11c30b84ecd936ebf5080bf6e87c93b4df2192c19",
+  "ruff.log": "c6486b51f483249343d4a4bdb91c41be31f0bdc28887b2f4cd4800e174f8bd6b",
+  "verification.json": "acdf41e6fc22273d217936b49aeb1be088860f82c03116165e92305f9ced9cea"
+}

@@ -1,0 +1,20 @@
+{
+  "B_audit_output_empty_before_and_after": true,
+  "child_script": "ci/release/audit_candidate.py",
+  "failing_operation": "P6 generation B payload-audit child",
+  "historical_error": "Operation failed: python (CalledProcessError)",
+  "interpreter_version": "3.12.15",
+  "no_native_audit_or_preparation_or_GUI_executed": true,
+  "prepared_json_sha256": "6d96611d1b3c75a1a7f1151568705aa5575c3aaddd01908119c6e056708460d3",
+  "reproduction_exit_code": 1,
+  "root_cause": "P6 B reuses P5B-only audit_candidate.py; core.approval intentionally admits only A, before candidate validation or native payload audit.",
+  "safe_exception_class": "core.Rejected",
+  "safe_rejection": "Source is not approved for staging",
+  "source_checkout": "bfa0b8005a3ddc519354fd7907e9b972fde8126b",
+  "status": "CONFIRMED",
+  "trace_sequence": [
+    "audit_candidate.main",
+    "core.approval",
+    "core.require"
+  ]
+}

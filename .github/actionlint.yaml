@@ -1,0 +1,6 @@
+# Official GA hosted label, recognized explicitly by the existing pinned linter.
+# https://github.blog/changelog/2026-09-17-ubuntu-26-generally-available-and-latest-migration/
+# This is linter configuration, not use of a self-hosted runner in the workflow.
+self-hosted-runner:
+  labels:
+    - ubuntu-26.04

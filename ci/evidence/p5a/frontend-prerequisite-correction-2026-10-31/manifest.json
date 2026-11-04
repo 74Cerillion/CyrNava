@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-31",
+  "base_commit": "329020b5286ce0d5474e04a781ed61a6079f8edc",
+  "tracked_changed_files": {
+    ".github/workflows/ci.yml": "3f11c9ab58d2f7c8cebca0b153a09ccffae06e314545067ddd6b42f7b8e809f4",
+    "ci/P5A_OWNER_CHECKS.md": "f5fa26c27b302e5985e8abd4dbfa47fa69f088da3c1fb82f82c28e1adb972f2f",
+    "ci/P5A_REPORT.md": "6163892378e7bf3f692d1ad91aa11d7766c21f1f7befeb03755d76d8f9514056",
+    "ci/README.md": "c09098e5d81bd4995d236a5965c9fdd269845cfbb1545b7e4991c7c5694ce17a",
+    "ci/evidence/p5a/validation.json": "2d1d8aac066db60633618f278e0803cae06d8b0299c0efddf6c964934059380a",
+    "ci/test_ci.py": "2b58854a7de665567f2aa8692b9203b3ac6148ae5b59dc93a4cd9cdc1e9628a0",
+    "ci/validate.py": "9371632e6c4c2f3b9a09ce67f8f7c4e04605f34c5b73df292bc84b87cf80bf2b",
+    "ci/verify.py": "b98beebf870b0f288f7cd5881551a3a40d895f2e13e374841e6cd764947935d6"
+  },
+  "untracked_p5a_evidence_directories": [
+    "ci/evidence/p5a/hosted-attempt-2026-10-31/",
+    "ci/evidence/p5a/frontend-prerequisite-correction-2026-10-31/"
+  ],
+  "evidence_files": {
+    "backend-clean-checkout.txt": {
+      "sha256": "979138d3a1143ad263e6d4354b086e61cc2fb5748aa21facdd5ea4109c2389ad",
+      "bytes": 4029
+    },
+    "backend-clean-junit.xml": {
+      "sha256": "a46488170448dc4c73d4e78311bffa066c67b0abf07ee65e58ca4293f2408740",
+      "bytes": 68117
+    },
+    "backend-clean-result.json": {
+      "sha256": "d3cfa08017b674ff667f23be2efed03a83085b4542216077dc47e684fecb7524",
+      "bytes": 622
+    },
+    "before-correction-P5A_OWNER_CHECKS.md": {
+      "sha256": "b662811185419a133dbaa2fa01babc08cc898fcf7924c80ac8c417ed54af2c59",
+      "bytes": 2234
+    },
+    "before-correction-P5A_REPORT.md": {
+      "sha256": "fe23c7e12f6cd0ce799f38174abd499707a1fa8857f4d216510e81d30910a73d",
+      "bytes": 17749
+    },
+    "before-correction-validation.json": {
+      "sha256": "0c9b28628fe4d158cfa66e99dbfba871f6bc4261423fade90436b47de6dca09d",
+      "bytes": 13963
+    },
+    "browser-clean-junit.xml": {
+      "sha256": "5428f8e63c1d6c9e9a17827658c5bd348c91ea568aaf7a831179a540b79e565e",
+      "bytes": 3329
+    },
+    "browser-setup-result.json": {
+      "sha256": "a314a5cd4bcc29fc58edb428d31c2ba502f12b4f463592b46319487460a2cd5f",
+      "bytes": 123
+    },
+    "candidate-source-patch.json": {
+      "sha256": "7c849086d70392aadab44ad1d4db1b76aae77fa63e9de84493e3801c28c0a27a",
+      "bytes": 11208
+    },
+    "clean-checkout-result.json": {
+      "sha256": "f946a4f1272eb5c05015fcfc66c1f100e6e17e588a62a1d16f9e55226e20470c",
+      "bytes": 153
+    },
+    "dependency-results.json": {
+      "sha256": "3768465fa2f7b56a16b959258082fd19f5517ede10ca2b0b0dc3b7baaf25e1d3",
+      "bytes": 329
+    },
+    "dependency-setup.txt": {
+      "sha256": "233c0de801cdb4480ba277196a2bab14d0854f48f164e8784ec4bf33f9f66cf0",
+      "bytes": 6631
+    },
+    "exploratory-lint.json": {
+      "sha256": "ce17a8c39d425752a1081600a61733f98792affdaca719c87037e7f6f4400023",
+      "bytes": 305
+    },
+    "final-static-checks.json": {
+      "sha256": "c6ec05bb9b0275126301940a213c0f3a4b4679c3d6453223ef8fe09cc88f65f5",
+      "bytes": 904
+    },
+    "formerly-failing-tests.json": {
+      "sha256": "2df62a0fc7957cdc2874398640c77d7f2a08d6c197079bc6a390e290ef6680ca",
+      "bytes": 230
+    },
+    "frontend-clean-checkout.txt": {
+      "sha256": "76a3102b4e462c86dd26b120a3aa71aff4c98dcdab3e8b1e108db44c24005993",
+      "bytes": 5360
+    },
+    "frontend-clean-result.json": {
+      "sha256": "36121289816b19c54a0ecea2756ed510146d5ae9dc258a4adbdf1bc5cf03270f",
+      "bytes": 480
+    },
+    "preservation-checks.json": {
+      "sha256": "8aa69c872ab46e2563bad0ba1ec79e7b4aa5327bcbc3a0205c9ad717203c5522",
+      "bytes": 623
+    },
+    "reproduction.md": {
+      "sha256": "06cb543884e6c7b68861a7b326dc6fef75c350e2ad2fda18987c5ea2884ab36b",
+      "bytes": 1456
+    },
+    "setup.json": {
+      "sha256": "d9a2a07517dac3e6d4911c7fd9d8dcbc182e58628eb606a178e8f0cc3bd7378f",
+      "bytes": 887
+    },
+    "validation.json": {
+      "sha256": "04a5671299a6d08f0d9fa02a7b8dc4e5cdecb53f9d3dec0391b340a21bf93fae",
+      "bytes": 3158
+    },
+    "workflow-contract-tests.txt": {
+      "sha256": "5de0dfd5e1613a42f74f4d9a480de473d5f104f6ff1d87fd51508a7097598fc1",
+      "bytes": 3334
+    }
+  },
+  "no_new_commit_push_or_workflow_trigger": true
+}

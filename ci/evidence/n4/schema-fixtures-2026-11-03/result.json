@@ -1,0 +1,240 @@
+{
+  "CI_headless_install_scope": "Imports/providers/ELF/installed identities/backend/data only; does not execute system-schema preflight, bootstrap or normal desktop launcher",
+  "N4": "CONDITIONAL; latest hosted CI 41616088358 remains FAIL",
+  "actual_GitHub_rejected_object_UID_mode": "STILL UNKNOWN; old run did not record it; next separately approved ordinary CI will log safe observation",
+  "actual_host_observation_semantics": "Unmocked trust observation printed separately as PASS/BLOCKED; BLOCKED remains BLOCKED even if observation unit wrapper succeeds; unknown exceptions still fail; no application/renderer readiness is inferred",
+  "candidate_with_new_diagnostic_bytes": "NOT BUILT; prior accepted/candidate artifacts retained under original scope",
+  "clean_snapshot": {
+    "GUI_build_download_host_policy_commit_push": "NOT EXECUTED",
+    "corrected_files_sha256": {
+      "packaging/native/feasibility/run_probe.py": "81a4f6c6c3cad96fc6b6d4efba32c1511886d5cd341fbe8abe5dd8b1fde6d0b3",
+      "packaging/native/feasibility/test_system_schemas.py": "995ae8eed99e17ed2aac7ce56403bf3a5b2522164e593c2c7f10d68ae5773cf8"
+    },
+    "elapsed_seconds": 3.975,
+    "native_started_without_ci_output": true,
+    "patch_paths": [
+      "packaging/native/feasibility/run_probe.py",
+      "packaging/native/feasibility/test_system_schemas.py"
+    ],
+    "patch_sha256": "555327bbc552fd4f3ca9a6825adbd45763fd51b451b0341bafba50cc106441e7",
+    "raw_record_sha256": "02f61a7469a909c3a145470b7b9bec97aa9b7ee45ac577e7fb8469d8712b8102",
+    "raw_scope_label_note": "Private runner inherited a test-only description; explicit patch_paths and file hashes record both diagnostics and tests. Counts, source identity and all measured results are unchanged.",
+    "results": [
+      {
+        "ci_output_absent_before": true,
+        "command": [
+          "/usr/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "packaging/native",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "elapsed_seconds": 2.745,
+        "exit_code": 0,
+        "log_sha256": "2678d5b7a964e86a72cb124576073511ceba4fab6d199584b858850c451365f3",
+        "name": "native",
+        "reported_tests": 198,
+        "skipped": false,
+        "status": "PASS"
+      },
+      {
+        "ci_output_absent_before": false,
+        "command": [
+          "/usr/bin/python3.14",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "packaging/native/feasibility",
+          "-p",
+          "test_*.py",
+          "-v"
+        ],
+        "elapsed_seconds": 0.214,
+        "exit_code": 0,
+        "log_sha256": "e1d3f1c6dfd1b53e072383de71dfce42f1ca09e6b5100e59a87865b4a278ccef",
+        "name": "feasibility",
+        "reported_tests": 63,
+        "skipped": false,
+        "status": "PASS"
+      },
+      {
+        "ci_output_absent_before": false,
+        "command": [
+          "<existing-backend-venv-python>",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "ci",
+          "-p",
+          "test_ci.py",
+          "-v"
+        ],
+        "elapsed_seconds": 0.422,
+        "exit_code": 0,
+        "log_sha256": "b6bf79cd743a676d4af06cb01ee22c151100501f5b9c1f6cffab2c5eafb4115d",
+        "name": "workflow",
+        "reported_tests": 38,
+        "skipped": false,
+        "status": "PASS"
+      },
+      {
+        "ci_output_absent_before": false,
+        "command": [
+          "<existing-backend-venv-python>",
+          "-B",
+          "ci/validate.py"
+        ],
+        "elapsed_seconds": 0.212,
+        "exit_code": 0,
+        "log_sha256": "6929f9534e22bc6fa880e0273e930cbca7230a10ad605b44103eec52e5d3f6a6",
+        "name": "workflow-contract",
+        "reported_tests": null,
+        "skipped": false,
+        "status": "PASS"
+      }
+    ],
+    "scope": "fresh full committed-source snapshot plus exactly two diagnostic/test-file overlays; no assembly, native launch or GUI",
+    "signature_fixture_directory_removed": true,
+    "snapshot_source_unchanged_after_tests": true,
+    "source_commit": "2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8",
+    "source_manifest_sha256": "24bfb75c6233b502d2146521b50488cc837c677c996b5f4d5436a97b70c0d9e7",
+    "source_snapshot_bytes": 48073056,
+    "source_snapshot_files": 1612,
+    "status": "LOCAL PASS",
+    "temporary_budget_bytes": 134217728,
+    "temporary_peak_allocated_bytes": 52432896
+  },
+  "controlled_after": {
+    "errors": 0,
+    "failures": 0,
+    "host_permission_changes": false,
+    "log_sha256": "55504160d45482d092abec4133b1beda838e8187d5fca62aefbf0c233338015f",
+    "observation": {
+      "application_launch": "NOT EXECUTED",
+      "diagnostic": {
+        "errno": null,
+        "expected_os_uid": 0,
+        "mode": "0775",
+        "path_category": "usr-directory",
+        "reason": "group-or-world-writable",
+        "uid": 0
+      },
+      "renderer": "NOT EXECUTED",
+      "scope": "actual-system-schema-preflight-only",
+      "status": "BLOCKED"
+    },
+    "profile": {
+      "invoking_uid": 1000,
+      "os_owner_uid": 0,
+      "usr_directory_mode": "0775"
+    },
+    "scope": "synthetic controlled metadata profile only; not the actual GitHub runner metadata",
+    "skipped": 0,
+    "status": "PASS; SIMULATED HOST TRUST REMAINS BLOCKED",
+    "tests_run": 19
+  },
+  "controlled_before": {
+    "errors": 2,
+    "failures": 1,
+    "host_permission_changes": false,
+    "log_sha256": "451f74771d5471a67ce56a7f30d162ecf0f5a89f6b4637caf50b91a023c0df3f",
+    "observation": null,
+    "profile": {
+      "invoking_uid": 1000,
+      "os_owner_uid": 0,
+      "usr_directory_mode": "0775"
+    },
+    "scope": "synthetic controlled metadata profile only; not the actual GitHub runner metadata",
+    "skipped": 0,
+    "status": "EXPECTED FAIL REPRODUCED",
+    "tests_run": 3
+  },
+  "diagnostic_contract": {
+    "exception": "SchemaTrustError(ValueError)",
+    "fields": [
+      "path_category",
+      "reason",
+      "uid",
+      "expected_os_uid",
+      "mode",
+      "errno"
+    ],
+    "paths": "Only six fixed system-object categories; unknown paths become unreviewed-path",
+    "values": "Fixed reasons, int-or-null numeric metadata, four-digit octal permissions; no raw paths/environment/error strings; OSError cause suppressed"
+  },
+  "focused_schema_tests": {
+    "included_in_feasibility_total": true,
+    "passed": 19
+  },
+  "hosted_statuses_preserved": [
+    {
+      "run_id": 41607482461,
+      "status": "FAIL"
+    },
+    {
+      "run_id": 41612661098,
+      "status": "FAIL"
+    },
+    {
+      "run_id": 41616088358,
+      "status": "FAIL"
+    }
+  ],
+  "implementation_paths": [
+    "packaging/native/feasibility/run_probe.py",
+    "packaging/native/feasibility/test_system_schemas.py"
+  ],
+  "independent_read_only_review": "No blocker; trust predicates/order and sanitized diagnostics reviewed",
+  "initial_uncommitted_files_verified_unchanged_before_report_update": 10,
+  "local_build_native_GUI_host_policy_network_commit_push_workflow": "NOT EXECUTED",
+  "local_schema_only_observation": {
+    "application_launch": "NOT EXECUTED",
+    "platform_integration": {
+      "compiled_schema_sha256": "21865d7b212dfafb37dbc3394cf386b9d1a4fdfcb4f61192f286bffb2b0d61a6",
+      "inherited_schema_override_was_set": false,
+      "mode": "explicit-Ubuntu-system-schemas",
+      "required_font_keys_present": [
+        "font-antialiasing",
+        "font-hinting",
+        "font-rgba-order"
+      ]
+    },
+    "renderer": "NOT EXECUTED",
+    "scope": "actual-system-schema-preflight-only",
+    "status": "PASS"
+  },
+  "next_checkpoint": "Owner review and separate authorization for any corrective commit/normal integration push; no production signing or publication",
+  "patch_sha256": "555327bbc552fd4f3ca9a6825adbd45763fd51b451b0341bafba50cc106441e7",
+  "production_acceptance_predicates": "UNCHANGED; separate OS owner, no symlink, matching OS owner and no group/world writes, compiled regular file, required font keys and unchanged bytes still enforced in original order",
+  "protected_files_verified_unchanged": 45,
+  "real_signature_tests": {
+    "fixture_directory_removed": true,
+    "included_in_native_total": true,
+    "passed": 6,
+    "scope": "Fresh one-day synthetic unit fixture only"
+  },
+  "retained_local_iterations": [
+    "Initial metadata fixture omitted Python 3.14 is_file path; focused-schema.private.log retained; fixture model corrected",
+    "First controlled minimal-source fixture omitted sandbox_probe.py hash input; original corrected-controlled-profile.private.log retained; unchanged required source input added",
+    "One scratch wrapper chmod error occurred before tests; empty r2 log retained"
+  ],
+  "source_commit": "2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8",
+  "source_file_sha256": {
+    "packaging/native/feasibility/run_probe.py": "81a4f6c6c3cad96fc6b6d4efba32c1511886d5cd341fbe8abe5dd8b1fde6d0b3",
+    "packaging/native/feasibility/test_system_schemas.py": "995ae8eed99e17ed2aac7ce56403bf3a5b2522164e593c2c7f10d68ae5773cf8"
+  },
+  "status": "LOCAL DIAGNOSTIC/FIXTURE CORRECTION VERIFIED / READY FOR REVIEW",
+  "test_changes": "Deterministic synthetic trust metadata for unit semantics, real GLib compiler/query/bytes with isolated synthetic schema sets, per-object ownership/write/symlink refusals and missing/nonregular/query/read/content checks",
+  "time_utc": "2026-11-03T10:29:35Z",
+  "two_owner_write_predicates_AST_comparison": "PASS",
+  "unique_tests_passed": 299
+}

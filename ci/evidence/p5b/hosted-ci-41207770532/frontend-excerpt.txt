@@ -1,0 +1,12 @@
+2026-10-31T13:56:51.9278943Z [2m      Tests [22m [1m[32m273 passed[39m[22m[90m (273)[39m
+2026-10-31T13:57:04.4136819Z   ✓   1 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits (8.2s)
+2026-10-31T13:57:13.1851082Z   ✓   2 e2e/lifecycle.spec.ts:139:1 › managed tabs close, restart and recover immediately closed unconfirmed edits without browser routing (8.8s)
+2026-10-31T13:57:17.7742597Z   ✓   3 e2e/lifecycle.spec.ts:232:1 › a committed write with a lost acknowledgement retains its draft and requires conflict review (4.6s)
+2026-10-31T13:57:20.5329237Z   ✓   4 e2e/lifecycle.spec.ts:295:1 › visibility flush is correlated through FastAPI and SQLite, and the SQL boundary rejects it (2.8s)
+2026-10-31T13:57:23.6553260Z   ✓   5 e2e/lifecycle.spec.ts:349:1 › killed isolated browser leaves no managed backend after lease expiry (3.1s)
+2026-10-31T13:57:58.4382164Z   ✓  10 e2e/workspace.spec.ts:135:1 › appearance follows system and explicit preferences without changing notes, templates or autosave (10.4s)
+2026-10-31T13:58:00.7856015Z   ✓  11 e2e/workspace.spec.ts:305:1 › placeholder rendering requires the selected empty paragraph, not the last paragraph alone (2.3s)
+2026-10-31T13:59:03.6545121Z   21 passed (2.1m)
+2026-10-31T13:59:04.8622024Z SHA256 digest of uploaded artifact zip is cf7087a6e4f46b8ab058fc43d42ecf4d011937f0bbbc0e36c9ad62a7220ca8b5
+2026-10-31T13:59:05.2784037Z Artifact frontend-diagnostics-abbb1b7a723d0b42dae1fa2b3312cb7667299e96-1.zip successfully finalized. Artifact ID 13044952845
+2026-10-31T13:59:05.2784780Z Artifact frontend-diagnostics-abbb1b7a723d0b42dae1fa2b3312cb7667299e96-1 has been successfully uploaded! Final size is 4894058 bytes. Artifact ID is 13044952845

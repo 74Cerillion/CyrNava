@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-02",
+  "status": "LOCAL DIAGNOSTICS VERIFIED; R9 FAIL; P6 CONDITIONAL",
+  "confirmed_failure_boundary": "After owned_backend_reaped and before saved_owner_edit_checks in the second updated invocation, after reinstall B",
+  "exact_missing_file": "UNDETERMINED; original Python filename/errno/traceback was discarded",
+  "current_pointer_and_workspace": "Valid pointer to existing schema-5 imported workspace",
+  "data_integrity": "Original and active imported DB hashes/content fingerprints and image trees identical. Each has one note, folder, asset; integrity and foreign-key checks PASS. Inactive schema-6 fixture intentional.",
+  "confirmed_defect": "Verifier diagnostics set stage after Profile construction and suppressed the filesystem operation; repeated updated label obscured post-reinstall context",
+  "application_defect": "NOT ESTABLISHED; production storage unchanged",
+  "hypothesis_only": "Concurrent removal of a Qt-profile/cache file during strict Profile scan; synthetic reproduction establishes possibility, not historical causality",
+  "historical_gui_and_recovery_successes_preserved": {
+    "edit": "PASS",
+    "restart": "PASS",
+    "updated": "PASS",
+    "rollback": "PASS",
+    "maintenance": "PASS",
+    "recovery": "PASS",
+    "post_reinstall_updated": "FAIL"
+  },
+  "changed_implementation": [
+    "packaging/flatpak/production/native_check.py",
+    "ci/release/real_update.py"
+  ],
+  "new_tests": [
+    "packaging/flatpak/production/test_profile_diagnostics.py",
+    "ci/release/test_native_phase_context.py"
+  ],
+  "scope": "Stage/allowlisted filesystem diagnostics and phase-context evidence only. No retry, delay or filesystem validation relaxation.",
+  "native_rerun": "NOT EXECUTED. A further separately authorized instrumented native observation is needed to complete post-reinstall verification; may identify the exact operation if failure recurs."
+}

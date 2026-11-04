@@ -1,0 +1,30 @@
+[
+  {
+    "id": 13075391222,
+    "name": "flatpak-diagnostics-bfa0b8005a3ddc519354fd7907e9b972fde8126b-1",
+    "bytes": 2042,
+    "sha256": "c7801737e1f65e7cd4f6fcee147e2b753051b5ba6d5e91a527c86bd41ae9c418",
+    "status": "PASS"
+  },
+  {
+    "id": 13075346402,
+    "name": "CyrNava-linux-x86_64-bfa0b8005a3ddc519354fd7907e9b972fde8126b-1",
+    "bytes": 210239212,
+    "sha256": "2d11ce5057ae66cd4dc526dac607a2344b89dbc1fcef5e62038ad59583c93fbe",
+    "status": "PASS"
+  },
+  {
+    "id": 13075216549,
+    "name": "frontend-diagnostics-bfa0b8005a3ddc519354fd7907e9b972fde8126b-1",
+    "bytes": 4892869,
+    "sha256": "104ad10f02939cb73c88da82fa4f04cab920bbd7a22800074b528d1af550a1ef",
+    "status": "PASS"
+  },
+  {
+    "id": 13074752903,
+    "name": "backend-diagnostics-bfa0b8005a3ddc519354fd7907e9b972fde8126b-1",
+    "bytes": 12996,
+    "sha256": "cd51cc75dc962c3ab26eaeb62d20dde0301df8917c2b4ad249c2a8291100fae6",
+    "status": "PASS"
+  }
+]

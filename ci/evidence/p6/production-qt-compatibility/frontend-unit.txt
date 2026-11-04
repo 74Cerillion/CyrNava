@@ -1,0 +1,18 @@
+
+> cyrnava@0.1.0 test
+> node scripts/check-minimatch.mjs && vitest run --cache=false
+
+PASS: fixed resolution for all three consumers; normal and adversarial glob compilation
+
+ RUN  v5.0.5 <clean-checkout>/frontend
+
+
+ Test Files  22 passed (22)
+      Tests  273 passed (273)
+   Start at  13:10:04
+   Duration  15.34s (environment 42%, tests 33%, import 11%, transform 7%, setup 7%)
+
+Environment  jsdom was created 22 times · 23.36s total, 42% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+

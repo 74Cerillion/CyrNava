@@ -1,0 +1,34 @@
+{
+  "failing_command_template": [
+    "flatpak",
+    "--user",
+    "run",
+    "--branch=stable",
+    "--command=python3",
+    "io.github._74Cerillion.CyrNava",
+    "-u",
+    "-",
+    "edit",
+    "<synthetic-run-id>",
+    "<host-network-namespace>",
+    "<synthetic-host-canary>"
+  ],
+  "helper_script_sha256": "8cec1f8e659063a05c9279aa5d89127a0325b5c7e8c138bdb48d0853d00bd248",
+  "historical_stderr_retained": false,
+  "pair_hashes": {
+    "a/manifest.json": "8cfe52ff916775cb576681264973a3c523865eb6aca11d40b64f32cafdd80437",
+    "a/manifest.json.sig": "260dbb9a15be75b14bcd8f3f380395770bf0c4347547a48e09cb7a9826b9da2b",
+    "b/manifest.json": "f5b90880f47eb4e12245ab99a20f64d5e20506f2648fdae7be8e7253d166614f",
+    "b/manifest.json.sig": "34afcb97b19234a6a3964ecb57f52590a61c46f126cfed99ecad6eaa459cbb9c",
+    "owner-result.json": "578fd89690f4301ca595f778581720369f652ae554fc836cb8abd55d8275a57f",
+    "prepared.json": "0740b8d035d7db2904ca45d1f7bdd7265fba9157f1313d2440a83e1f2b8d5099"
+  },
+  "phase_edit_result_found_in_attempt": false,
+  "private_native_logs_found": false,
+  "r3_hashes": {
+    ".p6-gui-attempt": "ea86db7cd2202240c02ba27cd0d10004ec9abd23ff66be34210fc8fe3a751611",
+    "operations.jsonl": "5f62636b62b5f9143925633bd9a2dad67ea37b189738b64fc144df6585523671",
+    "owner-result.json": "5d11d9bd97b4b1e0c2839ec7239490d195a4f9abc167abaf10c9de049ab8b32e",
+    "progress.json": "f9383d535422e631fb323564311d79caa8a08a69c5d324915c2463faa2e77ae3"
+  }
+}

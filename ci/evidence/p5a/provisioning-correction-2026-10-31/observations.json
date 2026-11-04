@@ -1,0 +1,66 @@
+[
+  {
+    "command": [
+      "flatpak",
+      "--version"
+    ],
+    "returncode": 0,
+    "stdout": "Flatpak 1.16.6\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "flatpak",
+      "remote-add",
+      "--user",
+      "--if-not-exists",
+      "flathub",
+      "https://dl.flathub.org/repo/flathub.flatpakrepo"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "flatpak",
+      "remote-info",
+      "--user",
+      "--commit=76fa01ac42ecf45d2c5020ef80de1c474c0c2ae86a51a79e8fec44c48f9dc473",
+      "--show-metadata",
+      "flathub",
+      "org.kde.Platform//6.11"
+    ],
+    "returncode": 0,
+    "stdout": "[Runtime]\nname = org.kde.Platform\nruntime = org.kde.Platform/x86_64/6.11\nsdk = org.kde.Sdk/x86_64/6.11\n\n[Environment]\nGI_TYPELIB_PATH = /app/lib/girepository-1.0\nGST_PLUGIN_SYSTEM_PATH = /app/lib/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/codecs-extra/lib/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0\nXDG_DATA_DIRS = /app/share:/usr/share:/usr/share/runtime/share:/run/host/user-share:/run/host/share\nALSA_CONFIG_DIR = /usr/share/alsa\nALSA_CONFIG_PATH = /usr/share/alsa/alsa-flatpak.conf\n__EGL_EXTERNAL_PLATFORM_CONFIG_DIRS = /etc/egl/egl_external_platform.d:/usr/lib/x86_64-linux-gnu/GL/egl/egl_external_platform.d:/usr/share/egl/egl_external_platform.d\nPYTHONUSERBASE = /var/data/python\nQT_PLUGIN_PATH = /app/lib/plugins:/usr/share/runtime/lib/plugins\nQML2_IMPORT_PATH = /app/lib/qml\nKDE_FORK_SLAVES = 1\n\n[Context]\nfilesystems = xdg-config/kdeglobals:ro;\n\n[Session Bus Policy]\ncom.canonical.AppMenu.Registrar = talk\norg.kde.kconfig.notify = talk\norg.kde.KGlobalSettings = talk\n\n[Extension org.kde.Platform.Locale]\ndirectory = share/runtime/locale\nautodelete = true\nlocale-subset = true\n\n[Extension org.kde.KStyle]\ndirectory = share/runtime/lib/plugins/\nsubdirectories = true\nno-autodownload = true\nversion = 6.11\nmerge-dirs = styles\nadd-ld-path = lib\ndownload-if = active-gtk-theme\n\n[Extension org.kde.PlatformInputContexts]\ndirectory = share/runtime/lib/plugins/\nsubdirectories = true\nautodelete = true\nno-autodownload = true\nversion = 6.11\nmerge-dirs = platforminputcontexts\nadd-ld-path = lib\n\n[Extension org.inqlude.WaylandDecoration]\ndirectory = share/runtime/lib/plugins/\nsubdirectories = true\nno-autodownload = true\nversion = 6.11\nmerge-dirs = wayland-decoration-client\nadd-ld-path = lib\n//TODO = This is currently only used for gnome platform plugin and should be its own extension point\ndownload-if = on-xdg-desktop-GNOME;on-xdg-desktop-GNOME-classic\n\n[Extension org.freedesktop.Platform.GL]\nversions = 25.08;25.08-extra;1.4\nversion = 1.4\ndirectory = lib/x86_64-linux-gnu/GL\nsubdirectories = true\nno-autodownload = true\nautodelete = false\nadd-ld-path = lib\nmerge-dirs = vulkan/icd.d;glvnd/egl_vendor.d;egl/egl_external_platform.d;OpenCL/vendors;lib/dri;lib/d3d;lib/gbm;vulkan/explicit_layer.d;vulkan/implicit_layer.d;vdpau\ndownload-if = active-gl-driver\nenable-if = active-gl-driver\nautoprune-unless = active-gl-driver\n\n[Extension org.freedesktop.Platform.GL.Debug]\nversions = 25.08;25.08-extra;1.4\nversion = 1.4\ndirectory = lib/debug/usr/lib/x86_64-linux-gnu/GL\nsubdirectories = true\nno-autodownload = true\nmerge-dirs = vulkan/icd.d;glvnd/egl_vendor.d;egl/egl_external_platform.d;OpenCL/vendors;lib/dri;lib/d3d;lib/gbm;vulkan/explicit_layer.d;vulkan/implicit_layer.d;vdpau\nenable-if = active-gl-driver\nautoprune-unless = active-gl-driver\n\n[Extension org.freedesktop.Platform.VulkanLayer]\nversion = 25.08\ndirectory = lib/extensions/vulkan\nsubdirectories = true\nno-autodownload = true\nmerge-dirs = share/vulkan/implicit_layer.d;share/vulkan/explicit_layer.d;\n\n[Extension org.freedesktop.Platform.Timezones]\ndirectory = share/zoneinfo\nversion = 25.08\n\n[Extension org.freedesktop.Platform.GStreamer]\ndirectory = lib/extensions/gstreamer-1.0\nsubdirectories = true\nno-autodownload = true\nversion = 25.08\n\n[Extension org.freedesktop.Platform.Icontheme]\ndirectory = share/runtime/share/icons\nsubdirectories = true\nno-autodownload = true\nversion = 1.0\n\n[Extension org.gtk.Gtk3theme]\ndirectory = share/runtime/share/themes\nsubdirectories = true\nsubdirectory-suffix = gtk-3.0\nno-autodownload = true\nversion = 3.22\ndownload-if = active-gtk-theme\n\n[Extension org.freedesktop.Platform.VAAPI.Intel]\ndirectory = lib/x86_64-linux-gnu/dri/intel-vaapi-driver\nautodelete = false\nno-autodownload = true\nadd-ld-path = lib\ndownload-if = have-intel-gpu\nautoprune-unless = have-intel-gpu\nversion = 25.08\n\n[Extension org.freedesktop.Platform.VAAPI.nvidia]\ndirectory = lib/x86_64-linux-gnu/dri/nvidia-vaapi-driver\nautodelete = false\nno-autodownload = true\nadd-ld-path = lib\ndownload-if = have-kernel-module-nvidia\nautoprune-unless = have-kernel-module-nvidia\nversion = 25.08\n\n[Extension org.freedesktop.Platform.codecs-extra]\ndirectory = lib/x86_64-linux-gnu/codecs-extra\nversion = 25.08-extra\nadd-ld-path = lib\nautodelete = true\n\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "flatpak",
+      "remote-info",
+      "--user",
+      "--commit=df314f9c067cba031e153a2f3b0be53bd13c1eca6baa78b68982a1d35b873a86",
+      "--show-metadata",
+      "flathub",
+      "org.kde.Sdk//6.11"
+    ],
+    "returncode": 0,
+    "stdout": "[Runtime]\nname = org.kde.Sdk\nruntime = org.kde.Platform/x86_64/6.11\nsdk = org.kde.Sdk/x86_64/6.11\n\n[Environment]\nGI_TYPELIB_PATH = /app/lib/girepository-1.0\nGST_PLUGIN_SYSTEM_PATH = /app/lib/gstreamer-1.0:/usr/lib/extensions/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/codecs-extra/lib/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0\nXDG_DATA_DIRS = /app/share:/usr/share:/usr/share/runtime/share:/run/host/user-share:/run/host/share\nALSA_CONFIG_DIR = /usr/share/alsa\nALSA_CONFIG_PATH = /usr/share/alsa/alsa-flatpak.conf\n__EGL_EXTERNAL_PLATFORM_CONFIG_DIRS = /etc/egl/egl_external_platform.d:/usr/lib/x86_64-linux-gnu/GL/egl/egl_external_platform.d:/usr/share/egl/egl_external_platform.d\nPYTHONUSERBASE = /var/data/python\nQT_PLUGIN_PATH = /app/lib/plugins:/usr/share/runtime/lib/plugins\nQML2_IMPORT_PATH = /app/lib/qml\nKDE_FORK_SLAVES = 1\n\n[Context]\nfilesystems = xdg-config/kdeglobals:ro;\n\n[Session Bus Policy]\ncom.canonical.AppMenu.Registrar = talk\norg.kde.kconfig.notify = talk\norg.kde.KGlobalSettings = talk\n\n[Extension org.kde.Sdk.Debug]\ndirectory = lib/debug\nautodelete = true\nno-autodownload = true\n\n[Extension org.kde.Sdk.Docs]\ndirectory = share/runtime/docs\nbundle = true\nautodelete = true\nno-autodownload = true\n\n[Extension org.kde.Sdk.Locale]\ndirectory = share/runtime/locale\nautodelete = true\nlocale-subset = true\n\n[Extension org.kde.KStyle]\ndirectory = share/runtime/lib/plugins/\nsubdirectories = true\nno-autodownload = true\nversion = 6.11\nmerge-dirs = styles\nadd-ld-path = lib\ndownload-if = active-gtk-theme\n\n[Extension org.kde.PlatformInputContexts]\ndirectory = share/runtime/lib/plugins/\nsubdirectories = true\nautodelete = true\nno-autodownload = true\nversion = 6.11\nmerge-dirs = platforminputcontexts\nadd-ld-path = lib\n\n[Extension org.inqlude.WaylandDecoration]\ndirectory = share/runtime/lib/plugins/\nsubdirectories = true\nno-autodownload = true\nversion = 6.11\nmerge-dirs = wayland-decoration-client\nadd-ld-path = lib\n//TODO = This is currently only used for gnome platform plugin and should be its own extension point\ndownload-if = on-xdg-desktop-GNOME;on-xdg-desktop-GNOME-classic\n\n[Extension org.freedesktop.Platform.GL]\nversions = 25.08;25.08-extra;1.4\nversion = 1.4\ndirectory = lib/x86_64-linux-gnu/GL\nsubdirectories = true\nno-autodownload = true\nautodelete = false\nadd-ld-path = lib\nmerge-dirs = vulkan/icd.d;glvnd/egl_vendor.d;egl/egl_external_platform.d;OpenCL/vendors;lib/dri;lib/d3d;lib/gbm;vulkan/explicit_layer.d;vulkan/implicit_layer.d;vdpau\ndownload-if = active-gl-driver\nenable-if = active-gl-driver\nautoprune-unless = active-gl-driver\n\n[Extension org.freedesktop.Platform.GL.Debug]\nversions = 25.08;25.08-extra;1.4\nversion = 1.4\ndirectory = lib/debug/usr/lib/x86_64-linux-gnu/GL\nsubdirectories = true\nno-autodownload = true\nmerge-dirs = vulkan/icd.d;glvnd/egl_vendor.d;egl/egl_external_platform.d;OpenCL/vendors;lib/dri;lib/d3d;lib/gbm;vulkan/explicit_layer.d;vulkan/implicit_layer.d;vdpau\nenable-if = active-gl-driver\nautoprune-unless = active-gl-driver\n\n[Extension org.freedesktop.Platform.VulkanLayer]\nversion = 25.08\ndirectory = lib/extensions/vulkan\nsubdirectories = true\nno-autodownload = true\nmerge-dirs = share/vulkan/implicit_layer.d;share/vulkan/explicit_layer.d;\n\n[Extension org.freedesktop.Platform.Timezones]\ndirectory = share/zoneinfo\nversion = 25.08\n\n[Extension org.freedesktop.Platform.GStreamer]\ndirectory = lib/extensions/gstreamer-1.0\nsubdirectories = true\nno-autodownload = true\nversion = 25.08\n\n[Extension org.freedesktop.Platform.Icontheme]\ndirectory = share/runtime/share/icons\nsubdirectories = true\nno-autodownload = true\nversion = 1.0\n\n[Extension org.gtk.Gtk3theme]\ndirectory = share/runtime/share/themes\nsubdirectories = true\nsubdirectory-suffix = gtk-3.0\nno-autodownload = true\nversion = 3.22\ndownload-if = active-gtk-theme\n\n[Extension org.freedesktop.Sdk.Extension]\nsubdirectories = true\ndirectory = lib/sdk\nno-autodownload = true\nadd-ld-path = lib\nversion = 25.08\n\n[Extension org.freedesktop.Platform.codecs-extra]\ndirectory = lib/x86_64-linux-gnu/codecs-extra\nversion = 25.08-extra\nadd-ld-path = lib\nautodelete = true\n\n[Extension org.freedesktop.Platform.VAAPI.Intel]\ndirectory = lib/x86_64-linux-gnu/dri/intel-vaapi-driver\nautodelete = false\nno-autodownload = true\ndownload-if = have-intel-gpu\nautoprune-unless = have-intel-gpu\nversion = 25.08\n\n[Extension org.freedesktop.Platform.VAAPI.nvidia]\ndirectory = lib/x86_64-linux-gnu/dri/nvidia-vaapi-driver\nautodelete = false\nno-autodownload = true\nadd-ld-path = lib\ndownload-if = have-kernel-module-nvidia\nautoprune-unless = have-kernel-module-nvidia\nversion = 25.08\n\n[Extension org.freedesktop.Sdk.Compat.i386]\ndirectory = lib/i386-linux-gnu\nautodelete = true\nno-autodownload = true\nadd-ld-path = .\nversion = 25.08\n\n[Extension org.freedesktop.Sdk.Compat.i386.Debug]\ndirectory = lib/debug/usr/lib/i386-linux-gnu\nautodelete = true\nno-autodownload = true\nversion = 25.08\n\n[Extension org.freedesktop.Sdk.Compat.aarch64]\ndirectory = lib/aarch64-linux-gnu\nautodelete = true\nno-autodownload = true\nadd-ld-path = .\nversion = 25.08\n\n[Extension org.freedesktop.Sdk.Compat.aarch64.Debug]\ndirectory = lib/debug/usr/lib/aarch64-linux-gnu\nautodelete = true\nno-autodownload = true\nversion = 25.08\n\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "flatpak",
+      "remote-info",
+      "--user",
+      "--commit=a6cddcbcf58032e3f22c66a98779cc07685d376e52718e5aee307ad9aeb1bb8e",
+      "--show-metadata",
+      "flathub",
+      "io.qt.PySide.BaseApp//6.11"
+    ],
+    "returncode": 0,
+    "stdout": "[Application]\nname=io.qt.PySide.BaseApp\nruntime=org.kde.Platform/x86_64/6.11\nsdk=org.kde.Sdk/x86_64/6.11\nbase=app/io.qt.qtwebengine.BaseApp/x86_64/6.11\ncommand=QtWebEngineProcess\n\n[Context]\nfilesystems=xdg-config/kdeglobals:ro;\n\n[Session Bus Policy]\ncom.canonical.AppMenu.Registrar=talk\norg.kde.kconfig.notify=talk\norg.kde.KGlobalSettings=talk\n\n[Extension io.qt.PySide.BaseApp.Debug]\ndirectory=lib/debug\nautodelete=true\nno-autodownload=true\n\n[Build]\nbuilt-extensions=io.qt.PySide.BaseApp.Debug;io.qt.PySide.BaseApp.Sources;\n",
+    "stderr": ""
+  }
+]

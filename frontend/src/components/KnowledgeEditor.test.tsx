@@ -121,3 +121,26 @@ it('delegates ordinary text paste and disables the optional file-drop path', () 
   expect(screen.getByRole('alert')).toHaveTextContent('Ctrl+V or the image selector');
   expect(uploadImage).not.toHaveBeenCalled();
 });
+
+it('an empty image remains unsafe to close until its placeholder is removed or uploaded', async () => {
+  current = [{ type: 'image', props: { url: '', name: 'unfinished.png' } }];
+  const ref = createRef<EditorHandle>(); const state = vi.fn();
+  render(<KnowledgeEditor ref={ref} noteId="A" initialDocument={current} onDocumentChange={vi.fn()} onUploadStateChange={state} />);
+  expect(state).toHaveBeenLastCalledWith({ pending: false, incomplete: true });
+  await act(async () => { expect(await ref.current!.flushUploads()).toBe(false); });
+  current = structuredClone(snapshot); fireEvent.click(screen.getByRole('button', { name: 'Editor change' }));
+  await act(async () => { expect(await ref.current!.flushUploads()).toBe(true); });
+});
+it('drains every image of an accepted paste even after editing is locked for closure', async () => {
+  let first!: (value: string) => void, second!: (value: string) => void;
+  vi.mocked(uploadImage).mockReturnValueOnce(new Promise((yes) => { first = yes; }))
+    .mockReturnValueOnce(new Promise((yes) => { second = yes; }));
+  const ref = createRef<EditorHandle>();
+  render(<KnowledgeEditor ref={ref} noteId="A" initialDocument={initial} onDocumentChange={vi.fn()} />);
+  act(() => { paste([file, file]); });
+  const done = vi.fn(); const flush = ref.current!.flushUploads().then(done);
+  editor.isEditable = false; await act(async () => first(url));
+  expect(uploadImage).toHaveBeenCalledTimes(2); expect(done).not.toHaveBeenCalled();
+  await act(async () => { second(url); await flush; }); expect(done).toHaveBeenCalledWith(true);
+  editor.isEditable = true;
+});

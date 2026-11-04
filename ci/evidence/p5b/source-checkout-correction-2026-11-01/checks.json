@@ -1,0 +1,52 @@
+[
+  {
+    "check": "source-tests",
+    "exit_code": 0,
+    "seconds": 0.214
+  },
+  {
+    "check": "release-tests",
+    "exit_code": 0,
+    "seconds": 1.467
+  },
+  {
+    "check": "ci-contracts",
+    "exit_code": 0,
+    "seconds": 0.264
+  },
+  {
+    "check": "ruff",
+    "exit_code": 0,
+    "seconds": 0.032
+  },
+  {
+    "check": "format",
+    "exit_code": 0,
+    "seconds": 0.032
+  },
+  {
+    "check": "workflow-policy",
+    "exit_code": 0,
+    "seconds": 0.064
+  },
+  {
+    "check": "registration-policy",
+    "exit_code": 0,
+    "seconds": 0.114
+  },
+  {
+    "check": "ci-policy",
+    "exit_code": 0,
+    "seconds": 0.064
+  },
+  {
+    "check": "actionlint-bootstrap",
+    "exit_code": 0,
+    "seconds": 0.615
+  },
+  {
+    "check": "actionlint",
+    "exit_code": 0,
+    "seconds": 0.004
+  }
+]

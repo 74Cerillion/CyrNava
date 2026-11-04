@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-30",
+  "status": "CONDITIONAL",
+  "cause": "Save chooser allowed an extensionless name; import chooser filter only *.cyrnava hid the file",
+  "provided_archive": {
+    "path": "/home/cerillion/test",
+    "sha256": "22710e4978c446204b71d3a7e888a049ff0e77236881565e92616f7e159eca73",
+    "bytes": 822547,
+    "validation": "PASS",
+    "schema": 5,
+    "counts": {
+      "notes": 1,
+      "folders": 2,
+      "assets": 2
+    },
+    "source_unchanged": true
+  },
+  "native_import": "NOT VERIFIED: latest phase still reports import_activated_new_workspace FAIL",
+  "correction": "Suggest cyrnava-backup.cyrnava on save; import filter includes ZIP and All files. Preserve portal-selected paths exactly and retain full archive validation.",
+  "installed_artifacts": "Existing A/B do not include source correction. Current build workaround: explicitly enter .cyrnava extension in Save portal; import archive directly, without extraction.",
+  "scope": "No supplied backup alteration, production-data migration, security weakening or publication",
+  "automated_tests": {
+    "status": "PASS",
+    "passed": 76,
+    "seconds": 0.82,
+    "command": "cd backend && .venv/bin/python -m pytest -q tests/test_native_dialogs.py tests/test_migration.py ../packaging/flatpak/production/test_packaging.py",
+    "note": "Initial restricted-network run stalled at local API regression and was interrupted; rerun with local socket access completed. Warnings: existing Starlette deprecation and intentional duplicate-archive fixture."
+  }
+}

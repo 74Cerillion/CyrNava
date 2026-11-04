@@ -1,0 +1,110 @@
+{
+  "phase": "updated",
+  "status": "PASS",
+  "complete": true,
+  "checks": {
+    "production_identity_private_network_and_filesystem": "PASS",
+    "single_instance_lock": "PASS",
+    "backend_authentication_and_origin": "PASS",
+    "production_window_title": "PASS",
+    "dark_preference_saved": "PASS",
+    "renderer_sandbox": "PASS",
+    "owned_backend_reaped": "PASS",
+    "required_title_saved": "PASS",
+    "screenshot_asset_saved": "PASS",
+    "folder_saved": "PASS",
+    "saved_title_and_screenshot": "PASS"
+  },
+  "timings_ms": {
+    "backend_ready": 1081.1,
+    "frontend_loaded": 1925.2,
+    "backend_shutdown": 214.1
+  },
+  "backend_pid": 10,
+  "backend_origin": "http://127.0.0.1:38615",
+  "preferences_sha256": "70992515ae26d5f17712ddff6e52182309267109d0eb035fce68d6c884bfca85",
+  "sandbox_diagnostic": "Sandbox Status\nLayer 1 Sandbox\tFlatpak\nPID namespaces\tYes\nNetwork namespaces\tYes\nSeccomp-BPF sandbox\tYes\nSeccomp-BPF sandbox supports TSYNC\tYes\nPtrace Protection with Yama LSM (Broker)\tYes\nPtrace Protection with Yama LSM (Non-broker)\tYes\n\nYou are adequately sandboxed.",
+  "processes": [
+    {
+      "pid": 2,
+      "renderer": false,
+      "status": {
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "1",
+        "VmRSS": "359424 kB"
+      },
+      "namespaces": {
+        "user": "user:[4026534373]",
+        "pid": "pid:[4026534320]",
+        "net": "net:[4026534321]",
+        "mnt": "mnt:[4026534318]"
+      }
+    },
+    {
+      "pid": 29,
+      "renderer": false,
+      "status": {
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "1",
+        "VmRSS": "58660 kB"
+      },
+      "namespaces": {
+        "user": "user:[4026534373]",
+        "pid": "pid:[4026534320]",
+        "net": "net:[4026534321]",
+        "mnt": "mnt:[4026534318]"
+      }
+    },
+    {
+      "pid": 33,
+      "renderer": false,
+      "status": {
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "1",
+        "VmRSS": "59016 kB"
+      },
+      "namespaces": {
+        "user": "user:[4026534373]",
+        "pid": "pid:[4026534537]",
+        "net": "net:[4026534377]",
+        "mnt": "mnt:[4026534375]"
+      }
+    },
+    {
+      "pid": 57,
+      "renderer": true,
+      "status": {
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "2",
+        "VmRSS": "149868 kB"
+      },
+      "namespaces": {
+        "user": "user:[4026534373]",
+        "pid": "pid:[4026534537]",
+        "net": "net:[4026534377]",
+        "mnt": "mnt:[4026534375]"
+      }
+    },
+    {
+      "pid": 95,
+      "renderer": true,
+      "status": {
+        "NoNewPrivs": "1",
+        "Seccomp": "2",
+        "Seccomp_filters": "2",
+        "VmRSS": "93636 kB"
+      },
+      "namespaces": {
+        "user": "user:[4026534373]",
+        "pid": "pid:[4026534537]",
+        "net": "net:[4026534377]",
+        "mnt": "mnt:[4026534375]"
+      }
+    }
+  ],
+  "stage": "saved_owner_edit_checks"
+}

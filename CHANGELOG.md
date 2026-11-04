@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0
+
+- Native Ubuntu 26.04 x86_64 / GNOME Wayland desktop application with the verified Qt/PySide/WebEngine 6.11.3 stack.
+- Source-first installation with `bash install.sh`, official pinned dependency acquisition, a local frontend build and per-user desktop integration.
+- Local folders, rich-text notes, images, templates, search, appearance preferences and offline application operation.
+- Compatible manual updates through `bash update.sh`, with the existing N3 transaction engine, preserved workspace/profile bytes and retained previous program versions.
+- Authenticated local backend, renderer sandboxing, installation-specific AppArmor setup, safe data paths and backup/recovery protections.
+- Original code licensed MIT, Copyright (c) 2026 74Cerillion; existing third-party notices retained.
+
+## Historical pre-release development records
+
+All entries below preserve their original candidate, environment and acceptance
+scope. Their old pending decisions do not replace the current N4 owner acceptance.
+
 ## Unreleased — F-09 M4 validation candidate
 
 - Add a deterministic, temporary-data-only backend benchmark for 100/1,000/10,000 native notes, with raw metrics and explicit warm-cache timing boundaries.

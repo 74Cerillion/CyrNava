@@ -1,0 +1,9 @@
+{
+  "unchanged_from_047a99b": {
+    "ci/lifecycle_harness.py": "f5045d6b8395435ed6db4ed79f954fa298cceceea40c8caecc5b3d0cf3d086bd",
+    "backend/tests/test_lifecycle_harness.py": "55f7de2f1e356bfcc64d3247e098f0859e7c152ac72a7d70a28e890ce2ec7e8a",
+    "frontend/e2e/lifecycle.spec.ts": "edcbcb5c52df17590ab79c3dea894574a49a236472e923302e1a8050a3b1047a"
+  },
+  "hosted_sql_boundary_evidence": "../hosted-sql-boundary-2026-10-31/",
+  "production_paths_unchanged": true
+}

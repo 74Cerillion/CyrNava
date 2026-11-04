@@ -1,0 +1,6 @@
+{
+  "synthetic_clean_source_without_frontend_dist": true,
+  "worker_error": "Frontend build missing",
+  "owned_backend_reaped": true,
+  "application_source_modified": false
+}

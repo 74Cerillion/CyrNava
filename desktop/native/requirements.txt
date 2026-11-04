@@ -1,0 +1,6 @@
+# Optional isolated host testing only. Flatpak uses the matched, sandbox-aware
+# PySide/WebEngine BaseApps on branch 6.11, recorded by review-lock.json instead.
+PySide6==6.11.3
+PySide6_Addons==6.11.3
+PySide6_Essentials==6.11.3
+shiboken6==6.11.3

@@ -1,0 +1,26 @@
+2026-11-01T01:32:11.9109756Z Actions: read
+2026-11-01T01:32:11.9110893Z Contents: read
+2026-11-01T01:32:11.9111932Z Metadata: read
+2026-11-01T01:32:12.7354612Z   fetch-depth: 1
+2026-11-01T01:32:13.2279418Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin d32ae20bfcd9ad3e6ccab530c62e2e2eb1918b8e
+2026-11-01T01:32:40.6348085Z Successfully installed PyYAML-6.0.3
+2026-11-01T01:32:46.0468369Z SHA256 digest of uploaded artifact zip is 18511f21dd83688b7824edd71ee32e22ee1358c9f42658ff605d6a2f40306dcc
+2026-11-01T01:32:46.4557621Z Artifact p5b-staging-diagnostics-d32ae20bfcd9ad3e6ccab530c62e2e2eb1918b8e-1 has been successfully uploaded! Final size is 897 bytes. Artifact ID is 13065456983
+2026-11-01T01:32:45.5176115Z   "status": "FAIL",
+2026-11-01T01:32:45.5176461Z   "complete": true,
+2026-11-01T01:32:45.5176866Z   "purpose": "P5B disposable staging",
+2026-11-01T01:32:45.5177443Z   "authorization_model": "single-maintainer-manual-staging",
+2026-11-01T01:32:45.5178050Z   "stage": "signed-repository",
+2026-11-01T01:32:45.5178430Z   "steps": [
+2026-11-01T01:32:45.5178712Z     {
+2026-11-01T01:32:45.5179050Z       "eligibility": "PASS"
+2026-11-01T01:32:45.5179447Z     },
+2026-11-01T01:32:45.5179749Z     {
+2026-11-01T01:32:45.5180097Z       "candidate": "PASS"
+2026-11-01T01:32:45.5180492Z     }
+2026-11-01T01:32:45.5180782Z   ],
+2026-11-01T01:32:45.5181126Z   "error_type": "Rejected",
+2026-11-01T01:32:45.5181678Z   "error": "Operation failed: git (CalledProcessError)",
+2026-11-01T01:32:45.5182272Z   "seconds": 4.769
+2026-11-01T01:32:45.5182897Z }
+2026-11-01T01:32:45.5318567Z ##[error]Process completed with exit code 1.

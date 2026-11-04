@@ -1,0 +1,28 @@
+{
+  "date_utc": "2026-10-31T07:11:05.258096+00:00",
+  "parent_commit": "047a99b1473304cc73518dff6427bf7937c542a2",
+  "branch": "desktop/p2-production-integration",
+  "scope": "P5A image-selection tests/helper, reports, local synthetic evidence and fourth hosted results only",
+  "production_source_and_permissions_unchanged": true,
+  "accepted_lifecycle_guard_unchanged": true,
+  "clean_checkout_tests": {
+    "focused": 10,
+    "frontend_units": 273,
+    "browser": 20,
+    "targeted_backend": 9
+  },
+  "production_frontend_assets_identical": 33,
+  "prior_manifest_verified": true,
+  "public_evidence": "Synthetic fixtures; credential pattern and request-header review; no owner data, signing credentials or private profiles. Historical failures and limits retained.",
+  "workflow": "Unchanged contents:read, pinned actions, persist-credentials:false, no secrets reference or publishing/signing step; fail-closed gates unchanged",
+  "authorization": "Exactly one commit and push; no subsequent commit/push/rerun/dispatch",
+  "candidate_sources": {
+    "frontend/e2e/workspace.spec.ts": "864fefc0ba0a82f49c8b139bf410b4ad24a27a3147bfca23b4a3ccf3930a7dd3",
+    "frontend/e2e/editorSelection.ts": "b528027e903a6a9c3102e62f342e5ecc86283cae4d14c5bec968250953e10755"
+  },
+  "reports": {
+    "ci/P5A_REPORT.md": "369401b41ccd036aae0a0088b9b8f61ecad16b365ca2ca18996263935c1f7f9a",
+    "ci/P5A_OWNER_CHECKS.md": "e4c0ef3a300573b142eea6b414debad400f1f6472805b4aec2f9f3aa55c31236",
+    "ci/P5A_IMAGE_SELECTION_CORRECTION.md": "5c93287209b60d4797be0eee1b2c3e645011d7a8acb3fce5ac7b189ebb9cfbca"
+  }
+}

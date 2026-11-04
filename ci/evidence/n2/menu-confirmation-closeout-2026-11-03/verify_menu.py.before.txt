@@ -1,0 +1,711 @@
+"""Owner-only N2 GNOME menu check of the already GUI-verified disposable client.
+
+Temporarily registers the exact development Desktop Entry, observes a manual
+Applications-menu launch, then removes only its unchanged registration. No install,
+updater, personal profile, security change, signing or automatic GUI launch.
+"""
+
+import argparse
+import ctypes
+import json
+import os
+import subprocess
+import sys
+import time
+import traceback
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+RESULT = "cfb76d3616e0c98e307653397d45bee96b8b1f8165e4de5124d828c8ce3ecdde"
+MANIFEST = "a1e066a3d769319a761b8643469f055201ef04b2b80ff92c0ac9604e1a4f8d82"
+
+
+class MenuEvidenceError(RuntimeError):
+    def __init__(self, category):
+        self.category = category
+        super().__init__(
+            "Live evidence incomplete after 30 seconds; "
+            + category
+            + "; close the candidate normally and preserve observation.json"
+        )
+
+
+def renderer_failure(diagnostic):
+    """Classify a failed predicate, never infer its host-policy cause."""
+    if diagnostic.get("renderer_roles_seen", 0) > 0:
+        if any(
+            key.startswith("renderer-") for key in diagnostic.get("read_errors", {})
+        ):
+            return "renderer_identity_or_security_incomplete"
+        checks = diagnostic.get("renderer_checks", {})
+        if checks.get("stable_identity") is True:
+            if checks.get("NoNewPrivs") is False or checks.get("Seccomp") is False:
+                return "renderer_process_protection_failed"
+            namespaces = checks.get("namespace_separation", {})
+            if any(namespaces.get(key) is False for key in ("user", "pid", "net")):
+                return "renderer_namespace_separation_failed"
+        return "renderer_identity_or_security_incomplete"
+    return "renderer_not_observed"
+
+
+def module(name, path):
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(name, path)
+    result = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(result)
+    return result
+
+
+def register(engine, source, destination):
+    """Exclusive creation; collisions and unsafe parents never get overwritten."""
+    source, destination = engine.regular(source), engine.checked_path(destination)
+    destination.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    info = destination.parent.stat()
+    engine.require(
+        info.st_uid == os.getuid() and not info.st_mode & 0o022, "Unsafe menu directory"
+    )
+    data = source.read_bytes()
+    fd = os.open(
+        destination, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o644
+    )
+    with os.fdopen(fd, "wb") as stream:
+        stream.write(data)
+        stream.flush()
+        os.fsync(stream.fileno())
+    engine.sync_directory(destination.parent)
+    return engine.digest(destination)
+
+
+def unregister(engine, destination, expected):
+    """Remove only this check's exact owned registration; preserve changed files."""
+    destination = engine.regular(destination)
+    engine.require(
+        destination.stat().st_uid == os.getuid()
+        and engine.digest(destination) == expected,
+        "Changed menu entry preserved; owner review required",
+    )
+    destination.unlink()
+    engine.sync_directory(destination.parent)
+
+
+def gio_discovery(destination):
+    """Ask the real desktop registry by ID, not by direct filename."""
+    gio = ctypes.CDLL("libgio-2.0.so.0")
+    objects = ctypes.CDLL("libgobject-2.0.so.0")
+    gio.g_desktop_app_info_new.argtypes = [ctypes.c_char_p]
+    gio.g_desktop_app_info_new.restype = ctypes.c_void_p
+    for name in (
+        "g_desktop_app_info_get_filename",
+        "g_app_info_get_id",
+        "g_app_info_get_name",
+    ):
+        function = getattr(gio, name)
+        function.argtypes = [ctypes.c_void_p]
+        function.restype = ctypes.c_char_p
+    gio.g_app_info_should_show.argtypes = [ctypes.c_void_p]
+    gio.g_app_info_should_show.restype = ctypes.c_int
+    objects.g_object_unref.argtypes = [ctypes.c_void_p]
+    app = gio.g_desktop_app_info_new(os.fsencode(destination.name))
+    if not app:
+        raise ValueError("GNOME registry did not resolve the development entry")
+    try:
+        return {
+            "correct_path": os.fsdecode(gio.g_desktop_app_info_get_filename(app))
+            == str(destination),
+            "correct_id": os.fsdecode(gio.g_app_info_get_id(app)) == destination.name,
+            "name": os.fsdecode(gio.g_app_info_get_name(app)),
+            "should_show": bool(gio.g_app_info_should_show(app)),
+        }
+    finally:
+        objects.g_object_unref(app)
+
+
+def find_gui(bootstrap):
+    """Read only same-user process metadata; match the exact installed command."""
+    expected = [b"-B", b"-I", os.fsencode(bootstrap)]
+    matches = []
+    for process in Path("/proc").iterdir():
+        if not process.name.isdecimal():
+            continue
+        try:
+            if process.stat().st_uid != os.getuid():
+                continue
+            command = (process / "cmdline").read_bytes().rstrip(b"\0").split(b"\0")
+            if len(command) == 4 and command[1:] == expected:
+                matches.append(int(process.name))
+        except (OSError, ValueError):
+            continue
+    if len(matches) > 1:
+        raise ValueError("More than one matching installed application process")
+    return matches[0] if matches else None
+
+
+def sample_menu_tree(check, gui_pid, owned, sandbox):
+    """N2-only observation of every thread's children; same N1 security predicates.
+
+    Linux children files are per-thread. A browser started by another thread is
+    still owned by this GUI, but is invisible to a main-thread-only traversal.
+    No arbitrary process is accepted based on its name, and read failures never
+    count as successful security checks. Diagnostics contain no paths or argv.
+    """
+    found = dict.fromkeys(("backend", "renderer", "qt_providers", "foreign_qt"), False)
+    diagnostic = {
+        "processes_seen": 0,
+        "helpers_seen": 0,
+        "renderer_roles_seen": 0,
+        "read_errors": {},
+    }
+    expected_policy = getattr(check, "EXPECTED_APPARMOR", None)
+    if expected_policy:
+        found["apparmor"] = False
+        diagnostic["apparmor_labels"] = []
+    policy_roles = set()
+    helper = (
+        check.CANDIDATE
+        / ".venv/lib/python3.14/site-packages/PySide6/Qt/libexec/QtWebEngineProcess"
+    )
+    worker = os.fsencode(check.CANDIDATE / "application/desktop/native/worker.py")
+
+    def attempt(operation, function):
+        try:
+            return function()
+        except (OSError, ValueError, IndexError, KeyError) as error:
+            errno = getattr(error, "errno", None)
+            key = (
+                operation
+                + ":"
+                + (str(errno) if isinstance(errno, int) else type(error).__name__)
+            )
+            diagnostic["read_errors"][key] = diagnostic["read_errors"].get(key, 0) + 1
+            return None
+
+    def policy_matches(process, role):
+        if not expected_policy:
+            return True
+        label = attempt(
+            "apparmor-" + role,
+            lambda: (process / "attr/apparmor/current").read_text().strip(),
+        )
+        passed = label == expected_policy + " (enforce)"
+        diagnostic["apparmor_labels"].append(
+            {"role": role, "expected_profile": passed, "readable": label is not None}
+        )
+        if passed:
+            policy_roles.add(role)
+        elif label is not None:
+            diagnostic["apparmor_mismatch"] = True
+        else:
+            diagnostic["apparmor_incomplete"] = True
+        return passed
+
+    pending, seen = [gui_pid], set()
+    while pending and len(seen) < 128:
+        pid = pending.pop()
+        if pid in seen:
+            continue
+        seen.add(pid)
+        diagnostic["processes_seen"] += 1
+        process = Path("/proc") / str(pid)
+        tasks = (
+            attempt(
+                "thread-list",
+                lambda process=process: list((process / "task").iterdir()),
+            )
+            or []
+        )
+        if len(tasks) > 256:
+            diagnostic["read_errors"]["thread-limit:0"] = 1
+        for task in tasks[:256]:
+            children = attempt(
+                "thread-children", lambda task=task: (task / "children").read_text()
+            )
+            if children is not None:
+                pending.extend(
+                    int(value) for value in children.split() if value.isdecimal()
+                )
+        started = attempt(
+            "start-time", lambda process=process: sandbox.process_start_time(process)
+        )
+        command = attempt(
+            "command",
+            lambda process=process: (process / "cmdline").read_bytes()[:65537],
+        )
+        executable = attempt(
+            "executable", lambda process=process: Path(os.readlink(process / "exe"))
+        )
+        if (
+            started is not None
+            and command is not None
+            and worker in command.split(b"\0")
+        ):
+            owned[pid] = started
+            found["backend"] = policy_matches(process, "backend")
+        if started is not None and executable == helper:
+            helper_policy = policy_matches(process, "helper")
+            diagnostic["helpers_seen"] += 1
+            owned[pid] = started
+            if (
+                command is not None
+                and sandbox.renderer_role(command, helper)["verified"]
+            ):
+                diagnostic["renderer_roles_seen"] += 1
+                status = attempt(
+                    "renderer-status", lambda pid=pid: check.proc_state(pid)[1]
+                )
+                namespaces = {}
+                for key in ("user", "pid", "net"):
+                    value = attempt(
+                        "renderer-namespace-" + key,
+                        lambda key=key, process=process: (
+                            os.readlink(process / "ns" / key)
+                            != os.readlink(Path("/proc") / str(gui_pid) / "ns" / key)
+                        ),
+                    )
+                    namespaces[key] = value is True
+                stable = attempt(
+                    "renderer-start-time",
+                    lambda process=process: sandbox.process_start_time(process),
+                )
+                passed = bool(
+                    helper_policy
+                    and status
+                    and status.get("NoNewPrivs", "").strip() == "1"
+                    and status.get("Seccomp", "").strip() == "2"
+                    and all(namespaces.values())
+                    and stable == started
+                )
+                if helper_policy:
+                    policy_roles.add("renderer")
+                found["renderer"] |= passed
+                diagnostic["renderer_checks"] = {
+                    "NoNewPrivs": bool(
+                        status and status.get("NoNewPrivs", "").strip() == "1"
+                    ),
+                    "Seccomp": bool(
+                        status and status.get("Seccomp", "").strip() == "2"
+                    ),
+                    "namespace_separation": namespaces,
+                    "stable_identity": stable == started,
+                    "all_checks_same_renderer": passed,
+                }
+        if pid == gui_pid:
+            gui_policy = policy_matches(process, "GUI")
+            maps = attempt(
+                "GUI-Qt-maps", lambda process=process: (process / "maps").read_text()
+            )
+            if maps is not None:
+                providers = [
+                    line.split(maxsplit=5)[5]
+                    for line in maps.splitlines()
+                    if "libQt6" in line and len(line.split(maxsplit=5)) == 6
+                ]
+                coherent = bool(providers) and all(
+                    Path(p).is_relative_to(check.CANDIDATE / ".venv") for p in providers
+                )
+                found["qt_providers"] = coherent and gui_policy
+                found["foreign_qt"] = bool(providers) and not coherent
+    if pending:
+        diagnostic["read_errors"]["process-limit:0"] = 1
+    if expected_policy:
+        found["apparmor"] = (
+            {"GUI", "backend", "renderer"} <= policy_roles
+            and not diagnostic.get("apparmor_mismatch")
+            and not diagnostic.get("apparmor_incomplete")
+        )
+    return found, diagnostic
+
+
+def observe_menu_launch(
+    check,
+    bootstrap,
+    *,
+    startup_seconds=120,
+    window_seconds=600,
+    evidence_seconds=30,
+    record_observation=None,
+):
+    sandbox = check.support("sandbox_probe")
+    deadline = time.monotonic() + startup_seconds
+    while (pid := find_gui(bootstrap)) is None:
+        if time.monotonic() >= deadline:
+            raise TimeoutError(
+                "No manual GNOME menu launch observed within two minutes"
+            )
+        time.sleep(0.1)
+    process = Path("/proc") / str(pid)
+    started = sandbox.process_start_time(process)
+    owned, observed, authenticated = (
+        {},
+        dict.fromkeys(("backend", "renderer", "qt_providers"), False),
+        False,
+    )
+    if getattr(check, "EXPECTED_APPARMOR", None):
+        observed["apparmor"] = False
+    deadline = time.monotonic() + window_seconds
+    evidence_deadline = time.monotonic() + evidence_seconds
+    last_progress = float("-inf")
+
+    def progress(diagnostic, *, final=False):
+        renderer_category = (
+            renderer_failure(diagnostic) if not observed["renderer"] else None
+        )
+        value = {
+            "observed": {
+                k: "PASS" if v else "NOT OBSERVED" for k, v in observed.items()
+            },
+            "unauthenticated_backend_rejected": "PASS"
+            if authenticated
+            else "NOT TESTED",
+            "missing_checks": [k for k, v in observed.items() if not v],
+            "diagnostic": diagnostic,
+            "renderer_failure_category": renderer_category,
+            "final": final,
+        }
+        if final and renderer_category in {
+            "renderer_namespace_separation_failed",
+            "renderer_process_protection_failed",
+        }:
+            value["observed"]["renderer"] = "FAIL"
+        if record_observation is not None:
+            record_observation(value)
+        return value
+
+    diagnostic = {}
+    print(
+        "N2: menu-launched application observed; checking renderer and backend.",
+        flush=True,
+    )
+    while check.still_alive(pid, started, sandbox):
+        sample, diagnostic = sample_menu_tree(check, pid, owned, sandbox)
+        if diagnostic.get("apparmor_mismatch"):
+            diagnostic["rejection"] = "apparmor_profile_mismatch"
+            progress(diagnostic, final=True)
+            raise RuntimeError("Application/helper AppArmor profile mismatch")
+        if any(
+            key in diagnostic.get("read_errors", {})
+            for key in ("thread-limit:0", "process-limit:0")
+        ):
+            progress(diagnostic, final=True)
+            raise RuntimeError(
+                "Bounded process traversal limit exceeded; evidence incomplete"
+            )
+        if sample.pop("foreign_qt"):
+            diagnostic["rejection"] = "foreign_qt"
+            progress(diagnostic, final=True)
+            raise RuntimeError("Foreign Qt provider rejected")
+        for key, value in sample.items():
+            observed[key] |= value
+        if all(observed.values()) and not authenticated:
+            progress(diagnostic)
+            if not check.unauthenticated_rejected():
+                diagnostic["rejection"] = "backend_authentication"
+                progress(diagnostic, final=True)
+                raise RuntimeError("Backend authentication failed")
+            authenticated = True
+            print(
+                "N2: renderer/providers/auth PASS. Inspect existing synthetic note, image, Dark, icon and window grouping; close normally without editing.",
+                flush=True,
+            )
+        if time.monotonic() - last_progress >= 5:
+            value = progress(diagnostic)
+            print("N2 observation: " + json.dumps(value, sort_keys=True), flush=True)
+            last_progress = time.monotonic()
+        if time.monotonic() >= evidence_deadline and not (
+            all(observed.values()) and authenticated
+        ):
+            progress(diagnostic, final=True)
+            category = (
+                renderer_failure(diagnostic)
+                if not observed["renderer"]
+                else "application_live_evidence_incomplete"
+            )
+            raise MenuEvidenceError(category)
+        if time.monotonic() >= deadline:
+            progress(diagnostic, final=True)
+            raise TimeoutError(
+                "Menu application close deadline exceeded; close it manually"
+            )
+        time.sleep(0.1)
+    cleanup_deadline = time.monotonic() + 15
+    while any(check.still_alive(p, start, sandbox) for p, start in owned.items()):
+        if time.monotonic() >= cleanup_deadline:
+            raise RuntimeError("Menu application's descendant cleanup incomplete")
+        time.sleep(0.1)
+    progress(diagnostic, final=True)
+    if not all(observed.values()) or not authenticated:
+        raise RuntimeError("Menu application live evidence incomplete")
+    return {
+        **dict.fromkeys(observed, "PASS"),
+        "unauthenticated_backend_rejected": "PASS",
+        "owned_process_cleanup": "PASS",
+        "exit_code": "NOT AVAILABLE for external GNOME child",
+    }
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--owner-host", action="store_true", required=True)
+    parser.add_argument(
+        "--root", type=Path, default=ROOT / "ci-output/native-n2-client-3"
+    )
+    parser.add_argument("--manifest-sha256", default=MANIFEST)
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=ROOT / "ci-output/native-n2-owner-4",
+        help="Fresh direct ci-output/native-n2-owner-N; existing attempts are preserved",
+    )
+    args = parser.parse_args()
+    engine = module("n2_menu_engine", ROOT / "desktop/install_engine.py")
+    engine.host_supported()
+    engine.require(
+        sys.stdin.isatty()
+        and os.environ.get("WAYLAND_DISPLAY")
+        and os.environ.get("XDG_SESSION_TYPE") == "wayland",
+        "Owner GNOME Wayland terminal required",
+    )
+    client = engine.checked_path(args.root)
+    engine.require(
+        client.parent == ROOT / "ci-output", "Direct disposable client required"
+    )
+    expected_manifest = args.manifest_sha256
+    output = engine.checked_path(args.output)
+    engine.require(
+        output.parent == ROOT / "ci-output"
+        and output.name.startswith("native-n2-owner-")
+        and output.name.removeprefix("native-n2-owner-").isdecimal()
+        and int(output.name.removeprefix("native-n2-owner-")) > 0,
+        "Fresh direct repository native-n2-owner-N output required",
+    )
+    engine.require(
+        not output.exists(), "Previous menu attempt preserved; no automatic retry"
+    )
+    prior = ROOT / "ci-output/native-n2-owner-3"
+    engine.require(
+        engine.digest(prior / "result.json") == RESULT, "Reviewed GUI PASS changed"
+    )
+    approved = engine.load(prior / "result.json")
+    engine.require(
+        approved["status"] == "PASS"
+        and approved["complete"] is True
+        and approved["saved_data_and_origin"] == "PASS"
+        and approved["owner_visual_confirmation"] == "PASS",
+        "Completed GUI verification required",
+    )
+    release = (
+        client
+        / "releases"
+        / engine.member_name(engine.load(client / "current.json")["release"])
+    )
+    with engine.installation_lock(client):
+        receipt, manifest = engine.installed(release)
+        engine.require(
+            receipt["manifest_sha256"] == expected_manifest
+            and manifest["kind"] == "candidate",
+            "Wrong reviewed development package",
+        )
+        native = "apparmor" in manifest
+        if native:
+            # Retain earlier GUI evidence only for unchanged application/data inputs;
+            # the changed launcher/context needs its own actual menu result.
+            old_manifest_path = ROOT / "ci-output/native-n2-candidate-3/manifest.json"
+            engine.require(
+                engine.digest(old_manifest_path) == MANIFEST,
+                "Reviewed baseline manifest changed",
+            )
+            old_manifest = engine.load(old_manifest_path)
+            for name, info in old_manifest["files"].items():
+                if name.startswith("application/") or name in {
+                    "requirements.lock",
+                    "dependencies.json",
+                }:
+                    engine.require(
+                        manifest["files"].get(name) == info,
+                        "Application/dependency input changed; wider verification required",
+                    )
+            engine.require(
+                manifest.get("apparmor") == engine.APPARMOR_CONTRACT,
+                "Wrong AppArmor contract",
+            )
+            engine.require(
+                manifest.get("n1_receipt_sha256")
+                == old_manifest.get("n1_receipt_sha256"),
+                "N1 source receipt changed",
+            )
+        else:
+            engine.require(
+                expected_manifest == MANIFEST,
+                "Only reviewed legacy GUI candidate is permitted",
+            )
+        engine.require(
+            engine.digest(ROOT / "packaging/native/verify_desktop.py")
+            == approved["driver_sha256"],
+            "Reviewed state verifier changed",
+        )
+    desktop = client / "xdg/applications" / (engine.CANDIDATE_ID + ".desktop")
+    engine.require(
+        desktop.read_bytes()
+        == engine.desktop_entry(release, engine.CANDIDATE_ID, True, native=native)
+        and (native or engine.digest(desktop) == approved["desktop_sha256"]),
+        "Reviewed Desktop Entry changed",
+    )
+    data_home = engine.checked_path(
+        Path(os.environ.get("XDG_DATA_HOME", Path.home() / ".local/share"))
+    )
+    entry = engine.checked_path(data_home / "applications" / desktop.name)
+    engine.require(
+        not entry.exists() and not entry.is_symlink(),
+        "Existing development menu entry preserved",
+    )
+    engine.require(
+        find_gui(client / "launch.py") is None, "Close existing candidate first"
+    )
+    check = module(
+        "n2_menu_monitor", ROOT / "packaging/native/feasibility/check_application.py"
+    )
+    engine.require(
+        engine.digest(ROOT / "packaging/native/feasibility/check_application.py")
+        == "406e0afd6011dbf9f1e9031d8f6e8c8cdf8eb5ba3b7557b2db4fca67260584ed",
+        "Accepted live policy changed",
+    )
+    check.CANDIDATE = release
+    if native:
+        check.EXPECTED_APPARMOR = engine.support(
+            release, "apparmor_support"
+        ).profile_name(client)
+    check.unauthenticated_rejected = lambda: unauthenticated(receipt, engine)
+    output.mkdir(mode=0o700)
+    (output / "active").write_text("N2 menu verification only\n")
+    record = {
+        "status": "FAIL",
+        "complete": False,
+        "scope": "N2 actual GNOME Applications-menu launch",
+        "manifest_sha256": expected_manifest,
+        "archive_sha256": manifest["archive_sha256"],
+        "inherited_GUI_result_sha256": RESULT,
+        "driver_sha256": engine.digest(Path(__file__)),
+        "desktop_sha256": engine.digest(desktop),
+        "checks": {},
+        "apparmor_required": native,
+        "inherited_scope": "earlier GUI/data inputs only; changed entrypoint/context must pass this actual run",
+    }
+    registered = None
+
+    def snapshot(phase):
+        with (
+            engine.installation_lock(client),
+            (output / (phase + "-state.private.log")).open("xb") as log,
+        ):
+            subprocess.run(
+                [
+                    str(release / ".venv/bin/python"),
+                    "-B",
+                    "-I",
+                    str(ROOT / "packaging/native/verify_desktop.py"),
+                    "--owner-host",
+                    "--root",
+                    str(client),
+                    "--output",
+                    str(output),
+                    "--manifest-sha256",
+                    expected_manifest,
+                    "--snapshot",
+                    phase,
+                ],
+                stdout=log,
+                stderr=subprocess.STDOUT,
+                check=True,
+                timeout=30,
+            )
+        return engine.load(output / (phase + "-state.json"))
+
+    try:
+        record["stage"] = "saved-state-preflight"
+        before = snapshot("edit")
+        engine.require(
+            before == engine.load(prior / "restart-state.json"),
+            "Verified saved data changed; preserve for review",
+        )
+        print(
+            "N2: temporary 'CyrNava — N2 Candidate' GNOME menu entry; existing disposable profile only. No normal CyrNava data or security settings change.",
+            flush=True,
+        )
+        input("Press Enter to register the development entry for this check: ")
+        record["stage"] = "menu-registration"
+        registered = register(engine, desktop, entry)
+        discovery = gio_discovery(entry)
+        engine.require(
+            all(discovery[k] for k in ("correct_path", "correct_id", "should_show")),
+            "GNOME discovery mismatch",
+        )
+        record["discovery"] = discovery
+        record["checks"]["GIO_menu_discovery"] = "PASS"
+        print(
+            "Open GNOME Activities / Show Applications. Search 'CyrNava' and click 'CyrNava — N2 Candidate' ONCE. Do not use a terminal launch. Start within two minutes; wait for this terminal's close instruction.",
+            flush=True,
+        )
+        record["stage"] = "owner-menu-launch"
+        record["live_checks"] = observe_menu_launch(
+            check,
+            client / "launch.py",
+            record_observation=lambda value: engine.durable(
+                output / "observation.json", value
+            ),
+        )
+        record["stage"] = "post-close-state"
+        engine.require(before == snapshot("restart"), "Saved state or origin changed")
+        answer = input(
+            "Only if you selected the entry in GNOME Applications and the correct window/icon/grouping, saved note/image and Dark were correct, type CONFIRM N2 MENU: "
+        )
+        engine.require(
+            " ".join(answer.split()).casefold() == "confirm n2 menu",
+            "Menu visual confirmation missing",
+        )
+        record["checks"].update(
+            owner_GNOME_menu_launch="PASS",
+            owner_icon_and_window_grouping="PASS",
+            exact_saved_data_and_origin="PASS",
+            owner_appearance="PASS",
+        )
+        record.update(status="PASS", stage="complete")
+    except (Exception, KeyboardInterrupt) as error:  # noqa: BLE001 - retained private diagnostic
+        (output / "exception.private.log").write_text(traceback.format_exc())
+        record["error_type"] = type(error).__name__
+        if isinstance(error, MenuEvidenceError):
+            record["failure_category"] = error.category
+    finally:
+        if registered is not None:
+            try:
+                unregister(engine, entry, registered)
+                record["checks"]["temporary_menu_entry_removed"] = "PASS"
+            except (OSError, ValueError):
+                record.update(
+                    status="FAIL",
+                    menu_cleanup="CHANGED ENTRY PRESERVED; OWNER REVIEW REQUIRED",
+                )
+        (output / "active").unlink(missing_ok=True)
+        record["complete"] = True
+        engine.durable(output / "result.json", record)
+        print(json.dumps(record, indent=2), flush=True)
+    return 0 if record["status"] == "PASS" else 2
+
+
+def unauthenticated(receipt, engine):
+    import urllib.error
+    import urllib.request
+
+    port = engine.load(Path(receipt["profile"]) / "desktop.json")["port"]
+    engine.require(type(port) is int and 0 < port < 65536, "Invalid backend port")
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    try:
+        with opener.open(f"http://127.0.0.1:{port}/api/tree", timeout=3):
+            return False
+    except urllib.error.HTTPError as error:
+        error.close()
+        return error.code == 401
+
+
+if __name__ == "__main__":
+    os.umask(0o077)
+    raise SystemExit(main())

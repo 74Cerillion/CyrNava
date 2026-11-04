@@ -1,0 +1,9 @@
+{
+  "status": "BLOCKED",
+  "context": "Independent downloaded-bundle audit; no application installation or execution",
+  "error_type": "CalledProcessError",
+  "error": "Command '['flatpak', 'build-import-bundle', '/tmp/cyrnava-p5a-hosted-41181510439/independent-audit/imported-repo', '/tmp/cyrnava-p5a-hosted-41181510439/package/io.github._74Cerillion.CyrNava.flatpak']' returned non-zero exit status 1.",
+  "seconds": 0.482,
+  "reason": "Local OSTree bundle import denied: open(O_TMPFILE): Read-only file system",
+  "hosted_exported_bundle_audit": "PASS; verified against job, downloaded audit.json and matching package/provenance"
+}

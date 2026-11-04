@@ -1,0 +1,34 @@
+{
+  "GitHub_API_file_blob_SHA_matches_local_Git": true,
+  "commit": "b7ab94265270866911311b4ca818071868f58361",
+  "connector_commit_identity_readback": "PASS",
+  "default_branch": "main",
+  "final_remote_refs": {
+    "refs/heads/desktop/p2-production-integration": "b7ab94265270866911311b4ca818071868f58361",
+    "refs/heads/main": "4021bc292267c19b7ebebf219b4f682f8f99bf4c"
+  },
+  "main_unchanged": "4021bc292267c19b7ebebf219b4f682f8f99bf4c",
+  "normal_push_count": 1,
+  "parent": "2b3ca78f7c5f4f6227d376a96cc3f8d46454b9b8",
+  "paths": [
+    "ci/N4_OWNER_CHECKS.md",
+    "ci/N4_REPORT.md",
+    "ci/P6_NATIVE_DISTRIBUTION_ROADMAP.md",
+    "ci/P6_OWNER_CHECKS.md",
+    "ci/P6_REPORT.md",
+    "ci/evidence/n4/hosted-41616088358/artifact-integrity.json",
+    "ci/evidence/n4/hosted-41616088358/remote-readback.json",
+    "ci/evidence/n4/hosted-41616088358/resources.json",
+    "ci/evidence/n4/hosted-41616088358/result.json",
+    "ci/evidence/n4/hosted-41616088358/retained-records.json",
+    "ci/evidence/n4/schema-fixtures-2026-11-03/commit-proposal.json",
+    "ci/evidence/n4/schema-fixtures-2026-11-03/final-checks.json",
+    "ci/evidence/n4/schema-fixtures-2026-11-03/resources.json",
+    "ci/evidence/n4/schema-fixtures-2026-11-03/result.json",
+    "ci/evidence/n4/schema-fixtures-2026-11-03/retained-records.json",
+    "packaging/native/feasibility/run_probe.py",
+    "packaging/native/feasibility/test_system_schemas.py"
+  ],
+  "status": "PASS",
+  "tree": "09722d4c91f21caac693e9cd4107996e9ada24ba"
+}

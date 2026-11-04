@@ -1,0 +1,18 @@
+{
+  "recorded_at_utc": "2026-10-31T03:59:32.103021+00:00",
+  "branch": "desktop/p2-production-integration",
+  "created_commit": "129700175cf4716446647572979771d27422fc3f",
+  "parent_commit": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+  "commit_count_this_authorization": 1,
+  "push_attempt_count_this_authorization": 1,
+  "push_exit_code": 128,
+  "push_status": "BLOCKED \u2014 terminal has no Git HTTPS credentials",
+  "remote_sha_confirmed_by_read_only_GitHub_API": "72f4c7b0ca1de627b7615f03e20393cf5d423512",
+  "remote_updated": false,
+  "new_hosted_workflow": "NOT STARTED",
+  "package_build_audit_upload": "NOT EXECUTED for this correction",
+  "P5A_acceptance": "CONDITIONAL / UNACCEPTED",
+  "no_additional_commit_push_rerun_dispatch": true,
+  "next_action": "Owner executes the exact already-authorized push in authenticated terminal; then monitor automatically triggered run",
+  "command": "git push origin 129700175cf4716446647572979771d27422fc3f:refs/heads/desktop/p2-production-integration"
+}

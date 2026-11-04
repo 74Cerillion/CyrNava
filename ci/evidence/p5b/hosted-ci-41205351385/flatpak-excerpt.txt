@@ -1,0 +1,25 @@
+2026-10-31T13:27:48.1305863Z Prepare all required actions
+2026-10-31T13:27:54.2624366Z Successfully set up CPython (3.12.15)
+2026-10-31T13:28:01.0047083Z Cache restored successfully
+2026-10-31T13:29:39.9925935Z   "status": "PASS",
+2026-10-31T13:29:53.6794415Z Successfully downloaded annotated-doc annotated-types anyio click fastapi h11 idna opentelemetry-api pillow pydantic pydantic-core starlette typing-extensions typing-inspection uvicorn
+2026-10-31T13:29:55.9581147Z Successfully installed annotated-doc-0.0.5 annotated-types-0.8.0 anyio-4.15.1 click-8.5.0 fastapi-0.156.3 h11-0.16.0 idna-3.20 opentelemetry-api-1.45.1 pillow-13.0.0 pydantic-2.14.1 pydantic-core-2.50.1 starlette-1.9.0 typing-extensions-4.16.0 typing-inspection-0.4.4 uvicorn-0.54.0
+2026-10-31T13:29:59.5124042Z ✔ Validation was successful: infos: 2, pedantic: 2
+2026-10-31T13:37:29.1704796Z   "status": "PASS",
+2026-10-31T13:37:29.1707477Z   "sha256": "01e13b55a60100e6573de8bfbfc87f1b16373c4d7b8ca05047e35c4e27263153",
+2026-10-31T13:37:29.1780265Z   "status": "PASS",
+2026-10-31T13:37:29.1895726Z ##[group]Run python ci/flatpak.py audit --output ci-output/flatpak
+2026-10-31T13:37:29.1896526Z [36;1mpython ci/flatpak.py audit --output ci-output/flatpak[0m
+2026-10-31T13:38:26.8557895Z   "status": "PASS",
+2026-10-31T13:38:26.8560455Z   "source_commit": "7aaefd0f60a735637ee603ac380587a25b73f6cb",
+2026-10-31T13:38:26.8561611Z   "sha256": "01e13b55a60100e6573de8bfbfc87f1b16373c4d7b8ca05047e35c4e27263153",
+2026-10-31T13:38:26.8570385Z   "workflow_run_id": "41205351385",
+2026-10-31T13:38:26.8570734Z   "workflow_run_attempt": "1",
+2026-10-31T13:38:27.0532405Z Artifact name is valid!
+2026-10-31T13:38:29.9181301Z SHA256 digest of uploaded artifact zip is 560a05310a80ae0d397d7b34936563ea3f674dd6f72b2bdb2984aa246ab35b51
+2026-10-31T13:38:30.3529601Z Artifact CyrNava-linux-x86_64-7aaefd0f60a735637ee603ac380587a25b73f6cb-1.zip successfully finalized. Artifact ID 13044630984
+2026-10-31T13:38:30.3532175Z Artifact CyrNava-linux-x86_64-7aaefd0f60a735637ee603ac380587a25b73f6cb-1 has been successfully uploaded! Final size is 210238004 bytes. Artifact ID is 13044630984
+2026-10-31T13:38:30.5668826Z Artifact name is valid!
+2026-10-31T13:38:31.1926384Z SHA256 digest of uploaded artifact zip is 6b19eecb34517f698d3500098ef5eb1abcdcc93d76da0f0b870f7f7f6f2920da
+2026-10-31T13:38:31.6034282Z Artifact flatpak-diagnostics-7aaefd0f60a735637ee603ac380587a25b73f6cb-1.zip successfully finalized. Artifact ID 13044800454
+2026-10-31T13:38:31.6035967Z Artifact flatpak-diagnostics-7aaefd0f60a735637ee603ac380587a25b73f6cb-1 has been successfully uploaded! Final size is 2037 bytes. Artifact ID is 13044800454

@@ -1,0 +1,15 @@
+{
+  "tooling_commit": "d32ae20bfcd9ad3e6ccab530c62e2e2eb1918b8e",
+  "source_commit": "1ee2077b283b8e5dfc2162119dd439ed3baeb109",
+  "checkout_shallow": false,
+  "alternates": false,
+  "source_detached": true,
+  "source_clean": true,
+  "accepted_auditor_hashes_verified": {
+    "ci/flatpak.py": "74168678c6c3446a601f76bbec735dcfaed4f3b5ebeef5d3092c54d88464cb0f",
+    "packaging/flatpak/production/build.py": "66f64360e3d18be3fbe2b1718e17a4da76e88c4ea2475d8fd8f97bdd2f9332f4",
+    "packaging/flatpak/production/host_verify.py": "adc03e27b1e8615df16cc52d707f990291890060ec83c0f0a5d04a6cc771f7e4",
+    "packaging/flatpak/production/install_payload.py": "b1fe69f2234fa3c5ef8082df20907741216908bf06fa45b0b365a5763f39bbbc"
+  },
+  "source_verification": "PASS"
+}

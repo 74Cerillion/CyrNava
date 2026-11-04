@@ -51,3 +51,19 @@ cyrnava-draft-*.json
 playwright-report/
 test-results/
 .engage.lock
+
+# Local P4 build outputs; never packaged or committed.
+.p4-cache/
+
+# P5A generated CI diagnostics and local tool/download caches
+ci-output/
+
+# P5B disposable repositories and signing material; public trust anchors are
+# generated into staging outputs, never copied from a personal GnuPG profile.
+.p5b-stage/
+.p5b-private/
+**/private-keys-v1.d/
+**/openpgp-revocs.d/
+**/pubring.kbx
+**/trustdb.gpg
+**/secring.gpg

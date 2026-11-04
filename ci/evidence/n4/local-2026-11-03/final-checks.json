@@ -1,0 +1,18 @@
+{
+  "GUI": "NOT EXECUTED",
+  "actionlint": "PASS",
+  "git_diff_check": "PASS",
+  "head_unchanged": true,
+  "hosted_CI": "NOT EXECUTED",
+  "index_empty": true,
+  "new_document_relative_links": "PASS",
+  "normal_installation_or_host_policy_load": "NOT EXECUTED",
+  "protected_baseline_hashes": "PASS",
+  "public_identity_export_audit": "PASS",
+  "publication": "NOT EXECUTED",
+  "recorded_at_utc": "2026-11-03T08:49:47.073349+00:00",
+  "ruff_live_source_scope": "PASS",
+  "signing": "NOT EXECUTED",
+  "source_archive_scope": "196 individually pinned source files; final report/evidence additions separate",
+  "workflow_validator": "PASS"
+}
