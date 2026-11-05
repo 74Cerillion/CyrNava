@@ -24,6 +24,18 @@ The application is now **CyrNava**, formerly ENGAGE. The repository is [74Cerill
 
 Existing `engage/engage.sqlite3`, image files, browser keys (`engage.*`), program/state directories and `org.engage.*.desktop` filenames deliberately remain stable compatibility identifiers. This preserves notes, templates, drafts, appearance and existing icons without copying or deleting a live profile. Desktop/menu **display names** become CyrNava when reinstalled. New environment variables use `CYRNAVA_API_PORT`, `CYRNAVA_E2E_RELEASE` and `CYRNAVA_SUPERVISOR_SECRET`; their `ENGAGE_*` counterparts remain compatibility aliases. No schema or document migration is required for rebranding.
 
+**Native Installations**
+CyrNava is intended for use with linux. Functionality has not been confirmed on Windows, Mac, or otherwise and would likely fail. CyrNava should function across all Linux distributions, however all testing was conducted utilizing Ubuntu LTS 26. 
+
+To download CyrNava:
+1. Download the installation script at this link, ensuring you take note of its location: https://github.com/74Cerillion/CyrNava/blob/main/INSTALLATION.py
+2. Open a terminal and navigate to the folder location in which you saved that script
+3. Run the following command in your terminal: /usr/bin/python3 -B -I ./install_cyrnava.py
+4. When prompted, type 'INSTALL' to confirm installation
+5. Enter your Sudo password
+6. Review the displayed AppArmor policy
+7. Copy and Paste the SHA256 hash that it gives you to approve the final installation
+
 ## Features
 
 - Two-pane workspace with nested folders, notes, rename, move and confirmed deletion.
